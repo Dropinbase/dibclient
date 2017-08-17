@@ -1,10 +1,4 @@
 {
-    "repositories": [
-      {
-        "type": "vcs",
-        "url": "https://username:password@github.com/Dropinbase/dropinbase.git"
-      }
-    ],
     "require": {
         "php": ">=5.3.3",
         "Dropinbase/dropinbase": "dev-develop"
