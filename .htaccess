@@ -1,3 +1,4 @@
+
 # Set the default file for indexes
 DirectoryIndex index.php
 <IfModule mod_rewrite.c>
