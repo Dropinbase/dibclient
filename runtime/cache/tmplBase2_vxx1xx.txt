@@ -1,7 +1,0 @@
- 
-<div component-loaded dib-container=tmplBase2 dib-container-name="8174" dib-config="{ }" layout-fill flex>
-	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
-	</md-progress-linear>
-	<md-tabs id="ci179841" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci179841' aria-label="MainHolder" can-be-moved=true can-have-children=true flex md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci179841' aria-label="MainHolder" dib-container-name='tmplBase2' dib-config="{ listeners : { } }" >
-	</md-tabs>
-</div>

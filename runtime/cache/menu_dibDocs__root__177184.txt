@@ -1,2 +1,0 @@
-)]}',
-{"success":true,"records":[{"container":"","port":"","default_query":"","change_url":null,"action":"","submit_url":"","expression":"","text":null,"leaf":false,"icon":null,"item_event_id":"","item_alias":"","id":"180048"}],"message":"","showType":"notice","messageDelay":4000,"asyncInterval":null,"summary":[],"total":0,"filtertotal":0}
