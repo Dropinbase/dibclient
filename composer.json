@@ -1,6 +1,6 @@
 {
     "require": {
         "php": ">=5.3.3",
-        "Dropinbase/dropinbase": "dev-develop"
+        "dropinbase/dropinbase": "1.*"
     }
 }
