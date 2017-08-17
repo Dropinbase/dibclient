@@ -1,0 +1,92 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibMenu/js/components/dibSideBarStatus.js' ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var mysql = angular.module('mysql', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+    mysql.factory('service184585',['ajax', '$log', 'discoverService', function (ajax, $log, discoverService) {
+            var list = function (node) {
+               var url = DIB__base_url + "/dropins/setNgMaterial/dibMenu/menu/list.json?containerName=mysql";
+               if (!!node === false) {
+                   url += "&node=root&rootMenuId=184586";
+               } else {
+                   url += "&node="+node+"&rootMenuId=184586";
+               }
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci184585'),
+                    container : $('[dib-container=mysql]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+            return {
+                list : list
+            };
+    }]); 
+})();
+(function() {
+var mysql = angular.module('mysql');
+mysql.component('mysql', {
+    controllerAs: 'mysql',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibContainer/Template/view/mysql.html',
+    controller : component__mysql
+});
+component__mysql.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','service184585','containerService','recordFactory','crudService','utilityService'];
+    function component__mysql($scope, $ocLazyLoad, $rootScope, $log, $q,service184585,containerService,recordFactory,crudService,utilityService) {
+                     $scope.container = {};
+            $scope.container.Id = '8359';
+            $scope.container.Name = 'mysql';
+            $("[dib-container='mysql']").trigger('load');
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.view = {};
+            $scope.view.menu = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+            $scope.menus.service184585 = {};
+            $scope.menus.service184585.update = function (node){
+                $scope.menus.service184585.loading = true;
+                service184585.list(!!node? node.id : null).then(function (menu) {
+                    $scope.menus.service184585.loading = false;
+                    if (!!node === false) { 
+                        $scope.menus.service184585.menu = menu;
+                    } else { 
+                        node.children = menu;
+                    }
+                }, function () {
+                    $scope.menus.service184585.loading = false;
+                });
+            };
+            $scope.menus.service184585.update();
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'mysql'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=mysql]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

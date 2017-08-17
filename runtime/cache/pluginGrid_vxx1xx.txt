@@ -1,0 +1,352 @@
+ 
+<div component-loaded dib-container="pluginGrid" dib-grid  dib-config="{ }" >
+	<div dib-inject-content="replace" layout="row"  aria-label="toolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci184880' aria-label="toolbar" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btninlineadd" can-be-moved=true flex=none class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci184887' aria-label="btninlineadd" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add record inline
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " id='ci184884' aria-label="btnadd" dib-container-name='pluginGrid' ng-click="common.goTo('pluginForm','',true,'?record=new','',$event);" dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add a new record using a form
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btngriddelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="deleteSelected()" id='ci184881' aria-label="btngriddelete" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete selected records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci184882' aria-label="btnreload" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Reload records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci185451' aria-label="btnAuditTrail" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci184883' aria-label="emptyspan" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+		</span>
+		<md-button aria-label="btnfilteropen" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci184888' aria-label="btnfilteropen" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Display headers for filtering records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterapply" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="searchGrid()" id='ci184885' aria-label="btnfilterapply" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Apply filter criteria specified in grid headers
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterclear" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="clearSearch()" id='ci184886' aria-label="btnfilterclear" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Show all records and clear filter criteria
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
+			</md-icon>
+		</md-button>
+		<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci184889' aria-label="gridtotals" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			-1" >
+			<md-button ng-disabled="true" aria-label="Grid totals">
+				Records: {{page.fromRecord}}
+				<span ng-if='page.fromRecord>
+					0'>
+					to {{page.toRecord}} of {{page.records}}
+				</span>
+				<span ng-if='page.totalRecords!=page.records'>
+					(Total: {{page.totalRecords}})
+				</span>
+			</md-button>
+		</div>
+	</div>
+	<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div flex dib-table-width >
+		<md-list class='dib-grid-column-header'>
+			<md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+				<div layout="row" flex="100" dib-grid-search ng-show="!loadingData">
+					<!--TODO checkbox
+						<div flex>
+						</div>
+						-->
+						<div table-column  flex = 'nogrow' class="md-subhead" dib-column-heading='184891' style="    " >
+						</div>
+						<div table-column  flex  class="md-subhead" dib-column-heading='185452' style="    " >
+							<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('name')">
+								Name*
+								<span ng-if="gridOptions.sortFields['name']">
+									({{gridOptions.sortFields['name']['Count']}}) 
+									<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'">
+									</md-icon>
+									<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['name']['Order'] == 'DESC'">
+									</md-icon>
+								</span>
+							</div>
+							<span ng-if="showSearch" dib-edit>
+								<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+									<input type="text"  maxlength='64' name="name" ng-model="search.name" aria-label="Name" ng-enter='searchGrid()' id='ci185452' aria-label="name" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+									<label>
+										Name
+									</label>
+									<div ng-messages="pluginGrid.name.$error">
+										<div ng-message="maxlength">
+											At most 64 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+						<div table-column  flex  class="md-subhead" dib-column-heading='185453' style="    " >
+							<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('dl')">
+								Dl*
+								<span ng-if="gridOptions.sortFields['dl']">
+									({{gridOptions.sortFields['dl']['Count']}}) 
+									<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['dl']['Order'] == 'ASC'">
+									</md-icon>
+									<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['dl']['Order'] == 'DESC'">
+									</md-icon>
+								</span>
+							</div>
+							<span ng-if="showSearch" dib-edit>
+								<md-input-container aria-label="dl" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+									<input type="text"  maxlength='128' name="dl" ng-model="search.dl" aria-label="Dl" ng-enter='searchGrid()' id='ci185453' aria-label="dl" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+									<label>
+										Dl
+									</label>
+									<div ng-messages="pluginGrid.dl.$error">
+										<div ng-message="maxlength">
+											At most 128 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+				</md-list-item>
+				<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='pluginGrid' ng-if="gridOptions.inlineAddShow">
+					<ng-form name=pluginGrid  dib-container-name="pluginGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+						<div table-column layout="column" flex = 'nogrow' dib-column="184891" style="    " >
+							<md-button aria-label="btngridedit" can-be-moved=true flex="nogrow" class="md-icon-button  md-squared md-raised" style="    " id='ci184891' aria-label="btngridedit" dib-container-name='pluginGrid' ng-click="common.goTo('pluginForm','',true,'?primary_name='+row.name,'',$event);" dib-config="{ listeners : { } }" >
+								<md-tooltip md-direction="top" md-delay="500">
+									View/edit record in a form
+								</md-tooltip>
+								<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+								</md-icon>
+							</md-button>
+						</div>
+						<div table-column layout="column" flex  dib-column="185452" style="    " >
+							<div aria-label="name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+								<div layout=row ng-if="!row.___editing" dib-view flex>
+									<span flex data-type="text" >
+										<span>
+											{{$parent.viewModel['name']}}
+										</span>
+									</span>
+								</div>
+								<span dib-edit ng-if="row.___editing" flex>
+									<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+										<input type="text"  maxlength='64' required         name="name" ng-model="model.name" aria-label="Name" ng-enter='searchGrid()' id='ci185452' aria-label="name" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+										<label>
+											Name*
+										</label>
+										<div ng-messages="pluginGrid.name.$error">
+											<div ng-message="required">
+												Name required.
+											</div>
+											<div ng-message="maxlength">
+												At most 64 characters are allowed.
+											</div>
+										</div>
+									</md-input-container>
+								</span>
+							</div>
+						</div>
+						<div table-column layout="column" flex  dib-column="185453" style="    " >
+							<div aria-label="dl" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+								<div layout=row ng-if="!row.___editing" dib-view flex>
+									<span flex data-type="text" >
+										<span>
+											{{$parent.viewModel['dl']}}
+										</span>
+									</span>
+								</div>
+								<span dib-edit ng-if="row.___editing" flex>
+									<md-input-container aria-label="dl" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+										<input type="text"  maxlength='128' required         name="dl" ng-model="model.dl" aria-label="Dl" ng-enter='searchGrid()' id='ci185453' aria-label="dl" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+										<label>
+											Dl*
+										</label>
+										<div ng-messages="pluginGrid.dl.$error">
+											<div ng-message="required">
+												Dl required.
+											</div>
+											<div ng-message="maxlength">
+												At most 128 characters are allowed.
+											</div>
+										</div>
+									</md-input-container>
+								</span>
+							</div>
+						</div>
+						<div class='dib-inline-edit-buttons' flex='none' dib-edit >
+							<md-button ng-click='toggleInlineAdd()' class="md-raised ">
+								Close 
+							</md-button>
+							<md-button ng-click='cleanRow($event,model, pluginGrid)' class="md-raised "  ng-disabled='!pluginGrid.$dirty'>
+								Clear   
+							</md-button>
+							<md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+								Use selected data 
+							</md-button>
+							<md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!pluginGrid.$valid">
+								Add   
+							</md-button>
+						</div>
+					</ng-form>
+				</md-list-item>
+			</md-list>
+		</div>
+		<md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+			<md-list dib-table-column-width >
+				<md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+					<div class="no-records-available">
+						  No records available 
+					</div>
+				</md-list-item>
+				<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"   double-click="rowEdit(element)" >
+					<ng-form name='pluginGrid' dib-container-name="pluginGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+						<div table-column layout="column" flex = 'nogrow' dib-column="184891" style="    " >
+							<md-button aria-label="btngridedit" can-be-moved=true flex="nogrow" class="md-icon-button  md-squared md-raised" style="    " id='ci184891' aria-label="btngridedit" dib-container-name='pluginGrid' ng-click="common.goTo('pluginForm','',true,'?primary_name='+row.name,'',$event);" dib-config="{ listeners : { } }" >
+								<md-tooltip md-direction="top" md-delay="500">
+									View/edit record in a form
+								</md-tooltip>
+								<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+								</md-icon>
+							</md-button>
+						</div>
+						<div table-column layout="column" flex  dib-column="185452" style="    " >
+							<div aria-label="name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+								<div layout=row ng-if="!row.___editing" dib-view flex>
+									<span flex data-type="text" >
+										<span>
+											{{$parent.viewModel['name']}}
+										</span>
+									</span>
+								</div>
+								<span dib-edit ng-if="row.___editing" flex>
+									<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+										<input type="text"  maxlength='64' required         name="name" ng-model="model.name" aria-label="Name" ng-enter='searchGrid()' id='ci185452' aria-label="name" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+										<label>
+											Name*
+										</label>
+										<div ng-messages="pluginGrid.name.$error">
+											<div ng-message="required">
+												Name required.
+											</div>
+											<div ng-message="maxlength">
+												At most 64 characters are allowed.
+											</div>
+										</div>
+									</md-input-container>
+								</span>
+							</div>
+						</div>
+						<div table-column layout="column" flex  dib-column="185453" style="    " >
+							<div aria-label="dl" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+								<div layout=row ng-if="!row.___editing" dib-view flex>
+									<span flex data-type="text" >
+										<span>
+											{{$parent.viewModel['dl']}}
+										</span>
+									</span>
+								</div>
+								<span dib-edit ng-if="row.___editing" flex>
+									<md-input-container aria-label="dl" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4046&text=plugin' >
+										<input type="text"  maxlength='128' required         name="dl" ng-model="model.dl" aria-label="Dl" ng-enter='searchGrid()' id='ci185453' aria-label="dl" dib-container-name='pluginGrid' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+										<label>
+											Dl*
+										</label>
+										<div ng-messages="pluginGrid.dl.$error">
+											<div ng-message="required">
+												Dl required.
+											</div>
+											<div ng-message="maxlength">
+												At most 128 characters are allowed.
+											</div>
+										</div>
+									</md-input-container>
+								</span>
+							</div>
+						</div>
+						<div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+							<md-button ng-click='cancelRow($event,row)' class="md-raised ">
+								Cancel 
+							</md-button>
+							<md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!pluginGrid.$valid" >
+								Save   
+							</md-button>
+						</div>
+					</ng-form>
+				</md-list-item>
+			</md-list>
+		</md-content>
+		<div layout-fill layout='row' flex class='dib-grid-footer'>
+			<div flex=20 layout='row'>
+				<md-button disabled>
+					Page limit
+				</md-button>
+				<md-select ng-model="page.limit">
+					<md-option ng-value="10">
+						10
+					</md-option>
+					<md-option ng-value="20">
+						20
+					</md-option>
+					<md-option ng-value="50">
+						50
+					</md-option>
+				</md-select>
+			</div>
+			<div  ng-if="page.count>
+				1" flex=80 layout='row'  layout-align="center center" >
+				<md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+					First 
+				</md-button>
+				<md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+					Prev 
+				</md-button>
+				<div layout='row'>
+					<md-button disabled>
+						Page
+					</md-button>
+					<md-input-container>
+						<input type='number' ng-model="page.number" aria-label="Page number">
+					</md-input-container>
+					<md-button disabled>
+						of {{ page.count }} 
+					</md-button>
+				</div>
+				<md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+					Next 
+				</md-button>
+				<md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+					Last 
+				</md-button>
+			</div>
+		</div>
+	</div>
+	

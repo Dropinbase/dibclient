@@ -1,0 +1,51 @@
+(function() {
+  var require = [ ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(enviroment_base_url+'/files'+file);
+  });
+    var wizBuildAppWait = angular.module('wizBuildAppWait', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+})();
+(function() {
+var wizBuildAppWait = angular.module('wizBuildAppWait');
+wizBuildAppWait.component('wizBuildAppWait', {
+    controllerAs: 'wizBuildAppWait',
+    templateUrl: enviroment_base_url + '/dropins/setNgMaterial/dibContainer/Template/view/wizBuildAppWait.html',
+    controller : component__wizBuildAppWait
+});
+component__wizBuildAppWait.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','containerService','recordFactory','crudService','utilityService'];
+    function component__wizBuildAppWait($scope, $ocLazyLoad, $rootScope, $log, $q,containerService,recordFactory,crudService,utilityService) {
+                     $scope.container = {};
+            $scope.container.Id = '7307';
+            $scope.container.Name = 'wizBuildAppWait';
+            $("[dib-container='wizBuildAppWait']").trigger('load');
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'wizBuildAppWait'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=wizBuildAppWait]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

@@ -1,0 +1,380 @@
+ 
+<ng-form layout-fill dib-container=beneficiaryForm  flex isolate-form name='beneficiaryForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci208052' aria-label="rowToolbar" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci208053' aria-label="btnsave" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci208054' aria-label="btnadd" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised " style="    " ng-click="deleteRecord({'redirect' : true})" id='ci208055' aria-label="btndelete" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci208056' aria-label="btnreload" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci208620' aria-label="btnAuditTrail" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnGrid" can-be-moved=true flex=none style="    " id='ci208059' aria-label="btnGrid" dib-container-name='beneficiaryForm' ng-click="dibCommon.goTo('beneficiaryGrid','',true,'','',$event);" dib-config="{ listeners : { } }" aria-label="Grid" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Open grid
+			</md-tooltip>
+			Grid 
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci208057' aria-label="emptyspan" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci208058' aria-label="formpaging" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" data-container-name="beneficiaryForm" >
+		</dib-form-paging >
+	</div>
+	<md-tabs id="ci208639" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci208639' aria-label="mdtabs" can-be-moved=true can-have-children=true flex=none md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci208639' aria-label="mdtabs" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+		<md-tab label='Form Data' tabId="208060"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208060'     id='ci208060' aria-label="layoutrow" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+					<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci208061' aria-label="fieldset" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-input-container aria-label="beneficiary_pk" can-be-moved=true item-alias="beneficiary_pk"    ng-show="!!view.beneficiary_pk == false || view.beneficiary_pk.visible"  dib-disable="{{view.beneficiary_pk.disabled}}" ng-class="view.beneficiary_pk.class"  ng-style="view.beneficiary_pk.style" flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" id='ci208621' aria-label="beneficiary_pk" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="beneficiaryForm.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='80' required name="name" ng-model="model.name" aria-label="Name" id='ci208622' aria-label="name" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Name*
+									</label>
+									<div ng-messages="beneficiaryForm.name.$error">
+										<div ng-message="required">
+											Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="ben_acc_no" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='20' name="ben_acc_no" ng-model="model.ben_acc_no" aria-label="Ben Acc No" id='ci208623' aria-label="ben_acc_no" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Ben Acc No
+									</label>
+									<div ng-messages="beneficiaryForm.ben_acc_no.$error">
+										<div ng-message="maxlength">
+											At most 20 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<div layout='row' aria-label="code" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='code' select-model="model.selected___code.id" md-search-text-change="dropdowns.service208624.searchTextChange(dropdowns.service208624.searchText)" md-search-text="dropdowns.service208624.searchText" md-selected-item="model.selected___code" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service208624.getItems(dropdowns.service208624.searchText,'model')" md-floating-label="Code" md-no-cache="true" md-selected-item-change="select208624(model,'model','code')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Code" id='ci208624' aria-label="code" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service208624.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="beneficiaryForm.code.$error" ng-if="beneficiaryForm.code.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for codeForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('codeForm','',true,'selected___code','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+								<md-input-container aria-label="code_date" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text" theme="material" ng-model="model.code_date" name=code_date required aria-label="Code Date" placeholder="Code Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci208625' aria-label="code_date" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+									<div ng-messages="beneficiaryForm.model.code_date.$error">
+										<div ng-message="required">
+											This is required.
+										</div>
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="other_codes" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='10' name="other_codes" ng-model="model.other_codes" aria-label="Other Codes" id='ci208626' aria-label="other_codes" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Other Codes
+									</label>
+									<div ng-messages="beneficiaryForm.other_codes.$error">
+										<div ng-message="maxlength">
+											At most 10 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="class_code" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='5' name="class_code" ng-model="model.class_code" aria-label="Class Code" id='ci208627' aria-label="class_code" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Class Code
+									</label>
+									<div ng-messages="beneficiaryForm.class_code.$error">
+										<div ng-message="maxlength">
+											At most 5 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="inst_holder" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='3' name="inst_holder" ng-model="model.inst_holder" aria-label="Inst Holder" id='ci208628' aria-label="inst_holder" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Inst Holder
+									</label>
+									<div ng-messages="beneficiaryForm.inst_holder.$error">
+										<div ng-message="maxlength">
+											At most 3 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</section>
+						</md-card-content>
+					</md-card>
+					<md-card  aria-label="fieldset2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci208063' aria-label="fieldset2" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-input-container aria-label="address1" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address1" ng-model="model.address1" aria-label="Address1" id='ci208629' aria-label="address1" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address1
+									</label>
+									<div ng-messages="beneficiaryForm.address1.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="address2" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address2" ng-model="model.address2" aria-label="Address2" id='ci208630' aria-label="address2" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address2
+									</label>
+									<div ng-messages="beneficiaryForm.address2.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="address3" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address3" ng-model="model.address3" aria-label="Address3" id='ci208631' aria-label="address3" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address3
+									</label>
+									<div ng-messages="beneficiaryForm.address3.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="address4" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address4" ng-model="model.address4" aria-label="Address4" id='ci208632' aria-label="address4" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address4
+									</label>
+									<div ng-messages="beneficiaryForm.address4.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="postal_code" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='16' name="postal_code" ng-model="model.postal_code" aria-label="Postal Code" id='ci208633' aria-label="postal_code" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Postal Code
+									</label>
+									<div ng-messages="beneficiaryForm.postal_code.$error">
+										<div ng-message="maxlength">
+											At most 16 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="country_code" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='2' name="country_code" ng-model="model.country_code" aria-label="Country Code" id='ci208634' aria-label="country_code" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Country Code
+									</label>
+									<div ng-messages="beneficiaryForm.country_code.$error">
+										<div ng-message="maxlength">
+											At most 2 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="import_date" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text" theme="material" ng-model="model.import_date"   name="import_date" required     aria-label="Import Date" placeholder="Import Date" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci208635' aria-label="import_date" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+								</md-input-container>
+								<md-input-container class="md-block"  aria-label="add_new_code_to_beneficiary" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<md-checkbox  dib-data-component='checkbox' name="add_new_code_to_beneficiary" ng-model="model.add_new_code_to_beneficiary" aria-label="Add New Code To Beneficiary" id='ci208636' aria-label="add_new_code_to_beneficiary" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+										Add New Code To Beneficiary
+									</md-checkbox>
+									<div ng-messages="beneficiaryForm.add_new_code_to_beneficiary.$error">
+									</div>
+								</md-input-container>
+							</section>
+						</md-card-content>
+					</md-card>
+					<md-card  aria-label="fieldset3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci208062' aria-label="fieldset3" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<div layout='row' aria-label="strate_id" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='strate_id' select-model="model.selected___strate_id.id" md-search-text-change="dropdowns.service208637.searchTextChange(dropdowns.service208637.searchText)" md-search-text="dropdowns.service208637.searchText" md-selected-item="model.selected___strate_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service208637.getItems(dropdowns.service208637.searchText,'model')" md-floating-label="Strate" md-no-cache="true" md-selected-item-change="select208637(model,'model','strate_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Strate" id='ci208637' aria-label="strate_id" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service208637.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="beneficiaryForm.strate_id.$error" ng-if="beneficiaryForm.strate_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for importStrateForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('importStrateForm','',true,'selected___strate_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+								<md-input-container aria-label="notes" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4417&text=beneficiary' >
+									<input type="text"  maxlength='255' name="notes" ng-model="model.notes" aria-label="Notes" id='ci208638' aria-label="notes" dib-container-name='beneficiaryForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="beneficiaryForm.notes.$error">
+										<div ng-message="maxlength">
+											At most 255 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</section>
+						</md-card-content>
+					</md-card>
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Ben Ids (Grid)' tabId="208640"  ng-click=dibCommon.goTo('benIdGrid','beneficiaryForm',false) aria-label="benIdGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="benIdGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208640'     id='ci208640' aria-label="benIdGrid" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_benIdGrid' dib-container-filter-settings="{ 'beneficiaryForm_benIdGrid' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Ben Ids (Form)' tabId="208641"  ng-click=dibCommon.goTo('benIdForm','beneficiaryForm',false) aria-label="benIdForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="benIdForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208641'     id='ci208641' aria-label="benIdForm" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_benIdForm' dib-container-filter-settings="{ 'beneficiaryForm_benIdForm' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Ben Names (Grid)' tabId="208642"  ng-click=dibCommon.goTo('benNameGrid','beneficiaryForm',false) aria-label="benNameGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="benNameGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208642'     id='ci208642' aria-label="benNameGrid" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_benNameGrid' dib-container-filter-settings="{ 'beneficiaryForm_benNameGrid' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Ben Names (Form)' tabId="208643"  ng-click=dibCommon.goTo('benNameForm','beneficiaryForm',false) aria-label="benNameForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="benNameForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208643'     id='ci208643' aria-label="benNameForm" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_benNameForm' dib-container-filter-settings="{ 'beneficiaryForm_benNameForm' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Import Strates (Grid)' tabId="208644"  ng-click=dibCommon.goTo('importStrateGrid','beneficiaryForm',false) aria-label="importStrateGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="importStrateGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208644'     id='ci208644' aria-label="importStrateGrid" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_importStrateGrid' dib-container-filter-settings="{ 'beneficiaryForm_importStrateGrid' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Import Strates (Form)' tabId="208645"  ng-click=dibCommon.goTo('importStrateForm','beneficiaryForm',false) aria-label="importStrateForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="importStrateForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208645'     id='ci208645' aria-label="importStrateForm" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_importStrateForm' dib-container-filter-settings="{ 'beneficiaryForm_importStrateForm' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Inet Bfas (Grid)' tabId="208646"  ng-click=dibCommon.goTo('inetBfaGrid','beneficiaryForm',false) aria-label="inetBfaGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="inetBfaGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208646'     id='ci208646' aria-label="inetBfaGrid" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_inetBfaGrid' dib-container-filter-settings="{ 'beneficiaryForm_inetBfaGrid' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Inet Bfas (Form)' tabId="208647"  ng-click=dibCommon.goTo('inetBfaForm','beneficiaryForm',false) aria-label="inetBfaForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="inetBfaForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208647'     id='ci208647' aria-label="inetBfaForm" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_inetBfaForm' dib-container-filter-settings="{ 'beneficiaryForm_inetBfaForm' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Mandateds (Grid)' tabId="208648"  ng-click=dibCommon.goTo('mandatedGrid','beneficiaryForm',false) aria-label="mandatedGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="mandatedGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208648'     id='ci208648' aria-label="mandatedGrid" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_mandatedGrid' dib-container-filter-settings="{ 'beneficiaryForm_mandatedGrid' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Mandateds (Form)' tabId="208649"  ng-click=dibCommon.goTo('mandatedForm','beneficiaryForm',false) aria-label="mandatedForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="mandatedForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208649'     id='ci208649' aria-label="mandatedForm" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_mandatedForm' dib-container-filter-settings="{ 'beneficiaryForm_mandatedForm' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Shares (Grid)' tabId="208650"  ng-click=dibCommon.goTo('shareGrid','beneficiaryForm',false) aria-label="shareGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="shareGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208650'     id='ci208650' aria-label="shareGrid" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_shareGrid' dib-container-filter-settings="{ 'beneficiaryForm_shareGrid' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Shares (Form)' tabId="208651"  ng-click=dibCommon.goTo('shareForm','beneficiaryForm',false) aria-label="shareForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="shareForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208651'     id='ci208651' aria-label="shareForm" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_shareForm' dib-container-filter-settings="{ 'beneficiaryForm_shareForm' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Xxxben Codes (Grid)' tabId="208652"  ng-click=dibCommon.goTo('xxxbenCodeGrid','beneficiaryForm',false) aria-label="xxxbenCodeGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="xxxbenCodeGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208652'     id='ci208652' aria-label="xxxbenCodeGrid" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_xxxbenCodeGrid' dib-container-filter-settings="{ 'beneficiaryForm_xxxbenCodeGrid' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Xxxben Codes (Form)' tabId="208653"  ng-click=dibCommon.goTo('xxxbenCodeForm','beneficiaryForm',false) aria-label="xxxbenCodeForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="xxxbenCodeForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=beneficiaryForm&itemId=208653'     id='ci208653' aria-label="xxxbenCodeForm" dib-container-name='beneficiaryForm' dib-active-filter='beneficiaryForm_xxxbenCodeForm' dib-container-filter-settings="{ 'beneficiaryForm_xxxbenCodeForm' : 'submitItemAlias_parent_beneficiary_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+	</md-tabs>
+</ng-form>

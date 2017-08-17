@@ -1,0 +1,60 @@
+ 
+<div component-loaded dib-container=dashboard dib-container-name="9171" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace"  aria-label="divDashboard" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " id='ci211770' aria-label="divDashboard" dib-container-name='dashboard' dib-config="{ listeners : { } }" >
+		<md-card aria-label="mdcard" can-be-moved=true can-have-children=true flex=none layout='row' layout-align='center center' style="    " >
+			<md-card-content  id="ci211771" dib-inject-content="replace" class="no-padding" style="padding:0px"  id='ci211771' aria-label="mdcard" dib-container-name='dashboard' dib-config="{ listeners : { } }" >
+				<md-button  class="dib-large-icon-button" aria-label="icon1" can-be-moved=true style="width:140 !important; height:140 !important; overflow:auto !important;   " id='ci211772' aria-label="icon1" dib-container-name='dashboard' ng-click="dibCommon.goTo('datasetGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon  md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Datasets 
+					</span>
+				</md-button>
+				<md-button  class="dib-large-icon-button" aria-label="icon2" can-be-moved=true style="width:140 !important; height:140 !important; overflow:auto !important;   " id='ci211773' aria-label="icon2" dib-container-name='dashboard' ng-click="dibCommon.goTo('companyGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon  md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Companies 
+					</span>
+				</md-button>
+				<md-button  class="dib-large-icon-button" aria-label="icon3" can-be-moved=true style="width:140 !important; height:140 !important; overflow:auto !important;   " id='ci211776' aria-label="icon3" dib-container-name='dashboard' ng-click="dibCommon.goTo('beneficiaryGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon  md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Beneficiaries 
+					</span>
+				</md-button>
+				<md-button  class="dib-large-icon-button" aria-label="icon4" can-be-moved=true style="width:140 !important; height:140 !important; overflow:auto !important;   " id='ci211775' aria-label="icon4" dib-container-name='dashboard' ng-click="dibCommon.goTo('marketCapGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon  md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Market Caps 
+					</span>
+				</md-button>
+				<md-button  class="dib-large-icon-button" aria-label="icon5" can-be-moved=true style="width:140 !important; height:140 !important; overflow:auto !important;   " id='ci211774' aria-label="icon5" dib-container-name='dashboard' ng-click="dibCommon.goTo('codeGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon  md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Codes 
+					</span>
+				</md-button>
+			</md-card-content>
+		</md-card>
+		<md-card aria-label="mdcard1" can-be-moved=true can-have-children=true flex=none layout='row' layout-align='center center' style="    " >
+			<md-card-content  id="ci211777" dib-inject-content="replace" class="no-padding" style="padding:0px"  id='ci211777' aria-label="mdcard1" dib-container-name='dashboard' dib-config="{ listeners : { } }" >
+				<md-button  class="dib-large-icon-button" aria-label="designMyApp" can-be-moved=true style="width:140 !important; height:140 !important; overflow:auto !important;   " dib-help='Design My App: Allows you to change the application with our designer. Remember to delete this button from the view before you publish your app. ' id='ci211778' aria-label="designMyApp" dib-container-name='dashboard' ng-click="dibCommon.goTo('dibDesigner','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-tooltip md-direction="top" md-delay="500">
+						Open the Designer
+					</md-tooltip>
+					<md-icon  md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/settings.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Design My App 
+					</span>
+				</md-button>
+			</md-card-content>
+		</md-card>
+	</div>
+</div>

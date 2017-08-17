@@ -1,0 +1,20 @@
+ 
+<div component-loaded dib-container=wizBuildAppWait dib-container-name="7307" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout='column' aria-label="Layout" can-be-moved=true flex layout-align="center center" layout="column" can-have-children=true on-move-refresh-preview=true style=" height:600px !important;   " id='ci159826' aria-label="Layout" dib-container-name='wizBuildAppWait' dib-config="{ listeners : { } }" >
+		<img aria-label="img" can-be-moved=true flex=none style="width:250px !important; height:250px !important;   position: absolute;top:240px" id='ci159838' aria-label="img" dib-container-name='wizBuildAppWait' dib-config="{ listeners : { } }" src="/files/dropins/setNgMaterial/dibAdmin/images/diblogocoffee.png" />
+		<span aria-label="span" can-be-moved=true flex=none can-have-children=true on-move-refresh-preview=true style="    " id='ci159835' aria-label="span" dib-container-name='wizBuildAppWait' dib-config="{ listeners : { } }" >
+			<h1>
+				We're busy creating your app; have some coffee
+			</h1>
+		</span>
+		<span aria-label="span1" can-be-moved=true flex=none can-have-children=true on-move-refresh-preview=true style="    " id='ci159836' aria-label="span1" dib-container-name='wizBuildAppWait' dib-config="{ listeners : { } }" >
+			<h3>
+				We will redirect you to your application once it's done...
+			</h3>
+		</span>
+		<md-progress-circular   aria-label="mdprogresscircular" can-be-moved=true flex=none md-diameter="250" style="    " id='ci159837' aria-label="mdprogresscircular" dib-container-name='wizBuildAppWait' dib-config="{ listeners : { } }" >
+		</md-progress-circular>
+	</div>
+</div>

@@ -1,0 +1,487 @@
+ 
+<ng-form layout-fill dib-container=pefTableForm  flex isolate-form name='pefTableForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci209784' aria-label="rowToolbar" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci209785' aria-label="btnsave" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci209786' aria-label="btnadd" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised " style="    " ng-click="deleteRecord({'redirect' : true})" id='ci209787' aria-label="btndelete" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci209788' aria-label="btnreload" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci209869' aria-label="btnAuditTrail" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnGrid" can-be-moved=true flex=none style="    " id='ci209791' aria-label="btnGrid" dib-container-name='pefTableForm' ng-click="dibCommon.goTo('pefTableGrid','',true,'','',$event);" dib-config="{ listeners : { } }" aria-label="Grid" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Open grid
+			</md-tooltip>
+			Grid 
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci209789' aria-label="emptyspan" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci209790' aria-label="formpaging" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" data-container-name="pefTableForm" >
+		</dib-form-paging >
+	</div>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci209792' aria-label="layoutrow" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+		<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci209793' aria-label="fieldset" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-input-container aria-label="id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" id='ci209870' aria-label="id" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Id*
+						</label>
+						<div ng-messages="pefTableForm.id.$error">
+							<div ng-message="required">
+								Id required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='150' required name="name" ng-model="model.name" aria-label="Name" id='ci209871' aria-label="name" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Name*
+						</label>
+						<div ng-messages="pefTableForm.name.$error">
+							<div ng-message="required">
+								Name required.
+							</div>
+							<div ng-message="maxlength">
+								At most 150 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="pef_database_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  required name="pef_database_id" ng-model="model.pef_database_id" aria-label="Pef Database" id='ci209872' aria-label="pef_database_id" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Pef Database*
+						</label>
+						<div ng-messages="pefTableForm.pef_database_id.$error">
+							<div ng-message="required">
+								Pef Database required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="display_expression" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='255' name="display_expression" ng-model="model.display_expression" aria-label="Display Expression" id='ci209873' aria-label="display_expression" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Display Expression
+						</label>
+						<div ng-messages="pefTableForm.display_expression.$error">
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block"  aria-label="filter_any_part" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-checkbox  dib-data-component='checkbox' name="filter_any_part" ng-model="model.filter_any_part" aria-label="Filter Any Part" id='ci209874' aria-label="filter_any_part" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+							Filter Any Part
+						</md-checkbox>
+						<div ng-messages="pefTableForm.filter_any_part.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="engine_type" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='150' name="engine_type" ng-model="model.engine_type" aria-label="Engine Type" id='ci209875' aria-label="engine_type" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Engine Type
+						</label>
+						<div ng-messages="pefTableForm.engine_type.$error">
+							<div ng-message="maxlength">
+								At most 150 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="pef_edit_container_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  name="pef_edit_container_id" ng-model="model.pef_edit_container_id" aria-label="Pef Edit Container" id='ci209876' aria-label="pef_edit_container_id" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Pef Edit Container
+						</label>
+						<div ng-messages="pefTableForm.pef_edit_container_id.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="crud_events" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='30' name="crud_events" ng-model="model.crud_events" aria-label="Crud Events" id='ci209877' aria-label="crud_events" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Crud Events
+						</label>
+						<div ng-messages="pefTableForm.crud_events.$error">
+							<div ng-message="maxlength">
+								At most 30 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="php_list_criteria" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<textarea   name="php_list_criteria" ng-model="model.php_list_criteria" aria-label="Php List Criteria" id='ci209878' aria-label="php_list_criteria" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+						</textarea>
+						<label>
+							Php List Criteria
+						</label>
+						<div ng-messages="pefTableForm.php_list_criteria.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="special" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='255' name="special" ng-model="model.special" aria-label="Special" id='ci209879' aria-label="special" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Special
+						</label>
+						<div ng-messages="pefTableForm.special.$error">
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="audit_create" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-input-container flex>
+							<label>
+								Audit Create
+							</label>
+							<md-select    ng-required dib-data-component='enum' dib-onload-service placeholder="Audit Create" aria-label="audit_create" md-on-close="select209880(model)" flex ng-model="model.audit_create" name='audit_create' id='ci209880' aria-label="audit_create" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['detail','summary','basic','none']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="pefTableForm.audit_create.$error">
+								<div ng-message="required">
+									Audit Create required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<md-input-container aria-label="audit_create_criteria" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='255' name="audit_create_criteria" ng-model="model.audit_create_criteria" aria-label="Audit Create Criteria" id='ci209881' aria-label="audit_create_criteria" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Audit Create Criteria
+						</label>
+						<div ng-messages="pefTableForm.audit_create_criteria.$error">
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="audit_update" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-input-container flex>
+							<label>
+								Audit Update
+							</label>
+							<md-select    ng-required dib-data-component='enum' dib-onload-service placeholder="Audit Update" aria-label="audit_update" md-on-close="select209882(model)" flex ng-model="model.audit_update" name='audit_update' id='ci209882' aria-label="audit_update" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['detail','summary','basic','none']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="pefTableForm.audit_update.$error">
+								<div ng-message="required">
+									Audit Update required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+				</section>
+			</md-card-content>
+		</md-card>
+		<md-card  aria-label="fieldset2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci209795' aria-label="fieldset2" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-input-container aria-label="audit_update_criteria" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='255' name="audit_update_criteria" ng-model="model.audit_update_criteria" aria-label="Audit Update Criteria" id='ci209883' aria-label="audit_update_criteria" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Audit Update Criteria
+						</label>
+						<div ng-messages="pefTableForm.audit_update_criteria.$error">
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="audit_delete" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-input-container flex>
+							<label>
+								Audit Delete
+							</label>
+							<md-select    ng-required dib-data-component='enum' dib-onload-service placeholder="Audit Delete" aria-label="audit_delete" md-on-close="select209884(model)" flex ng-model="model.audit_delete" name='audit_delete' id='ci209884' aria-label="audit_delete" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['detail','summary','basic','none']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="pefTableForm.audit_delete.$error">
+								<div ng-message="required">
+									Audit Delete required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<md-input-container aria-label="audit_delete_criteria" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='255' name="audit_delete_criteria" ng-model="model.audit_delete_criteria" aria-label="Audit Delete Criteria" id='ci209885' aria-label="audit_delete_criteria" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Audit Delete Criteria
+						</label>
+						<div ng-messages="pefTableForm.audit_delete_criteria.$error">
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="audit_read" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-input-container flex>
+							<label>
+								Audit Read
+							</label>
+							<md-select    ng-required dib-data-component='enum' dib-onload-service placeholder="Audit Read" aria-label="audit_read" md-on-close="select209886(model)" flex ng-model="model.audit_read" name='audit_read' id='ci209886' aria-label="audit_read" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['basic','none']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="pefTableForm.audit_read.$error">
+								<div ng-message="required">
+									Audit Read required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<md-input-container aria-label="audit_read_criteria" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='255' name="audit_read_criteria" ng-model="model.audit_read_criteria" aria-label="Audit Read Criteria" id='ci209887' aria-label="audit_read_criteria" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Audit Read Criteria
+						</label>
+						<div ng-messages="pefTableForm.audit_read_criteria.$error">
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block"  aria-label="ignore" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-checkbox  dib-data-component='checkbox' name="ignore" ng-model="model.ignore" aria-label="Ignore" id='ci209888' aria-label="ignore" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+							Ignore
+						</md-checkbox>
+						<div ng-messages="pefTableForm.ignore.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="notice" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<textarea   name="notice" ng-model="model.notice" aria-label="Notice" id='ci209889' aria-label="notice" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+						</textarea>
+						<label>
+							Notice
+						</label>
+						<div ng-messages="pefTableForm.notice.$error">
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="extra_database_fields" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-input-container flex>
+							<label>
+								Extra Database Fields
+							</label>
+							<md-select    dib-data-component='enum' dib-onload-service placeholder="Extra Database Fields" aria-label="extra_database_fields" md-on-close="select209890(model)" flex ng-model="model.extra_database_fields" name='extra_database_fields' id='ci209890' aria-label="extra_database_fields" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['leave outside DIB','add to DIB','remove from database']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="pefTableForm.extra_database_fields.$error">
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="extra_dib_fields" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-input-container flex>
+							<label>
+								Extra Dib Fields
+							</label>
+							<md-select    dib-data-component='enum' dib-onload-service placeholder="Extra Dib Fields" aria-label="extra_dib_fields" md-on-close="select209891(model)" flex ng-model="model.extra_dib_fields" name='extra_dib_fields' id='ci209891' aria-label="extra_dib_fields" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['SKIP!','remove from DIB','add to database']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="pefTableForm.extra_dib_fields.$error">
+							</div>
+						</md-input-container>
+					</div>
+					<md-input-container class="md-block"  aria-label="create_grid" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-checkbox  dib-data-component='checkbox' name="create_grid" ng-model="model.create_grid" aria-label="Create Grid" id='ci209892' aria-label="create_grid" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+							Create Grid
+						</md-checkbox>
+						<div ng-messages="pefTableForm.create_grid.$error">
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block"  aria-label="create_form" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-checkbox  dib-data-component='checkbox' name="create_form" ng-model="model.create_form" aria-label="Create Form" id='ci209893' aria-label="create_form" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+							Create Form
+						</md-checkbox>
+						<div ng-messages="pefTableForm.create_form.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="new_grid_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='50' name="new_grid_name" ng-model="model.new_grid_name" aria-label="New Grid Name" id='ci209894' aria-label="new_grid_name" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							New Grid Name
+						</label>
+						<div ng-messages="pefTableForm.new_grid_name.$error">
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+		<md-card  aria-label="fieldset3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci209794' aria-label="fieldset3" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-input-container aria-label="new_form_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='50' name="new_form_name" ng-model="model.new_form_name" aria-label="New Form Name" id='ci209895' aria-label="new_form_name" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							New Form Name
+						</label>
+						<div ng-messages="pefTableForm.new_form_name.$error">
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="caption" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='60' required name="caption" ng-model="model.caption" aria-label="Caption" id='ci209896' aria-label="caption" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Caption*
+						</label>
+						<div ng-messages="pefTableForm.caption.$error">
+							<div ng-message="required">
+								Caption required.
+							</div>
+							<div ng-message="maxlength">
+								At most 60 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="field_count" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  required name="field_count" ng-model="model.field_count" aria-label="Field Count" id='ci209897' aria-label="field_count" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Field Count*
+						</label>
+						<div ng-messages="pefTableForm.field_count.$error">
+							<div ng-message="required">
+								Field Count required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="pef_menu_item_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  name="pef_menu_item_id" ng-model="model.pef_menu_item_id" aria-label="Pef Menu Item" id='ci209898' aria-label="pef_menu_item_id" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Pef Menu Item
+						</label>
+						<div ng-messages="pefTableForm.pef_menu_item_id.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="pef_port_item_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  name="pef_port_item_id" ng-model="model.pef_port_item_id" aria-label="Pef Port Item" id='ci209899' aria-label="pef_port_item_id" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Pef Port Item
+						</label>
+						<div ng-messages="pefTableForm.pef_port_item_id.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="pef_add_port_component_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  name="pef_add_port_component_id" ng-model="model.pef_add_port_component_id" aria-label="Pef Add Port Component" id='ci209900' aria-label="pef_add_port_component_id" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Pef Add Port Component
+						</label>
+						<div ng-messages="pefTableForm.pef_add_port_component_id.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="pef_grid_design_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  required name="pef_grid_design_id" ng-model="model.pef_grid_design_id" aria-label="Pef Grid Design" id='ci209901' aria-label="pef_grid_design_id" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Pef Grid Design*
+						</label>
+						<div ng-messages="pefTableForm.pef_grid_design_id.$error">
+							<div ng-message="required">
+								Pef Grid Design required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="pef_form_design_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="number"  required name="pef_form_design_id" ng-model="model.pef_form_design_id" aria-label="Pef Form Design" id='ci209902' aria-label="pef_form_design_id" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Pef Form Design*
+						</label>
+						<div ng-messages="pefTableForm.pef_form_design_id.$error">
+							<div ng-message="required">
+								Pef Form Design required.
+							</div>
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="related_records" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<md-input-container flex>
+							<label>
+								Related Records
+							</label>
+							<md-select    ng-required dib-data-component='enum' dib-onload-service placeholder="Related Records" aria-label="related_records" md-on-close="select209903(model)" flex ng-model="model.related_records" name='related_records' id='ci209903' aria-label="related_records" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['none','grids','forms','both']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="pefTableForm.related_records.$error">
+								<div ng-message="required">
+									Related Records required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<md-input-container aria-label="help_html" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<textarea   name="help_html" ng-model="model.help_html" aria-label="Help Html" id='ci209904' aria-label="help_html" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+						</textarea>
+						<label>
+							Help Html
+						</label>
+						<div ng-messages="pefTableForm.help_html.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="notes" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='255' name="notes" ng-model="model.notes" aria-label="Notes" id='ci209905' aria-label="notes" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Notes
+						</label>
+						<div ng-messages="pefTableForm.notes.$error">
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="uid" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4457&text=pef_table' >
+						<input type="text"  maxlength='30' name="uid" ng-model="model.uid" aria-label="Uid" id='ci209906' aria-label="uid" dib-container-name='pefTableForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Uid
+						</label>
+						<div ng-messages="pefTableForm.uid.$error">
+							<div ng-message="maxlength">
+								At most 30 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+	</div>
+</ng-form>

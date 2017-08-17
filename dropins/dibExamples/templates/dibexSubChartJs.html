@@ -1,0 +1,311 @@
+<html>
+<head>
+
+    <!-- *** NOTE: Security measure: always specify UTF-8 encoding, which corresponds with the UTF-8 header which Eleutheria sends to the client -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <title>DIB ChartJs</title>
+    <meta charset="utf-8" />   
+
+    <script src="/files/dropins/dibCharts/js/chartJs/Chart.bundle.min.js"></script>
+    <script src="/files/dropins/dibCharts/js/chartJs/utils.js"></script>
+   
+    <style type="text/css">
+        body {
+            font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;            
+            color: #333;
+        }
+        ul li {
+            list-style: decimal;
+        }
+        a {
+            color: #660;
+        }
+        
+		#btn {
+			background-color: #008CBA;
+            border-radius: 15px;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border: none;
+            color: white;
+            padding: 3px 6px;       
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px; 
+		}
+		
+		#trheading {
+            text-align: center; 
+			color: white; 
+			background: #3a79b3;
+			font-weight: bold;
+			font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;
+        }
+		#trrow {
+            font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;            
+            color: #333;
+        }
+        a:hover {
+            color: #000;
+        }
+        
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;            
+        }
+
+        /* Tooltip text */
+        a .tooltiptext {
+            opacity: 0;
+            transition: opacity 0.7s;
+            width: 200px;
+            background-color: lightyellow;
+            color: #221CA2;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+         
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        a:hover .tooltiptext {
+            opacity: 1;
+        }
+    </style>
+    
+</head>
+
+<body ng-controller="MainCtrl" ~if(getval(print)=true, [*onload="window.print()"*])~>   
+    
+~$// DIB function definitions made available by TemplateActions.js referenced above: 
+    dibCommon.goTo(containerName, portAlias, changeUrl, urlQueryString)    -- note, use '' for empty values, not null
+    dibCommon.startAction(submitUrl, containerName)   -- note, the containerName parameter indicates the starting place to search for submissionData values
+~
+
+~$// 
+    Note variables sent from PHP are sanitized allowing only "a-zA-Z0-9_ " by default. 
+    The [%...%] directives are used to ignore encoding of safe html
+    The Eleutheria encode function is used to sanitize urls 
+~ 
+
+~$// HEADING ~
+<p style="font-size: 15px">
+    <b>ChartJs Dropin</b><br>
+    Docs: <a target="blank_" href="http://www.chartjs.org/samples/latest/">http://www.chartjs.org/samples/latest/</a>
+</p>
+
+~$// BUTTONS ~
+
+~if(getval(print)<>true,[%
+    <a id="btn" href="/dropins/setNgMaterial/dibHtmlTemplate/template/open/dibexSubChartJsHtml?filter=%]encode(this, url,{"submitItemAlias_parent_companyId":"^submitItemAlias_parent_companyId^"[*,*]"print":"true"})[%" target="_blank">Print
+    </a>
+%])~ 
+
+~if(getval(print)<>true,[%
+    <a id="btn" href="/dropins/dibPdf/Pdf/convertContainer/dibexSubChartJsHtml?fileName=test.pdf&filter%]=encode(this, url,{"submitItemAlias_parent_companyId":"^submitItemAlias_parent_companyId^"[*,*]"print":"true"})[%">PDF
+    </a>
+%])~
+
+~if(getval(print)<>true,[%<button id="btn" onclick="document.location.reload();">Refresh Info</button>%])~
+
+<div>
+
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test1,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "groupBySql" : "`position`",
+        "havingSql" : "",
+        "category" : "`position`",
+        "series" : [{"expression" : "count(id) as `count`",  "lineTension" : 0}, {"expression" : "max(id) as `maxId`"}, {"expression" : "min(id) as `minId`"}]
+    *],
+    [* "type": "line" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "line"
+        } 
+    *],
+    [*style="float: left; width: 30%;"*]
+)~
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test2,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "groupBySql" : "`position`",
+        "havingSql" : "",
+        "category" : "`position`",
+        "series" : [{"expression" : "count(id) as `count`",  "lineTension" : 0}, {"expression" : "max(id) as `maxId`"}, {"expression" : "min(id) as `minId`"}]
+    *],
+    [* "type": "bar" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "bar"
+        } 
+    *],
+    [*style="float: left; width: 30%;"*]
+)~
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test3,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "groupBySql" : "`position`",
+        "havingSql" : "",
+        "category" : "`position`",
+        "series" : [{"expression" : "count(id) as `count`"}, {"expression" : "max(id) as `maxId`"}]
+    *],
+    [* "type": "radar" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "radar"
+        } 
+    *],
+    [*style="float: left; width: 20%;"*]
+)~
+
+<br style="clear: left;" />
+</div>
+<div>
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test4,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "groupBySql" : "`position`",
+        "havingSql" : "",
+        "category" : "`position`",
+        "series" : [{"expression" : "count(id) as `count`"}, {"expression" : "max(id) as `maxId`"}, {"expression" : "min(id) as `minId`"}]
+    *],
+    [* "type": "doughnut" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "doughnut"
+        } 
+    *],
+    [*style="float: left; width: 20%;"*]
+)~
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test5,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "groupBySql" : "`position`",
+        "havingSql" : "",
+        "category" : "`position`",
+        "series" : [{"expression" : "count(id) as `count`"}, {"expression" : "max(id) as `maxId`"}, {"expression" : "min(id) as `minId`"}]
+    *],
+    [* "type": "polarArea" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "polarArea"
+        } 
+    *],
+    [*style="float: left; width: 20%;"*]
+)~
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test6,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "groupBySql" : "`position`",
+        "havingSql" : "",
+        "category" : "`position`",
+        "series" : [{"expression" : "count(id) as `count`"}, {"expression" : "max(id) as `maxId`"}, {"expression" : "min(id) as `minId`"}]
+    *],
+    [* "type": "pie" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "pie"
+        } 
+    *],
+    [*style="float: left; width: 20%;"*]
+)~
+
+<br style="clear: left;" />
+</div>
+<div>
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test7,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "havingSql" : "",
+        "series" : [{"expression" : "consultant_id AS `y`"}, {"expression" : "test_company_id AS `x`"}, {"expression" : "id AS `r`"}]
+    *],
+    [* "type": "bubble" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "bubble"
+        } 
+    *],
+    [*style="float: left; width: 30%;"*]
+)~
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test8,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "havingSql" : "",
+        "series" : [{"expression" : "consultant_id AS `y`"}, {"expression" : "test_company_id AS `x`"}]
+    *],
+    [* "type": "scatter" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "scatter"
+        } 
+    *],
+    [*style="float: left; width: 30%;"*]
+)~
+
+~encode(current, none)dropin(/dropins/dibCharts/ChartJs/chart, test9,
+    [*  
+        "containerName" : "dibtestCompanyConsultantGrid",
+        "fromSql" : "test_company_consultant",
+        *]"whereSql" : "id < param(29)"[*,
+        "groupBySql" : "`position`",
+        "havingSql" : "",
+        "category" : "`position`",
+        "series" : [{"expression" : "count(id) as `count`", "type" : "line", "lineTension" : 0}, {"expression" : "max(id) as `maxId`"}, {"expression" : "min(id) as `minId`"}]
+    *],
+    [* "type": "bar" *],
+    [* 
+        "title": {
+            "display": true,
+            "text": "Combo Bar/Line"
+        } 
+    *],
+    [*style="float: left; width: 30%;"*]
+)~
+
+<br style="clear: left;" />
+</div>
+
+</body>
+</html>

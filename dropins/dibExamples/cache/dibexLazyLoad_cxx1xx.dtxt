@@ -1,0 +1,81 @@
+
+(function() {
+    var require = ['/dropins/setNgMaterial/dibGlobals/js/component/timeDatePickerInput.js' ];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    var dibexLazyLoad = angular.module('dibexLazyLoad', [files]);
+    var dibexLazyLoad = angular.module('dibexLazyLoad');
+    dibexLazyLoad.component('dibexLazyLoad', {
+        controllerAs: 'dibexLazyLoad',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dibexLazyLoad.html',
+        controller : component__dibexLazyLoad
+    });
+    component__dibexLazyLoad.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad'];
+    function component__dibexLazyLoad($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad) {
+        var ctrl = this;
+        ctrl.$onInit = function () { 
+                        $scope.container = {};
+            $scope.container.Id = '7152';
+            $scope.container.Name = 'dibexLazyLoad';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = dibRecord.modelConstruct($scope);
+        $scope.model._GET['textfield_DDD'] = dibContainer.modelItem({
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['datefield_DDD'] = dibContainer.modelItem({
+            dataType : "date", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['textfield2_DDD_FFF'] = dibContainer.modelItem({
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.view = {};
+            $scope.view.parentFieldset = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.colParent = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.fieldsetLazy = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.buttonPHPA = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.buttonPHPAAA = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.buttonPHPCCC = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.buttonPHPD = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.buttonPHPDDD = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.buttonPHPFFF = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = [];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+    $scope.dropdowns = {};
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+            $scope.recordStatus = "create";
+            $scope.reloadContainer = function () {
+                //Now we reload all the required 
+                dibContainer.reloadChildren({containerName: 'dibexLazyLoad'});
+            };
+            if (!!dibContainer.isSubContainer($("[dib-container=dibexLazyLoad]")) === false) { 
+                $scope.reloadContainer();
+            }
+        };
+        //required for permissions
+        ctrl.$postLink = function () {
+        };
+    } 
+})();

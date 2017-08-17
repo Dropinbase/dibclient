@@ -1,0 +1,91 @@
+
+(function() {
+    var require = ['/dropins/setNgMaterial/dibMenu/js/components/dibSideBarStatus.js' ];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    var tmplBase4 = angular.module('tmplBase4', [files]);
+    tmplBase4.service('service209917',service209917);
+    service209917.$inject = ['dibAjax', 'dibDiscover'];
+    function service209917(dibAjax,  dibDiscover) {
+            return {
+                list : list
+            };
+            function list($scope, $element, node) {
+                var url = dibDiscover.updateQueryStringMenu(DIB.base_url + "/dropins/setNgMaterial/dibMenu/menu/list.json?containerName=tmplBase4&rootMenuId=209921", node);
+                var requestInfo = dibDiscover.addToUrl({
+                    field : $('#ci209917'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+    };
+    var tmplBase4 = angular.module('tmplBase4');
+    tmplBase4.component('tmplBase4', {
+        controllerAs: 'tmplBase4',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibContainer/Template/view/tmplBase4.html',
+        controller : component__tmplBase4
+    });
+    component__tmplBase4.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad','service209917'];
+    function component__tmplBase4($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad,service209917) {
+        var ctrl = this;
+        ctrl.$onInit = function () { 
+                        $scope.container = {};
+            $scope.container.Id = '9093';
+            $scope.container.Name = 'tmplBase4';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = dibRecord.modelConstruct($scope);
+        $scope.view = {};
+            $scope.view.menu = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.menuItems = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.menuItems1 = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = [];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+            $scope.menus.service209922 = {};
+            $scope.menus.service209922.update = function (node){
+                $scope.menus.service209922.loading = true;
+                service209922.list($scope,$dibContainer, !!node? node.id : null).then(function (menu) {
+                    $scope.menus.service209922.loading = false;
+                    if (!!node === false) { 
+                        $scope.menus.service209922.menu = menu;
+                    } else { 
+                        node.children = menu;
+                    }
+                }, function () {
+                    $scope.menus.service209922.loading = false;
+                });
+            };
+            $scope.menus.service209922.update();
+    $scope.dropdowns = {};
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+            $scope.recordStatus = "create";
+            $scope.reloadContainer = function () {
+                //Now we reload all the required 
+                dibContainer.reloadChildren({containerName: 'tmplBase4'});
+            };
+            if (!!dibContainer.isSubContainer($("[dib-container=tmplBase4]")) === false) { 
+                $scope.reloadContainer();
+            }
+        };
+        //required for permissions
+        ctrl.$postLink = function () {
+        };
+    } 
+})();

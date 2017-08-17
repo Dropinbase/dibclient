@@ -1,0 +1,47 @@
+<html>
+
+<head>
+
+<!-- *** NOTE: Security measure: always specify UTF-8 encoding, inline with the UTF-8 header which Eleutheria sends to the client -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script type="text/javascript" src="/files/dropins/setNgMaterial/dibAngular/src/js/core/shared/TemplateActions.js"></script>
+<style type="text/css">
+    body {
+        font-size: 12px;
+        font-family: helvetica,arial,verdana,sans-serif;            
+        color: #333;
+    }
+    a {
+        font-size: 12px;
+        font-family: helvetica,arial,verdana,sans-serif;
+        color: #1B2BBA;
+    }
+    a:hover {
+        color: #000;
+    }
+</style>
+</head>
+
+<body>
+
+<b>COMING SOON...  Using Javascript called from Html Templates:</b><br>
+<i>Leaving it here to demo fact that any type of container (like this dibHtmlTemplate container) can be lazy loaded.</i>
+<br><br>
+
+<table style="border-collapse: collapse" cellpadding="10" border="0">
+<tr>
+<td>
+   <a href="#" onclick="dibCommon.lazyLoadChildren('parentVbox', 'd', 'lazy', '');return false;"><b>Load all: those with tag &apos;d&apos;</b></a> 
+</td>
+<td>
+   <a href="#" onclick="dibCommon.lazyLoadChildren('parentVbox', 'ddd', 'lazy', '');return false;"><b>Load those with tag &apos;ddd&apos;</b></a> 
+</td>
+<td>
+   <a href="#" onclick="dibCommon.lazyLoadChildren('parentVbox', 'fff', 'lazy', '');return false;"><b>Load those with tag &apos;fff&apos;</b></a> 
+</td>
+</tr>
+</table>
+
+</body>
+</html>

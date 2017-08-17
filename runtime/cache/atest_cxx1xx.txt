@@ -1,0 +1,264 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibForm/js/component/formPaging.js','/dropins/setNgMaterial/dibGlobals/js/component/timeDatePickerInput.js',  
+		'/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+	];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var atest = angular.module('atest', [files]);
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+var atest = angular.module('atest');
+atest.component('atest', {
+    controllerAs: 'atest',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibForm/Template/view/atest.html',
+    controller : component__atest
+});
+component__atest.$inject = [  
+            'dibForm', '$scope','$element', '$ocLazyLoad', '$rootScope', '$log', 'discoverService', 'messageService','$location','actionService', '$q','utilityService', '$timeout', 'activeFilterOverride','containerService','recordFactory','crudService','utilityService'];
+    function component__atest(dibForm, $scope,$element, $ocLazyLoad, $rootScope, $log, discoverService, messageService,$location,actionService, $q,utilityService, $timeout, activeFilterOverride,containerService,recordFactory,crudService,utilityService) {
+        var ctrl = this;        
+        ctrl.$postLink = function () {
+        if (!!$scope) { 
+                $scope.$broadcast('postLink');
+        }
+        };
+        ctrl.$onInit = function () {
+        if (!!$scope) { 
+                $scope.$broadcast('onInit');
+        }
+                        $scope.container = {};
+            $scope.container.Id = '8584';
+            $scope.container.Name = 'atest';
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.model._GET['datePickerInput1'] = containerService.modelItem("date", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['inputCheckbox1'] = containerService.modelItem("boolean", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['inputEmail1'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['inputText2'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['inputText11'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['mdSelectEnum1'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['id'] = containerService.modelItem("number", 
+            false,
+            false,
+            null
+        );
+        $scope.view = {};
+            $scope.view.id = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = ["id"];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                            var primaryKeyData = recordFactory.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                            if (primaryKeyData.length > 0) {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=4020&filter_record_id="+primaryKeyData);
+                        } else {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=4020");
+                        }
+            };
+            $scope.addModel = function () { 
+                dibForm.addModel($scope, "atest");
+            };
+            $scope.deleteRecord = function (options) {
+                dibForm.deleteRecord('atest', $scope, $scope.atest, options, crudController).then(function (){
+        if (!!$scope) { 
+                $scope.$broadcast('delete');
+        }
+                });
+            };         
+            /**
+            *  Saving record in this model
+            */
+            $scope.saveModel = function (options) {
+                if ($scope.loadingData) return $q.reject('Busy loading...');
+                if (dibForm.validate($scope, $scope.atest)) {
+        if (!!$scope) { 
+                $scope.$broadcast('beforeUpdate');
+        }
+                    $scope.loadingData =  true;
+                    var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, $scope.model);
+                    return dibForm.updateRecord('atest', $scope, $scope.atest, crudController, options).then(function () { 
+                        if (Object.keys(primaryKeyData).length>0) {
+        if (!!$scope) { 
+                $scope.$broadcast('update');
+        }
+                        } else {
+        if (!!$scope) { 
+                $scope.$broadcast('create');
+        }
+                            loadForm();
+                        }
+                        return $q.when();
+                    });
+                }
+            };
+            var mdTabs = $("[dib-container=atest]").closest('md-tabs');
+            var tabsScope = null;
+            if (mdTabs.length === 0) {
+                mdTabs = null;
+            }
+            else {
+                tabsScope = mdTabs.scope();
+            }
+            $scope.$watch('atest.$dirty', function (newValue, oldValue) { 
+                $rootScope._navigation.containerDirty = newValue;
+                if ($rootScope._navigation.containerDirty && !!mdTabs && !!tabsScope) {
+                    var currentIndex = tabsScope.selectedIndex;
+                    $rootScope._navigation.addSaveFailedPromise(function(tabIndex) {
+                        tabsScope.selectedIndex = tabIndex;
+                        return $q.when();
+                    }, [currentIndex]);
+                }
+            },true);
+            $rootScope._navigation.addSavePromise($scope.saveModel);
+            //Giving the form the ability to handle dependency data (if an event is trigger on another component that has a refresh item alias point to the form/child form)
+            $scope.setDependencyData = function (object) { 
+                return dibForm.setDependencyData($scope,object);
+            };
+            $scope.itemAliasData = function () {
+                return angular.copy($scope.primaryKeyData);
+            };
+            /**
+            * Clear the form from records and dependancy data
+            */
+            $scope.clearForm = function () {
+                if ($scope.loadingData) return;
+                $scope.primaryKeyData = null;
+                $scope.reloadContainer();
+                dibForm.clean($scope.atest,$scope.model);
+        if (!!$scope) { 
+                $scope.$broadcast('clearDependency');
+        }
+            };
+            function loadForm () { 
+                $rootScope._navigation.reset();
+                $rootScope._navigation.addSavePromise($scope.saveModel);
+        if (!!$scope) { 
+                $scope.$broadcast('beforeLoad');
+        }
+                //clear the record status
+                $scope.recordStatus = null;
+                var isUrlContainer = containerService.urlContainer('atest');
+                if (isUrlContainer) {
+                    //check if record is first or last
+                    if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                        return;
+                    }
+                }
+                //check if this is a child container 
+                $scope.primaryKeyData = isUrlContainer ? discoverService.getPrimaryKeysFromUrl() : $scope.primaryKeyData;
+                if (!!$scope.primaryKeyData === false) {
+                $scope.primaryKeyData = {};
+                //set all the primaryKeys to 0
+                angular.forEach($scope.primaryKeys, function (key,index) { 
+                    $scope.model[key] = 0;
+                });
+                }
+                //remove active filter if no record are available
+                if (Object.keys($scope.primaryKeyData).length ==0) {
+                    $scope.recordStatus = "create";
+                } else {
+                    $scope.recordStatus = "update";
+                }
+                $scope.loadingData = true;
+                $scope.currentPrimaryKeyData = $scope.primaryKeyData;
+                crudService.read(crudController,'atest',{
+                    primaryKeyData : $scope.currentPrimaryKeyData,
+                    createParams: "{}"
+                },
+                $scope
+                ).then(function (model) {
+                    $scope.model = model;
+                    $scope.currentPrimaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, $scope.model);
+        if (!!$scope) { 
+                $scope.$broadcast('load');
+        }
+                    $scope.atest.$setUntouched();
+                    $scope.atest.$setPristine();
+                    //@TODO refactor start 
+                    var timeoutTest = $timeout(function () { 
+                        containerService.reloadChildren({containerName: 'atest'});
+                    },500); 
+                    //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                    var eventDeregister = $rootScope.$on("dibAngular.subcontainerLoaded", function () {
+                        $timeout.cancel(timeoutTest);
+                        timeoutTest = $timeout(function () { 
+                            containerService.reloadChildren({containerName: 'atest'});
+                            eventDeregister();
+                        },500); 
+                        //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                    });
+                    //Refactor stop
+                    $log.debug("containerName read->model",$scope.model );
+                    $scope.loadingData =  false;
+                }, function () {
+                    $scope.loadingData =  false;
+                });
+            }
+            $scope.reloadContainer = function (options) {
+        if (!!$scope) { 
+                $scope.$broadcast('beforeContainerReload');
+        }
+                $scope.autoRefresh = true;
+                loadForm ();
+        if (!!$scope) { 
+                $scope.$broadcast('reloadContainer');
+        }
+            };
+            //var isUrlContainer = containerService.urlContainer('atest');
+            //the if below we removed the requirement to match the url to the containerName, so we can load data into a window without the url changing. wizBuildAppAdv.
+            loadForm();
+            $scope.$watch('model', function (oldVal, newVal) {
+        if (!!$scope) { 
+                $scope.$broadcast('modelChange');
+        }
+            },true);  
+        }
+    }
+})();

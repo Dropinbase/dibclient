@@ -1,0 +1,26 @@
+
+<div component-loaded dib-container="testTree"  dib-config="{
+}"
+    dib-enable-dependency-scope-object="lastSelectedItem"
+>
+      <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+      <md-content layout="column" flex>
+*ET* Could not find any file referenced by the following inclfile function (last file tried was 'C:\wamp\www\dib2\dropinbase\dropins\setNgMaterial\dibGlobals\templates\includes\components\buttontreerefresh.et.html'):
+~inclfile(/dropins/setNgMaterial/fld(dropin)/[**]fld(componentFolder)/, fld(component).et.html, crit: ci.pef_container_id = 7094 AND ci.pef_item_id=fld(id))~
+ PROCESSED SO FAR: inclfile(/dropins/setNgMaterial/dibGlobals/dibMem_0_templates/includes/components/, buttontreerefresh.et.html, crit: ci.pef_container_id = 7094 AND ci.pef_item_id=153232)
+            <div layout="row" flex style='
+    position: absolute;
+    background: white;
+    z-index: 1000;
+    width:100%;'>
+                    <md-input-container flex>
+                        <label>Search</label>
+                        <input ng-model="search" ng-enter="searchTree()"> 
+                    </md-input-container>
+                    <md-button class="md-icon-button md-raised md-squared " ng-click="searchTree()">
+                        <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibTree/img/icons/search.svg"></md-icon>
+                    </md-button>
+                </div>
+            <dib-tree-node style='margin-top:60px' ng-model='treeData' dib-container-name='container.Name' dib-service='service' dib-search='search'  dib-active-filter='activeFilter'></dib-tree-node>
+      </md-content>
+</div>

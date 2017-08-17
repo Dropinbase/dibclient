@@ -1,0 +1,157 @@
+<html>
+<head>
+
+    <!-- *** NOTE: Security measure: always specify UTF-8 encoding, which corresponds with the UTF-8 header which Eleutheria sends to the client -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <title>Company Report</title>
+    
+    <script type="text/javascript" src="/files/dropins/setNgMaterial/dibAngular/src/js/core/shared/TemplateActions.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;            
+            color: #333;
+        }
+        ul li {
+            list-style: decimal;
+        }
+        a {
+            color: #660;
+        }
+        
+		#btn {
+			background-color: #008CBA;
+            border-radius: 15px;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border: none;
+            color: white;
+            padding: 3px 6px;       
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px; 
+		}
+		
+		#trheading {
+            text-align: center; 
+			color: white; 
+			background: #3a79b3;
+			font-weight: bold;
+			font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;
+        }
+		#trrow {
+            font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;            
+            color: #333;
+        }
+        a:hover {
+            color: #000;
+        }
+        
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;            
+        }
+
+        /* Tooltip text */
+        a .tooltiptext {
+            opacity: 0;
+            transition: opacity 0.7s;
+            width: 200px;
+            background-color: lightyellow;
+            color: #221CA2;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+         
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        a:hover .tooltiptext {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body ~if(getval(print)=true, [*onload="window.print()"*])~>
+
+~$// DIB function definitions made available by TemplateActions.js referenced above: 
+     dibCommon.goTo(containerName, portAlias, changeUrl, urlQueryString)    -- note, use '' for empty values, not null
+     dibCommon.startAction(submitUrl, containerName)   -- note, the containerName parameter indicates the starting place to search for submissionData values
+~
+
+~$// 
+    Note variables sent from PHP are sanitized allowing only "a-zA-Z0-9_ " by default. 
+    The [%...%] directives are used to ignore encoding of safe html
+    The Eleutheria encode function is used to sanitize urls 
+~ 
+
+~$// BUTTONS ~
+
+<button onclick="document.location.reload();">Refresh Info</button>
+
+~$// HEADING ~
+<p style="font-size: 15px">
+    <b>~getdb(name, test_company, id=param(^submitItemAlias_parent_htmlCompanyId^))~ 
+    (~getdb(chinese_name, test_company, id=param(^submitItemAlias_parent_htmlCompanyId^))~)</b>
+</p>
+
+
+~$// ACTION TEST ~
+
+~$// Get the dibuid/id values of pef_item_event record(s) into the globalArray so that they can be passed on for permission checking, eg see testAction below) ~
+~adddbval([*i.name, pie.id*], pef_item i INNER JOIN pef_container c ON i.pef_container_id = c.id INNER JOIN pef_item_event pie ON pie.pef_item_id = i.id, c.name='dibtestETEventsReport')~
+
+<p style="font-size: 15px">
+    <b>
+    <a style="color:#5BB0FF" href="#" onClick="dibCommon.startAction('/dropins/dibExamples/Events/btnHelloWorld_click/dibtestETEventsReport/~fld(testAction)~');return false;">Test dibCommon.startAction to execute PHP code</a>
+    </b>
+</p>
+
+~$// LIST OF CONSULTANTS ~
+<p style="font-size: 13px"><b>Consultants (click the links below to tet the dibCommon.goTo function):</b></p>
+
+<table  style="border-collapse: collapse" cellpadding="4" border="1">
+<tr id="trheading"><td>No</td><td>Consultant</td><td>Position</td><td>Date Joined</td><td>Scope</td><td>Employed At</td></tr>
+
+|rssql1;SELECT c.id AS consultantId, c.name, cc.date_started, cc.position, c.employed_at_id, tc.name AS company, cc.scope
+FROM (test_company_consultant cc INNER JOIN test_consultant c ON c.id = cc.consultant_id)
+	  LEFT JOIN test_company tc ON tc.id = c.employed_at_id
+WHERE cc.test_company_id = ~param(^submitItemAlias_parent_htmlCompanyId^,1)~|
+
+<tr id="trrow">
+    <td>~#~</td>
+    <td style="background: #ADD2ED; color: white" >
+        <a href="#" onClick="dibCommon.goTo('dibtestConsultantForm', '', true, '?primary_id=~consultantId~');return false">~name~ 
+            ~if(getval(print)<>true, [%
+                <span class="tooltiptext">This will open the <b>dibtestConsultantForm</b> container on %]fld(name)[%&apos;s record</span>%]
+            )~
+        </a>
+    </td>
+    <td>~position~</td>
+    <td>~date_started~</td>
+    <td>~scope~</td>
+    <td style="background: #ADD2ED; color: white" >
+        <a href="#" onClick="dibCommon.goTo('dibtestCompanyForm', '', true, '?primary_id=~employed_at_id~');return false">~company~
+            ~if(getval(print)<>true, [%
+                <span class="tooltiptext">This will open the <b>dibtestCompanyForm</b> container for %]fld(company)[%</span>%]
+            )~
+        </a>
+    </td>
+</tr>
+
+|End1|
+
+</table>
+
+
+
+</body>
+</html>

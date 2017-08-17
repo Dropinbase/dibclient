@@ -1,0 +1,484 @@
+ 
+<ng-form layout-fill dib-container=individualForm  flex isolate-form name='individualForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci193315' aria-label="rowToolbar" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true flex=none class=" md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci193316' aria-label="btnsave" dib-container-name='individualForm' dib-config="{ 'tooltip':'Save record', listeners : { } }" aria-label="Register" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+			Register 
+		</md-button>
+		<span aria-label="span2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="  margin:16px 0px 0px 5px; font-size:17px; !important;  " id='ci193453' aria-label="span2" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+			Please provide details for all the required (*) fields, and click the Register button when done. 
+		</span>
+	</div>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs="column" auto-fill-height style="    " id='ci193323' aria-label="layoutrow" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+		<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci193324' aria-label="fieldset" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-subheader class="cl-md-accent md-no-sticky">
+						Personal Details
+					</md-subheader>
+					<div layout='row' aria-label="identification_type" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<md-input-container flex>
+							<label>
+								Identification Type
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['identification_type'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Identification Type" aria-label="identification_type" md-on-close="select193392(model)" flex ng-model="model.identification_type" name='identification_type' id='ci193392' aria-label="identification_type" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['ID Book','Passport']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="individualForm.identification_type.$error">
+								<div ng-message="required">
+									Identification Type required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<md-input-container aria-label="id_passport_no" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='20' required         name="id_passport_no" ng-model="model.id_passport_no" aria-label="Id Passport No" id='ci193393' aria-label="id_passport_no" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Id Passport No*
+						</label>
+						<div ng-messages="individualForm.id_passport_no.$error">
+							<div ng-message="required">
+								Id Passport No required.
+							</div>
+							<div ng-message="maxlength">
+								At most 20 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="first_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' required         name="first_name" ng-model="model.first_name" aria-label="First Name" id='ci193394' aria-label="first_name" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							First Name*
+						</label>
+						<div ng-messages="individualForm.first_name.$error">
+							<div ng-message="required">
+								First Name required.
+							</div>
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="last_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' required         name="last_name" ng-model="model.last_name" aria-label="Last Name" id='ci193395' aria-label="last_name" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Last Name*
+						</label>
+						<div ng-messages="individualForm.last_name.$error">
+							<div ng-message="required">
+								Last Name required.
+							</div>
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="race" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<md-input-container flex>
+							<label>
+								Race
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['race'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Race" aria-label="race" md-on-close="select193396(model)" flex ng-model="model.race" name='race' id='ci193396' aria-label="race" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['White','Black','Asian','Coloured']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="individualForm.race.$error">
+								<div ng-message="required">
+									Race required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="gender" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<md-input-container flex>
+							<label>
+								Gender
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['gender'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Gender" aria-label="gender" md-on-close="select193397(model)" flex ng-model="model.gender" name='gender' id='ci193397' aria-label="gender" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['Male','Female']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="individualForm.gender.$error">
+								<div ng-message="required">
+									Gender required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="title" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<md-input-container flex>
+							<label>
+								Title
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['title'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Title" aria-label="title" md-on-close="select193398(model)" flex ng-model="model.title" name='title' id='ci193398' aria-label="title" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['Mr','Mrs','Miss','Ms','Dr','Prof']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="individualForm.title.$error">
+								<div ng-message="required">
+									Title required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<md-input-container aria-label="previous_id_no" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='20' name="previous_id_no" ng-model="model.previous_id_no" aria-label="Previous No" id='ci193400' aria-label="previous_id_no" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Previous No
+						</label>
+						<div ng-messages="individualForm.previous_id_no.$error">
+							<div ng-message="maxlength">
+								At most 20 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="nationality_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="number"  required         name="nationality_id" ng-model="model.nationality_id" aria-label="Nationality" id='ci193401' aria-label="nationality_id" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Nationality*
+						</label>
+						<div ng-messages="individualForm.nationality_id.$error">
+							<div ng-message="required">
+								Nationality required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="language_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="number"  required         name="language_id" ng-model="model.language_id" aria-label="Language" id='ci193402' aria-label="language_id" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Language*
+						</label>
+						<div ng-messages="individualForm.language_id.$error">
+							<div ng-message="required">
+								Language required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="date_of_birth" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text" theme="material" ng-model="model.date_of_birth"         name=date_of_birth required aria-label="Date Of Birth" placeholder="Date Of Birth" dib-data-component='date-picker-input' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci193403' aria-label="date_of_birth" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+						<div ng-messages="individualForm.model.date_of_birth.$error">
+							<div ng-message="required">
+								This is required.
+							</div>
+							<div ng-message="valid">
+								The entered value is not a date!
+							</div>
+							<div ng-message="required">
+								This date is required!
+							</div>
+							<div ng-message="mindate">
+								Date is too early!
+							</div>
+							<div ng-message="maxdate">
+								Date is too late!
+							</div>
+							<div ng-message="filtered">
+								Only weekends are allowed!
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="disability_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="number"  name="disability_id" ng-model="model.disability_id" aria-label="Disability" id='ci193404' aria-label="disability_id" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Disability
+						</label>
+						<div ng-messages="individualForm.disability_id.$error">
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+		<md-card  aria-label="fieldset2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci193326' aria-label="fieldset2" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-subheader class="cl-md-accent md-no-sticky">
+						Contact Details
+					</md-subheader>
+					<md-input-container aria-label="email" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='70' required         name="email" ng-model="model.email" aria-label="Email" id='ci193405' aria-label="email" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Email*
+						</label>
+						<div ng-messages="individualForm.email.$error">
+							<div ng-message="required">
+								Email required.
+							</div>
+							<div ng-message="maxlength">
+								At most 70 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<span aria-label="span1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci193452' aria-label="span1" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+						Please note that this is your official contact address for all email correspondence 
+					</span>
+					<md-input-container aria-label="phone_number" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' required         name="phone_number" ng-model="model.phone_number" aria-label="Phone Number" id='ci193406' aria-label="phone_number" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Phone Number*
+						</label>
+						<div ng-messages="individualForm.phone_number.$error">
+							<div ng-message="required">
+								Phone Number required.
+							</div>
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="mobile" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='15' name="mobile" ng-model="model.mobile" aria-label="Mobile" id='ci193407' aria-label="mobile" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Mobile
+						</label>
+						<div ng-messages="individualForm.mobile.$error">
+							<div ng-message="maxlength">
+								At most 15 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="fax_number" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' name="fax_number" ng-model="model.fax_number" aria-label="Fax Number" id='ci193408' aria-label="fax_number" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Fax Number
+						</label>
+						<div ng-messages="individualForm.fax_number.$error">
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block"  aria-label="newsletter" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<md-checkbox  dib-data-component='checkbox' name="newsletter" ng-model="model.newsletter" aria-label="Subscribe to Newsletter?" id='ci193409' aria-label="newsletter" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='md-checkbox' md-detect-hidden >
+							Subscribe to Newsletter?
+						</md-checkbox>
+						<div ng-messages="individualForm.newsletter.$error">
+						</div>
+					</md-input-container>
+					<span aria-label="span" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci193451' aria-label="span" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+						Would you like to receive the Moonstone newsletter? 
+					</span>
+				</section>
+			</md-card-content>
+		</md-card>
+		<md-card  aria-label="fieldset21" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci193449' aria-label="fieldset21" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-subheader class="cl-md-accent md-no-sticky">
+						Profession Details
+					</md-subheader>
+					<md-input-container aria-label="role_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="number"  required         name="role_id" ng-model="model.role_id" aria-label="Role" id='ci193410' aria-label="role_id" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Role*
+						</label>
+						<div ng-messages="individualForm.role_id.$error">
+							<div ng-message="required">
+								Role required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="industry_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="number"  required         name="industry_id" ng-model="model.industry_id" aria-label="Industry" id='ci193411' aria-label="industry_id" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Industry*
+						</label>
+						<div ng-messages="individualForm.industry_id.$error">
+							<div ng-message="required">
+								Industry required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="job_title" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='255' required         name="job_title" ng-model="model.job_title" aria-label="Job Title" id='ci193412' aria-label="job_title" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Job Title*
+						</label>
+						<div ng-messages="individualForm.job_title.$error">
+							<div ng-message="required">
+								Job Title required.
+							</div>
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="occupational_category_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="number"  required         name="occupational_category_id" ng-model="model.occupational_category_id" aria-label="Occupational Category" id='ci193413' aria-label="occupational_category_id" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Occupational Category*
+						</label>
+						<div ng-messages="individualForm.occupational_category_id.$error">
+							<div ng-message="required">
+								Occupational Category required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="main_qualification_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="number"  name="main_qualification_id" ng-model="model.main_qualification_id" aria-label="Main Qualification" id='ci193414' aria-label="main_qualification_id" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Main Qualification
+						</label>
+						<div ng-messages="individualForm.main_qualification_id.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="company_branch" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='255' name="company_branch" ng-model="model.company_branch" aria-label="Company Branch" id='ci193416' aria-label="company_branch" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Company Branch
+						</label>
+						<div ng-messages="individualForm.company_branch.$error">
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="company_employee_number" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' name="company_employee_number" ng-model="model.company_employee_number" aria-label="Company Employee Number" id='ci193420' aria-label="company_employee_number" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Company Employee Number
+						</label>
+						<div ng-messages="individualForm.company_employee_number.$error">
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="company_costcentre" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' name="company_costcentre" ng-model="model.company_costcentre" aria-label="Company Costcentre" id='ci193421' aria-label="company_costcentre" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Company Costcentre
+						</label>
+						<div ng-messages="individualForm.company_costcentre.$error">
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="employee_group" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' name="employee_group" ng-model="model.employee_group" aria-label="Employee Group" id='ci193422' aria-label="employee_group" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Employee Group
+						</label>
+						<div ng-messages="individualForm.employee_group.$error">
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+		<md-card  aria-label="fieldset3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci193325' aria-label="fieldset3" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-subheader class="cl-md-accent md-no-sticky">
+						Work Details
+					</md-subheader>
+					<md-input-container aria-label="department_or_branch" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' name="department_or_branch" ng-model="model.department_or_branch" aria-label="Department Or Branch" id='ci193450' aria-label="department_or_branch" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Department Or Branch
+						</label>
+						<div ng-messages="individualForm.department_or_branch.$error">
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="employer_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='50' name="employer_name" ng-model="model.employer_name" aria-label="Employer Name" id='ci193424' aria-label="employer_name" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Employer Name
+						</label>
+						<div ng-messages="individualForm.employer_name.$error">
+							<div ng-message="maxlength">
+								At most 50 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="employer_physical_address" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<textarea   name="employer_physical_address" ng-model="model.employer_physical_address" aria-label="Employer Physical Address" id='ci193425' aria-label="employer_physical_address" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-textarea' md-detect-hidden >
+						</textarea>
+						<label>
+							Employer Physical Address
+						</label>
+						<div ng-messages="individualForm.employer_physical_address.$error">
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="province" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<md-input-container flex>
+							<label>
+								Province
+							</label>
+							<md-select    ng-disabled="model._GET['province'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Province" aria-label="province" md-on-close="select193426(model)" flex ng-model="model.province" name='province' id='ci193426' aria-label="province" dib-container-name='individualForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['Western Cape','Eastern Cape','Northern Cape','Gauteng','Mpumalanga','North West','Free State','KwaZulu-Natal','Limpopo']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="individualForm.province.$error">
+							</div>
+						</md-input-container>
+					</div>
+					<md-input-container aria-label="postal_code" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='20' name="postal_code" ng-model="model.postal_code" aria-label="Postal Code" id='ci193431' aria-label="postal_code" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Postal Code
+						</label>
+						<div ng-messages="individualForm.postal_code.$error">
+							<div ng-message="maxlength">
+								At most 20 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="fsp_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='255' required         name="fsp_name" ng-model="model.fsp_name" aria-label="Fsp Name" id='ci193432' aria-label="fsp_name" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Fsp Name*
+						</label>
+						<div ng-messages="individualForm.fsp_name.$error">
+							<div ng-message="required">
+								Fsp Name required.
+							</div>
+							<div ng-message="maxlength">
+								At most 255 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="fsp_number" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="text"  maxlength='20' name="fsp_number" ng-model="model.fsp_number" aria-label="Fsp Number" id='ci193427' aria-label="fsp_number" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Fsp Number
+						</label>
+						<div ng-messages="individualForm.fsp_number.$error">
+							<div ng-message="maxlength">
+								At most 20 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="exam_country_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4084&text=individual' >
+						<input type="number"  required         name="exam_country_id" ng-model="model.exam_country_id" aria-label="Exam Country" id='ci193438' aria-label="exam_country_id" dib-container-name='individualForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Exam Country*
+						</label>
+						<div ng-messages="individualForm.exam_country_id.$error">
+							<div ng-message="required">
+								Exam Country required.
+							</div>
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+	</div>
+</ng-form>

@@ -1,0 +1,98 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibMenu/js/components/dibSideBarStatus.js' ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var trainingdb = angular.module('trainingdb', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+    trainingdb.factory('service193306',['ajax', '$log', 'discoverService', function (ajax, $log, discoverService) {
+            var list = function (node) {
+               var url = DIB__base_url + "/dropins/setNgMaterial/dibMenu/menu/list.json?containerName=trainingdb";
+               if (!!node === false) {
+                   url += "&node=root&rootMenuId=193307";
+               } else {
+                   url += "&node="+node+"&rootMenuId=193307";
+               }
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci193306'),
+                    container : $('[dib-container=trainingdb]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+            return {
+                list : list
+            };
+    }]); 
+        trainingdb.component('tabModule193311', {
+                controllerAs: 'tabModule193311',
+                controller : ["$scope", function ($scope) { 
+                    //debugger;
+                }]
+            });
+})();
+(function() {
+var trainingdb = angular.module('trainingdb');
+trainingdb.component('trainingdb', {
+    controllerAs: 'trainingdb',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibContainer/Template/view/trainingdb.html',
+    controller : component__trainingdb
+});
+component__trainingdb.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','service193306','containerService','recordFactory','crudService','utilityService'];
+    function component__trainingdb($scope, $ocLazyLoad, $rootScope, $log, $q,service193306,containerService,recordFactory,crudService,utilityService) {
+                     $scope.container = {};
+            $scope.container.Id = '8523';
+            $scope.container.Name = 'trainingdb';
+            $("[dib-container='trainingdb']").trigger('load');
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.view = {};
+            $scope.view.menu = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+            $scope.menus.service193306 = {};
+            $scope.menus.service193306.update = function (node){
+                $scope.menus.service193306.loading = true;
+                service193306.list(!!node? node.id : null).then(function (menu) {
+                    $scope.menus.service193306.loading = false;
+                    if (!!node === false) { 
+                        $scope.menus.service193306.menu = menu;
+                    } else { 
+                        node.children = menu;
+                    }
+                }, function () {
+                    $scope.menus.service193306.loading = false;
+                });
+            };
+            $scope.menus.service193306.update();
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'trainingdb'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=trainingdb]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

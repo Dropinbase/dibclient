@@ -1,0 +1,1096 @@
+ 
+<div component-loaded dib-container="staffGrid" dib-grid  dib-config="{ }" >
+	<div dib-inject-content="replace" layout="row"  aria-label="toolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci195403' aria-label="toolbar" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btninlineadd" can-be-moved=true flex=none class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci195410' aria-label="btninlineadd" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add record inline
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " id='ci195407' aria-label="btnadd" dib-container-name='staffGrid' ng-click="common.goTo('staffForm','',true,'?record=new','',$event);" dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add a new record using a form
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btngriddelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="deleteSelected()" id='ci195404' aria-label="btngriddelete" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete selected records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci195405' aria-label="btnreload" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Reload records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci195574' aria-label="btnAuditTrail" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci195406' aria-label="emptyspan" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+		</span>
+		<md-button aria-label="btnfilteropen" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci195411' aria-label="btnfilteropen" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Display headers for filtering records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterapply" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="searchGrid()" id='ci195408' aria-label="btnfilterapply" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Apply filter criteria specified in grid headers
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterclear" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="clearSearch()" id='ci195409' aria-label="btnfilterclear" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Show all records and clear filter criteria
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
+			</md-icon>
+		</md-button>
+		<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci195412' aria-label="gridtotals" dib-container-name='staffGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			-1" >
+			<md-button ng-disabled="true" aria-label="Grid totals">
+				Records: {{page.fromRecord}}
+				<span ng-if='page.fromRecord>
+					0'>
+					to {{page.toRecord}} of {{page.records}}
+				</span>
+				<span ng-if='page.totalRecords!=page.records'>
+					(Total: {{page.totalRecords}})
+				</span>
+			</md-button>
+		</div>
+	</div>
+	<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div flex dib-table-width >
+		<md-list class='dib-grid-column-header'>
+			<md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+				<div layout="row" flex="100" dib-grid-search ng-show="!loadingData">
+					<div table-column  flex = 'nogrow' class="md-subhead" dib-column-heading='195414' style="    " >
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195575' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+							Id*
+							<span ng-if="gridOptions.sortFields['id']">
+								({{gridOptions.sortFields['id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  name="id" ng-model="search.id" aria-label="Id" ng-enter='searchGrid()' id='ci195575' aria-label="id" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Id
+								</label>
+								<div ng-messages="staffGrid.id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195576' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('first_name')" >
+							First Name*
+							<span ng-if="gridOptions.sortFields['first_name']">
+								({{gridOptions.sortFields['first_name']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['first_name']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['first_name']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="first_name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  maxlength='50' name="first_name" ng-model="search.first_name" aria-label="First Name" ng-enter='searchGrid()' id='ci195576' aria-label="first_name" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									First Name
+								</label>
+								<div ng-messages="staffGrid.first_name.$error">
+									<div ng-message="maxlength">
+										At most 50 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195577' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('last_name')" >
+							Last Name*
+							<span ng-if="gridOptions.sortFields['last_name']">
+								({{gridOptions.sortFields['last_name']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['last_name']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['last_name']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="last_name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  maxlength='50' name="last_name" ng-model="search.last_name" aria-label="Last Name" ng-enter='searchGrid()' id='ci195577' aria-label="last_name" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Last Name
+								</label>
+								<div ng-messages="staffGrid.last_name.$error">
+									<div ng-message="maxlength">
+										At most 50 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195578' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('staff_code')" >
+							Staff Code*
+							<span ng-if="gridOptions.sortFields['staff_code']">
+								({{gridOptions.sortFields['staff_code']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['staff_code']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['staff_code']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="staff_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  maxlength='10' name="staff_code" ng-model="search.staff_code" aria-label="Staff Code" ng-enter='searchGrid()' id='ci195578' aria-label="staff_code" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Staff Code
+								</label>
+								<div ng-messages="staffGrid.staff_code.$error">
+									<div ng-message="maxlength">
+										At most 10 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195579' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('email')" >
+							Email*
+							<span ng-if="gridOptions.sortFields['email']">
+								({{gridOptions.sortFields['email']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['email']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['email']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  maxlength='200' name="email" ng-model="search.email" aria-label="Email" ng-enter='searchGrid()' id='ci195579' aria-label="email" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Email
+								</label>
+								<div ng-messages="staffGrid.email.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195580' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('mobile')" >
+							Mobile*
+							<span ng-if="gridOptions.sortFields['mobile']">
+								({{gridOptions.sortFields['mobile']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['mobile']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['mobile']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="mobile" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  maxlength='30' name="mobile" ng-model="search.mobile" aria-label="Mobile" ng-enter='searchGrid()' id='ci195580' aria-label="mobile" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Mobile
+								</label>
+								<div ng-messages="staffGrid.mobile.$error">
+									<div ng-message="maxlength">
+										At most 30 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195581' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('skype')" >
+							Skype
+							<span ng-if="gridOptions.sortFields['skype']">
+								({{gridOptions.sortFields['skype']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['skype']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['skype']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="skype" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  maxlength='40' name="skype" ng-model="search.skype" aria-label="Skype" ng-enter='searchGrid()' id='ci195581' aria-label="skype" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Skype
+								</label>
+								<div ng-messages="staffGrid.skype.$error">
+									<div ng-message="maxlength">
+										At most 40 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195582' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('position')" >
+							Position*
+							<span ng-if="gridOptions.sortFields['position']">
+								({{gridOptions.sortFields['position']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['position']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['position']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="position" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  maxlength='255' name="position" ng-model="search.position" aria-label="Position" ng-enter='searchGrid()' id='ci195582' aria-label="position" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Position
+								</label>
+								<div ng-messages="staffGrid.position.$error">
+									<div ng-message="maxlength">
+										At most 255 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195583' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('join_date')" >
+							Join Date*
+							<span ng-if="gridOptions.sortFields['join_date']">
+								({{gridOptions.sortFields['join_date']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['join_date']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['join_date']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="join_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  name="join_date" ng-model="search.join_date" aria-label="Join Date" ng-enter='searchGrid()' id='ci195583' aria-label="join_date" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Join Date
+								</label>
+								<div ng-messages="staffGrid.join_date.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195584' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('pef_login_id')" >
+							Login*
+							<span ng-if="gridOptions.sortFields['pef_login_id']">
+								({{gridOptions.sortFields['pef_login_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['pef_login_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['pef_login_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="pef_login_id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  name="pef_login_id" ng-model="search.pef_login_id" aria-label="Login" ng-enter='searchGrid()' id='ci195584' aria-label="pef_login_id" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Login
+								</label>
+								<div ng-messages="staffGrid.pef_login_id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195585' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('notes')" >
+							Notes
+							<span ng-if="gridOptions.sortFields['notes']">
+								({{gridOptions.sortFields['notes']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci195585' aria-label="notes" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Notes
+								</label>
+								<div ng-messages="staffGrid.notes.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='195586' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('updated')" >
+							Updated
+							<span ng-if="gridOptions.sortFields['updated']">
+								({{gridOptions.sortFields['updated']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['updated']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['updated']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+								<input type="text"  name="updated" ng-model="search.updated" aria-label="Updated" ng-enter='searchGrid()' id='ci195586' aria-label="updated" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Updated
+								</label>
+								<div ng-messages="staffGrid.updated.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='staffGrid' ng-if="gridOptions.inlineAddShow">
+				<ng-form name=staffGrid  dib-container-name="staffGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+					<div table-column layout="column" flex = 'nogrow' dib-column="195414" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true flex="nogrow" class="md-icon-button  md-squared md-raised" style="    " id='ci195414' aria-label="btngridedit" dib-container-name='staffGrid' ng-click="common.goTo('staffForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="195575" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci195575' aria-label="id" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="staffGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195576" style="    " >
+						<div aria-label="first_name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['first_name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="first_name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='50' required name="first_name" ng-model="model.first_name" aria-label="First Name" ng-enter='searchGrid()' id='ci195576' aria-label="first_name" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										First Name*
+									</label>
+									<div ng-messages="staffGrid.first_name.$error">
+										<div ng-message="required">
+											First Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195577" style="    " >
+						<div aria-label="last_name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['last_name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="last_name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='50' required name="last_name" ng-model="model.last_name" aria-label="Last Name" ng-enter='searchGrid()' id='ci195577' aria-label="last_name" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Last Name*
+									</label>
+									<div ng-messages="staffGrid.last_name.$error">
+										<div ng-message="required">
+											Last Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195578" style="    " >
+						<div aria-label="staff_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['staff_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="staff_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='10' required name="staff_code" ng-model="model.staff_code" aria-label="Staff Code" ng-enter='searchGrid()' id='ci195578' aria-label="staff_code" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Staff Code*
+									</label>
+									<div ng-messages="staffGrid.staff_code.$error">
+										<div ng-message="required">
+											Staff Code required.
+										</div>
+										<div ng-message="maxlength">
+											At most 10 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195579" style="    " >
+						<div aria-label="email" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['email']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='200' required name="email" ng-model="model.email" aria-label="Email" ng-enter='searchGrid()' id='ci195579' aria-label="email" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Email*
+									</label>
+									<div ng-messages="staffGrid.email.$error">
+										<div ng-message="required">
+											Email required.
+										</div>
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195580" style="    " >
+						<div aria-label="mobile" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['mobile']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="mobile" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='30' required name="mobile" ng-model="model.mobile" aria-label="Mobile" ng-enter='searchGrid()' id='ci195580' aria-label="mobile" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Mobile*
+									</label>
+									<div ng-messages="staffGrid.mobile.$error">
+										<div ng-message="required">
+											Mobile required.
+										</div>
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195581" style="    " >
+						<div aria-label="skype" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['skype']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="skype" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='40' name="skype" ng-model="model.skype" aria-label="Skype" ng-enter='searchGrid()' id='ci195581' aria-label="skype" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Skype
+									</label>
+									<div ng-messages="staffGrid.skype.$error">
+										<div ng-message="maxlength">
+											At most 40 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195582" style="    " >
+						<div aria-label="position" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['position']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="position" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<md-input-container flex>
+										<label>
+											Position
+										</label>
+										<md-select    ng-required ng-disabled="!model._GET['position'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Position" aria-label="position" md-on-close="select195582(model)" flex ng-model="model.position" name='position' id='ci195582' aria-label="position" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+											<md-option ng-repeat="state in ['Employee','Developer','Manager','Project Manager','HR Manager','Sales Manager','Recruitment Director']" value="{{state}}"  >
+												{{state}} 
+											</md-option>
+										</md-select>
+										<div ng-messages="staffGrid.position.$error">
+											<div ng-message="required">
+												Position required.
+											</div>
+										</div>
+									</md-input-container>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195583" style="    " >
+						<div aria-label="join_date" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['join_date']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="join_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text" theme="material" ng-model="model.join_date"         name=join_date required aria-label="Join Date" placeholder="Join Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci195583' aria-label="join_date" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="staffGrid.model.join_date.$error">
+										<div ng-message="required">
+											This is required.
+										</div>
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195584" style="    " >
+						<div aria-label="pef_login_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['pef_login_id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="pef_login_id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="number"  required name="pef_login_id" ng-model="model.pef_login_id" aria-label="Login" ng-enter='searchGrid()' id='ci195584' aria-label="pef_login_id" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Login*
+									</label>
+									<div ng-messages="staffGrid.pef_login_id.$error">
+										<div ng-message="required">
+											Login required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195585" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<textarea   name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci195585' aria-label="notes" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+									</textarea>
+									<label>
+										Notes
+									</label>
+									<div ng-messages="staffGrid.notes.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195586" style="    " >
+						<div aria-label="updated" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['updated']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text" theme="material" ng-model="model.updated"         name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci195586' aria-label="updated" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex='none' dib-edit >
+						<md-button ng-click='toggleInlineAdd()' class="md-raised ">
+							Close 
+						</md-button>
+						<md-button ng-click='cleanRow($event,model, staffGrid)' class="md-raised "  ng-disabled='!staffGrid.$dirty'>
+							Clear   
+						</md-button>
+						<md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+							Use selected data 
+						</md-button>
+						<md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!staffGrid.$valid">
+							Add   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</div>
+	<md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+		<md-list dib-table-column-width >
+			<md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+				<div class="no-records-available">
+					  No records available 
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"   double-click="rowEdit(element)" >
+				<ng-form name='staffGrid' dib-container-name="staffGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+					<div table-column layout="column" flex = 'nogrow' dib-column="195414" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true flex="nogrow" class="md-icon-button  md-squared md-raised" style="    " id='ci195414' aria-label="btngridedit" dib-container-name='staffGrid' ng-click="common.goTo('staffForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="195575" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci195575' aria-label="id" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="staffGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195576" style="    " >
+						<div aria-label="first_name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['first_name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="first_name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='50' required name="first_name" ng-model="model.first_name" aria-label="First Name" ng-enter='searchGrid()' id='ci195576' aria-label="first_name" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										First Name*
+									</label>
+									<div ng-messages="staffGrid.first_name.$error">
+										<div ng-message="required">
+											First Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195577" style="    " >
+						<div aria-label="last_name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['last_name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="last_name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='50' required name="last_name" ng-model="model.last_name" aria-label="Last Name" ng-enter='searchGrid()' id='ci195577' aria-label="last_name" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Last Name*
+									</label>
+									<div ng-messages="staffGrid.last_name.$error">
+										<div ng-message="required">
+											Last Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195578" style="    " >
+						<div aria-label="staff_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['staff_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="staff_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='10' required name="staff_code" ng-model="model.staff_code" aria-label="Staff Code" ng-enter='searchGrid()' id='ci195578' aria-label="staff_code" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Staff Code*
+									</label>
+									<div ng-messages="staffGrid.staff_code.$error">
+										<div ng-message="required">
+											Staff Code required.
+										</div>
+										<div ng-message="maxlength">
+											At most 10 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195579" style="    " >
+						<div aria-label="email" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['email']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='200' required name="email" ng-model="model.email" aria-label="Email" ng-enter='searchGrid()' id='ci195579' aria-label="email" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Email*
+									</label>
+									<div ng-messages="staffGrid.email.$error">
+										<div ng-message="required">
+											Email required.
+										</div>
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195580" style="    " >
+						<div aria-label="mobile" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['mobile']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="mobile" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='30' required name="mobile" ng-model="model.mobile" aria-label="Mobile" ng-enter='searchGrid()' id='ci195580' aria-label="mobile" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Mobile*
+									</label>
+									<div ng-messages="staffGrid.mobile.$error">
+										<div ng-message="required">
+											Mobile required.
+										</div>
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195581" style="    " >
+						<div aria-label="skype" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['skype']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="skype" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text"  maxlength='40' name="skype" ng-model="model.skype" aria-label="Skype" ng-enter='searchGrid()' id='ci195581' aria-label="skype" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Skype
+									</label>
+									<div ng-messages="staffGrid.skype.$error">
+										<div ng-message="maxlength">
+											At most 40 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195582" style="    " >
+						<div aria-label="position" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['position']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="position" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<md-input-container flex>
+										<label>
+											Position
+										</label>
+										<md-select    ng-required ng-disabled="!model._GET['position'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Position" aria-label="position" md-on-close="select195582(model)" flex ng-model="model.position" name='position' id='ci195582' aria-label="position" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+											<md-option ng-repeat="state in ['Employee','Developer','Manager','Project Manager','HR Manager','Sales Manager','Recruitment Director']" value="{{state}}"  >
+												{{state}} 
+											</md-option>
+										</md-select>
+										<div ng-messages="staffGrid.position.$error">
+											<div ng-message="required">
+												Position required.
+											</div>
+										</div>
+									</md-input-container>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195583" style="    " >
+						<div aria-label="join_date" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['join_date']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="join_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text" theme="material" ng-model="model.join_date"         name=join_date required aria-label="Join Date" placeholder="Join Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci195583' aria-label="join_date" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="staffGrid.model.join_date.$error">
+										<div ng-message="required">
+											This is required.
+										</div>
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195584" style="    " >
+						<div aria-label="pef_login_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['pef_login_id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="pef_login_id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="number"  required name="pef_login_id" ng-model="model.pef_login_id" aria-label="Login" ng-enter='searchGrid()' id='ci195584' aria-label="pef_login_id" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Login*
+									</label>
+									<div ng-messages="staffGrid.pef_login_id.$error">
+										<div ng-message="required">
+											Login required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195585" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<textarea   name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci195585' aria-label="notes" dib-container-name='staffGrid' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+									</textarea>
+									<label>
+										Notes
+									</label>
+									<div ng-messages="staffGrid.notes.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="195586" style="    " >
+						<div aria-label="updated" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['updated']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4245&text=staff' >
+									<input type="text" theme="material" ng-model="model.updated"         name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci195586' aria-label="updated" dib-container-name='staffGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+						<md-button ng-click='cancelRow($event,row)' class="md-raised ">
+							Cancel 
+						</md-button>
+						<md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!staffGrid.$valid" >
+							Save   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<div layout-fill layout='row' flex class='dib-grid-footer'>
+		<div flex=20 layout='row'>
+			<md-button disabled>
+				Page limit
+			</md-button>
+			<md-select ng-model="page.limit">
+				<md-option ng-value="10">
+					10
+				</md-option>
+				<md-option ng-value="20">
+					20
+				</md-option>
+				<md-option ng-value="50">
+					50
+				</md-option>
+			</md-select>
+		</div>
+		<div  ng-if="page.count>
+			1" flex=80 layout='row'  layout-align="center center" >
+			<md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+				First 
+			</md-button>
+			<md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+				Prev 
+			</md-button>
+			<div layout='row'>
+				<md-button disabled>
+					Page
+				</md-button>
+				<md-input-container>
+					<input type='number' ng-model="page.number" aria-label="Page number">
+				</md-input-container>
+				<md-button disabled>
+					of {{ page.count }} 
+				</md-button>
+			</div>
+			<md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+				Next 
+			</md-button>
+			<md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+				Last 
+			</md-button>
+		</div>
+	</div>
+</div>

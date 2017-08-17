@@ -1,0 +1,246 @@
+ 
+<ng-form layout-fill dib-container=clientForm  flex isolate-form name='clientForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci211789' aria-label="rowToolbar" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnadd" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci211791' aria-label="btnadd" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true class="md-icon-button md-squared md-raised " style="    " ng-click="deleteRecord({'redirect' : true})" id='ci211792' aria-label="btndelete" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnsave" can-be-moved=true class=" md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci211790' aria-label="btnsave" dib-container-name='clientForm' dib-config="{ listeners : { } }" aria-label="aaa" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+			aaa 
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci211793' aria-label="btnreload" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci211977' aria-label="btnAuditTrail" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnGrid" can-be-moved=true style="    " id='ci211796' aria-label="btnGrid" dib-container-name='clientForm' ng-click="dibCommon.goTo('clientGrid','',true,'','',$event);" dib-config="{ listeners : { } }" aria-label="Grid" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Open grid
+			</md-tooltip>
+			Grid 
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci211794' aria-label="emptyspan" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci211795' aria-label="formpaging" dib-container-name='clientForm' dib-config="{ listeners : { } }" data-container-name="clientForm" >
+		</dib-form-paging >
+	</div>
+	<md-tabs id="ci211990" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci211990' aria-label="mdtabs" can-be-moved=true can-have-children=true flex=none md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci211990' aria-label="mdtabs" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+		<md-tab label='Form Data' tabId="211797"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace" layout='column' aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=clientForm&itemId=211797'     id='ci211797' aria-label="layoutrow" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+					<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci211798' aria-label="fieldset" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-input-container aria-label="client_pk" can-be-moved=true item-alias="client_pk"    ng-show="!!view.client_pk == false || view.client_pk.visible"  dib-disable="{{view.client_pk.disabled}}" ng-class="view.client_pk.class"  ng-style="view.client_pk.style" flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" id='ci211978' aria-label="client_pk" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="clientForm.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='80' required name="name" ng-model="model.name" aria-label="Name" id='ci211979' aria-label="name" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Name*
+									</label>
+									<div ng-messages="clientForm.name.$error">
+										<div ng-message="required">
+											Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="start_date" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.start_date" name=start_date aria-label="Start Date" placeholder="Start Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci211980' aria-label="start_date" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+									<div ng-messages="clientForm.model.start_date.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="phone" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='100' name="phone" ng-model="model.phone" aria-label="Phone" id='ci211981' aria-label="phone" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Phone
+									</label>
+									<div ng-messages="clientForm.phone.$error">
+										<div ng-message="maxlength">
+											At most 100 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</section>
+						</md-card-content>
+					</md-card>
+					<md-card  aria-label="fieldset1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci212127' aria-label="fieldset1" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-input-container aria-label="email" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='100' name="email" ng-model="model.email" aria-label="Email" id='ci211982' aria-label="email" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Email
+									</label>
+									<div ng-messages="clientForm.email.$error">
+										<div ng-message="maxlength">
+											At most 100 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="aaa" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.aaa" name=aaa aria-label="Aaa" placeholder="Aaa" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212134' aria-label="aaa" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+									<div ng-messages="clientForm.model.aaa.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="address2" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='200' name="address2" ng-model="model.address2" aria-label="Address2" id='ci211984' aria-label="address2" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address2
+									</label>
+									<div ng-messages="clientForm.address2.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="city_town" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="city_town" ng-model="model.city_town" aria-label="City Town" id='ci211985' aria-label="city_town" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										City Town
+									</label>
+									<div ng-messages="clientForm.city_town.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</section>
+						</md-card-content>
+					</md-card>
+					<md-card  aria-label="fieldset2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci211800' aria-label="fieldset2" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-input-container aria-label="country" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="country" ng-model="model.country" aria-label="Country" id='ci211986' aria-label="country" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Country
+									</label>
+									<div ng-messages="clientForm.country.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="zip_code" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="zip_code" ng-model="model.zip_code" aria-label="Zip Code" id='ci211987' aria-label="zip_code" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Zip Code
+									</label>
+									<div ng-messages="clientForm.zip_code.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="notes" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<textarea   name="notes" ng-model="model.notes" aria-label="Notes" id='ci211988' aria-label="notes" dib-container-name='clientForm' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+									</textarea>
+									<label>
+										Notes
+									</label>
+									<div ng-messages="clientForm.notes.$error">
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="updated" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.updated"   name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci211989' aria-label="updated" dib-container-name='clientForm' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</section>
+						</md-card-content>
+					</md-card>
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Client Contacts (Grid)' tabId="211991"  ng-click=dibCommon.goTo('clientContactGrid','clientForm',false) aria-label="clientContactGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="clientContactGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=clientForm&itemId=211991'     id='ci211991' aria-label="clientContactGrid" dib-container-name='clientForm' dib-active-filter='clientForm_clientContactGrid' dib-container-filter-settings="{ 'clientForm_clientContactGrid' : 'submitItemAlias_parent_client_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Client Contacts (Form)' tabId="211992"  ng-click=dibCommon.goTo('clientContactForm','clientForm',false) aria-label="clientContactForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="clientContactForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=clientForm&itemId=211992'     id='ci211992' aria-label="clientContactForm" dib-container-name='clientForm' dib-active-filter='clientForm_clientContactForm' dib-container-filter-settings="{ 'clientForm_clientContactForm' : 'submitItemAlias_parent_client_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Projects (Grid)' tabId="211993"  ng-click=dibCommon.goTo('projectGrid','clientForm',false) aria-label="projectGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="projectGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=clientForm&itemId=211993'     id='ci211993' aria-label="projectGrid" dib-container-name='clientForm' dib-active-filter='clientForm_projectGrid' dib-container-filter-settings="{ 'clientForm_projectGrid' : 'submitItemAlias_parent_client_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Projects (Form)' tabId="211994"  ng-click=dibCommon.goTo('projectForm','clientForm',false) aria-label="projectForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="projectForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=clientForm&itemId=211994'     id='ci211994' aria-label="projectForm" dib-container-name='clientForm' dib-active-filter='clientForm_projectForm' dib-container-filter-settings="{ 'clientForm_projectForm' : 'submitItemAlias_parent_client_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+	</md-tabs>
+</ng-form>

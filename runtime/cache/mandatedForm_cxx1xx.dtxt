@@ -1,0 +1,563 @@
+(function() {
+    var require = ['/dropins/setNgMaterial/dibForm/js/component/formPaging.js','/dropins/setNgMaterial/dibGlobals/js/component/timeDatePickerInput.js',  
+		'/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+	];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    var mandatedForm = angular.module('mandatedForm', [files]);
+    mandatedForm.service('service211534',service211534); 
+    service211534.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211534(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/mandatedForm?containerItemId=211534", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211534'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    mandatedForm.service('service211536',service211536); 
+    service211536.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211536(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/mandatedForm?containerItemId=211536", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211536'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    mandatedForm.service('service211540',service211540); 
+    service211540.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211540(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/mandatedForm?containerItemId=211540", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211540'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    mandatedForm.service('service211541',service211541); 
+    service211541.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211541(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/mandatedForm?containerItemId=211541", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211541'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    var mandatedForm = angular.module('mandatedForm');
+    mandatedForm.component('mandatedForm', {
+        controllerAs: 'mandatedForm',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibForm/Template/view/mandatedForm.html',
+        controller : component__mandatedForm
+    });
+    component__mandatedForm.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
+            'dibForm', 'dibMessage','$location','dibAction','dibUtility', '$timeout', 'dibActiveFilterState','service211534','service211536','service211540','service211541'];
+    function component__mandatedForm($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
+            dibForm, dibMessage,$location,dibAction,dibUtility, $timeout, dibActiveFilterState,service211534,service211536,service211540,service211541) {
+        var ctrl = this;        
+                    $scope.container = {};
+            $scope.container.Id = '9153';
+            $scope.container.Name = 'mandatedForm';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = {};
+        $scope.model['id'] = '';
+        $scope.model._GET['id'] = dibContainer.modelItem({
+            key : 'id',
+            dataType : "number", 
+            create : false,
+            update : false,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['select___beneficiary_id'] = '';
+        $scope.model._GET['beneficiary_id'] = dibContainer.modelItem({
+            key : 'beneficiary_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211534,
+            itemAlias : false
+        });
+        $scope.model['active'] = '';
+        $scope.model._GET['active'] = dibContainer.modelItem({
+            key : 'active',
+            dataType : "boolean", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['select___dataset_id'] = '';
+        $scope.model._GET['dataset_id'] = dibContainer.modelItem({
+            key : 'dataset_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211536,
+            itemAlias : false
+        });
+        $scope.model['from_date'] = '';
+        $scope.model._GET['from_date'] = dibContainer.modelItem({
+            key : 'from_date',
+            dataType : "date", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['to_date'] = '';
+        $scope.model._GET['to_date'] = dibContainer.modelItem({
+            key : 'to_date',
+            dataType : "date", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['type'] = '';
+        $scope.model._GET['type'] = dibContainer.modelItem({
+            key : 'type',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['select___class_id'] = '';
+        $scope.model._GET['class_id'] = dibContainer.modelItem({
+            key : 'class_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211540,
+            itemAlias : false
+        });
+        $scope.model['select___subclass_id'] = '';
+        $scope.model._GET['subclass_id'] = dibContainer.modelItem({
+            key : 'subclass_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211541,
+            itemAlias : false
+        });
+        $scope.model['asset_manager'] = '';
+        $scope.model._GET['asset_manager'] = dibContainer.modelItem({
+            key : 'asset_manager',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['notes'] = '';
+        $scope.model._GET['notes'] = dibContainer.modelItem({
+            key : 'notes',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = ["id"];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+    $scope.dropdowns = {};
+    $scope.dropdowns.service211534 = {};
+    $scope.dropdowns.service211534.items = [];
+    var setTimeoutCancel211534 = null;
+    var $dibContainer = $element.first();
+    var query211534;
+    $scope.loadService211534 = function (query, skipTimeout) {
+        if (query211534 != query) {
+            query211534 = query;
+            if (!!skipTimeout) {
+                return service211534.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211534.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211534);
+                setTimeoutCancel211534 = setTimeout(function () { 
+                    service211534.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211534.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211534.searchTextChange = function (query) {
+        $scope.loadService211534(query);
+    };
+    $scope.dropdowns.service211534.getItems = function (query,modelType) {
+        return service211534.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211534 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211534');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211534.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+    $scope.dropdowns.service211536 = {};
+    $scope.dropdowns.service211536.items = [];
+    var setTimeoutCancel211536 = null;
+    var $dibContainer = $element.first();
+    var query211536;
+    $scope.loadService211536 = function (query, skipTimeout) {
+        if (query211536 != query) {
+            query211536 = query;
+            if (!!skipTimeout) {
+                return service211536.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211536.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211536);
+                setTimeoutCancel211536 = setTimeout(function () { 
+                    service211536.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211536.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211536.searchTextChange = function (query) {
+        $scope.loadService211536(query);
+    };
+    $scope.dropdowns.service211536.getItems = function (query,modelType) {
+        return service211536.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211536 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211536');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211536.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+    $scope.dropdowns.service211540 = {};
+    $scope.dropdowns.service211540.items = [];
+    var setTimeoutCancel211540 = null;
+    var $dibContainer = $element.first();
+    var query211540;
+    $scope.loadService211540 = function (query, skipTimeout) {
+        if (query211540 != query) {
+            query211540 = query;
+            if (!!skipTimeout) {
+                return service211540.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211540.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211540);
+                setTimeoutCancel211540 = setTimeout(function () { 
+                    service211540.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211540.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211540.searchTextChange = function (query) {
+        $scope.loadService211540(query);
+    };
+    $scope.dropdowns.service211540.getItems = function (query,modelType) {
+        return service211540.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211540 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211540');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211540.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+    $scope.dropdowns.service211541 = {};
+    $scope.dropdowns.service211541.items = [];
+    var setTimeoutCancel211541 = null;
+    var $dibContainer = $element.first();
+    var query211541;
+    $scope.loadService211541 = function (query, skipTimeout) {
+        if (query211541 != query) {
+            query211541 = query;
+            if (!!skipTimeout) {
+                return service211541.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211541.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211541);
+                setTimeoutCancel211541 = setTimeout(function () { 
+                    service211541.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211541.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211541.searchTextChange = function (query) {
+        $scope.loadService211541(query);
+    };
+    $scope.dropdowns.service211541.getItems = function (query,modelType) {
+        return service211541.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211541 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211541');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211541.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+            $scope.openAuditTrail = function (portAlias) {
+                            var primaryKeyData = dibRecord.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                            if (primaryKeyData.length > 0) {
+                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=4622&filter_record_id="+primaryKeyData);
+                        } else {
+                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=4622");
+                        }
+            };
+        ctrl.$onInit = function () {
+            $scope.addModel = function () { 
+                dibForm.addModel($scope, "mandatedForm");
+            };
+            $scope.deleteRecord = function (options) {
+                dibForm.deleteRecord('mandatedForm', $scope, $scope.mandatedForm, options, crudController).then(function (){
+                });
+            };         
+            /**
+            *  Saving record in this model
+            */
+            $scope.saveModel = function (options) {
+                if ($scope.loadingData) return $q.reject('Busy loading...');
+                if (dibForm.validate($scope, $scope.mandatedForm)) {
+                    $scope.loadingData =  true;
+                    var primaryKeyData = dibRecord.primaryKeyData($scope.primaryKeys, $scope.model);
+                    return dibForm.updateRecord('mandatedForm', $scope, $scope.mandatedForm, crudController, options).then(function () { 
+                        if (Object.keys(primaryKeyData).length>0) {
+                        } else {
+                            loadForm();
+                        }
+                        return $q.when();
+                    });
+                }
+            };
+            var mdTabs = $("[dib-container=mandatedForm]").closest('md-tabs');
+            var tabsScope = null;
+            if (mdTabs.length === 0) {
+                mdTabs = null;
+            }
+            else {
+                tabsScope = mdTabs.scope();
+            }
+            $scope.$watch('mandatedForm.$dirty', function (newValue, oldValue) { 
+                dibNavigation.containerDirty = newValue;
+                if (dibNavigation.containerDirty && !!mdTabs && !!tabsScope) {
+                    var currentIndex = tabsScope.selectedIndex;
+                    dibNavigation.addSaveFailedPromise(function(tabIndex) {
+                        tabsScope.selectedIndex = tabIndex;
+                        return $q.when();
+                    }, [currentIndex]);
+                }
+            },true);
+            dibNavigation.addSavePromise($scope.saveModel);
+            //Giving the form the ability to handle dependency data (if an event is trigger on another component that has a refresh item alias point to the form/child form)
+            $scope.setDependencyData = function (object) { 
+                return dibForm.setDependencyData($scope,object);
+            };
+            $scope.itemAliasData = function () {
+                return angular.copy($scope.primaryKeyData);
+            };
+            /**
+            * Clear the form from records and dependancy data
+            */
+            $scope.clearForm = function () {
+                if ($scope.loadingData) return;
+                $scope.primaryKeyData = null;
+                $scope.reloadContainer();
+                dibForm.clean($scope.mandatedForm,$scope.model);
+            };
+            $scope.reloadContainer = function (options) {
+                $scope.autoRefresh = true;
+                loadForm ();
+            };
+            $scope.$watch('model', function (oldVal, newVal) {
+            },true);  
+        };
+        ctrl.$postLink = function () {
+            var isUrlContainer = dibContainer.urlContainer('mandatedForm');
+            if (isUrlContainer) {
+                //check if record is first or last
+                if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                    $scope.$broadcast('load');
+                }
+            } else {
+                $scope.$broadcast('load');
+            }
+            //var isUrlContainer = dibContainer.urlContainer('mandatedForm');
+            //the if below we removed the requirement to match the url to the containerName, so we can load data into a window without the url changing. wizBuildAppAdv.
+                $scope.reloadContainer({ force : true });
+        };
+        function loadForm () { 
+            dibNavigation.reset();
+            dibNavigation.addSavePromise($scope.saveModel);
+            //clear the record status
+            $scope.recordStatus = null;
+            var isUrlContainer = dibContainer.urlContainer('mandatedForm');
+            if (isUrlContainer) {
+                //check if record is first or last
+                if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                    return;
+                }
+            }
+            //check if this is a child container 
+            $scope.primaryKeyData = isUrlContainer ? dibDiscover.getPrimaryKeysFromUrl() : $scope.primaryKeyData;
+            if (!!$scope.primaryKeyData === false) {
+                $scope.primaryKeyData = {};
+                //set all the primaryKeys to 0
+                angular.forEach($scope.primaryKeys, function (key,index) { 
+                    $scope.model[key] = 0;
+                });
+            }
+            //remove active filter if no record are available
+            if (Object.keys($scope.primaryKeyData).length ==0) {
+                $scope.recordStatus = "create";
+            } else {
+                $scope.recordStatus = "update";
+            }
+            $scope.loadingData = true;
+            $scope.currentPrimaryKeyData = $scope.primaryKeyData;
+            dibCrud.read($scope,crudController,'mandatedForm',{
+                primaryKeyData : $scope.currentPrimaryKeyData,
+                createParams: "{}"
+            },
+            $scope
+            ).then(function (model) {
+                $scope.model = model;
+                $scope.currentPrimaryKeyData = dibRecord.primaryKeyData($scope.primaryKeys, $scope.model);
+                $scope.$broadcast('load');
+                $scope.mandatedForm.$setUntouched();
+                $scope.mandatedForm.$setPristine();
+                //@TODO refactor start 
+                var timeoutTest = $timeout(function () { 
+                    dibContainer.reloadChildren({containerName: 'mandatedForm'});
+                },500); 
+                //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                // var eventDeregister = $rootScope.$on("dibAngular.subcontainerLoaded", function () {
+                //     $timeout.cancel(timeoutTest);
+                //     timeoutTest = $timeout(function () { 
+                //         dibContainer.reloadChildren({containerName: 'mandatedForm'});
+                //         eventDeregister();
+                //     },500); 
+                //     //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                // });
+                //Refactor stop
+                $log.debug("containerName read->model",$scope.model );
+                $scope.loadingData =  false;
+            }).catch(function (error) {
+                $scope.$broadcast('load');
+                $scope.loadingData =  false;
+            });
+        }
+    }
+})();

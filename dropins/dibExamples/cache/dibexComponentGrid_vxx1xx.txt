@@ -1,0 +1,2660 @@
+ 
+<div component-loaded dib-container="dibexComponentGrid" dib-grid  dib-config="{ }" >
+	<div dib-inject-content="replace" layout="row"  aria-label="toolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci174012' aria-label="toolbar" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btninlineadd" can-be-moved=true flex=none class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci174019' aria-label="btninlineadd" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add record inline
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci174016' aria-label="btnadd" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add a new record using a form
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btngriddelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="deleteSelected()" id='ci174013' aria-label="btngriddelete" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" ng-disabled="true" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete selected records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci174014' aria-label="btnreload" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Reload records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnaudittrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci174022' aria-label="btnaudittrail" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci174015' aria-label="emptyspan" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+		</span>
+		<md-button aria-label="btnfilteropen" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci174020' aria-label="btnfilteropen" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Display headers for filtering records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterapply" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="searchGrid()" id='ci174017' aria-label="btnfilterapply" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Apply filter criteria specified in grid headers
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterclear" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="clearSearch()" id='ci174018' aria-label="btnfilterclear" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Show all records and clear filter criteria
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
+			</md-icon>
+		</md-button>
+		<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci174021' aria-label="gridtotals" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			-1" >
+			<md-button ng-disabled="true" aria-label="Grid totals">
+				Records: {{page.fromRecord}}
+				<span ng-if='page.fromRecord>
+					0'>
+					to {{page.toRecord}} of {{page.records}}
+				</span>
+				<span ng-if='page.totalRecords!=page.records'>
+					(Total: {{page.totalRecords}})
+				</span>
+			</md-button>
+		</div>
+	</div>
+	<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div flex dib-table-width >
+		<md-list class='dib-grid-column-header'>
+			<md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+				<div layout="row" flex="100" dib-grid-search ng-show="!loadingData">
+					<div table-column  flex = 'none' class="md-subhead" dib-column-heading='155543' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+							Id*
+							<span ng-if="gridOptions.sortFields['id']">
+								({{gridOptions.sortFields['id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="id" ng-model="search.id" aria-label="Id" ng-enter='searchGrid()' id='ci155543' aria-label="id" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Id
+								</label>
+								<div ng-messages="dibexComponentGrid.id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155576' style="width:90px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('test_company_id')" >
+							Test Company
+							<span ng-if="gridOptions.sortFields['test_company_id']">
+								({{gridOptions.sortFields['test_company_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['test_company_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['test_company_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<div layout='row' aria-label="test_company" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company_id' select-model="search.selected___test_company_id.id" md-search-text-change="dropdowns.service155576.searchTextChange(dropdowns.service155576.searchText)" md-search-text="dropdowns.service155576.searchText" md-selected-item="search.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155576.getItems(dropdowns.service155576.searchText,'search')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155576(search,'search','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155576' aria-label="test_company" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-item-template>
+										<span md-highlight-text="dropdowns.service155576.searchText">
+											{{item.id_display_value}}
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+									<div ng-messages="dibexComponentGrid.test_company_id.$error" ng-if="dibexComponentGrid.test_company_id.$touched">
+									</div>
+								</md-autocomplete>
+							</div>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155577' style="width:90px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('test_company2_id')" >
+							Test Company2
+							<span ng-if="gridOptions.sortFields['test_company2_id']">
+								({{gridOptions.sortFields['test_company2_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['test_company2_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['test_company2_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<div layout='row' aria-label="test_company2" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company2_id' select-model="search.selected___test_company2_id.id" md-search-text-change="dropdowns.service155577.searchTextChange(dropdowns.service155577.searchText)" md-search-text="dropdowns.service155577.searchText" md-selected-item="search.selected___test_company2_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155577.getItems(dropdowns.service155577.searchText,'search')" md-floating-label="Test Company2" md-no-cache="true" md-selected-item-change="select155577(search,'search','test_company2_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company2" id='ci155577' aria-label="test_company2" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-item-template>
+										<span md-highlight-text="dropdowns.service155577.searchText">
+											{{item.id_display_value}}
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+									<div ng-messages="dibexComponentGrid.test_company2_id.$error" ng-if="dibexComponentGrid.test_company2_id.$touched">
+									</div>
+								</md-autocomplete>
+							</div>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155544' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('varchar10_required')" >
+							Varchar10 Required*
+							<span ng-if="gridOptions.sortFields['varchar10_required']">
+								({{gridOptions.sortFields['varchar10_required']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['varchar10_required']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['varchar10_required']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="varchar10_required" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='10' name="varchar10_required" ng-model="search.varchar10_required" aria-label="Varchar10 Required" ng-enter='searchGrid()' id='ci155544' aria-label="varchar10_required" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Varchar10 Required
+								</label>
+								<div ng-messages="dibexComponentGrid.varchar10_required.$error">
+									<div ng-message="maxlength">
+										At most 10 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155545' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('has_default')" >
+							Has Default*
+							<span ng-if="gridOptions.sortFields['has_default']">
+								({{gridOptions.sortFields['has_default']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['has_default']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['has_default']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="has_default" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='80' name="has_default" ng-model="search.has_default" aria-label="Has Default" ng-enter='searchGrid()' id='ci155545' aria-label="has_default" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Has Default
+								</label>
+								<div ng-messages="dibexComponentGrid.has_default.$error">
+									<div ng-message="maxlength">
+										At most 80 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155546' style="width:130px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('time_stamp')" >
+							Time Stamp*
+							<span ng-if="gridOptions.sortFields['time_stamp']">
+								({{gridOptions.sortFields['time_stamp']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['time_stamp']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['time_stamp']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="time_stamp" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="time_stamp" ng-model="search.time_stamp" aria-label="Time Stamp" ng-enter='searchGrid()' id='ci155546' aria-label="time_stamp" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Time Stamp
+								</label>
+								<div ng-messages="dibexComponentGrid.time_stamp.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155547' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('unique_fld')" >
+							Unique Fld
+							<span ng-if="gridOptions.sortFields['unique_fld']">
+								({{gridOptions.sortFields['unique_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['unique_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['unique_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="unique_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='50' name="unique_fld" ng-model="search.unique_fld" aria-label="Unique Fld" ng-enter='searchGrid()' id='ci155547' aria-label="unique_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Unique Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.unique_fld.$error">
+									<div ng-message="maxlength">
+										At most 50 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155548' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('nvarchar80')" >
+							Nvarchar80
+							<span ng-if="gridOptions.sortFields['nvarchar80']">
+								({{gridOptions.sortFields['nvarchar80']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['nvarchar80']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['nvarchar80']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="nvarchar80" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='80' name="nvarchar80" ng-model="search.nvarchar80" aria-label="Nvarchar80" ng-enter='searchGrid()' id='ci155548' aria-label="nvarchar80" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Nvarchar80
+								</label>
+								<div ng-messages="dibexComponentGrid.nvarchar80.$error">
+									<div ng-message="maxlength">
+										At most 80 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155549' style="width:250px;    max-height:70px;overflow:hidden;" >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('text_fld')" >
+							Text Fld
+							<span ng-if="gridOptions.sortFields['text_fld']">
+								({{gridOptions.sortFields['text_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['text_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['text_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="text_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="text_fld" ng-model="search.text_fld" aria-label="Text Fld" ng-enter='searchGrid()' id='ci155549' aria-label="text_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Text Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.text_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155550' style="width:250px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('tinytext_fld')" >
+							Tinytext Fld
+							<span ng-if="gridOptions.sortFields['tinytext_fld']">
+								({{gridOptions.sortFields['tinytext_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['tinytext_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['tinytext_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="tinytext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="tinytext_fld" ng-model="search.tinytext_fld" aria-label="Tinytext Fld" ng-enter='searchGrid()' id='ci155550' aria-label="tinytext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Tinytext Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.tinytext_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155551' style="width:250px;    max-height:70px;overflow:hidden;" >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('mediumtext_fld')" >
+							Mediumtext Fld
+							<span ng-if="gridOptions.sortFields['mediumtext_fld']">
+								({{gridOptions.sortFields['mediumtext_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['mediumtext_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['mediumtext_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="mediumtext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="mediumtext_fld" ng-model="search.mediumtext_fld" aria-label="Mediumtext Fld" ng-enter='searchGrid()' id='ci155551' aria-label="mediumtext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Mediumtext Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.mediumtext_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155552' style="width:250px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('longtext_fld')" >
+							Longtext Fld
+							<span ng-if="gridOptions.sortFields['longtext_fld']">
+								({{gridOptions.sortFields['longtext_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['longtext_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['longtext_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="longtext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="longtext_fld" ng-model="search.longtext_fld" aria-label="Longtext Fld" ng-enter='searchGrid()' id='ci155552' aria-label="longtext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Longtext Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.longtext_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155553' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('bit_fld')" >
+							Bit Fld
+							<span ng-if="gridOptions.sortFields['bit_fld']">
+								({{gridOptions.sortFields['bit_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['bit_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['bit_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="bit_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='2' name="bit_fld" ng-model="search.bit_fld" aria-label="Bit Fld" ng-enter='searchGrid()' id='ci155553' aria-label="bit_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Bit Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.bit_fld.$error">
+									<div ng-message="maxlength">
+										At most 2 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155554' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('tinyint_fld')" >
+							Tinyint Fld
+							<span ng-if="gridOptions.sortFields['tinyint_fld']">
+								({{gridOptions.sortFields['tinyint_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['tinyint_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['tinyint_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="tinyint_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="tinyint_fld" ng-model="search.tinyint_fld" aria-label="Tinyint Fld" ng-enter='searchGrid()' id='ci155554' aria-label="tinyint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Tinyint Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.tinyint_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex = 'none' class="md-subhead" dib-column-heading='155555' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('smallint_fld')" >
+							Smallint Fld
+							<span ng-if="gridOptions.sortFields['smallint_fld']">
+								({{gridOptions.sortFields['smallint_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['smallint_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['smallint_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="smallint_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="smallint_fld" ng-model="search.smallint_fld" aria-label="Smallint Fld" ng-enter='searchGrid()' id='ci155555' aria-label="smallint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Smallint Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.smallint_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex = 'none' class="md-subhead" dib-column-heading='155556' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('int_fld')" >
+							Int Fld
+							<span ng-if="gridOptions.sortFields['int_fld']">
+								({{gridOptions.sortFields['int_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['int_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['int_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="int_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="int_fld" ng-model="search.int_fld" aria-label="Int Fld" ng-enter='searchGrid()' id='ci155556' aria-label="int_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Int Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.int_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex = 'none' class="md-subhead" dib-column-heading='155557' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('bigint_fld')" >
+							Bigint Fld
+							<span ng-if="gridOptions.sortFields['bigint_fld']">
+								({{gridOptions.sortFields['bigint_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['bigint_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['bigint_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="bigint_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="bigint_fld" ng-model="search.bigint_fld" aria-label="Bigint Fld" ng-enter='searchGrid()' id='ci155557' aria-label="bigint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Bigint Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.bigint_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex = 'none' class="md-subhead" dib-column-heading='155558' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('float_fld')" >
+							Float Fld
+							<span ng-if="gridOptions.sortFields['float_fld']">
+								({{gridOptions.sortFields['float_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['float_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['float_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="float_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="float_fld" ng-model="search.float_fld" aria-label="Float Fld" ng-enter='searchGrid()' id='ci155558' aria-label="float_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Float Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.float_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex = 'none' class="md-subhead" dib-column-heading='155559' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('double_fld')" >
+							Double Fld
+							<span ng-if="gridOptions.sortFields['double_fld']">
+								({{gridOptions.sortFields['double_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['double_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['double_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="double_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="double_fld" ng-model="search.double_fld" aria-label="Double Fld" ng-enter='searchGrid()' id='ci155559' aria-label="double_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Double Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.double_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex = 'none' class="md-subhead" dib-column-heading='155560' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('decimal_fld')" >
+							Decimal Fld
+							<span ng-if="gridOptions.sortFields['decimal_fld']">
+								({{gridOptions.sortFields['decimal_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['decimal_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['decimal_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="decimal_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="decimal_fld" ng-model="search.decimal_fld" aria-label="Decimal Fld" ng-enter='searchGrid()' id='ci155560' aria-label="decimal_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Decimal Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.decimal_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155561' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('date_fld')" >
+							Date Fld
+							<span ng-if="gridOptions.sortFields['date_fld']">
+								({{gridOptions.sortFields['date_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['date_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['date_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="date_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="date_fld" ng-model="search.date_fld" aria-label="Date Fld" ng-enter='searchGrid()' id='ci155561' aria-label="date_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Date Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.date_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155562' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('time_fld')" >
+							Time Fld
+							<span ng-if="gridOptions.sortFields['time_fld']">
+								({{gridOptions.sortFields['time_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['time_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['time_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="time_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='7' name="time_fld" ng-model="search.time_fld" aria-label="Time Fld" ng-enter='searchGrid()' id='ci155562' aria-label="time_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Time Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.time_fld.$error">
+									<div ng-message="maxlength">
+										At most 7 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155563' style="width:130px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('datetime_fld')" >
+							Datetime Fld
+							<span ng-if="gridOptions.sortFields['datetime_fld']">
+								({{gridOptions.sortFields['datetime_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['datetime_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['datetime_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="datetime_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="datetime_fld" ng-model="search.datetime_fld" aria-label="Datetime Fld" ng-enter='searchGrid()' id='ci155563' aria-label="datetime_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Datetime Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.datetime_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex = 'none' class="md-subhead" dib-column-heading='155564' style="width:80px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('year_fld')" >
+							Year Fld
+							<span ng-if="gridOptions.sortFields['year_fld']">
+								({{gridOptions.sortFields['year_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['year_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['year_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="year_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  name="year_fld" ng-model="search.year_fld" aria-label="Year Fld" ng-enter='searchGrid()' id='ci155564' aria-label="year_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Year Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.year_fld.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155565' style="width:130px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('enum_fld')" >
+							Enum Fld
+							<span ng-if="gridOptions.sortFields['enum_fld']">
+								({{gridOptions.sortFields['enum_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['enum_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['enum_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="enum_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='255' name="enum_fld" ng-model="search.enum_fld" aria-label="Enum Fld" ng-enter='searchGrid()' id='ci155565' aria-label="enum_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Enum Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.enum_fld.$error">
+									<div ng-message="maxlength">
+										At most 255 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155566' style="width:130px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('set_fld')" >
+							Set Fld
+							<span ng-if="gridOptions.sortFields['set_fld']">
+								({{gridOptions.sortFields['set_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['set_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['set_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="set_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='255' name="set_fld" ng-model="search.set_fld" aria-label="Set Fld" ng-enter='searchGrid()' id='ci155566' aria-label="set_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Set Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.set_fld.$error">
+									<div ng-message="maxlength">
+										At most 255 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155567' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('email')" >
+							Email
+							<span ng-if="gridOptions.sortFields['email']">
+								({{gridOptions.sortFields['email']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['email']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['email']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='120' name="email" ng-model="search.email" aria-label="Email" ng-enter='searchGrid()' id='ci155567' aria-label="email" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Email
+								</label>
+								<div ng-messages="dibexComponentGrid.email.$error">
+									<div ng-message="maxlength">
+										At most 120 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155568' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('url')" >
+							Url
+							<span ng-if="gridOptions.sortFields['url']">
+								({{gridOptions.sortFields['url']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['url']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['url']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="url" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='200' name="url" ng-model="search.url" aria-label="Url" ng-enter='searchGrid()' id='ci155568' aria-label="url" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Url
+								</label>
+								<div ng-messages="dibexComponentGrid.url.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155569' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('longitude')" >
+							Longitude
+							<span ng-if="gridOptions.sortFields['longitude']">
+								({{gridOptions.sortFields['longitude']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['longitude']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['longitude']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="longitude" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='200' name="longitude" ng-model="search.longitude" aria-label="Longitude" ng-enter='searchGrid()' id='ci155569' aria-label="longitude" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Longitude
+								</label>
+								<div ng-messages="dibexComponentGrid.longitude.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155570' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('lattitude')" >
+							Lattitude
+							<span ng-if="gridOptions.sortFields['lattitude']">
+								({{gridOptions.sortFields['lattitude']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['lattitude']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['lattitude']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="lattitude" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='200' name="lattitude" ng-model="search.lattitude" aria-label="Lattitude" ng-enter='searchGrid()' id='ci155570' aria-label="lattitude" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Lattitude
+								</label>
+								<div ng-messages="dibexComponentGrid.lattitude.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155571' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('file_fld')" >
+							File Fld
+							<span ng-if="gridOptions.sortFields['file_fld']">
+								({{gridOptions.sortFields['file_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['file_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['file_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="file_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='200' name="file_fld" ng-model="search.file_fld" aria-label="File Fld" ng-enter='searchGrid()' id='ci155571' aria-label="file_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									File Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.file_fld.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155572' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('image_fld')" >
+							Image Fld
+							<span ng-if="gridOptions.sortFields['image_fld']">
+								({{gridOptions.sortFields['image_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['image_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['image_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="image_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='200' name="image_fld" ng-model="search.image_fld" aria-label="Image Fld" ng-enter='searchGrid()' id='ci155572' aria-label="image_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Image Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.image_fld.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155573' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('document_fld')" >
+							Document Fld
+							<span ng-if="gridOptions.sortFields['document_fld']">
+								({{gridOptions.sortFields['document_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['document_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['document_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="document_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='200' name="document_fld" ng-model="search.document_fld" aria-label="Document Fld" ng-enter='searchGrid()' id='ci155573' aria-label="document_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Document Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.document_fld.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155574' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('expression_fld')" >
+							Expression Fld
+							<span ng-if="gridOptions.sortFields['expression_fld']">
+								({{gridOptions.sortFields['expression_fld']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['expression_fld']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['expression_fld']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="expression_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='200' name="expression_fld" ng-model="search.expression_fld" aria-label="Expression Fld" ng-enter='searchGrid()' id='ci155574' aria-label="expression_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Expression Fld
+								</label>
+								<div ng-messages="dibexComponentGrid.expression_fld.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='155575' style="width:160px;    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('notes')" >
+							Notes
+							<span ng-if="gridOptions.sortFields['notes']">
+								({{gridOptions.sortFields['notes']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+								<input type="text"  maxlength='255' name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155575' aria-label="notes" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Notes
+								</label>
+								<div ng-messages="dibexComponentGrid.notes.$error">
+									<div ng-message="maxlength">
+										At most 255 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='dibexComponentGrid' ng-if="gridOptions.inlineAddShow">
+				<ng-form name=dibexComponentGrid  dib-container-name="dibexComponentGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+					<div table-column layout="column" flex = 'none' dib-column="155543" style="width:80px;    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci155543' aria-label="id" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="dibexComponentGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155576" style="width:90px;    " >
+						<div aria-label="test_company" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['test_company_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="common.goToForDropdowns('dibtestCompanyForm','',true,'selected___test_company_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="test_company" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company_id' select-model="model.selected___test_company_id.id" md-search-text-change="dropdowns.service155576.searchTextChange(dropdowns.service155576.searchText)" md-search-text="dropdowns.service155576.searchText" md-selected-item="model.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155576.getItems(dropdowns.service155576.searchText,'model')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155576(model,'model','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155576' aria-label="test_company" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service155576.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="dibexComponentGrid.test_company_id.$error" ng-if="dibexComponentGrid.test_company_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="common.goToForDropdowns('dibtestCompanyForm','',true,'selected___test_company_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155577" style="width:90px;    " >
+						<div aria-label="test_company2" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['test_company2_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="common.goToForDropdowns('dibtestCompanyForm','',true,'selected___test_company2_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="test_company2" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company2_id' select-model="model.selected___test_company2_id.id" md-search-text-change="dropdowns.service155577.searchTextChange(dropdowns.service155577.searchText)" md-search-text="dropdowns.service155577.searchText" md-selected-item="model.selected___test_company2_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155577.getItems(dropdowns.service155577.searchText,'model')" md-floating-label="Test Company2" md-no-cache="true" md-selected-item-change="select155577(model,'model','test_company2_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company2" id='ci155577' aria-label="test_company2" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service155577.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="dibexComponentGrid.test_company2_id.$error" ng-if="dibexComponentGrid.test_company2_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="common.goToForDropdowns('dibtestCompanyForm','',true,'selected___test_company2_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155544" style="width:160px;    " >
+						<div aria-label="varchar10_required" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['varchar10_required']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="varchar10_required" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='10' required name="varchar10_required" ng-model="model.varchar10_required" aria-label="Varchar10 Required" ng-enter='searchGrid()' id='ci155544' aria-label="varchar10_required" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Varchar10 Required*
+									</label>
+									<div ng-messages="dibexComponentGrid.varchar10_required.$error">
+										<div ng-message="required">
+											Varchar10 Required required.
+										</div>
+										<div ng-message="maxlength">
+											At most 10 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155545" style="width:160px;    " >
+						<div aria-label="has_default" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['has_default']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="has_default" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='80' required name="has_default" ng-model="model.has_default" aria-label="Has Default" ng-enter='searchGrid()' id='ci155545' aria-label="has_default" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Has Default*
+									</label>
+									<div ng-messages="dibexComponentGrid.has_default.$error">
+										<div ng-message="required">
+											Has Default required.
+										</div>
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155546" style="width:130px;    " >
+						<div aria-label="time_stamp" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['time_stamp']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="time_stamp" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text" theme="material" ng-model="model.time_stamp"         name="time_stamp" required aria-label="Time Stamp" placeholder="Time Stamp" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci155546' aria-label="time_stamp" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155547" style="width:160px;    " >
+						<div aria-label="unique_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['unique_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="unique_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='50' name="unique_fld" ng-model="model.unique_fld" aria-label="Unique Fld" ng-enter='searchGrid()' id='ci155547' aria-label="unique_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Unique Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.unique_fld.$error">
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155548" style="width:160px;    " >
+						<div aria-label="nvarchar80" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['nvarchar80']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="nvarchar80" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='80' name="nvarchar80" ng-model="model.nvarchar80" aria-label="Nvarchar80" ng-enter='searchGrid()' id='ci155548' aria-label="nvarchar80" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Nvarchar80
+									</label>
+									<div ng-messages="dibexComponentGrid.nvarchar80.$error">
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155549" style="width:250px;    max-height:70px;overflow:hidden;" >
+						<div aria-label="text_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['text_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="text_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  name="text_fld" ng-model="model.text_fld" aria-label="Text Fld" ng-enter='searchGrid()' id='ci155549' aria-label="text_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Text Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.text_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155550" style="width:250px;    " >
+						<div aria-label="tinytext_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['tinytext_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="tinytext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  name="tinytext_fld" ng-model="model.tinytext_fld" aria-label="Tinytext Fld" ng-enter='searchGrid()' id='ci155550' aria-label="tinytext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Tinytext Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.tinytext_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155551" style="width:250px;    max-height:70px;overflow:hidden;" >
+						<div aria-label="mediumtext_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['mediumtext_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="mediumtext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  name="mediumtext_fld" ng-model="model.mediumtext_fld" aria-label="Mediumtext Fld" ng-enter='searchGrid()' id='ci155551' aria-label="mediumtext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Mediumtext Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.mediumtext_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155552" style="width:250px;    " >
+						<div aria-label="longtext_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['longtext_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="longtext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  name="longtext_fld" ng-model="model.longtext_fld" aria-label="Longtext Fld" ng-enter='searchGrid()' id='ci155552' aria-label="longtext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Longtext Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.longtext_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155553" style="width:160px;    " >
+						<div aria-label="bit_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['bit_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="bit_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='2' name="bit_fld" ng-model="model.bit_fld" aria-label="Bit Fld" ng-enter='searchGrid()' id='ci155553' aria-label="bit_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Bit Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.bit_fld.$error">
+										<div ng-message="maxlength">
+											At most 2 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155554" style="width:80px;    " >
+						<div aria-label="tinyint_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="boolean" ng-class="{ checked : $parent.viewModel['tinyint_fld']} ">
+									<span>
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container class="md-block"  aria-label="tinyint_fld" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-checkbox  dib-data-component='checkbox' name="tinyint_fld" ng-model="model.tinyint_fld" aria-label="Tinyint Fld" ng-enter='searchGrid()' id='ci155554' aria-label="tinyint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+										Tinyint Fld
+									</md-checkbox>
+									<div ng-messages="dibexComponentGrid.tinyint_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155555" style="width:80px;    " >
+						<div aria-label="smallint_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['smallint_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="smallint_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="smallint_fld" ng-model="model.smallint_fld" aria-label="Smallint Fld" ng-enter='searchGrid()' id='ci155555' aria-label="smallint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Smallint Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.smallint_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155556" style="width:80px;    " >
+						<div aria-label="int_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['int_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="int_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="int_fld" ng-model="model.int_fld" aria-label="Int Fld" ng-enter='searchGrid()' id='ci155556' aria-label="int_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Int Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.int_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155557" style="width:80px;    " >
+						<div aria-label="bigint_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['bigint_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="bigint_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="bigint_fld" ng-model="model.bigint_fld" aria-label="Bigint Fld" ng-enter='searchGrid()' id='ci155557' aria-label="bigint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Bigint Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.bigint_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155558" style="width:80px;    " >
+						<div aria-label="float_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['float_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="float_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="float_fld" ng-model="model.float_fld" aria-label="Float Fld" ng-enter='searchGrid()' id='ci155558' aria-label="float_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Float Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.float_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155559" style="width:80px;    " >
+						<div aria-label="double_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['double_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="double_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="double_fld" ng-model="model.double_fld" aria-label="Double Fld" ng-enter='searchGrid()' id='ci155559' aria-label="double_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Double Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.double_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155560" style="width:80px;    " >
+						<div aria-label="decimal_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['decimal_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="decimal_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="decimal_fld" ng-model="model.decimal_fld" aria-label="Decimal Fld" ng-enter='searchGrid()' id='ci155560' aria-label="decimal_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Decimal Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.decimal_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155561" style="width:80px;    " >
+						<div aria-label="date_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['date_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="date_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text" theme="material" ng-model="model.date_fld"         name=date_fld aria-label="Date Fld" placeholder="Date Fld" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci155561' aria-label="date_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="dibexComponentGrid.model.date_fld.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155562" style="width:160px;    " >
+						<div aria-label="time_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['time_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="time_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='7' name="time_fld" ng-model="model.time_fld" aria-label="Time Fld" ng-enter='searchGrid()' id='ci155562' aria-label="time_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Time Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.time_fld.$error">
+										<div ng-message="maxlength">
+											At most 7 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155563" style="width:130px;    " >
+						<div aria-label="datetime_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['datetime_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="datetime_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text" theme="material" ng-model="model.datetime_fld"         name="datetime_fld" aria-label="Datetime Fld" placeholder="Datetime Fld" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci155563' aria-label="datetime_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155564" style="width:80px;    " >
+						<div aria-label="year_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['year_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="year_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="year_fld" ng-model="model.year_fld" aria-label="Year Fld" ng-enter='searchGrid()' id='ci155564' aria-label="year_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Year Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.year_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155565" style="width:130px;    " >
+						<div aria-label="enum_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['enum_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="enum_fld" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-input-container flex>
+										<label>
+											Enum Fld
+										</label>
+										<md-select    ng-disabled="!model._GET['enum_fld'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Enum Fld" aria-label="enum_fld" md-on-close="select155565(model)" flex ng-model="model.enum_fld" name='enum_fld' id='ci155565' aria-label="enum_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+											<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+												{{state}} 
+											</md-option>
+										</md-select>
+										<div ng-messages="dibexComponentGrid.enum_fld.$error">
+										</div>
+									</md-input-container>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155566" style="width:130px;    " >
+						<div aria-label="set_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['set_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="set_fld" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-input-container flex>
+										<label>
+											Set Fld
+										</label>
+										<md-select    ng-disabled="!model._GET['set_fld'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Set Fld" aria-label="set_fld" md-on-close="select155566(model)" flex ng-model="model.set_fld" name='set_fld' id='ci155566' aria-label="set_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+											<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+												{{state}} 
+											</md-option>
+										</md-select>
+										<div ng-messages="dibexComponentGrid.set_fld.$error">
+										</div>
+									</md-input-container>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155567" style="width:160px;    " >
+						<div aria-label="email" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['email']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='120' name="email" ng-model="model.email" aria-label="Email" ng-enter='searchGrid()' id='ci155567' aria-label="email" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Email
+									</label>
+									<div ng-messages="dibexComponentGrid.email.$error">
+										<div ng-message="maxlength">
+											At most 120 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155568" style="width:160px;    " >
+						<div aria-label="url" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['url']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="url" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="url" ng-model="model.url" aria-label="Url" ng-enter='searchGrid()' id='ci155568' aria-label="url" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Url
+									</label>
+									<div ng-messages="dibexComponentGrid.url.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155569" style="width:160px;    " >
+						<div aria-label="longitude" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['longitude']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="longitude" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="longitude" ng-model="model.longitude" aria-label="Longitude" ng-enter='searchGrid()' id='ci155569' aria-label="longitude" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Longitude
+									</label>
+									<div ng-messages="dibexComponentGrid.longitude.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155570" style="width:160px;    " >
+						<div aria-label="lattitude" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['lattitude']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="lattitude" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="lattitude" ng-model="model.lattitude" aria-label="Lattitude" ng-enter='searchGrid()' id='ci155570' aria-label="lattitude" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Lattitude
+									</label>
+									<div ng-messages="dibexComponentGrid.lattitude.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155571" style="width:160px;    " >
+						<div aria-label="file_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['file_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="file_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="file_fld" ng-model="model.file_fld" aria-label="File Fld" ng-enter='searchGrid()' id='ci155571' aria-label="file_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										File Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.file_fld.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155572" style="width:160px;    " >
+						<div aria-label="image_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['image_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="image_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="image_fld" ng-model="model.image_fld" aria-label="Image Fld" ng-enter='searchGrid()' id='ci155572' aria-label="image_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Image Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.image_fld.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155573" style="width:160px;    " >
+						<div aria-label="document_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['document_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="document_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="document_fld" ng-model="model.document_fld" aria-label="Document Fld" ng-enter='searchGrid()' id='ci155573' aria-label="document_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Document Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.document_fld.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155574" style="width:160px;    " >
+						<div aria-label="expression_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['expression_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="expression_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="expression_fld" ng-model="model.expression_fld" aria-label="Expression Fld" ng-enter='searchGrid()' id='ci155574' aria-label="expression_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Expression Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.expression_fld.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155575" style="width:160px;    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='255' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155575' aria-label="notes" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="dibexComponentGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 255 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex='none' dib-edit >
+						<md-button ng-click='toggleInlineAdd()' class="md-raised ">
+							Close 
+						</md-button>
+						<md-button ng-click='cleanRow($event,model, dibexComponentGrid)' class="md-raised "  ng-disabled='!dibexComponentGrid.$dirty'>
+							Clear   
+						</md-button>
+						<md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+							Use selected data 
+						</md-button>
+						<md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!dibexComponentGrid.$valid">
+							Add   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</div>
+	<md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+		<md-list dib-table-column-width >
+			<md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+				<div class="no-records-available">
+					  No records available 
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"   double-click="rowEdit(element)" >
+				<ng-form name='dibexComponentGrid' dib-container-name="dibexComponentGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+					<div table-column layout="column" flex = 'none' dib-column="155543" style="width:80px;    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci155543' aria-label="id" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="dibexComponentGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155576" style="width:90px;    " >
+						<div aria-label="test_company" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['test_company_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="common.goToForDropdowns('dibtestCompanyForm','',true,'selected___test_company_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="test_company" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company_id' select-model="model.selected___test_company_id.id" md-search-text-change="dropdowns.service155576.searchTextChange(dropdowns.service155576.searchText)" md-search-text="dropdowns.service155576.searchText" md-selected-item="model.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155576.getItems(dropdowns.service155576.searchText,'model')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155576(model,'model','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155576' aria-label="test_company" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service155576.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="dibexComponentGrid.test_company_id.$error" ng-if="dibexComponentGrid.test_company_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="common.goToForDropdowns('dibtestCompanyForm','',true,'selected___test_company_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155577" style="width:90px;    " >
+						<div aria-label="test_company2" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['test_company2_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="common.goToForDropdowns('dibtestCompanyForm','',true,'selected___test_company2_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="test_company2" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company2_id' select-model="model.selected___test_company2_id.id" md-search-text-change="dropdowns.service155577.searchTextChange(dropdowns.service155577.searchText)" md-search-text="dropdowns.service155577.searchText" md-selected-item="model.selected___test_company2_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155577.getItems(dropdowns.service155577.searchText,'model')" md-floating-label="Test Company2" md-no-cache="true" md-selected-item-change="select155577(model,'model','test_company2_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company2" id='ci155577' aria-label="test_company2" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service155577.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="dibexComponentGrid.test_company2_id.$error" ng-if="dibexComponentGrid.test_company2_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="common.goToForDropdowns('dibtestCompanyForm','',true,'selected___test_company2_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155544" style="width:160px;    " >
+						<div aria-label="varchar10_required" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['varchar10_required']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="varchar10_required" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='10' required name="varchar10_required" ng-model="model.varchar10_required" aria-label="Varchar10 Required" ng-enter='searchGrid()' id='ci155544' aria-label="varchar10_required" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Varchar10 Required*
+									</label>
+									<div ng-messages="dibexComponentGrid.varchar10_required.$error">
+										<div ng-message="required">
+											Varchar10 Required required.
+										</div>
+										<div ng-message="maxlength">
+											At most 10 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155545" style="width:160px;    " >
+						<div aria-label="has_default" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['has_default']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="has_default" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='80' required name="has_default" ng-model="model.has_default" aria-label="Has Default" ng-enter='searchGrid()' id='ci155545' aria-label="has_default" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Has Default*
+									</label>
+									<div ng-messages="dibexComponentGrid.has_default.$error">
+										<div ng-message="required">
+											Has Default required.
+										</div>
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155546" style="width:130px;    " >
+						<div aria-label="time_stamp" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['time_stamp']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="time_stamp" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text" theme="material" ng-model="model.time_stamp"         name="time_stamp" required aria-label="Time Stamp" placeholder="Time Stamp" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci155546' aria-label="time_stamp" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155547" style="width:160px;    " >
+						<div aria-label="unique_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['unique_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="unique_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='50' name="unique_fld" ng-model="model.unique_fld" aria-label="Unique Fld" ng-enter='searchGrid()' id='ci155547' aria-label="unique_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Unique Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.unique_fld.$error">
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155548" style="width:160px;    " >
+						<div aria-label="nvarchar80" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['nvarchar80']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="nvarchar80" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='80' name="nvarchar80" ng-model="model.nvarchar80" aria-label="Nvarchar80" ng-enter='searchGrid()' id='ci155548' aria-label="nvarchar80" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Nvarchar80
+									</label>
+									<div ng-messages="dibexComponentGrid.nvarchar80.$error">
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155549" style="width:250px;    max-height:70px;overflow:hidden;" >
+						<div aria-label="text_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['text_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="text_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  name="text_fld" ng-model="model.text_fld" aria-label="Text Fld" ng-enter='searchGrid()' id='ci155549' aria-label="text_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Text Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.text_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155550" style="width:250px;    " >
+						<div aria-label="tinytext_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['tinytext_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="tinytext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  name="tinytext_fld" ng-model="model.tinytext_fld" aria-label="Tinytext Fld" ng-enter='searchGrid()' id='ci155550' aria-label="tinytext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Tinytext Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.tinytext_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155551" style="width:250px;    max-height:70px;overflow:hidden;" >
+						<div aria-label="mediumtext_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['mediumtext_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="mediumtext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  name="mediumtext_fld" ng-model="model.mediumtext_fld" aria-label="Mediumtext Fld" ng-enter='searchGrid()' id='ci155551' aria-label="mediumtext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Mediumtext Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.mediumtext_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155552" style="width:250px;    " >
+						<div aria-label="longtext_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['longtext_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="longtext_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  name="longtext_fld" ng-model="model.longtext_fld" aria-label="Longtext Fld" ng-enter='searchGrid()' id='ci155552' aria-label="longtext_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Longtext Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.longtext_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155553" style="width:160px;    " >
+						<div aria-label="bit_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['bit_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="bit_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='2' name="bit_fld" ng-model="model.bit_fld" aria-label="Bit Fld" ng-enter='searchGrid()' id='ci155553' aria-label="bit_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Bit Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.bit_fld.$error">
+										<div ng-message="maxlength">
+											At most 2 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155554" style="width:80px;    " >
+						<div aria-label="tinyint_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="boolean" ng-class="{ checked : $parent.viewModel['tinyint_fld']} ">
+									<span>
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container class="md-block"  aria-label="tinyint_fld" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-checkbox  dib-data-component='checkbox' name="tinyint_fld" ng-model="model.tinyint_fld" aria-label="Tinyint Fld" ng-enter='searchGrid()' id='ci155554' aria-label="tinyint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+										Tinyint Fld
+									</md-checkbox>
+									<div ng-messages="dibexComponentGrid.tinyint_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155555" style="width:80px;    " >
+						<div aria-label="smallint_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['smallint_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="smallint_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="smallint_fld" ng-model="model.smallint_fld" aria-label="Smallint Fld" ng-enter='searchGrid()' id='ci155555' aria-label="smallint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Smallint Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.smallint_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155556" style="width:80px;    " >
+						<div aria-label="int_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['int_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="int_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="int_fld" ng-model="model.int_fld" aria-label="Int Fld" ng-enter='searchGrid()' id='ci155556' aria-label="int_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Int Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.int_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155557" style="width:80px;    " >
+						<div aria-label="bigint_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['bigint_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="bigint_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="bigint_fld" ng-model="model.bigint_fld" aria-label="Bigint Fld" ng-enter='searchGrid()' id='ci155557' aria-label="bigint_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Bigint Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.bigint_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155558" style="width:80px;    " >
+						<div aria-label="float_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['float_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="float_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="float_fld" ng-model="model.float_fld" aria-label="Float Fld" ng-enter='searchGrid()' id='ci155558' aria-label="float_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Float Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.float_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155559" style="width:80px;    " >
+						<div aria-label="double_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['double_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="double_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="double_fld" ng-model="model.double_fld" aria-label="Double Fld" ng-enter='searchGrid()' id='ci155559' aria-label="double_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Double Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.double_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155560" style="width:80px;    " >
+						<div aria-label="decimal_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['decimal_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="decimal_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="decimal_fld" ng-model="model.decimal_fld" aria-label="Decimal Fld" ng-enter='searchGrid()' id='ci155560' aria-label="decimal_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Decimal Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.decimal_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155561" style="width:80px;    " >
+						<div aria-label="date_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['date_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="date_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text" theme="material" ng-model="model.date_fld"         name=date_fld aria-label="Date Fld" placeholder="Date Fld" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci155561' aria-label="date_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="dibexComponentGrid.model.date_fld.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155562" style="width:160px;    " >
+						<div aria-label="time_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['time_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="time_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='7' name="time_fld" ng-model="model.time_fld" aria-label="Time Fld" ng-enter='searchGrid()' id='ci155562' aria-label="time_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Time Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.time_fld.$error">
+										<div ng-message="maxlength">
+											At most 7 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155563" style="width:130px;    " >
+						<div aria-label="datetime_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['datetime_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="datetime_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text" theme="material" ng-model="model.datetime_fld"         name="datetime_fld" aria-label="Datetime Fld" placeholder="Datetime Fld" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci155563' aria-label="datetime_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex = 'none' dib-column="155564" style="width:80px;    " >
+						<div aria-label="year_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['year_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="year_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="number"  name="year_fld" ng-model="model.year_fld" aria-label="Year Fld" ng-enter='searchGrid()' id='ci155564' aria-label="year_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Year Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.year_fld.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155565" style="width:130px;    " >
+						<div aria-label="enum_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['enum_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="enum_fld" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-input-container flex>
+										<label>
+											Enum Fld
+										</label>
+										<md-select    ng-disabled="!model._GET['enum_fld'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Enum Fld" aria-label="enum_fld" md-on-close="select155565(model)" flex ng-model="model.enum_fld" name='enum_fld' id='ci155565' aria-label="enum_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+											<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+												{{state}} 
+											</md-option>
+										</md-select>
+										<div ng-messages="dibexComponentGrid.enum_fld.$error">
+										</div>
+									</md-input-container>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155566" style="width:130px;    " >
+						<div aria-label="set_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['set_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="set_fld" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<md-input-container flex>
+										<label>
+											Set Fld
+										</label>
+										<md-select    ng-disabled="!model._GET['set_fld'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Set Fld" aria-label="set_fld" md-on-close="select155566(model)" flex ng-model="model.set_fld" name='set_fld' id='ci155566' aria-label="set_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" >
+											<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+												{{state}} 
+											</md-option>
+										</md-select>
+										<div ng-messages="dibexComponentGrid.set_fld.$error">
+										</div>
+									</md-input-container>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155567" style="width:160px;    " >
+						<div aria-label="email" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['email']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='120' name="email" ng-model="model.email" aria-label="Email" ng-enter='searchGrid()' id='ci155567' aria-label="email" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Email
+									</label>
+									<div ng-messages="dibexComponentGrid.email.$error">
+										<div ng-message="maxlength">
+											At most 120 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155568" style="width:160px;    " >
+						<div aria-label="url" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['url']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="url" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="url" ng-model="model.url" aria-label="Url" ng-enter='searchGrid()' id='ci155568' aria-label="url" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Url
+									</label>
+									<div ng-messages="dibexComponentGrid.url.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155569" style="width:160px;    " >
+						<div aria-label="longitude" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['longitude']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="longitude" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="longitude" ng-model="model.longitude" aria-label="Longitude" ng-enter='searchGrid()' id='ci155569' aria-label="longitude" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Longitude
+									</label>
+									<div ng-messages="dibexComponentGrid.longitude.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155570" style="width:160px;    " >
+						<div aria-label="lattitude" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['lattitude']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="lattitude" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="lattitude" ng-model="model.lattitude" aria-label="Lattitude" ng-enter='searchGrid()' id='ci155570' aria-label="lattitude" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Lattitude
+									</label>
+									<div ng-messages="dibexComponentGrid.lattitude.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155571" style="width:160px;    " >
+						<div aria-label="file_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['file_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="file_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="file_fld" ng-model="model.file_fld" aria-label="File Fld" ng-enter='searchGrid()' id='ci155571' aria-label="file_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										File Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.file_fld.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155572" style="width:160px;    " >
+						<div aria-label="image_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['image_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="image_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="image_fld" ng-model="model.image_fld" aria-label="Image Fld" ng-enter='searchGrid()' id='ci155572' aria-label="image_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Image Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.image_fld.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155573" style="width:160px;    " >
+						<div aria-label="document_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['document_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="document_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="document_fld" ng-model="model.document_fld" aria-label="Document Fld" ng-enter='searchGrid()' id='ci155573' aria-label="document_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Document Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.document_fld.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155574" style="width:160px;    " >
+						<div aria-label="expression_fld" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['expression_fld']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="expression_fld" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='200' name="expression_fld" ng-model="model.expression_fld" aria-label="Expression Fld" ng-enter='searchGrid()' id='ci155574' aria-label="expression_fld" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Expression Fld
+									</label>
+									<div ng-messages="dibexComponentGrid.expression_fld.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="155575" style="width:160px;    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
+									<input type="text"  maxlength='255' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155575' aria-label="notes" dib-container-name='dibexComponentGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="dibexComponentGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 255 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+						<md-button ng-click='cancelRow($event,row)' class="md-raised ">
+							Cancel 
+						</md-button>
+						<md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!dibexComponentGrid.$valid" >
+							Save   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<div layout-fill layout='row' flex class='dib-grid-footer'>
+		<div flex=20 layout='row'>
+			<md-button disabled>
+				Page limit
+			</md-button>
+			<md-select ng-model="page.limit">
+				<md-option ng-value="10">
+					10
+				</md-option>
+				<md-option ng-value="20">
+					20
+				</md-option>
+				<md-option ng-value="50">
+					50
+				</md-option>
+			</md-select>
+		</div>
+		<div  ng-if="page.count>
+			1" flex=80 layout='row'  layout-align="center center" >
+			<md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+				First 
+			</md-button>
+			<md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+				Prev 
+			</md-button>
+			<div layout='row'>
+				<md-button disabled>
+					Page
+				</md-button>
+				<md-input-container>
+					<input type='number' ng-model="page.number" aria-label="Page number">
+				</md-input-container>
+				<md-button disabled>
+					of {{ page.count }} 
+				</md-button>
+			</div>
+			<md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+				Next 
+			</md-button>
+			<md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+				Last 
+			</md-button>
+		</div>
+	</div>
+</div>

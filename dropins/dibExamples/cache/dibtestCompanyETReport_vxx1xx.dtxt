@@ -1,0 +1,11 @@
+
+<iframe ng-show='!loading'  on-loading="completed()" 
+ layout-fill fill-height  dib-container=dibtestCompanyETReport 
+ name='dibtestCompanyETReport' dib-config="{
+}"
+ ng-if="model.url" ng-src="{{model.url}}" frameBorder="0" width="100%" flex="100" 
+ng-style="{{frameStyle}}">
+</iframe>
+<div ng-show='loading'  layout="row" layout-sm="column" layout-align="space-around">
+  <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+</div>

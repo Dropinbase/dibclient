@@ -1,0 +1,130 @@
+<html>
+<head>
+
+    <!-- *** NOTE: Security measure: always specify UTF-8 encoding, which corresponds with the UTF-8 header which Eleutheria sends to the client -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <title>Company Info</title>
+    
+    <script type="text/javascript" src="/files/dropins/setNgMaterial/dibAngular/src/js/core/shared/TemplateActions.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;            
+            color: #333;
+        }
+        ul li {
+            list-style: decimal;
+        }
+        a {
+            color: #660;
+        }
+        
+		#btn {
+			background-color: #008CBA;
+            border-radius: 15px;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border: none;
+            color: white;
+            padding: 3px 6px;       
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px; 
+		}
+		
+		#trheading {
+            text-align: center; 
+			color: white; 
+			background: #3a79b3;
+			font-weight: bold;
+			font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;
+        }
+		#trrow {
+            font-size: 13px;
+            font-family: helvetica,arial,verdana,sans-serif;            
+            color: #333;
+        }
+        a:hover {
+            color: #000;
+        }
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+        }
+
+        /* Tooltip text */
+        a .tooltiptext {
+            opacity: 0;
+            transition: opacity 0.7s;
+            width: 200px;
+            background-color: lightyellow;
+            color: #221CA2;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+         
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        a:hover .tooltiptext {
+            opacity: 1;
+        }
+    </style>
+    
+</head>
+~$// 
+    Note variables sent from PHP are sanitized allowing only "a-zA-Z0-9_ " by default. 
+    The [%...%] directives are used to ignore encoding of safe html
+    The Eleutheria encode function is used to sanitize urls 
+~ 
+
+<body ~if('getval(print)'=true, [%onload="window.print()"%])~>
+
+~if('getval(print)'<>true,[%
+    <a id="btn" href="/dropins/setNgMaterial/dibHtmlTemplate/template/open/dibtestCompanyDrilldown?filter=%]encode(this, url,{"submitItemAlias_parent_companyId":"^submitItemAlias_parent_companyId^"[*,*]"print":"true"[*,*]"areaType":"^areaType^"[*,*]"area":"^area^"})[%" target="_blank">Print
+    </a>
+%])~
+
+~if(getval(print)<>true,[%<button id="btn" onclick="document.location.reload();">Refresh Info</button>%])~
+
+~if(getval(print)<>true,[%
+    <a id="btn" href="/dropins/setNgMaterial/dibHtmlTemplate/template/open/dibtestCompanyETReport?filter=%]encode(this, url,{"submitItemAlias_parent_companyId":"^submitItemAlias_parent_companyId^"[*,*]"print":"false"})[%">
+        <b>Back to Company Info Report...</b>
+    </a>
+%])~
+
+<p style="font-size: 15px"><b>^area^</b></p>
+<p style="font-size: 13px"><b>Users and Employees in ^area^:</b></p>
+
+<table  style="border-collapse: collapse" cellpadding="4" border="1">
+
+<tr id="trheading"><td>No</td><td>User</td><td>User Position</td><td>Date Joined</td><td>scope</td><td>Employed At</td></tr>
+
+|rssql1;SELECT c.id AS userId, c.name, cc.date_started, cc.position, c.employed_at_id, tc.name AS company, cc.scope
+FROM (test_company_consultant cc INNER JOIN test_consultant c ON c.id = cc.consultant_id)
+	  LEFT JOIN test_company tc ON tc.id = c.employed_at_id
+WHERE c.`~if(^areaType^=country,country,city_town)~` = ~param(^area^,1)~|
+
+<tr id="trrow"><td>~#~</td>
+<td style="background: #ADD2ED; color: black" >~name~</td>
+<td>~position~</td><td>~date_started~</td><td>~scope~</td>
+<td style="background: #ADD2ED; color: white" >
+    <a href="#" onClick="dibCommon.goTo('dibtestCompanyForm', '', true, '?primary_id=~employed_at_id~')">~company~
+        <span class="tooltiptext">This will open the <b>dibtestCompanyForm</b> container for ~company~.</span>
+    </a>
+</td></tr>
+
+|End1|
+
+</table>
+
+</body>
+</html>

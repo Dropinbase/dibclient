@@ -1,0 +1,296 @@
+
+(function() {
+  var require = [  
+		'/dropins/setNgMaterial/dibTree/js/components/dibTreeNode.js',
+		'/dropins/setNgMaterial/dibTree/js/components/dibTreeChildNode.js',
+		'/dropins/setNgMaterial/dibTree/js/factory/dibNodes.js'
+	];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var dibtestTree = angular.module('dibtestTree', [files]);
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+	dibtestTree.service('treeServicedibtestTree', treeServicedibtestTree);
+treeServicedibtestTree.$inject = [ 'ajax', '$log','discoverService', 'recordFactory', 'dibNodes'];
+function treeServicedibtestTree(ajax, $log,discoverService, recordFactory, dibNodes) {
+    var service = { 
+        drop : drop,
+        read : read,
+        create : create,
+        update : update,
+        delete : dispose
+    }
+    return service;
+    function drop(options) { 
+        var url = DIB__base_url + '/dropins/dibExamples/Tree/drop?containerName=dibtestTree';
+        var container = $('[dib-container=dibtestTree]');
+        var requestInfo = discoverService.addToUrl({
+            container : container,
+            field : container,
+            url : url
+        });
+        angular.forEach(options, function (item,index) { 
+            requestInfo.url += '&' + index +"="+item;
+        });
+        return ajax.post(requestInfo);
+    }
+    function read(search, activeFilter, nodeId) {
+        var url = DIB__base_url + '/dropins/dibExamples/Tree/read?containerName=dibtestTree';
+        var container = $('[dib-container=dibtestTree]');
+        var requestInfo = discoverService.addToUrl({
+            container : container,
+            field : container,
+            url : url,
+            activeFilter : activeFilter
+        });
+        if (!!search) { 
+            requestInfo.url += "&query="+ search; 
+        }
+        //Adding the root node for a request
+        var node= !!nodeId? nodeId : 'root';
+        requestInfo.url += "&node=" + node; 
+        return ajax.post(requestInfo,{
+            factoryResult : dibNodes.records
+        });
+    }
+    function create(data, primaryKeys) {
+        var url = DIB__base_url + '/dropins/dibExamples/Tree/create?containerName=dibtestTree';
+        var container = $('[dib-container=dibtestTree]');
+        var requestInfo = discoverService.addToUrl({
+            container : container,
+            field : container,
+            url : url,
+            primaryKeys : primaryKeys,
+            data : data
+        });
+        return ajax.post(requestInfo,null, data);
+    }
+    function update(data,primaryKeys) {
+        var url = DIB__base_url + '/dropins/dibExamples/Tree/update?containerName=dibtestTree';
+        var container = $('[dib-container=dibtestTree]');
+        var requestInfo = discoverService.addToUrl({
+            container : container,
+            field : container,
+            url : url,
+            primaryKeys : primaryKeys,
+            data : data
+        });
+        return ajax.post(url, null,data);
+    }
+    function dispose(data,primaryKeys) {
+        var url = DIB__base_url + '/dropins/dibExamples/Tree/delete?containerName=dibtestTree';
+        var container = $('[dib-container=dibtestTree]');
+        var requestInfo = discoverService.addToUrl({
+            container : container,
+            field : container,
+            url : url,
+            primaryKeys : primaryKeys,
+            data : data
+        });
+        return ajax.post(requestInfo,null,data);
+    }
+}
+})();
+(function() {
+var dibtestTree = angular.module('dibtestTree');
+dibtestTree.component('dibtestTree', {
+    controllerAs: 'dibtestTree',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibTree/Template/view/dibtestTree.html',
+    controller : component__dibtestTree
+});
+component__dibtestTree.$inject = [  
+            '$timeout', '$scope', '$ocLazyLoad', '$rootScope', '$log', 'containerService','treeServicedibtestTree', '$q', '$window','keysPressed','dibNodes','containerService','recordFactory','crudService','utilityService'];
+    function component__dibtestTree($timeout, $scope, $ocLazyLoad, $rootScope, $log, containerService,treeServicedibtestTree, $q, $window,keysPressed,dibNodes,containerService,recordFactory,crudService,utilityService) {
+        var vm = this;    
+        vm.$postLink = function () {
+            $("[dib-container=dibtestTree]").trigger('onInit');
+        };
+        vm.$onInit = function () {
+                        $scope.container = {};
+            $scope.container.Id = '7165';
+            $scope.container.Name = 'dibtestTree';
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.model._GET['checkSomething'] = containerService.modelItem("boolean", 
+            true,
+            true,
+            null
+        );
+        $scope.view = {};
+            $scope.view.pasteChildrenAllRelated1 = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.checkSomething = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+            $scope.service = treeServicedibtestTree;
+            function loadGrid() {
+                $scope.selectedItems = [];
+                $scope.lastSelectedItem = null;
+                var arraySelected = [];
+                $scope.loadingData = true;
+                $log.log($scope.search);
+                treeServicedibtestTree.read($scope.search, null).then(function (data) {
+                    $scope.loadingData = false;
+                    $scope.treeData= data.records;
+                    $("[dib-container='dibtestTree']").trigger('treechange');
+                }, function () { 
+                    $scope.loadingData = false;
+                    $scope.treeData =  [{ "text" : 'No tree items returned' , "leaf" : true, 'icon' : '/files/dropins/setNgMaterial/dibTree/img/icons/warning.svg'}];
+                });
+            }
+            $scope.searchTree = function ()  {
+                loadGrid();
+            };
+            //override primary keys 
+            $scope.primaryKeys = ['id'];
+            //resize window to ensure everything fits onto the window screen especially when window height has been implemented
+            angular.element($window).trigger('resize');
+            //Last selected node object will always be stored here
+            $scope.lastSelectedItem = null;
+            var arraySelected = [];
+            /**
+            * The itemAliasData function on the scope is how we collect data from this component/dropin for submissionData, or when the component is referenced by using its itemAlias
+            */
+            $scope.itemAliasData = function () {
+                var itemSelected= angular.copy($scope.lastSelectedItem);
+                //remove the children as this is not relevant information
+                if (!!itemSelected && !!itemSelected.children) { 
+                    itemSelected.children = null; 
+                }
+                return itemSelected;
+            };
+            /**
+            *  After the tree has changed it will trigger the event on the container
+            */
+            $scope.$on('nodeclose', function ($event) { 
+                $log.debug("Node close");
+                $("[dib-container='dibtestTree']").trigger('nodeclose');
+            });
+            /**
+            *  After the tree has changed it will trigger the event on the container
+            */
+            $scope.$on('nodeopen', function ($event) { 
+                $log.debug("Node open");
+                $("[dib-container='dibtestTree']").trigger('nodeopen');
+            });
+            /**
+            *  After the tree has changed it will trigger the event on the container
+            */
+            $scope.$on('treechange', function ($event) { 
+                $log.debug("TREECHANGE");
+                $("[dib-container='dibtestTree']").trigger('treechange');
+                $event.stopPropagation();
+                $event.preventDefault();
+            });
+            /**
+            * Trigger event on container before tree change
+            */
+            $scope.$on('beforetreechange', function ($event) { 
+                $("[dib-container='dibtestTree']").trigger('beforetreechange');
+                $event.stopPropagation();
+                $event.preventDefault();
+            });
+            /**
+            *  ability to select a node if the node is in the tree and the id match
+            */
+            $scope.updateSelectedNode = function (id) { 
+                function treeData(items) {
+                    angular.forEach(items, function (item, index) {
+                        if (item.id == id) {
+                            item.checked= true;
+                            $scope.$emit('selectNode',item);
+                            return;
+                        } 
+                        if (item.children) {
+                            treeData(item.children);
+                        }
+                    });   
+                }
+                treeData($scope.treeData);
+            };
+            $scope.selectedItems = [];
+            /**
+            * Manage the selected node id''s
+            * Listen if a node is being selected and trigger to tree parent
+            */
+            $scope.$on('selectNode', function ($event, node) { 
+                    //Dont do anything if the node, dont have an id attached to it
+                    if (!!node.id === false) return;
+                    if (keysPressed.ctrlKey) {
+                        //add to array if not checked, as this means the item will be checked.
+                        if (arraySelected.indexOf(node.id) === -1 && !node.checked) { 
+                            //Setting the last selected node
+                            $scope.lastSelectedItem = node;
+                            $log.debug("SELECTED NODE", node);
+                            //trigger selected item event
+                            $("[dib-container='dibtestTree']").trigger('itemclick', [node]);
+                            arraySelected.push(node.id);
+                            $scope.selectedItems.push(node);
+                            $log.debug("CURRENT SELECTED ITEMS IN TREE", arraySelected);
+                            return;
+                        }
+                        //remove from the array as the item in the tree is checked and marked for unselection 
+                        if (arraySelected.indexOf(node.id) !== -1) {
+                            arraySelected.splice(arraySelected.indexOf(node.id),1);
+                            $scope.selectedItems.splice($scope.selectedItems.indexOf(node),1);
+                            $("[dib-container='dibtestTree']").trigger('itemdeselect', [node]);
+                        }      
+                    } else if (keysPressed.shiftKey) {
+                        dibNodes.shiftSelect($scope.treeData, $scope.lastSelectedItem, node, $scope,arraySelected);
+                        $("[dib-container='dibtestTree']").trigger('itemclick', [node]);
+                        $scope.lastSelectedItem = node;
+                    } else {
+                        $log.debug("SELECTED NODE", node);
+                        angular.forEach($scope.selectedItems,function (treeNode,index) { 
+                            if (treeNode.id != node.id) {
+                                treeNode.checked=false;
+                            }
+                        });
+                        $scope.selectedItems = [node];
+                        $scope.lastSelectedItem = node;
+                        arraySelected= [node.id];
+                        $("[dib-container='dibtestTree']").trigger('itemselect', [node]);
+                        $("[dib-container='dibtestTree']").trigger('itemclick', [node]);
+                    }
+                    $log.debug("CURRENT SELECTED ITEMS IN TREE", arraySelected);
+                    $event.stopPropagation();
+                    $event.preventDefault();
+            });
+            $timeout(function () { 
+                    loadGrid();
+            },500);
+            $scope.reloadContainer  = function (options) {
+                    loadGrid();
+        if (!!$scope) { 
+                $scope.$broadcast('reload container');
+        }
+            };
+        };
+     }
+})();

@@ -1,0 +1,90 @@
+
+(function() {
+    var require = ['/dropins/setNgMaterial/dibMenu/js/components/dibSideBarStatus.js' ];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    var aatemp1 = angular.module('aatemp1', [files]);
+    aatemp1.service('service210003',service210003);
+    service210003.$inject = ['dibAjax', 'dibDiscover'];
+    function service210003(dibAjax,  dibDiscover) {
+            return {
+                list : list
+            };
+            function list($scope, $element, node) {
+                var url = dibDiscover.updateQueryStringMenu(DIB.base_url + "/dropins/setNgMaterial/dibMenu/menu/list.json?containerName=aatemp1&rootMenuId=210004", node);
+                var requestInfo = dibDiscover.addToUrl({
+                    field : $('#ci210003'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+    };
+    var aatemp1 = angular.module('aatemp1');
+    aatemp1.component('aatemp1', {
+        controllerAs: 'aatemp1',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibContainer/Template/view/aatemp1.html',
+        controller : component__aatemp1
+    });
+    component__aatemp1.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad','service210003'];
+    function component__aatemp1($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad,service210003) {
+        var ctrl = this;
+        ctrl.$onInit = function () { 
+                        $scope.container = {};
+            $scope.container.Id = '9101';
+            $scope.container.Name = 'aatemp1';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = dibRecord.modelConstruct($scope);
+        $scope.view = {};
+            $scope.view.menu = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.menuItems = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = [];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+            $scope.menus.service210003 = {};
+            $scope.menus.service210003.update = function (node){
+                $scope.menus.service210003.loading = true;
+                service210003.list($scope,$dibContainer, !!node? node.id : null).then(function (menu) {
+                    $scope.menus.service210003.loading = false;
+                    if (!!node === false) { 
+                        $scope.menus.service210003.menu = menu;
+                    } else { 
+                        node.children = menu;
+                    }
+                }, function () {
+                    $scope.menus.service210003.loading = false;
+                });
+            };
+            $scope.menus.service210003.update();
+    $scope.dropdowns = {};
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+            $scope.recordStatus = "create";
+            $scope.reloadContainer = function () {
+                //Now we reload all the required 
+                dibContainer.reloadChildren({containerName: 'aatemp1'});
+            };
+            if (!!dibContainer.isSubContainer($("[dib-container=aatemp1]")) === false) { 
+                $scope.reloadContainer();
+            }
+        };
+        //required for permissions
+        ctrl.$postLink = function () {
+        };
+    } 
+})();

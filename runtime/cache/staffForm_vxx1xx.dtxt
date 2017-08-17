@@ -1,0 +1,263 @@
+ 
+<ng-form layout-fill dib-container=staffForm  flex isolate-form name='staffForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci210334' aria-label="rowToolbar" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci210335' aria-label="btnsave" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci210336' aria-label="btnadd" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true class="md-icon-button md-squared md-raised " style="    " ng-click="deleteRecord({'redirect' : true})" id='ci210337' aria-label="btndelete" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci210338' aria-label="btnreload" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci210505' aria-label="btnAuditTrail" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnGrid" can-be-moved=true style="    " id='ci210341' aria-label="btnGrid" dib-container-name='staffForm' ng-click="dibCommon.goTo('staffGrid','',true,'','',$event);" dib-config="{ listeners : { } }" aria-label="Grid" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Open grid
+			</md-tooltip>
+			Grid 
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci210339' aria-label="emptyspan" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci210340' aria-label="formpaging" dib-container-name='staffForm' dib-config="{ listeners : { } }" data-container-name="staffForm" >
+		</dib-form-paging >
+	</div>
+	<md-tabs id="ci210518" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci210518' aria-label="mdtabs" can-be-moved=true can-have-children=true flex=none md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci210518' aria-label="mdtabs" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+		<md-tab label='Form Data' tabId="210342"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=staffForm&itemId=210342'     id='ci210342' aria-label="layoutrow" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+					<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci210343' aria-label="fieldset" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-input-container aria-label="staff_pk" can-be-moved=true item-alias="staff_pk"    ng-show="!!view.staff_pk == false || view.staff_pk.visible"  dib-disable="{{view.staff_pk.disabled}}" ng-class="view.staff_pk.class"  ng-style="view.staff_pk.style" flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" id='ci210506' aria-label="staff_pk" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="staffForm.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="first_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="text"  maxlength='50' required name="first_name" ng-model="model.first_name" aria-label="First Name" id='ci210507' aria-label="first_name" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										First Name*
+									</label>
+									<div ng-messages="staffForm.first_name.$error">
+										<div ng-message="required">
+											First Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="last_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="text"  maxlength='50' required name="last_name" ng-model="model.last_name" aria-label="Last Name" id='ci210508' aria-label="last_name" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Last Name*
+									</label>
+									<div ng-messages="staffForm.last_name.$error">
+										<div ng-message="required">
+											Last Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="staff_code" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="text"  maxlength='10' required name="staff_code" ng-model="model.staff_code" aria-label="Staff Code" id='ci210509' aria-label="staff_code" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Staff Code*
+									</label>
+									<div ng-messages="staffForm.staff_code.$error">
+										<div ng-message="required">
+											Staff Code required.
+										</div>
+										<div ng-message="maxlength">
+											At most 10 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="email" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="text"  maxlength='200' required name="email" ng-model="model.email" aria-label="Email" id='ci210510' aria-label="email" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Email*
+									</label>
+									<div ng-messages="staffForm.email.$error">
+										<div ng-message="required">
+											Email required.
+										</div>
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="mobile" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="text"  maxlength='30' required name="mobile" ng-model="model.mobile" aria-label="Mobile" id='ci210511' aria-label="mobile" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Mobile*
+									</label>
+									<div ng-messages="staffForm.mobile.$error">
+										<div ng-message="required">
+											Mobile required.
+										</div>
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="skype" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="text"  maxlength='40' name="skype" ng-model="model.skype" aria-label="Skype" id='ci210512' aria-label="skype" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Skype
+									</label>
+									<div ng-messages="staffForm.skype.$error">
+										<div ng-message="maxlength">
+											At most 40 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+								<div layout='row' aria-label="position" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<md-input-container flex>
+										<label>
+											Position
+										</label>
+										<md-select    ng-required dib-data-component='enum' aria-label="position" dib-onload-service placeholder="Position" aria-label="position" md-on-close="select210513(model)" flex ng-model="model.position" name='position' id='ci210513' aria-label="position" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+											<md-option ng-repeat="state in ['Employee','Developer','Manager','Project Manager','HR Manager','Sales Manager','Recruitment Director']" value="{{state}}"  >
+												{{state}} 
+											</md-option>
+										</md-select>
+										<div ng-messages="staffForm.position.$error">
+											<div ng-message="required">
+												Position required.
+											</div>
+										</div>
+									</md-input-container>
+								</div>
+							</section>
+						</md-card-content>
+					</md-card>
+					<md-card  aria-label="fieldset2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci210345' aria-label="fieldset2" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-input-container aria-label="join_date" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="text" theme="material" ng-model="model.join_date" name=join_date required aria-label="Join Date" placeholder="Join Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci210514' aria-label="join_date" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+									<div ng-messages="staffForm.model.join_date.$error">
+										<div ng-message="required">
+											This is required.
+										</div>
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="pef_login_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="number"  required name="pef_login_id" ng-model="model.pef_login_id" aria-label="Pef Login" id='ci210515' aria-label="pef_login_id" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Pef Login*
+									</label>
+									<div ng-messages="staffForm.pef_login_id.$error">
+										<div ng-message="required">
+											Pef Login required.
+										</div>
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="notes" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<textarea   name="notes" ng-model="model.notes" aria-label="Notes" id='ci210516' aria-label="notes" dib-container-name='staffForm' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+									</textarea>
+									<label>
+										Notes
+									</label>
+									<div ng-messages="staffForm.notes.$error">
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="updated" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4597&text=staff' >
+									<input type="text" theme="material" ng-model="model.updated"   name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci210517' aria-label="updated" dib-container-name='staffForm' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</section>
+						</md-card-content>
+					</md-card>
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Projects (Grid)' tabId="210519"  ng-click=dibCommon.goTo('projectGrid','staffForm',false) aria-label="projectGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="projectGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=staffForm&itemId=210519'     id='ci210519' aria-label="projectGrid" dib-container-name='staffForm' dib-active-filter='staffForm_projectGrid' dib-container-filter-settings="{ 'staffForm_projectGrid' : 'submitItemAlias_parent_staff_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Projects (Form)' tabId="210520"  ng-click=dibCommon.goTo('projectForm','staffForm',false) aria-label="projectForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="projectForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=staffForm&itemId=210520'     id='ci210520' aria-label="projectForm" dib-container-name='staffForm' dib-active-filter='staffForm_projectForm' dib-container-filter-settings="{ 'staffForm_projectForm' : 'submitItemAlias_parent_staff_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Staff Projects (Grid)' tabId="210521"  ng-click=dibCommon.goTo('staffProjectGrid','staffForm',false) aria-label="staffProjectGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="staffProjectGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=staffForm&itemId=210521'     id='ci210521' aria-label="staffProjectGrid" dib-container-name='staffForm' dib-active-filter='staffForm_staffProjectGrid' dib-container-filter-settings="{ 'staffForm_staffProjectGrid' : 'submitItemAlias_parent_staff_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Staff Projects (Form)' tabId="210522"  ng-click=dibCommon.goTo('staffProjectForm','staffForm',false) aria-label="staffProjectForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="staffProjectForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=staffForm&itemId=210522'     id='ci210522' aria-label="staffProjectForm" dib-container-name='staffForm' dib-active-filter='staffForm_staffProjectForm' dib-container-filter-settings="{ 'staffForm_staffProjectForm' : 'submitItemAlias_parent_staff_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Staff Skills (Grid)' tabId="210523"  ng-click=dibCommon.goTo('staffSkillGrid','staffForm',false) aria-label="staffSkillGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="staffSkillGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=staffForm&itemId=210523'     id='ci210523' aria-label="staffSkillGrid" dib-container-name='staffForm' dib-active-filter='staffForm_staffSkillGrid' dib-container-filter-settings="{ 'staffForm_staffSkillGrid' : 'submitItemAlias_parent_staff_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Staff Skills (Form)' tabId="210524"  ng-click=dibCommon.goTo('staffSkillForm','staffForm',false) aria-label="staffSkillForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="staffSkillForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=staffForm&itemId=210524'     id='ci210524' aria-label="staffSkillForm" dib-container-name='staffForm' dib-active-filter='staffForm_staffSkillForm' dib-container-filter-settings="{ 'staffForm_staffSkillForm' : 'submitItemAlias_parent_staff_pk'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+	</md-tabs>
+</ng-form>

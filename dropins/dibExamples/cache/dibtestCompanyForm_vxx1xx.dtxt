@@ -1,0 +1,177 @@
+ 
+<ng-form layout-fill dib-container=dibtestCompanyForm  flex isolate-form name='dibtestCompanyForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrowtoolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci173695' aria-label="layoutrowtoolbar" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci173696' aria-label="btnsave" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci173697' aria-label="btnadd" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true class="md-icon-button md-squared md-raised " style="    " ng-click="deleteRecord({'redirect' : true})" id='ci173698' aria-label="btndelete" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" ng-disabled="true" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci173699' aria-label="btnreload" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnaudittrail" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci173709' aria-label="btnaudittrail" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci173700' aria-label="emptyspan" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci173701' aria-label="formpaging" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" data-container-name="dibtestCompanyForm" >
+		</dib-form-paging >
+	</div>
+	<md-tabs id="ci173719" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci173719' aria-label="mdtabs" can-be-moved=true can-have-children=true flex=none md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci173719' aria-label="mdtabs" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+		<md-tab label='Form Data' tabId="183051"  aria-label="layoutcolumn" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="   padding:5px !important; " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace" layout='column' aria-label="layoutcolumn" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:5px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibtestCompanyForm&itemId=183051'     id='ci183051' aria-label="layoutcolumn" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+					<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibtestCompanyForm&itemId=183051'     id='ci173703' aria-label="layoutrow" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+						<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci173704' aria-label="fieldset" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+							<md-card-content>
+								<section layout-fill>
+									<md-input-container aria-label="id" can-be-moved=true item-alias="id"    ng-show="!!view.id == false || view.id.visible"  dib-disable="{{view.id.disabled}}" ng-class="view.id.class"  ng-style="view.id.style" flex=none class="md-block" style="    " dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+										<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" id='ci173710' aria-label="id" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+										<label>
+											Id*
+										</label>
+										<div ng-messages="dibtestCompanyForm.id.$error">
+											<div ng-message="required">
+												Id required.
+											</div>
+										</div>
+									</md-input-container>
+									<md-input-container aria-label="name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+										<input type="text"  maxlength='70' required name="name" ng-model="model.name" aria-label="Name" id='ci173711' aria-label="name" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+										<label>
+											Name*
+										</label>
+										<div ng-messages="dibtestCompanyForm.name.$error">
+											<div ng-message="required">
+												Name required.
+											</div>
+											<div ng-message="maxlength">
+												At most 70 characters are allowed.
+											</div>
+										</div>
+									</md-input-container>
+									<md-input-container aria-label="chinese_name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+										<input type="text"  maxlength='70' name="chinese_name" ng-model="model.chinese_name" aria-label="Chinese Name" id='ci173712' aria-label="chinese_name" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+										<label>
+											Chinese Name
+										</label>
+										<div ng-messages="dibtestCompanyForm.chinese_name.$error">
+											<div ng-message="maxlength">
+												At most 70 characters are allowed.
+											</div>
+										</div>
+									</md-input-container>
+									<div layout='row' aria-label="parent_company_id" can-be-moved=true flex=none style="    " dib-help='&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Head Office or Parent Company&lt;/span&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+										<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='parent_company_id' select-model="model.selected___parent_company_id.id" md-search-text-change="dropdowns.service173713.searchTextChange(dropdowns.service173713.searchText)" md-search-text="dropdowns.service173713.searchText" md-selected-item="model.selected___parent_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service173713.getItems(dropdowns.service173713.searchText,'model')" md-floating-label="Parent Company" md-no-cache="true" md-selected-item-change="select173713(model,'model','parent_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Parent Company" id='ci173713' aria-label="parent_company_id" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+											<md-item-template>
+												<span md-highlight-text="dropdowns.service173713.searchText">
+													{{item.id_display_value}}
+												</span>
+											</md-item-template>
+											<md-not-found>
+												No matches found.
+											</md-not-found>
+											<div ng-messages="dibtestCompanyForm.parent_company_id.$error" ng-if="dibtestCompanyForm.parent_company_id.$touched">
+											</div>
+										</md-autocomplete>
+										<md-button  aria-label="Link to page for dibtestCompanyForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('dibtestCompanyForm','',true,'selected___parent_company_id','id',model,row,$event);" >
+											<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+											</md-icon>
+										</md-button>
+									</div>
+								</section>
+							</md-card-content>
+						</md-card>
+						<md-card  aria-label="fieldset1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci183050' aria-label="fieldset1" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+							<md-card-content>
+								<section layout-fill>
+									<md-input-container aria-label="website" can-be-moved=true flex=none class="md-block" style="    " dib-help='&lt;font color=&quot;#333333&quot; face=&quot;helvetica, arial, verdana, sans-serif&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Website address&lt;/span&gt;&lt;/font&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+										<input type="text"  maxlength='250' name="website" ng-model="model.website" aria-label="Website" id='ci173715' aria-label="website" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+										<label>
+											Website
+										</label>
+										<div ng-messages="dibtestCompanyForm.website.$error">
+											<div ng-message="maxlength">
+												At most 250 characters are allowed.
+											</div>
+										</div>
+									</md-input-container>
+									<div layout='row' aria-label="parent_company_contact_id" can-be-moved=true flex=none style="    " dib-help='&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Contact person at the Head Office or Parent Company&lt;/span&gt;&lt;br&gt;&lt;/div&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+										<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='parent_company_contact_id' select-model="model.selected___parent_company_contact_id.id" md-search-text-change="dropdowns.service173716.searchTextChange(dropdowns.service173716.searchText)" md-search-text="dropdowns.service173716.searchText" md-selected-item="model.selected___parent_company_contact_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service173716.getItems(dropdowns.service173716.searchText,'model')" md-floating-label="Parent Company Contact" md-no-cache="true" md-selected-item-change="select173716(model,'model','parent_company_contact_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Parent Company Contact" id='ci173716' aria-label="parent_company_contact_id" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+											<md-item-template>
+												<span md-highlight-text="dropdowns.service173716.searchText">
+													{{item.id_display_value}}
+												</span>
+											</md-item-template>
+											<md-not-found>
+												No matches found.
+											</md-not-found>
+											<div ng-messages="dibtestCompanyForm.parent_company_contact_id.$error" ng-if="dibtestCompanyForm.parent_company_contact_id.$touched">
+											</div>
+										</md-autocomplete>
+									</div>
+									<md-input-container aria-label="icon" can-be-moved=true flex=none class="md-block" style="    " dib-help='Image attached to this record. Allowed file types: .jpg/.jpeg/.png/.gif/.bmp ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+										<input type="text"  maxlength='250' name="icon" ng-model="model.icon" aria-label="Icon" id='ci173717' aria-label="icon" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+										<label>
+											Icon
+										</label>
+										<div ng-messages="dibtestCompanyForm.icon.$error">
+											<div ng-message="maxlength">
+												At most 250 characters are allowed.
+											</div>
+										</div>
+									</md-input-container>
+								</section>
+							</md-card-content>
+						</md-card>
+					</div>
+					<span aria-label="span" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci183052' aria-label="span" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+						<h4>
+							Notes
+						</h4>
+					</span>
+					<text-angular ng-model="model.notes" layout="column" aria-label="notes" can-be-moved=true flex=none style=" height:170px !important; overflow:auto !important;   " dib-help='Comments / Notes ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'  id='ci173714' aria-label="notes" dib-container-name='dibtestCompanyForm' dib-config="{ listeners : { } }" >
+					</text-angular>
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Consultants' tabId="173727"  ng-click=dibCommon.goTo('dibtestCompanyConsultantGrid','dibTestCompanyForm',false) aria-label="dibtestCompanyConsultantGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="dibtestCompanyConsultantGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibtestCompanyForm&itemId=173727'     id='ci173727' aria-label="dibtestCompanyConsultantGrid" dib-container-name='dibtestCompanyForm' dib-active-filter='dibtestCompanyForm_dibtestCompanyConsultantGrid' dib-container-filter-settings="{ 'dibtestCompanyForm_dibtestCompanyConsultantGrid' : 'submitItemAlias_parent_id'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Employees' tabId="173736"  ng-click=dibCommon.goTo('dibtestConsultantPortGrid','EmployeesInCompanyForm',false) aria-label="dibtestConsultantGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="dibtestConsultantGrid" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibtestCompanyForm&itemId=173736'     id='ci173736' aria-label="dibtestConsultantGrid" dib-container-name='dibtestCompanyForm' dib-active-filter='dibtestCompanyForm_dibtestConsultantGrid' dib-container-filter-settings="{ 'dibtestCompanyForm_dibtestConsultantGrid' : 'submitItemAlias_parent_id'}" dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+	</md-tabs>
+</ng-form>

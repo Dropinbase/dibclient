@@ -1,0 +1,90 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibMenu/js/components/dibSideBarStatus.js' ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(enviroment_base_url+'/files'+file);
+  });
+    var dibserver = angular.module('dibserver', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+    dibserver.factory('service182044',['ajax', '$log', 'discoverService', function (ajax, $log, discoverService) {
+            var list = function (node) {
+               var url = enviroment_base_url + "/dropins/setNgMaterial/dibMenu/menu/list.json?containerName=dibserver";
+               if (!!node === false) {
+                   url += "&node=root&rootMenuId=182045";
+               } else {
+                   url += "&node="+node+"&rootMenuId=182045";
+               }
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci182044'),
+                    container : $('[dib-container=dibserver]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+            return {
+                list : list
+            };
+    }]); 
+})();
+(function() {
+var dibserver = angular.module('dibserver');
+dibserver.component('dibserver', {
+    controllerAs: 'dibserver',
+    templateUrl: enviroment_base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dibserver.html',
+    controller : component__dibserver
+});
+component__dibserver.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','service182044','containerService','recordFactory','crudService','utilityService'];
+    function component__dibserver($scope, $ocLazyLoad, $rootScope, $log, $q,service182044,containerService,recordFactory,crudService,utilityService) {
+                     $scope.container = {};
+            $scope.container.Id = '8268';
+            $scope.container.Name = 'dibserver';
+            $("[dib-container='dibserver']").trigger('load');
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+            $scope.menus.service182044 = {};
+            $scope.menus.service182044.update = function (node){
+                $scope.menus.service182044.loading = true;
+                service182044.list(!!node? node.id : null).then(function (menu) {
+                    $scope.menus.service182044.loading = false;
+                    if (!!node === false) { 
+                        $scope.menus.service182044.menu = menu;
+                    } else { 
+                        node.children = menu;
+                    }
+                }, function () {
+                    $scope.menus.service182044.loading = false;
+                });
+            };
+            $scope.menus.service182044.update();
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'dibserver'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=dibserver]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

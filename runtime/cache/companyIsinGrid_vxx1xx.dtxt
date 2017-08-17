@@ -1,0 +1,516 @@
+ 
+<div component-loaded dib-container="companyIsinGrid" dib-grid  dib-config="{ }" >
+	<div dib-inject-content="replace" layout="row"  aria-label="toolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci210761' aria-label="toolbar" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btninlineadd" can-be-moved=true class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci210768' aria-label="btninlineadd" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add record inline
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " id='ci210765' aria-label="btnadd" dib-container-name='companyIsinGrid' ng-click="dibCommon.goTo('companyIsinForm','',true,'?record=new','',$event);" dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add a new record using a form
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btngriddelete" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="deleteSelected()" id='ci210762' aria-label="btngriddelete" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete selected records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci210763' aria-label="btnreload" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Reload records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci211300' aria-label="btnAuditTrail" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci210764' aria-label="emptyspan" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+		</span>
+		<md-button aria-label="btnfilteropen" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci210769' aria-label="btnfilteropen" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Display headers for filtering records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterapply" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="searchGrid()" id='ci210766' aria-label="btnfilterapply" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Apply filter criteria specified in grid headers
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterclear" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="clearSearch()" id='ci210767' aria-label="btnfilterclear" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Show all records and clear filter criteria
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
+			</md-icon>
+		</md-button>
+		<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci210770' aria-label="gridtotals" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			-1" >
+			<md-button ng-disabled="true" aria-label="Grid totals">
+				Records: {{page.fromRecord}}
+				<span ng-if='page.fromRecord>
+					0'>
+					to {{page.toRecord}} of {{page.records}}
+				</span>
+				<span ng-if='page.totalRecords!=page.records'>
+					(Total: {{page.totalRecords}})
+				</span>
+			</md-button>
+		</div>
+	</div>
+	<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div flex dib-table-width >
+		<md-list class='dib-grid-column-header'>
+			<md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+				<div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length >
+					0">
+					<div table-column  flex = 'nogrow' class="md-subhead" dib-column-heading='210772' style="    " >
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211301' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+							Id*
+							<span ng-if="gridOptions.sortFields['id']">
+								({{gridOptions.sortFields['id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+								<input type="text"  name="id" ng-model="search.id" aria-label="Id" ng-enter='searchGrid()' id='ci211301' aria-label="id" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Id
+								</label>
+								<div ng-messages="companyIsinGrid.id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211302' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('company_id')" >
+							Company*
+							<span ng-if="gridOptions.sortFields['company_id']">
+								({{gridOptions.sortFields['company_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['company_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['company_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<div layout='row' aria-label="company_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='company_id' select-model="search.selected___company_id.id" md-search-text-change="dropdowns.service211302.searchTextChange(dropdowns.service211302.searchText)" md-search-text="dropdowns.service211302.searchText" md-selected-item="search.selected___company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service211302.getItems(dropdowns.service211302.searchText,'search')" md-floating-label="Company" md-no-cache="true" md-selected-item-change="select211302(search,'search','company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Company" id='ci211302' aria-label="company_id" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-item-template>
+										<span md-highlight-text="dropdowns.service211302.searchText">
+											{{item.id_display_value}}
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+									<div ng-messages="companyIsinGrid.company_id.$error" ng-if="companyIsinGrid.company_id.$touched">
+									</div>
+								</md-autocomplete>
+							</div>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211303' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('isin')" >
+							Isin*
+							<span ng-if="gridOptions.sortFields['isin']">
+								({{gridOptions.sortFields['isin']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['isin']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['isin']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="isin" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+								<input type="text"  maxlength='20' name="isin" ng-model="search.isin" aria-label="Isin" ng-enter='searchGrid()' id='ci211303' aria-label="isin" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Isin
+								</label>
+								<div ng-messages="companyIsinGrid.isin.$error">
+									<div ng-message="maxlength">
+										At most 20 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211304' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('notes')" >
+							Notes
+							<span ng-if="gridOptions.sortFields['notes']">
+								({{gridOptions.sortFields['notes']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+								<input type="text"  maxlength='250' name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci211304' aria-label="notes" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Notes
+								</label>
+								<div ng-messages="companyIsinGrid.notes.$error">
+									<div ng-message="maxlength">
+										At most 250 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='companyIsinGrid' ng-if="gridOptions.inlineAddShow">
+				<ng-form name=companyIsinGrid  dib-container-name="companyIsinGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+					<div table-column layout="column" flex = 'nogrow' dib-column="210772" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true class="md-icon-button  md-squared md-raised" style="    " id='ci210772' aria-label="btngridedit" dib-container-name='companyIsinGrid' ng-click="dibCommon.goTo('companyIsinForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="211301" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci211301' aria-label="id" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="companyIsinGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211302" style="    " >
+						<div aria-label="company_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['company_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for companyForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('companyForm','',true,'selected___company_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="company_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='company_id' select-model="model.selected___company_id.id" md-search-text-change="dropdowns.service211302.searchTextChange(dropdowns.service211302.searchText)" md-search-text="dropdowns.service211302.searchText" md-selected-item="model.selected___company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service211302.getItems(dropdowns.service211302.searchText,'model')" md-floating-label="Company" md-no-cache="true" md-selected-item-change="select211302(model,'model','company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Company" id='ci211302' aria-label="company_id" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service211302.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="companyIsinGrid.company_id.$error" ng-if="companyIsinGrid.company_id.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for companyForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('companyForm','',true,'selected___company_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211303" style="    " >
+						<div aria-label="isin" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['isin']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="isin" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+									<input type="text"  maxlength='20' required name="isin" ng-model="model.isin" aria-label="Isin" ng-enter='searchGrid()' id='ci211303' aria-label="isin" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Isin*
+									</label>
+									<div ng-messages="companyIsinGrid.isin.$error">
+										<div ng-message="required">
+											Isin required.
+										</div>
+										<div ng-message="maxlength">
+											At most 20 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211304" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+									<input type="text"  maxlength='250' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci211304' aria-label="notes" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="companyIsinGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 250 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex='none' dib-edit >
+						<md-button ng-click='toggleInlineAdd()' class="md-raised ">
+							Close 
+						</md-button>
+						<md-button ng-click='cleanRow($event,model, companyIsinGrid)' class="md-raised "  ng-disabled='!companyIsinGrid.$dirty'>
+							Clear   
+						</md-button>
+						<md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+							Use selected data 
+						</md-button>
+						<md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!companyIsinGrid.$valid">
+							Add   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</div>
+	<md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+		<md-list dib-table-column-width >
+			<md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+				<div class="no-records-available">
+					  No records available 
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)" >
+				<ng-form name='companyIsinGrid' dib-container-name="companyIsinGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+					<div table-column layout="column" flex = 'nogrow' dib-column="210772" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true class="md-icon-button  md-squared md-raised" style="    " id='ci210772' aria-label="btngridedit" dib-container-name='companyIsinGrid' ng-click="dibCommon.goTo('companyIsinForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="211301" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci211301' aria-label="id" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="companyIsinGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211302" style="    " >
+						<div aria-label="company_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['company_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for companyForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('companyForm','',true,'selected___company_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="company_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='company_id' select-model="model.selected___company_id.id" md-search-text-change="dropdowns.service211302.searchTextChange(dropdowns.service211302.searchText)" md-search-text="dropdowns.service211302.searchText" md-selected-item="model.selected___company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service211302.getItems(dropdowns.service211302.searchText,'model')" md-floating-label="Company" md-no-cache="true" md-selected-item-change="select211302(model,'model','company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Company" id='ci211302' aria-label="company_id" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service211302.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="companyIsinGrid.company_id.$error" ng-if="companyIsinGrid.company_id.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for companyForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('companyForm','',true,'selected___company_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211303" style="    " >
+						<div aria-label="isin" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['isin']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="isin" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+									<input type="text"  maxlength='20' required name="isin" ng-model="model.isin" aria-label="Isin" ng-enter='searchGrid()' id='ci211303' aria-label="isin" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Isin*
+									</label>
+									<div ng-messages="companyIsinGrid.isin.$error">
+										<div ng-message="required">
+											Isin required.
+										</div>
+										<div ng-message="maxlength">
+											At most 20 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211304" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4613&text=company_isin' >
+									<input type="text"  maxlength='250' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci211304' aria-label="notes" dib-container-name='companyIsinGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="companyIsinGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 250 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+						<md-button ng-click='cancelRow($event,row)' class="md-raised ">
+							Cancel 
+						</md-button>
+						<md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!companyIsinGrid.$valid" >
+							Save   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<div layout-fill layout='row' flex class='dib-grid-footer'>
+		<div flex=20 layout='row'>
+			<md-button disabled>
+				Page limit
+			</md-button>
+			<md-select ng-model="page.limit" aria-label="Page Limit">
+				<md-option ng-value="10">
+					10
+				</md-option>
+				<md-option ng-value="20">
+					20
+				</md-option>
+				<md-option ng-value="50">
+					50
+				</md-option>
+			</md-select>
+		</div>
+		<div  ng-if="page.count>
+			1" flex=80 layout='row'  layout-align="center center" >
+			<md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+				First 
+			</md-button>
+			<md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+				Prev 
+			</md-button>
+			<div layout='row'>
+				<md-button disabled>
+					Page
+				</md-button>
+				<md-input-container>
+					<input type='number' ng-model="page.number" aria-label="Page number">
+				</md-input-container>
+				<md-button disabled>
+					of {{ page.count }} 
+				</md-button>
+			</div>
+			<md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+				Next 
+			</md-button>
+			<md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+				Last 
+			</md-button>
+		</div>
+	</div>
+</div>

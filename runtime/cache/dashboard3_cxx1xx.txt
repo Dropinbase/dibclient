@@ -1,0 +1,52 @@
+(function() {
+  var require = [ ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var dashboard3 = angular.module('dashboard3', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+})();
+(function() {
+var dashboard3 = angular.module('dashboard3');
+dashboard3.component('dashboard3', {
+    controllerAs: 'dashboard3',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dashboard3.html',
+    controller : component__dashboard3
+});
+component__dashboard3.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','containerService','recordFactory','crudService','utilityService'];
+    function component__dashboard3($scope, $ocLazyLoad, $rootScope, $log, $q,containerService,recordFactory,crudService,utilityService) {
+                     $scope.container = {};
+            $scope.container.Id = '8520';
+            $scope.container.Name = 'dashboard3';
+            $("[dib-container='dashboard3']").trigger('load');
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'dashboard3'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=dashboard3]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

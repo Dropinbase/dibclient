@@ -1,0 +1,107 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibMenu/js/components/dibSideBarStatus.js' ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var tmplBase1 = angular.module('tmplBase1', [files]);
+    tmplBase1.service('service158199',service158199);
+    service158199.$inject = ['ajax', 'discoverService'];
+    function service158199(ajax,  discoverService) {
+            return {
+                list : list
+            };
+            function list(node) {
+                var url = updateQueryStringMenu(DIB__base_url + "/dropins/setNgMaterial/dibMenu/menu/list.json?containerName=tmplBase1&rootMenuId=181672", node);
+                var requestInfo = discoverService.addToUrl({
+                    field : $('#ci158199'),
+                    container : $('[dib-container=tmplBase1]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+    };
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+})();
+(function() {
+var tmplBase1 = angular.module('tmplBase1');
+tmplBase1.component('tmplBase1', {
+    controllerAs: 'tmplBase1',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibContainer/Template/view/tmplBase1.html',
+    controller : component__tmplBase1
+});
+component__tmplBase1.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','service158199','containerService','recordFactory','crudService','utilityService'];
+    function component__tmplBase1($scope, $ocLazyLoad, $rootScope, $log, $q,service158199,containerService,recordFactory,crudService,utilityService) {
+        var vm = this;
+                     $scope.container = {};
+            $scope.container.Id = '7236';
+            $scope.container.Name = 'tmplBase1';
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.view = {};
+            $scope.view.menu = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+            $scope.menus.service158199 = {};
+            $scope.menus.service158199.update = function (node){
+                $scope.menus.service158199.loading = true;
+                service158199.list(!!node? node.id : null).then(function (menu) {
+                    $scope.menus.service158199.loading = false;
+                    if (!!node === false) { 
+                        $scope.menus.service158199.menu = menu;
+                    } else { 
+                        node.children = menu;
+                    }
+                }, function () {
+                    $scope.menus.service158199.loading = false;
+                });
+            };
+            $scope.menus.service158199.update();
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        //required for permissions
+        vm.$postLink = function () {
+            $("[dib-container=tmplBase1]").trigger('onInit');
+        };
+        vm.$onInit = function () { 
+            $scope.recordStatus = "create";
+        };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'tmplBase1'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=tmplBase1]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

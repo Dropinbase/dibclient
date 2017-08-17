@@ -1,0 +1,209 @@
+ 
+<div component-loaded dib-container=tmplBase4 dib-container-name="9093" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci209907' aria-label="layoutrow" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+		<md-sidenav  aria-label="menu" can-be-moved=true item-alias="menu"    ng-show="!!view.menu == false || view.menu.visible"  dib-disable="{{view.menu.disabled}}" ng-class="view.menu.class"  ng-style="view.menu.style" can-have-children=true flex=none class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4" style="    " id="ci209917" dib-side-bar-status md-is-open="sideNavs.menu" md-component-id="menu" id='ci209917' aria-label="menu" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+			<md-toolbar >
+				<div class="md-toolbar-tools">
+					<h2>
+						Dropinbase
+					</h2>
+					<span flex>
+					</span>
+					<md-button class="md-icon-button" aria-label="Logout" ng-click="dibCommon.location('/dropins/dibAuthenticate/Site/logout');">
+						<md-tooltip md-direction="left">
+							Logout
+						</md-tooltip>
+						<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_remove_circle_outline_black_24px.svg">
+						</md-icon>
+					</md-button>
+					<md-button ng-if='!dibCommon.navConfigSize("menu")' class="md-icon-button" aria-label="Settings" ng-click="dibCommon.toggleNavigation('menu')">
+						<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibAngular/src/img/icons/menu.svg">
+						</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-content>
+				<md-tabs id="ci209921" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci209921' aria-label="mdTabs1" can-be-moved=true can-have-children=true flex=none md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci209921' aria-label="mdTabs1" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+					<md-tab label='Menu' tabId="209922"  aria-label="divMenu" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+						<md-tab-body flex layout-fill>
+							<div dib-inject-content="replace"  aria-label="divMenu" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=tmplBase4&itemId=209922'     id='ci209922' aria-label="divMenu" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+								<md-progress-linear ng-if="menus.service209922.loading" md-mode="indeterminate" class="dib-data-loading">
+								</md-progress-linear>
+								<md-list>
+									<md-list-item class="dib-main-menu-item secondary-button-padding" ng-repeat="item in menus.service209922.menu" ng-if="item.text"  ng-click="dibCommon.toggleNavigation(item,'menuItems')"   dib-selected>
+										<div layout="column" flex>
+											<div layout="row" flex>
+												<md-icon ng-if="item.icon" md-svg-icon="{{item.icon}}">
+												</md-icon>
+												<p layout="row" flex layout-align="space-between center" class="md-body-2">
+													<span flex>
+														{{ item.text }}
+													</span>
+													<span ng-if="item.notices" class="counter-pill md-accent">
+														{{item.notices}}
+													</span>
+													<md-button ng-if="!item.leaf && !!item.children == false" class="md-icon-button  md-squared" ng-click="menus.service209922.update(item)">
+														<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/open.svg">
+														</md-icon>
+													</md-button>
+													<md-button ng-if="!item.leaf && !!item.children" class="md-icon-button  md-squared" ng-click="item.children = null">
+														<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/close.svg">
+														</md-icon>
+													</md-button>
+												</p>
+											</div>
+											<md-list ng-if="item.children">
+												<md-list-item ng-repeat="child in item.children"    ng-click="dibCommon.toggleNavigation(child,'menuItems')"   ng-if="child.text"  dib-selected >
+													<md-icon ng-if="item.icon" md-svg-icon="{{child.icon}}">
+													</md-icon>
+													<p layout="row" layout-align="space-between center" class="md-body-2">
+														<span>
+															{{ child.text }}
+														</span>
+														<span ng-if="child.notices" class="counter-pill md-accent">
+															{{child.notices}}
+														</span>
+														<md-button ng-if="!child.leaf" class="md-icon-button  md-squared" ng-click="menus.service209922.update(child)">
+															<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/open.svg">
+															</md-icon>
+														</md-button>
+													</p>
+												</md-list-item>
+											</md-list>
+										</div>
+									</md-list-item>
+								</md-list>
+							</div>
+						</md-tab-body>
+					</md-tab>
+					<md-tab label='Reports' tabId="209923"  aria-label="divReports" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+						<md-tab-body flex layout-fill>
+							<div dib-inject-content="replace"  aria-label="divReports" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=tmplBase4&itemId=209923'     id='ci209923' aria-label="divReports" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+								*ET* The 'incl' function refers to an undeclared section named 'contentFor_menuItems1' in the following expression: ~incl(contentFor_fld(name))~ PROCESSED SO FAR: incl(contentFor_menuItems1) 
+							</div>
+						</md-tab-body>
+					</md-tab>
+				</md-tabs>
+			</md-content >
+		</md-sidenav>
+		<md-button aria-label="openNav" can-be-moved=true flex="none" ng-if="!common.$mdMedia('gt-lg')"  class="md-icon-button " style="position:fixed;top:0px;left:0px;z-index:1000" style="    " id='ci209908' aria-label="openNav" dib-container-name='tmplBase4' dib-config="{ listeners : { 'click___1827' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'tmplBase4', triggerType: 'click', nextActionItem: '', itemEventId: '1827',         containerItemId: 209908, submitUrl: 'dibGlobals.action.ToggleMenu',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAngular/src/img/icons/menu.svg">
+			</md-icon>
+		</md-button>
+		<div dib-inject-content="replace"  aria-label="div" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=tmplBase4&itemId=209923'     id='ci209909' aria-label="div" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+			<md-tabs id="ci209910" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci209910' aria-label="mdTabs" can-be-moved=true can-have-children=true flex="100" md-no-select-click md-dynamic-height class= "shifted-tabs md-accent" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci209910' aria-label="mdTabs" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+				<md-tab label='Design Instructions' tabId="209915"  aria-label="deleteMe" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="   padding:10px !important; " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="deleteMe" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=tmplBase4&itemId=209915'     id='ci209915' aria-label="deleteMe" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+							<span style="font-size:14px">
+								The 
+								<i>
+									tmplBase4
+								</i>
+								template functions exactly the same as 
+								<i>
+									tmplBase2
+								</i>
+								except that the side menu has tabs. This design is ideal if your application has many reports that can be accessed from menu nodes on the second tab.
+								<br>
+								<br>
+								This template has fixed tabs for selected containers that always remain available, similar to the design of the Dropinbase administration pages. You need to link specific containers to these fixed tabs after they have been created. The rest of the containers will all load within the MainHolder tab (as specified in the database record). 
+								<h3>
+									Notes
+								</h3>
+								<ul>
+									<li>
+										Follow the 
+										<b>
+											Manual Steps
+										</b>
+										under 
+										<span ng-click="dibCommon.location('/nav/dibDocs?id=103&text=Creating%20Applications%20and%20Importing%20Tables');">
+											<u>
+												Creating Applications and Importing Tables 
+											</u>
+										</span>
+										to import your tables using a duplicate of this template (
+										<b>
+											remember
+										</b>
+										to save the database record changes before importing the tables).
+									</li>
+									<li>
+										Use the  
+										<span ng-click="dibCommon.goTo('dibDesigner','',true,'','',$event);">
+											<u>
+												Designer
+											</u>
+										</span>
+										to change the port records for the containers that must be linked to the fixed tabs. The 
+										<i>
+											Port Item
+										</i>
+										fields of these port records must point to the Dashboard/fixedTab1/fixedTab2 items of the new base container. Refer to the documentation about 
+										<span ng-click="dibCommon.location('/nav/dibDocs?id=72&text=Ports');">
+											<u>
+												Ports 
+											</u>
+										</span>
+										for more info.
+									</li>
+									<li>
+										Set the 
+										<i>
+											Name
+										</i>
+										and 
+										<i>
+											Caption
+										</i>
+										fields of the fixed tab items on the new base container. Also set their 
+										<i>
+											Port
+										</i>
+										fields to point to the port records that were updated in the previous step.
+									</li>
+									<li>
+										Remove, change or add fixed tabs as needed (use copy paste to add - remember to set the field values of the new tabs correctly).
+									</li>
+									<li>
+										<b>
+											Do not remove
+										</b>
+										the MainHolder &lt;div&gt; which is used for hosting the rest of the containers.
+									</li>
+								</ul>
+							</span>
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<md-tab label='Dashboard' tabId="209913"  aria-label="DashboardHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="  margin:0px 0px 0px 40px !important;  " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="DashboardHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="  margin:0px 0px 0px 40px !important;  " on-inject='dibGlobals.action.ActivateTab?containerName=tmplBase4&itemId=209913'     id='ci209913' aria-label="DashboardHolder" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<md-tab label='Fixed Page 1' tabId="209912"  aria-label="fixedTab1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" flex layout-fill style="    " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="fixedTab1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=tmplBase4&itemId=209912'     id='ci209912' aria-label="fixedTab1" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<md-tab label='Fixed Page 2' tabId="209914"  aria-label="fixedTab2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="fixedTab2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=tmplBase4&itemId=209914'     id='ci209914' aria-label="fixedTab2" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<md-tab label='' tabId="209911"  aria-label="MainHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" flex layout-fill style="    " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="MainHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=tmplBase4&itemId=209911'     id='ci209911' aria-label="MainHolder" dib-container-name='tmplBase4' dib-config="{ listeners : { } }" >
+						</div>
+					</md-tab-body>
+				</md-tab>
+			</md-tabs>
+		</div>
+	</div>
+</div>

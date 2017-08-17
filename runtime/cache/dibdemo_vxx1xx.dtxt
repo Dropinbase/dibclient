@@ -1,0 +1,92 @@
+ 
+<div component-loaded dib-container=dibdemo dib-container-name="9173" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci211779' aria-label="layoutrow" dib-container-name='dibdemo' dib-config="{ listeners : { } }" >
+		<md-sidenav  aria-label="menu" can-be-moved=true item-alias="menu"    ng-show="!!view.menu == false || view.menu.visible"  dib-disable="{{view.menu.disabled}}" ng-class="view.menu.class"  ng-style="view.menu.style" can-have-children=true flex=none class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4" style="    " id="ci211780" dib-side-bar-status md-is-open="sideNavs.menu" md-component-id="menu" id='ci211780' aria-label="menu" dib-container-name='dibdemo' dib-config="{ listeners : { } }" >
+			<md-toolbar >
+				<div class="md-toolbar-tools">
+					<h2>
+						Dropinbase
+					</h2>
+					<span flex>
+					</span>
+					<md-button class="md-icon-button" aria-label="Logout" ng-click="dibCommon.location('/dropins/dibAuthenticate/Site/logout');">
+						<md-tooltip md-direction="left">
+							Logout
+						</md-tooltip>
+						<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_remove_circle_outline_black_24px.svg">
+						</md-icon>
+					</md-button>
+					<md-button ng-if='!dibCommon.navConfigSize("menu")' class="md-icon-button" aria-label="Settings" ng-click="dibCommon.toggleNavigation('menu')">
+						<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibAngular/src/img/icons/menu.svg">
+						</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-content>
+				<md-progress-linear ng-if="menus.service211780.loading" md-mode="indeterminate" class="dib-data-loading">
+				</md-progress-linear>
+				<md-list>
+					<md-list-item class="dib-main-menu-item secondary-button-padding" ng-repeat="item in menus.service211780.menu" ng-if="item.text"  ng-click="dibCommon.toggleNavigation(item,'menuItems')"   dib-selected>
+						<div layout="column" flex>
+							<div layout="row" flex>
+								<md-icon ng-if="item.icon" md-svg-icon="{{item.icon}}">
+								</md-icon>
+								<p layout="row" flex layout-align="space-between center" class="md-body-2">
+									<span flex>
+										{{ item.text }}
+									</span>
+									<span ng-if="item.notices" class="counter-pill md-accent">
+										{{item.notices}}
+									</span>
+									<md-button ng-if="!item.leaf && !!item.children == false" class="md-icon-button  md-squared" ng-click="menus.service211780.update(item)">
+										<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/open.svg">
+										</md-icon>
+									</md-button>
+									<md-button ng-if="!item.leaf && !!item.children" class="md-icon-button  md-squared" ng-click="item.children = null">
+										<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/close.svg">
+										</md-icon>
+									</md-button>
+								</p>
+							</div>
+							<md-list ng-if="item.children">
+								<md-list-item ng-repeat="child in item.children"    ng-click="dibCommon.toggleNavigation(child,'menuItems')"   ng-if="child.text"  dib-selected >
+									<md-icon ng-if="item.icon" md-svg-icon="{{child.icon}}">
+									</md-icon>
+									<p layout="row" layout-align="space-between center" class="md-body-2">
+										<span>
+											{{ child.text }}
+										</span>
+										<span ng-if="child.notices" class="counter-pill md-accent">
+											{{child.notices}}
+										</span>
+										<md-button ng-if="!child.leaf" class="md-icon-button  md-squared" ng-click="menus.service211780.update(child)">
+											<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/open.svg">
+											</md-icon>
+										</md-button>
+									</p>
+								</md-list-item>
+							</md-list>
+						</div>
+					</md-list-item>
+				</md-list>
+			</md-content >
+		</md-sidenav>
+		<div dib-inject-content="replace"  aria-label="DesignerHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " id='ci211784' aria-label="DesignerHolder" dib-container-name='dibdemo' dib-config="{ listeners : { } }" >
+			<md-toolbar aria-label="mdtoolbar" can-be-moved=true can-have-children=true flex="100" md-scroll-shrink style="    " id='ci211786' aria-label="mdtoolbar" dib-container-name='dibdemo' dib-config="{ listeners : { } }" >
+				<div class="md-toolbar-tools">
+					<md-button aria-label="openNav" can-be-moved=true ng-if="!common.$mdMedia('gt-lg')"  class="md-icon-button md-raised md-squared" style="    " id='ci211788' aria-label="openNav" dib-container-name='dibdemo' dib-config="{ listeners : { 'click___1853' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibdemo', triggerType: 'click', nextActionItem: '', itemEventId: '1853',         containerItemId: 211788, submitUrl: 'dibGlobals.action.ToggleMenu',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
+						<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAngular/src/img/icons/menu.svg">
+						</md-icon>
+					</md-button>
+					<span aria-label="emptyspan" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci211787' aria-label="emptyspan" dib-container-name='dibdemo' dib-config="{ listeners : { } }" >
+						{{common.title}} 
+					</span>
+				</div>
+			</md-toolbar>
+			<div dib-inject-content="replace"  aria-label="MainHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" style="    " id='ci211785' aria-label="MainHolder" dib-container-name='dibdemo' dib-config="{ listeners : { } }" >
+			</div>
+		</div>
+	</div>
+</div>

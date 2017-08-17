@@ -1,0 +1,47 @@
+
+<div component-loaded dib-container="dibtestHorTree" dib-container-name="dibtestHorTree" dib-config="{
+    'submitItemAlias' : 'dibDesigner'
+    ,
+    'listeners' : { 
+            'nodeopen___94' : function(field, originArguments) {
+        actionService.executeAction( 
+        {
+        eventArguments : originArguments,
+        containerName: 'dibtestHorTree',
+        field : element,
+        triggerType: 'nodeopen',
+        nextActionItem: '',
+        containerEventId: 'dib*n-7ixbsnf',        
+        containerId: 8178,
+        submitUrl: 'dibGlobals.action.RefreshHeight?itemAlias=designerPreview',
+        itemAlias: '',
+        refreshItemId : 'refresh_itemId',
+        responseType: 'actions',
+    }
+, 'nodeopen');
+            } ,
+            'nodeclose___95' : function(field, originArguments) {
+        actionService.executeAction( 
+        {
+        eventArguments : originArguments,
+        containerName: 'dibtestHorTree',
+        field : element,
+        triggerType: 'nodeclose',
+        nextActionItem: '',
+        containerEventId: 'dib*h-1t2018m01',        
+        containerId: 8178,
+        submitUrl: 'dibGlobals.action.RefreshHeight?itemAlias=designerPreview',
+        itemAlias: '',
+        refreshItemId : 'refresh_itemId',
+        responseType: 'actions',
+    }
+, 'nodeclose');
+            } 
+        }            
+}"
+            >
+        <md-content >
+            <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+            <dib-horizontal-tree-node show-search="true" layout=column ng-model='treeData' dib-container-name='container.Name' dib-service='service' dib-search='search'  dib-active-filter='activeFilter'></dib-horizontal-tree-node>
+      </md-content>
+</div>

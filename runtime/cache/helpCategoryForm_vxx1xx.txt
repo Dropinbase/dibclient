@@ -1,0 +1,105 @@
+ 
+<ng-form layout-fill dib-container=helpCategoryForm  flex isolate-form name='helpCategoryForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci184693' aria-label="rowToolbar" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci184694' aria-label="btnsave" dib-container-name='helpCategoryForm' dib-config="{ 'tooltip':'Save record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci184695' aria-label="btnadd" dib-container-name='helpCategoryForm' dib-config="{ 'tooltip':'Add new record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised " style="    " ng-click="deleteModel({'redirect' : true})" id='ci184696' aria-label="btndelete" dib-container-name='helpCategoryForm' dib-config="{ 'tooltip':'Delete record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci184697' aria-label="btnreload" dib-container-name='helpCategoryForm' dib-config="{ 'tooltip':'Restore saved data', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci185366' aria-label="btnAuditTrail" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnGrid" can-be-moved=true flex=none style="    " id='ci184700' aria-label="btnGrid" dib-container-name='helpCategoryForm' ng-click="common.goTo('helpCategoryGrid','',true,'','',$event);" dib-config="{ 'tooltip':'Open grid', listeners : { } }" aria-label="Grid" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Open grid
+			</md-tooltip>
+			Grid 
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci184698' aria-label="emptyspan" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci184699' aria-label="formpaging" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" data-container-name="helpCategoryForm" >
+		</dib-form-paging >
+	</div>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci184701' aria-label="layoutrow" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" >
+		<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci184702' aria-label="fieldset" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-input-container aria-label="help_category_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4039&text=help_category' >
+						<input type="number"  required         name="help_category_id" ng-model="model.help_category_id" aria-label="Help Category" id='ci185367' aria-label="help_category_id" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Help Category*
+						</label>
+						<div ng-messages="helpCategoryForm.help_category_id.$error">
+							<div ng-message="required">
+								Help Category required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4039&text=help_category' >
+						<input type="text"  maxlength='64' required         name="name" ng-model="model.name" aria-label="Name" id='ci185368' aria-label="name" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Name*
+						</label>
+						<div ng-messages="helpCategoryForm.name.$error">
+							<div ng-message="required">
+								Name required.
+							</div>
+							<div ng-message="maxlength">
+								At most 64 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="parent_category_id" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4039&text=help_category' >
+						<input type="number"  name="parent_category_id" ng-model="model.parent_category_id" aria-label="Parent Category" id='ci185369' aria-label="parent_category_id" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Parent Category
+						</label>
+						<div ng-messages="helpCategoryForm.parent_category_id.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="url" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4039&text=help_category' >
+						<textarea   required         name="url" ng-model="model.url" aria-label="Url" id='ci185370' aria-label="url" dib-container-name='helpCategoryForm' dib-config="{ listeners : { } }" dib-data-component='input-textarea' md-detect-hidden >
+						</textarea>
+						<label>
+							Url*
+						</label>
+						<div ng-messages="helpCategoryForm.url.$error">
+							<div ng-message="required">
+								Url required.
+							</div>
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+	</div>
+</ng-form>

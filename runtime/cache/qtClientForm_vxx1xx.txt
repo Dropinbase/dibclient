@@ -1,0 +1,215 @@
+ 
+<ng-form layout-fill dib-container=qtClientForm  flex isolate-form name='qtClientForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci196322' aria-label="rowToolbar" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci196323' aria-label="btnsave" dib-container-name='qtClientForm' dib-config="{ 'tooltip':'Save record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci196324' aria-label="btnadd" dib-container-name='qtClientForm' dib-config="{ 'tooltip':'Add new record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised " style="    " ng-click="deleteRecord({'redirect' : true})" id='ci196325' aria-label="btndelete" dib-container-name='qtClientForm' dib-config="{ 'tooltip':'Delete record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci196326' aria-label="btnreload" dib-container-name='qtClientForm' dib-config="{ 'tooltip':'Restore saved data', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci196560' aria-label="btnAuditTrail" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnGrid" can-be-moved=true flex=none style="    " id='ci196329' aria-label="btnGrid" dib-container-name='qtClientForm' ng-click="common.goTo('qtClientGrid','',true,'','',$event);" dib-config="{ 'tooltip':'Open grid', listeners : { } }" aria-label="Grid" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Open grid
+			</md-tooltip>
+			Grid 
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci196327' aria-label="emptyspan" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci196328' aria-label="formpaging" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" data-container-name="qtClientForm" >
+		</dib-form-paging >
+	</div>
+	<div dib-inject-content="replace" layout='column' aria-label="layoutColumn" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " id='ci196867' aria-label="layoutColumn" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+		<div layout='column' layout-fill>
+			<md-toolbar class="md-theme-light">
+				<h2 class="md-toolbar-tools">
+					<span>
+						Form Data
+					</span>
+				</h2>
+			</md-toolbar>
+			<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-sm="column" style="    " id='ci196330' aria-label="layoutrow" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+				<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci196331' aria-label="fieldset" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+					<md-card-content>
+						<section layout-fill>
+							<md-input-container aria-label="client_pk" can-be-moved=true item-alias="client_pk"    ng-show="!!view.client_pk == false || view.client_pk.visible"  dib-disable="{{view.client_pk.disabled}}" ng-class="view.client_pk.class"  ng-style="view.client_pk.style" flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" id='ci196561' aria-label="client_pk" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+								<label>
+									Id*
+								</label>
+								<div ng-messages="qtClientForm.id.$error">
+									<div ng-message="required">
+										Id required.
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text"  maxlength='80' required name="name" ng-model="model.name" aria-label="Name" id='ci196562' aria-label="name" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Name*
+								</label>
+								<div ng-messages="qtClientForm.name.$error">
+									<div ng-message="required">
+										Name required.
+									</div>
+									<div ng-message="maxlength">
+										At most 80 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="start_date" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text" theme="material" ng-model="model.start_date"         name=start_date aria-label="Start Date" placeholder="Start Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci196563' aria-label="start_date" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+								<div ng-messages="qtClientForm.model.start_date.$error">
+									<div ng-message="valid">
+										The entered value is not a date!
+									</div>
+									<div ng-message="required">
+										This date is required!
+									</div>
+									<div ng-message="mindate">
+										Date is too early!
+									</div>
+									<div ng-message="maxdate">
+										Date is too late!
+									</div>
+									<div ng-message="filtered">
+										Only weekends are allowed!
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="phone" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text"  maxlength='100' name="phone" ng-model="model.phone" aria-label="Phone" id='ci196564' aria-label="phone" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Phone
+								</label>
+								<div ng-messages="qtClientForm.phone.$error">
+									<div ng-message="maxlength">
+										At most 100 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="email" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text"  maxlength='100' name="email" ng-model="model.email" aria-label="Email" id='ci196565' aria-label="email" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Email
+								</label>
+								<div ng-messages="qtClientForm.email.$error">
+									<div ng-message="maxlength">
+										At most 100 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="address1" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text"  maxlength='200' name="address1" ng-model="model.address1" aria-label="Address1" id='ci196566' aria-label="address1" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Address1
+								</label>
+								<div ng-messages="qtClientForm.address1.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="address2" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text"  maxlength='200' name="address2" ng-model="model.address2" aria-label="Address2" id='ci196567' aria-label="address2" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Address2
+								</label>
+								<div ng-messages="qtClientForm.address2.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="city_town" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text"  maxlength='30' name="city_town" ng-model="model.city_town" aria-label="City Town" id='ci196568' aria-label="city_town" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									City Town
+								</label>
+								<div ng-messages="qtClientForm.city_town.$error">
+									<div ng-message="maxlength">
+										At most 30 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</section>
+					</md-card-content>
+				</md-card>
+				<md-card  aria-label="fieldset2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci196333' aria-label="fieldset2" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+					<md-card-content>
+						<section layout-fill>
+							<md-input-container aria-label="country" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text"  maxlength='30' name="country" ng-model="model.country" aria-label="Country" id='ci196569' aria-label="country" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Country
+								</label>
+								<div ng-messages="qtClientForm.country.$error">
+									<div ng-message="maxlength">
+										At most 30 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="zip_code" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text"  maxlength='30' name="zip_code" ng-model="model.zip_code" aria-label="Zip Code" id='ci196570' aria-label="zip_code" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Zip Code
+								</label>
+								<div ng-messages="qtClientForm.zip_code.$error">
+									<div ng-message="maxlength">
+										At most 30 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="notes" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<textarea   name="notes" ng-model="model.notes" aria-label="Notes" id='ci196571' aria-label="notes" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+								</textarea>
+								<label>
+									Notes
+								</label>
+								<div ng-messages="qtClientForm.notes.$error">
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="updated" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4048&text=client' >
+								<input type="text" theme="material" ng-model="model.updated"         name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci196572' aria-label="updated" dib-container-name='qtClientForm' dib-config="{ listeners : { } }" >
+							</md-input-container>
+						</section>
+					</md-card-content>
+				</md-card>
+			</div>
+		</div>
+		<div layout-fill flex aria-label="qtProjectGrid" can-be-moved=true flex style="    " id='ci196868' aria-label="qtProjectGrid" dib-container-name='qtClientForm' dib-active-filter='qtClientForm_qtProjectGrid' dib-container-filter-settings="{ 'qtClientForm_qtProjectGrid' : 'submitItemAlias_parent_client_pk'}" dib-config="{ listeners : { } }" >
+			<qt-project-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
+			</qt-project-grid>
+		</div>
+	</div>
+</ng-form>

@@ -1,0 +1,2 @@
+)]}',
+{"success":true,"records":[{"container":null,"port":null,"default_query":null,"change_url":false,"action":null,"submit_url":null,"expression":"\/dropins\/dibAuthenticate\/Site\/logout","responseType":"actions","text":"Logout","leaf":true,"icon":null,"item_event_id":null,"item_alias":"","id":"194879"}],"message":"","showType":"notice","messageDelay":4000,"asyncInterval":null,"summary":[],"total":0,"filtertotal":0}

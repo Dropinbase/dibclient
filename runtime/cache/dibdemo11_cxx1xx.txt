@@ -1,0 +1,89 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibMenu/js/components/dibSideBarStatus.js' ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(enviroment_base_url+'/files'+file);
+  });
+    var dibdemo11 = angular.module('dibdemo11', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+    dibdemo11.factory('service180660',['ajax', '$log', 'discoverService', function (ajax, $log, discoverService) {
+            var list = function (node) {
+               var url = enviroment_base_url + "/dropins/setNgMaterial/dibMenu/menu/list.json?containerName=dibdemo11";
+               if (!!node === false) {
+                   url += "&node=root&rootMenuId=180660";
+               } else {
+                   url += "&node="+node+"&rootMenuId=180660";
+               }
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci180660'),
+                    container : $('[dib-container=dibdemo11]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+            return {
+                list : list
+            };
+    }]); 
+})();
+(function() {
+var dibdemo11 = angular.module('dibdemo11');
+dibdemo11.component('dibdemo11', {
+    controllerAs: 'dibdemo11',
+    templateUrl: enviroment_base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dibdemo11.html',
+    controller : component__dibdemo11
+});
+component__dibdemo11.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','service180660','containerService','recordFactory'];
+    function component__dibdemo11($scope, $ocLazyLoad, $rootScope, $log, $q,service180660,containerService,recordFactory) {
+                     $scope.container = {};
+            $scope.container.Id = '8206';
+            $scope.container.Name = 'dibdemo11';
+            $("[dib-container='dibdemo11']").trigger('load');
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+            $scope.menus.service180660 = {};
+            $scope.menus.service180660.update = function (node){
+                $scope.menus.service180660.loading = true;
+                service180660.list(!!node? node.id : null).then(function (menu) {
+                    $scope.menus.service180660.loading = false;
+                    if (!!node === false) { 
+                        $scope.menus.service180660.menu = menu;
+                    } else { 
+                        node.children = menu;
+                    }
+                }, function () {
+                    $scope.menus.service180660.loading = false;
+                });
+            };
+            $scope.menus.service180660.update();
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'dibdemo11'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=dibdemo11]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

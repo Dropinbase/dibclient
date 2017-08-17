@@ -1,0 +1,88 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibMenu/js/components/dibSideBarStatus.js' ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(enviroment_base_url+'/files'+file);
+  });
+    var dibdemo9 = angular.module('dibdemo9', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+    dibdemo9.factory('service179936',['ajax', '$log', 'discoverService', function (ajax, $log, discoverService) {
+            var list = function (node) {
+               var url = enviroment_base_url + "/dropins/setNgMaterial/dibMenu/menu/list.json?containerName=dibdemo9";
+               if (!!node === false) {
+                   url += "&node=root&rootMenuId=179936";
+               } else {
+                   url += "&node="+node+"&rootMenuId=179936";
+               }
+                url = discoverService.addToUrl({
+                    field :$('#ci179936'),
+                    container : $('[dib-container=dibdemo9]'),
+                    url : url
+                });
+                return ajax.post(url, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+            return {
+                list : list
+            };
+    }]); 
+})();
+(function() {
+var dibdemo9 = angular.module('dibdemo9');
+dibdemo9.component('dibdemo9', {
+    controllerAs: 'dibdemo9',
+    templateUrl: enviroment_base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dibdemo9.html',
+    controller : component__dibdemo9
+});
+component__dibdemo9.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','service179936','containerService','recordFactory'];
+    function component__dibdemo9($scope, $ocLazyLoad, $rootScope, $log, $q,service179936,containerService,recordFactory) {
+                     $scope.container = {};
+            $scope.container.Id = '8177';
+            $scope.container.Name = 'dibdemo9';
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+            $scope.menus.service179936 = {};
+            $scope.menus.service179936.update = function (node){
+                $scope.menus.service179936.loading = true;
+                service179936.list(!!node? node.id : null).then(function (menu) {
+                    $scope.menus.service179936.loading = false;
+                    if (!!node === false) { 
+                        $scope.menus.service179936.menu = menu;
+                    } else { 
+                        node.children = menu;
+                    }
+                }, function () {
+                    $scope.menus.service179936.loading = false;
+                });
+            };
+            $scope.menus.service179936.update();
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'dibdemo9'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=dibdemo9]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

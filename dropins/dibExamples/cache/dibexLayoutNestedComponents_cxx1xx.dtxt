@@ -1,0 +1,128 @@
+
+(function() {
+    var require = ['/dropins/setNgMaterial/dibGlobals/js/component/dibProgressTabs.js' ];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    var dibexLayoutNestedComponents = angular.module('dibexLayoutNestedComponents', [files]);
+    var dibexLayoutNestedComponents = angular.module('dibexLayoutNestedComponents');
+    dibexLayoutNestedComponents.component('dibexLayoutNestedComponents', {
+        controllerAs: 'dibexLayoutNestedComponents',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dibexLayoutNestedComponents.html',
+        controller : component__dibexLayoutNestedComponents
+    });
+    component__dibexLayoutNestedComponents.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad'];
+    function component__dibexLayoutNestedComponents($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad) {
+        var ctrl = this;
+        ctrl.$onInit = function () { 
+                        $scope.container = {};
+            $scope.container.Id = '8061';
+            $scope.container.Name = 'dibexLayoutNestedComponents';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = dibRecord.modelConstruct($scope);
+        $scope.model._GET['inputdate'] = dibContainer.modelItem({
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['inputnumber'] = dibContainer.modelItem({
+            dataType : "number", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['checkboxfield33'] = dibContainer.modelItem({
+            dataType : "boolean", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['checkboxfield34'] = dibContainer.modelItem({
+            dataType : "boolean", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['checkboxfield32'] = dibContainer.modelItem({
+            dataType : "boolean", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['textfield263'] = dibContainer.modelItem({
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['textfield2612'] = dibContainer.modelItem({
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['datefield4'] = dibContainer.modelItem({
+            dataType : "date", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['textfield282'] = dibContainer.modelItem({
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['inputdate1'] = dibContainer.modelItem({
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model._GET['inputemail'] = dibContainer.modelItem({
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = [];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+    $scope.dropdowns = {};
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+            $scope.recordStatus = "create";
+            $scope.reloadContainer = function () {
+                //Now we reload all the required 
+                dibContainer.reloadChildren({containerName: 'dibexLayoutNestedComponents'});
+            };
+            if (!!dibContainer.isSubContainer($("[dib-container=dibexLayoutNestedComponents]")) === false) { 
+                $scope.reloadContainer();
+            }
+        };
+        //required for permissions
+        ctrl.$postLink = function () {
+        };
+    } 
+})();

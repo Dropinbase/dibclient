@@ -1,0 +1,400 @@
+ 
+<ng-form layout-fill dib-container=aaannn  flex isolate-form name='aaannn' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="column" layout-align="start start" aria-label="layoutcolumn" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:10px !important; " id='ci194835' aria-label="layoutcolumn" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+		<span aria-label="headQuickFacts" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194868' aria-label="headQuickFacts" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<span style="font-size:20px">
+				Quick Facts
+			</span>
+		</span>
+		<span aria-label="commentQuickFacts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194867' aria-label="commentQuickFacts" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Containers can be embedded in one another to any level of nesting, using subcontainers.
+				<br>
+				Filters that accept parameters from the client can be defined on subcontainers using any criteria, to facilitate flexible master-child relationships. Filters can also be defined on dropdowns.
+				<br>
+				While ports provide a way of dynamically loading containers,  subcontainers are loaded with the rest of the hosting container (unless the 
+				<i>
+					display_on_load
+				</i>
+				field is unticked). 
+			</p>
+		</span>
+		<span aria-label="comment3" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194848' aria-label="comment3" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Whenever an item or container has a Filter, DIB automatically adds an activeFilter parameter named after the container or item to the relevant read request (url).
+				<br>
+				The server will generate a PHP Crud class containing the same name in the parseFilter function, causing the filter to be applied.
+				<br>
+				The filter's SQL criteria must be compatible with the container's underlying SQL (which can be viewed on the Configuration-tab of the Designer using the View SQL tick). 
+			</p>
+		</span>
+		<span aria-label="headSubmissionData" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194856' aria-label="headSubmissionData" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<span style="font-size:20px">
+				Submission Data
+			</span>
+		</span>
+		<span aria-label="commentSubmissionData" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194872' aria-label="commentSubmissionData" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Data from the client is submitted to the server in the post data of most requests, using an array named 
+				<b>
+					submissionData
+				</b>
+				.
+				<br>
+				These values can be referenced using parameters in filter criteria, which limits the data returned in containers and subcontainers.
+				<br>
+				<br>
+				By default, for the the current container, values of all items with an alias are submitted as [submitItemAlias.self][ITEM_NAME]
+				<br>
+				and the primary key values of the current/last selected record of any subcontainers are submitted as [submitItemAlias.self][SUBCONTAINER_NAME][PKEY_NAME]
+				<br>
+				and the value of the last field (eg textbox, dropdown or checkbox) that had the focus (cursor) as [submitItemId].
+				<br>
+				<br>
+				By default, for the the parent container, values of all items with an alias are submitted as [submitItemAlias.parent][ITEM_NAME]
+				<br>
+				and the primary key values of the current/last selected record of any subcontainers are submitted as [submitItemAlias.parent][SUBCONTAINER_NAME][PKEY_NAME]
+				<br>
+				<br>
+				To include additional values, configurations can be used in the 
+				<i>
+					config
+				</i>
+				field of the item that triggers the event. The syntax used is:
+				<br>
+				<b>
+					SUBMISSION_DATA_TYPE : 'OBJECT'
+				</b>
+				 (eg submitCheckedItem : 'myDesigner.tree')
+				<br>
+				<br>
+				Where 
+				<b>
+					OBJECT
+				</b>
+				references containers as:
+				<br>
+				self - the current container
+				<br>
+				parent -  the parent container
+				<br>
+				CONTAINER_NAME - the container named CONTAINER_NAME
+				<br>
+				SUBCONTAINER_ALIAS - the container inside the subcontainer (on the current container) with alias SUBCONTAINER_ALIAS.
+				<br>
+				CONTAINER_NAME.SUBCONTAINER_ALIAS - the container inside the subcontainer (on the container named CONTAINER_NAME) with alias SUBCONTAINER_ALIAS.
+				<br>
+				parent.SUBCONTAINER_ALIAS - the container inside the subcontainer (on the parent container) with alias SUBCONTAINER_ALIAS.
+				<br>
+				<br>
+				And 
+				<b>
+					SUBMISSION_DATA_TYPE
+				</b>
+				refers to the type of data to submit, eg submitCheckedItem, submitLastRecord, submitHeaderFilter, etc.
+				<br>
+				<br>
+				Note, to flatten the array, the underscore(_) character has been used as a separator (eg [submitItemAlias.self][SUBCONTAINER_NAME][PKEY_NAME] becomes submitItemAlias_self_SUBCONTAINER_NAME_PKEY_NAME)
+				<br>
+				This is also the standard way of referencing submission data in filters (see below). 
+			</p>
+		</span>
+		<span aria-label="commentBtnSubmitData" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194873' aria-label="commentBtnSubmitData" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				The button below will submit the following Submission Data:
+				<br>
+				submitItemAlias : 'self' (by default - no configuration needed)
+				<br>
+				submitItemAlias : 'parent' (by default - no configuration needed)
+				<br>
+				submitLastItemId : 'self' (by default - no configuration needed)
+				<br>
+				submitCheckedItem : 'subCompanyConsult'
+				<br>
+				submitFormData : 'subConsult'
+				<br>
+				<br>
+				Experiment by selecting different records in the grid, and navigating between records in the 'self' and 'subConsult' forms. 
+			</p>
+		</span>
+		<md-button aria-label="btnSubmissionData" can-be-moved=true flex=none class="md-raised md-primary" style="    " id='ci194870' aria-label="btnSubmissionData" dib-container-name='aaannn' dib-config="{ submitCheckedItem : 'subCompanyConsult', submitFormData : 'subConsult', listeners : { 'click___1788' : function(field, originArguments) {  actionService.executeAction(  { eventArguments : originArguments, containerName: 'aaannn', field : element, triggerType: 'click', nextActionItem: '', itemEventId: '1788',         containerItemId: 194870, submitUrl: '/dropins/dibExamples/SubContainer/testSubmissionData', itemAlias: '', refreshItemId : '', responseType: 'actions', } , 'click'); }  } }" aria-label="Print Submission Data" >
+			Print Submission Data 
+		</md-button>
+		<md-input-container aria-label="dibIgnore_SubmitData" can-be-moved=true item-alias="dibIgnore_SubmitData"    ng-show="!!view.dibIgnore_SubmitData == false || view.dibIgnore_SubmitData.visible"  dib-disable="{{view.dibIgnore_SubmitData.disabled}}" ng-class="view.dibIgnore_SubmitData.class"  ng-style="view.dibIgnore_SubmitData.style" flex="none" class="md-block" style="width:100% !important;  margin:10px 0px 20px 0px !important;  " >
+			<textarea   name="dibIgnore_SubmitData" ng-model="model.dibIgnore_SubmitData" aria-label="dibIgnore_SubmitData" id='ci194871' aria-label="dibIgnore_SubmitData" dib-container-name='aaannn' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+			</textarea>
+			<div ng-messages="aaannn.dibIgnore_SubmitData.$error">
+			</div>
+		</md-input-container>
+		<span aria-label="headSimpleFilter1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194869' aria-label="headSimpleFilter1" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<span style="font-size:20px">
+				Simple Filter
+			</span>
+		</span>
+		<div dib-inject-content="replace" layout="row"  aria-label="layoutrowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none layout-xs='column' style="    " id='ci194839' aria-label="layoutrowToolbar" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<md-toolbar aria-label="toolbar" can-be-moved=true can-have-children=true flex=none style="    " id='ci194840' aria-label="toolbar" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+				<div class="md-toolbar-tools">
+					<md-button aria-label="btnsave" can-be-moved=true flex=none class=" md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci194841' aria-label="btnsave" dib-container-name='aaannn' dib-config="{ listeners : { } }" aria-label="Save" >
+						<md-tooltip md-direction="top" md-delay="500">
+							Save changes
+						</md-tooltip>
+						<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+						</md-icon>
+						Save 
+					</md-button>
+					<md-button aria-label="btnreload" can-be-moved=true flex=none class=" md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci194842' aria-label="btnreload" dib-container-name='aaannn' dib-config="{ listeners : { } }" aria-label="Refresh" >
+						<md-tooltip md-direction="top" md-delay="500">
+							Reload records
+						</md-tooltip>
+						<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+						</md-icon>
+						Refresh 
+					</md-button>
+					<dib-form-paging aria-label="buttonsformnavigation" can-be-moved=true flex=none style="    " id='ci194843' aria-label="buttonsformnavigation" dib-container-name='aaannn' dib-config="{ listeners : { } }" data-container-name="aaannn" >
+					</dib-form-paging >
+				</div>
+			</md-toolbar>
+		</div>
+		<md-card  aria-label="TestCompanyInfo" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci194836' aria-label="TestCompanyInfo" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-subheader class="cl-md-accent md-no-sticky">
+						<i>
+							<b>
+								Note, this form is not inside a subcontainer - it is part of dibexSubcontainer's design
+							</b>
+						</i>
+					</md-subheader>
+					<md-input-container aria-label="id" can-be-moved=true item-alias="id"    ng-show="!!view.id == false || view.id.visible"  dib-disable="{{view.id.disabled}}" ng-class="view.id.class"  ng-style="view.id.style" flex=none class="md-block" style="    " dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+						<input type="number"  ng-disabled="true" name="id" ng-model="model.id" aria-label="Id" id='ci194837' aria-label="id" dib-container-name='aaannn' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<label>
+							Id
+						</label>
+						<div ng-messages="aaannn.id.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+						<input type="text"  name="name" ng-model="model.name" aria-label="Name" id='ci194838' aria-label="name" dib-container-name='aaannn' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Name
+						</label>
+						<div ng-messages="aaannn.name.$error">
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+		<span aria-label="commentSimpleFilter" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194845' aria-label="commentSimpleFilter" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Scroll through the records using the navigation buttons above and notice how the grid only displays Consultants contracted by the current company.
+				<br>
+				The subcontainer hosting the grid has the following filter that references the aliased 'id' field above:
+				<br>
+				<b>
+					test_company_consultant.test_company_id = :submitItemAlias_parent_id.
+				</b>
+			</p>
+		</span>
+		<span aria-label="commentBtnGridSubmitData1" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194874' aria-label="commentBtnGridSubmitData1" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Note, the button in the grid below will print the following Submission Data:
+				<br>
+				submitItemAlias : 'self' (by default - no configuration needed)
+				<br>
+				submitItemAlias : 'parent' (by default - no configuration needed)
+				<br>
+				submitLastItemId : 'self' (by default - no configuration needed)
+				<br>
+				submitHeaderFilter : 'self'
+				<br>
+				submitFilter : 'parent.subConsult'
+				<br>
+				submitFormData : 'parent.subConsult' 
+			</p>
+		</span>
+		<div layout-fill flex aria-label="subCompanyConsult" can-be-moved=true item-alias="subCompanyConsult"    ng-show="!!view.subCompanyConsult == false || view.subCompanyConsult.visible"  dib-disable="{{view.subCompanyConsult.disabled}}" ng-class="view.subCompanyConsult.class"  ng-style="view.subCompanyConsult.style" flex style=" height:350px !important;overflow:auto !important   " id='ci194844' aria-label="subCompanyConsult" dib-container-name='aaannn' dib-active-filter='aaannn_subCompanyConsult' dib-container-filter-settings="{ 'aaannn_subCompanyConsult' : 'submitItemAlias_parent_id'}" dib-config="{ frame : true, listeners : { } }" >
+			<dibtest-company-consultant-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         fill-height-for-child >
+			</dibtest-company-consultant-grid>
+		</div>
+		<span aria-label="headLinkedForm" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194857' aria-label="headLinkedForm" dib-container-name='aaannn' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+			<span style="font-size:20px">
+				Linked Form
+			</span>
+		</span>
+		<span aria-label="commentLinkedForm" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194847' aria-label="commentLinkedForm" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Click on the records above and notice how the form below updates.
+				<br>
+				The form's subcontainer has the following filter that references the aliased subcontainer above:
+				<br>
+				<b>
+					test_consultant.id = :submitLastRecord_subCompanyConsult_consultant_id.
+				</b>
+				<br>
+				Note the following Submission Data config was added to the form's subcontainer so that the primary key value of the last clicked record is submitted with the read request (in addition to the default 
+				<i>
+					self
+				</i>
+				and 
+				<i>
+					parent
+				</i>
+				values):
+				<br>
+				<b>
+					submitLastRecord : 'subCompanyConsult'
+				</b>
+				<br>
+				The subcontainer above also has an itemclick event with Refresh Item pointing to the form's subcontainer,
+				<br>
+				causing the form to refresh its data whenever a record in the subcontainer above is clicked. 
+			</p>
+		</span>
+		<div layout-fill flex aria-label="subConsult" can-be-moved=true item-alias="subConsult"    ng-show="!!view.subConsult == false || view.subConsult.visible"  dib-disable="{{view.subConsult.disabled}}" ng-class="view.subConsult.class"  ng-style="view.subConsult.style" flex style=" height:380px !important;overflow:auto !important   " id='ci194846' aria-label="subConsult" dib-container-name='aaannn' dib-active-filter='aaannn_subConsult' dib-container-filter-settings="{ 'aaannn_subConsult' : 'submitLastRecord_subCompanyConsult_consultant_id'}" dib-config="{ submitLastRecord : 'subCompanyConsult', listeners : { } }" >
+			<dibtest-consultant-form dib-subcontainer-loaded dib-subcontainer=true layout-fill         fill-height-for-child >
+			</dibtest-consultant-form>
+		</div>
+		<span aria-label="headDependentDropdowns" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194858' aria-label="headDependentDropdowns" dib-container-name='aaannn' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+			<span style="font-size:20px">
+				Dependent Dropdowns
+			</span>
+		</span>
+		<span aria-label="commentDependentDropdowns" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194851' aria-label="commentDependentDropdowns" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Filters can be added to any component or container that returns data.
+				<br>
+				Below is an example where the second dropdown's list is filtered by the selected value in the first dropdown.
+				<br>
+				The following filter is on the second dropdown:
+				<br>
+				<b>
+					test_consultant.employed_at_id = :submitItemAlias_self_parentCompanyId
+				</b>
+				<br>
+				The first dropdown also has a select event with Refresh Item pointing to the second dropdown,
+				<br>
+				causing the second dropdown to refresh its data whenever a record in the first is selected. 
+			</p>
+		</span>
+		<div layout='row' aria-label="parentCompanyId" can-be-moved=true item-alias="parentCompanyId"    ng-show="!!view.parentCompanyId == false || view.parentCompanyId.visible"  dib-disable="{{view.parentCompanyId.disabled}}" ng-class="view.parentCompanyId.class"  ng-style="view.parentCompanyId.style" flex=none style="width:350px !important;    " dib-help='&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Head Office or Parent Company&lt;/span&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+			<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='parent_company_id' select-model="model.selected___parent_company_id.id" md-search-text-change="dropdowns.service194850.searchTextChange(dropdowns.service194850.searchText)" md-search-text="dropdowns.service194850.searchText" md-selected-item="model.selected___parent_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service194850.getItems(dropdowns.service194850.searchText,'model')" md-floating-label="Parent Company" md-no-cache="true" md-selected-item-change="select194850(model,'model','parent_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Parent Company" id='ci194850' aria-label="parentCompanyId" dib-container-name='aaannn' dib-config="{ listeners : { 'click___1787' : function(field, originArguments) {  element.trigger('enableDependency', ['click' , 'parentCompanyContactId' , originArguments]); }  } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+				<md-item-template>
+					<span md-highlight-text="dropdowns.service194850.searchText">
+						{{item.id_display_value}}
+					</span>
+				</md-item-template>
+				<md-not-found>
+					No matches found.
+				</md-not-found>
+				<div ng-messages="aaannn.parent_company_id.$error" ng-if="aaannn.parent_company_id.$touched">
+				</div>
+			</md-autocomplete>
+		</div>
+		<div layout='row' aria-label="parentCompanyContactId" can-be-moved=true item-alias="parentCompanyContactId"    ng-show="!!view.parentCompanyContactId == false || view.parentCompanyContactId.visible"  dib-disable="{{view.parentCompanyContactId.disabled}}" ng-class="view.parentCompanyContactId.class"  ng-style="view.parentCompanyContactId.style" flex=none style="width:350px !important;    " dib-help='&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Contact person at the Head Office or Parent Company&lt;/span&gt;&lt;br&gt;&lt;/div&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+			<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='parent_company_contact_id' select-model="model.selected___parent_company_contact_id.id" md-search-text-change="dropdowns.service194849.searchTextChange(dropdowns.service194849.searchText)" md-search-text="dropdowns.service194849.searchText" md-selected-item="model.selected___parent_company_contact_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service194849.getItems(dropdowns.service194849.searchText,'model')" md-floating-label="Parent Company Contact" md-no-cache="true" md-selected-item-change="select194849(model,'model','parent_company_contact_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Parent Company Contact" dib-active-filter='aaannn_parentCompanyContactId' dib-container-filter-settings="{ 'aaannn_parentCompanyContactId' : 'submitItemAlias_self_parentCompanyId'}" id='ci194849' aria-label="parentCompanyContactId" dib-container-name='aaannn' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+				<md-item-template>
+					<span md-highlight-text="dropdowns.service194849.searchText">
+						{{item.id_display_value}}
+					</span>
+				</md-item-template>
+				<md-not-found>
+					No matches found.
+				</md-not-found>
+				<div ng-messages="aaannn.parent_company_contact_id.$error" ng-if="aaannn.parent_company_contact_id.$touched">
+				</div>
+			</md-autocomplete>
+		</div>
+		<span aria-label="headSqlGrids" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194859' aria-label="headSqlGrids" dib-container-name='aaannn' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+			<span style="font-size:20px">
+				Sql Grids
+			</span>
+		</span>
+		<span aria-label="commentSqlGrids" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194854' aria-label="commentSqlGrids" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				The filter for grids based on Sql statements must be compatible with the underlying sql.
+				<br>
+				The grid below displays only the companies linked to the selected Parent Company
+				<br>
+				using the following filter that references the aliased Parent Company dropdown above:
+				<br>
+				<b>
+					t.parent_company_id = :submitItemAlias_parent_parentCompanyId
+				</b>
+			</p>
+		</span>
+		<div layout-fill flex aria-label="testCompanySqlRpt_grid" can-be-moved=true item-alias="testCompanySqlRpt_grid"    ng-show="!!view.testCompanySqlRpt_grid == false || view.testCompanySqlRpt_grid.visible"  dib-disable="{{view.testCompanySqlRpt_grid.disabled}}" ng-class="view.testCompanySqlRpt_grid.class"  ng-style="view.testCompanySqlRpt_grid.style" flex style=" height:350px !important;overflow:auto !important   " id='ci194855' aria-label="testCompanySqlRpt_grid" dib-container-name='aaannn' dib-active-filter='aaannn_testCompanySqlRpt_grid' dib-container-filter-settings="{ 'aaannn_testCompanySqlRpt_grid' : 'submitItemAlias_parent_parentCompanyId'}" dib-config="{ frame : true, listeners : { } }" >
+			<dibtest-company-sql-rpt-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         fill-height-for-child >
+			</dibtest-company-sql-rpt-grid>
+		</div>
+		<span aria-label="headGoogleMaps" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194860' aria-label="headGoogleMaps" dib-container-name='aaannn' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+			<span style="font-size:20px">
+				Google Maps
+			</span>
+		</span>
+		<span aria-label="commentGoogleMaps" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194853' aria-label="commentGoogleMaps" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Below is an example of how Google maps can be filtered to display only the selected Parent Company's employees
+				<br>
+				using the following filter that references the same dropdown above:
+				<br>
+				<b>
+					test_company_id = :submitItemAlias_parent_parentCompanyId
+				</b>
+			</p>
+		</span>
+		<span aria-label="subTestGoogleMap" can-be-moved=true item-alias="subTestGoogleMap"    ng-show="!!view.subTestGoogleMap == false || view.subTestGoogleMap.visible"  dib-disable="{{view.subTestGoogleMap.disabled}}" ng-class="view.subTestGoogleMap.class"  ng-style="view.subTestGoogleMap.style" can-have-children=true on-move-refresh-preview=true flex style="width:100% !important; height:350px !important;overflow:auto !important   " id='ci194852' aria-label="subTestGoogleMap" dib-container-name='aaannn' dib-active-filter='aaannn_subTestGoogleMap' dib-container-filter-settings="{ 'aaannn_subTestGoogleMap' : 'submitItemAlias_parent_parentCompanyId'}" dib-config="{ listeners : { } }" >
+			... google maps coming soon...  
+		</span>
+		<span aria-label="headContainerFilters" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194862' aria-label="headContainerFilters" dib-container-name='aaannn' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+			<span style="font-size:20px">
+				Container Filters
+			</span>
+		</span>
+		<span aria-label="commentContainerFilters" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194861' aria-label="commentContainerFilters" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				Filters can also be added directly to containers instead of the subcontainer components that host them.
+				<br>
+				Click the button below to open a popup container with the following filter that references the aliased id field on this container.
+				<br>
+				<b>
+					test_company_id = :submitItemAlias_dibexSubContainers_id
+				</b>
+				<br>
+				Note, the following Submission Data config was added to the container in order to submit the required values with the read request:
+				<br>
+				<b>
+					submitItemAlias: 'dibexSubContainers'
+				</b>
+			</p>
+		</span>
+		<md-button aria-label="buttonContainerFilters" can-be-moved=true flex=none class="md-accent md-raised" style="    " id='ci194863' aria-label="buttonContainerFilters" dib-container-name='aaannn' ng-click="common.goTo('dibtestCompanyConsultantPopup','',true,'','',$event);" dib-config="{ listeners : { } }" aria-label="Consultants working at Company" >
+			Consultants working at Company 
+		</md-button>
+		<span aria-label="headContainerSubFilters" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci194865' aria-label="headContainerSubFilters" dib-container-name='aaannn' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+			<span style="font-size:20px">
+				Container &amp; Subcontainer Filters
+			</span>
+		</span>
+		<span aria-label="commentContainerSubFilters" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194864' aria-label="commentContainerSubFilters" dib-container-name='aaannn' dib-config="{ listeners : { } }" >
+			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+				When both the container and the subcontainer component have filters, then the combination of the filter criteria (joined with AND) is applied.
+				<br>
+				The subcontaner below has the following filter that causes only supervising consultants of the current company to be displayed:
+				<br>
+				<b>
+					`position` = 'supervisor'
+				</b>
+				<br>
+				Use the navigation buttons above to scroll through records - note certain companies will have no related records.
+				<br>
+				Also note that the same container ('dibtestCompanyConsultantPopup') is reused and functions independently whether it also open as a popup or not. 
+			</p>
+		</span>
+		<div layout-fill flex aria-label="dibtestCompanyConsultantPopup" can-be-moved=true flex style=" height:350px !important;overflow:auto !important   " id='ci194866' aria-label="dibtestCompanyConsultantPopup" dib-container-name='aaannn' dib-active-filter='aaannn_dibtestCompanyConsultantPopup___dibtestCompanyConsultantPopup' dib-container-filter-settings="{ 'aaannn_dibtestCompanyConsultantPopup___dibtestCompanyConsultantPopup' : 'submitItemAlias_dibexSubContainers_id'}" dib-config="{ frame : true, listeners : { } }" >
+			<dibtest-company-consultant-popup dib-subcontainer-loaded dib-subcontainer=true layout-fill         fill-height-for-child >
+			</dibtest-company-consultant-popup>
+		</div>
+	</div>
+</ng-form>

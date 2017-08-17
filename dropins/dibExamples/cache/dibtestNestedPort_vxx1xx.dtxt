@@ -1,0 +1,35 @@
+ 
+<div component-loaded dib-container=dibtestNestedPort dib-container-name="7167" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci155623' aria-label="fieldset" dib-container-name='dibtestNestedPort' dib-config="{ layout : 'hbox', listeners : { } }" >
+		<md-card-content>
+			<section layout-fill>
+				<md-subheader class="cl-md-accent md-no-sticky">
+					Fieldset
+				</md-subheader>
+				<img aria-label="imagestatic" can-be-moved=true flex=none style="    " id='ci155624' aria-label="imagestatic" dib-container-name='dibtestNestedPort' ng-click="dibCommon.location('/files/icons/charts.jpg');" dib-config="{ listeners : { } }" src="/files/icons/charts.jpg" />
+				<span aria-label="spanImg" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155625' aria-label="spanImg" dib-container-name='dibtestNestedPort' dib-config="{ listeners : { } }" >
+					<a target="_blank" href="http://gifgifs.com/" title="gifgifs.com">
+						<img src="http://gifgifs.com//animations/geography-history/planet-earth/people.gif" border=0 alt="gifgifs.com" />
+					</a>
+					<br/>
+					<a target="_blank" href="http://gifgifs.com/">
+						gifgifs.com
+					</a>
+				</span>
+				<div layout='column' layout-fill>
+					<md-toolbar class="md-theme-light">
+						<h2 class="md-toolbar-tools">
+							<span>
+								This is where the grid gets loaded
+							</span>
+						</h2>
+					</md-toolbar>
+					<div dib-inject-content="replace" layout="column" layout-align="start start" aria-label="colPortTarget" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="none" style=" height:300px !important; overflow:auto !important;   " id='ci155626' aria-label="colPortTarget" dib-container-name='dibtestNestedPort' dib-config="{ listeners : { } }" fill-height-for-child >
+					</div>
+				</div>
+			</section>
+		</md-card-content>
+	</md-card>
+</div>

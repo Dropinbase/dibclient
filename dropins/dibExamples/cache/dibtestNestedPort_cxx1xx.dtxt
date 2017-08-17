@@ -1,0 +1,51 @@
+
+(function() {
+    var require = [ ];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    var dibtestNestedPort = angular.module('dibtestNestedPort', [files]);
+    var dibtestNestedPort = angular.module('dibtestNestedPort');
+    dibtestNestedPort.component('dibtestNestedPort', {
+        controllerAs: 'dibtestNestedPort',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dibtestNestedPort.html',
+        controller : component__dibtestNestedPort
+    });
+    component__dibtestNestedPort.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad'];
+    function component__dibtestNestedPort($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad) {
+        var ctrl = this;
+        ctrl.$onInit = function () { 
+                        $scope.container = {};
+            $scope.container.Id = '7167';
+            $scope.container.Name = 'dibtestNestedPort';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = dibRecord.modelConstruct($scope);
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = [];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+    $scope.dropdowns = {};
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+            $scope.recordStatus = "create";
+            $scope.reloadContainer = function () {
+                //Now we reload all the required 
+                dibContainer.reloadChildren({containerName: 'dibtestNestedPort'});
+            };
+            if (!!dibContainer.isSubContainer($("[dib-container=dibtestNestedPort]")) === false) { 
+                $scope.reloadContainer();
+            }
+        };
+        //required for permissions
+        ctrl.$postLink = function () {
+        };
+    } 
+})();

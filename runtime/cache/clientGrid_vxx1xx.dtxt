@@ -1,0 +1,1105 @@
+ 
+<div component-loaded dib-container="clientGrid" dib-grid  dib-config="{ }" >
+	<div dib-inject-content="replace" layout="row"  aria-label="toolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci211801' aria-label="toolbar" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btninlineadd" can-be-moved=true class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci211808' aria-label="btninlineadd" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add record inline
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " id='ci211805' aria-label="btnadd" dib-container-name='clientGrid' ng-click="dibCommon.goTo('clientForm','',true,'?record=new','',$event);" dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add a new record using a form
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btngriddelete" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="deleteSelected()" id='ci211802' aria-label="btngriddelete" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete selected records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci211803' aria-label="btnreload" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Reload records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-menu  aria-label="exportMenu" can-be-moved=true can-have-children=true flex=none style="    " >
+			<md-button ng-click="$mdOpenMenu()"  id='ci212128' aria-label="exportMenu" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+				Export 
+			</md-button>
+			<md-menu-content width="4">
+				<md-menu-item aria-label="xlsx" can-be-moved=true item-alias="xlsx"    ng-show="!!view.xlsx == false || view.xlsx.visible"  dib-disable="{{view.xlsx.disabled}}" ng-class="view.xlsx.class"  ng-style="view.xlsx.style" can-have-children=true flex=none style="    " >
+					<md-button  id='ci212130' aria-label="xlsx" dib-container-name='clientGrid' dib-config="{ submitCheckedItem : 'self', submitHeaderFilter : 'self', submitActiveFilter: 'self', listeners : { 'click___1855' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'clientGrid', triggerType: 'click', nextActionItem: '', itemEventId: '1855',         containerItemId: 212130, submitUrl: '/dropins/dibExcel/Export/exportDibExcel',         itemAlias: 'xlsx', refreshItemId : '', responseType: '500' } , additionalInfoOnEvent); }  } }" >
+						Excel (*.xlsx) 
+					</md-button>
+				</md-menu-item>
+				<md-menu-item aria-label="xlsxA" can-be-moved=true item-alias="xlsxA"    ng-show="!!view.xlsxA == false || view.xlsxA.visible"  dib-disable="{{view.xlsxA.disabled}}" ng-class="view.xlsxA.class"  ng-style="view.xlsxA.style" can-have-children=true flex=none style="    " >
+					<md-button  id='ci212131' aria-label="xlsxA" dib-container-name='clientGrid' dib-config="{ submitCheckedItem : 'self', submitHeaderFilter : 'self', submitActiveFilter: 'self', listeners : { 'click___1856' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'clientGrid', triggerType: 'click', nextActionItem: '', itemEventId: '1856',         containerItemId: 212131, submitUrl: '/dropins/dibExcel/Export/exportDibExcel',         itemAlias: 'xlsxA', refreshItemId : '', responseType: '500' } , additionalInfoOnEvent); }  } }" >
+						Excel (*.xlsx large files) 
+					</md-button>
+				</md-menu-item>
+				<md-menu-item aria-label="xls" can-be-moved=true item-alias="xls"    ng-show="!!view.xls == false || view.xls.visible"  dib-disable="{{view.xls.disabled}}" ng-class="view.xls.class"  ng-style="view.xls.style" can-have-children=true flex=none style="    " >
+					<md-button  id='ci212129' aria-label="xls" dib-container-name='clientGrid' dib-config="{ submitHeaderFilter : 'self', submitCheckedItem : 'self', submitActiveFilter: 'self', listeners : { 'click___1854' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'clientGrid', triggerType: 'click', nextActionItem: '', itemEventId: '1854',         containerItemId: 212129, submitUrl: '/dropins/dibExcel/Export/exportPHPExcel',         itemAlias: 'xls', refreshItemId : '', responseType: '500' } , additionalInfoOnEvent); }  } }" >
+						Excel (*.xls) 
+					</md-button>
+				</md-menu-item>
+				<md-menu-item aria-label="csv" can-be-moved=true item-alias="csv"    ng-show="!!view.csv == false || view.csv.visible"  dib-disable="{{view.csv.disabled}}" ng-class="view.csv.class"  ng-style="view.csv.style" can-have-children=true flex=none style="    " >
+					<md-button  id='ci212132' aria-label="csv" dib-container-name='clientGrid' dib-config="{ submitHeaderFilter : 'self', submitCheckedItem : 'self', submitActiveFilter: 'self', listeners : { 'click___1857' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'clientGrid', triggerType: 'click', nextActionItem: '', itemEventId: '1857',         containerItemId: 212132, submitUrl: '/dropins/dibCsv/CsvExport/exportContainerCsv',         itemAlias: 'csv', refreshItemId : '', responseType: '500.redirect' } , additionalInfoOnEvent); }  } }" >
+						Comma Separated Values (*.csv) 
+					</md-button>
+				</md-menu-item>
+				<md-menu-item aria-label="csvA" can-be-moved=true item-alias="csvA"    ng-show="!!view.csvA == false || view.csvA.visible"  dib-disable="{{view.csvA.disabled}}" ng-class="view.csvA.class"  ng-style="view.csvA.style" can-have-children=true flex=none style="    " >
+					<md-button  id='ci212133' aria-label="csvA" dib-container-name='clientGrid' dib-config="{ submitHeaderFilter : 'self', submitCheckedItem : 'self', submitActiveFilter: 'self', listeners : { 'click___1858' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'clientGrid', triggerType: 'click', nextActionItem: '', itemEventId: '1858',         containerItemId: 212133, submitUrl: '/dropins/dibCsv/CsvExport/exportContainerCsv',         itemAlias: 'csvA', refreshItemId : '', responseType: '500.redirect' } , additionalInfoOnEvent); }  } }" >
+						Comma Separated Values (*.csv large files) 
+					</md-button>
+				</md-menu-item>
+			</md-menu-content>
+		</md-menu>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci211964' aria-label="btnAuditTrail" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci211804' aria-label="emptyspan" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+		</span>
+		<md-button aria-label="btnfilteropen" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci211809' aria-label="btnfilteropen" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Display headers for filtering records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterapply" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="searchGrid()" id='ci211806' aria-label="btnfilterapply" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Apply filter criteria specified in grid headers
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterclear" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="clearSearch()" id='ci211807' aria-label="btnfilterclear" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Show all records and clear filter criteria
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
+			</md-icon>
+		</md-button>
+		<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci211810' aria-label="gridtotals" dib-container-name='clientGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			-1" >
+			<md-button ng-disabled="true" aria-label="Grid totals">
+				Records: {{page.fromRecord}}
+				<span ng-if='page.fromRecord>
+					0'>
+					to {{page.toRecord}} of {{page.records}}
+				</span>
+				<span ng-if='page.totalRecords!=page.records'>
+					(Total: {{page.totalRecords}})
+				</span>
+			</md-button>
+		</div>
+	</div>
+	<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div flex dib-table-width >
+		<md-list class='dib-grid-column-header'>
+			<md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+				<div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length >
+					0">
+					<div table-column  flex = 'nogrow' class="md-subhead" dib-column-heading='211812' style="    " >
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211965' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+							Id*
+							<span ng-if="gridOptions.sortFields['id']">
+								({{gridOptions.sortFields['id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  name="id" ng-model="search.id" aria-label="Id" ng-enter='searchGrid()' id='ci211965' aria-label="id" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Id
+								</label>
+								<div ng-messages="clientGrid.id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211966' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('name')" >
+							Name*
+							<span ng-if="gridOptions.sortFields['name']">
+								({{gridOptions.sortFields['name']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['name']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  maxlength='80' name="name" ng-model="search.name" aria-label="Name" ng-enter='searchGrid()' id='ci211966' aria-label="name" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Name
+								</label>
+								<div ng-messages="clientGrid.name.$error">
+									<div ng-message="maxlength">
+										At most 80 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211967' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('start_date')" >
+							Start Date
+							<span ng-if="gridOptions.sortFields['start_date']">
+								({{gridOptions.sortFields['start_date']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['start_date']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['start_date']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="start_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  name="start_date" ng-model="search.start_date" aria-label="Start Date" ng-enter='searchGrid()' id='ci211967' aria-label="start_date" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Start Date
+								</label>
+								<div ng-messages="clientGrid.start_date.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211968' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('phone')" >
+							Phone
+							<span ng-if="gridOptions.sortFields['phone']">
+								({{gridOptions.sortFields['phone']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['phone']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['phone']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="phone" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  maxlength='100' name="phone" ng-model="search.phone" aria-label="Phone" ng-enter='searchGrid()' id='ci211968' aria-label="phone" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Phone
+								</label>
+								<div ng-messages="clientGrid.phone.$error">
+									<div ng-message="maxlength">
+										At most 100 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211969' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('email')" >
+							Email
+							<span ng-if="gridOptions.sortFields['email']">
+								({{gridOptions.sortFields['email']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['email']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['email']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  maxlength='100' name="email" ng-model="search.email" aria-label="Email" ng-enter='searchGrid()' id='ci211969' aria-label="email" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Email
+								</label>
+								<div ng-messages="clientGrid.email.$error">
+									<div ng-message="maxlength">
+										At most 100 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='212135' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('aaa')" >
+							Aaa
+							<span ng-if="gridOptions.sortFields['aaa']">
+								({{gridOptions.sortFields['aaa']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['aaa']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['aaa']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="aaa" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  name="aaa" ng-model="search.aaa" aria-label="Aaa" ng-enter='searchGrid()' id='ci212135' aria-label="aaa" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Aaa
+								</label>
+								<div ng-messages="clientGrid.aaa.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211971' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('address2')" >
+							Address2
+							<span ng-if="gridOptions.sortFields['address2']">
+								({{gridOptions.sortFields['address2']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['address2']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['address2']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="address2" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  maxlength='200' name="address2" ng-model="search.address2" aria-label="Address2" ng-enter='searchGrid()' id='ci211971' aria-label="address2" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Address2
+								</label>
+								<div ng-messages="clientGrid.address2.$error">
+									<div ng-message="maxlength">
+										At most 200 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211972' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('city_town')" >
+							City Town
+							<span ng-if="gridOptions.sortFields['city_town']">
+								({{gridOptions.sortFields['city_town']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['city_town']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['city_town']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="city_town" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  maxlength='30' name="city_town" ng-model="search.city_town" aria-label="City Town" ng-enter='searchGrid()' id='ci211972' aria-label="city_town" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									City Town
+								</label>
+								<div ng-messages="clientGrid.city_town.$error">
+									<div ng-message="maxlength">
+										At most 30 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211973' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('country')" >
+							Country
+							<span ng-if="gridOptions.sortFields['country']">
+								({{gridOptions.sortFields['country']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['country']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['country']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="country" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  maxlength='30' name="country" ng-model="search.country" aria-label="Country" ng-enter='searchGrid()' id='ci211973' aria-label="country" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Country
+								</label>
+								<div ng-messages="clientGrid.country.$error">
+									<div ng-message="maxlength">
+										At most 30 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211974' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('zip_code')" >
+							Zip Code
+							<span ng-if="gridOptions.sortFields['zip_code']">
+								({{gridOptions.sortFields['zip_code']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['zip_code']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['zip_code']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="zip_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  maxlength='30' name="zip_code" ng-model="search.zip_code" aria-label="Zip Code" ng-enter='searchGrid()' id='ci211974' aria-label="zip_code" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Zip Code
+								</label>
+								<div ng-messages="clientGrid.zip_code.$error">
+									<div ng-message="maxlength">
+										At most 30 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211975' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('notes')" >
+							Notes
+							<span ng-if="gridOptions.sortFields['notes']">
+								({{gridOptions.sortFields['notes']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci211975' aria-label="notes" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Notes
+								</label>
+								<div ng-messages="clientGrid.notes.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='211976' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('updated')" >
+							Updated
+							<span ng-if="gridOptions.sortFields['updated']">
+								({{gridOptions.sortFields['updated']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['updated']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['updated']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+								<input type="text"  name="updated" ng-model="search.updated" aria-label="Updated" ng-enter='searchGrid()' id='ci211976' aria-label="updated" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Updated
+								</label>
+								<div ng-messages="clientGrid.updated.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='clientGrid' ng-if="gridOptions.inlineAddShow">
+				<ng-form name=clientGrid  dib-container-name="clientGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+					<div table-column layout="column" flex = 'nogrow' dib-column="211812" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true class="md-icon-button  md-squared md-raised" style="    " id='ci211812' aria-label="btngridedit" dib-container-name='clientGrid' ng-click="dibCommon.goTo('clientForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="211965" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci211965' aria-label="id" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="clientGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211966" style="    " >
+						<div aria-label="name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='80' required name="name" ng-model="model.name" aria-label="Name" ng-enter='searchGrid()' id='ci211966' aria-label="name" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Name*
+									</label>
+									<div ng-messages="clientGrid.name.$error">
+										<div ng-message="required">
+											Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211967" style="    " >
+						<div aria-label="start_date" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['start_date']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="start_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.start_date" name=start_date aria-label="Start Date" placeholder="Start Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci211967' aria-label="start_date" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="clientGrid.model.start_date.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211968" style="    " >
+						<div aria-label="phone" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['phone']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="phone" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='100' name="phone" ng-model="model.phone" aria-label="Phone" ng-enter='searchGrid()' id='ci211968' aria-label="phone" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Phone
+									</label>
+									<div ng-messages="clientGrid.phone.$error">
+										<div ng-message="maxlength">
+											At most 100 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211969" style="    " >
+						<div aria-label="email" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['email']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='100' name="email" ng-model="model.email" aria-label="Email" ng-enter='searchGrid()' id='ci211969' aria-label="email" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Email
+									</label>
+									<div ng-messages="clientGrid.email.$error">
+										<div ng-message="maxlength">
+											At most 100 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212135" style="    " >
+						<div aria-label="aaa" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['aaa']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="aaa" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.aaa" name=aaa aria-label="Aaa" placeholder="Aaa" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212135' aria-label="aaa" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="clientGrid.model.aaa.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211971" style="    " >
+						<div aria-label="address2" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address2']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address2" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='200' name="address2" ng-model="model.address2" aria-label="Address2" ng-enter='searchGrid()' id='ci211971' aria-label="address2" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address2
+									</label>
+									<div ng-messages="clientGrid.address2.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211972" style="    " >
+						<div aria-label="city_town" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['city_town']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="city_town" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="city_town" ng-model="model.city_town" aria-label="City Town" ng-enter='searchGrid()' id='ci211972' aria-label="city_town" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										City Town
+									</label>
+									<div ng-messages="clientGrid.city_town.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211973" style="    " >
+						<div aria-label="country" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['country']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="country" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="country" ng-model="model.country" aria-label="Country" ng-enter='searchGrid()' id='ci211973' aria-label="country" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Country
+									</label>
+									<div ng-messages="clientGrid.country.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211974" style="    " >
+						<div aria-label="zip_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['zip_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="zip_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="zip_code" ng-model="model.zip_code" aria-label="Zip Code" ng-enter='searchGrid()' id='ci211974' aria-label="zip_code" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Zip Code
+									</label>
+									<div ng-messages="clientGrid.zip_code.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211975" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<textarea   name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci211975' aria-label="notes" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+									</textarea>
+									<label>
+										Notes
+									</label>
+									<div ng-messages="clientGrid.notes.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211976" style="    " >
+						<div aria-label="updated" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['updated']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.updated"   name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci211976' aria-label="updated" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex='none' dib-edit >
+						<md-button ng-click='toggleInlineAdd()' class="md-raised ">
+							Close 
+						</md-button>
+						<md-button ng-click='cleanRow($event,model, clientGrid)' class="md-raised "  ng-disabled='!clientGrid.$dirty'>
+							Clear   
+						</md-button>
+						<md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+							Use selected data 
+						</md-button>
+						<md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!clientGrid.$valid">
+							Add   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</div>
+	<md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+		<md-list dib-table-column-width >
+			<md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+				<div class="no-records-available">
+					  No records available 
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)" >
+				<ng-form name='clientGrid' dib-container-name="clientGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+					<div table-column layout="column" flex = 'nogrow' dib-column="211812" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true class="md-icon-button  md-squared md-raised" style="    " id='ci211812' aria-label="btngridedit" dib-container-name='clientGrid' ng-click="dibCommon.goTo('clientForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="211965" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci211965' aria-label="id" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="clientGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211966" style="    " >
+						<div aria-label="name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='80' required name="name" ng-model="model.name" aria-label="Name" ng-enter='searchGrid()' id='ci211966' aria-label="name" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Name*
+									</label>
+									<div ng-messages="clientGrid.name.$error">
+										<div ng-message="required">
+											Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211967" style="    " >
+						<div aria-label="start_date" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['start_date']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="start_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.start_date" name=start_date aria-label="Start Date" placeholder="Start Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci211967' aria-label="start_date" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="clientGrid.model.start_date.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211968" style="    " >
+						<div aria-label="phone" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['phone']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="phone" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='100' name="phone" ng-model="model.phone" aria-label="Phone" ng-enter='searchGrid()' id='ci211968' aria-label="phone" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Phone
+									</label>
+									<div ng-messages="clientGrid.phone.$error">
+										<div ng-message="maxlength">
+											At most 100 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211969" style="    " >
+						<div aria-label="email" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['email']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="email" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='100' name="email" ng-model="model.email" aria-label="Email" ng-enter='searchGrid()' id='ci211969' aria-label="email" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Email
+									</label>
+									<div ng-messages="clientGrid.email.$error">
+										<div ng-message="maxlength">
+											At most 100 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212135" style="    " >
+						<div aria-label="aaa" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['aaa']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="aaa" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.aaa" name=aaa aria-label="Aaa" placeholder="Aaa" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212135' aria-label="aaa" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="clientGrid.model.aaa.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211971" style="    " >
+						<div aria-label="address2" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address2']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address2" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='200' name="address2" ng-model="model.address2" aria-label="Address2" ng-enter='searchGrid()' id='ci211971' aria-label="address2" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address2
+									</label>
+									<div ng-messages="clientGrid.address2.$error">
+										<div ng-message="maxlength">
+											At most 200 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211972" style="    " >
+						<div aria-label="city_town" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['city_town']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="city_town" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="city_town" ng-model="model.city_town" aria-label="City Town" ng-enter='searchGrid()' id='ci211972' aria-label="city_town" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										City Town
+									</label>
+									<div ng-messages="clientGrid.city_town.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211973" style="    " >
+						<div aria-label="country" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['country']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="country" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="country" ng-model="model.country" aria-label="Country" ng-enter='searchGrid()' id='ci211973' aria-label="country" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Country
+									</label>
+									<div ng-messages="clientGrid.country.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211974" style="    " >
+						<div aria-label="zip_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['zip_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="zip_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text"  maxlength='30' name="zip_code" ng-model="model.zip_code" aria-label="Zip Code" ng-enter='searchGrid()' id='ci211974' aria-label="zip_code" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Zip Code
+									</label>
+									<div ng-messages="clientGrid.zip_code.$error">
+										<div ng-message="maxlength">
+											At most 30 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211975" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<textarea   name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci211975' aria-label="notes" dib-container-name='clientGrid' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+									</textarea>
+									<label>
+										Notes
+									</label>
+									<div ng-messages="clientGrid.notes.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="211976" style="    " >
+						<div aria-label="updated" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['updated']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4643&text=client' >
+									<input type="text" theme="material" ng-model="model.updated"   name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci211976' aria-label="updated" dib-container-name='clientGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+						<md-button ng-click='cancelRow($event,row)' class="md-raised ">
+							Cancel 
+						</md-button>
+						<md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!clientGrid.$valid" >
+							Save   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<div layout-fill layout='row' flex class='dib-grid-footer'>
+		<div flex=20 layout='row'>
+			<md-button disabled>
+				Page limit
+			</md-button>
+			<md-select ng-model="page.limit" aria-label="Page Limit">
+				<md-option ng-value="10">
+					10
+				</md-option>
+				<md-option ng-value="20">
+					20
+				</md-option>
+				<md-option ng-value="50">
+					50
+				</md-option>
+			</md-select>
+		</div>
+		<div  ng-if="page.count>
+			1" flex=80 layout='row'  layout-align="center center" >
+			<md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+				First 
+			</md-button>
+			<md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+				Prev 
+			</md-button>
+			<div layout='row'>
+				<md-button disabled>
+					Page
+				</md-button>
+				<md-input-container>
+					<input type='number' ng-model="page.number" aria-label="Page number">
+				</md-input-container>
+				<md-button disabled>
+					of {{ page.count }} 
+				</md-button>
+			</div>
+			<md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+				Next 
+			</md-button>
+			<md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+				Last 
+			</md-button>
+		</div>
+	</div>
+</div>

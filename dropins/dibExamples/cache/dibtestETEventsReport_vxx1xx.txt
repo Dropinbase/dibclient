@@ -1,0 +1,8 @@
+
+<iframe
+ layout-fill fill-height  dib-container=dibtestETEventsReport 
+ name='dibtestETEventsReport' dib-config="{
+}"
+ ng-if="model.url" ng-src="{{model.url}}" frameBorder="0" width="100%" flex="100" 
+ng-style="{{frameStyle}}">
+</iframe>

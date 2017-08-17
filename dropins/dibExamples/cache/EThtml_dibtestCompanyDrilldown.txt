@@ -1,0 +1,1 @@
+{"template":"\/dibExamples\/reports\/testCompanyDrilldown.html","valid_params":"\"submitItemAlias_parent_companyId\":\"*required*\",\"areaType\":\"*required*\",\"area\":\"*required*\",\"print\":\"false\"","pef_sql_id":null,"pef_table_id":null,"containerId":"3677","configs":null,"globalsReplaceList":null,"HtmlPurifier":null}

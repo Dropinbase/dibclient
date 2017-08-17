@@ -1,0 +1,411 @@
+(function() {
+  var require = ['Ext.ux.system.action.Button','Ext.button.Split','Ext.ux.system.action.MenuItemAudit','Ext.ux.form.DibFieldSet','Ext.ux.form.field.PComboBox' ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var test_company_consultant_form = angular.module('test_company_consultant_form', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+    test_company_consultant_form.factory('service47894',['ajax', '$log', 'discoverService', '$q', function (ajax, $log,discoverService, $q) {
+            var list = function (query, modelType, page) {
+                var $defer = $q.defer();
+                var url = DIB__base_url + "/peff/Crud/componentlist/test_company_consultant_form?containerItemId=47894";
+               if (!!page === false) {
+                   url += "&page=1&limit=20";
+               } else {
+                   url += "&limit=20&page="+ page;
+               }
+               if (modelType=='search') { 
+                   url += "&showUsedOnly=true";
+               }
+               if (!!query === false) { 
+                   url += "&query=";
+               } else {
+                   url += "&query="+query;
+               }
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci47894'),
+                    container : $('[dib-container=test_company_consultant_form]'),
+                    url : url
+                });
+               return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+            return {
+                list : list
+            };         
+    }]);
+    test_company_consultant_form.factory('service47896',['ajax', '$log', 'discoverService', '$q', function (ajax, $log,discoverService, $q) {
+            var list = function (query, modelType, page) {
+                var $defer = $q.defer();
+                var url = DIB__base_url + "/peff/Crud/componentlist/test_company_consultant_form?containerItemId=47896";
+               if (!!page === false) {
+                   url += "&page=1&limit=20";
+               } else {
+                   url += "&limit=20&page="+ page;
+               }
+               if (modelType=='search') { 
+                   url += "&showUsedOnly=true";
+               }
+               if (!!query === false) { 
+                   url += "&query=";
+               } else {
+                   url += "&query="+query;
+               }
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci47896'),
+                    container : $('[dib-container=test_company_consultant_form]'),
+                    url : url
+                });
+               return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                })
+            };
+            return {
+                list : list
+            };         
+    }]);
+var test_company_consultant_form = angular.module('test_company_consultant_form');
+test_company_consultant_form.component('test_company_consultant_form', {
+    controllerAs: 'test_company_consultant_form',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibForm/Template/view/test_company_consultant_form.html',
+    controller : component__test_company_consultant_form
+});
+component__test_company_consultant_form.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', 'discoverService', 'messageService','$location','actionService', '$q','utilityService', '$timeout', 'activeFilterOverride','service47894','service47896','containerService','recordFactory','crudService','utilityService'];
+    function component__test_company_consultant_form($scope, $ocLazyLoad, $rootScope, $log, discoverService, messageService,$location,actionService, $q,utilityService, $timeout, activeFilterOverride,service47894,service47896,containerService,recordFactory,crudService,utilityService) {
+                    $scope.container = {};
+            $scope.container.Id = '3403';
+            $scope.container.Name = 'test_company_consultant_form';
+            $("[dib-container='test_company_consultant_form']").trigger('load');
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.model._GET['id'] = containerService.modelItem("text");
+        $scope.model._GET['test_company_id'] = containerService.modelItem("text");
+        $scope.model._GET['consultant_id'] = containerService.modelItem("text");
+        $scope.model._GET['date_started'] = containerService.modelItem("text");
+        $scope.model._GET['notes'] = containerService.modelItem("text");
+        $scope.model._GET['position'] = containerService.modelItem("text");
+        $scope.model._GET['scope'] = containerService.modelItem("text");
+        $scope.model._GET['uid'] = containerService.modelItem("text");
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = ["id"];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.dropdowns.service47894 = {};
+            $scope.dropdowns.service47894.items = [];
+            var setTimeoutCancel47894 = null;
+            var query47894;
+            $scope.loadService47894 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query47894 != query) {
+                    query47894 = query;
+                    if (!!skipTimeout) {
+                        return service47894.list(query).then(function (items) {
+                            $scope.dropdowns.service47894.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel47894);
+                        setTimeoutCancel47894 = setTimeout(function () { 
+                            service47894.list(query).then(function (items) {
+                                $scope.dropdowns.service47894.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service47894.searchTextChange = function (query) {
+                $scope.loadService47894(query);
+            };
+            $scope.dropdowns.service47894.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service47894.list(query,modelType);
+            };
+            $scope.select47894 = function (model,modelName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci47894');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  $element.attr('select-model').replace(modelName+'.','').replace('.id', '');
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service47894.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout47894 = null;
+            //loadService47894();
+            //reloadContainerFunctions.push($scope.loadService47894);
+            $scope.dropdowns.service47896 = {};
+            $scope.dropdowns.service47896.items = [];
+            var setTimeoutCancel47896 = null;
+            var query47896;
+            $scope.loadService47896 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query47896 != query) {
+                    query47896 = query;
+                    if (!!skipTimeout) {
+                        return service47896.list(query).then(function (items) {
+                            $scope.dropdowns.service47896.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel47896);
+                        setTimeoutCancel47896 = setTimeout(function () { 
+                            service47896.list(query).then(function (items) {
+                                $scope.dropdowns.service47896.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service47896.searchTextChange = function (query) {
+                $scope.loadService47896(query);
+            };
+            $scope.dropdowns.service47896.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service47896.list(query,modelType);
+            };
+            $scope.select47896 = function (model,modelName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci47896');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  $element.attr('select-model').replace(modelName+'.','').replace('.id', '');
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service47896.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout47896 = null;
+            //loadService47896();
+            //reloadContainerFunctions.push($scope.loadService47896);
+            $scope.openAuditTrail = function (portAlias) {
+                            var primaryKeyData = recordFactory.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                            if (primaryKeyData.length > 0) {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=1441&filter_record_id="+primaryKeyData);
+                        } else {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=1441");
+                        }
+            };
+        /**
+        * Add a new record 
+        */
+        $scope.addModel = function (options) { 
+            utilityService.updateUrlPrimaryKeys($scope, true, {});
+            $scope.clearForm();  
+            $scope.recordStatus = "new";
+            if (containerService.urlContainer("test_company_consultant_form")) {
+                $location.search("record","new");
+            };
+        };
+        /**
+        * Delete the record from the database
+        */
+        $scope.deleteModel = function (options) { 
+            if ($scope.recordStatus == "new") {
+                messageService.callout({
+                    message : 'No valid record to delete.',
+                    type: "notice"
+                });
+                return;
+            }
+            messageService.confirm({
+                title: 'Delete record',
+                text : 'Warning - are you sure you want to permanently delete the current records?'
+            }).then(function () { 
+                $scope.recordStatus = null;
+                var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, $scope.model);
+                return crudService.delete(crudController,'test_company_consultant_form',{
+                        primaryKeyData : oldPrimaryKeyData
+                }).then(function (model) { 
+                    $scope.loadingData =  false;
+                    $scope.test_company_consultant_form.$setUntouched();
+                    $scope.test_company_consultant_form.$setPristine();
+                    messageService.callout({
+                        message : "Record successfully deleted.",
+                        type : 'success'
+                    });
+                    utilityService.updateUrlPrimaryKeys($scope, options.redirect, model);
+                }, function (data) { 
+                    $scope.loadingData =  false;
+                });
+            });
+        };         
+        /**
+        *  Saving record in this model
+        */
+        $scope.saveModel = function (options) {
+            if (!$scope.test_company_consultant_form.$valid) { 
+                $scope.recordStatus = null;
+                containerService.makeFormDirty($scope.test_company_consultant_form);
+                var errorMsg = "";
+                angular.forEach($scope.test_company_consultant_form.$error, function (errorCategory,index) { 
+                    angular.forEach(errorCategory, function (error, key) { 
+                        errorMsg += index + ":"+error.$name + "; ";
+                    });
+                });
+                var msg = 'Resolve validation errors to save on fields: '+errorMsg + '';
+                messageService.callout({
+                    message : msg,
+                    type : 'warning',
+                    duration : 10000
+                });
+                return $q.reject(msg);
+            } 
+            $scope.loadingData =  true;
+            var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, $scope.model);
+            $("[dib-container=test_company_consultant_form]").trigger('beforeUpdate');
+            return crudService.update(crudController,'test_company_consultant_form',{
+                        primaryKeyData : oldPrimaryKeyData
+        }, $scope).then(function (model) {
+                oldPrimaryKeyData = primaryKeyData;
+                $scope.loadingData =  false;
+                $scope.test_company_consultant_form.$setUntouched();
+                $scope.test_company_consultant_form.$setPristine();
+                $rootScope._navigation.reset();
+                $("[dib-container=test_company_consultant_form]").trigger('update');
+                if (Object.keys(primaryKeyData).length>0) {
+                    messageService.callout({
+                        message : "Record successfully saved.",
+                        type : 'success'
+                    });
+                    return $q.reject($scope);
+                } else {
+                    messageService.callout({
+                        message : "Record successfully created.",
+                        type : 'success'
+                    });
+                    utilityService.updateUrlPrimaryKeys($scope,  options.redirect, model);
+                    return $q.resolve($scope);
+                }
+            }, function () {
+                $scope.loadingData =  false;
+                return $q.reject($scope);
+            });
+        };
+        var mdTabs = $("[dib-container=test_company_consultant_form]").closest('md-tabs');
+        var tabsScope = null;
+        if (mdTabs.length === 0) {
+            mdTabs = null;
+        }
+        else {
+            tabsScope = mdTabs.scope();
+        }
+        $scope.$watch('test_company_consultant_form.$dirty', function (newValue, oldValue) { 
+            $rootScope._navigation.containerDirty = newValue;
+            if ($rootScope._navigation.containerDirty && !!mdTabs && !!tabsScope) {
+                var currentIndex = tabsScope.selectedIndex;
+                $rootScope._navigation.addSaveFailedPromise(function(tabIndex) {
+                    tabsScope.selectedIndex = tabIndex;
+                    return $q.when();
+                }, [currentIndex]);
+            }
+        },true);
+        $rootScope._navigation.addSavePromise($scope.saveModel);
+        //Giving the form the ability to handle dependency data (if an event is trigger on another component that has a refresh item alias point to the form/child form)
+        $scope.setDependencyData = function (object) { 
+                $scope.primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, object);
+                return $q.when();
+        };
+        /**
+        * Clear the form from records and dependancy data
+        */
+        $scope.clearForm = function () {
+            $scope.primaryKeyData = null;
+            $scope.reloadContainer();
+            containerService.cleanForm($scope.test_company_consultant_form,$scope.model);
+            $("[dib-container=test_company_consultant_form]").trigger('clearDependency');
+        };
+        var oldPrimaryKeyData;
+        function loadForm () { 
+            $("[dib-container=test_company_consultant_form]").trigger('beforeload');
+            //clear the record status
+            $scope.recordStatus = null;
+            var isUrlContainer = containerService.urlContainer('test_company_consultant_form');
+            //check if this is a child container 
+            $scope.primaryKeyData = isUrlContainer ? discoverService.getPrimaryKeysFromUrl() : $scope.primaryKeyData;
+            if (!!$scope.primaryKeyData === false) {
+               $scope.primaryKeyData = {};
+               //set all the primaryKeys to 0
+               angular.forEach($scope.primaryKeys, function (key,index) { 
+                   $scope.model[key] = 0;
+               });
+            }
+            //remove active filter if no record are available
+            if (Object.keys($scope.primaryKeyData).length ==0) {
+                activeFilterOverride.remove = true;
+            }
+            $scope.loadingData = true;
+            oldPrimaryKeyData = $scope.primaryKeyData;
+            crudService.read(crudController,'test_company_consultant_form',{
+                primaryKeyData : oldPrimaryKeyData,
+                createParams: "{}"
+            },
+            $scope
+            ).then(function (model) {
+                $scope.model = model;
+                $("[dib-container=test_company_consultant_form]").trigger('load');
+                $scope.test_company_consultant_form.$setUntouched();
+                $scope.test_company_consultant_form.$setPristine();
+                //@TODO refactor start 
+                var timeoutTest = $timeout(function () { 
+                    containerService.reloadChildren({containerName: 'test_company_consultant_form'});
+                },500); 
+                //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                var eventDeregister = $rootScope.$on("dibAngular.subcontainerLoaded", function () {
+                    $timeout.cancel(timeoutTest);
+                    timeoutTest = $timeout(function () { 
+                        containerService.reloadChildren({containerName: 'test_company_consultant_form'});
+                        eventDeregister();
+                    },500); 
+                    //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                });
+                //Refactor stop
+                $log.debug("containerName read->model",$scope.model );
+                $scope.loadingData =  false;
+            }, function () {
+                $scope.loadingData =  false;
+            });
+        }
+        $scope.reloadContainer = function (options) {
+            $("[dib-container=test_company_consultant_form]").trigger('beforeReloadContainer');
+            $scope.autoRefresh = true;
+            loadForm ();
+        };
+        var isUrlContainer = containerService.urlContainer('test_company_consultant_form');
+            loadForm();
+        $scope.$watch('model', function (oldVal, newVal) {
+            $("[dib-container=test_company_consultant_form]").trigger('modelChange');
+        },true);            
+    }
+})();

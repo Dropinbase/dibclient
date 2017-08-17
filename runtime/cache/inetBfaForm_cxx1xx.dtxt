@@ -1,0 +1,794 @@
+(function() {
+    var require = ['/dropins/setNgMaterial/dibForm/js/component/formPaging.js','/dropins/setNgMaterial/dibGlobals/js/component/timeDatePickerInput.js',  
+		'/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+	];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    var inetBfaForm = angular.module('inetBfaForm', [files]);
+    inetBfaForm.service('service211494',service211494); 
+    service211494.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211494(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/inetBfaForm?containerItemId=211494", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211494'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    inetBfaForm.service('service211495',service211495); 
+    service211495.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211495(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/inetBfaForm?containerItemId=211495", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211495'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    inetBfaForm.service('service211496',service211496); 
+    service211496.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211496(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/inetBfaForm?containerItemId=211496", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211496'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    inetBfaForm.service('service211500',service211500); 
+    service211500.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211500(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/inetBfaForm?containerItemId=211500", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211500'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    inetBfaForm.service('service211501',service211501); 
+    service211501.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service211501(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/inetBfaForm?containerItemId=211501", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci211501'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    var inetBfaForm = angular.module('inetBfaForm');
+    inetBfaForm.component('inetBfaForm', {
+        controllerAs: 'inetBfaForm',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibForm/Template/view/inetBfaForm.html',
+        controller : component__inetBfaForm
+    });
+    component__inetBfaForm.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
+            'dibForm', 'dibMessage','$location','dibAction','dibUtility', '$timeout', 'dibActiveFilterState','service211494','service211495','service211496','service211500','service211501'];
+    function component__inetBfaForm($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
+            dibForm, dibMessage,$location,dibAction,dibUtility, $timeout, dibActiveFilterState,service211494,service211495,service211496,service211500,service211501) {
+        var ctrl = this;        
+                    $scope.container = {};
+            $scope.container.Id = '9151';
+            $scope.container.Name = 'inetBfaForm';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = {};
+        $scope.model['id'] = '';
+        $scope.model._GET['id'] = dibContainer.modelItem({
+            key : 'id',
+            dataType : "number", 
+            create : false,
+            update : false,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['ticker'] = '';
+        $scope.model._GET['ticker'] = dibContainer.modelItem({
+            key : 'ticker',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['company'] = '';
+        $scope.model._GET['company'] = dibContainer.modelItem({
+            key : 'company',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['select___company_id'] = '';
+        $scope.model._GET['company_id'] = dibContainer.modelItem({
+            key : 'company_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211494,
+            itemAlias : false
+        });
+        $scope.model['select___market_cap_id'] = '';
+        $scope.model._GET['market_cap_id'] = dibContainer.modelItem({
+            key : 'market_cap_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211495,
+            itemAlias : false
+        });
+        $scope.model['select___code'] = '';
+        $scope.model._GET['code'] = dibContainer.modelItem({
+            key : 'code',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211496,
+            itemAlias : false
+        });
+        $scope.model['isin'] = '';
+        $scope.model._GET['isin'] = dibContainer.modelItem({
+            key : 'isin',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['holdingdate'] = '';
+        $scope.model._GET['holdingdate'] = dibContainer.modelItem({
+            key : 'holdingdate',
+            dataType : "number", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['beneficiary'] = '';
+        $scope.model._GET['beneficiary'] = dibContainer.modelItem({
+            key : 'beneficiary',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['select___beneficiary_id'] = '';
+        $scope.model._GET['beneficiary_id'] = dibContainer.modelItem({
+            key : 'beneficiary_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211500,
+            itemAlias : false
+        });
+        $scope.model['select___dataset_id'] = '';
+        $scope.model._GET['dataset_id'] = dibContainer.modelItem({
+            key : 'dataset_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service211501,
+            itemAlias : false
+        });
+        $scope.model['nominee'] = '';
+        $scope.model._GET['nominee'] = dibContainer.modelItem({
+            key : 'nominee',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['address1'] = '';
+        $scope.model._GET['address1'] = dibContainer.modelItem({
+            key : 'address1',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['address2'] = '';
+        $scope.model._GET['address2'] = dibContainer.modelItem({
+            key : 'address2',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['address3'] = '';
+        $scope.model._GET['address3'] = dibContainer.modelItem({
+            key : 'address3',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['address4'] = '';
+        $scope.model._GET['address4'] = dibContainer.modelItem({
+            key : 'address4',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['postalcode'] = '';
+        $scope.model._GET['postalcode'] = dibContainer.modelItem({
+            key : 'postalcode',
+            dataType : "number", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['clientholdings'] = '';
+        $scope.model._GET['clientholdings'] = dibContainer.modelItem({
+            key : 'clientholdings',
+            dataType : "number", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['isc'] = '';
+        $scope.model._GET['isc'] = dibContainer.modelItem({
+            key : 'isc',
+            dataType : "number", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['percic'] = '';
+        $scope.model._GET['percic'] = dibContainer.modelItem({
+            key : 'percic',
+            dataType : "number", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['shareholdertype'] = '';
+        $scope.model._GET['shareholdertype'] = dibContainer.modelItem({
+            key : 'shareholdertype',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['countrycd'] = '';
+        $scope.model._GET['countrycd'] = dibContainer.modelItem({
+            key : 'countrycd',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['registeredaccountnumber'] = '';
+        $scope.model._GET['registeredaccountnumber'] = dibContainer.modelItem({
+            key : 'registeredaccountnumber',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['beneficiaryaccountnumber'] = '';
+        $scope.model._GET['beneficiaryaccountnumber'] = dibContainer.modelItem({
+            key : 'beneficiaryaccountnumber',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['sharecode'] = '';
+        $scope.model._GET['sharecode'] = dibContainer.modelItem({
+            key : 'sharecode',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['annualreportindicator'] = '';
+        $scope.model._GET['annualreportindicator'] = dibContainer.modelItem({
+            key : 'annualreportindicator',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['clientreconciliationindicator'] = '';
+        $scope.model._GET['clientreconciliationindicator'] = dibContainer.modelItem({
+            key : 'clientreconciliationindicator',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['import_date'] = '';
+        $scope.model._GET['import_date'] = dibContainer.modelItem({
+            key : 'import_date',
+            dataType : "dateTime", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['batch_no'] = '';
+        $scope.model._GET['batch_no'] = dibContainer.modelItem({
+            key : 'batch_no',
+            dataType : "number", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = ["id"];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+    $scope.dropdowns = {};
+    $scope.dropdowns.service211494 = {};
+    $scope.dropdowns.service211494.items = [];
+    var setTimeoutCancel211494 = null;
+    var $dibContainer = $element.first();
+    var query211494;
+    $scope.loadService211494 = function (query, skipTimeout) {
+        if (query211494 != query) {
+            query211494 = query;
+            if (!!skipTimeout) {
+                return service211494.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211494.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211494);
+                setTimeoutCancel211494 = setTimeout(function () { 
+                    service211494.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211494.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211494.searchTextChange = function (query) {
+        $scope.loadService211494(query);
+    };
+    $scope.dropdowns.service211494.getItems = function (query,modelType) {
+        return service211494.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211494 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211494');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211494.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+    $scope.dropdowns.service211495 = {};
+    $scope.dropdowns.service211495.items = [];
+    var setTimeoutCancel211495 = null;
+    var $dibContainer = $element.first();
+    var query211495;
+    $scope.loadService211495 = function (query, skipTimeout) {
+        if (query211495 != query) {
+            query211495 = query;
+            if (!!skipTimeout) {
+                return service211495.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211495.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211495);
+                setTimeoutCancel211495 = setTimeout(function () { 
+                    service211495.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211495.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211495.searchTextChange = function (query) {
+        $scope.loadService211495(query);
+    };
+    $scope.dropdowns.service211495.getItems = function (query,modelType) {
+        return service211495.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211495 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211495');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211495.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+    $scope.dropdowns.service211496 = {};
+    $scope.dropdowns.service211496.items = [];
+    var setTimeoutCancel211496 = null;
+    var $dibContainer = $element.first();
+    var query211496;
+    $scope.loadService211496 = function (query, skipTimeout) {
+        if (query211496 != query) {
+            query211496 = query;
+            if (!!skipTimeout) {
+                return service211496.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211496.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211496);
+                setTimeoutCancel211496 = setTimeout(function () { 
+                    service211496.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211496.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211496.searchTextChange = function (query) {
+        $scope.loadService211496(query);
+    };
+    $scope.dropdowns.service211496.getItems = function (query,modelType) {
+        return service211496.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211496 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211496');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211496.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+    $scope.dropdowns.service211500 = {};
+    $scope.dropdowns.service211500.items = [];
+    var setTimeoutCancel211500 = null;
+    var $dibContainer = $element.first();
+    var query211500;
+    $scope.loadService211500 = function (query, skipTimeout) {
+        if (query211500 != query) {
+            query211500 = query;
+            if (!!skipTimeout) {
+                return service211500.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211500.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211500);
+                setTimeoutCancel211500 = setTimeout(function () { 
+                    service211500.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211500.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211500.searchTextChange = function (query) {
+        $scope.loadService211500(query);
+    };
+    $scope.dropdowns.service211500.getItems = function (query,modelType) {
+        return service211500.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211500 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211500');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211500.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+    $scope.dropdowns.service211501 = {};
+    $scope.dropdowns.service211501.items = [];
+    var setTimeoutCancel211501 = null;
+    var $dibContainer = $element.first();
+    var query211501;
+    $scope.loadService211501 = function (query, skipTimeout) {
+        if (query211501 != query) {
+            query211501 = query;
+            if (!!skipTimeout) {
+                return service211501.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service211501.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel211501);
+                setTimeoutCancel211501 = setTimeout(function () { 
+                    service211501.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service211501.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service211501.searchTextChange = function (query) {
+        $scope.loadService211501(query);
+    };
+    $scope.dropdowns.service211501.getItems = function (query,modelType) {
+        return service211501.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select211501 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci211501');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service211501.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+            $scope.openAuditTrail = function (portAlias) {
+                            var primaryKeyData = dibRecord.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                            if (primaryKeyData.length > 0) {
+                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=4621&filter_record_id="+primaryKeyData);
+                        } else {
+                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=4621");
+                        }
+            };
+        ctrl.$onInit = function () {
+            $scope.addModel = function () { 
+                dibForm.addModel($scope, "inetBfaForm");
+            };
+            $scope.deleteRecord = function (options) {
+                dibForm.deleteRecord('inetBfaForm', $scope, $scope.inetBfaForm, options, crudController).then(function (){
+                });
+            };         
+            /**
+            *  Saving record in this model
+            */
+            $scope.saveModel = function (options) {
+                if ($scope.loadingData) return $q.reject('Busy loading...');
+                if (dibForm.validate($scope, $scope.inetBfaForm)) {
+                    $scope.loadingData =  true;
+                    var primaryKeyData = dibRecord.primaryKeyData($scope.primaryKeys, $scope.model);
+                    return dibForm.updateRecord('inetBfaForm', $scope, $scope.inetBfaForm, crudController, options).then(function () { 
+                        if (Object.keys(primaryKeyData).length>0) {
+                        } else {
+                            loadForm();
+                        }
+                        return $q.when();
+                    });
+                }
+            };
+            var mdTabs = $("[dib-container=inetBfaForm]").closest('md-tabs');
+            var tabsScope = null;
+            if (mdTabs.length === 0) {
+                mdTabs = null;
+            }
+            else {
+                tabsScope = mdTabs.scope();
+            }
+            $scope.$watch('inetBfaForm.$dirty', function (newValue, oldValue) { 
+                dibNavigation.containerDirty = newValue;
+                if (dibNavigation.containerDirty && !!mdTabs && !!tabsScope) {
+                    var currentIndex = tabsScope.selectedIndex;
+                    dibNavigation.addSaveFailedPromise(function(tabIndex) {
+                        tabsScope.selectedIndex = tabIndex;
+                        return $q.when();
+                    }, [currentIndex]);
+                }
+            },true);
+            dibNavigation.addSavePromise($scope.saveModel);
+            //Giving the form the ability to handle dependency data (if an event is trigger on another component that has a refresh item alias point to the form/child form)
+            $scope.setDependencyData = function (object) { 
+                return dibForm.setDependencyData($scope,object);
+            };
+            $scope.itemAliasData = function () {
+                return angular.copy($scope.primaryKeyData);
+            };
+            /**
+            * Clear the form from records and dependancy data
+            */
+            $scope.clearForm = function () {
+                if ($scope.loadingData) return;
+                $scope.primaryKeyData = null;
+                $scope.reloadContainer();
+                dibForm.clean($scope.inetBfaForm,$scope.model);
+            };
+            $scope.reloadContainer = function (options) {
+                $scope.autoRefresh = true;
+                loadForm ();
+            };
+            $scope.$watch('model', function (oldVal, newVal) {
+            },true);  
+        };
+        ctrl.$postLink = function () {
+            var isUrlContainer = dibContainer.urlContainer('inetBfaForm');
+            if (isUrlContainer) {
+                //check if record is first or last
+                if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                    $scope.$broadcast('load');
+                }
+            } else {
+                $scope.$broadcast('load');
+            }
+            //var isUrlContainer = dibContainer.urlContainer('inetBfaForm');
+            //the if below we removed the requirement to match the url to the containerName, so we can load data into a window without the url changing. wizBuildAppAdv.
+                $scope.reloadContainer({ force : true });
+        };
+        function loadForm () { 
+            dibNavigation.reset();
+            dibNavigation.addSavePromise($scope.saveModel);
+            //clear the record status
+            $scope.recordStatus = null;
+            var isUrlContainer = dibContainer.urlContainer('inetBfaForm');
+            if (isUrlContainer) {
+                //check if record is first or last
+                if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                    return;
+                }
+            }
+            //check if this is a child container 
+            $scope.primaryKeyData = isUrlContainer ? dibDiscover.getPrimaryKeysFromUrl() : $scope.primaryKeyData;
+            if (!!$scope.primaryKeyData === false) {
+                $scope.primaryKeyData = {};
+                //set all the primaryKeys to 0
+                angular.forEach($scope.primaryKeys, function (key,index) { 
+                    $scope.model[key] = 0;
+                });
+            }
+            //remove active filter if no record are available
+            if (Object.keys($scope.primaryKeyData).length ==0) {
+                $scope.recordStatus = "create";
+            } else {
+                $scope.recordStatus = "update";
+            }
+            $scope.loadingData = true;
+            $scope.currentPrimaryKeyData = $scope.primaryKeyData;
+            dibCrud.read($scope,crudController,'inetBfaForm',{
+                primaryKeyData : $scope.currentPrimaryKeyData,
+                createParams: "{}"
+            },
+            $scope
+            ).then(function (model) {
+                $scope.model = model;
+                $scope.currentPrimaryKeyData = dibRecord.primaryKeyData($scope.primaryKeys, $scope.model);
+                $scope.$broadcast('load');
+                $scope.inetBfaForm.$setUntouched();
+                $scope.inetBfaForm.$setPristine();
+                //@TODO refactor start 
+                var timeoutTest = $timeout(function () { 
+                    dibContainer.reloadChildren({containerName: 'inetBfaForm'});
+                },500); 
+                //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                // var eventDeregister = $rootScope.$on("dibAngular.subcontainerLoaded", function () {
+                //     $timeout.cancel(timeoutTest);
+                //     timeoutTest = $timeout(function () { 
+                //         dibContainer.reloadChildren({containerName: 'inetBfaForm'});
+                //         eventDeregister();
+                //     },500); 
+                //     //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                // });
+                //Refactor stop
+                $log.debug("containerName read->model",$scope.model );
+                $scope.loadingData =  false;
+            }).catch(function (error) {
+                $scope.$broadcast('load');
+                $scope.loadingData =  false;
+            });
+        }
+    }
+})();

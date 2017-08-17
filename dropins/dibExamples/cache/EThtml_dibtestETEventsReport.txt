@@ -1,0 +1,1 @@
+{"template":"\/dibExamples\/reports\/testETEvents.html","valid_params":"\"submitItemAlias_parent_htmlCompanyId\":\"*required*\"","pef_sql_id":null,"pef_table_id":null,"containerId":"8581","configs":null,"globalsReplaceList":null,"HtmlPurifier":null}

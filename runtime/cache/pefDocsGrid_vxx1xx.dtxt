@@ -1,0 +1,842 @@
+ 
+<div component-loaded dib-container="pefDocsGrid" dib-grid  dib-config="{ }" >
+	<div dib-inject-content="replace" layout="row"  aria-label="toolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci210024' aria-label="toolbar" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btninlineadd" can-be-moved=true flex=none class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci210031' aria-label="btninlineadd" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add record inline
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " id='ci210028' aria-label="btnadd" dib-container-name='pefDocsGrid' ng-click="dibCommon.goTo('pefDocsForm','',true,'?record=new','',$event);" dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add a new record using a form
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btngriddelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="deleteSelected()" id='ci210025' aria-label="btngriddelete" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete selected records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci210026' aria-label="btnreload" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Reload records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci210062' aria-label="btnAuditTrail" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci210027' aria-label="emptyspan" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+		</span>
+		<md-button aria-label="btnfilteropen" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci210032' aria-label="btnfilteropen" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Display headers for filtering records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterapply" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="searchGrid()" id='ci210029' aria-label="btnfilterapply" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Apply filter criteria specified in grid headers
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterclear" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="clearSearch()" id='ci210030' aria-label="btnfilterclear" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Show all records and clear filter criteria
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
+			</md-icon>
+		</md-button>
+		<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci210033' aria-label="gridtotals" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			-1" >
+			<md-button ng-disabled="true" aria-label="Grid totals">
+				Records: {{page.fromRecord}}
+				<span ng-if='page.fromRecord>
+					0'>
+					to {{page.toRecord}} of {{page.records}}
+				</span>
+				<span ng-if='page.totalRecords!=page.records'>
+					(Total: {{page.totalRecords}})
+				</span>
+			</md-button>
+		</div>
+	</div>
+	<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div flex dib-table-width >
+		<md-list class='dib-grid-column-header'>
+			<md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+				<div layout="row" flex="100" dib-grid-search ng-show="!loadingData">
+					<div table-column  flex = 'nogrow' class="md-subhead" dib-column-heading='210035' style="    " >
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210063' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+							Id*
+							<span ng-if="gridOptions.sortFields['id']">
+								({{gridOptions.sortFields['id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<input type="text"  name="id" ng-model="search.id" aria-label="Id" ng-enter='searchGrid()' id='ci210063' aria-label="id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Id
+								</label>
+								<div ng-messages="pefDocsGrid.id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210064' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('name')" >
+							Name*
+							<span ng-if="gridOptions.sortFields['name']">
+								({{gridOptions.sortFields['name']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['name']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<input type="text"  maxlength='250' name="name" ng-model="search.name" aria-label="Name" ng-enter='searchGrid()' id='ci210064' aria-label="name" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Name
+								</label>
+								<div ng-messages="pefDocsGrid.name.$error">
+									<div ng-message="maxlength">
+										At most 250 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210065' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('body')" >
+							Body
+							<span ng-if="gridOptions.sortFields['body']">
+								({{gridOptions.sortFields['body']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['body']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['body']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="body" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<input type="text"  name="body" ng-model="search.body" aria-label="Body" ng-enter='searchGrid()' id='ci210065' aria-label="body" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Body
+								</label>
+								<div ng-messages="pefDocsGrid.body.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210066' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('pef_docs_id')" >
+							Pef Docs
+							<span ng-if="gridOptions.sortFields['pef_docs_id']">
+								({{gridOptions.sortFields['pef_docs_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['pef_docs_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['pef_docs_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<div layout='row' aria-label="pef_docs_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='pef_docs_id' select-model="search.selected___pef_docs_id.id" md-search-text-change="dropdowns.service210066.searchTextChange(dropdowns.service210066.searchText)" md-search-text="dropdowns.service210066.searchText" md-selected-item="search.selected___pef_docs_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service210066.getItems(dropdowns.service210066.searchText,'search')" md-floating-label="Pef Docs" md-no-cache="true" md-selected-item-change="select210066(search,'search','pef_docs_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Pef Docs" id='ci210066' aria-label="pef_docs_id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-item-template>
+										<span md-highlight-text="dropdowns.service210066.searchText">
+											{{item.id_display_value}}
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+									<div ng-messages="pefDocsGrid.pef_docs_id.$error" ng-if="pefDocsGrid.pef_docs_id.$touched">
+									</div>
+								</md-autocomplete>
+							</div>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210067' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('order_no')" >
+							Order No
+							<span ng-if="gridOptions.sortFields['order_no']">
+								({{gridOptions.sortFields['order_no']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['order_no']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['order_no']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="order_no" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<input type="text"  name="order_no" ng-model="search.order_no" aria-label="Order No" ng-enter='searchGrid()' id='ci210067' aria-label="order_no" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Order No
+								</label>
+								<div ng-messages="pefDocsGrid.order_no.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210068' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('auto_expand_children')" >
+							Auto Expand Children
+							<span ng-if="gridOptions.sortFields['auto_expand_children']">
+								({{gridOptions.sortFields['auto_expand_children']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['auto_expand_children']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['auto_expand_children']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="auto_expand_children" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<input type="text"  name="auto_expand_children" ng-model="search.auto_expand_children" aria-label="Auto Expand Children" ng-enter='searchGrid()' id='ci210068' aria-label="auto_expand_children" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Auto Expand Children
+								</label>
+								<div ng-messages="pefDocsGrid.auto_expand_children.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210069' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('icon')" >
+							Icon
+							<span ng-if="gridOptions.sortFields['icon']">
+								({{gridOptions.sortFields['icon']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['icon']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['icon']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="icon" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<input type="text"  maxlength='50' name="icon" ng-model="search.icon" aria-label="Icon" ng-enter='searchGrid()' id='ci210069' aria-label="icon" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Icon
+								</label>
+								<div ng-messages="pefDocsGrid.icon.$error">
+									<div ng-message="maxlength">
+										At most 50 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210070' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('pef_container_id')" >
+							Pef Container*
+							<span ng-if="gridOptions.sortFields['pef_container_id']">
+								({{gridOptions.sortFields['pef_container_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['pef_container_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['pef_container_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="pef_container_id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<input type="text"  name="pef_container_id" ng-model="search.pef_container_id" aria-label="Pef Container" ng-enter='searchGrid()' id='ci210070' aria-label="pef_container_id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Pef Container
+								</label>
+								<div ng-messages="pefDocsGrid.pef_container_id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='210071' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('notes')" >
+							Notes
+							<span ng-if="gridOptions.sortFields['notes']">
+								({{gridOptions.sortFields['notes']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+								<input type="text"  maxlength='250' name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci210071' aria-label="notes" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Notes
+								</label>
+								<div ng-messages="pefDocsGrid.notes.$error">
+									<div ng-message="maxlength">
+										At most 250 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='pefDocsGrid' ng-if="gridOptions.inlineAddShow">
+				<ng-form name=pefDocsGrid  dib-container-name="pefDocsGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+					<div table-column layout="column" flex = 'nogrow' dib-column="210035" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true flex="nogrow" class="md-icon-button  md-squared md-raised" style="    " id='ci210035' aria-label="btngridedit" dib-container-name='pefDocsGrid' ng-click="dibCommon.goTo('pefDocsForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="210063" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci210063' aria-label="id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="pefDocsGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210064" style="    " >
+						<div aria-label="name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="text"  maxlength='250' required name="name" ng-model="model.name" aria-label="Name" ng-enter='searchGrid()' id='ci210064' aria-label="name" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Name*
+									</label>
+									<div ng-messages="pefDocsGrid.name.$error">
+										<div ng-message="required">
+											Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 250 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210065" style="    " >
+						<div aria-label="body" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['body']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="body" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<textarea   name="body" ng-model="model.body" aria-label="Body" ng-enter='searchGrid()' id='ci210065' aria-label="body" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+									</textarea>
+									<label>
+										Body
+									</label>
+									<div ng-messages="pefDocsGrid.body.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210066" style="    " >
+						<div aria-label="pef_docs_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['pef_docs_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for pefDocsForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('pefDocsForm','',true,'selected___pef_docs_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="pef_docs_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='pef_docs_id' select-model="model.selected___pef_docs_id.id" md-search-text-change="dropdowns.service210066.searchTextChange(dropdowns.service210066.searchText)" md-search-text="dropdowns.service210066.searchText" md-selected-item="model.selected___pef_docs_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service210066.getItems(dropdowns.service210066.searchText,'model')" md-floating-label="Pef Docs" md-no-cache="true" md-selected-item-change="select210066(model,'model','pef_docs_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Pef Docs" id='ci210066' aria-label="pef_docs_id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service210066.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="pefDocsGrid.pef_docs_id.$error" ng-if="pefDocsGrid.pef_docs_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for pefDocsForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('pefDocsForm','',true,'selected___pef_docs_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210067" style="    " >
+						<div aria-label="order_no" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['order_no']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="order_no" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="number"  name="order_no" ng-model="model.order_no" aria-label="Order No" ng-enter='searchGrid()' id='ci210067' aria-label="order_no" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Order No
+									</label>
+									<div ng-messages="pefDocsGrid.order_no.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210068" style="    " >
+						<div aria-label="auto_expand_children" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="boolean" ng-class="{ checked : $parent.viewModel['auto_expand_children']} ">
+									<span>
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container class="md-block"  aria-label="auto_expand_children" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<md-checkbox  dib-data-component='checkbox' name="auto_expand_children" ng-model="model.auto_expand_children" aria-label="Auto Expand Children" ng-enter='searchGrid()' id='ci210068' aria-label="auto_expand_children" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+										Auto Expand Children
+									</md-checkbox>
+									<div ng-messages="pefDocsGrid.auto_expand_children.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210069" style="    " >
+						<div aria-label="icon" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['icon']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="icon" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="text"  maxlength='50' name="icon" ng-model="model.icon" aria-label="Icon" ng-enter='searchGrid()' id='ci210069' aria-label="icon" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Icon
+									</label>
+									<div ng-messages="pefDocsGrid.icon.$error">
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210070" style="    " >
+						<div aria-label="pef_container_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['pef_container_id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="pef_container_id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="number"  required name="pef_container_id" ng-model="model.pef_container_id" aria-label="Pef Container" ng-enter='searchGrid()' id='ci210070' aria-label="pef_container_id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Pef Container*
+									</label>
+									<div ng-messages="pefDocsGrid.pef_container_id.$error">
+										<div ng-message="required">
+											Pef Container required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210071" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="text"  maxlength='250' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci210071' aria-label="notes" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="pefDocsGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 250 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex='none' dib-edit >
+						<md-button ng-click='toggleInlineAdd()' class="md-raised ">
+							Close 
+						</md-button>
+						<md-button ng-click='cleanRow($event,model, pefDocsGrid)' class="md-raised "  ng-disabled='!pefDocsGrid.$dirty'>
+							Clear   
+						</md-button>
+						<md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+							Use selected data 
+						</md-button>
+						<md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!pefDocsGrid.$valid">
+							Add   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</div>
+	<md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+		<md-list dib-table-column-width >
+			<md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+				<div class="no-records-available">
+					  No records available 
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)" >
+				<ng-form name='pefDocsGrid' dib-container-name="pefDocsGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+					<div table-column layout="column" flex = 'nogrow' dib-column="210035" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true flex="nogrow" class="md-icon-button  md-squared md-raised" style="    " id='ci210035' aria-label="btngridedit" dib-container-name='pefDocsGrid' ng-click="dibCommon.goTo('pefDocsForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="210063" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci210063' aria-label="id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="pefDocsGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210064" style="    " >
+						<div aria-label="name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="text"  maxlength='250' required name="name" ng-model="model.name" aria-label="Name" ng-enter='searchGrid()' id='ci210064' aria-label="name" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Name*
+									</label>
+									<div ng-messages="pefDocsGrid.name.$error">
+										<div ng-message="required">
+											Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 250 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210065" style="    " >
+						<div aria-label="body" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['body']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="body" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<textarea   name="body" ng-model="model.body" aria-label="Body" ng-enter='searchGrid()' id='ci210065' aria-label="body" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
+									</textarea>
+									<label>
+										Body
+									</label>
+									<div ng-messages="pefDocsGrid.body.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210066" style="    " >
+						<div aria-label="pef_docs_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['pef_docs_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for pefDocsForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('pefDocsForm','',true,'selected___pef_docs_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="pef_docs_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='pef_docs_id' select-model="model.selected___pef_docs_id.id" md-search-text-change="dropdowns.service210066.searchTextChange(dropdowns.service210066.searchText)" md-search-text="dropdowns.service210066.searchText" md-selected-item="model.selected___pef_docs_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service210066.getItems(dropdowns.service210066.searchText,'model')" md-floating-label="Pef Docs" md-no-cache="true" md-selected-item-change="select210066(model,'model','pef_docs_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Pef Docs" id='ci210066' aria-label="pef_docs_id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service210066.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="pefDocsGrid.pef_docs_id.$error" ng-if="pefDocsGrid.pef_docs_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for pefDocsForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('pefDocsForm','',true,'selected___pef_docs_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210067" style="    " >
+						<div aria-label="order_no" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['order_no']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="order_no" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="number"  name="order_no" ng-model="model.order_no" aria-label="Order No" ng-enter='searchGrid()' id='ci210067' aria-label="order_no" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Order No
+									</label>
+									<div ng-messages="pefDocsGrid.order_no.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210068" style="    " >
+						<div aria-label="auto_expand_children" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="boolean" ng-class="{ checked : $parent.viewModel['auto_expand_children']} ">
+									<span>
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container class="md-block"  aria-label="auto_expand_children" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<md-checkbox  dib-data-component='checkbox' name="auto_expand_children" ng-model="model.auto_expand_children" aria-label="Auto Expand Children" ng-enter='searchGrid()' id='ci210068' aria-label="auto_expand_children" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+										Auto Expand Children
+									</md-checkbox>
+									<div ng-messages="pefDocsGrid.auto_expand_children.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210069" style="    " >
+						<div aria-label="icon" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['icon']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="icon" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="text"  maxlength='50' name="icon" ng-model="model.icon" aria-label="Icon" ng-enter='searchGrid()' id='ci210069' aria-label="icon" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Icon
+									</label>
+									<div ng-messages="pefDocsGrid.icon.$error">
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210070" style="    " >
+						<div aria-label="pef_container_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['pef_container_id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="pef_container_id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="number"  required name="pef_container_id" ng-model="model.pef_container_id" aria-label="Pef Container" ng-enter='searchGrid()' id='ci210070' aria-label="pef_container_id" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Pef Container*
+									</label>
+									<div ng-messages="pefDocsGrid.pef_container_id.$error">
+										<div ng-message="required">
+											Pef Container required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="210071" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4591&text=pef_docs' >
+									<input type="text"  maxlength='250' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci210071' aria-label="notes" dib-container-name='pefDocsGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="pefDocsGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 250 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+						<md-button ng-click='cancelRow($event,row)' class="md-raised ">
+							Cancel 
+						</md-button>
+						<md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!pefDocsGrid.$valid" >
+							Save   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<div layout-fill layout='row' flex class='dib-grid-footer'>
+		<div flex=20 layout='row'>
+			<md-button disabled>
+				Page limit
+			</md-button>
+			<md-select ng-model="page.limit">
+				<md-option ng-value="10">
+					10
+				</md-option>
+				<md-option ng-value="20">
+					20
+				</md-option>
+				<md-option ng-value="50">
+					50
+				</md-option>
+			</md-select>
+		</div>
+		<div  ng-if="page.count>
+			1" flex=80 layout='row'  layout-align="center center" >
+			<md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+				First 
+			</md-button>
+			<md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+				Prev 
+			</md-button>
+			<div layout='row'>
+				<md-button disabled>
+					Page
+				</md-button>
+				<md-input-container>
+					<input type='number' ng-model="page.number" aria-label="Page number">
+				</md-input-container>
+				<md-button disabled>
+					of {{ page.count }} 
+				</md-button>
+			</div>
+			<md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+				Next 
+			</md-button>
+			<md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+				Last 
+			</md-button>
+		</div>
+	</div>
+</div>

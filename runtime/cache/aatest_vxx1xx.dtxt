@@ -1,0 +1,169 @@
+ 
+<div component-loaded dib-container=aatest dib-container-name="9075" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci209292' aria-label="layoutrow" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+		<md-sidenav  aria-label="menu" can-be-moved=true item-alias="menu"    ng-show="!!view.menu == false || view.menu.visible"  dib-disable="{{view.menu.disabled}}" ng-class="view.menu.class"  ng-style="view.menu.style" can-have-children=true flex=none class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4" style="    " id="ci209302" dib-side-bar-status md-is-open="sideNavs.menu" md-component-id="menu" id='ci209302' aria-label="menu" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+			<md-toolbar >
+				<div class="md-toolbar-tools">
+					<h2>
+						Dropinbase
+					</h2>
+					<span flex>
+					</span>
+					<md-button class="md-icon-button" aria-label="Logout" ng-click="dibCommon.location('/dropins/dibAuthenticate/Site/logout');">
+						<md-tooltip md-direction="left">
+							Logout
+						</md-tooltip>
+						<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_remove_circle_outline_black_24px.svg">
+						</md-icon>
+					</md-button>
+					<md-button ng-if='!dibCommon.navConfigSize("menu")' class="md-icon-button" aria-label="Settings" ng-click="dibCommon.toggleNavigation('menu')">
+						<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibAngular/src/img/icons/menu.svg">
+						</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-content>
+				<md-progress-linear ng-if="menus.service209302.loading" md-mode="indeterminate" class="dib-data-loading">
+				</md-progress-linear>
+				<md-list>
+					<md-list-item class="dib-main-menu-item secondary-button-padding" ng-repeat="item in menus.service209302.menu" ng-if="item.text"  ng-click="dibCommon.toggleNavigation(item,'menuItems')"   dib-selected>
+						<div layout="column" flex>
+							<div layout="row" flex>
+								<md-icon ng-if="item.icon" md-svg-icon="{{item.icon}}">
+								</md-icon>
+								<p layout="row" flex layout-align="space-between center" class="md-body-2">
+									<span flex>
+										{{ item.text }}
+									</span>
+									<span ng-if="item.notices" class="counter-pill md-accent">
+										{{item.notices}}
+									</span>
+									<md-button ng-if="!item.leaf && !!item.children == false" class="md-icon-button  md-squared" ng-click="menus.service209302.update(item)">
+										<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/open.svg">
+										</md-icon>
+									</md-button>
+									<md-button ng-if="!item.leaf && !!item.children" class="md-icon-button  md-squared" ng-click="item.children = null">
+										<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/close.svg">
+										</md-icon>
+									</md-button>
+								</p>
+							</div>
+							<md-list ng-if="item.children">
+								<md-list-item ng-repeat="child in item.children"    ng-click="dibCommon.toggleNavigation(child,'menuItems')"   ng-if="child.text"  dib-selected >
+									<md-icon ng-if="item.icon" md-svg-icon="{{child.icon}}">
+									</md-icon>
+									<p layout="row" layout-align="space-between center" class="md-body-2">
+										<span>
+											{{ child.text }}
+										</span>
+										<span ng-if="child.notices" class="counter-pill md-accent">
+											{{child.notices}}
+										</span>
+										<md-button ng-if="!child.leaf" class="md-icon-button  md-squared" ng-click="menus.service209302.update(child)">
+											<md-icon md-svg-icon="/files/dropins/setNgMaterial/dibMenu/img/open.svg">
+											</md-icon>
+										</md-button>
+									</p>
+								</md-list-item>
+							</md-list>
+						</div>
+					</md-list-item>
+				</md-list>
+			</md-content >
+		</md-sidenav>
+		<md-button aria-label="openNav" can-be-moved=true item-alias="openNav"    ng-show="!!view.openNav == false || view.openNav.visible"  dib-disable="{{view.openNav.disabled}}" ng-class="view.openNav.class"  ng-style="view.openNav.style" ng-if="!common.$mdMedia('gt-lg')"  class="md-icon-button " style="position:fixed;top:0px;left:0px;z-index:1000" style="    " id='ci209293' aria-label="openNav" dib-container-name='aatest' dib-config="{ listeners : { 'click___1826' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'aatest', triggerType: 'click', nextActionItem: '', itemEventId: '1826',         containerItemId: 209293, submitUrl: 'dibGlobals.action.ToggleMenu',         itemAlias: 'openNav', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAngular/src/img/icons/menu.svg">
+			</md-icon>
+		</md-button>
+		<div dib-inject-content="replace"  aria-label="div" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " id='ci209294' aria-label="div" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+			<md-tabs id="ci209295" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci209295' aria-label="mdTabs" can-be-moved=true can-have-children=true flex="100" md-no-select-click md-dynamic-height class= "shifted-tabs md-accent" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci209295' aria-label="mdTabs" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+				<md-tab label='Design Instructions' tabId="209300"  aria-label="deleteMe" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="   padding:10px !important; " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="deleteMe" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=aatest&itemId=209300'     id='ci209300' aria-label="deleteMe" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+							<span style="font-size:14px">
+								This template has fixed tabs that always remain open, similar to the design of the Dropinbase administration pages. A selection of containers are linked to these fixed tabs, while the rest will all load within the MainHolder tab. 
+								<h3>
+									Notes
+								</h3>
+								<ul>
+									<li>
+										Follow the 
+										<b>
+											Manual Steps
+										</b>
+										under 
+										<span ng-click="dibCommon.location('/nav/dibDocs?id=103&text=Creating%20Applications%20and%20Importing%20Tables');">
+											<u>
+												Creating Applications and Importing Tables 
+											</u>
+										</span>
+										to import your tables using a duplicate of this template.
+									</li>
+									<li>
+										Use the  
+										<span ng-click="dibCommon.goTo('dibDesigner','',true,'','',$event);">
+											<u>
+												Designer
+											</u>
+										</span>
+										to change the port records for the containers that must be linked to the fixed tabs. Their 
+										<i>
+											Port Item
+										</i>
+										fields must point to the Dashboard/fixedTab1/fixedTab2 items of the new base container.
+									</li>
+									<li>
+										Set the 
+										<i>
+											Name, Port
+										</i>
+										and 
+										<i>
+											Caption
+										</i>
+										fields for the fixed tab items.
+									</li>
+									<li>
+										Remove, change or add fixed tabs as needed (use copy paste to add - remember to set the values of the new tab correctly).
+									</li>
+									<li>
+										<b>
+											Do not remove
+										</b>
+										the MainHolder tab which is used for hosting the rest of the containers.
+									</li>
+								</ul>
+							</span>
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<md-tab label='Dashboard' tabId="209298"  aria-label="DashboardHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="  margin:0px 0px 0px 40px !important;  " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="DashboardHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="  margin:0px 0px 0px 40px !important;  " on-inject='dibGlobals.action.ActivateTab?containerName=aatest&itemId=209298'     id='ci209298' aria-label="DashboardHolder" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<md-tab label='Fixed Page 1' tabId="209297"  aria-label="fixedHolder1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" flex layout-fill style="    " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="fixedHolder1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=aatest&itemId=209297'     id='ci209297' aria-label="fixedHolder1" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<md-tab label='Fixed Page 2' tabId="209299"  aria-label="fixedHolder2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="fixedHolder2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=aatest&itemId=209299'     id='ci209299' aria-label="fixedHolder2" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<md-tab label='' tabId="209296"  aria-label="MainHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" flex layout-fill style="    " >
+					<md-tab-body flex layout-fill>
+						<div dib-inject-content="replace"  aria-label="MainHolder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="100" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=aatest&itemId=209296'     id='ci209296' aria-label="MainHolder" dib-container-name='aatest' dib-config="{ listeners : { } }" >
+						</div>
+					</md-tab-body>
+				</md-tab>
+			</md-tabs>
+		</div>
+	</div>
+</div>

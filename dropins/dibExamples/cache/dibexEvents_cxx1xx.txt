@@ -1,0 +1,535 @@
+(function() {
+  var require = [ ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibGrid/Template/controller/dibtestConsultantGrid.js');
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibHtmlTemplate/Template/controller/dibtestETEventsReport.js');
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibGrid/Template/controller/dibtestConsultantEventsGrid.js');
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibGrid/Template/controller/dibtestCompanyGrid.js');
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibForm/Template/controller/dibtestChildForm.js');
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibGrid/Template/controller/dibtestCompanyConsultantGrid.js');
+    var dibexEvents = angular.module('dibexEvents', [files]);
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    dibexEvents.service('service155095',service155095); 
+    service155095.$inject = ['ajax', 'discoverService', '$q'];
+    function service155095(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/dibexEvents?containerItemId=155095", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci155095'),
+                    container : $('[dib-container=dibexEvents]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    dibexEvents.service('service155121',service155121); 
+    service155121.$inject = ['ajax', 'discoverService', '$q'];
+    function service155121(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/dibexEvents?containerItemId=155121", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci155121'),
+                    container : $('[dib-container=dibexEvents]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    dibexEvents.service('service155143',service155143); 
+    service155143.$inject = ['ajax', 'discoverService', '$q'];
+    function service155143(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/dibexEvents?containerItemId=155143", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci155143'),
+                    container : $('[dib-container=dibexEvents]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    dibexEvents.service('service180007',service180007); 
+    service180007.$inject = ['ajax', 'discoverService', '$q'];
+    function service180007(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/dibexEvents?containerItemId=180007", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci180007'),
+                    container : $('[dib-container=dibexEvents]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    dibexEvents.service('service194831',service194831); 
+    service194831.$inject = ['ajax', 'discoverService', '$q'];
+    function service194831(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/dibexEvents?containerItemId=194831", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci194831'),
+                    container : $('[dib-container=dibexEvents]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+})();
+(function() {
+var dibexEvents = angular.module('dibexEvents');
+dibexEvents.component('dibexEvents', {
+    controllerAs: 'dibexEvents',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dibexEvents.html',
+    controller : component__dibexEvents
+});
+component__dibexEvents.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', '$q','service155095','service155121','service155143','service180007','service194831','containerService','recordFactory','crudService','utilityService'];
+    function component__dibexEvents($scope, $ocLazyLoad, $rootScope, $log, $q,service155095,service155121,service155143,service180007,service194831,containerService,recordFactory,crudService,utilityService) {
+        var vm = this;
+                     $scope.container = {};
+            $scope.container.Id = '7146';
+            $scope.container.Name = 'dibexEvents';
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.model._GET['test_company_id'] = containerService.modelItem("select", 
+            true,
+            true,
+            service155095
+        );
+        $scope.model._GET['Textfield1'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['Textfield2'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['test_company_id'] = containerService.modelItem("select", 
+            true,
+            true,
+            service155121
+        );
+        $scope.model._GET['companyList'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['loginId'] = containerService.modelItem("select", 
+            true,
+            true,
+            service155143
+        );
+        $scope.model._GET['msg'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['text1'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['queueLoginId'] = containerService.modelItem("select", 
+            true,
+            true,
+            service180007
+        );
+        $scope.model._GET['queueMsg'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['test_company_id'] = containerService.modelItem("select", 
+            true,
+            true,
+            service194831
+        );
+        $scope.model._GET['containerEvents'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['SelectTextEvent'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['CopyEvent'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.view = {};
+            $scope.view.mdtabs = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.colBasics = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.dibtestConsultantGrid = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.subTestHtmlEvents = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.companyId = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.btnHelloWorld = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.Textfield1 = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.Textfield2 = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.activeFilterCompany1 = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.activeFilterSupervisors = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.none = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.company1Id = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.btnPrompt = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.companyList = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.loginId = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.msg = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.test_company_grid = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.hiddenPopupButton = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.hiddenPromptButton = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.text1 = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.queueLoginId = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.queueMsg = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.btnHidden = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.btnDisable = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.btnSetStyleClass = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.CompanyConsultantGrid = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.activeFilterOriginal = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.htmlCompanyId = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            $scope.view.containerEvents = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.dropdowns.service155095 = {};
+            $scope.dropdowns.service155095.items = [];
+            var setTimeoutCancel155095 = null;
+            var query155095;
+            $scope.loadService155095 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query155095 != query) {
+                    query155095 = query;
+                    if (!!skipTimeout) {
+                        return service155095.list(query).then(function (items) {
+                            $scope.dropdowns.service155095.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel155095);
+                        setTimeoutCancel155095 = setTimeout(function () { 
+                            service155095.list(query).then(function (items) {
+                                $scope.dropdowns.service155095.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service155095.searchTextChange = function (query) {
+                $scope.loadService155095(query);
+            };
+            $scope.dropdowns.service155095.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service155095.list(query,modelType);
+            };
+            $scope.select155095 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci155095');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service155095.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout155095 = null;
+            //loadService155095();
+            //reloadContainerFunctions.push($scope.loadService155095);
+            $scope.dropdowns.service155121 = {};
+            $scope.dropdowns.service155121.items = [];
+            var setTimeoutCancel155121 = null;
+            var query155121;
+            $scope.loadService155121 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query155121 != query) {
+                    query155121 = query;
+                    if (!!skipTimeout) {
+                        return service155121.list(query).then(function (items) {
+                            $scope.dropdowns.service155121.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel155121);
+                        setTimeoutCancel155121 = setTimeout(function () { 
+                            service155121.list(query).then(function (items) {
+                                $scope.dropdowns.service155121.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service155121.searchTextChange = function (query) {
+                $scope.loadService155121(query);
+            };
+            $scope.dropdowns.service155121.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service155121.list(query,modelType);
+            };
+            $scope.select155121 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci155121');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service155121.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout155121 = null;
+            //loadService155121();
+            //reloadContainerFunctions.push($scope.loadService155121);
+            $scope.dropdowns.service155143 = {};
+            $scope.dropdowns.service155143.items = [];
+            var setTimeoutCancel155143 = null;
+            var query155143;
+            $scope.loadService155143 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query155143 != query) {
+                    query155143 = query;
+                    if (!!skipTimeout) {
+                        return service155143.list(query).then(function (items) {
+                            $scope.dropdowns.service155143.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel155143);
+                        setTimeoutCancel155143 = setTimeout(function () { 
+                            service155143.list(query).then(function (items) {
+                                $scope.dropdowns.service155143.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service155143.searchTextChange = function (query) {
+                $scope.loadService155143(query);
+            };
+            $scope.dropdowns.service155143.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service155143.list(query,modelType);
+            };
+            $scope.select155143 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci155143');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service155143.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout155143 = null;
+            //loadService155143();
+            //reloadContainerFunctions.push($scope.loadService155143);
+            $scope.dropdowns.service180007 = {};
+            $scope.dropdowns.service180007.items = [];
+            var setTimeoutCancel180007 = null;
+            var query180007;
+            $scope.loadService180007 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query180007 != query) {
+                    query180007 = query;
+                    if (!!skipTimeout) {
+                        return service180007.list(query).then(function (items) {
+                            $scope.dropdowns.service180007.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel180007);
+                        setTimeoutCancel180007 = setTimeout(function () { 
+                            service180007.list(query).then(function (items) {
+                                $scope.dropdowns.service180007.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service180007.searchTextChange = function (query) {
+                $scope.loadService180007(query);
+            };
+            $scope.dropdowns.service180007.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service180007.list(query,modelType);
+            };
+            $scope.select180007 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci180007');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service180007.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout180007 = null;
+            //loadService180007();
+            //reloadContainerFunctions.push($scope.loadService180007);
+            $scope.dropdowns.service194831 = {};
+            $scope.dropdowns.service194831.items = [];
+            var setTimeoutCancel194831 = null;
+            var query194831;
+            $scope.loadService194831 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query194831 != query) {
+                    query194831 = query;
+                    if (!!skipTimeout) {
+                        return service194831.list(query).then(function (items) {
+                            $scope.dropdowns.service194831.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel194831);
+                        setTimeoutCancel194831 = setTimeout(function () { 
+                            service194831.list(query).then(function (items) {
+                                $scope.dropdowns.service194831.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service194831.searchTextChange = function (query) {
+                $scope.loadService194831(query);
+            };
+            $scope.dropdowns.service194831.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service194831.list(query,modelType);
+            };
+            $scope.select194831 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci194831');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service194831.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout194831 = null;
+            //loadService194831();
+            //reloadContainerFunctions.push($scope.loadService194831);
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        //required for permissions
+        vm.$postLink = function () {
+            $("[dib-container=dibexEvents]").trigger('onInit');
+        };
+        vm.$onInit = function () { 
+            $scope.recordStatus = "create";
+        };
+        $scope.reloadContainer = function () {
+            //Now we reload all the required 
+            containerService.reloadChildren({containerName: 'dibexEvents'});
+        };
+        if (!!containerService.isSubContainer($("[dib-container=dibexEvents]")) === false) { 
+            $scope.reloadContainer();
+        }
+    } 
+})();

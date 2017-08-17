@@ -1,0 +1,97 @@
+ 
+<div component-loaded dib-container=aatest1 dib-container-name="9088" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<md-tabs id="ci209755" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci209755' aria-label="MainHolder" can-be-moved=true can-have-children=true flex md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci209755' aria-label="MainHolder" dib-container-name='aatest1' dib-config="{ listeners : { } }" >
+		<md-tab label='Pef Docs' tabId="209758"  ng-click=dibCommon.goTo('pefDocsGrid',null,true) aria-label="portpefdocs" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="portpefdocs" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=aatest1&itemId=209758'     id='ci209758' aria-label="portpefdocs" dib-container-name='aatest1' dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Pef Tables' tabId="209783"  ng-click=dibCommon.goTo('pefTableGrid',null,true) aria-label="portpeftable" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="    " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="portpeftable" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " on-inject='dibGlobals.action.ActivateTab?containerName=aatest1&itemId=209783'     id='ci209783' aria-label="portpeftable" dib-container-name='aatest1' dib-config="{ listeners : { } }" >
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Design Instructions' tabId="209756"  aria-label="deleteMe" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="   padding:10px !important; " >
+			<md-tab-body flex layout-fill>
+				<div dib-inject-content="replace"  aria-label="deleteMe" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=aatest1&itemId=209756'     id='ci209756' aria-label="deleteMe" dib-container-name='aatest1' dib-config="{ listeners : { } }" >
+					<span style="font-size:14px">
+						This is a very simple template with only one item, a mdTabs component named MainHolder. By setting the 
+						<i>
+							Add Port Component
+						</i>
+						field of the database record, a template has fixed tabs for selected containers that always remain available, similar to the design of the Dropinbase administration pages. You need to link specific containers to these fixed tabs after they have been created. The rest of the containers will all load within the MainHolder tab (as specified in the database record). 
+						<h3>
+							Notes
+						</h3>
+						<ul>
+							<li>
+								Follow the 
+								<b>
+									Manual Steps
+								</b>
+								under 
+								<span ng-click="dibCommon.location('/nav/dibDocs?id=103&text=Creating%20Applications%20and%20Importing%20Tables');">
+									<u>
+										Creating Applications and Importing Tables 
+									</u>
+								</span>
+								to import your tables using a duplicate of this template (
+								<b>
+									remember
+								</b>
+								to save the database record changes before importing the tables).
+							</li>
+							<li>
+								Use the  
+								<span ng-click="dibCommon.goTo('dibDesigner','',true,'','',$event);">
+									<u>
+										Designer
+									</u>
+								</span>
+								to change the port records for the containers that must be linked to the fixed tabs. The 
+								<i>
+									Port Item
+								</i>
+								fields of these port records must point to the Dashboard/fixedTab1/fixedTab2 items of the new base container. Refer to the documentation about 
+								<span ng-click="dibCommon.location('/nav/dibDocs?id=72&text=Ports');">
+									<u>
+										Ports 
+									</u>
+								</span>
+								for more info.
+							</li>
+							<li>
+								Set the 
+								<i>
+									Name
+								</i>
+								and 
+								<i>
+									Caption
+								</i>
+								fields of the fixed tab items on the new base container. Also set their 
+								<i>
+									Port
+								</i>
+								fields to point to the port records that were updated in the previous step.
+							</li>
+							<li>
+								Remove, change or add fixed tabs as needed (use copy paste to add - remember to set the field values of the new tabs correctly).
+							</li>
+							<li>
+								<b>
+									Do not remove
+								</b>
+								the MainHolder &lt;div&gt; which is used for hosting the rest of the containers.
+							</li>
+						</ul>
+					</span>
+				</div>
+			</md-tab-body>
+		</md-tab>
+	</md-tabs>
+</div>

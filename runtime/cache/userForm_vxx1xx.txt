@@ -1,0 +1,711 @@
+ 
+<ng-form layout-fill dib-container=userForm  flex isolate-form name='userForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci185218' aria-label="rowToolbar" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci185219' aria-label="btnsave" dib-container-name='userForm' dib-config="{ 'tooltip':'Save record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci185220' aria-label="btnadd" dib-container-name='userForm' dib-config="{ 'tooltip':'Add new record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised " style="    " ng-click="deleteModel({'redirect' : true})" id='ci185221' aria-label="btndelete" dib-container-name='userForm' dib-config="{ 'tooltip':'Delete record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci185222' aria-label="btnreload" dib-container-name='userForm' dib-config="{ 'tooltip':'Restore saved data', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci185745' aria-label="btnAuditTrail" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnGrid" can-be-moved=true flex=none style="    " id='ci185225' aria-label="btnGrid" dib-container-name='userForm' ng-click="common.goTo('userGrid','',true,'','',$event);" dib-config="{ 'tooltip':'Open grid', listeners : { } }" aria-label="Grid" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Open grid
+			</md-tooltip>
+			Grid 
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci185223' aria-label="emptyspan" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci185224' aria-label="formpaging" dib-container-name='userForm' dib-config="{ listeners : { } }" data-container-name="userForm" >
+		</dib-form-paging >
+	</div>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci185226' aria-label="layoutrow" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+		<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci185227' aria-label="fieldset" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-input-container aria-label="Host" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<input type="text"  maxlength='60' required         name="Host" ng-model="model.Host" aria-label="Host" id='ci185746' aria-label="Host" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Host*
+						</label>
+						<div ng-messages="userForm.Host.$error">
+							<div ng-message="required">
+								Host required.
+							</div>
+							<div ng-message="maxlength">
+								At most 60 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="User" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<input type="text"  maxlength='16' required         name="User" ng-model="model.User" aria-label="User" id='ci185747' aria-label="User" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							User*
+						</label>
+						<div ng-messages="userForm.User.$error">
+							<div ng-message="required">
+								User required.
+							</div>
+							<div ng-message="maxlength">
+								At most 16 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="Password" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<input type="text"  maxlength='41' required         name="Password" ng-model="model.Password" aria-label="Password" id='ci185748' aria-label="Password" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Password*
+						</label>
+						<div ng-messages="userForm.Password.$error">
+							<div ng-message="required">
+								Password required.
+							</div>
+							<div ng-message="maxlength">
+								At most 41 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="Select_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Select Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Select_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Select Priv" aria-label="Select_priv" md-on-close="select185749(model)" flex ng-model="model.Select_priv" name='Select_priv' id='ci185749' aria-label="Select_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Select_priv.$error">
+								<div ng-message="required">
+									Select Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Insert_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Insert Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Insert_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Insert Priv" aria-label="Insert_priv" md-on-close="select185750(model)" flex ng-model="model.Insert_priv" name='Insert_priv' id='ci185750' aria-label="Insert_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Insert_priv.$error">
+								<div ng-message="required">
+									Insert Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Update_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Update Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Update_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Update Priv" aria-label="Update_priv" md-on-close="select185751(model)" flex ng-model="model.Update_priv" name='Update_priv' id='ci185751' aria-label="Update_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Update_priv.$error">
+								<div ng-message="required">
+									Update Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Delete_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Delete Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Delete_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Delete Priv" aria-label="Delete_priv" md-on-close="select185752(model)" flex ng-model="model.Delete_priv" name='Delete_priv' id='ci185752' aria-label="Delete_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Delete_priv.$error">
+								<div ng-message="required">
+									Delete Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Create_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Create Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Create_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Create Priv" aria-label="Create_priv" md-on-close="select185753(model)" flex ng-model="model.Create_priv" name='Create_priv' id='ci185753' aria-label="Create_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Create_priv.$error">
+								<div ng-message="required">
+									Create Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Drop_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Drop Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Drop_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Drop Priv" aria-label="Drop_priv" md-on-close="select185754(model)" flex ng-model="model.Drop_priv" name='Drop_priv' id='ci185754' aria-label="Drop_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Drop_priv.$error">
+								<div ng-message="required">
+									Drop Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Reload_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Reload Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Reload_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Reload Priv" aria-label="Reload_priv" md-on-close="select185755(model)" flex ng-model="model.Reload_priv" name='Reload_priv' id='ci185755' aria-label="Reload_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Reload_priv.$error">
+								<div ng-message="required">
+									Reload Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Shutdown_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Shutdown Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Shutdown_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Shutdown Priv" aria-label="Shutdown_priv" md-on-close="select185756(model)" flex ng-model="model.Shutdown_priv" name='Shutdown_priv' id='ci185756' aria-label="Shutdown_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Shutdown_priv.$error">
+								<div ng-message="required">
+									Shutdown Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Process_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Process Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Process_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Process Priv" aria-label="Process_priv" md-on-close="select185757(model)" flex ng-model="model.Process_priv" name='Process_priv' id='ci185757' aria-label="Process_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Process_priv.$error">
+								<div ng-message="required">
+									Process Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="File_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								File Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['File_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="File Priv" aria-label="File_priv" md-on-close="select185758(model)" flex ng-model="model.File_priv" name='File_priv' id='ci185758' aria-label="File_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.File_priv.$error">
+								<div ng-message="required">
+									File Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Grant_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Grant Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Grant_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Grant Priv" aria-label="Grant_priv" md-on-close="select185759(model)" flex ng-model="model.Grant_priv" name='Grant_priv' id='ci185759' aria-label="Grant_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Grant_priv.$error">
+								<div ng-message="required">
+									Grant Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="References_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								References Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['References_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="References Priv" aria-label="References_priv" md-on-close="select185760(model)" flex ng-model="model.References_priv" name='References_priv' id='ci185760' aria-label="References_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.References_priv.$error">
+								<div ng-message="required">
+									References Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+				</section>
+			</md-card-content>
+		</md-card>
+		<md-card  aria-label="fieldset2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci185229' aria-label="fieldset2" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<div layout='row' aria-label="Index_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Index Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Index_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Index Priv" aria-label="Index_priv" md-on-close="select185761(model)" flex ng-model="model.Index_priv" name='Index_priv' id='ci185761' aria-label="Index_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Index_priv.$error">
+								<div ng-message="required">
+									Index Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Alter_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Alter Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Alter_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Alter Priv" aria-label="Alter_priv" md-on-close="select185762(model)" flex ng-model="model.Alter_priv" name='Alter_priv' id='ci185762' aria-label="Alter_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Alter_priv.$error">
+								<div ng-message="required">
+									Alter Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Show_db_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Show Db Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Show_db_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Show Db Priv" aria-label="Show_db_priv" md-on-close="select185763(model)" flex ng-model="model.Show_db_priv" name='Show_db_priv' id='ci185763' aria-label="Show_db_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Show_db_priv.$error">
+								<div ng-message="required">
+									Show Db Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Super_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Super Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Super_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Super Priv" aria-label="Super_priv" md-on-close="select185764(model)" flex ng-model="model.Super_priv" name='Super_priv' id='ci185764' aria-label="Super_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Super_priv.$error">
+								<div ng-message="required">
+									Super Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Create_tmp_table_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Create Tmp Table Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Create_tmp_table_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Create Tmp Table Priv" aria-label="Create_tmp_table_priv" md-on-close="select185765(model)" flex ng-model="model.Create_tmp_table_priv" name='Create_tmp_table_priv' id='ci185765' aria-label="Create_tmp_table_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Create_tmp_table_priv.$error">
+								<div ng-message="required">
+									Create Tmp Table Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Lock_tables_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Lock Tables Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Lock_tables_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Lock Tables Priv" aria-label="Lock_tables_priv" md-on-close="select185766(model)" flex ng-model="model.Lock_tables_priv" name='Lock_tables_priv' id='ci185766' aria-label="Lock_tables_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Lock_tables_priv.$error">
+								<div ng-message="required">
+									Lock Tables Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Execute_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Execute Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Execute_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Execute Priv" aria-label="Execute_priv" md-on-close="select185767(model)" flex ng-model="model.Execute_priv" name='Execute_priv' id='ci185767' aria-label="Execute_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Execute_priv.$error">
+								<div ng-message="required">
+									Execute Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Repl_slave_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Repl Slave Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Repl_slave_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Repl Slave Priv" aria-label="Repl_slave_priv" md-on-close="select185768(model)" flex ng-model="model.Repl_slave_priv" name='Repl_slave_priv' id='ci185768' aria-label="Repl_slave_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Repl_slave_priv.$error">
+								<div ng-message="required">
+									Repl Slave Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Repl_client_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Repl Client Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Repl_client_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Repl Client Priv" aria-label="Repl_client_priv" md-on-close="select185769(model)" flex ng-model="model.Repl_client_priv" name='Repl_client_priv' id='ci185769' aria-label="Repl_client_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Repl_client_priv.$error">
+								<div ng-message="required">
+									Repl Client Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Create_view_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Create View Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Create_view_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Create View Priv" aria-label="Create_view_priv" md-on-close="select185770(model)" flex ng-model="model.Create_view_priv" name='Create_view_priv' id='ci185770' aria-label="Create_view_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Create_view_priv.$error">
+								<div ng-message="required">
+									Create View Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Show_view_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Show View Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Show_view_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Show View Priv" aria-label="Show_view_priv" md-on-close="select185771(model)" flex ng-model="model.Show_view_priv" name='Show_view_priv' id='ci185771' aria-label="Show_view_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Show_view_priv.$error">
+								<div ng-message="required">
+									Show View Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Create_routine_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Create Routine Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Create_routine_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Create Routine Priv" aria-label="Create_routine_priv" md-on-close="select185772(model)" flex ng-model="model.Create_routine_priv" name='Create_routine_priv' id='ci185772' aria-label="Create_routine_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Create_routine_priv.$error">
+								<div ng-message="required">
+									Create Routine Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Alter_routine_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Alter Routine Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Alter_routine_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Alter Routine Priv" aria-label="Alter_routine_priv" md-on-close="select185773(model)" flex ng-model="model.Alter_routine_priv" name='Alter_routine_priv' id='ci185773' aria-label="Alter_routine_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Alter_routine_priv.$error">
+								<div ng-message="required">
+									Alter Routine Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Create_user_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Create User Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Create_user_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Create User Priv" aria-label="Create_user_priv" md-on-close="select185774(model)" flex ng-model="model.Create_user_priv" name='Create_user_priv' id='ci185774' aria-label="Create_user_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Create_user_priv.$error">
+								<div ng-message="required">
+									Create User Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+				</section>
+			</md-card-content>
+		</md-card>
+		<md-card  aria-label="fieldset3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci185228' aria-label="fieldset3" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<div layout='row' aria-label="Event_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Event Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Event_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Event Priv" aria-label="Event_priv" md-on-close="select185775(model)" flex ng-model="model.Event_priv" name='Event_priv' id='ci185775' aria-label="Event_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Event_priv.$error">
+								<div ng-message="required">
+									Event Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Trigger_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Trigger Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Trigger_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Trigger Priv" aria-label="Trigger_priv" md-on-close="select185776(model)" flex ng-model="model.Trigger_priv" name='Trigger_priv' id='ci185776' aria-label="Trigger_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Trigger_priv.$error">
+								<div ng-message="required">
+									Trigger Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="Create_tablespace_priv" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Create Tablespace Priv
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['Create_tablespace_priv'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Create Tablespace Priv" aria-label="Create_tablespace_priv" md-on-close="select185777(model)" flex ng-model="model.Create_tablespace_priv" name='Create_tablespace_priv' id='ci185777' aria-label="Create_tablespace_priv" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.Create_tablespace_priv.$error">
+								<div ng-message="required">
+									Create Tablespace Priv required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout='row' aria-label="ssl_type" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Ssl Type
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['ssl_type'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Ssl Type" aria-label="ssl_type" md-on-close="select185778(model)" flex ng-model="model.ssl_type" name='ssl_type' id='ci185778' aria-label="ssl_type" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['dib___slash*,'ANY','X509','SPECIFIED']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.ssl_type.$error">
+								<div ng-message="required">
+									Ssl Type required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<dib-file-uploader class="md-block" aria-label="ssl_cipher" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' data-container-name='userForm' ngf-model-invalid="errorFile" ng-model="model.ssl_cipher" name='ssl_cipher' id='ci185779' aria-label="ssl_cipher" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+					</dib-file-uploader>
+					<dib-file-uploader class="md-block" aria-label="x509_issuer" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' data-container-name='userForm' ngf-model-invalid="errorFile" ng-model="model.x509_issuer" name='x509_issuer' id='ci185780' aria-label="x509_issuer" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+					</dib-file-uploader>
+					<dib-file-uploader class="md-block" aria-label="x509_subject" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' data-container-name='userForm' ngf-model-invalid="errorFile" ng-model="model.x509_subject" name='x509_subject' id='ci185781' aria-label="x509_subject" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+					</dib-file-uploader>
+					<md-input-container aria-label="max_questions" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<input type="number"  required         name="max_questions" ng-model="model.max_questions" aria-label="Max Questions" id='ci185782' aria-label="max_questions" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Max Questions*
+						</label>
+						<div ng-messages="userForm.max_questions.$error">
+							<div ng-message="required">
+								Max Questions required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="max_updates" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<input type="number"  required         name="max_updates" ng-model="model.max_updates" aria-label="Max Updates" id='ci185783' aria-label="max_updates" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Max Updates*
+						</label>
+						<div ng-messages="userForm.max_updates.$error">
+							<div ng-message="required">
+								Max Updates required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="max_connections" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<input type="number"  required         name="max_connections" ng-model="model.max_connections" aria-label="Max Connections" id='ci185784' aria-label="max_connections" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Max Connections*
+						</label>
+						<div ng-messages="userForm.max_connections.$error">
+							<div ng-message="required">
+								Max Connections required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="max_user_connections" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<input type="number"  required         name="max_user_connections" ng-model="model.max_user_connections" aria-label="Max User Connections" id='ci185785' aria-label="max_user_connections" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-number' md-detect-hidden >
+						<label>
+							Max User Connections*
+						</label>
+						<div ng-messages="userForm.max_user_connections.$error">
+							<div ng-message="required">
+								Max User Connections required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="plugin" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<input type="text"  maxlength='64' name="plugin" ng-model="model.plugin" aria-label="Plugin" id='ci185786' aria-label="plugin" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-text' md-detect-hidden >
+						<label>
+							Plugin
+						</label>
+						<div ng-messages="userForm.plugin.$error">
+							<div ng-message="maxlength">
+								At most 64 characters are allowed.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="authentication_string" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<textarea   name="authentication_string" ng-model="model.authentication_string" aria-label="Authentication String" id='ci185787' aria-label="authentication_string" dib-container-name='userForm' dib-config="{ listeners : { } }" dib-data-component='input-textarea' md-detect-hidden >
+						</textarea>
+						<label>
+							Authentication String
+						</label>
+						<div ng-messages="userForm.authentication_string.$error">
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="password_expired" can-be-moved=true flex=none style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4061&text=user' >
+						<md-input-container flex>
+							<label>
+								Password Expired
+							</label>
+							<md-select    ng-required=true         ng-disabled="model._GET['password_expired'][recordStatus]" dib-data-component='enum' dib-onload-service placeholder="Password Expired" aria-label="password_expired" md-on-close="select185788(model)" flex ng-model="model.password_expired" name='password_expired' id='ci185788' aria-label="password_expired" dib-container-name='userForm' dib-config="{ listeners : { } }" >
+								<md-option ng-repeat="state in ['N','Y']" value="{{state}}"  >
+									{{state}} 
+								</md-option>
+							</md-select>
+							<div ng-messages="userForm.password_expired.$error">
+								<div ng-message="required">
+									Password Expired required.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+				</section>
+			</md-card-content>
+		</md-card>
+	</div>
+</ng-form>

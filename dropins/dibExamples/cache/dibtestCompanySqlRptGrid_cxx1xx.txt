@@ -1,0 +1,484 @@
+(function() {
+  var require = [ 
+		'/dropins/setNgMaterial/dibGrid/js/components/dibTableWidth.js',
+  		'/dropins/setNgMaterial/dibGrid/js/components/dibInlineEdit.js',
+	    '/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+  ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var dibtestCompanySqlRptGrid = angular.module('dibtestCompanySqlRptGrid', [files]);
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+})();
+(function() {
+var dibtestCompanySqlRptGrid = angular.module('dibtestCompanySqlRptGrid');
+dibtestCompanySqlRptGrid.component('dibtestCompanySqlRptGrid', {
+    controllerAs: 'dibtestCompanySqlRptGrid',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibGrid/Template/view/dibtestCompanySqlRptGrid.html',
+    controller : component__dibtestCompanySqlRptGrid
+});
+component__dibtestCompanySqlRptGrid.$inject = [  
+            'dibForm', '$location', '$timeout', '$scope', '$ocLazyLoad', '$rootScope', '$log', 'containerService', '$q', 'recordFactory', 'messageService','keysPressed','containerService','recordFactory','crudService','utilityService'];
+    function component__dibtestCompanySqlRptGrid(dibForm, $location, $timeout, $scope, $ocLazyLoad, $rootScope, $log, containerService, $q, recordFactory, messageService,keysPressed,containerService,recordFactory,crudService,utilityService) {
+        var vm = this;
+        vm.$postLink = function () {
+            $("[dib-container=dibtestCompanySqlRptGrid]").trigger('onInit');
+        };
+        vm.$onInit = function () {
+                        $scope.container = {};
+            $scope.container.Id = '7159';
+            $scope.container.Name = 'dibtestCompanySqlRptGrid';
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.model._GET['id'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['name'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['chinese_name'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['parent_company'] = containerService.modelItem("sqltext", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['website'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['icon'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+            $scope.gridOptions = {};
+            $scope.gridOptions.data = 'gridData';
+            $scope.gridOptions.inlineAddShow = "" == "true";
+            $scope.selectedItems = [];
+            $scope.lastSelectedItem = null;
+            var arraySelected = [];
+            /**
+             * Inline add show/hide
+             */
+            $scope.toggleInlineAdd = function () { 
+                $scope.gridOptions.inlineAddShow = !$scope.gridOptions.inlineAddShow;
+                //ensuring edit buttons is on the correct place by triggering the scroll event
+                var $content = $('[dib-container=dibtestCompanySqlRptGrid]').find('.dib-grid-column-content');
+                $timeout(function () { 
+                    $content.trigger('scroll');
+                    $content.trigger('refreshHeight');
+                },100);
+            }
+            $scope.$on('dib-select', function ($event, $row) { 
+                $log.debug("Selected Row", $row);
+            });
+            /**
+             * Copy the selected record to the current row.
+             */
+            $scope.useSelectedRow = function ($event, model) {
+                var scope = angular.element($event.currentTarget).scope().$parent;
+                model = recordFactory.getModel(angular.copy($scope.lastSelectedItem), scope);
+                angular.forEach($scope.primaryKeys, function (key, index) { 
+                    model[key] = 0;
+                });
+            };
+            /**
+             * Select the row
+             */
+            $scope.selectRow = function (row,$event) { 
+                $scope.lastSelectedItem = row;
+                //check if inline editing is busy then ignore
+                if (row.___editing) { 
+                    return;
+                }
+                //If the even is passed in then we should not select row. 
+                if (!!$event) return;
+                $("[dib-container='dibtestCompanySqlRptGrid']").trigger('rowClick', [row]);
+                //If the even is passed in then we should not select row. 
+                //if (!!$event) return;
+                row.___selected = !row.___selected;
+                //add to array if not checked, as this means the item will be checked.
+                if (row.___selected) { 
+                    //Setting the last selected node
+                    $log.debug("SELECTED NODE", row);
+                    //trigger selected item event
+                    $("[dib-container='dibtestCompanySqlRptGrid']").trigger('rowSelect', [row]);
+                } else {
+                    $("[dib-container='dibtestCompanySqlRptGrid']").trigger('rowDeselect', [row]);
+                }
+                //update the selected items
+                $scope.selectedItems = []; 
+                angular.forEach($scope.gridData, function (gridRow, index) { 
+                    if (gridRow.___selected) {
+                        $scope.selectedItems.push(gridRow);
+                    }
+                });
+                $log.debug("CURRENT SELECTED ITEMS IN GRID", $scope.selectedItems);
+            };
+            /**
+             * Save the row data
+             */
+            $scope.saveRow = function ($event, row) {
+                var element = $($event.target).parents('[dib-inline-edit]');
+                element.trigger('editClose');    
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            /**
+             * Add the row
+             */
+            $scope.addRow = function ($event, row) {
+                var element = $($event.target).parents('[dib-inline-edit]');
+                element.trigger('addRow');    
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            /**
+             * Cancel row and close editing
+             */
+            $scope.cancelRow = function ($event, row) {
+                var element = $($event.target).parents('[dib-inline-edit]');
+                row.___editing = false;
+                row.___selected = true;
+                element.find('[dib-edit]').hide();
+                element.find('[dib-view]').show();
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            /**
+             * clean row mainly used to cancel inline add.
+             */
+            $scope.cleanRow = function ($event, model, $form) {
+                $form.$setDirty(false);
+                dibForm.clean($form,model);
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            /**
+             * Double click event gets triggered then the row can be editable
+             */
+            $scope.rowEdit = function (element) {
+                var $rowElement = $(element).find('[dib-inline-edit]');
+                if ($rowElement.length > 0) {
+                    //Open
+                    $rowElement.trigger('edit');
+                    $rowElement.removeClass('md-accent');    
+                } else {
+                    //Closed
+                    $containerItemElement.parents('[dib-inline-edit=open]').trigger('editClose');        
+                }
+                var $rowElement =$rowElement.parents('[dib-inline-edit=add-mode]');
+                if ($rowElement.length>0) {
+                    $rowElement.trigger('addRow');
+                }
+            };
+            /**
+             * The itemAliasData function on the scope is how we collect data from this component/dropin for submissionData, or when the component is referenced by using its itemAlias
+             */
+            $scope.itemAliasData = function () {
+                var itemSelected= angular.copy($scope.lastSelectedItem);
+                return itemSelected;
+            };
+        /**
+         * Custom sorting added Cobus
+         */
+        $scope.gridOptions.sortFields = {};
+        $scope.gridOptions.sortNr = 0;
+        function applySortFromUrl() { 
+            var sortUrlChange= containerService.urlContainer("dibtestCompanySqlRptGrid");
+             var searchLength = Object.keys($location.search()).length;
+            if (sortUrlChange && searchLength>0) {
+                //apply search from urlContainer
+                $scope.gridOptions.sortNr = 0;
+                angular.forEach($location.search(), function (item,index) {
+                    if (index.indexOf("sort_") !==-1) { 
+                        $scope.gridOptions.sortNr ++;
+                        var splitValues = item.split("::");
+                        $scope.gridOptions.sortFields[index.replace('sort_','')]= {
+                            "Order" : splitValues[0],
+                            "Count" :  splitValues[1]
+                        } 
+                    } 
+                });
+                //apply sort from urlContainer
+            }
+        }
+        $scope.gridOptions.toggleSort = function (fieldName) { 
+            var sortUrlChange= containerService.urlContainer("dibtestCompanySqlRptGrid");
+            if (!!$scope.gridOptions.sortFields[fieldName] && $scope.gridOptions.sortFields[fieldName]['Order'] === "ASC") { 
+                $scope.gridOptions.sortFields[fieldName]['Order'] = "DESC";
+                if (sortUrlChange ) $location.search("sort_"+fieldName,"DESC::"+$scope.gridOptions.sortFields[fieldName]['Count']);
+            } else if (!!$scope.gridOptions.sortFields[fieldName] && $scope.gridOptions.sortFields[fieldName]['Order'] === "DESC") { 
+                $scope.gridOptions.sortNr = 0;
+                delete $scope.gridOptions.sortFields[fieldName];
+                if (Object.keys($scope.gridOptions.sortFields).length == 0)  {
+                    containerService.cleanUrlState();
+                }
+                if (sortUrlChange ) $location.search("sort_"+fieldName,null);
+                angular.forEach($scope.gridOptions.sortFields, function (sort,index) { 
+                    if (!!sort) { 
+                        $scope.gridOptions.sortNr ++;
+                        sort['Count'] = $scope.gridOptions.sortNr;
+                        if (sortUrlChange ) $location.search("sort_"+index,sort['Order']+"::"+sort['Count']);
+                    }
+                });
+                return;
+            } else {
+                $scope.gridOptions.sortNr ++;
+                $scope.gridOptions.sortFields[fieldName] = {"Order" : "ASC", "Count" : $scope.gridOptions.sortNr };
+                if (sortUrlChange ) $location.search("sort_"+fieldName,"ASC::"+$scope.gridOptions.sortNr);
+            }
+            loadGrid();
+        };
+            $scope.search = {};
+$scope.clearSearch = function () { 
+    $scope.search = {};
+    containerService.cleanUrlState();
+    $scope.searchGrid();
+};
+$scope.searchGrid = function () { 
+    var searchUrlChange= containerService.urlContainer("dibtestCompanySqlRptGrid");
+    if (searchUrlChange ) {
+        //clear search
+        angular.forEach($location.search(), function (item,index) {
+            if (index.indexOf("filter_") ==0 || index.indexOf("filterDisplay_") ==0) { 
+                $location.search(index,null);
+            } 
+        });
+        //fill search
+        angular.forEach($scope.search, function (search, index) {
+            if (!!search == false) return;
+            if (typeof search != 'object') {
+                $location.search("filter_"+index,search.replace('&','~~~'));
+            } else if (!!search.id && !!search.id_display_value) {
+                var key = index.replace('selected___','');
+                var urlSearch = {};
+                urlSearch["filter_"+key]=search.id;
+                urlSearch["filterDisplay_"+key] = utilityService.fixedEncodeURIComponent(search.id_display_value);
+                $location.search(urlSearch);
+            }
+        });
+    }
+    loadGrid();
+};
+$scope.$watch("showSearch", function () {
+    //to ensure when the state change that the heights are calculated accordingly.
+    $timeout(function () { 
+        $("[dib-container=dibtestCompanySqlRptGrid]").find('.dib-grid-column-content').trigger('refreshHeight')
+    },50);
+    if (!!$scope.showSearch === false) {
+        $scope.search = {};
+        if (!!$scope.gridData) loadGrid();
+    }
+});
+function applyFilterFromUrl() { 
+    var searchUrlChange= containerService.urlContainer("dibtestCompanySqlRptGrid");
+    var searchLength = Object.keys($location.search()).length;
+    if (searchUrlChange && searchLength>0) {
+        //apply search from urlContainer
+        $scope.search = {};
+        var urlSearch  =$location.search();
+        angular.forEach(urlSearch, function (item,index) {
+            if (index.indexOf('filter') === -1) return;
+            if (index.indexOf("filter_") ==0) { 
+                $scope.showSearch = true;
+                $scope.search[index.replace('filter_','')]= item.replace('~~~','&');
+            } 
+            if (index.indexOf("filterDisplay_") ==0) {
+                var selectKeyIndex=  index.replace('filterDisplay_','');
+                var selectKey ="selected___" + selectKeyIndex; 
+                $scope.search[selectKey]= {};
+                $scope.search[selectKey].id = urlSearch["filter_"+selectKeyIndex];
+                $scope.search[selectKey].id_display_value = decodeURI(item);
+            }
+        });
+        //apply sort from urlContainer
+    } else {
+        $scope.search = {};
+        $scope.showSearch = false;
+    }
+}
+            $scope.scrollConfig = {
+                autoHideScrollbar: false,
+                theme: 'light',
+                advanced:{
+                    updateOnContentResize: true
+                },
+                    setHeight: 200,
+                    scrollInertia: 0
+            };
+            $scope.createRecord = function (data) {
+                $scope.loadingData = true;
+                return gridOptionsdibtestCompanySqlRptGrid.create(data,$scope.primaryKeys).then(function () {
+                    $("[dib-container=dibtestCompanySqlRptGrid]").trigger('afterSave');
+                    $scope.page.number = 1;
+                    loadGrid();
+                });
+            };
+            $scope.updateRecord = function (data) {
+                $scope.loadingData = true;
+                return gridOptionsdibtestCompanySqlRptGrid.update(data,$scope.primaryKeys).then(function (data) {
+                    $scope.loadingData = false;
+                    $("[dib-container=dibtestCompanySqlRptGrid]").trigger('afterSave');
+                    return $q.resolve();
+                }, function (data) {
+                    $scope.loadingData = false;
+                    return $q.reject(data);
+                });
+            };
+            $scope.deleteRecord = function (data) {
+                $scope.loadingData = true;
+                return gridOptionsdibtestCompanySqlRptGrid.delete(data,$scope.primaryKeys).then(function () {
+                    $("[dib-container=dibtestCompanySqlRptGrid]").trigger('afterSave');
+                    $scope.page.number = 1;
+                    loadGrid();
+                });
+            };
+            $scope.deleteSelected = function() { 
+                messageService.confirm({
+                    title: 'Delete selected records',
+                    text : 'Warning - are you sure you want to permanently delete all the selected records?'
+                }).then(function () { 
+                    deleteSelectedRecords();
+                })
+            };
+        $scope.page = {
+            count : 0,
+            limit : 10,
+            number : 1
+        };
+        $scope.nextPage = function () {
+           $scope.page.number++;
+        };
+        $scope.lastPage = function () {
+            $scope.page.number = $scope.page.count;
+        };
+        $scope.firstPage = function () {
+            $scope.page.number = 1;
+        };
+        $scope.previousPage = function () {
+           $scope.page.number--;
+        };
+        $scope.$watch("page.limit", function () {
+           $scope.page.number = 1;
+           if (!!$scope.gridData) loadGrid();
+        });
+        $scope.$watch("page.number", function () {
+           if (!!$scope.gridData) loadGrid();
+        });
+            applyFilterFromUrl();
+            applySortFromUrl();
+                loadGrid();
+            $scope.reloadContainer  = function (options) {
+                $("[dib-container=dibtestCompanySqlRptGrid]").trigger('beforeReloadContainer');
+                    applyFilterFromUrl();
+                    applySortFromUrl();
+                    loadGrid();
+        if (!!$scope) { 
+                $scope.$broadcast('reload container');
+        }
+            };
+            function loadGrid() {
+                $scope.loadingData = true;
+                crudService.list(crudController,'dibtestCompanySqlRptGrid',$scope.page, $scope.search, null, $scope.gridOptions.sortFields).then(function (data) {
+                    $scope.selectedItems = [];
+                    $scope.lastSelectedItem = null;
+                    var arraySelected = [];
+                    $scope.page.count = Math.ceil(data.filtertotal / $scope.page.limit, 10);
+                    $scope.page.records = data.filtertotal;
+                    $scope.page.totalRecords = data.total;
+                    $scope.page.fromRecord = $scope.page.number==1? 1 : ($scope.page.number-1)*$scope.page.limit;
+                    $scope.page.toRecord = $scope.page.fromRecord==1? $scope.page.fromRecord + data.records.length - 1 : $scope.page.fromRecord + data.records.length;
+                    if ($scope.page.fromRecord == 1 && data.records.length ==0 ) {
+                        $scope.page.fromRecord = 0;
+                    }
+                    if ($scope.page.number != 1 && data.records.length ==0) { 
+                        loadGrid();
+                        $scope.page.number --;
+                        return;
+                    }
+                    $scope.loadingData = false;
+                    $scope.gridData= data.records;
+                    $("[dib-container=dibtestCompanySqlRptGrid]").trigger('load');
+                    $timeout(function () { 
+                        $('[dib-container=dibtestCompanySqlRptGrid]').find('[select-default]').trigger('refreshDefault'); 
+                    },100);
+                    $scope.$emit('load');
+                }, function (error) { 
+                    $scope.loadingData = false;
+                });
+            };
+            function deleteSelectedRecords() { 
+                if ($scope.selectedItems.length > 0) {
+                    $scope.loadingData = true;
+                    gridOptionsdibtestCompanySqlRptGrid.delete($scope.selectedItems.pop(),$scope.primaryKeys).then(function (data) {
+                        deleteSelectedRecords();
+                        return $q.resolve();
+                    }, function (data) {
+                        deleteSelectedRecords();
+                        return $q.reject(data);
+                    });
+                } else if ($scope.loadingData) { 
+                    $("[dib-container=dibtestCompanySqlRptGrid]").trigger('afterDelete');
+                    loadGrid();
+                }
+            };
+        }
+    }
+})();

@@ -1,0 +1,73 @@
+
+(function() {
+    var requiredFiles = [];
+        //Adding some special requirements for this dropin
+    var testCompanyDrilldown = angular.module('testCompanyDrilldown', [requiredFiles]);
+    testCompanyDrilldown.factory('testCompanyDrilldownStore',['ajax', '$log', 'recordFactory','discoverService', function (ajax, $log, recordFactory,discoverService) {
+        var url = function () {
+            return discoverService.addToUrl({
+                field : $('[dib-container=testCompanyDrilldown]'),
+                url : DIB__base_url+"/dropins/setNgMaterial/dibHtmlTemplate/Template/open/testCompanyDrilldown"
+            });
+        };
+        return {
+            url : url
+        };
+    }]);
+})();
+(function() {
+var testCompanyDrilldown = angular.module('testCompanyDrilldown');
+testCompanyDrilldown.component('testCompanyDrilldown', {
+    controllerAs: 'testCompanyDrilldown',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibHtmlTemplate/Template/view/testCompanyDrilldown.html',
+    controller : component__testCompanyDrilldown
+});
+component__testCompanyDrilldown.$inject = [  
+            '$scope','discoverService','testCompanyDrilldownStore','containerService', '$rootScope','$sce', '$timeout','containerService','recordFactory','crudService','utilityService'];
+    function component__testCompanyDrilldown($scope,discoverService,testCompanyDrilldownStore,containerService, $rootScope,$sce, $timeout,containerService,recordFactory,crudService,utilityService) {
+                    $scope.container = {};
+            $scope.container.Id = '3677';
+            $scope.container.Name = 'testCompanyDrilldown';
+            $("[dib-container='testCompanyDrilldown']").trigger('load');
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        function setupUrl() { 
+            var url = testCompanyDrilldownStore.url();
+            if (!!url.url == false) return;
+            var tmpUri = url.url;
+            if (tmpUri.indexOf("?") !== -1) {
+              tmpUri += "&" + $.param(url.data);
+            } else {
+               tmpUri += "?" + $.param(url.data);
+            }
+            $sce.trustAsResourceUrl(tmpUri);
+            $scope.model.url = tmpUri;
+        }
+        if (!!containerService.isSubContainer($("[dib-container=testCompanyDrilldown]")) === false) { 
+            setupUrl();
+        }
+        $scope.reloadContainer = function (options) {
+                setupUrl();
+            $scope.frameStyle = {
+                "height" : "200px"
+            };
+            //@TODO to figure out how to update the screen height
+            // $timeout(function () { 
+            //     $scope.frameStyle = {
+            //         "height" : $('[dib-container=testCompanyDrilldown]').contents().find('body').height() + "px"
+            //     };
+            // }, 100);
+        };
+    }  
+})();

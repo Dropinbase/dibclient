@@ -1,0 +1,697 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibGlobals/js/component/timeDatePickerInput.js', 
+		'/dropins/setNgMaterial/dibGrid/js/components/dibTableWidth.js',
+  		'/dropins/setNgMaterial/dibGrid/js/components/dibInlineEdit.js',
+	    '/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+  ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+    var projectGrid = angular.module('projectGrid', [files]);
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    projectGrid.service('service195706',service195706); 
+    service195706.$inject = ['ajax', 'discoverService', '$q'];
+    function service195706(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/projectGrid?containerItemId=195706", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci195706'),
+                    container : $('[dib-container=projectGrid]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    projectGrid.service('service195707',service195707); 
+    service195707.$inject = ['ajax', 'discoverService', '$q'];
+    function service195707(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/projectGrid?containerItemId=195707", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci195707'),
+                    container : $('[dib-container=projectGrid]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    projectGrid.service('service195706',service195706); 
+    service195706.$inject = ['ajax', 'discoverService', '$q'];
+    function service195706(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/projectGrid?containerItemId=195706", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci195706'),
+                    container : $('[dib-container=projectGrid]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    projectGrid.service('service195707',service195707); 
+    service195707.$inject = ['ajax', 'discoverService', '$q'];
+    function service195707(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/projectGrid?containerItemId=195707", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci195707'),
+                    container : $('[dib-container=projectGrid]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+})();
+(function() {
+var projectGrid = angular.module('projectGrid');
+projectGrid.component('projectGrid', {
+    controllerAs: 'projectGrid',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibGrid/Template/view/projectGrid.html',
+    controller : component__projectGrid
+});
+component__projectGrid.$inject = [  
+            'dibForm', '$location', '$timeout', '$scope', '$ocLazyLoad', '$rootScope', '$log', 'containerService', '$q', 'recordFactory', 'messageService','keysPressed','service195706','service195707','containerService','recordFactory','crudService','utilityService'];
+    function component__projectGrid(dibForm, $location, $timeout, $scope, $ocLazyLoad, $rootScope, $log, containerService, $q, recordFactory, messageService,keysPressed,service195706,service195707,containerService,recordFactory,crudService,utilityService) {
+        var vm = this;
+        vm.$postLink = function () {
+            $("[dib-container=projectGrid]").trigger('onInit');
+        };
+        vm.$onInit = function () {
+                        $scope.container = {};
+            $scope.container.Id = '8594';
+            $scope.container.Name = 'projectGrid';
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.model._GET['id'] = containerService.modelItem("number", 
+            false,
+            false,
+            null
+        );
+        $scope.model._GET['name'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['client_id'] = containerService.modelItem("select", 
+            true,
+            true,
+            service195706
+        );
+        $scope.model._GET['project_leader_id'] = containerService.modelItem("select", 
+            true,
+            true,
+            service195707
+        );
+        $scope.model._GET['notes'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['updated'] = containerService.modelItem("dateTime", 
+            true,
+            true,
+            null
+        );
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = ["id"];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.dropdowns.service195706 = {};
+            $scope.dropdowns.service195706.items = [];
+            var setTimeoutCancel195706 = null;
+            var query195706;
+            $scope.loadService195706 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query195706 != query) {
+                    query195706 = query;
+                    if (!!skipTimeout) {
+                        return service195706.list(query).then(function (items) {
+                            $scope.dropdowns.service195706.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel195706);
+                        setTimeoutCancel195706 = setTimeout(function () { 
+                            service195706.list(query).then(function (items) {
+                                $scope.dropdowns.service195706.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service195706.searchTextChange = function (query) {
+                $scope.loadService195706(query);
+            };
+            $scope.dropdowns.service195706.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service195706.list(query,modelType);
+            };
+            $scope.select195706 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci195706');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service195706.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout195706 = null;
+            //loadService195706();
+            //reloadContainerFunctions.push($scope.loadService195706);
+            $scope.dropdowns.service195707 = {};
+            $scope.dropdowns.service195707.items = [];
+            var setTimeoutCancel195707 = null;
+            var query195707;
+            $scope.loadService195707 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query195707 != query) {
+                    query195707 = query;
+                    if (!!skipTimeout) {
+                        return service195707.list(query).then(function (items) {
+                            $scope.dropdowns.service195707.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel195707);
+                        setTimeoutCancel195707 = setTimeout(function () { 
+                            service195707.list(query).then(function (items) {
+                                $scope.dropdowns.service195707.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service195707.searchTextChange = function (query) {
+                $scope.loadService195707(query);
+            };
+            $scope.dropdowns.service195707.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service195707.list(query,modelType);
+            };
+            $scope.select195707 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci195707');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service195707.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout195707 = null;
+            //loadService195707();
+            //reloadContainerFunctions.push($scope.loadService195707);
+            $scope.openAuditTrail = function (portAlias) {
+                            var primaryKeyData = recordFactory.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                            if (primaryKeyData.length > 0) {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=4033&filter_record_id="+primaryKeyData);
+                        } else {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=4033");
+                        }
+            };
+            $scope.gridOptions = {};
+            $scope.gridOptions.data = 'gridData';
+            $scope.gridOptions.enableFiltering = true;
+            $scope.gridOptions.inlineAddShow = "" == "true";
+            /**
+            * Inline add show/hide
+            */
+            $scope.toggleInlineAdd = function () { 
+                $scope.gridOptions.inlineAddShow = !$scope.gridOptions.inlineAddShow;
+                //ensuring edit buttons is on the correct place by triggering the scroll event
+                var $content = $('[dib-container=projectGrid]').find('.dib-grid-column-content');
+                $timeout(function () { 
+                    $content.trigger('scroll');
+                    $content.trigger('refreshHeight');
+                },100);
+            }
+            $scope.$on('dib-select', function ($event, $row) { 
+                $log.debug("Selected Row", $row);
+            });
+            $scope.selectedItems = [];
+            $scope.lastSelectedItem = null;
+            var arraySelected = [];
+            /**
+            * Copy the selected record to the current row.
+            */
+            $scope.useSelectedRow = function ($event, model) {
+                var scope = angular.element($event.currentTarget).scope().$parent;
+                model = recordFactory.getModel(angular.copy($scope.lastSelectedItem), scope);
+                angular.forEach($scope.primaryKeys, function (key, index) { 
+                    model[key] = 0;
+                });
+                //specific use case clean dibuid when trying to create a new row.
+                model._GET['dibuid'].model(model,null,'dibuid');
+            };
+            /**
+            * Select the row
+            */
+            $scope.selectRow = function (row,$event) { 
+                //check if inline editing is busy then ignore
+                if (row.___editing) { 
+                    return;
+                }
+                $scope.lastSelectedItem = row;
+                //If the even is passed in then we should not select row. 
+                if (!!$event) return;
+                $("[dib-container='projectGrid']").trigger('rowClick', [row]);
+                row.___selected = !row.___selected;
+                //add to array if not checked, as this means the item will be checked.
+                if (row.___selected) { 
+                    //Setting the last selected node
+                    $log.debug("SELECTED NODE", row);
+                    //trigger selected item event
+                    $("[dib-container='projectGrid']").trigger('rowSelect', [row]);
+                } else {
+                    $("[dib-container='projectGrid']").trigger('rowDeselect', [row]);
+                }
+                //update the selected items
+                $scope.selectedItems = []; 
+                angular.forEach($scope.gridData, function (gridRow, index) { 
+                    if (gridRow.___selected) {
+                        $scope.selectedItems.push(gridRow);
+                    }
+                });
+                $log.debug("CURRENT SELECTED ITEMS IN GRID", $scope.selectedItems);
+            };
+            /**
+            * Save the row data
+            */
+            $scope.saveRow = function ($event, row) {
+                var element = $($event.target).parents('[dib-inline-edit]');
+                element.trigger('editClose');    
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            /**
+            * Add the row
+            */
+            $scope.addRow = function ($event, row) {
+                var element = $($event.target).parents('[dib-inline-edit]');
+                element.trigger('addRow');    
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            /**
+            * Cancel row and close editing
+            */
+            $scope.cancelRow = function ($event, row) {
+                var element = $($event.target).parents('[dib-inline-edit]');
+                row.___editing = false;
+                row.___selected = true;
+                element.find('[dib-edit]').hide();
+                element.find('[dib-view]').show();
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            /**
+            * clean row mainly used to cancel inline add.
+            */
+            $scope.cleanRow = function ($event, model, $form) {
+                $form.$setDirty(false);
+                dibForm.clean($form,model);
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            /**
+            * Double click event gets triggered then the row can be editable
+            */
+            $scope.rowEdit = function (element) {
+                var $rowElement = $(element).find('[dib-inline-edit]');
+                if ($rowElement.length > 0) {
+                    //Open
+                    $rowElement.trigger('edit');
+                    $rowElement.removeClass('md-accent');    
+                } else {
+                    //Closed
+                    $containerItemElement.parents('[dib-inline-edit=open]').trigger('editClose');        
+                }
+                var $rowElement =$rowElement.parents('[dib-inline-edit=add-mode]');
+                if ($rowElement.length>0) {
+                    $rowElement.trigger('addRow');
+                }
+            };
+            /**
+            * The itemAliasData function on the scope is how we collect data from this component/dropin for submissionData, or when the component is referenced by using its itemAlias
+            */
+            $scope.itemAliasData = function () {
+                var itemSelected= angular.copy($scope.lastSelectedItem);
+                return itemSelected;
+            };
+        /**
+         * Custom sorting added Cobus
+         */
+        $scope.gridOptions.sortFields = {};
+        $scope.gridOptions.sortNr = 0;
+        function applySortFromUrl() { 
+            var sortUrlChange= containerService.urlContainer("projectGrid");
+             var searchLength = Object.keys($location.search()).length;
+            if (sortUrlChange && searchLength>0) {
+                //apply search from urlContainer
+                $scope.gridOptions.sortNr = 0;
+                angular.forEach($location.search(), function (item,index) {
+                    if (index.indexOf("sort_") !==-1) { 
+                        $scope.gridOptions.sortNr ++;
+                        var splitValues = item.split("::");
+                        $scope.gridOptions.sortFields[index.replace('sort_','')]= {
+                            "Order" : splitValues[0],
+                            "Count" :  splitValues[1]
+                        } 
+                    } 
+                });
+                //apply sort from urlContainer
+            }
+        }
+        $scope.gridOptions.toggleSort = function (fieldName) { 
+            var sortUrlChange= containerService.urlContainer("projectGrid");
+            if (!!$scope.gridOptions.sortFields[fieldName] && $scope.gridOptions.sortFields[fieldName]['Order'] === "ASC") { 
+                $scope.gridOptions.sortFields[fieldName]['Order'] = "DESC";
+                if (sortUrlChange ) $location.search("sort_"+fieldName,"DESC::"+$scope.gridOptions.sortFields[fieldName]['Count']);
+            } else if (!!$scope.gridOptions.sortFields[fieldName] && $scope.gridOptions.sortFields[fieldName]['Order'] === "DESC") { 
+                $scope.gridOptions.sortNr = 0;
+                delete $scope.gridOptions.sortFields[fieldName];
+                if (Object.keys($scope.gridOptions.sortFields).length == 0)  {
+                    containerService.cleanUrlState();
+                }
+                if (sortUrlChange ) $location.search("sort_"+fieldName,null);
+                angular.forEach($scope.gridOptions.sortFields, function (sort,index) { 
+                    if (!!sort) { 
+                        $scope.gridOptions.sortNr ++;
+                        sort['Count'] = $scope.gridOptions.sortNr;
+                        if (sortUrlChange ) $location.search("sort_"+index,sort['Order']+"::"+sort['Count']);
+                    }
+                });
+                return;
+            } else {
+                $scope.gridOptions.sortNr ++;
+                $scope.gridOptions.sortFields[fieldName] = {"Order" : "ASC", "Count" : $scope.gridOptions.sortNr };
+                if (sortUrlChange ) $location.search("sort_"+fieldName,"ASC::"+$scope.gridOptions.sortNr);
+            }
+            loadGrid();
+        };
+            $scope.search = {};
+$scope.clearSearch = function () { 
+    $scope.search = {};
+    containerService.cleanUrlState();
+    $scope.searchGrid();
+};
+$scope.searchGrid = function () { 
+    var searchUrlChange= containerService.urlContainer("projectGrid");
+    if (searchUrlChange ) {
+        //clear search
+        angular.forEach($location.search(), function (item,index) {
+            if (index.indexOf("filter_") ==0 || index.indexOf("filterDisplay_") ==0) { 
+                $location.search(index,null);
+            } 
+        });
+        //fill search
+        angular.forEach($scope.search, function (search, index) {
+            if (!!search == false) return;
+            if (typeof search != 'object') {
+                $location.search("filter_"+index,search.replace('&','~~~'));
+            } else if (!!search.id && !!search.id_display_value) {
+                var key = index.replace('selected___','');
+                var urlSearch = {};
+                urlSearch["filter_"+key]=search.id;
+                urlSearch["filterDisplay_"+key] = utilityService.fixedEncodeURIComponent(search.id_display_value);
+                $location.search(urlSearch);
+            }
+        });
+    }
+    loadGrid();
+};
+$scope.$watch("showSearch", function () {
+    //to ensure when the state change that the heights are calculated accordingly.
+    $timeout(function () { 
+        $("[dib-container=projectGrid]").find('.dib-grid-column-content').trigger('refreshHeight')
+    },50);
+    if (!!$scope.showSearch === false) {
+        $scope.search = {};
+        if (!!$scope.gridData) loadGrid();
+    }
+});
+function applyFilterFromUrl() { 
+    var searchUrlChange= containerService.urlContainer("projectGrid");
+    var searchLength = Object.keys($location.search()).length;
+    if (searchUrlChange && searchLength>0) {
+        //apply search from urlContainer
+        $scope.search = {};
+        var urlSearch  =$location.search();
+        angular.forEach(urlSearch, function (item,index) {
+            if (index.indexOf('filter') === -1) return;
+            if (index.indexOf("filter_") ==0) { 
+                $scope.showSearch = true;
+                $scope.search[index.replace('filter_','')]= item.replace('~~~','&');
+            } 
+            if (index.indexOf("filterDisplay_") ==0) {
+                var selectKeyIndex=  index.replace('filterDisplay_','');
+                var selectKey ="selected___" + selectKeyIndex; 
+                $scope.search[selectKey]= {};
+                $scope.search[selectKey].id = urlSearch["filter_"+selectKeyIndex];
+                $scope.search[selectKey].id_display_value = decodeURI(item);
+            }
+        });
+        //apply sort from urlContainer
+    } else {
+        $scope.search = {};
+        $scope.showSearch = false;
+    }
+}
+            $scope.scrollConfig = {
+                autoHideScrollbar: false,
+                theme: 'light',
+                advanced:{
+                    updateOnContentResize: true
+                },
+                    setHeight: 200,
+                    scrollInertia: 0
+            };
+            function loadGrid() {
+                $scope.loadingData = true;
+                crudService.list(crudController,'projectGrid',$scope.page, $scope.search, null, $scope.gridOptions.sortFields).then(function (data) {
+                    $scope.selectedItems = [];
+                    $scope.lastSelectedItem = null;
+                    var arraySelected = [];
+                    var t1 = performance.now();
+                    $scope.page.count = Math.ceil(data.filtertotal / $scope.page.limit, 10);
+                    $scope.page.records = data.filtertotal;
+                    $scope.page.totalRecords = data.total;
+                    $scope.page.fromRecord = $scope.page.number==1? 1 : ($scope.page.number-1)*$scope.page.limit;
+                    $scope.page.toRecord = $scope.page.fromRecord==1? $scope.page.fromRecord + data.records.length - 1 : $scope.page.fromRecord + data.records.length;
+                    if ($scope.page.fromRecord == 1 && data.records.length ==0 ) {
+                        $scope.page.fromRecord = 0;
+                    }
+                    if ($scope.page.number != 1 && data.records.length ==0) { 
+                        loadGrid();
+                        $scope.page.number --;
+                        return;
+                    }
+                    $scope.loadingData = false;
+                    $scope.gridData= data.records;
+                    $("[dib-container=projectGrid]").trigger('load');
+                    $timeout(function () { 
+                        $('[dib-container=projectGrid]').find('[select-default]').trigger('refreshDefault'); 
+                    },100);
+                    $scope.$emit('load');
+                    var t2 = performance.now();
+                    $log.error(t2-t1);
+                }, function (error) { 
+                    $scope.loadingData = false;
+                });
+            }
+            $scope.createRecord = function (data) {
+                $scope.loadingData = true;
+                return crudService.create(crudController,'projectGrid', {
+                        data : data,
+                    }).then(function () {
+                    $("[dib-container=projectGrid]").trigger('afterSave');
+                    $scope.page.number = 1;
+                    loadGrid();
+                    return $q.when();
+                }, function () { 
+                    $scope.loadingData = false;
+                    return $q.reject();
+                });
+            };
+            $scope.updateRecord = function (data) {
+                $scope.loadingData = true;
+                var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, data.recordData);
+                return crudService.update(crudController,'projectGrid',{
+                    primaryKeyData : primaryKeyData,
+                    data : data,
+                    createParams: "{}"
+                }).then(function (data) {
+                    $scope.loadingData = false;
+                    $("[dib-container=projectGrid]").trigger('afterSave');
+                    return $q.resolve();
+                }, function (data) {
+                    $scope.loadingData = false;
+                    return $q.reject(data);
+                });
+            };
+            $scope.deleteRecord = function (data) {
+                $scope.loadingData = true;
+                var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, data);
+                return crudService.delete(crudController,'projectGrid',data,$scope.primaryKeys).then(function () {
+                    $("[dib-container=projectGrid]").trigger('afterDelete');
+                    $scope.page.number = 1;
+                    loadGrid();
+                });
+            };
+            var deleteSelectedRecords = function () { 
+                if ($scope.selectedItems.length > 0) {
+                    $scope.loadingData = true;
+                    var selectedRecord =  $scope.selectedItems.pop();
+                    var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, selectedRecord);
+                    crudService.delete(crudController,'projectGrid',{
+                        primaryKeyData : primaryKeyData
+                    }).then(function (data) {
+                        deleteSelectedRecords();
+                        return $q.resolve();
+                    }, function (data) {
+                        deleteSelectedRecords();
+                        return $q.reject(data);
+                    });
+                } else if ($scope.loadingData) { 
+                    $("[dib-container=projectGrid]").trigger('afterDelete');
+                    loadGrid();
+                }
+            }
+            $scope.deleteSelected = function() { 
+                messageService.confirm({
+                    title: 'Delete selected records',
+                    text : 'Warning - are you sure you want to permanently delete all the selected records?'
+                }).then(function () { 
+                    deleteSelectedRecords();
+                });
+            };
+        $scope.page = {
+            count : 0,
+            limit : 10,
+            number : 1
+        };
+        $scope.nextPage = function () {
+           $scope.page.number++;
+        };
+        $scope.lastPage = function () {
+            $scope.page.number = $scope.page.count;
+        };
+        $scope.firstPage = function () {
+            $scope.page.number = 1;
+        };
+        $scope.previousPage = function () {
+           $scope.page.number--;
+        };
+        $scope.$watch("page.limit", function () {
+           $scope.page.number = 1;
+           if (!!$scope.gridData) loadGrid();
+        });
+        $scope.$watch("page.number", function () {
+           if (!!$scope.gridData) loadGrid();
+        });
+            applyFilterFromUrl();
+            applySortFromUrl();
+            loadGrid();
+            $scope.reloadContainer  = function (options) {
+                $("[dib-container=projectGrid]").trigger('beforeReloadContainer');
+                    applyFilterFromUrl();
+                    applySortFromUrl();
+                        loadGrid();
+        if (!!$scope) { 
+                $scope.$broadcast('reload container');
+        }
+            };
+        };
+    }
+})();

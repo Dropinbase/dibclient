@@ -1,0 +1,154 @@
+ 
+<ng-form layout-fill dib-container=dibtestChildForm  flex isolate-form name='dibtestChildForm' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<md-toolbar aria-label="toolbar" can-be-moved=true can-have-children=true flex=none style="    " id='ci155250' aria-label="toolbar" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" >
+		<div class="md-toolbar-tools">
+			<md-button aria-label="btnsave" can-be-moved=true class=" md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci155251' aria-label="btnsave" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" aria-label="Save" >
+				<md-tooltip md-direction="top" md-delay="500">
+					Save changes
+				</md-tooltip>
+				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+				</md-icon>
+				Save 
+			</md-button>
+			<md-button aria-label="btnadd" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci155252' aria-label="btnadd" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" >
+				<md-tooltip md-direction="top" md-delay="500">
+					Add a new record using a form
+				</md-tooltip>
+				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+				</md-icon>
+			</md-button>
+			<md-button aria-label="btndelete" can-be-moved=true class="md-icon-button md-squared md-raised " style="    " ng-click="deleteRecord({'redirect' : true})" id='ci155253' aria-label="btndelete" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" ng-disabled="true" >
+				<md-tooltip md-direction="top" md-delay="500">
+					Delete current record
+				</md-tooltip>
+				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+				</md-icon>
+			</md-button>
+			<md-button aria-label="btnreload" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci155254' aria-label="btnreload" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" >
+				<md-tooltip md-direction="top" md-delay="500">
+					Reload records
+				</md-tooltip>
+				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+				</md-icon>
+			</md-button>
+			<md-button aria-label="gridButton" can-be-moved=true style="    " id='ci155255' aria-label="gridButton" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" aria-label="Grid" >
+				Grid 
+			</md-button>
+			<md-button aria-label="auditTrail" can-be-moved=true class=" md-raised" style="    " ng-click="openAuditTrail('')" id='ci155257' aria-label="auditTrail" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" aria-label="Audit Trail" >
+				<md-tooltip md-direction="top" md-delay="500">
+					View audit trail of record changes
+				</md-tooltip>
+				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+				</md-icon>
+				Audit Trail 
+			</md-button>
+			<dib-form-paging aria-label="buttonsformnavigation" can-be-moved=true flex=none style="    " id='ci155258' aria-label="buttonsformnavigation" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" data-container-name="dibtestChildForm" >
+			</dib-form-paging >
+		</div>
+	</md-toolbar>
+	<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " id='ci155262' aria-label="layoutrow" dib-container-name='dibtestChildForm' dib-config="{ defaults : {margin : 5}, listeners : { } }" >
+		<md-card  aria-label="fieldSet1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci155263' aria-label="fieldSet1" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-subheader class="cl-md-accent md-no-sticky">
+						General
+					</md-subheader>
+					<md-input-container aria-label="primkey1" can-be-moved=true flex=none class="md-block" style="width:260px !important;    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child' >
+						<input type="text"  required name="primkey1" ng-model="model.primkey1" aria-label="Primkey1" id='ci155264' aria-label="primkey1" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Primkey1*
+						</label>
+						<div ng-messages="dibtestChildForm.primkey1.$error">
+							<div ng-message="required">
+								Primkey1 required.
+							</div>
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="primkey2" can-be-moved=true flex=none class="md-block" style="width:260px !important;    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child' >
+						<input type="text"  required name="primkey2" ng-model="model.primkey2" aria-label="Primkey2" id='ci155265' aria-label="primkey2" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Primkey2*
+						</label>
+						<div ng-messages="dibtestChildForm.primkey2.$error">
+							<div ng-message="required">
+								Primkey2 required.
+							</div>
+						</div>
+					</md-input-container>
+					<div layout='row' aria-label="pef_test_id" can-be-moved=true flex=none style="width:250px !important;    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child' >
+						<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='pef_test_id' select-model="model.selected___pef_test_id.id" md-search-text-change="dropdowns.service155266.searchTextChange(dropdowns.service155266.searchText)" md-search-text="dropdowns.service155266.searchText" md-selected-item="model.selected___pef_test_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155266.getItems(dropdowns.service155266.searchText,'model')" md-floating-label="Test" md-no-cache="true" md-selected-item-change="select155266(model,'model','pef_test_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test" id='ci155266' aria-label="pef_test_id" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+							<md-item-template>
+								<span md-highlight-text="dropdowns.service155266.searchText">
+									{{item.id_display_value}}
+								</span>
+							</md-item-template>
+							<md-not-found>
+								No matches found.
+							</md-not-found>
+							<div ng-messages="dibtestChildForm.pef_test_id.$error" ng-if="dibtestChildForm.pef_test_id.$touched">
+								<div ng-message="required">
+									Please make a valid selection.
+								</div>
+							</div>
+						</md-autocomplete>
+					</div>
+					<md-input-container aria-label="date_fld" can-be-moved=true flex=none class="md-block" style="width:260px !important;    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child' >
+						<input type="text" theme="material" ng-model="model.date_fld" name=date_fld aria-label="Date Fld" placeholder="Date Fld" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci155267' aria-label="date_fld" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" >
+						<div ng-messages="dibtestChildForm.model.date_fld.$error">
+							<div ng-message="valid">
+								The entered value is not a date!
+							</div>
+							<div ng-message="required">
+								This date is required!
+							</div>
+							<div ng-message="mindate">
+								Date is too early!
+							</div>
+							<div ng-message="maxdate">
+								Date is too late!
+							</div>
+							<div ng-message="filtered">
+								Only weekends are allowed!
+							</div>
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+		<md-card  aria-label="fieldSet11" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci155268' aria-label="fieldSet11" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" >
+			<md-card-content>
+				<section layout-fill>
+					<md-subheader class="cl-md-accent md-no-sticky">
+						Details
+					</md-subheader>
+					<md-input-container aria-label="unique1" can-be-moved=true flex=none class="md-block" style="width:260px !important;    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child' >
+						<input type="text"  name="unique1" ng-model="model.unique1" aria-label="Unique1" id='ci155269' aria-label="unique1" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Unique1
+						</label>
+						<div ng-messages="dibtestChildForm.unique1.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="unique2" can-be-moved=true flex=none class="md-block" style="width:260px !important;    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child' >
+						<input type="text"  name="unique2" ng-model="model.unique2" aria-label="Unique2" id='ci155270' aria-label="unique2" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Unique2
+						</label>
+						<div ng-messages="dibtestChildForm.unique2.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="notes" can-be-moved=true flex=none class="md-block" style="width:260px !important;    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child' >
+						<input type="text"  name="notes" ng-model="model.notes" aria-label="Notes" id='ci155271' aria-label="notes" dib-container-name='dibtestChildForm' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+						<label>
+							Notes
+						</label>
+						<div ng-messages="dibtestChildForm.notes.$error">
+						</div>
+					</md-input-container>
+				</section>
+			</md-card-content>
+		</md-card>
+	</div>
+</ng-form>

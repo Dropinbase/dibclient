@@ -1,0 +1,356 @@
+(function() {
+    var require = ['/dropins/setNgMaterial/dibForm/js/component/formPaging.js','/dropins/setNgMaterial/dibGlobals/js/component/timeDatePickerInput.js',  
+		'/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+	];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    var clientContactForm = angular.module('clientContactForm', [files]);
+    clientContactForm.service('service212009',service212009); 
+    service212009.$inject = ['dibAjax', 'dibDiscover', '$q'];
+    function service212009(dibAjax, dibDiscover, $q) {
+            return {
+                list : list
+            };       
+            function list($scope, $element, query, modelType, page) {
+                var $defer = $q.defer();
+                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/clientContactForm?containerItemId=212009", query, modelType, page);
+                var requestInfo = dibDiscover.addToUrl({
+                    field :$('#ci212009'),
+                    $scope : $scope,
+                    container : $element,
+                    url : url
+                });
+                return dibAjax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    var clientContactForm = angular.module('clientContactForm');
+    clientContactForm.component('clientContactForm', {
+        controllerAs: 'clientContactForm',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibForm/Template/view/clientContactForm.html',
+        controller : component__clientContactForm
+    });
+    component__clientContactForm.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
+            'dibForm', 'dibMessage','$location','dibAction','dibUtility', '$timeout', 'dibActiveFilterState','service212009'];
+    function component__clientContactForm($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
+            dibForm, dibMessage,$location,dibAction,dibUtility, $timeout, dibActiveFilterState,service212009) {
+        var ctrl = this;        
+                    $scope.container = {};
+            $scope.container.Id = '9176';
+            $scope.container.Name = 'clientContactForm';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = {};
+        $scope.model['id'] = '';
+        $scope.model._GET['id'] = dibContainer.modelItem({
+            key : 'id',
+            dataType : "number", 
+            create : false,
+            update : false,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['select___client_id'] = '';
+        $scope.model._GET['client_id'] = dibContainer.modelItem({
+            key : 'client_id',
+            dataType : "select", 
+            create : true,
+            update : true,
+            service : service212009,
+            itemAlias : false
+        });
+        $scope.model['first_name'] = '';
+        $scope.model._GET['first_name'] = dibContainer.modelItem({
+            key : 'first_name',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['last_name'] = '';
+        $scope.model._GET['last_name'] = dibContainer.modelItem({
+            key : 'last_name',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['position'] = '';
+        $scope.model._GET['position'] = dibContainer.modelItem({
+            key : 'position',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['email'] = '';
+        $scope.model._GET['email'] = dibContainer.modelItem({
+            key : 'email',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['phone_w'] = '';
+        $scope.model._GET['phone_w'] = dibContainer.modelItem({
+            key : 'phone_w',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['mobile'] = '';
+        $scope.model._GET['mobile'] = dibContainer.modelItem({
+            key : 'mobile',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['resigned'] = '';
+        $scope.model._GET['resigned'] = dibContainer.modelItem({
+            key : 'resigned',
+            dataType : "date", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['updated'] = '';
+        $scope.model._GET['updated'] = dibContainer.modelItem({
+            key : 'updated',
+            dataType : "dateTime", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.model['notes'] = '';
+        $scope.model._GET['notes'] = dibContainer.modelItem({
+            key : 'notes',
+            dataType : "text", 
+            create : true,
+            update : true,
+            service : null,
+            itemAlias : false
+        });
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = ["id"];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+    $scope.dropdowns = {};
+    $scope.dropdowns.service212009 = {};
+    $scope.dropdowns.service212009.items = [];
+    var setTimeoutCancel212009 = null;
+    var $dibContainer = $element.first();
+    var query212009;
+    $scope.loadService212009 = function (query, skipTimeout) {
+        if (query212009 != query) {
+            query212009 = query;
+            if (!!skipTimeout) {
+                return service212009.list($scope,$dibContainer, query).then(function (items) {
+                    $scope.dropdowns.service212009.items = items;
+                });
+            } else {
+                clearTimeout(setTimeoutCancel212009);
+                setTimeoutCancel212009 = setTimeout(function () { 
+                    service212009.list($scope,$dibContainer, query).then(function (items) {
+                        $scope.dropdowns.service212009.items = items;
+                    });
+                }, 100);
+            }
+        } 
+    };
+    $scope.dropdowns.service212009.searchTextChange = function (query) {
+        $scope.loadService212009(query);
+    };
+    $scope.dropdowns.service212009.getItems = function (query,modelType) {
+        return service212009.list($scope,$dibContainer, query,modelType);
+    };
+    $scope.select212009 = function (model,modelName,fieldName) {
+        if (!!modelName == false) modelName ="model";
+        var $element =  $('#ci212009');
+        if (!!$element.attr('select-model') === false) { 
+            $element = $element.find('[select-model]');
+        }
+        var modelName =  'selected___' + fieldName;
+        $element.trigger('select');
+        if (!!model[modelName]  === false) { 
+            return  false;
+        }
+        angular.forEach($scope.dropdowns.service212009.items, function (item, index)   {
+            if (item.id == model[modelName]['id']) {
+                model[modelName]['id_display_value'] = item.id_display_value; 
+                return false;
+            }
+        });
+    };
+            $scope.openAuditTrail = function (portAlias) {
+                            var primaryKeyData = dibRecord.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                            if (primaryKeyData.length > 0) {
+                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D4644&filter_record_id=%3D"+primaryKeyData);
+                        } else {
+                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D4644");
+                        }
+            };
+        ctrl.$onInit = function () {
+            $scope.addModel = function () { 
+                dibForm.addModel($scope, "clientContactForm");
+            };
+            $scope.deleteRecord = function (options) {
+                dibForm.deleteRecord('clientContactForm', $scope, $scope.clientContactForm, options, crudController).then(function (){
+                });
+            };         
+            /**
+            *  Saving record in this model
+            */
+            $scope.saveModel = function (options) {
+                if ($scope.loadingData) return $q.reject('Busy loading...');
+                if (dibForm.validate($scope, $scope.clientContactForm)) {
+                    $scope.loadingData =  true;
+                    var primaryKeyData = dibRecord.primaryKeyData($scope.primaryKeys, $scope.model);
+                    return dibForm.updateRecord('clientContactForm', $scope, $scope.clientContactForm, crudController, options).then(function () { 
+                        if (Object.keys(primaryKeyData).length>0) {
+                        } else {
+                            loadForm();
+                        }
+                        return $q.when();
+                    });
+                }
+            };
+            var mdTabs = $("[dib-container=clientContactForm]").closest('md-tabs');
+            var tabsScope = null;
+            if (mdTabs.length === 0) {
+                mdTabs = null;
+            }
+            else {
+                tabsScope = mdTabs.scope();
+            }
+            $scope.$watch('clientContactForm.$dirty', function (newValue, oldValue) { 
+                dibNavigation.containerDirty = newValue;
+                if (dibNavigation.containerDirty && !!mdTabs && !!tabsScope) {
+                    var currentIndex = tabsScope.selectedIndex;
+                    dibNavigation.addSaveFailedPromise(function(tabIndex) {
+                        tabsScope.selectedIndex = tabIndex;
+                        return $q.when();
+                    }, [currentIndex]);
+                }
+            },true);
+            dibNavigation.addSavePromise($scope.saveModel);
+            //Giving the form the ability to handle dependency data (if an event is trigger on another component that has a refresh item alias point to the form/child form)
+            $scope.setDependencyData = function (object) { 
+                return dibForm.setDependencyData($scope,object);
+            };
+            $scope.itemAliasData = function () {
+                return angular.copy($scope.primaryKeyData);
+            };
+            /**
+            * Clear the form from records and dependancy data
+            */
+            $scope.clearForm = function () {
+                if ($scope.loadingData) return;
+                $scope.primaryKeyData = null;
+                $scope.reloadContainer();
+                dibForm.clean($scope.clientContactForm,$scope.model);
+            };
+            $scope.reloadContainer = function (options) {
+                $scope.autoRefresh = true;
+                loadForm ();
+            };
+            $scope.$watch('model', function (oldVal, newVal) {
+            },true);  
+        };
+        ctrl.$postLink = function () {
+            var isUrlContainer = dibContainer.urlContainer('clientContactForm');
+            if (isUrlContainer) {
+                //check if record is first or last
+                if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                    $scope.$broadcast('load');
+                }
+            } else {
+                $scope.$broadcast('load');
+            }
+            //var isUrlContainer = dibContainer.urlContainer('clientContactForm');
+            //the if below we removed the requirement to match the url to the containerName, so we can load data into a window without the url changing. wizBuildAppAdv.
+                $scope.reloadContainer({ force : true });
+        };
+        function loadForm () { 
+            dibNavigation.reset();
+            dibNavigation.addSavePromise($scope.saveModel);
+            //clear the record status
+            $scope.recordStatus = null;
+            var isUrlContainer = dibContainer.urlContainer('clientContactForm');
+            if (isUrlContainer) {
+                //check if record is first or last
+                if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                    return;
+                }
+            }
+            //check if this is a child container 
+            $scope.primaryKeyData = isUrlContainer ? dibDiscover.getPrimaryKeysFromUrl() : $scope.primaryKeyData;
+            if (!!$scope.primaryKeyData === false) {
+                $scope.primaryKeyData = {};
+                //set all the primaryKeys to 0
+                angular.forEach($scope.primaryKeys, function (key,index) { 
+                    $scope.model[key] = 0;
+                });
+            }
+            //remove active filter if no record are available
+            if (Object.keys($scope.primaryKeyData).length ==0) {
+                $scope.recordStatus = "create";
+            } else {
+                $scope.recordStatus = "update";
+            }
+            $scope.loadingData = true;
+            $scope.currentPrimaryKeyData = $scope.primaryKeyData;
+            dibCrud.read($scope,crudController,'clientContactForm',{
+                primaryKeyData : $scope.currentPrimaryKeyData,
+                createParams: "{}"
+            },
+            $scope
+            ).then(function (model) {
+                $scope.model = model;
+                $scope.currentPrimaryKeyData = dibRecord.primaryKeyData($scope.primaryKeys, $scope.model);
+                $scope.$broadcast('load');
+                $scope.clientContactForm.$setUntouched();
+                $scope.clientContactForm.$setPristine();
+                //@TODO refactor start 
+                var timeoutTest = $timeout(function () { 
+                    dibContainer.reloadChildren({containerName: 'clientContactForm'});
+                },500); 
+                //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                // var eventDeregister = $rootScope.$on("dibAngular.subcontainerLoaded", function () {
+                //     $timeout.cancel(timeoutTest);
+                //     timeoutTest = $timeout(function () { 
+                //         dibContainer.reloadChildren({containerName: 'clientContactForm'});
+                //         eventDeregister();
+                //     },500); 
+                //     //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                // });
+                //Refactor stop
+                $log.debug("containerName read->model",$scope.model );
+                $scope.loadingData =  false;
+            }).catch(function (error) {
+                $scope.$broadcast('load');
+                $scope.loadingData =  false;
+            });
+        }
+    }
+})();

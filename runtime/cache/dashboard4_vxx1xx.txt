@@ -1,0 +1,60 @@
+ 
+<div component-loaded dib-container=dashboard4 dib-container-name="8339" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace"  aria-label="Dashboard" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " id='ci183738' aria-label="Dashboard" dib-container-name='dashboard4' dib-config="{ listeners : { } }" >
+		<md-card aria-label="mdcard" can-be-moved=true can-have-children=true flex=none layout='row' layout-align='center center' style="    " >
+			<md-card-content  id="ci183739" dib-inject-content="replace" class="no-padding" style="padding:0px"  id='ci183739' aria-label="mdcard" dib-container-name='dashboard4' dib-config="{ listeners : { } }" >
+				<md-button class="dib-large-icon-button" aria-label="icon1" can-be-moved=true flex=none style="width:140 !important; height:140 !important;   " id='ci183740' aria-label="icon1" dib-container-name='dashboard4' ng-click="common.goTo('staffGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Staff 
+					</span>
+				</md-button>
+				<md-button class="dib-large-icon-button" aria-label="icon2" can-be-moved=true flex=none style="width:140 !important; height:140 !important;   " id='ci183741' aria-label="icon2" dib-container-name='dashboard4' ng-click="common.goTo('clientGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Clients 
+					</span>
+				</md-button>
+				<md-button class="dib-large-icon-button" aria-label="icon3" can-be-moved=true flex=none style="width:140 !important; height:140 !important;   " id='ci183744' aria-label="icon3" dib-container-name='dashboard4' ng-click="common.goTo('projectGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Projects 
+					</span>
+				</md-button>
+				<md-button class="dib-large-icon-button" aria-label="icon4" can-be-moved=true flex=none style="width:140 !important; height:140 !important;   " id='ci183743' aria-label="icon4" dib-container-name='dashboard4' ng-click="common.goTo('skillGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Skills 
+					</span>
+				</md-button>
+				<md-button class="dib-large-icon-button" aria-label="icon5" can-be-moved=true flex=none style="width:140 !important; height:140 !important;   " id='ci183742' aria-label="icon5" dib-container-name='dashboard4' ng-click="common.goTo('staffProjectGrid','',true,'','',$event);" dib-config="{ listeners : { } }" >
+					<md-icon md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/whatshot.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Staff Projects 
+					</span>
+				</md-button>
+			</md-card-content>
+		</md-card>
+		<md-card aria-label="mdcard1" can-be-moved=true can-have-children=true flex=none layout='row' layout-align='center center' style="    " >
+			<md-card-content  id="ci183745" dib-inject-content="replace" class="no-padding" style="padding:0px"  id='ci183745' aria-label="mdcard1" dib-container-name='dashboard4' dib-config="{ listeners : { } }" >
+				<md-button class="dib-large-icon-button" aria-label="designMyApp" can-be-moved=true flex=none style="width:140 !important; height:140 !important;   " dib-help='Design My App: Allows you to change the application with our designer. Remember to delete this button from the view before you publish your app. ' id='ci183746' aria-label="designMyApp" dib-container-name='dashboard4' ng-click="common.goTo('dibDesigner','',true,'','',$event);" dib-config="{ 'tooltip':'Open the Designer', listeners : { } }" >
+					<md-tooltip md-direction="top" md-delay="500">
+						Open the Designer
+					</md-tooltip>
+					<md-icon md-svg-src="/files/dropins/setNgMaterial/dibAdmin/images/settings.svg" class="md-opacity-55">
+					</md-icon>
+					<span class="label md-caption md-opacity-55">
+						Design My App 
+					</span>
+				</md-button>
+			</md-card-content>
+		</md-card>
+	</div>
+</div>

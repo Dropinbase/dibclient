@@ -1,0 +1,12 @@
+ 
+<div component-loaded dib-container=xxxx dib-container-name="8359" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<md-button aria-label="btndelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised " style="    " ng-click="deleteModel({'redirect' : true})" id='ci184578' aria-label="btndelete" dib-container-name='xxxx' dib-config="{ listeners : { } }" >
+		<md-tooltip md-direction="top" md-delay="500">
+			Delete current record
+		</md-tooltip>
+		<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+		</md-icon>
+	</md-button>
+</div>

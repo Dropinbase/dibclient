@@ -1,0 +1,93 @@
+
+(function() {
+    var requiredFiles = [];
+        //Adding some special requirements for this dropin
+    var dibexLazyLoadHtml = angular.module('dibexLazyLoadHtml', [requiredFiles]);
+    dibexLazyLoadHtml.factory('dibexLazyLoadHtmlStore',['ajax', '$log', 'recordFactory','discoverService', function (ajax, $log, recordFactory,discoverService) {
+        var url = function () {
+            return discoverService.addToUrl({
+                field : $('[dib-container=dibexLazyLoadHtml]'),
+                url : DIB__base_url+"/dropins/setNgMaterial/dibHtmlTemplate/Template/open/dibexLazyLoadHtml"
+            });
+        };
+        return {
+            url : url
+        };
+    }]);
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+})();
+(function() {
+var dibexLazyLoadHtml = angular.module('dibexLazyLoadHtml');
+dibexLazyLoadHtml.component('dibexLazyLoadHtml', {
+    controllerAs: 'dibexLazyLoadHtml',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibHtmlTemplate/Template/view/dibexLazyLoadHtml.html',
+    controller : component__dibexLazyLoadHtml
+});
+component__dibexLazyLoadHtml.$inject = [  
+            '$scope','discoverService','dibexLazyLoadHtmlStore','containerService', '$rootScope','$sce', '$timeout','containerService','recordFactory','crudService','utilityService'];
+    function component__dibexLazyLoadHtml($scope,discoverService,dibexLazyLoadHtmlStore,containerService, $rootScope,$sce, $timeout,containerService,recordFactory,crudService,utilityService) {
+                    $scope.container = {};
+            $scope.container.Id = '7153';
+            $scope.container.Name = 'dibexLazyLoadHtml';
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = [];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+        function setupUrl() { 
+            var url = dibexLazyLoadHtmlStore.url();
+            if (!!url.url == false) return;
+            var tmpUri = url.url;
+            if (tmpUri.indexOf("?") !== -1) {
+              tmpUri += "&" + $.param(url.data) + "&v="+new Date().getTime();
+            } else {
+               tmpUri += "?" + $.param(url.data)+ "&v="+new Date().getTime();
+            }
+            $sce.trustAsResourceUrl(tmpUri);
+            $scope.model.url = tmpUri;
+        }
+        if (!!containerService.isSubContainer($("[dib-container=dibexLazyLoadHtml]")) === false) { 
+            setupUrl();
+        }
+        $scope.reloadContainer = function (options) {
+                setupUrl();
+        if (!!$scope) { 
+                $scope.$broadcast('reload container');
+        }
+            $scope.frameStyle = {
+                "height" : "200px"
+            };
+            //@TODO to figure out how to update the screen height
+            // $timeout(function () { 
+            //     $scope.frameStyle = {
+            //         "height" : $('[dib-container=dibexLazyLoadHtml]').contents().find('body').height() + "px"
+            //     };
+            // }, 100);
+        };
+    }  
+})();

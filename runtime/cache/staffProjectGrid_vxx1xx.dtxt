@@ -1,0 +1,777 @@
+ 
+<div component-loaded dib-container="staffProjectGrid" dib-grid  dib-config="{ }" >
+	<div dib-inject-content="replace" layout="row"  aria-label="toolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci211926' aria-label="toolbar" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btninlineadd" can-be-moved=true class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci211933' aria-label="btninlineadd" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add record inline
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " id='ci211930' aria-label="btnadd" dib-container-name='staffProjectGrid' ng-click="dibCommon.goTo('staffProjectForm','',true,'?record=new','',$event);" dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add a new record using a form
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btngriddelete" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="deleteSelected()" id='ci211927' aria-label="btngriddelete" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete selected records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci211928' aria-label="btnreload" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Reload records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci212080' aria-label="btnAuditTrail" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci211929' aria-label="emptyspan" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+		</span>
+		<md-button aria-label="btnfilteropen" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci211934' aria-label="btnfilteropen" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Display headers for filtering records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterapply" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="searchGrid()" id='ci211931' aria-label="btnfilterapply" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Apply filter criteria specified in grid headers
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterclear" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="clearSearch()" id='ci211932' aria-label="btnfilterclear" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Show all records and clear filter criteria
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
+			</md-icon>
+		</md-button>
+		<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci211935' aria-label="gridtotals" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			-1" >
+			<md-button ng-disabled="true" aria-label="Grid totals">
+				Records: {{page.fromRecord}}
+				<span ng-if='page.fromRecord>
+					0'>
+					to {{page.toRecord}} of {{page.records}}
+				</span>
+				<span ng-if='page.totalRecords!=page.records'>
+					(Total: {{page.totalRecords}})
+				</span>
+			</md-button>
+		</div>
+	</div>
+	<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div flex dib-table-width >
+		<md-list class='dib-grid-column-header'>
+			<md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+				<div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length >
+					0">
+					<div table-column  flex = 'nogrow' class="md-subhead" dib-column-heading='211937' style="    " >
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='212081' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+							Id*
+							<span ng-if="gridOptions.sortFields['id']">
+								({{gridOptions.sortFields['id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+								<input type="text"  name="id" ng-model="search.id" aria-label="Id" ng-enter='searchGrid()' id='ci212081' aria-label="id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Id
+								</label>
+								<div ng-messages="staffProjectGrid.id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='212082' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('staff_id')" >
+							Staff*
+							<span ng-if="gridOptions.sortFields['staff_id']">
+								({{gridOptions.sortFields['staff_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['staff_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['staff_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<div layout='row' aria-label="staff_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='staff_id' select-model="search.selected___staff_id.id" md-search-text-change="dropdowns.service212082.searchTextChange(dropdowns.service212082.searchText)" md-search-text="dropdowns.service212082.searchText" md-selected-item="search.selected___staff_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service212082.getItems(dropdowns.service212082.searchText,'search')" md-floating-label="Staff" md-no-cache="true" md-selected-item-change="select212082(search,'search','staff_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Staff" id='ci212082' aria-label="staff_id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-item-template>
+										<span md-highlight-text="dropdowns.service212082.searchText">
+											{{item.id_display_value}}
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+									<div ng-messages="staffProjectGrid.staff_id.$error" ng-if="staffProjectGrid.staff_id.$touched">
+									</div>
+								</md-autocomplete>
+							</div>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='212083' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('project_id')" >
+							Project*
+							<span ng-if="gridOptions.sortFields['project_id']">
+								({{gridOptions.sortFields['project_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['project_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['project_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<div layout='row' aria-label="project_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='project_id' select-model="search.selected___project_id.id" md-search-text-change="dropdowns.service212083.searchTextChange(dropdowns.service212083.searchText)" md-search-text="dropdowns.service212083.searchText" md-selected-item="search.selected___project_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service212083.getItems(dropdowns.service212083.searchText,'search')" md-floating-label="Project" md-no-cache="true" md-selected-item-change="select212083(search,'search','project_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Project" id='ci212083' aria-label="project_id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-item-template>
+										<span md-highlight-text="dropdowns.service212083.searchText">
+											{{item.id_display_value}}
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+									<div ng-messages="staffProjectGrid.project_id.$error" ng-if="staffProjectGrid.project_id.$touched">
+									</div>
+								</md-autocomplete>
+							</div>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='212084' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('date_from')" >
+							Date From*
+							<span ng-if="gridOptions.sortFields['date_from']">
+								({{gridOptions.sortFields['date_from']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['date_from']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['date_from']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="date_from" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+								<input type="text"  name="date_from" ng-model="search.date_from" aria-label="Date From" ng-enter='searchGrid()' id='ci212084' aria-label="date_from" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Date From
+								</label>
+								<div ng-messages="staffProjectGrid.date_from.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='212085' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('date_to')" >
+							Date To
+							<span ng-if="gridOptions.sortFields['date_to']">
+								({{gridOptions.sortFields['date_to']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['date_to']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['date_to']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="date_to" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+								<input type="text"  name="date_to" ng-model="search.date_to" aria-label="Date To" ng-enter='searchGrid()' id='ci212085' aria-label="date_to" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Date To
+								</label>
+								<div ng-messages="staffProjectGrid.date_to.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='212086' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('notes')" >
+							Notes
+							<span ng-if="gridOptions.sortFields['notes']">
+								({{gridOptions.sortFields['notes']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+								<input type="text"  maxlength='50' name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci212086' aria-label="notes" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Notes
+								</label>
+								<div ng-messages="staffProjectGrid.notes.$error">
+									<div ng-message="maxlength">
+										At most 50 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='212087' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('updated')" >
+							Updated
+							<span ng-if="gridOptions.sortFields['updated']">
+								({{gridOptions.sortFields['updated']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['updated']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['updated']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+								<input type="text"  name="updated" ng-model="search.updated" aria-label="Updated" ng-enter='searchGrid()' id='ci212087' aria-label="updated" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Updated
+								</label>
+								<div ng-messages="staffProjectGrid.updated.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='staffProjectGrid' ng-if="gridOptions.inlineAddShow">
+				<ng-form name=staffProjectGrid  dib-container-name="staffProjectGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+					<div table-column layout="column" flex = 'nogrow' dib-column="211937" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true class="md-icon-button  md-squared md-raised" style="    " id='ci211937' aria-label="btngridedit" dib-container-name='staffProjectGrid' ng-click="dibCommon.goTo('staffProjectForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="212081" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci212081' aria-label="id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="staffProjectGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212082" style="    " >
+						<div aria-label="staff_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['staff_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for staffForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('staffForm','',true,'selected___staff_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="staff_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='staff_id' select-model="model.selected___staff_id.id" md-search-text-change="dropdowns.service212082.searchTextChange(dropdowns.service212082.searchText)" md-search-text="dropdowns.service212082.searchText" md-selected-item="model.selected___staff_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service212082.getItems(dropdowns.service212082.searchText,'model')" md-floating-label="Staff" md-no-cache="true" md-selected-item-change="select212082(model,'model','staff_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Staff" id='ci212082' aria-label="staff_id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service212082.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="staffProjectGrid.staff_id.$error" ng-if="staffProjectGrid.staff_id.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for staffForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('staffForm','',true,'selected___staff_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212083" style="    " >
+						<div aria-label="project_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['project_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for projectForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('projectForm','',true,'selected___project_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="project_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='project_id' select-model="model.selected___project_id.id" md-search-text-change="dropdowns.service212083.searchTextChange(dropdowns.service212083.searchText)" md-search-text="dropdowns.service212083.searchText" md-selected-item="model.selected___project_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service212083.getItems(dropdowns.service212083.searchText,'model')" md-floating-label="Project" md-no-cache="true" md-selected-item-change="select212083(model,'model','project_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Project" id='ci212083' aria-label="project_id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service212083.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="staffProjectGrid.project_id.$error" ng-if="staffProjectGrid.project_id.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for projectForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('projectForm','',true,'selected___project_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212084" style="    " >
+						<div aria-label="date_from" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['date_from']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="date_from" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="text" theme="material" ng-model="model.date_from" name=date_from required aria-label="Date From" placeholder="Date From" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212084' aria-label="date_from" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="staffProjectGrid.model.date_from.$error">
+										<div ng-message="required">
+											This is required.
+										</div>
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212085" style="    " >
+						<div aria-label="date_to" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['date_to']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="date_to" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="text" theme="material" ng-model="model.date_to" name=date_to aria-label="Date To" placeholder="Date To" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212085' aria-label="date_to" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="staffProjectGrid.model.date_to.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212086" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="text"  maxlength='50' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci212086' aria-label="notes" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="staffProjectGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212087" style="    " >
+						<div aria-label="updated" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['updated']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="text" theme="material" ng-model="model.updated"   name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212087' aria-label="updated" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex='none' dib-edit >
+						<md-button ng-click='toggleInlineAdd()' class="md-raised ">
+							Close 
+						</md-button>
+						<md-button ng-click='cleanRow($event,model, staffProjectGrid)' class="md-raised "  ng-disabled='!staffProjectGrid.$dirty'>
+							Clear   
+						</md-button>
+						<md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+							Use selected data 
+						</md-button>
+						<md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!staffProjectGrid.$valid">
+							Add   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</div>
+	<md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+		<md-list dib-table-column-width >
+			<md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+				<div class="no-records-available">
+					  No records available 
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)" >
+				<ng-form name='staffProjectGrid' dib-container-name="staffProjectGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+					<div table-column layout="column" flex = 'nogrow' dib-column="211937" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true class="md-icon-button  md-squared md-raised" style="    " id='ci211937' aria-label="btngridedit" dib-container-name='staffProjectGrid' ng-click="dibCommon.goTo('staffProjectForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="212081" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci212081' aria-label="id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="staffProjectGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212082" style="    " >
+						<div aria-label="staff_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['staff_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for staffForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('staffForm','',true,'selected___staff_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="staff_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='staff_id' select-model="model.selected___staff_id.id" md-search-text-change="dropdowns.service212082.searchTextChange(dropdowns.service212082.searchText)" md-search-text="dropdowns.service212082.searchText" md-selected-item="model.selected___staff_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service212082.getItems(dropdowns.service212082.searchText,'model')" md-floating-label="Staff" md-no-cache="true" md-selected-item-change="select212082(model,'model','staff_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Staff" id='ci212082' aria-label="staff_id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service212082.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="staffProjectGrid.staff_id.$error" ng-if="staffProjectGrid.staff_id.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for staffForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('staffForm','',true,'selected___staff_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212083" style="    " >
+						<div aria-label="project_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['project_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for projectForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('projectForm','',true,'selected___project_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="project_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='project_id' select-model="model.selected___project_id.id" md-search-text-change="dropdowns.service212083.searchTextChange(dropdowns.service212083.searchText)" md-search-text="dropdowns.service212083.searchText" md-selected-item="model.selected___project_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service212083.getItems(dropdowns.service212083.searchText,'model')" md-floating-label="Project" md-no-cache="true" md-selected-item-change="select212083(model,'model','project_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Project" id='ci212083' aria-label="project_id" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service212083.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="staffProjectGrid.project_id.$error" ng-if="staffProjectGrid.project_id.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for projectForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('projectForm','',true,'selected___project_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212084" style="    " >
+						<div aria-label="date_from" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['date_from']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="date_from" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="text" theme="material" ng-model="model.date_from" name=date_from required aria-label="Date From" placeholder="Date From" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212084' aria-label="date_from" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="staffProjectGrid.model.date_from.$error">
+										<div ng-message="required">
+											This is required.
+										</div>
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212085" style="    " >
+						<div aria-label="date_to" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['date_to']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="date_to" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="text" theme="material" ng-model="model.date_to" name=date_to aria-label="Date To" placeholder="Date To" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212085' aria-label="date_to" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="staffProjectGrid.model.date_to.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212086" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="text"  maxlength='50' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci212086' aria-label="notes" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="staffProjectGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 50 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="212087" style="    " >
+						<div aria-label="updated" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['updated']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="updated" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4648&text=staff_project' >
+									<input type="text" theme="material" ng-model="model.updated"   name="updated" aria-label="Updated" placeholder="Updated" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci212087' aria-label="updated" dib-container-name='staffProjectGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+						<md-button ng-click='cancelRow($event,row)' class="md-raised ">
+							Cancel 
+						</md-button>
+						<md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!staffProjectGrid.$valid" >
+							Save   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<div layout-fill layout='row' flex class='dib-grid-footer'>
+		<div flex=20 layout='row'>
+			<md-button disabled>
+				Page limit
+			</md-button>
+			<md-select ng-model="page.limit" aria-label="Page Limit">
+				<md-option ng-value="10">
+					10
+				</md-option>
+				<md-option ng-value="20">
+					20
+				</md-option>
+				<md-option ng-value="50">
+					50
+				</md-option>
+			</md-select>
+		</div>
+		<div  ng-if="page.count>
+			1" flex=80 layout='row'  layout-align="center center" >
+			<md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+				First 
+			</md-button>
+			<md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+				Prev 
+			</md-button>
+			<div layout='row'>
+				<md-button disabled>
+					Page
+				</md-button>
+				<md-input-container>
+					<input type='number' ng-model="page.number" aria-label="Page number">
+				</md-input-container>
+				<md-button disabled>
+					of {{ page.count }} 
+				</md-button>
+			</div>
+			<md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+				Next 
+			</md-button>
+			<md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+				Last 
+			</md-button>
+		</div>
+	</div>
+</div>

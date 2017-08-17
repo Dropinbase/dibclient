@@ -1,0 +1,144 @@
+<div component-loaded layout="column">
+    <md-menu-toolbar flex class="md-background md-whiteframe-1dp">
+        <div class="md-toolbar-tools" layout="row">
+            <div flex>
+                <button class="md-button md-ink-ripple md-custom-grey" ng-click="setToday()">
+                    TODAY
+                </button>
+            </div>
+            <div flex>
+                <md-datepicker ng-model="selectedDate"></md-datepicker>
+            </div>
+            <div ng-if="calendarSwitchableViews" flex>
+                <div layout="row" layout-align="end center">
+                    <button class="md-button md-ink-ripple md-accent md-raised" ng-class="{'inactive':weekView}" ng-click="toggleView('day')">
+                        DAY VIEW
+                    </button>
+                    <button class="md-button md-ink-ripple md-accent md-raised" ng-class="{'inactive':!weekView}" ng-click="toggleView('week')">
+                        WEEK VIEW
+                    </button>
+                </div>
+            </div>
+        </div>
+    </md-menu-toolbar>
+</div>
+<div ng-if="!weekView" layout="column" class="dib-calendar-day">
+    <div class="shifts" layout="row" layout-xs="column" layout-align="space-around start">
+        <div ng-repeat="shift in calendarData[0].Shifts | limitTo:3" flex layout-fit layout-padding>
+            <div  class="shift md-whiteframe-1dp"  flex layout-align="stretch">
+                <md-toolbar class="md-custom-darkgrey">
+                    <div class="md-toolbar-tools multi-line">
+                        <div layout="column" >
+                            <h4>{{shift.ShiftName}}</h4>
+                            <p class="sub-line">{{shift.TimeLabels.From}} - {{shift.TimeLabels.To}}</p>
+                        </div>
+                    </div>
+                </md-toolbar>
+                <md-content>
+                    <md-subheader class="cl-md-accent md-no-sticky">
+                        {{shift.Team.Label}}
+                    </md-subheader>
+                    <md-list ng-cloak>
+                        <md-list-item ng-repeat="employee in shift.Employees">
+                            <img alt="{{employee.Name}}" ng-src="{{employee.Avatar}}" class="md-avatar"/>
+                            <p>{{employee.Name}}</p>
+                            <md-switch class="md-secondary" ng-model="employee.CheckedIn"></md-switch>
+                        </md-list-item>
+                    </md-list>
+                    <md-subheader class="cl-md-accent md-no-sticky">
+                        Add employee to shift
+                    </md-subheader>
+                    <div layout="row" class="dib-add-field">
+                        <md-autocomplete
+                                flex-auto
+                                md-search-text="addEmployee.searchText"
+                                md-items="employee in addEmployee.querySearch(addEmployee.searchText)"
+                                md-item-text="employee.Name"
+                                md-min-length="0"
+                                placeholder="Select an employee">
+                            <md-item-template>
+                                <span md-highlight-text="addEmployee.searchText" md-highlight-flags="^i">{{employee.Name}}</span>
+                            </md-item-template>
+                            <md-not-found>
+                                No states matching "{{addEmployee.searchText}}" were found.
+                            </md-not-found>
+                        </md-autocomplete>
+                        <md-button class="md-icon-button md-raised md-squared" aria-label="More">
+                            <md-icon md-svg-icon="img/icons/plus.svg"></md-icon>
+                        </md-button>
+                    </div>
+                </md-content>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="weekView" layout="column" class="dib-calendar-week md-whiteframe-2dp">
+    <md-toolbar layout="row" class="toolbar">
+        <div flex="10"></div>
+        <div ng-repeat="day in calendarData" flex>{{day.Date  | date:'EEE, d/M'}}</div>
+    </md-toolbar>
+    <div layout="row" class="week">
+        <ul flex="10" class="hour-labels">
+            <li ng-repeat="hour in hourList" class="hour">{{hour}}</li>
+        </ul>
+        <div ng-repeat="day in calendarData" flex class="day">
+            <div ng-repeat="hour in hourList" class="hour"></div>
+            <ul class="events">
+                <li ng-repeat="shift in day.Shifts" class="event start-{{shift.TimeFromCls}} duration-{{shift.DurationCls}} cl-event-{{shift.ShiftId}}" ng-click="showOverlay('shiftDetails'); setSelectedShift(shift)">
+                    <p>
+                        <strong>{{shift.ShiftName}}</strong><br><br>
+                        Employees ({{shift.Employees.length}})<br>
+                        <span ng-repeat="employee in shift.Employees">{{employee.Name}}<span ng-if="!$last">, </span></span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div ng-if="overlay.shiftDetails" class="overlay">
+    <div class="overlay-close" ng-click="showOverlay('shiftDetails')"></div>
+    <div class="window shift md-whiteframe-8dp" flex="40">
+        <md-toolbar class="md-custom-darkgrey">
+            <div class="md-toolbar-tools multi-line">
+                <div layout="column" >
+                    <h4>{{selectedShift.ShiftName}}</h4>
+                    <p class="sub-line">{{selectedShift.TimeLabels.From}} - {{selectedShift.TimeLabels.To}}</p>
+                </div>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <md-subheader class="md-accent md-no-sticky">
+                {{selectedShift.Team.Label}}
+            </md-subheader>
+            <md-list ng-cloak>
+                <md-list-item ng-repeat="employee in selectedShift.Employees">
+                    <img alt="{{employee.Name}}" ng-src="{{employee.Avatar}}" class="md-avatar"/>
+                    <p>{{employee.Name}}</p>
+                    <md-switch class="md-secondary" ng-model="employee.CheckedIn"></md-switch>
+                </md-list-item>
+            </md-list>
+            <md-subheader class="md-accent md-no-sticky">
+                Add employee to shift
+            </md-subheader>
+            <div layout="row" class="dib-add-field">
+                <md-autocomplete
+                        flex-auto
+                        md-search-text="addEmployee.searchText"
+                        md-items="employee in addEmployee.querySearch(addEmployee.searchText)"
+                        md-item-text="employee.Name"
+                        md-min-length="0"
+                        placeholder="Select an employee">
+                    <md-item-template>
+                        <span md-highlight-text="addEmployee.searchText" md-highlight-flags="^i">{{employee.Name}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                        No states matching "{{addEmployee.searchText}}" were found.
+                    </md-not-found>
+                </md-autocomplete>
+                <md-button class="md-icon-button md-raised md-squared" aria-label="More">
+                    <md-icon md-svg-icon="img/icons/plus.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-content>
+    </div>
+</div>

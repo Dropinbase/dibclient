@@ -1,0 +1,405 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibForm/js/component/formPaging.js','/dropins/setNgMaterial/dibGlobals/js/component/timeDatePickerInput.js',  
+		'/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+	];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibGrid/Template/controller/staffProjectGrid.js');
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibForm/Template/controller/staffProjectForm.js');
+    var projectForm = angular.module('projectForm', [files]);
+    function updateQueryStringMenu(url, node) { 
+        if (!!node === true) {
+            return url + "&node="+node;
+        } 
+        return url + "&node=root";
+    };
+    projectForm.service('service195713',service195713); 
+    service195713.$inject = ['ajax', 'discoverService', '$q'];
+    function service195713(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/projectForm?containerItemId=195713", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci195713'),
+                    container : $('[dib-container=projectForm]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    projectForm.service('service195714',service195714); 
+    service195714.$inject = ['ajax', 'discoverService', '$q'];
+    function service195714(ajax, discoverService, $q) {
+            return {
+                list : list
+            };       
+            function list(query, modelType, page) {
+                var $defer = $q.defer();
+                var url = updateQueryStringDropdown(DIB__base_url + "/peff/Crud/componentlist/projectForm?containerItemId=195714", query, modelType, page);
+                var requestInfo = discoverService.addToUrl({
+                    field :$('#ci195714'),
+                    container : $('[dib-container=projectForm]'),
+                    url : url
+                });
+                return ajax.post(requestInfo, {
+                    excludeFromCancels : true,
+                    factoryResult : function (data) {
+                        return data.records;
+                    }
+                });
+            };
+    };
+    function updateQueryStringDropdown(url, query, modelType, page) {
+        url += "&limit=20&page=" + (!!page == true? page: 1);
+        if (modelType=='search') { 
+            url += "&showUsedOnly=true";
+        }
+        url += "&query=";
+        if (!!query == true) {
+            url += query;
+        }
+        return url;
+    };
+var projectForm = angular.module('projectForm');
+projectForm.component('projectForm', {
+    controllerAs: 'projectForm',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibForm/Template/view/projectForm.html',
+    controller : component__projectForm
+});
+component__projectForm.$inject = [  
+            'dibForm', '$scope','$element', '$ocLazyLoad', '$rootScope', '$log', 'discoverService', 'messageService','$location','actionService', '$q','utilityService', '$timeout', 'activeFilterOverride','service195713','service195714','containerService','recordFactory','crudService','utilityService'];
+    function component__projectForm(dibForm, $scope,$element, $ocLazyLoad, $rootScope, $log, discoverService, messageService,$location,actionService, $q,utilityService, $timeout, activeFilterOverride,service195713,service195714,containerService,recordFactory,crudService,utilityService) {
+        var ctrl = this;        
+        ctrl.$postLink = function () {
+        if (!!$scope) { 
+                $scope.$broadcast('postLink');
+        }
+        };
+        ctrl.$onInit = function () {
+        if (!!$scope) { 
+                $scope.$broadcast('onInit');
+        }
+                        $scope.container = {};
+            $scope.container.Id = '8593';
+            $scope.container.Name = 'projectForm';
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.model._GET['id'] = containerService.modelItem("number", 
+            false,
+            false,
+            null
+        );
+        $scope.model._GET['name'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['client_id'] = containerService.modelItem("select", 
+            true,
+            true,
+            service195713
+        );
+        $scope.model._GET['project_leader_id'] = containerService.modelItem("select", 
+            true,
+            true,
+            service195714
+        );
+        $scope.model._GET['notes'] = containerService.modelItem("text", 
+            true,
+            true,
+            null
+        );
+        $scope.model._GET['updated'] = containerService.modelItem("dateTime", 
+            true,
+            true,
+            null
+        );
+        $scope.view = {};
+            $scope.view.project_pk = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = ["id"];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.dropdowns.service195713 = {};
+            $scope.dropdowns.service195713.items = [];
+            var setTimeoutCancel195713 = null;
+            var query195713;
+            $scope.loadService195713 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query195713 != query) {
+                    query195713 = query;
+                    if (!!skipTimeout) {
+                        return service195713.list(query).then(function (items) {
+                            $scope.dropdowns.service195713.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel195713);
+                        setTimeoutCancel195713 = setTimeout(function () { 
+                            service195713.list(query).then(function (items) {
+                                $scope.dropdowns.service195713.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service195713.searchTextChange = function (query) {
+                $scope.loadService195713(query);
+            };
+            $scope.dropdowns.service195713.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service195713.list(query,modelType);
+            };
+            $scope.select195713 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci195713');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service195713.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout195713 = null;
+            //loadService195713();
+            //reloadContainerFunctions.push($scope.loadService195713);
+            $scope.dropdowns.service195714 = {};
+            $scope.dropdowns.service195714.items = [];
+            var setTimeoutCancel195714 = null;
+            var query195714;
+            $scope.loadService195714 = function (query, skipTimeout) {
+                //This is to prevent to load any unnessary data as this gets triggered a few times with the multi line editing
+                if (query195714 != query) {
+                    query195714 = query;
+                    if (!!skipTimeout) {
+                        return service195714.list(query).then(function (items) {
+                            $scope.dropdowns.service195714.items = items;
+                        });
+                    } else {
+                        clearTimeout(setTimeoutCancel195714);
+                        setTimeoutCancel195714 = setTimeout(function () { 
+                            service195714.list(query).then(function (items) {
+                                $scope.dropdowns.service195714.items = items;
+                            });
+                        }, 100);
+                    }
+                } 
+            };
+            $scope.dropdowns.service195714.searchTextChange = function (query) {
+                $scope.loadService195714(query);
+            };
+            $scope.dropdowns.service195714.getItems = function (query,modelType) {
+                //return promise this will asign the result to the items
+                return service195714.list(query,modelType);
+            };
+            $scope.select195714 = function (model,modelName,fieldName) {
+                if (!!modelName == false) modelName ="model";
+                var $element =  $('#ci195714');
+                if (!!$element.attr('select-model') === false) { 
+                    $element = $element.find('[select-model]');
+                }
+                var modelName =  'selected___' + fieldName;
+                $element.trigger('select');
+                if (!!model[modelName]  === false) { 
+                    return  false;
+                }
+                angular.forEach($scope.dropdowns.service195714.items, function (item, index)   {
+                    if (item.id == model[modelName]['id']) {
+                        model[modelName]['id_display_value'] = item.id_display_value; 
+                        return false;
+                    }
+                });
+            };
+            var setTimeout195714 = null;
+            //loadService195714();
+            //reloadContainerFunctions.push($scope.loadService195714);
+            $scope.openAuditTrail = function (portAlias) {
+                            var primaryKeyData = recordFactory.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                            if (primaryKeyData.length > 0) {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=4033&filter_record_id="+primaryKeyData);
+                        } else {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=4033");
+                        }
+            };
+            $scope.addModel = function () { 
+                dibForm.addModel($scope, "projectForm");
+            };
+            $scope.deleteRecord = function (options) {
+                dibForm.deleteRecord('projectForm', $scope, $scope.projectForm, options, crudController).then(function (){
+        if (!!$scope) { 
+                $scope.$broadcast('delete');
+        }
+                });
+            };         
+            /**
+            *  Saving record in this model
+            */
+            $scope.saveModel = function (options) {
+                if ($scope.loadingData) return $q.reject('Busy loading...');
+                if (dibForm.validate($scope, $scope.projectForm)) {
+        if (!!$scope) { 
+                $scope.$broadcast('beforeUpdate');
+        }
+                    $scope.loadingData =  true;
+                    var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, $scope.model);
+                    return dibForm.updateRecord('projectForm', $scope, $scope.projectForm, crudController, options).then(function () { 
+                        if (Object.keys(primaryKeyData).length>0) {
+        if (!!$scope) { 
+                $scope.$broadcast('update');
+        }
+                        } else {
+        if (!!$scope) { 
+                $scope.$broadcast('create');
+        }
+                            loadForm();
+                        }
+                        return $q.when();
+                    });
+                }
+            };
+            var mdTabs = $("[dib-container=projectForm]").closest('md-tabs');
+            var tabsScope = null;
+            if (mdTabs.length === 0) {
+                mdTabs = null;
+            }
+            else {
+                tabsScope = mdTabs.scope();
+            }
+            $scope.$watch('projectForm.$dirty', function (newValue, oldValue) { 
+                $rootScope._navigation.containerDirty = newValue;
+                if ($rootScope._navigation.containerDirty && !!mdTabs && !!tabsScope) {
+                    var currentIndex = tabsScope.selectedIndex;
+                    $rootScope._navigation.addSaveFailedPromise(function(tabIndex) {
+                        tabsScope.selectedIndex = tabIndex;
+                        return $q.when();
+                    }, [currentIndex]);
+                }
+            },true);
+            $rootScope._navigation.addSavePromise($scope.saveModel);
+            //Giving the form the ability to handle dependency data (if an event is trigger on another component that has a refresh item alias point to the form/child form)
+            $scope.setDependencyData = function (object) { 
+                return dibForm.setDependencyData($scope,object);
+            };
+            $scope.itemAliasData = function () {
+                return angular.copy($scope.primaryKeyData);
+            };
+            /**
+            * Clear the form from records and dependancy data
+            */
+            $scope.clearForm = function () {
+                if ($scope.loadingData) return;
+                $scope.primaryKeyData = null;
+                $scope.reloadContainer();
+                dibForm.clean($scope.projectForm,$scope.model);
+        if (!!$scope) { 
+                $scope.$broadcast('clearDependency');
+        }
+            };
+            function loadForm () { 
+                $rootScope._navigation.reset();
+                $rootScope._navigation.addSavePromise($scope.saveModel);
+        if (!!$scope) { 
+                $scope.$broadcast('beforeLoad');
+        }
+                //clear the record status
+                $scope.recordStatus = null;
+                var isUrlContainer = containerService.urlContainer('projectForm');
+                if (isUrlContainer) {
+                    //check if record is first or last
+                    if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                        return;
+                    }
+                }
+                //check if this is a child container 
+                $scope.primaryKeyData = isUrlContainer ? discoverService.getPrimaryKeysFromUrl() : $scope.primaryKeyData;
+                if (!!$scope.primaryKeyData === false) {
+                $scope.primaryKeyData = {};
+                //set all the primaryKeys to 0
+                angular.forEach($scope.primaryKeys, function (key,index) { 
+                    $scope.model[key] = 0;
+                });
+                }
+                //remove active filter if no record are available
+                if (Object.keys($scope.primaryKeyData).length ==0) {
+                    $scope.recordStatus = "create";
+                } else {
+                    $scope.recordStatus = "update";
+                }
+                $scope.loadingData = true;
+                $scope.currentPrimaryKeyData = $scope.primaryKeyData;
+                crudService.read(crudController,'projectForm',{
+                    primaryKeyData : $scope.currentPrimaryKeyData,
+                    createParams: "{}"
+                },
+                $scope
+                ).then(function (model) {
+                    $scope.model = model;
+                    $scope.currentPrimaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, $scope.model);
+        if (!!$scope) { 
+                $scope.$broadcast('load');
+        }
+                    $scope.projectForm.$setUntouched();
+                    $scope.projectForm.$setPristine();
+                    //@TODO refactor start 
+                    var timeoutTest = $timeout(function () { 
+                        containerService.reloadChildren({containerName: 'projectForm'});
+                    },500); 
+                    //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                    var eventDeregister = $rootScope.$on("dibAngular.subcontainerLoaded", function () {
+                        $timeout.cancel(timeoutTest);
+                        timeoutTest = $timeout(function () { 
+                            containerService.reloadChildren({containerName: 'projectForm'});
+                            eventDeregister();
+                        },500); 
+                        //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                    });
+                    //Refactor stop
+                    $log.debug("containerName read->model",$scope.model );
+                    $scope.loadingData =  false;
+                }, function () {
+                    $scope.loadingData =  false;
+                });
+            }
+            $scope.reloadContainer = function (options) {
+        if (!!$scope) { 
+                $scope.$broadcast('beforeContainerReload');
+        }
+                $scope.autoRefresh = true;
+                loadForm ();
+        if (!!$scope) { 
+                $scope.$broadcast('reloadContainer');
+        }
+            };
+            //var isUrlContainer = containerService.urlContainer('projectForm');
+            //the if below we removed the requirement to match the url to the containerName, so we can load data into a window without the url changing. wizBuildAppAdv.
+            loadForm();
+            $scope.$watch('model', function (oldVal, newVal) {
+        if (!!$scope) { 
+                $scope.$broadcast('modelChange');
+        }
+            },true);  
+        }
+    }
+})();

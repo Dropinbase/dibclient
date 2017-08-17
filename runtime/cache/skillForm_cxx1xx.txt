@@ -1,0 +1,293 @@
+(function() {
+  var require = ['/dropins/setNgMaterial/dibForm/js/component/formPaging.js' ];
+  require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+  var files = [];
+  angular.forEach(require, function (file,index) { 
+    files.push(DIB__base_url+'/files'+file);
+  });
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibGrid/Template/controller/staffSkillGrid.js');
+          files.push( DIB__base_url + '/dropins/setNgMaterial/dibForm/Template/controller/staffSkillForm.js');
+    var skillForm = angular.module('skillForm', [files]).run(['$rootScope', 'actionLoaderService', function($rootScope, actionLoaderService) {
+            var actions = ['dibGlobals.action.OpenContainer','dibGlobals.action.ToggleMenu'];
+            if (!actions || actions.length === 0) {
+                return;
+            }
+            actionLoaderService.loadDibActionDefinitions(actions);
+    }]);
+        skillForm.component('tabModule190534', {
+                controllerAs: 'tabModule190534',
+                controller : ["$scope", function ($scope) { 
+                    //debugger;
+                }]
+            });
+var skillForm = angular.module('skillForm');
+skillForm.component('skillForm', {
+    controllerAs: 'skillForm',
+    templateUrl: DIB__base_url + '/dropins/setNgMaterial/dibForm/Template/view/skillForm.html',
+    controller : component__skillForm
+});
+component__skillForm.$inject = [  
+            '$scope', '$ocLazyLoad', '$rootScope', '$log', 'discoverService', 'messageService','$location','actionService', '$q','utilityService', '$timeout', 'activeFilterOverride','containerService','recordFactory','crudService','utilityService'];
+    function component__skillForm($scope, $ocLazyLoad, $rootScope, $log, discoverService, messageService,$location,actionService, $q,utilityService, $timeout, activeFilterOverride,containerService,recordFactory,crudService,utilityService) {
+        var vm = this;        
+        vm.$onInit = function () {
+                        $scope.container = {};
+            $scope.container.Id = '8617';
+            $scope.container.Name = 'skillForm';
+            $("[dib-container='skillForm']").trigger('load');
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = recordFactory.modelConstruct();
+        $scope.model._GET['id'] = containerService.modelItem("number", 
+            true,
+            true
+        );
+        $scope.model._GET['name'] = containerService.modelItem("text", 
+            false,
+            false
+        );
+        $scope.model._GET['notes'] = containerService.modelItem("text", 
+            false,
+            false
+        );
+        $scope.view = {};
+            $scope.view.skill_pk = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            var reloadContainerFunctions = [];
+            containerService.watchModel($scope);
+	        $scope.common = $rootScope.common;
+            $scope.primaryKeys = ["id"];
+        $scope.menus = {};
+        $scope.dropdowns = {};
+        //load all dropdowns required for this container
+            $scope.openAuditTrail = function (portAlias) {
+                            var primaryKeyData = recordFactory.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                            if (primaryKeyData.length > 0) {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=4188&filter_record_id="+primaryKeyData);
+                        } else {
+                            $scope.common.goTo(DIB__audit_trail_container,portAlias,true,"?filter_pef_table_id=4188");
+                        }
+            };
+            /**
+            * Add a new record 
+            */
+            $scope.addModel = function (options) { 
+                if ($scope.loadingData) return;
+                var isUrlContainer = containerService.urlContainer("skillForm");
+                if (isUrlContainer){
+                    utilityService.updateUrlPrimaryKeys($scope, true, {});
+                    $location.search("record","new");
+                } 
+                $scope.clearForm();  
+                activeFilterOverride.remove = true;
+                $scope.recordStatus = "create";
+            };
+            /**
+            * Delete the record from the database
+            */
+            $scope.deleteModel = function (options) { 
+                if ($scope.loadingData) return;
+                if ($scope.recordStatus == "create") {
+                    messageService.callout({
+                        message : 'No valid record to delete.',
+                        type: "notice"
+                    });
+                    return;
+                }
+                messageService.confirm({
+                    title: 'Delete record',
+                    text : 'Warning - are you sure you want to permanently delete the current records?'
+                }).then(function () { 
+                    $scope.recordStatus = null;
+                    var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, $scope.model);
+                    return crudService.delete(crudController,'skillForm',{
+                            primaryKeyData : oldPrimaryKeyData
+                    }).then(function (model) { 
+                        $scope.loadingData =  false;
+                        $("[dib-container=skillForm]").trigger('delete');
+                        $scope.skillForm.$setUntouched();
+                        $scope.skillForm.$setPristine();
+                        messageService.callout({
+                            message : "Record successfully deleted.",
+                            type : 'success'
+                        });
+                        var isUrlContainer = containerService.urlContainer('skillForm');
+                        if (isUrlContainer) {
+                            utilityService.updateUrlPrimaryKeys($scope, options.redirect, model);
+                        } else {
+                            $scope.addModel();
+                        }
+                    }, function (data) { 
+                        $scope.loadingData =  false;
+                    });
+                });
+            };         
+            /**
+            *  Saving record in this model
+            */
+            $scope.saveModel = function (options) {
+                if ($scope.loadingData) return;
+                if (!$scope.skillForm.$valid) { 
+                    $scope.recordStatus = null;
+                    containerService.makeFormDirty($scope.skillForm);
+                    var errorMsg = "";
+                    angular.forEach($scope.skillForm.$error, function (errorCategory,index) { 
+                        angular.forEach(errorCategory, function (error, key) { 
+                            errorMsg += index + ":"+error.$name + "; ";
+                        });
+                    });
+                    var msg = 'Resolve validation errors to save on fields: '+errorMsg + '';
+                    messageService.callout({
+                        message : msg,
+                        type : 'warning',
+                        duration : 10000
+                    });
+                    return $q.reject(msg);
+                } 
+                $scope.loadingData =  true;
+                var primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, $scope.model);
+                $("[dib-container=skillForm]").trigger('beforeUpdate');
+                return crudService.update(crudController,'skillForm',{
+                            primaryKeyData : oldPrimaryKeyData
+            }, $scope).then(function (model) {
+                    oldPrimaryKeyData = primaryKeyData;
+                    $scope.loadingData =  false;
+                    $scope.skillForm.$setUntouched();
+                    $scope.skillForm.$setPristine();
+                    $rootScope._navigation.reset();
+                    if (Object.keys(primaryKeyData).length>0) {
+                        $("[dib-container=skillForm]").trigger('update');
+                        messageService.callout({
+                            message : "Record successfully saved.",
+                            type : 'success'
+                        });
+                        return $q.reject($scope);
+                    } else {
+                        $("[dib-container=skillForm]").trigger('create');
+                        messageService.callout({
+                            message : "Record successfully created.",
+                            type : 'success'
+                        });
+                        var isUrlContainer = containerService.urlContainer('skillForm');
+                        if (isUrlContainer) {
+                            utilityService.updateUrlPrimaryKeys($scope,  options.redirect, model);
+                        } else {
+                            //if primary key data is empty then we assume a new record has been created and store the model received against the primaryKeyData
+                            $scope.primaryKeyData = model;
+                            oldPrimaryKeyData = $scope.primaryKeyData;
+                            activeFilterOverride.remove = true;
+                            loadForm();
+                        }
+                        return $q.resolve($scope);
+                    }
+                }, function () {
+                    $scope.loadingData =  false;
+                    return $q.reject($scope);
+                });
+            };
+            var mdTabs = $("[dib-container=skillForm]").closest('md-tabs');
+            var tabsScope = null;
+            if (mdTabs.length === 0) {
+                mdTabs = null;
+            }
+            else {
+                tabsScope = mdTabs.scope();
+            }
+            $scope.$watch('skillForm.$dirty', function (newValue, oldValue) { 
+                $rootScope._navigation.containerDirty = newValue;
+                if ($rootScope._navigation.containerDirty && !!mdTabs && !!tabsScope) {
+                    var currentIndex = tabsScope.selectedIndex;
+                    $rootScope._navigation.addSaveFailedPromise(function(tabIndex) {
+                        tabsScope.selectedIndex = tabIndex;
+                        return $q.when();
+                    }, [currentIndex]);
+                }
+            },true);
+            $rootScope._navigation.addSavePromise($scope.saveModel);
+            //Giving the form the ability to handle dependency data (if an event is trigger on another component that has a refresh item alias point to the form/child form)
+            $scope.setDependencyData = function (object) { 
+                    $scope.primaryKeyData = recordFactory.primaryKeyData($scope.primaryKeys, object);
+                    return $q.when();
+            };
+            /**
+            * Clear the form from records and dependancy data
+            */
+            $scope.clearForm = function () {
+                if ($scope.loadingData) return;
+                $scope.primaryKeyData = null;
+                $scope.reloadContainer();
+                containerService.cleanForm($scope.skillForm,$scope.model);
+                $("[dib-container=skillForm]").trigger('clearDependency');
+            };
+            var oldPrimaryKeyData;
+            function loadForm () { 
+                $("[dib-container=skillForm]").trigger('beforeload');
+                //clear the record status
+                $scope.recordStatus = null;
+                var isUrlContainer = containerService.urlContainer('skillForm');
+                if (isUrlContainer) {
+                    //check if record is first or last
+                    if (!!$location.search()['record'] && $location.search()['record']!='new') {
+                        return;
+                    }
+                }
+                //check if this is a child container 
+                $scope.primaryKeyData = isUrlContainer ? discoverService.getPrimaryKeysFromUrl() : $scope.primaryKeyData;
+                if (!!$scope.primaryKeyData === false) {
+                $scope.primaryKeyData = {};
+                //set all the primaryKeys to 0
+                angular.forEach($scope.primaryKeys, function (key,index) { 
+                    $scope.model[key] = 0;
+                });
+                }
+                //remove active filter if no record are available
+                if (Object.keys($scope.primaryKeyData).length ==0) {
+                    $scope.recordStatus = "create";
+                } else {
+                    $scope.recordStatus = "update";
+                }
+                $scope.loadingData = true;
+                oldPrimaryKeyData = $scope.primaryKeyData;
+                crudService.read(crudController,'skillForm',{
+                    primaryKeyData : oldPrimaryKeyData,
+                    createParams: "{}"
+                },
+                $scope
+                ).then(function (model) {
+                    $scope.model = model;
+                    $("[dib-container=skillForm]").trigger('load');
+                    $scope.skillForm.$setUntouched();
+                    $scope.skillForm.$setPristine();
+                    //@TODO refactor start 
+                    var timeoutTest = $timeout(function () { 
+                        containerService.reloadChildren({containerName: 'skillForm'});
+                    },500); 
+                    //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                    var eventDeregister = $rootScope.$on("dibAngular.subcontainerLoaded", function () {
+                        $timeout.cancel(timeoutTest);
+                        timeoutTest = $timeout(function () { 
+                            containerService.reloadChildren({containerName: 'skillForm'});
+                            eventDeregister();
+                        },500); 
+                        //@FRANCOIS @TODO Maybe we can change this to a better magic number :)
+                    });
+                    //Refactor stop
+                    $log.debug("containerName read->model",$scope.model );
+                    $scope.loadingData =  false;
+                }, function () {
+                    $scope.loadingData =  false;
+                });
+            }
+            $scope.reloadContainer = function (options) {
+                $("[dib-container=skillForm]").trigger('beforeReloadContainer');
+                $scope.autoRefresh = true;
+                loadForm ();
+            };
+            //var isUrlContainer = containerService.urlContainer('skillForm');
+            //the if below we removed the requirement to match the url to the containerName, so we can load data into a window without the url changing. wizBuildAppAdv.
+            loadForm ();
+            $scope.$watch('model', function (oldVal, newVal) {
+                $("[dib-container=skillForm]").trigger('modelChange');
+            },true);  
+        }
+    }
+})();

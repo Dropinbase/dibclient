@@ -1,0 +1,51 @@
+ 
+<ng-form layout-fill dib-container=tmplFormNg  flex isolate-form name='tmplFormNg' dib-config="{ }" >
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div dib-inject-content="replace" layout="row"  aria-label="rowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci153092' aria-label="rowToolbar" dib-container-name='tmplFormNg' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btnsave" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci153093' aria-label="btnsave" dib-container-name='tmplFormNg' dib-config="{ 'tooltip':'Save record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Save record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/save.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="addModel()" id='ci154574' aria-label="btnadd" dib-container-name='tmplFormNg' dib-config="{ 'tooltip':'Add new record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add new record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btndelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised " style="    " ng-click="deleteModel({'redirect' : true})" id='ci154575' aria-label="btndelete" dib-container-name='tmplFormNg' dib-config="{ 'tooltip':'Delete record', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete record
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci156273' aria-label="btnreload" dib-container-name='tmplFormNg' dib-config="{ 'tooltip':'Restore saved data', listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Restore saved data
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnGrid" can-be-moved=true flex=none style="    " id='ci156290' aria-label="btnGrid" dib-container-name='tmplFormNg' dib-config="{ 'tooltip':'Open grid', listeners : { } }" aria-label="Grid" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Open grid
+			</md-tooltip>
+			Grid 
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci156274' aria-label="emptyspan" dib-container-name='tmplFormNg' dib-config="{ listeners : { } }" >
+		</span>
+		<dib-form-paging aria-label="formpaging" can-be-moved=true flex=none style="    " id='ci156275' aria-label="formpaging" dib-container-name='tmplFormNg' dib-config="{ listeners : { } }" data-container-name="tmplFormNg" >
+		</dib-form-paging >
+	</div>
+	<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci153069' aria-label="fieldset" dib-container-name='tmplFormNg' dib-config="{ listeners : { } }" >
+		<md-card-content>
+			<section layout-fill>
+			</section>
+		</md-card-content>
+	</md-card>
+</ng-form>

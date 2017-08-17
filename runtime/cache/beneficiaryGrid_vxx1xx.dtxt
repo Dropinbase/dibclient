@@ -1,0 +1,1551 @@
+ 
+<div component-loaded dib-container="beneficiaryGrid" dib-grid  dib-config="{ }" >
+	<div dib-inject-content="replace" layout="row"  aria-label="toolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="    " id='ci198633' aria-label="toolbar" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+		<md-button aria-label="btninlineadd" can-be-moved=true flex=none class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci198640' aria-label="btninlineadd" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add record inline
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnadd" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " id='ci198637' aria-label="btnadd" dib-container-name='beneficiaryGrid' ng-click="dibCommon.goTo('beneficiaryForm','',true,'?record=new','',$event);" dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Add a new record using a form
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btngriddelete" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="deleteSelected()" id='ci198634' aria-label="btngriddelete" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Delete selected records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnreload" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci198635' aria-label="btnreload" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Reload records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnAuditTrail" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="openAuditTrail('')" id='ci199171' aria-label="btnAuditTrail" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				View audit trail of record changes
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg">
+			</md-icon>
+		</md-button>
+		<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci198636' aria-label="emptyspan" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+		</span>
+		<md-button aria-label="btnfilteropen" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci198641' aria-label="btnfilteropen" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Display headers for filtering records
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterapply" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="searchGrid()" id='ci198638' aria-label="btnfilterapply" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Apply filter criteria specified in grid headers
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg">
+			</md-icon>
+		</md-button>
+		<md-button aria-label="btnfilterclear" can-be-moved=true flex=none class="md-icon-button md-squared md-raised" style="    " ng-click="clearSearch()" id='ci198639' aria-label="btnfilterclear" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+			<md-tooltip md-direction="top" md-delay="500">
+				Show all records and clear filter criteria
+			</md-tooltip>
+			<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
+			</md-icon>
+		</md-button>
+		<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci198642' aria-label="gridtotals" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			-1" >
+			<md-button ng-disabled="true" aria-label="Grid totals">
+				Records: {{page.fromRecord}}
+				<span ng-if='page.fromRecord>
+					0'>
+					to {{page.toRecord}} of {{page.records}}
+				</span>
+				<span ng-if='page.totalRecords!=page.records'>
+					(Total: {{page.totalRecords}})
+				</span>
+			</md-button>
+		</div>
+	</div>
+	<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<div flex dib-table-width >
+		<md-list class='dib-grid-column-header'>
+			<md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+				<div layout="row" flex="100" dib-grid-search ng-show="!loadingData">
+					<div table-column  flex = 'nogrow' class="md-subhead" dib-column-heading='198644' style="    " >
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199172' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+							Id*
+							<span ng-if="gridOptions.sortFields['id']">
+								({{gridOptions.sortFields['id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  name="id" ng-model="search.id" aria-label="Id" ng-enter='searchGrid()' id='ci199172' aria-label="id" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Id
+								</label>
+								<div ng-messages="beneficiaryGrid.id.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199173' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('name')" >
+							Name*
+							<span ng-if="gridOptions.sortFields['name']">
+								({{gridOptions.sortFields['name']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['name']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='80' name="name" ng-model="search.name" aria-label="Name" ng-enter='searchGrid()' id='ci199173' aria-label="name" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Name
+								</label>
+								<div ng-messages="beneficiaryGrid.name.$error">
+									<div ng-message="maxlength">
+										At most 80 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199174' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('ben_acc_no')" >
+							Ben Acc No
+							<span ng-if="gridOptions.sortFields['ben_acc_no']">
+								({{gridOptions.sortFields['ben_acc_no']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['ben_acc_no']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['ben_acc_no']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="ben_acc_no" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='20' name="ben_acc_no" ng-model="search.ben_acc_no" aria-label="Ben Acc No" ng-enter='searchGrid()' id='ci199174' aria-label="ben_acc_no" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Ben Acc No
+								</label>
+								<div ng-messages="beneficiaryGrid.ben_acc_no.$error">
+									<div ng-message="maxlength">
+										At most 20 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199175' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('code')" >
+							Code*
+							<span ng-if="gridOptions.sortFields['code']">
+								({{gridOptions.sortFields['code']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['code']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['code']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<div layout='row' aria-label="code" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='code' select-model="search.selected___code.id" md-search-text-change="dropdowns.service199175.searchTextChange(dropdowns.service199175.searchText)" md-search-text="dropdowns.service199175.searchText" md-selected-item="search.selected___code" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service199175.getItems(dropdowns.service199175.searchText,'search')" md-floating-label="Code" md-no-cache="true" md-selected-item-change="select199175(search,'search','code')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Code" id='ci199175' aria-label="code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-item-template>
+										<span md-highlight-text="dropdowns.service199175.searchText">
+											{{item.id_display_value}}
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+									<div ng-messages="beneficiaryGrid.code.$error" ng-if="beneficiaryGrid.code.$touched">
+									</div>
+								</md-autocomplete>
+							</div>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199176' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('code_date')" >
+							Code Date*
+							<span ng-if="gridOptions.sortFields['code_date']">
+								({{gridOptions.sortFields['code_date']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['code_date']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['code_date']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="code_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  name="code_date" ng-model="search.code_date" aria-label="Code Date" ng-enter='searchGrid()' id='ci199176' aria-label="code_date" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Code Date
+								</label>
+								<div ng-messages="beneficiaryGrid.code_date.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199177' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('other_codes')" >
+							Other Codes
+							<span ng-if="gridOptions.sortFields['other_codes']">
+								({{gridOptions.sortFields['other_codes']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['other_codes']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['other_codes']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="other_codes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='10' name="other_codes" ng-model="search.other_codes" aria-label="Other Codes" ng-enter='searchGrid()' id='ci199177' aria-label="other_codes" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Other Codes
+								</label>
+								<div ng-messages="beneficiaryGrid.other_codes.$error">
+									<div ng-message="maxlength">
+										At most 10 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199178' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('class_code')" >
+							Class Code
+							<span ng-if="gridOptions.sortFields['class_code']">
+								({{gridOptions.sortFields['class_code']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['class_code']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['class_code']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="class_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='5' name="class_code" ng-model="search.class_code" aria-label="Class Code" ng-enter='searchGrid()' id='ci199178' aria-label="class_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Class Code
+								</label>
+								<div ng-messages="beneficiaryGrid.class_code.$error">
+									<div ng-message="maxlength">
+										At most 5 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199179' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('inst_holder')" >
+							Inst Holder
+							<span ng-if="gridOptions.sortFields['inst_holder']">
+								({{gridOptions.sortFields['inst_holder']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['inst_holder']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['inst_holder']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="inst_holder" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='3' name="inst_holder" ng-model="search.inst_holder" aria-label="Inst Holder" ng-enter='searchGrid()' id='ci199179' aria-label="inst_holder" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Inst Holder
+								</label>
+								<div ng-messages="beneficiaryGrid.inst_holder.$error">
+									<div ng-message="maxlength">
+										At most 3 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199180' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('address1')" >
+							Address1
+							<span ng-if="gridOptions.sortFields['address1']">
+								({{gridOptions.sortFields['address1']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['address1']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['address1']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="address1" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='35' name="address1" ng-model="search.address1" aria-label="Address1" ng-enter='searchGrid()' id='ci199180' aria-label="address1" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Address1
+								</label>
+								<div ng-messages="beneficiaryGrid.address1.$error">
+									<div ng-message="maxlength">
+										At most 35 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199181' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('address2')" >
+							Address2
+							<span ng-if="gridOptions.sortFields['address2']">
+								({{gridOptions.sortFields['address2']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['address2']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['address2']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="address2" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='35' name="address2" ng-model="search.address2" aria-label="Address2" ng-enter='searchGrid()' id='ci199181' aria-label="address2" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Address2
+								</label>
+								<div ng-messages="beneficiaryGrid.address2.$error">
+									<div ng-message="maxlength">
+										At most 35 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199182' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('address3')" >
+							Address3
+							<span ng-if="gridOptions.sortFields['address3']">
+								({{gridOptions.sortFields['address3']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['address3']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['address3']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="address3" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='35' name="address3" ng-model="search.address3" aria-label="Address3" ng-enter='searchGrid()' id='ci199182' aria-label="address3" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Address3
+								</label>
+								<div ng-messages="beneficiaryGrid.address3.$error">
+									<div ng-message="maxlength">
+										At most 35 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199183' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('address4')" >
+							Address4
+							<span ng-if="gridOptions.sortFields['address4']">
+								({{gridOptions.sortFields['address4']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['address4']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['address4']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="address4" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='35' name="address4" ng-model="search.address4" aria-label="Address4" ng-enter='searchGrid()' id='ci199183' aria-label="address4" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Address4
+								</label>
+								<div ng-messages="beneficiaryGrid.address4.$error">
+									<div ng-message="maxlength">
+										At most 35 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199184' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('postal_code')" >
+							Postal Code
+							<span ng-if="gridOptions.sortFields['postal_code']">
+								({{gridOptions.sortFields['postal_code']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['postal_code']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['postal_code']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="postal_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='16' name="postal_code" ng-model="search.postal_code" aria-label="Postal Code" ng-enter='searchGrid()' id='ci199184' aria-label="postal_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Postal Code
+								</label>
+								<div ng-messages="beneficiaryGrid.postal_code.$error">
+									<div ng-message="maxlength">
+										At most 16 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199185' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('country_code')" >
+							Country Code
+							<span ng-if="gridOptions.sortFields['country_code']">
+								({{gridOptions.sortFields['country_code']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['country_code']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['country_code']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="country_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='2' name="country_code" ng-model="search.country_code" aria-label="Country Code" ng-enter='searchGrid()' id='ci199185' aria-label="country_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Country Code
+								</label>
+								<div ng-messages="beneficiaryGrid.country_code.$error">
+									<div ng-message="maxlength">
+										At most 2 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199186' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('import_date')" >
+							Import Date*
+							<span ng-if="gridOptions.sortFields['import_date']">
+								({{gridOptions.sortFields['import_date']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['import_date']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['import_date']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="import_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  name="import_date" ng-model="search.import_date" aria-label="Import Date" ng-enter='searchGrid()' id='ci199186' aria-label="import_date" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Import Date
+								</label>
+								<div ng-messages="beneficiaryGrid.import_date.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199187' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('add_new_code_to_beneficiary')" >
+							Add New Code To Beneficiary
+							<span ng-if="gridOptions.sortFields['add_new_code_to_beneficiary']">
+								({{gridOptions.sortFields['add_new_code_to_beneficiary']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['add_new_code_to_beneficiary']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['add_new_code_to_beneficiary']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="add_new_code_to_beneficiary" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  name="add_new_code_to_beneficiary" ng-model="search.add_new_code_to_beneficiary" aria-label="Add New Code To Beneficiary" ng-enter='searchGrid()' id='ci199187' aria-label="add_new_code_to_beneficiary" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Add New Code To Beneficiary
+								</label>
+								<div ng-messages="beneficiaryGrid.add_new_code_to_beneficiary.$error">
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199188' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('strate_id')" >
+							Strate
+							<span ng-if="gridOptions.sortFields['strate_id']">
+								({{gridOptions.sortFields['strate_id']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['strate_id']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['strate_id']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<div layout='row' aria-label="strate_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='strate_id' select-model="search.selected___strate_id.id" md-search-text-change="dropdowns.service199188.searchTextChange(dropdowns.service199188.searchText)" md-search-text="dropdowns.service199188.searchText" md-selected-item="search.selected___strate_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service199188.getItems(dropdowns.service199188.searchText,'search')" md-floating-label="Strate" md-no-cache="true" md-selected-item-change="select199188(search,'search','strate_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Strate" id='ci199188' aria-label="strate_id" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-item-template>
+										<span md-highlight-text="dropdowns.service199188.searchText">
+											{{item.id_display_value}}
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+									<div ng-messages="beneficiaryGrid.strate_id.$error" ng-if="beneficiaryGrid.strate_id.$touched">
+									</div>
+								</md-autocomplete>
+							</div>
+						</span>
+					</div>
+					<div table-column  flex  class="md-subhead" dib-column-heading='199189' style="    " >
+						<div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('notes')" >
+							Notes
+							<span ng-if="gridOptions.sortFields['notes']">
+								({{gridOptions.sortFields['notes']['Count']}}) 
+								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
+								</md-icon>
+								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
+								</md-icon>
+							</span>
+						</div>
+						<span ng-if="showSearch" dib-edit>
+							<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+								<input type="text"  maxlength='255' name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci199189' aria-label="notes" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+								<label>
+									Notes
+								</label>
+								<div ng-messages="beneficiaryGrid.notes.$error">
+									<div ng-message="maxlength">
+										At most 255 characters are allowed.
+									</div>
+								</div>
+							</md-input-container>
+						</span>
+					</div>
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='beneficiaryGrid' ng-if="gridOptions.inlineAddShow">
+				<ng-form name=beneficiaryGrid  dib-container-name="beneficiaryGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+					<div table-column layout="column" flex = 'nogrow' dib-column="198644" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true flex="nogrow" class="md-icon-button  md-squared md-raised" style="    " id='ci198644' aria-label="btngridedit" dib-container-name='beneficiaryGrid' ng-click="dibCommon.goTo('beneficiaryForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="199172" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci199172' aria-label="id" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="beneficiaryGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199173" style="    " >
+						<div aria-label="name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='80' required name="name" ng-model="model.name" aria-label="Name" ng-enter='searchGrid()' id='ci199173' aria-label="name" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Name*
+									</label>
+									<div ng-messages="beneficiaryGrid.name.$error">
+										<div ng-message="required">
+											Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199174" style="    " >
+						<div aria-label="ben_acc_no" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['ben_acc_no']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="ben_acc_no" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='20' name="ben_acc_no" ng-model="model.ben_acc_no" aria-label="Ben Acc No" ng-enter='searchGrid()' id='ci199174' aria-label="ben_acc_no" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Ben Acc No
+									</label>
+									<div ng-messages="beneficiaryGrid.ben_acc_no.$error">
+										<div ng-message="maxlength">
+											At most 20 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199175" style="    " >
+						<div aria-label="code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['code']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for codeForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('codeForm','',true,'selected___code','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="code" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='code' select-model="model.selected___code.id" md-search-text-change="dropdowns.service199175.searchTextChange(dropdowns.service199175.searchText)" md-search-text="dropdowns.service199175.searchText" md-selected-item="model.selected___code" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service199175.getItems(dropdowns.service199175.searchText,'model')" md-floating-label="Code" md-no-cache="true" md-selected-item-change="select199175(model,'model','code')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Code" id='ci199175' aria-label="code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service199175.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="beneficiaryGrid.code.$error" ng-if="beneficiaryGrid.code.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for codeForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('codeForm','',true,'selected___code','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199176" style="    " >
+						<div aria-label="code_date" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['code_date']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="code_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text" theme="material" ng-model="model.code_date" name=code_date required aria-label="Code Date" placeholder="Code Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci199176' aria-label="code_date" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="beneficiaryGrid.model.code_date.$error">
+										<div ng-message="required">
+											This is required.
+										</div>
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199177" style="    " >
+						<div aria-label="other_codes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['other_codes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="other_codes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='10' name="other_codes" ng-model="model.other_codes" aria-label="Other Codes" ng-enter='searchGrid()' id='ci199177' aria-label="other_codes" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Other Codes
+									</label>
+									<div ng-messages="beneficiaryGrid.other_codes.$error">
+										<div ng-message="maxlength">
+											At most 10 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199178" style="    " >
+						<div aria-label="class_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['class_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="class_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='5' name="class_code" ng-model="model.class_code" aria-label="Class Code" ng-enter='searchGrid()' id='ci199178' aria-label="class_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Class Code
+									</label>
+									<div ng-messages="beneficiaryGrid.class_code.$error">
+										<div ng-message="maxlength">
+											At most 5 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199179" style="    " >
+						<div aria-label="inst_holder" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['inst_holder']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="inst_holder" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='3' name="inst_holder" ng-model="model.inst_holder" aria-label="Inst Holder" ng-enter='searchGrid()' id='ci199179' aria-label="inst_holder" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Inst Holder
+									</label>
+									<div ng-messages="beneficiaryGrid.inst_holder.$error">
+										<div ng-message="maxlength">
+											At most 3 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199180" style="    " >
+						<div aria-label="address1" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address1']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address1" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address1" ng-model="model.address1" aria-label="Address1" ng-enter='searchGrid()' id='ci199180' aria-label="address1" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address1
+									</label>
+									<div ng-messages="beneficiaryGrid.address1.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199181" style="    " >
+						<div aria-label="address2" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address2']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address2" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address2" ng-model="model.address2" aria-label="Address2" ng-enter='searchGrid()' id='ci199181' aria-label="address2" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address2
+									</label>
+									<div ng-messages="beneficiaryGrid.address2.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199182" style="    " >
+						<div aria-label="address3" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address3']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address3" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address3" ng-model="model.address3" aria-label="Address3" ng-enter='searchGrid()' id='ci199182' aria-label="address3" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address3
+									</label>
+									<div ng-messages="beneficiaryGrid.address3.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199183" style="    " >
+						<div aria-label="address4" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address4']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address4" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address4" ng-model="model.address4" aria-label="Address4" ng-enter='searchGrid()' id='ci199183' aria-label="address4" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address4
+									</label>
+									<div ng-messages="beneficiaryGrid.address4.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199184" style="    " >
+						<div aria-label="postal_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['postal_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="postal_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='16' name="postal_code" ng-model="model.postal_code" aria-label="Postal Code" ng-enter='searchGrid()' id='ci199184' aria-label="postal_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Postal Code
+									</label>
+									<div ng-messages="beneficiaryGrid.postal_code.$error">
+										<div ng-message="maxlength">
+											At most 16 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199185" style="    " >
+						<div aria-label="country_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['country_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="country_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='2' name="country_code" ng-model="model.country_code" aria-label="Country Code" ng-enter='searchGrid()' id='ci199185' aria-label="country_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Country Code
+									</label>
+									<div ng-messages="beneficiaryGrid.country_code.$error">
+										<div ng-message="maxlength">
+											At most 2 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199186" style="    " >
+						<div aria-label="import_date" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['import_date']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="import_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text" theme="material" ng-model="model.import_date"   name="import_date" required     aria-label="Import Date" placeholder="Import Date" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci199186' aria-label="import_date" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199187" style="    " >
+						<div aria-label="add_new_code_to_beneficiary" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="boolean" ng-class="{ checked : $parent.viewModel['add_new_code_to_beneficiary']} ">
+									<span>
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container class="md-block"  aria-label="add_new_code_to_beneficiary" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<md-checkbox  dib-data-component='checkbox' name="add_new_code_to_beneficiary" ng-model="model.add_new_code_to_beneficiary" aria-label="Add New Code To Beneficiary" ng-enter='searchGrid()' id='ci199187' aria-label="add_new_code_to_beneficiary" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+										Add New Code To Beneficiary
+									</md-checkbox>
+									<div ng-messages="beneficiaryGrid.add_new_code_to_beneficiary.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199188" style="    " >
+						<div aria-label="strate_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['strate_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for importStrateForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('importStrateForm','',true,'selected___strate_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="strate_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='strate_id' select-model="model.selected___strate_id.id" md-search-text-change="dropdowns.service199188.searchTextChange(dropdowns.service199188.searchText)" md-search-text="dropdowns.service199188.searchText" md-selected-item="model.selected___strate_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service199188.getItems(dropdowns.service199188.searchText,'model')" md-floating-label="Strate" md-no-cache="true" md-selected-item-change="select199188(model,'model','strate_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Strate" id='ci199188' aria-label="strate_id" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service199188.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="beneficiaryGrid.strate_id.$error" ng-if="beneficiaryGrid.strate_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for importStrateForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('importStrateForm','',true,'selected___strate_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199189" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='255' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci199189' aria-label="notes" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="beneficiaryGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 255 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex='none' dib-edit >
+						<md-button ng-click='toggleInlineAdd()' class="md-raised ">
+							Close 
+						</md-button>
+						<md-button ng-click='cleanRow($event,model, beneficiaryGrid)' class="md-raised "  ng-disabled='!beneficiaryGrid.$dirty'>
+							Clear   
+						</md-button>
+						<md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+							Use selected data 
+						</md-button>
+						<md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!beneficiaryGrid.$valid">
+							Add   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</div>
+	<md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+		<md-list dib-table-column-width >
+			<md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+				<div class="no-records-available">
+					  No records available 
+				</div>
+			</md-list-item>
+			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)" >
+				<ng-form name='beneficiaryGrid' dib-container-name="beneficiaryGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+					<div table-column layout="column" flex = 'nogrow' dib-column="198644" style="    " >
+						<md-button aria-label="btngridedit" can-be-moved=true flex="nogrow" class="md-icon-button  md-squared md-raised" style="    " id='ci198644' aria-label="btngridedit" dib-container-name='beneficiaryGrid' ng-click="dibCommon.goTo('beneficiaryForm','',true,'?primary_id='+row.id,'',$event);" dib-config="{ listeners : { } }" >
+							<md-tooltip md-direction="top" md-delay="500">
+								View/edit record in a form
+							</md-tooltip>
+							<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/ic_mode_edit_black.svg">
+							</md-icon>
+						</md-button>
+					</div>
+					<div table-column layout="column" flex  dib-column="199172" style="    " >
+						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="number" >
+									<span>
+										{{$parent.viewModel['id']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="id" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="number"  ng-disabled="true" required name="id" ng-model="model.id" aria-label="Id" ng-enter='searchGrid()' id='ci199172' aria-label="id" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+									<label>
+										Id*
+									</label>
+									<div ng-messages="beneficiaryGrid.id.$error">
+										<div ng-message="required">
+											Id required.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199173" style="    " >
+						<div aria-label="name" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['name']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="name" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='80' required name="name" ng-model="model.name" aria-label="Name" ng-enter='searchGrid()' id='ci199173' aria-label="name" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Name*
+									</label>
+									<div ng-messages="beneficiaryGrid.name.$error">
+										<div ng-message="required">
+											Name required.
+										</div>
+										<div ng-message="maxlength">
+											At most 80 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199174" style="    " >
+						<div aria-label="ben_acc_no" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['ben_acc_no']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="ben_acc_no" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='20' name="ben_acc_no" ng-model="model.ben_acc_no" aria-label="Ben Acc No" ng-enter='searchGrid()' id='ci199174' aria-label="ben_acc_no" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Ben Acc No
+									</label>
+									<div ng-messages="beneficiaryGrid.ben_acc_no.$error">
+										<div ng-message="maxlength">
+											At most 20 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199175" style="    " >
+						<div aria-label="code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['code']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for codeForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('codeForm','',true,'selected___code','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="code" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='code' select-model="model.selected___code.id" md-search-text-change="dropdowns.service199175.searchTextChange(dropdowns.service199175.searchText)" md-search-text="dropdowns.service199175.searchText" md-selected-item="model.selected___code" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service199175.getItems(dropdowns.service199175.searchText,'model')" md-floating-label="Code" md-no-cache="true" md-selected-item-change="select199175(model,'model','code')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Code" id='ci199175' aria-label="code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service199175.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="beneficiaryGrid.code.$error" ng-if="beneficiaryGrid.code.$touched">
+											<div ng-message="required">
+												Please make a valid selection.
+											</div>
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for codeForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('codeForm','',true,'selected___code','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199176" style="    " >
+						<div aria-label="code_date" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="date" >
+									<span>
+										{{$parent.viewModel['code_date']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="code_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text" theme="material" ng-model="model.code_date" name=code_date required aria-label="Code Date" placeholder="Code Date" dib-data-component='datePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci199176' aria-label="code_date" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+									<div ng-messages="beneficiaryGrid.model.code_date.$error">
+										<div ng-message="required">
+											This is required.
+										</div>
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199177" style="    " >
+						<div aria-label="other_codes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['other_codes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="other_codes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='10' name="other_codes" ng-model="model.other_codes" aria-label="Other Codes" ng-enter='searchGrid()' id='ci199177' aria-label="other_codes" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Other Codes
+									</label>
+									<div ng-messages="beneficiaryGrid.other_codes.$error">
+										<div ng-message="maxlength">
+											At most 10 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199178" style="    " >
+						<div aria-label="class_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['class_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="class_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='5' name="class_code" ng-model="model.class_code" aria-label="Class Code" ng-enter='searchGrid()' id='ci199178' aria-label="class_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Class Code
+									</label>
+									<div ng-messages="beneficiaryGrid.class_code.$error">
+										<div ng-message="maxlength">
+											At most 5 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199179" style="    " >
+						<div aria-label="inst_holder" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['inst_holder']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="inst_holder" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='3' name="inst_holder" ng-model="model.inst_holder" aria-label="Inst Holder" ng-enter='searchGrid()' id='ci199179' aria-label="inst_holder" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Inst Holder
+									</label>
+									<div ng-messages="beneficiaryGrid.inst_holder.$error">
+										<div ng-message="maxlength">
+											At most 3 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199180" style="    " >
+						<div aria-label="address1" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address1']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address1" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address1" ng-model="model.address1" aria-label="Address1" ng-enter='searchGrid()' id='ci199180' aria-label="address1" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address1
+									</label>
+									<div ng-messages="beneficiaryGrid.address1.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199181" style="    " >
+						<div aria-label="address2" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address2']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address2" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address2" ng-model="model.address2" aria-label="Address2" ng-enter='searchGrid()' id='ci199181' aria-label="address2" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address2
+									</label>
+									<div ng-messages="beneficiaryGrid.address2.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199182" style="    " >
+						<div aria-label="address3" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address3']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address3" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address3" ng-model="model.address3" aria-label="Address3" ng-enter='searchGrid()' id='ci199182' aria-label="address3" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address3
+									</label>
+									<div ng-messages="beneficiaryGrid.address3.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199183" style="    " >
+						<div aria-label="address4" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['address4']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="address4" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='35' name="address4" ng-model="model.address4" aria-label="Address4" ng-enter='searchGrid()' id='ci199183' aria-label="address4" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Address4
+									</label>
+									<div ng-messages="beneficiaryGrid.address4.$error">
+										<div ng-message="maxlength">
+											At most 35 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199184" style="    " >
+						<div aria-label="postal_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['postal_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="postal_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='16' name="postal_code" ng-model="model.postal_code" aria-label="Postal Code" ng-enter='searchGrid()' id='ci199184' aria-label="postal_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Postal Code
+									</label>
+									<div ng-messages="beneficiaryGrid.postal_code.$error">
+										<div ng-message="maxlength">
+											At most 16 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199185" style="    " >
+						<div aria-label="country_code" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['country_code']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="country_code" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='2' name="country_code" ng-model="model.country_code" aria-label="Country Code" ng-enter='searchGrid()' id='ci199185' aria-label="country_code" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Country Code
+									</label>
+									<div ng-messages="beneficiaryGrid.country_code.$error">
+										<div ng-message="maxlength">
+											At most 2 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199186" style="    " >
+						<div aria-label="import_date" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="dateTime" >
+									<span>
+										{{$parent.viewModel['import_date']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="import_date" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text" theme="material" ng-model="model.import_date"   name="import_date" required     aria-label="Import Date" placeholder="Import Date" dib-data-component='timeDatePickerInput' time-date-picker-input display-mode="material" display-format="d MMMM yyyy  HH:mm" mindate="1800-01-01" maxdate="2999-12-31" aria-invalid="true" id='ci199186' aria-label="import_date" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" >
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199187" style="    " >
+						<div aria-label="add_new_code_to_beneficiary" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="boolean" ng-class="{ checked : $parent.viewModel['add_new_code_to_beneficiary']} ">
+									<span>
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container class="md-block"  aria-label="add_new_code_to_beneficiary" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<md-checkbox  dib-data-component='checkbox' name="add_new_code_to_beneficiary" ng-model="model.add_new_code_to_beneficiary" aria-label="Add New Code To Beneficiary" ng-enter='searchGrid()' id='ci199187' aria-label="add_new_code_to_beneficiary" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+										Add New Code To Beneficiary
+									</md-checkbox>
+									<div ng-messages="beneficiaryGrid.add_new_code_to_beneficiary.$error">
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199188" style="    " >
+						<div aria-label="strate_id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="select" >
+									<span>
+										{{$parent.viewModel['strate_id']}}
+									</span>
+								</span>
+								<md-button  aria-label="Link to page for importStrateForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('importStrateForm','',true,'selected___strate_id','id',model,$event);" >
+									<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+									</md-icon>
+								</md-button>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<div layout='row' aria-label="strate_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='strate_id' select-model="model.selected___strate_id.id" md-search-text-change="dropdowns.service199188.searchTextChange(dropdowns.service199188.searchText)" md-search-text="dropdowns.service199188.searchText" md-selected-item="model.selected___strate_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service199188.getItems(dropdowns.service199188.searchText,'model')" md-floating-label="Strate" md-no-cache="true" md-selected-item-change="select199188(model,'model','strate_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Strate" id='ci199188' aria-label="strate_id" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+										<md-item-template>
+											<span md-highlight-text="dropdowns.service199188.searchText">
+												{{item.id_display_value}}
+											</span>
+										</md-item-template>
+										<md-not-found>
+											No matches found.
+										</md-not-found>
+										<div ng-messages="beneficiaryGrid.strate_id.$error" ng-if="beneficiaryGrid.strate_id.$touched">
+										</div>
+									</md-autocomplete>
+									<md-button  aria-label="Link to page for importStrateForm" class="md-icon-button md-raised md-squared " ng-click="dibCommon.goToForDropdowns('importStrateForm','',true,'selected___strate_id','id',model,$event);" >
+										<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg">
+										</md-icon>
+									</md-button>
+								</div>
+							</span>
+						</div>
+					</div>
+					<div table-column layout="column" flex  dib-column="199189" style="    " >
+						<div aria-label="notes" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+							<div layout=row ng-if="!row.___editing" dib-view flex>
+								<span flex data-type="text" >
+									<span>
+										{{$parent.viewModel['notes']}}
+									</span>
+								</span>
+							</div>
+							<span dib-edit ng-if="row.___editing" flex>
+								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*4029&text=beneficiary' >
+									<input type="text"  maxlength='255' name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci199189' aria-label="notes" dib-container-name='beneficiaryGrid' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Notes
+									</label>
+									<div ng-messages="beneficiaryGrid.notes.$error">
+										<div ng-message="maxlength">
+											At most 255 characters are allowed.
+										</div>
+									</div>
+								</md-input-container>
+							</span>
+						</div>
+					</div>
+					<div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+						<md-button ng-click='cancelRow($event,row)' class="md-raised ">
+							Cancel 
+						</md-button>
+						<md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!beneficiaryGrid.$valid" >
+							Save   
+						</md-button>
+					</div>
+				</ng-form>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<div layout-fill layout='row' flex class='dib-grid-footer'>
+		<div flex=20 layout='row'>
+			<md-button disabled>
+				Page limit
+			</md-button>
+			<md-select ng-model="page.limit">
+				<md-option ng-value="10">
+					10
+				</md-option>
+				<md-option ng-value="20">
+					20
+				</md-option>
+				<md-option ng-value="50">
+					50
+				</md-option>
+			</md-select>
+		</div>
+		<div  ng-if="page.count>
+			1" flex=80 layout='row'  layout-align="center center" >
+			<md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+				First 
+			</md-button>
+			<md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+				Prev 
+			</md-button>
+			<div layout='row'>
+				<md-button disabled>
+					Page
+				</md-button>
+				<md-input-container>
+					<input type='number' ng-model="page.number" aria-label="Page number">
+				</md-input-container>
+				<md-button disabled>
+					of {{ page.count }} 
+				</md-button>
+			</div>
+			<md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+				Next 
+			</md-button>
+			<md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+				Last 
+			</md-button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+
+(function() {
+    var require = [ ];
+    require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
+    var files = [];
+    angular.forEach(require, function (file,index) { 
+        files.push(DIB.base_url+'/files'+file);
+    });
+    files.push( DIB.base_url + '/dropins/setNgMaterial/dibForm/Template/controller/dibtestCompanyForm.js');
+    var dibexPorts = angular.module('dibexPorts', [files]);
+    var dibexPorts = angular.module('dibexPorts');
+    dibexPorts.component('dibexPorts', {
+        controllerAs: 'dibexPorts',
+        templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibContainer/Template/view/dibexPorts.html',
+        controller : component__dibexPorts
+    });
+    component__dibexPorts.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad'];
+    function component__dibexPorts($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad) {
+        var ctrl = this;
+        ctrl.$onInit = function () { 
+                        $scope.container = {};
+            $scope.container.Id = '7154';
+            $scope.container.Name = 'dibexPorts';
+            $scope.container.SubContainerItemAliases = []; 
+            var crudController = "/peff/Crud";
+                    $scope.model = {};
+        $scope.model._GET = dibRecord.modelConstruct($scope);
+        $scope.view = {};
+            var reloadContainerFunctions = [];
+            dibContainer.watchModel($scope);
+	        $scope.dibCommon = dibCommon;
+            $scope.primaryKeys = [];
+        var $dibContainer = $element.first();
+        $scope.menus = {};
+    $scope.dropdowns = {};
+            $scope.openAuditTrail = function (portAlias) {
+                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+            };
+            $scope.recordStatus = "create";
+            $scope.reloadContainer = function () {
+                //Now we reload all the required 
+                dibContainer.reloadChildren({containerName: 'dibexPorts'});
+            };
+            if (!!dibContainer.isSubContainer($("[dib-container=dibexPorts]")) === false) { 
+                $scope.reloadContainer();
+            }
+        };
+        //required for permissions
+        ctrl.$postLink = function () {
+        };
+    } 
+})();

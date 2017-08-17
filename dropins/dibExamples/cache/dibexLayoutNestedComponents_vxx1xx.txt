@@ -1,0 +1,144 @@
+ 
+<div component-loaded dib-container=dibexLayoutNestedComponents dib-container-name="8061" dib-config="{ }" layout-fill flex>
+	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
+	</md-progress-linear>
+	<md-tabs aria-label="mdtabs" can-be-moved=true can-have-children=true flex=none class="dib-progress-tabs " md-dynamic-height md-autoselect md-whiteframe-1dp style="    " md-selected="selectedIndex" id='ci176972' aria-label="mdtabs" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" >
+		<md-tab label='Tab 1' tabId="176973"   aria-label="layoutrowTab1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " >
+			<md-tab-body>
+				<div dib-inject-content="replace" layout="row"  aria-label="layoutrowTab1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayoutNestedComponents&itemId=176973'     id='ci176973' aria-label="layoutrowTab1" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" >
+					<md-card  aria-label="fieldset11" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci176974' aria-label="fieldset11" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-subheader class="cl-md-accent md-no-sticky">
+									Fieldset
+								</md-subheader>
+								<md-input-container aria-label="textfield263" can-be-moved=true flex=none class="md-block" style="    " >
+									<input type="text"  name="textfield263" ng-model="model.textfield263" aria-label="Textfield" id='ci176980' aria-label="textfield263" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Textfield
+									</label>
+									<div ng-messages="dibexLayoutNestedComponents.textfield263.$error">
+									</div>
+								</md-input-container>
+								<div dib-inject-content="replace" layout="row"  aria-label="layoutrow6" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayoutNestedComponents&itemId=176973'     id='ci176976' aria-label="layoutrow6" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" >
+									<md-input-container class="md-block"  aria-label="checkboxfield32" can-be-moved=true flex=none style="    " >
+										<md-checkbox  dib-data-component='checkbox' name="checkboxfield32" ng-model="model.checkboxfield32" aria-label="Checkboxfield" id='ci176979' aria-label="checkboxfield32" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+											Checkboxfield
+										</md-checkbox>
+										<div ng-messages="dibexLayoutNestedComponents.checkboxfield32.$error">
+										</div>
+									</md-input-container>
+									<md-input-container class="md-block"  aria-label="checkboxfield33" can-be-moved=true flex=none style="    " >
+										<md-checkbox  dib-data-component='checkbox' name="checkboxfield33" ng-model="model.checkboxfield33" aria-label="Checkboxfield" id='ci176977' aria-label="checkboxfield33" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+											Checkboxfield
+										</md-checkbox>
+										<div ng-messages="dibexLayoutNestedComponents.checkboxfield33.$error">
+										</div>
+									</md-input-container>
+									<md-input-container class="md-block"  aria-label="checkboxfield34" can-be-moved=true flex=none style="    " >
+										<md-checkbox  dib-data-component='checkbox' name="checkboxfield34" ng-model="model.checkboxfield34" aria-label="Checkboxfield" id='ci176978' aria-label="checkboxfield34" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='mdCheckbox' md-detect-hidden >
+											Checkboxfield
+										</md-checkbox>
+										<div ng-messages="dibexLayoutNestedComponents.checkboxfield34.$error">
+										</div>
+									</md-input-container>
+								</div>
+								<md-button aria-label="button1212" can-be-moved=true flex=none class="md-warn md-raised" style="    " id='ci176975' aria-label="button1212" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" aria-label="Button" >
+									Button 
+								</md-button>
+							</section>
+						</md-card-content>
+					</md-card>
+					<md-card  aria-label="fieldset132" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci176981' aria-label="fieldset132" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" >
+						<md-card-content>
+							<section layout-fill>
+								<md-subheader class="cl-md-accent md-no-sticky">
+									Fieldset
+								</md-subheader>
+								<md-input-container aria-label="textfield2612" can-be-moved=true flex=none class="md-block" style="    " >
+									<input type="text"  name="textfield2612" ng-model="model.textfield2612" aria-label="Textfield" id='ci176982' aria-label="textfield2612" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Textfield
+									</label>
+									<div ng-messages="dibexLayoutNestedComponents.textfield2612.$error">
+									</div>
+								</md-input-container>
+								<md-input-container aria-label="textfield282" can-be-moved=true flex=none class="md-block" style="    " >
+									<input type="text"  name="textfield282" ng-model="model.textfield282" aria-label="Textfield" id='ci176984' aria-label="textfield282" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
+									<label>
+										Textfield
+									</label>
+									<div ng-messages="dibexLayoutNestedComponents.textfield282.$error">
+									</div>
+								</md-input-container>
+								<md-content class="md-block" aria-label="datefield4" can-be-moved=true flex=none style="    " >
+									<p>
+										datefield
+									</p>
+									<md-datepicker type="text" placeholder="datefield" theme="material" dib-data-component='mdDatefield' name=datefield4 ng-model="model.datefield4" aria-label="datefield" id='ci176983' aria-label="datefield4" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" >
+									</md-datepicker>
+									<div ng-messages="dibexLayoutNestedComponents.model.datefield4.$error">
+										<div ng-message="valid">
+											The entered value is not a date!
+										</div>
+										<div ng-message="required">
+											This date is required!
+										</div>
+										<div ng-message="mindate">
+											Date is too early!
+										</div>
+										<div ng-message="maxdate">
+											Date is too late!
+										</div>
+										<div ng-message="filtered">
+											Only weekends are allowed!
+										</div>
+									</div>
+								</md-content>
+							</section>
+						</md-card-content>
+					</md-card>
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Tab 2' tabId="176985"   aria-label="fieldsetTab2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " >
+			<md-tab-body>
+				<md-card  aria-label="fieldsetTab2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci176985' aria-label="fieldsetTab2" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" >
+					<md-card-content>
+						<section layout-fill>
+							<md-subheader class="cl-md-accent md-no-sticky">
+								Tab 2
+							</md-subheader>
+							<md-input-container aria-label="inputdate1" can-be-moved=true flex=none class="md-block" style="    " >
+								<input type="date"  name="inputdate1" ng-model="model.inputdate1" aria-label="inputdate1" id='ci176986' aria-label="inputdate1" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='inputDate' md-detect-hidden >
+								<div ng-messages="dibexLayoutNestedComponents.inputdate1.$error">
+								</div>
+							</md-input-container>
+							<md-input-container aria-label="inputemail" can-be-moved=true flex=none class="md-block" style="    " >
+								<input type="email"  name="inputemail" ng-model="model.inputemail" aria-label="inputemail" id='ci176987' aria-label="inputemail" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='inputEmail' md-detect-hidden >
+								<div ng-messages="dibexLayoutNestedComponents.inputemail.$error">
+								</div>
+							</md-input-container>
+						</section>
+					</md-card-content>
+				</md-card>
+			</md-tab-body>
+		</md-tab>
+		<md-tab label='Tab3' tabId="176966"   aria-label="layoutrowTab3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " >
+			<md-tab-body>
+				<div dib-inject-content="replace" layout="row"  aria-label="layoutrowTab3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayoutNestedComponents&itemId=176966'     id='ci176966' aria-label="layoutrowTab3" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" >
+					<md-input-container aria-label="inputdate" can-be-moved=true flex=none class="md-block" style="    " >
+						<input type="date"  name="inputdate" ng-model="model.inputdate" aria-label="inputdate" id='ci176967' aria-label="inputdate" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='inputDate' md-detect-hidden >
+						<div ng-messages="dibexLayoutNestedComponents.inputdate.$error">
+						</div>
+					</md-input-container>
+					<md-input-container aria-label="inputnumber" can-be-moved=true flex=none class="md-block" style="    " >
+						<input type="number"  name="inputnumber" ng-model="model.inputnumber" aria-label="inputnumber" id='ci176968' aria-label="inputnumber" dib-container-name='dibexLayoutNestedComponents' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
+						<div ng-messages="dibexLayoutNestedComponents.inputnumber.$error">
+						</div>
+					</md-input-container>
+				</div>
+			</md-tab-body>
+		</md-tab>
+	</md-tabs>
+</div>

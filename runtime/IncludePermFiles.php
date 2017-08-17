@@ -1,0 +1,3 @@
+<?php
+
+	self::$includePermFiles = array();
