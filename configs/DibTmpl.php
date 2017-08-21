@@ -53,7 +53,7 @@ class DIB {
     public static $DROPINPATHDEV='~rootdir~dropins~dirsep~';
     public static $RUNTIMEPATH='~rootdir~runtime~dirsep~';
     public static $FILESPATH='~rootdir~files~dirsep~';
-	public static $SYSTEMPATH='~systemdir~';   
+	public static $SYSTEMPATH='~systemdir~';
     public static $EXTPATH= '~systemdir~extensions~dirsep~';
     
 	// Values set dynamically with every request
