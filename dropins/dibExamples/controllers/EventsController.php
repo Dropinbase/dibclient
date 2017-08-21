@@ -39,6 +39,10 @@ class EventsController extends Controller {
         // Note, both textfields call this function...
         // We cleverly use the alias of the textfields to get the value of the one which triggered the action...
         
+        // Since hackers can change the automated $itemAlias value, and we're returning it to the client, let's validate it with a whitelist
+        if(!in_array($itemAlias, array('Textfield1', 'Textfield2')))
+            return $this->invalidResult("Invalid request", 'dialog');
+    
         // We use the PeffApp::getSubmitVal() function to return NULL if nothing was submitted
         // Note the abbreviation 'sIA.s' means 'submitItemAlias.self', 
         //    while 'sIA.p' means 'submitItemAlias.parent' and using only 'sIA.' will translate to 'submitItemAlias.'
@@ -46,28 +50,23 @@ class EventsController extends Controller {
         //	  $value = isset($submissionData['submitItemAlias.self'][$itemAlias]) ? $submissionData['submitItemAlias.self'][$itemAlias] : NULL;
         // but this is nicer:
         
-        $value = PeffApp::getSubmitVal($submissionData, 'sIA.s', $itemAlias);        
-        
-        // Since hackers can change the automated $itemAlias value, and we're returning it to the client, let's validate it with a whitelist
-        if(!in_array($itemAlias, array('Textfield1', 'Textfield2')))
-        	return $this->invalidResult("Invalid request", 'dialog');
+        $value = PeffApp::getSubmitVal($submissionData, 'sIA.s', $itemAlias);
         
         if(empty($value))
-        	return $this->validResult(NULL, "Server-side function was called by '$itemAlias'. No value was supplied.", 'dialog');
+        	return $this->validResult(null, "Server-side function was called by '$itemAlias'. No value was supplied.", 'dialog');
         	
-        // Let's sanitize $value for the same reason...
-        $clean = preg_replace("/[^A-Za-z0-9 ]/", '', $value);
+        // Angular comes with excellent built-in prevention of XSS attacks
+        //    but should we want to allow only certain characters, we can validate or santize the string
         
-        if($clean !== $value)
-        	return $this->invalidResult("Invalid value supplied. The textbox may only contain alpha-numeric characters and spaces", 'dialog');
+        if(!DValidate::_string($value, ' '))
+        	return $this->invalidResult("Invalid value supplied. The textbox may only contain alpha-numeric characters, underscore and spaces", 'dialog');
         	
-        // For demo purposes we're using 'invalidResult' below.
-        // In this case it serves no other purpose but to display a dialog message.
+        // Note, using invalidResult above serves no other purpose but to display a dialog message.
         // In other cases (such as crud events on trees) invalidResult instructs the client to 
         //    perform an alternative action than it normally would with a validResult.
         
         // Return an empty actionlist, and a message using style 'dialog'
-        return $this->validResult(NULL, "Server-side function was called by '$itemAlias' with a value of '$value'", 'dialog'); 
+        return $this->validResult(null, "Server-side function was called by '$itemAlias' with a value of '$value'", 'dialog'); 
     }   
     
     /***

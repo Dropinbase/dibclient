@@ -1,2 +1,4 @@
 vendor/
 runtime/
+.gitignore
+.htaccess
