@@ -158,7 +158,7 @@ class EventsController extends Controller {
         // The optional $itemId parameter identifies an item with additional submissionData configs (eg submitCheckedItem : 'myTree') to include
         
         // Note the use of the container name and dibuid in the url below that provides values required for permission checking
-        ClientFunctions::addSubmitUrl($actionList, "/dropins/dibExamples/Events/textfield_changed/$containerName/dib*hy-1pnfq3?itemAlias=Textfield1");
+        ClientFunctions::addSubmitUrl($actionList, "/dropins/dibExamples/Events/textfield_changed/$containerName/dib*4x1jtsqhb?itemAlias=Textfield1");
         return $this->validResult($actionList);
     }
     
@@ -251,7 +251,7 @@ class EventsController extends Controller {
 		//   To avoid the hasssle, using itemAlias pointing to a hidden button is a simpler solution
         ClientFunctions::addPrompt($actionList, 
             'Math Test', "Well done! And what is 2 + 3? If you cancel you will start the quiz again, else you will be greeted :)...",
-            'submitUrl', "/dropins/dibExamples/Events/btnHelloWorld_click/$containerName/dib*fbkbg31wm1", 
+            'submitUrl', "/dropins/dibExamples/Events/btnHelloWorld_click/$containerName/dib*dpzbp1x7", 
             false, 
             'itemAlias', 'btnPrompt');
         

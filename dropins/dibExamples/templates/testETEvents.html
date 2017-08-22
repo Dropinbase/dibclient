@@ -107,7 +107,7 @@
 ~$// ACTION TEST ~
 
 ~$// Get the dibuid/id values of pef_item_event record(s) into the globalArray so that they can be passed on for permission checking, eg see testAction below) ~
-~adddbval([*i.name, pie.id*], pef_item i INNER JOIN pef_container c ON i.pef_container_id = c.id INNER JOIN pef_item_event pie ON pie.pef_item_id = i.id, c.name='dibtestETEventsReport')~
+~adddbval([*i.name, pie.dibuid*], pef_item i INNER JOIN pef_container c ON i.pef_container_id = c.id INNER JOIN pef_item_event pie ON pie.pef_item_id = i.id, c.name='dibtestETEventsReport')~
 
 <p style="font-size: 15px">
     <b>

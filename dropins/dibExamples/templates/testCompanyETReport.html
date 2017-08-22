@@ -171,7 +171,7 @@ WHERE cc.test_company_id = ~param(^submitItemAlias_parent_companyId^,1)~|
      If the dibuid value is present then it will override the id value, and must then be used instead.
 ~
 
-~adddbval([*i.name, pie.id*], pef_item i INNER JOIN pef_container c ON i.pef_container_id = c.id INNER JOIN pef_item_event pie ON pie.pef_item_id = i.id, c.name='dibtestCompanyETReport')~
+~adddbval([*i.name, pie.dibuid*], pef_item i INNER JOIN pef_container c ON i.pef_container_id = c.id INNER JOIN pef_item_event pie ON pie.pef_item_id = i.id, c.name='dibtestCompanyETReport')~
 
 <p style="font-size: 15px">
     <b>
