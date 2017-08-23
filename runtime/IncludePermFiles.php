@@ -1,3 +1,3 @@
 <?php
 
-	self::$includePermFiles = array();
+	self::$includePermFiles = array('setNgMaterial/dibAdmin');
