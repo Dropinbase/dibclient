@@ -49,7 +49,7 @@ class DIB {
 	
     // Values generated automatically:
 	public static $BASEURL='~baseurl~';
-	public static $BASEPATH='~systemdir~';
+	public static $BASEPATH='~rootdir~';
     public static $DROPINPATHDEV='~rootdir~dropins~dirsep~';
     public static $RUNTIMEPATH='~rootdir~runtime~dirsep~';
     public static $FILESPATH='~rootdir~files~dirsep~';
