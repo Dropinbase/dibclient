@@ -8,21 +8,21 @@
     "packages": [
         {
             "name": "dropinbase/dropinbase",
-            "version": "v2.0.7",
+            "version": "v2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dropinbase/framework.git",
-                "reference": "15bc11d2652bdc4faa0585b24eb4521c4467856b"
+                "reference": "e13729024a39b7bd6c5c10f757a0c77cb47b11e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dropinbase/framework/zipball/15bc11d2652bdc4faa0585b24eb4521c4467856b",
-                "reference": "15bc11d2652bdc4faa0585b24eb4521c4467856b",
+                "url": "https://api.github.com/repos/Dropinbase/framework/zipball/e13729024a39b7bd6c5c10f757a0c77cb47b11e5",
+                "reference": "e13729024a39b7bd6c5c10f757a0c77cb47b11e5",
                 "shasum": ""
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2017-08-24T05:44:41+00:00"
+            "time": "2017-08-26T14:29:08+00:00"
         }
     ],
     "packages-dev": [],
