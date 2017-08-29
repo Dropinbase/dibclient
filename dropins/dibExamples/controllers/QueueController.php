@@ -84,8 +84,9 @@ class QueueController extends Controller {
       	if($async===false) {
 			
 			// Since we'll intiate the Queue server-side, we need to set a unique id that will be used by the client when requesting actions for this user
-       		// The call to validResult will package this value for return the client.
-       		// We also need to include the queueUid in the url's query parameters
+       		// The call to validResult will package this value (stored in PeffApp::$queueUid) for return to the client.
+			// We also need to include the new queueUid in the url's query parameters
+			   
 			// Note, PeffApp::randomToken() generates a cryptographically secure random string which is important to prevent hackers predicting the value.
 			PeffApp::$queueUid = DIB::$USER['id'] .'_'. PeffApp::randomToken(20);
         	

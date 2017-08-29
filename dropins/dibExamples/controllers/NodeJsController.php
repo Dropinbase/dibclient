@@ -84,7 +84,7 @@ class NodeJsController extends Controller {
         return $this->validResult(NULL); // in case NodeJs returned something above (always return validResult/invalidResult to waiting client...)
     }
 
-    public function btnRegAlias($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
+    public function regAlias($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
         $userAlias = PeffApp::getSubmitVal($submissionData, 'sIA.s', 'userAlias');
         if(empty($userAlias) || strlen($userAlias)>15 || !ctype_alnum($userAlias))
         	return $this->invalidResult("Please try again. The Alias must be an alpha-numeric string (no spaces) and no longer than 15 characters.");
@@ -104,22 +104,27 @@ class NodeJsController extends Controller {
             $users = json_decode($file, TRUE);
             
             // We use '@dibTime' to store the last time the file was accessed
-            // If later than 2 mins ago then empty the file
-            if(time() - $users['@dibTime'] > 120)
+            // If later than 5 mins ago then empty the file
+            if(time() - $users['@dibTime'] > (5*60))
                 $users = array('@dibTime' => time());
         
          } else
             $users = array('@dibTime' => time());
         
         // Add this user
-        $users[$userAlias] = DIB::$USER['secure'];
+        if(!isset($users[$userAlias]))
+            $users[$userAlias] = DIB::$USER['secure_id'];
 
+        // Empty the file
+        ftruncate($fh, 0);
+        rewind($fh);
         // Write and release the lock
         fwrite($fh, json_encode($users));
         fflush($fh);
         flock($fh, LOCK_UN);
         fclose($fh);
         
+        return $this->validResult(null, "Alias registered successfully", 'notice', 3000);
     }
 
     public function btnSend_click($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
@@ -152,16 +157,16 @@ class NodeJsController extends Controller {
         flock($fh, LOCK_SH); 
         
         $size = filesize($path);
-        $file = fread($fh, $size);                    
+        $file = fread($fh, $size);
         $users = json_decode($file, TRUE);
         flock($fh, LOCK_UN);
         fclose($fh); 
-        
+  
         if(!isset($users[$recipientAlias]))
             return $this->invalidResult("Sorry, the recipient has not been registered. Please try again.");
 
         // Send the message with NodeJs
-        NodeJs::msgHeader("Hello", $msg, 10000, 'notice', $recipientAlias); 
+        NodeJs::msgHeader("Hello", $msg, 5000, 'notice', $users[$recipientAlias]); 
 
         // Inform the sender
         return $this->validResult(NULL, 'Message sent to recipient: ' . $recipientAlias, 'notice', 2500);
