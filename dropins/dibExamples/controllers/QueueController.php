@@ -97,10 +97,13 @@ class QueueController extends Controller {
 		
         // Call our worker function which adds actions to the Queue...
         $this->doSomeWork($t);
-    }   
+    }
     
     public function sendMsg($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null, $async = false) {
-        
+		// Prevent public access
+		if(DIB::$USER['name'] === 'system_public')
+			return  $this->invalidResult('This function is not available for public users');
+		
         list($msg, $loginId) = PeffApp::getSubmitVal($submissionData, 'sIA.s', array('queueMsg', 'queueLoginId'));
         
         // Change the retryCount - now the queue will stop automatically after receiving 20 empty results
@@ -111,7 +114,7 @@ class QueueController extends Controller {
         	$sql = "SELECT l1.first_name as name1, l2.first_name as name2, l2.notes
         			FROM pef_login l1 LEFT JOIN pef_login l2 ON l2.id = :lId2
         			WHERE l1.id = :lId1";
-			$rst = Database::fetch($sql, array(':lId1'=>DIB::$USER['id'], ':lId2'=>$loginId));
+			$rst = Database::fetch($sql, array(':lId1'=>DIB::$USER['id'], ':lId2'=>$loginId), DIB::LOGINDBINDEX);
 			
 			if(Database::count()===1 && strlen($rst['notes'])>2) {
 				// sanitize msg and add it to the user's queue
@@ -124,14 +127,19 @@ class QueueController extends Controller {
 			}
 		}
         
-        return Queue::addMsg('Error', "Sorry, the selected login is not listening, or is invalid.", 'dialog', 0, true, 2000);      	
-        
-    } 
+        return Queue::addMsg('Error', "Sorry, the selected login is not listening, or is invalid.", 'dialog', 0, true, 2000);
+    }
     
     public function listen($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
-    	// Store queueUid against Login id (***TODO, handle reset of pef_login field after 20s of no activity)
+		// Prevent public access
+		if(DIB::$USER['name'] === 'system_public')
+			return  $this->invalidResult('This function is not available for public users');
+
+		// Store queueUid against Login id (***TODO, handle reset of pef_login field after 20s of no activity)
     	Database::execute("UPDATE pef_login SET notes = :uid WHERE id = " . DIB::$USER['id'], array(':uid'=> PeffApp::$queueUid));
         Queue::addMsg('Messages', 'Listening for messages... The queue will automatically stop after 20s of no activity', 'notice', 5000, true, 1000);
-    } 
+	}
+	
+
 
 }
