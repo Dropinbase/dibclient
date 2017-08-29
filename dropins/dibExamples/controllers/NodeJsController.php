@@ -94,7 +94,8 @@ class NodeJsController extends Controller {
 
         // read/write - create if it doesn't exist
         $fh = fopen($path, 'c+'); 
-        // Get exclusive lock
+        
+        // Let's lock this file to prevent concurrent users overwriting one another's changes
         flock($fh, LOCK_EX); 
         
         $size = filesize($path);
@@ -118,7 +119,8 @@ class NodeJsController extends Controller {
         // Empty the file
         ftruncate($fh, 0);
         rewind($fh);
-        // Write and release the lock
+
+        // Write file, and release the lock
         fwrite($fh, json_encode($users));
         fflush($fh);
         flock($fh, LOCK_UN);
