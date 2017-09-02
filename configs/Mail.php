@@ -14,8 +14,8 @@ self::$account = array(
     'smtp_auth' => TRUE,  // enable SMTP authentication
     'encryption' => 'ssl', // connection prefix to server: '', 'ssl' or 'tls'
     'port_outgoing' => '465', // SMTP port eg 587
-    'username'=> "anemail@gmail.com", // username
+    'username'=> "mail@gmail.com", // username
     'password'=>  "letmein", // password
-    'from_address' => 'anemail@gmail.com',
+    'from_address' => 'replyto@gmail.com',
     'display_name' => 'Dropinbase Administrator'
 );
