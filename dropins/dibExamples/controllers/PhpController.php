@@ -98,10 +98,10 @@ class PhpController extends Controller {
 		$str = "1 + 2 = " . $rst['answer'] . "\r\n";
 		$str .= "Min name : " . $rst['minName'] . "\r\n";
 		
-		// *** Fetch multiple records, use parameters, and loop through the records
+		// *** Fetch multiple records from the dropinbase database, use parameters, and loop through the records
 		
 		// WARNING! To avoid SQL injection, always use PDO parameters (eg :minName below) instead of 
-		//  directly adding text that originates from users to the SQL string
+		//   adding text that originates from users directly to the SQL string
 		
 		$params = array(':minName'=>$rst['minName']);
 		$rst = Database::execute('SELECT id, name FROM test_company WHERE name > :minName AND id < 20', $params);
@@ -113,16 +113,16 @@ class PhpController extends Controller {
 		}
 		
 		
-		// *** Another example of using parameters
+		// *** Another example of using parameters (still using the dropinbase database)
 		// (AGAIN - ALWAYS use parameters with user data)
 		
 		$params = array(':notes'=>'testing', 
 						':website'=>'http://www.example.com', 
 						':id'=>100);
-		$rst = Database::execute("UPDATE test_company SET notes = :notes, website = :website WHERE id = :id", $params);
-				
+		$result = Database::execute("UPDATE test_company SET notes = :notes, website = :website WHERE id = :id", $params);
 		
-		// *** Fetch records from another database
+		// *** Using another database
+
 		// The third parameter can be the name of a container, 
 		//   OR the index of a database in pef_database (which must correspond to the index in /config/Conn.php)
 		// The use of a container name is preferred:
@@ -139,14 +139,36 @@ class PhpController extends Controller {
         $str .= "\r\nChinese name 1: " . $rst['minName'];
         
         // Note, the following specification of $databaseId is unneccessary - 
-        //    without the 3d parameter the sql executes against the dropinbase database in any case
+        //    without the 3d parameter the sql executes against the dropinbase database.
         // Since we dont have enough info about tables in other databases on your system, 
         //    we provide this merely as an example of what your code may look like:
        
         $databaseId = DIB::DBINDEX;
         $rst = Database::fetch("SELECT min(chinese_name) as minName FROM test_company", array(), $databaseId);
         $str .= "\r\nChinese name 2: " . $rst['minName'];
-        
+		
+		
+		// Using Database::create and Database::update. 		
+		// *** Note that field names containing spaces or other non-alphanumeric characters (except underscore(_)) could cause bugs. 
+
+		$newName = uniqid('NewCo ', true);
+		$params = array('name'=>$newName, 'chinese_name'=>'T达拉斯', 'notes'=>'xxx');
+		// Again, the third parameter can be a database index or a container name
+		$result = Database::create('test_company', $params, 'dibtestCompanyGrid'); 
+
+
+		$params = array('chinese_name'=>'123 T达拉斯', 'notes'=>'yyy');
+		// The 4th parameter is a SQL WHERE clause
+		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', "name = '$newName'");
+
+		// To avoid SQL injection, we could use :name, but then need to include it in $params
+		$params = array('name'=>$newName, 'chinese_name'=>'123 T达拉斯', 'notes'=>'yyy');
+		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', 'name = :name');
+
+		// Let's delete that record 
+		$result = Database::execute("DELETE FROM test_company WHERE name=:name", array(':name'=>$newName), 'dibtestCompanyGrid');
+
+
         // *** Fetching records in a different PDO Style
         // See http://php.net/manual/en/pdostatement.fetch.php
         $rst = Database::execute("SELECT id FROM test_company WHERE id < 5", array(), 'dibtestCompanyGrid', PDO::FETCH_OBJ);
@@ -163,16 +185,18 @@ class PhpController extends Controller {
           Else the query is merely executed and TRUE or FALSE is returned
 		*/
 		
+		// Use these statements to experiment with Database::count() (see below)
 		$result = Database::execute("UPDATE test_company SET Notes = 'testing' WHERE id < 4");
 		$result = Database::execute("DELETE FROM test_company WHERE id > 9000000");
-		
+		$str .= "\r\nRecords affected by the last statement: " . Database::count();
+
 		// In many database engines, eg. MySQL, the Database::count() method will return the number of 
 		//  affected records of the last SELECT, INSERT, UPDATE and DELETE statement
 		// WARNING. According to the PDO documentation, this function does however not work reliably for SELECT statements of all database engines.
 		//   See http://php.net/manual/en/pdostatement.rowcount.php
 		// (DIB uses "SELECT @@Rowcount" for Sql Server SELECT statements to set Database::count() correctly).
 		
-		$str .= "\r\nRecords affected by the last statement: " . Database::count();
+		
 		
 		
 		// *** Executing data dictionary queries 
