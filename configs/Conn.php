@@ -5,7 +5,7 @@
 
 DIB::$DATABASES = array(
 
-   1 => array('database'=>'dropinbase', 'dbType'=>'mysql', 'connectionString'=>'mysql:dbname=dropinba_ngdev;host=127.0.0.1;charset=utf8', 'charset'=>'utf8',
+   1 => array('database'=>'dropinbase', 'dbType'=>'mysql', 'connectionString'=>'mysql:dbname=dropinbase;host=127.0.0.1;charset=utf8', 'charset'=>'utf8',
               'username'=>'root', 'password'=>'123456', 'host'=>'127.0.0.1', 'port'=>'', 'emulatePrepare'=>true,  'dbDropin'=>'dibMySqlPdo', 'systemDropin'=>true),      
 
      
