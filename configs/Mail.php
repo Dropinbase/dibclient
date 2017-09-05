@@ -6,7 +6,7 @@
 // Basic example settings for gmail here: http://phpmailer.worxware.com/?pg=examplebgmail
 
 self::$account = array(
-	'mail_host' => 'imap.gmail.com', // SMTP server, eg 'imap.gmail.com' | 'localhost'
+    'mail_host' => 'smtp-relay.gmail.com', // server, eg 'imap.gmail.com' | 'localhost'
     'debug_level' => 0, // enables SMTP debug information (for testing)
     					// 0 = none
                         // 1 = errors and messages
