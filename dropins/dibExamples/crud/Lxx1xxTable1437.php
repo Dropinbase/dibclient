@@ -75,8 +75,9 @@ class Lxx1xxTable1437 {
 	        	$params = $phpFilterParams;
 	        }
 			if($criteria) $criteria = ' WHERE ' . $criteria;
+            $databaseId = DIB::$ITEMLISTDATA[3];
             // Get Count
-            $filterCountRst = dibMySqlPdo::execute($totalSql . $criteria, DIB::$ITEMLISTDATA[3], $params, TRUE);
+            $filterCountRst = dibMySqlPdo::execute($totalSql . $criteria, $databaseId, $params, TRUE);
             if($filterCountRst === FALSE)
                 return array('error', "Error! Could not read dropdown data information. Please contact the System Administrator");
             $filteredCount = intval($filterCountRst["totalcount"]);
@@ -87,8 +88,8 @@ class Lxx1xxTable1437 {
         $limit = ' LIMIT ' . $page_size;
     else
         $limit = ' LIMIT ' . ($page_size * ($page - 1)) .  ', ' . $page_size;    
-$sql = "SELECT $sql FROM $from_clause $criteria $group_by $order_by $limit";            
-            $records = dibMySqlPdo::execute($sql, DIB::$ITEMLISTDATA[3], $params);
+$sql = "SELECT $sql FROM $from_clause $criteria $group_by $order_by $limit";
+            $records = dibMySqlPdo::execute($sql, $databaseId, $params);
             if($records === FALSE)
                 return array('error', "Error! Could not obtain data for the list. Please contact the System Administrator");
             return array($records, $filteredCount);

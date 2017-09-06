@@ -1,1121 +1,3199 @@
- 
-<div component-loaded dib-container=dibexLayout dib-container-name="7145" dib-config="{ }" layout-fill flex>
-	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
-	</md-progress-linear>
-	<md-tabs id="ci154875" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci154875' aria-label="mdtabs" can-be-moved=true can-have-children=true flex=none md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="width:100% !important;    " id='ci154875' aria-label="mdtabs" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-		<md-tab label='Basics' tabId="154972"  aria-label="colBasics" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-align="start start" style="   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colBasics" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-align="start start" style="   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154972'     id='ci154972' aria-label="colBasics" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-					<span aria-label="commentQuickFacts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154974' aria-label="commentQuickFacts" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The design of Angular Material is based in the excellent research done by Google&apos;s  
-							<a target="_blank" href="https://material.io/">
-								Material Design
-							</a>
-							team. Under the hood it uses the powerful CSS3 
-							<a href="http://www.w3.org/TR/css3-flexbox/">
-								flexbox
-							</a>
-							to enable feature rich and responsive layouts.
-							<br>
-							All the complex CSS styling is implemented for you by means of a set of directives (eg layout-fill or flex=33) which works consistently across the range of modern devices and browsers. The developer uses directives to communicate intent, and the layout engine figures out how best to implement it.
-							<br>
-							<br>
-							Angular Material is ready for production sites, and has one of the most active developer communities on 
-							<a href="https://github.com/angular/material">
-								Github
-							</a>
-							. The Angular Material site has 
-							<a href="https://material.angularjs.org/latest/demo/button">
-								demo's
-							</a>
-							, 
-							<a href="https://material.angularjs.org/latest/api/directive/mdButton">
-								API definitions
-							</a>
-							, 
-							<a href="https://material.angularjs.org/latest/layout/tips">
-								troubleshooting tips
-							</a>
-							, and more. The Github site lists compatible browsers.
-							<br>
-							<br>
-							Layout Examples provides an introduction to the basics of Angular Material layout and how DIB implements it.
-							<br>
-							Anyone with experience in laying out HTML documents (especially for responsive designs) will appreciate the power, ease and flexibility afforded by the combination of Dropinbase and Angular Material.
-							<br>
-							<br>
-							<b>
-								Basics
-							</b>
-							<br>
-							Each component in Droinbase is based on a template with HTML and Angular Material code that is merged with item data.
-							<br>
-							A component's properties &amp; directives affect the functionality and layout of the current and/or child components.
-							<br>
-							The most common properties (eg width, height, disabled, etc) are easily set in DIB using the item fields.
-							<br>
-							Certain components, eg 
-							<i>
-								md-tabs
-							</i>
-							and 
-							<i>
-								menu
-							</i>
-							, allow nesting of other components to form a tree structure.
-							<br>
-							<b>
-								Consequently it is best to construct and debug layout issues from the root up, and to test frequently before adding too many children..
-								<br>
-								Especially for first-comers, it will be best to work through the Layout Examples in the order they are provided.
-							</b>
-						</p>
-					</span>
-					<span aria-label="commentWidthHeight" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci177068' aria-label="commentWidthHeight" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The Width, Height, Margin, and Padding properties below are set in the corresponding fields in the DIB Item table (See Pg2 under "Selected Item" in the Designer).
-							<br>
-							They do not implement Angular Material directives; normal inline CSS styling is used.
-							<br>
-							Additional CSS styling can be configured using the Item table's css field.
-							<br>
-							<b>
-								Note
-							</b>
-							, it is normally best to follow the Angular approach of using directives as far as possible instead of specifying CSS directly.
-							<br>
-							Certain cases  do require CSS however. See the "Layout Configs"-tab for the use of AM directives. 
-						</p>
-					</span>
-					<span aria-label="headwidth" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154975' aria-label="headwidth" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Width
-						</span>
-					</span>
-					<span aria-label="commentWidth" can-be-moved=true on-move-refresh-preview=true flex=none style="width:100% !important;    " id='ci154976' aria-label="commentWidth" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Implements the 
-							<a target="_blank" href="http://www.w3schools.com/css/pr_dim_width.asp">
-								CSS width property
-							</a>
-							.
-							<br>
-							Below widths of 200px, 300px, 50%, 100% and 3.5in are used.
-							<br>
-							Note, relative width values such as percentages adjust automatically according to page or parent item width.
-							<br>
-							Also see 
-							<a target="_blank" href="http://www.w3schools.com/cssref/css_units.asp">
-								CSS units
-							</a>
-							for more info. 
-						</p>
-					</span>
-					<md-input-container aria-label="textfield3" can-be-moved=true flex=none class="md-block" style="width:200px !important;    " >
-						<input type="text"  name="textfield3" ng-model="model.textfield3" aria-label="Textfield" id='ci154977' aria-label="textfield3" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-						<label>
-							Textfield
-						</label>
-						<div ng-messages="dibexLayout.textfield3.$error">
-						</div>
-					</md-input-container>
-					<md-input-container aria-label="textfield4" can-be-moved=true flex=none class="md-block" style="width:300px !important;    " >
-						<input type="text"  name="textfield4" ng-model="model.textfield4" aria-label="Textfield" id='ci154978' aria-label="textfield4" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-						<label>
-							Textfield
-						</label>
-						<div ng-messages="dibexLayout.textfield4.$error">
-						</div>
-					</md-input-container>
-					<md-input-container aria-label="textfield5" can-be-moved=true flex=none class="md-block" style="width:50% !important;    " >
-						<input type="text"  name="textfield5" ng-model="model.textfield5" aria-label="Textfield" id='ci154979' aria-label="textfield5" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-						<label>
-							Textfield
-						</label>
-						<div ng-messages="dibexLayout.textfield5.$error">
-						</div>
-					</md-input-container>
-					<md-input-container aria-label="textfield6" can-be-moved=true flex=none class="md-block" style="width:100% !important;    " >
-						<input type="text"  name="textfield6" ng-model="model.textfield6" aria-label="Textfield" id='ci154980' aria-label="textfield6" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-						<label>
-							Textfield
-						</label>
-						<div ng-messages="dibexLayout.textfield6.$error">
-						</div>
-					</md-input-container>
-					<md-input-container aria-label="textfield12" can-be-moved=true flex=none class="md-block" style="width:3.5in !important;    " >
-						<input type="text"  name="textfield12" ng-model="model.textfield12" aria-label="Textfield" id='ci154988' aria-label="textfield12" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-						<label>
-							Textfield
-						</label>
-						<div ng-messages="dibexLayout.textfield12.$error">
-						</div>
-					</md-input-container>
-					<span aria-label="headheight" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154984' aria-label="headheight" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Height
-						</span>
-					</span>
-					<span aria-label="commentLabelHeight" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154985' aria-label="commentLabelHeight" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Implements the 
-							<a target="_blank" href="http://www.w3schools.com/cssref/pr_dim_height.asp">
-								CSS height
-							</a>
-							property.
-							<br>
-							Below heights of 100px, 20mm and 2cm is used. 
-						</p>
-					</span>
-					<md-input-container aria-label="textfield9" can-be-moved=true flex class="md-block" style="width:100% !important; height:100px !important; overflow:auto !important;   " >
-						<input type="text"  name="textfield9" ng-model="model.textfield9" aria-label="Textfield (height of 100px - results in distancing other items below)" id='ci154986' aria-label="textfield9" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-						<label>
-							Textfield (height of 100px - results in distancing other items below)
-						</label>
-						<div ng-messages="dibexLayout.textfield9.$error">
-						</div>
-					</md-input-container>
-					<img aria-label="imagestatic" can-be-moved=true flex=none style="width:200px !important; height:20mm !important; overflow:auto !important;   " id='ci154989' aria-label="imagestatic" dib-container-name='dibexLayout' ng-click="dibCommon.location('/files/icons/errorlogs.jpg');" dib-config="{ listeners : { } }" src="/files/icons/errorlogs.jpg" />
-					<md-button aria-label="button" can-be-moved=true flex=none class="md-accent md-raised md-hue-1" style=" height:2cm !important; overflow:auto !important;   " id='ci154987' aria-label="button" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="Button" >
-						Button 
-					</md-button>
-					<span aria-label="headMargins" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155000' aria-label="headMargins" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Margins
-						</span>
-					</span>
-					<span aria-label="commentMargins" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155001' aria-label="commentMargins" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Specifies the margins around the component. The margin can be a single value to apply to all sides
-							<br>
-							or it can be a CSS style specification for each side, eg: 10px 15px 30px 10px (top, right, bottom, left).
-							<br>
-							See 
-							<a target="_blank" href="http://www.w3schools.com/css/css_margin.asp">
-								CSS Margins
-							</a>
-							for more info 
-						</p>
-					</span>
-					<md-button aria-label="btnNoMargins" can-be-moved=true flex=none class="md-accent md-raised md-hue-1" style="    " id='ci155004' aria-label="btnNoMargins" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="No margins" >
-						No margins 
-					</md-button>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowMarginBtns" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154972'     id='ci188600' aria-label="rowMarginBtns" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<md-button aria-label="button1" can-be-moved=true flex=none class="md-accent md-raised md-hue-1" style="  margin:20px !important;  " id='ci155002' aria-label="button1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="margin : 20px" >
-							margin : 20px 
-						</md-button>
-						<md-button aria-label="btnNoMargins1" can-be-moved=true flex=none class="md-accent md-raised md-hue-1" style="    " id='ci188601' aria-label="btnNoMargins1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="No margins" >
-							No margins 
-						</md-button>
-					</div>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowMarginBtns2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154972'     id='ci188602' aria-label="rowMarginBtns2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<md-button aria-label="button2" can-be-moved=true flex=none class="md-accent md-raised md-hue-1" style="  margin:0px 50px 10px 30px !important;  " id='ci155003' aria-label="button2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="margin : 0px 0px 10px 30px" >
-							margin : 0px 0px 10px 30px 
-						</md-button>
-						<md-button aria-label="btnNoMargins3" can-be-moved=true flex=none class="md-accent md-raised md-hue-1" style="    " id='ci188603' aria-label="btnNoMargins3" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="No margins" >
-							No margins 
-						</md-button>
-					</div>
-					<md-button aria-label="btnNoMargins2" can-be-moved=true flex=none class="md-accent md-raised md-hue-1" style="    " id='ci155005' aria-label="btnNoMargins2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="No margins" >
-						No margins 
-					</md-button>
-					<span aria-label="headPadding" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155006' aria-label="headPadding" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Padding
-						</span>
-					</span>
-					<span aria-label="commentPadding" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155007' aria-label="commentPadding" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Specifies the margins within the component around content (if item is eg a button), or other items (if item is a eg a layout component). The padding can be a single value to apply to all sides
-							<br>
-							or it can be a CSS style specification for each side, eg: 10px 15px 30px 10px' (top, right, bottom, left).
-							<br>
-							See 
-							<a target="_blank" href="http://www.w3schools.com/css/css_margin.asp">
-								CSS Margins
-							</a>
-							for more info. 
-						</p>
-					</span>
-					<md-button aria-label="button5" can-be-moved=true flex=none class="md-raised md-primary" style="   padding:20px !important; " id='ci155008' aria-label="button5" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="padding : 20px" >
-						padding : 20px 
-					</md-button>
-					<div layout='column' layout-fill>
-						<md-toolbar class="md-theme-light">
-							<h2 class="md-toolbar-tools">
-								<span>
-									Div element with padding (10px 30px 0px 60px) containing a fieldset
-								</span>
-							</h2>
-						</md-toolbar>
-						<div dib-inject-content="replace"  aria-label="div" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="none" style="   padding:10px 30px 0px 60px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154972'     id='ci155009' aria-label="div" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							<md-card  aria-label="fieldset5" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci154996' aria-label="fieldset5" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-								<md-card-content>
-									<section layout-fill>
-										<md-subheader class="cl-md-accent md-no-sticky">
-											heading 2
-										</md-subheader>
-										<md-input-container aria-label="textfield101" can-be-moved=true flex=none class="md-block" style="    " >
-											<input type="text"  name="textfield101" ng-model="model.textfield101" aria-label="Textfield" id='ci154997' aria-label="textfield101" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-											<label>
-												Textfield
-											</label>
-											<div ng-messages="dibexLayout.textfield101.$error">
-											</div>
-										</md-input-container>
-										<md-input-container aria-label="textfield131" can-be-moved=true flex=none class="md-block" style="    " >
-											<input type="text"  name="textfield131" ng-model="model.textfield131" aria-label="Textfield" id='ci154998' aria-label="textfield131" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-											<label>
-												Textfield
-											</label>
-											<div ng-messages="dibexLayout.textfield131.$error">
-											</div>
-										</md-input-container>
-										<md-button aria-label="mybutton" can-be-moved=true flex=none class="md-raised md-primary" style="   padding:10px 30px 0px 30px !important; " id='ci154999' aria-label="mybutton" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="10px 30px 0px 30px" >
-											10px 30px 0px 30px 
-										</md-button>
-									</section>
-								</md-card-content>
-							</md-card>
-						</div>
-					</div>
-					<span aria-label="span1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style=" height:100px !important; overflow:auto !important;   " id='ci177057' aria-label="span1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-					</span>
-				</div>
-			</md-tab-body>
-		</md-tab>
-		<md-tab label='Layout Components' tabId="154876"  aria-label="colLayoutComponents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="width:100% !important;   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colLayoutComponents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="width:100% !important;   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'     id='ci154876' aria-label="colLayoutComponents" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-					<span aria-label="commentLayoutComponents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154877' aria-label="commentLayoutComponents" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Layout components, eg layoutRow, determine how the immediate child components are positioned and sized internally.
-							<br>
-							Angular has two basic layout types, row (arranges child items horizontally) and column (arranges child items vertically).
-							<br>
-							Various directives and configs provide finer control over positioning and sizing, eg flex and layout-align. 
-						</p>
-					</span>
-					<span aria-label="headlayoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154888' aria-label="headlayoutrow" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							layoutRow
-						</span>
-					</span>
-					<span aria-label="commentLayoutRow" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154878' aria-label="commentLayoutRow" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							layoutRow is used to arrange child items horizontally. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="layoutrow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'     id='ci154879' aria-label="layoutrow" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<md-input-container aria-label="textfield" can-be-moved=true flex=none class="md-block" style="    " >
-							<input type="text"  name="textfield" ng-model="model.textfield" aria-label="Text1" id='ci154880' aria-label="textfield" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text1
-							</label>
-							<div ng-messages="dibexLayout.textfield.$error">
-							</div>
-						</md-input-container>
-						<md-input-container aria-label="textfield1" can-be-moved=true flex=none class="md-block" style="    " >
-							<input type="text"  name="textfield1" ng-model="model.textfield1" aria-label="Text2" id='ci154881' aria-label="textfield1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text2
-							</label>
-							<div ng-messages="dibexLayout.textfield1.$error">
-							</div>
-						</md-input-container>
-						<div layout='row' aria-label="dropdownlist" can-be-moved=true flex=none style="    " >
-							<md-input-container flex>
-								<label>
-									Dropdownlist
-								</label>
-								<md-select    dib-data-component='enum' dib-onload-service placeholder="Dropdownlist" aria-label="dropdownlist" md-on-close="select154882(model)" flex ng-model="model.dropdownlist" name='dropdownlist' id='ci154882' aria-label="dropdownlist" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-									<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
-										{{state}} 
-									</md-option>
-								</md-select>
-								<div ng-messages="dibexLayout.dropdownlist.$error">
-								</div>
-							</md-input-container>
-						</div>
-					</div>
-					<span aria-label="commentRowWithConfigs" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154887' aria-label="commentRowWithConfigs" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Below is the same layoutRow, but with added margins and width configs to child items. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="layoutrow52" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'     id='ci154893' aria-label="layoutrow52" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<md-input-container aria-label="textfield22" can-be-moved=true flex=none class="md-block" style="width:170px !important;    " >
-							<input type="text"  name="textfield22" ng-model="model.textfield22" aria-label="Text1" id='ci154894' aria-label="textfield22" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text1
-							</label>
-							<div ng-messages="dibexLayout.textfield22.$error">
-							</div>
-						</md-input-container>
-						<md-input-container aria-label="textfield112" can-be-moved=true flex=none class="md-block" style="width:250px !important;  margin:11px 20px 11px 20px !important;  " >
-							<input type="text"  name="textfield112" ng-model="model.textfield112" aria-label="Text2" id='ci154895' aria-label="textfield112" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text2
-							</label>
-							<div ng-messages="dibexLayout.textfield112.$error">
-							</div>
-						</md-input-container>
-						<div layout='row' aria-label="dropdownlist12" can-be-moved=true flex=none style="width:200px !important;    " >
-							<md-input-container flex>
-								<label>
-									Dropdownlist
-								</label>
-								<md-select    dib-data-component='enum' dib-onload-service placeholder="Dropdownlist" aria-label="dropdownlist12" md-on-close="select154896(model)" flex ng-model="model.dropdownlist12" name='dropdownlist12' id='ci154896' aria-label="dropdownlist12" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-									<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
-										{{state}} 
-									</md-option>
-								</md-select>
-								<div ng-messages="dibexLayout.dropdownlist12.$error">
-								</div>
-							</md-input-container>
-						</div>
-					</div>
-					<span aria-label="headlayoutColumn1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154898' aria-label="headlayoutColumn1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							layoutColumn
-						</span>
-					</span>
-					<span aria-label="commentLayoutColumn" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154897' aria-label="commentLayoutColumn" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							layoutColumn is used to arrange child items vertically. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout='column' aria-label="layoutColumn2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'     id='ci154889' aria-label="layoutColumn2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<md-input-container aria-label="textfield21" can-be-moved=true flex=none class="md-block" style="    " >
-							<input type="text"  name="textfield21" ng-model="model.textfield21" aria-label="Text1" id='ci154890' aria-label="textfield21" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text1
-							</label>
-							<div ng-messages="dibexLayout.textfield21.$error">
-							</div>
-						</md-input-container>
-						<md-input-container aria-label="textfield111" can-be-moved=true flex=none class="md-block" style="    " >
-							<input type="text"  name="textfield111" ng-model="model.textfield111" aria-label="Text2" id='ci154891' aria-label="textfield111" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text2
-							</label>
-							<div ng-messages="dibexLayout.textfield111.$error">
-							</div>
-						</md-input-container>
-						<div layout='row' aria-label="dropdownlist11" can-be-moved=true flex=none style="width:200px !important;    " >
-							<md-input-container flex>
-								<label>
-									Dropdownlist
-								</label>
-								<md-select    dib-data-component='enum' dib-onload-service placeholder="Dropdownlist" aria-label="dropdownlist11" md-on-close="select154892(model)" flex ng-model="model.dropdownlist11" name='dropdownlist11' id='ci154892' aria-label="dropdownlist11" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-									<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
-										{{state}} 
-									</md-option>
-								</md-select>
-								<div ng-messages="dibexLayout.dropdownlist11.$error">
-								</div>
-							</md-input-container>
-						</div>
-					</div>
-					<span aria-label="headlayoutColumnStart" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci176915' aria-label="headlayoutColumnStart" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							layoutColumnStart
-						</span>
-					</span>
-					<span aria-label="commentLayoutColumnStart" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci176914' aria-label="commentLayoutColumnStart" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							layoutColumnStart is a variation of layoutColumn. It differs only by means of not stretching child items horizontally.
-							<br>
-							Note, the same effect can be achieved by adding  ' layout-align="start start" ' to the layout_configs field of layoutColumn. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="column" layout-align="start start" aria-label="layoutcolumnstart" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="width:100% !important; height:140px !important; overflow:auto !important;   " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'     id='ci154906' aria-label="layoutcolumnstart" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<md-input-container aria-label="textfield23" can-be-moved=true flex=none class="md-block" style="    " >
-							<input type="text"  name="textfield23" ng-model="model.textfield23" aria-label="Text1" id='ci154907' aria-label="textfield23" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text1
-							</label>
-							<div ng-messages="dibexLayout.textfield23.$error">
-							</div>
-						</md-input-container>
-						<md-input-container aria-label="textfield113" can-be-moved=true flex=none class="md-block" style="    " >
-							<input type="text"  name="textfield113" ng-model="model.textfield113" aria-label="Text2" id='ci154908' aria-label="textfield113" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text2
-							</label>
-							<div ng-messages="dibexLayout.textfield113.$error">
-							</div>
-						</md-input-container>
-						<div layout='row' aria-label="dropdownlist13" can-be-moved=true flex=none style="    " >
-							<md-input-container flex>
-								<label>
-									Dropdownlist
-								</label>
-								<md-select    dib-data-component='enum' dib-onload-service placeholder="Dropdownlist" aria-label="dropdownlist13" md-on-close="select154909(model)" flex ng-model="model.dropdownlist13" name='dropdownlist13' id='ci154909' aria-label="dropdownlist13" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-									<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
-										{{state}} 
-									</md-option>
-								</md-select>
-								<div ng-messages="dibexLayout.dropdownlist13.$error">
-								</div>
-							</md-input-container>
-						</div>
-					</div>
-					<span aria-label="headlayoutRowFill" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci176920' aria-label="headlayoutRowFill" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							layoutRowFill
-						</span>
-					</span>
-					<span aria-label="commentLayoutRowFill" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci176921' aria-label="commentLayoutRowFill" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							layoutRowFill is a variation of layoutRow. It uses the Angular layout-fill directive causing child items to vertically fill the available space. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row" layout-fill aria-label="layoutrowfill" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="width:100% !important; height:200px !important; overflow:auto !important;   " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'     id='ci176916' aria-label="layoutrowfill" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<md-button aria-label="buttonBig" can-be-moved=true flex=none class="md-raised" style="    " id='ci176917' aria-label="buttonBig" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="my big button" >
-							my big button 
-						</md-button>
-						<md-button aria-label="buttonBig1" can-be-moved=true flex=none class="md-raised" style="width:50% !important;    " id='ci176922' aria-label="buttonBig1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="my other big button" >
-							my other big button 
-						</md-button>
-					</div>
-					<span aria-label="headFieldsets" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154990' aria-label="headFieldsets" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Fieldsets
-						</span>
-					</span>
-					<span aria-label="commentFieldsets" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154991' aria-label="commentFieldsets" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							layoutFieldset and mdCard are often used to group sets of components, with optional headings. Note, layoutFieldset is based on mdCard with some added layout configs. 
-						</p>
-					</span>
-					<md-card  aria-label="fieldset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci154992' aria-label="fieldset" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<md-card-content>
-							<section layout-fill>
-								<md-subheader class="cl-md-accent md-no-sticky">
-									Fieldset Heading
-								</md-subheader>
-								<md-input-container aria-label="textfield10" can-be-moved=true flex=none class="md-block" style="    " >
-									<input type="text"  name="textfield10" ng-model="model.textfield10" aria-label="Textfield" id='ci154993' aria-label="textfield10" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-									<label>
-										Textfield
-									</label>
-									<div ng-messages="dibexLayout.textfield10.$error">
-									</div>
-								</md-input-container>
-								<md-input-container aria-label="textfield13" can-be-moved=true flex=none class="md-block" style="    " >
-									<input type="text"  name="textfield13" ng-model="model.textfield13" aria-label="Textfield" id='ci154994' aria-label="textfield13" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-									<label>
-										Textfield
-									</label>
-									<div ng-messages="dibexLayout.textfield13.$error">
-									</div>
-								</md-input-container>
-								<md-button aria-label="textfield14" can-be-moved=true flex=none class="md-raised md-accent" style="width:280px !important;    " id='ci154995' aria-label="textfield14" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="Test" >
-									Test 
-								</md-button>
-							</section>
-						</md-card-content>
-					</md-card>
-					<md-card aria-label="mdcard" can-be-moved=true can-have-children=true flex=none style="    " >
-						<md-card-title>
-							<md-card-title-text>
-								<span class="md-headline">
-									Card Heading
-								</span>
-							</md-card-title-text>
-						</md-card-title>
-						<md-card-content on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876' id="ci176947" dib-inject-content="replace" class="no-padding" style="padding:0px"  id='ci176947' aria-label="mdcard" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							<md-input-container aria-label="textfield102" can-be-moved=true flex=none class="md-block" style="    " >
-								<input type="text"  name="textfield102" ng-model="model.textfield102" aria-label="Textfield" id='ci176948' aria-label="textfield102" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-								<label>
-									Textfield
-								</label>
-								<div ng-messages="dibexLayout.textfield102.$error">
-								</div>
-							</md-input-container>
-							<md-input-container aria-label="textfield132" can-be-moved=true flex=none class="md-block" style="    " >
-								<input type="text"  name="textfield132" ng-model="model.textfield132" aria-label="Textfield" id='ci176949' aria-label="textfield132" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-								<label>
-									Textfield
-								</label>
-								<div ng-messages="dibexLayout.textfield132.$error">
-								</div>
-							</md-input-container>
-							<md-button aria-label="textfield142" can-be-moved=true flex=none class="md-raised md-accent" style="width:280px !important;    " id='ci176950' aria-label="textfield142" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="Test" >
-								Test 
-							</md-button>
-						</md-card-content>
-					</md-card>
-					<span aria-label="span2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style=" height:100px !important; overflow:auto !important;   " id='ci177058' aria-label="span2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-					</span>
-				</div>
-			</md-tab-body>
-		</md-tab>
-		<md-tab label='Responsive & Nested Layouts' tabId="155010"  aria-label="colResponsiveNestedLayouts" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colResponsiveNestedLayouts" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=155010'     id='ci155010' aria-label="colResponsiveNestedLayouts" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-					<span aria-label="headResponsiveLayouts" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154970' aria-label="headResponsiveLayouts" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Responsive Layouts
-						</span>
-					</span>
-					<span aria-label="commentResponsiveLayouts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154910' aria-label="commentResponsiveLayouts" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							You can use breakpoint alias suffixes to determine whether layoutColumn or layoutRow is used, depending on the size of the device's view.
-							<br>
-							For the demo below, as you shrink your browser window width notice the flow direction changes to "column" for mobile devices (xs). And as you expand it will reset to "row" for gt-sm view sizes.
-							<br>
-							See 
-							<a target="_blank" href="https://material.angularjs.org/latest/layout/container">
-								Layouts and Responsive Breakpoints
-							</a>
-							for more information. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowResponsiveLayout" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs="column" style="width:100% !important;    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=155010'     id='ci176923' aria-label="rowResponsiveLayout" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<div layout='column' layout-fill>
-							<md-toolbar class="md-theme-light">
-								<h2 class="md-toolbar-tools">
-									<span>
-										I'm above on mobile, and to the left on larger devices.
-									</span>
-								</h2>
-							</md-toolbar>
-							<div dib-inject-content="replace"  aria-label="button182" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex class="md-accent" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=155010'     id='ci176924' aria-label="button182" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							</div>
-						</div>
-						<div layout='column' layout-fill>
-							<md-toolbar class="md-theme-light">
-								<h2 class="md-toolbar-tools">
-									<span>
-										I'm below on mobile, and to the right on larger devices.
-									</span>
-								</h2>
-							</md-toolbar>
-							<div dib-inject-content="replace"  aria-label="div2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex class="md-accent" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=155010'     id='ci176925' aria-label="div2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							</div>
-						</div>
-					</div>
-					<span aria-label="headsubcontainer" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155012' aria-label="headsubcontainer" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Subcontainers
-						</span>
-					</span>
-					<span aria-label="commentSubcontainers" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155013' aria-label="commentSubcontainers" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Dropinbase adds the subcontainer component in order to nest whole containers in one another.
-							<br>
-							See the 
-							<a href="/nav/dibexSubcontainers">
-								Subcontainer examples
-							</a>
-							for more information. 
-						</p>
-					</span>
-					<div layout-fill flex aria-label="subcontainer" can-be-moved=true flex style="width:100% !important; height:400px !important; overflow:auto !important;   " id='ci155014' aria-label="subcontainer" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-injected-success=true >
-						<dibtest-consultant-form dib-subcontainer-loaded dib-subcontainer=true layout-fill         fill-height-for-child >
-						</dibtest-consultant-form>
-					</div>
-					<span aria-label="headtabs" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155024' aria-label="headtabs" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							mdTabs
-						</span>
-					</span>
-					<span aria-label="commentTabs" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155023' aria-label="commentTabs" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Presents child layout components (eg layoutRow/mdCard/div/subcontainer) as horizontal tabs.
-							<br>
-							The current container makes use of mdTabs to categorize the components. 
-							<br>
-							Below we used the md-align-tabs directive to position tabs at the bottom of the control.
-							<br>
-							NOTE: Angular shares the active index of all mdTabs components on the same view.
-							<br>
-							To nest mdTabs, or use more than one on the same container, use DIB subcontainer components.
-							<br>
-							Since the current container already makes use of mdTabs, the mdTabs below are in subcontainers.
-							<br>
-							See 
-							<a target="_blank" href="https://material.angularjs.org/latest/demo/tabs">
-								Tabs
-							</a>
-							for more information. 
-						</p>
-					</span>
-					<div layout-fill flex aria-label="subcontainerTabs" can-be-moved=true flex style="    " id='ci176957' aria-label="subcontainerTabs" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-injected-success=true >
-						<dibex-layout-tabs-subcontainer dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
-						</dibex-layout-tabs-subcontainer>
-					</div>
-					<span aria-label="headNestedLayouts" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci176970' aria-label="headNestedLayouts" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Nested Layouts
-						</span>
-					</span>
-					<span aria-label="commentNestedLayouts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci176971' aria-label="commentNestedLayouts" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Off-course we can nest layout components to create more complex layouts...
-							<br>
-							Instead of mdTabs, we used the mdTabsStepper component.
-							<br>
-							The grey bar at the bottom of the screen with NEXT / PREV TAB buttons is part of the mdTabsStepper component. 
-						</p>
-					</span>
-					<div layout-fill flex aria-label="subcontainerNested" can-be-moved=true flex style=" height:350px !important; overflow:auto !important;   " id='ci176988' aria-label="subcontainerNested" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-injected-success=true >
-						<dibex-layout-nested-components dib-subcontainer-loaded dib-subcontainer=true layout-fill         fill-height-for-child >
-						</dibex-layout-nested-components>
-					</div>
-					<span aria-label="span3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style=" height:100px !important; overflow:auto !important;   " id='ci177059' aria-label="span3" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-					</span>
-				</div>
-			</md-tab-body>
-		</md-tab>
-		<md-tab label='Layout Configs' tabId="176951"  aria-label="colLayoutConfigs" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colLayoutConfigs" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci176951' aria-label="colLayoutConfigs" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-					<span aria-label="commentOverview" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci176992' aria-label="commentOverview" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Angular Material provides various directives to customize the size and position of items. The flex and layout_configs fields in the DIB Item table can be used to configure them.
-							<br>
-							See 
-							<a target="_blank" href="https://material.angularjs.org/latest/layout/children">
-								Layout Children
-							</a>
-							for more info.
-							<br>
-							<br>
-							Note: also see 
-							<a target="_blank" href="https://material.angularjs.org/latest/layout/tips">
-								Troubleshooting
-							</a>
-							on the Angular site for important tips when developing responsive sites, and resolutions to issues. 
-						</p>
-					</span>
-					<span aria-label="headFlex" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci176993' aria-label="headFlex" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Flex
-						</span>
-					</span>
-					<span aria-label="commentFlex" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci176994' aria-label="commentFlex" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Flex values are percentages assigned to items to dynamically stretch or shrink their width relative to the available space within their parent container.
-							<br>
-							The widths of any items with fixed widths is first subtracted from the available space before calculations are made.
-							<br>
-							Flex values can be multiples of five, 33, 66, or one of the following: flex,none,auto,initial,grow,nogrow or noshrink.
-							<br>
-							Probably the most used is a value of 'flex' which causes the item to use up all the remaining space after other items' widths have been calculated.
-							<br>
-							Flex values can be set in the 
-							<i>
-								flex
-							</i>
-							field in the Item table.
-							<br>
-							See 
-							<a target="_blank" href="https://material.angularjs.org/latest/layout/children">
-								Layout Children
-							</a>
-							for more information about other values. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row" layout-fill aria-label="rowFlex" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="width:100% !important; height:80px !important; overflow:auto !important;   " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154952' aria-label="rowFlex" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<div layout='column' layout-fill>
-							<md-toolbar class="md-theme-light">
-								<h2 class="md-toolbar-tools">
-									<span>
-										No flex value, width 350
-									</span>
-								</h2>
-							</md-toolbar>
-							<div dib-inject-content="replace"  aria-label="div18" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex class="md-raised md-primary" style="width:350px !important;    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154953' aria-label="div18" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							</div>
-						</div>
-						<div layout='column' layout-fill>
-							<md-toolbar class="md-theme-light">
-								<h2 class="md-toolbar-tools">
-									<span>
-										flex : 25
-									</span>
-								</h2>
-							</md-toolbar>
-							<div dib-inject-content="replace"  aria-label="div19" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="25" class="md-raised md-accent" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154954' aria-label="div19" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							</div>
-						</div>
-						<div layout='column' layout-fill>
-							<md-toolbar class="md-theme-light">
-								<h2 class="md-toolbar-tools">
-									<span>
-										flex : 25
-									</span>
-								</h2>
-							</md-toolbar>
-							<div dib-inject-content="replace"  aria-label="div193" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="25" class="md-raised md-warn" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154957' aria-label="div193" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							</div>
-						</div>
-						<div layout='column' layout-fill>
-							<md-toolbar class="md-theme-light">
-								<h2 class="md-toolbar-tools">
-									<span>
-										flex : 40
-									</span>
-								</h2>
-							</md-toolbar>
-							<div dib-inject-content="replace"  aria-label="div192" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="40" class="md-raised md-primary" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154956' aria-label="div192" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							</div>
-						</div>
-						<div layout='column' layout-fill>
-							<md-toolbar class="md-theme-light">
-								<h2 class="md-toolbar-tools">
-									<span>
-										flex
-									</span>
-								</h2>
-							</md-toolbar>
-							<div dib-inject-content="replace"  aria-label="div191" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex class="md-raised md-accent" style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154955' aria-label="div191" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							</div>
-						</div>
-					</div>
-					<span aria-label="commentWidthPerc" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154964' aria-label="commentWidthPerc" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Using 
-							<b>
-								percentages
-							</b>
-							for widths can achieve a similar goal. Notice that the percentages are relative to the parent's width
-							<br>
-							and unlike flex, the fixed width of other child item's are not taken into account.
-							<br>
-							Notice that the total width below is 100% of the parent's width plus 200px + 250px (and therefore components don't fit on the parent).
-							<br>
-							Percentages are used mostly on their own, or in combination with flex. Percentages can not be used to set height, but note that flex can when used with the vbox layout. 
-						</p>
-					</span>
-					<span aria-label="WidthPerc" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154971' aria-label="WidthPerc" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:16px">
-							<b>
-								Width %
-							</b>
-						</span>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowPerc" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="width:100% !important; height:50px !important; overflow:auto !important;   " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154958' aria-label="rowPerc" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<md-button aria-label="button181" can-be-moved=true flex=none class="md-raised md-primary" style="width:200px !important;    " id='ci154959' aria-label="button181" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="width : 200" >
-							width : 200 
-						</md-button>
-						<md-button aria-label="button194" can-be-moved=true flex=none class="md-raised md-primary" style="width:25% !important;    " id='ci154960' aria-label="button194" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="width : 25%" >
-							width : 25% 
-						</md-button>
-						<md-button aria-label="button1931" can-be-moved=true flex=none class="md-raised md-primary" style="width:25% !important;    " id='ci154963' aria-label="button1931" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="width : 25%" >
-							width : 25% 
-						</md-button>
-						<md-button aria-label="button1921" can-be-moved=true flex=none class="md-raised md-primary" style="width:50% !important;    " id='ci154962' aria-label="button1921" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="width : 50%" >
-							width : 50% 
-						</md-button>
-						<md-button aria-label="button1911" can-be-moved=true flex=none class="md-raised md-primary" style="width:250px !important;    " id='ci154961' aria-label="button1911" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="width : 250" >
-							width : 250 
-						</md-button>
-					</div>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowPerc2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="width:100% !important; height:50px !important; overflow:auto !important;   " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154965' aria-label="rowPerc2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<md-button aria-label="button1941" can-be-moved=true flex=none class="md-raised md-accent" style="width:25% !important;    " id='ci154966' aria-label="button1941" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="width : 25%" >
-							width : 25% 
-						</md-button>
-						<md-button aria-label="button19311" can-be-moved=true flex=none class="md-raised md-accent" style="width:25% !important;    " id='ci154969' aria-label="button19311" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="width : 25%" >
-							width : 25% 
-						</md-button>
-						<md-button aria-label="button19211" can-be-moved=true flex=none class="md-raised md-accent" style="width:10% !important;    " id='ci154968' aria-label="button19211" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="width : 10%" >
-							width : 10% 
-						</md-button>
-						<md-button aria-label="button19111" can-be-moved=true flex class="md-raised md-accent" style="    " id='ci154967' aria-label="button19111" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex" >
-							flex 
-						</md-button>
-					</div>
-					<span aria-label="headResponsiveFlex" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci176995' aria-label="headResponsiveFlex" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:16px">
-							<b>
-								Responsive Flex
-							</b>
-						</span>
-					</span>
-					<span aria-label="commentResponsiveFlex" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci176996' aria-label="commentResponsiveFlex" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The flex, flex-order and flex-offset configs can all use responsive breakpoint aliases to cater for different device/view sizes.
-							<br>
-							See 
-							<a target="_blank" href="https://material.angularjs.org/latest/layout/children">
-								Layout Children
-							</a>
-							and 
-							<a target="_blank" href="https://material.angularjs.org/latest/layout/options">
-								Extra Options
-							</a>
-							for more info. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowResponsiveFlex" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs="column" style="width:100% !important;    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci176997' aria-label="rowResponsiveFlex" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<md-button aria-label="button1821" can-be-moved=true flex="33" class="md-accent md-raised" flex-gt-sm="66" style="    " id='ci176998' aria-label="button1821" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex 33% on mobile,  and 66% on gt-sm devices." >
-							flex 33% on mobile,  and 66% on gt-sm devices. 
-						</md-button>
-						<md-button aria-label="button221" can-be-moved=true flex="66" class="md-accent md-raised" flex-gt-sm="33" style="    " id='ci176999' aria-label="button221" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex 66% on mobile,  and 33% on gt-sm devices." >
-							flex 66% on mobile,  and 33% on gt-sm devices. 
-						</md-button>
-					</div>
-					<span aria-label="headFlexOrder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154903' aria-label="headFlexOrder" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Flex Order
-						</span>
-					</span>
-					<span aria-label="commentFlexOrder1" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci177012' aria-label="commentFlexOrder1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The flex-order config sets the ordering position of the item within its parent.
-							<br>
-							Since the order_no field in the Item table (pef_item) determines the default position of items, flex-order is only useful in responsive or dynamic (set programmatically) contexts.
-							<br>
-							Valid values are integers between -20 and 20.
-							<br>
-							Use the following link for more information about 
-							<a target="_blank" href="https://material.angularjs.org/latest/layout/children">
-								using flex-order responsively
-							</a>
-							. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowFlexOrder" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="width:100% !important; height:50px !important; overflow:auto !important;   " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci177000' aria-label="rowFlexOrder" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<md-button aria-label="buttonFO2" can-be-moved=true flex class="md-raised md-accent" flex-order="2" style="    " id='ci177002' aria-label="buttonFO2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex-order = 2" >
-							flex-order = 2 
-						</md-button>
-						<md-button aria-label="buttonFOminus1" can-be-moved=true flex=none class="md-raised md-accent" flex-order="-1" style="width:25% !important;    " id='ci177001' aria-label="buttonFOminus1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex-order = -1" >
-							flex-order = -1 
-						</md-button>
-						<md-button aria-label="buttonFO1" can-be-moved=true flex=none class="md-raised md-accent" flex-order="1" style="width:10% !important;    " id='ci177003' aria-label="buttonFO1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex-order = 1" >
-							flex-order = 1 
-						</md-button>
-						<md-button aria-label="buttonFO0" can-be-moved=true flex=none class="md-raised md-accent" flex-order="0" style="width:25% !important;    " id='ci177004' aria-label="buttonFO0" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex-order = 0" >
-							flex-order = 0 
-						</md-button>
-					</div>
-					<span aria-label="headFlexOffset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154917' aria-label="headFlexOffset" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Flex Offset
-						</span>
-					</span>
-					<span aria-label="commentFlexOffset" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154916' aria-label="commentFlexOffset" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Use flex-offset to adjust the left-margin offset percentage of the item with respect to the preceding item or the parent item's boundary.
-							<br>
-							Since the 
-							<i>
-								margin
-							</i>
-							field in the Item table (pef_item) determines the default margin of items, flex-offset is only useful in responsive or dynamic contexts.
-							<br>
-							Values are percentages, and must be multiples of 5, or 33 / 66.
-							<br>
-							Use the following link for more information about 
-							<a target="_blank" href="https://material.angularjs.org/latest/layout/children">
-								using flex-offset responsively
-							</a>
-							. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowFlexOffset" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="width:100% !important; height:60px !important; overflow:auto !important;   " on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154913' aria-label="rowFlexOffset" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<md-button aria-label="buttonFO20" can-be-moved=true flex="66" class="md-raised md-warn" flex-offset="20" style="    " id='ci154914' aria-label="buttonFO20" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex-offset = 20" >
-							flex-offset = 20 
-						</md-button>
-						<md-button aria-label="button8" can-be-moved=true flex class="md-raised md-warn" style="    " id='ci154915' aria-label="button8" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="flex" >
-							flex 
-						</md-button>
-					</div>
-					<span aria-label="headLayoutAlign" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci154911' aria-label="headLayoutAlign" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Layout Align
-						</span>
-					</span>
-					<span aria-label="commentLayoutAlign" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154904' aria-label="commentLayoutAlign" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The layout-align config works together with the layout type (row or column) to position items within the parent.
-							<br>
-							It makes use of two words. The first word (none,start(default),center,end,space-around,space-between) positions the items with respect to the layout direction (either horizontally for row, or vertically for column) of the parent layout component.
-							<br>
-							The second word (none, start,center,stretch(default),end) positions items with respect to the perpendicular axle of the layout direction. 
-							<br>
-							<br>
-							Below is a layoutRow component (with a border around it for clarification) using layout-align="start start, with a responsive directive layout-align-gt-sm=""end stretch".
-							<br>
-							Note that fields do not stretch, but components like buttons, subcontainers and divs do.
-							<br>
-							<b>
-								A clear illustration of the power of layout-align is provided 
-								<a href="">
-									here
-								</a>
-							</b>
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowLayoutAlign" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-align="start start" layout-align-gt-sm="end stretch" style="width:100% !important; height:200px !important; overflow:auto !important;   border : 2px solid blue" on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci154883' aria-label="rowLayoutAlign" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<md-input-container aria-label="textfield2" can-be-moved=true flex=none class="md-block" style="width:170px !important;    " >
-							<input type="text"  name="textfield2" ng-model="model.textfield2" aria-label="Text1" id='ci154884' aria-label="textfield2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text1
-							</label>
-							<div ng-messages="dibexLayout.textfield2.$error">
-							</div>
-						</md-input-container>
-						<md-input-container aria-label="textfield11" can-be-moved=true flex=none class="md-block" style="width:220px !important;    " >
-							<input type="text"  name="textfield11" ng-model="model.textfield11" aria-label="Text2" id='ci154885' aria-label="textfield11" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Text2
-							</label>
-							<div ng-messages="dibexLayout.textfield11.$error">
-							</div>
-						</md-input-container>
-						<div layout='row' aria-label="dropdownlist1" can-be-moved=true flex=none style="width:200px !important;    " >
-							<md-input-container flex>
-								<label>
-									Dropdownlist
-								</label>
-								<md-select    dib-data-component='enum' dib-onload-service placeholder="Dropdownlist" aria-label="dropdownlist1" md-on-close="select154886(model)" flex ng-model="model.dropdownlist1" name='dropdownlist1' id='ci154886' aria-label="dropdownlist1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-									<md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
-										{{state}} 
-									</md-option>
-								</md-select>
-								<div ng-messages="dibexLayout.dropdownlist1.$error">
-								</div>
-							</md-input-container>
-						</div>
-						<md-button aria-label="mdbutton" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci177005' aria-label="mdbutton" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" aria-label="my button" >
-							my button 
-						</md-button>
-					</div>
-					<span aria-label="headLayoutMargin" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci177011' aria-label="headLayoutMargin" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Layout Margin
-						</span>
-					</span>
-					<span aria-label="commentLayoutMargin" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci154912' aria-label="commentLayoutMargin" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The layout-margin adds a margin around each child item, as well as the layout component it is configured on. Note the space surrounding the blue boxes. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowLayoutMargin" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-margin style="width:100% !important; height:50px !important; overflow:auto !important;   border : 4px solid red" on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci177006' aria-label="rowLayoutMargin" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<span aria-label="spanLM1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177008' aria-label="spanLM1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanLM2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177007' aria-label="spanLM2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanLM3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177009' aria-label="spanLM3" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanLM34" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="width:200px !important;    border : 3px solid blue" id='ci177043' aria-label="spanLM34" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							width = 200px with no flex 
-						</span>
-					</div>
-					<span aria-label="headLayoutPadding" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci177017' aria-label="headLayoutPadding" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Layout Padding
-						</span>
-					</span>
-					<span aria-label="commentLayoutPadding" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci177018' aria-label="commentLayoutPadding" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The layout-padding adds padding to each child, as well as the layout component it is configured on. Note the space surrounding the words inside the blue boxes. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowLayoutPadding" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-padding style="width:100% !important; height:50px !important; overflow:auto !important;   border : 4px solid red" on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci177013' aria-label="rowLayoutPadding" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<span aria-label="spanP1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177045' aria-label="spanP1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanP2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177046' aria-label="spanP2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanP3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177047' aria-label="spanP3" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanP4" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="width:200px !important;    border : 3px solid blue" id='ci177044' aria-label="spanP4" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							width = 200px with no flex 
-						</span>
-					</div>
-					<span aria-label="headLayoutFill" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci177023' aria-label="headLayoutFill" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Layout Fill
-						</span>
-					</span>
-					<span aria-label="commentLayoutFill" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci177024' aria-label="commentLayoutFill" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Layout-fill is configured on the child item, and forces it to fill its parent.
-							<br>
-							Note: The child item should be the only child item of its parent. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowLayoutFill" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="width:100% !important; height:100px !important; overflow:auto !important;   border : 4px solid red" on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci177019' aria-label="rowLayoutFill" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<span aria-label="spanF1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none layout-fill style="    border : 3px solid blue" id='ci177051' aria-label="spanF1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							layout-fill with no flex 
-						</span>
-					</div>
-					<span aria-label="headLayoutWrap" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci177029' aria-label="headLayoutWrap" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Layout Wrap
-						</span>
-					</span>
-					<span aria-label="commentLayoutWrap" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci177030' aria-label="commentLayoutWrap" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Layout-wrap allows child items to wrap within the parent component it is configured on, when the items use more than 100% of available space.  
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowLayoutWrap" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="width:100% !important; height:50px !important; overflow:auto !important;   border : 4px solid red" on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci177025' aria-label="rowLayoutWrap" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<span aria-label="spanW1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177053' aria-label="spanW1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanW2" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177054' aria-label="spanW2" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanW3" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="33" style="    border : 3px solid blue" id='ci177055' aria-label="spanW3" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							flex = 33 
-						</span>
-						<span aria-label="spanW4" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="width:200px !important;    border : 3px solid blue" id='ci177052' aria-label="spanW4" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							width = 200px with no flex 
-						</span>
-					</div>
-					<span aria-label="headShowHideResp" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci177065' aria-label="headShowHideResp" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Show &amp; Hide Responsively
-						</span>
-					</span>
-					<span aria-label="commentShowHideResp" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci177066' aria-label="commentShowHideResp" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The 
-							<i>
-								ng-show
-							</i>
-							and 
-							<i>
-								ng-hide
-							</i>
-							directives can be used to responsively show and hide items. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowShowHideResp" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-wrap style="width:100% !important; height:80px !important; overflow:auto !important;   border : 4px solid red" on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'     id='ci177060' aria-label="rowShowHideResp" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" fill-height-for-child >
-						<span aria-label="spanSH1" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="25" hide show-gt-sm style="    border : 3px solid blue" id='ci177062' aria-label="spanSH1" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							Only show on gt-sm devices. 
-						</span>
-						<span aria-label="spanW21" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="25" hide-gt-sm style="    border : 3px solid blue" id='ci177063' aria-label="spanW21" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							Shown on small and medium.
-							<br>
-							Hidden on gt-sm devices. 
-						</span>
-						<span aria-label="spanW31" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="25" show hide-gt-md style="    border : 3px solid blue" id='ci177064' aria-label="spanW31" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							Shown on small and medium size devices.
-							<br>
-							Hidden on gt-md devices. 
-						</span>
-						<span aria-label="spanW41" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="25" hide show-gt-md style="    border : 3px solid blue" id='ci177061' aria-label="spanW41" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-							Shown on devices larger than 1200px wide only. 
-						</span>
-					</div>
-					<span aria-label="span" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style=" height:100px !important; overflow:auto !important;   " id='ci177056' aria-label="span" dib-container-name='dibexLayout' dib-config="{ listeners : { } }" >
-					</span>
-				</div>
-			</md-tab-body>
-		</md-tab>
-	</md-tabs>
+
+<div
+component-loaded
+dib-container=dibexLayout dib-container-name="7145" dib-config="{
+}" layout-fill flex>
+    <md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+    <md-tabs id="ci154875" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false 
+    md-tabs-dummy-wrapper='ci154875'
+    aria-label="mdtabs"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect
+style="width:100% !important;    "
+    id='ci154875'
+aria-label="mdtabs"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tab label='Basics' tabId="154972" 
+        aria-label="colBasics"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-align="start start"
+style="   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colBasics"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-align="start start"
+style="   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154972'    
+    id='ci154972'
+aria-label="colBasics"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span aria-label="commentQuickFacts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154974'
+aria-label="commentQuickFacts"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The design of Angular Material is based in the excellent research done by Google&apos;s  <a target="_blank" href="https://material.io/">Material Design</a> team. Under the hood it uses the powerful CSS3 <a href="http://www.w3.org/TR/css3-flexbox/">flexbox</a> to enable feature rich and responsive layouts.<br> All the complex CSS styling is implemented for you by means of a set of directives (eg layout-fill or flex=33) which works consistently across the range of modern devices and browsers. The developer uses directives to communicate intent, and the layout engine figures out how best to implement it.<br><br>
+
+Angular Material is ready for production sites, and has one of the most active developer communities on <a href="https://github.com/angular/material">Github</a>. The Angular Material site has <a href="https://material.angularjs.org/latest/demo/button">demo's</a>, <a href="https://material.angularjs.org/latest/api/directive/mdButton">API definitions</a>, <a href="https://material.angularjs.org/latest/layout/tips">troubleshooting tips</a>, and more. The Github site lists compatible browsers.<br><br>
+
+Layout Examples provides an introduction to the basics of Angular Material layout and how DIB implements it.<br>Anyone with experience in laying out HTML documents (especially for responsive designs) will appreciate the power, ease and flexibility afforded by the combination of Dropinbase and Angular Material.<br><br>
+
+<b>Basics</b><br>
+Each component in Droinbase is based on a template with HTML and Angular Material code that is merged with item data.<br>A component's properties &amp; directives affect the functionality and layout of the current and/or child components.<br>The most common properties (eg width, height, disabled, etc) are easily set in DIB using the item fields.<br>Certain components, eg <i>md-tabs</i> and <i>menu</i>, allow nesting of other components to form a tree structure.<br><b>Consequently it is best to construct and debug layout issues from the root up, and to test frequently before adding too many children..<br>Especially for first-comers, it will be best to work through the Layout Examples in the order they are provided.</b>
+    </p>    
+</span>
+    <span aria-label="commentWidthHeight"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177068'
+aria-label="commentWidthHeight"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The Width, Height, Margin, and Padding properties below are set in the corresponding fields in the DIB Item table (See Pg2 under "Selected Item" in the Designer).<br> They do not implement Angular Material directives; normal inline CSS styling is used.<br>Additional CSS styling can be configured using the Item table's css field.<br><b>Note</b>, it is normally best to follow the Angular approach of using directives as far as possible instead of specifying CSS directly.<br> Certain cases  do require CSS however. See the "Layout Configs"-tab for the use of AM directives.
+    </p>    
+</span>
+    <span aria-label="headwidth"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154975'
+aria-label="headwidth"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Width</span>
+</span>
+    <span aria-label="commentWidth"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="width:100% !important;    "
+    id='ci154976'
+aria-label="commentWidth"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Implements the <a target="_blank" href="http://www.w3schools.com/css/pr_dim_width.asp">CSS width property</a>.<br>Below widths of 200px, 300px, 50%, 100% and 3.5in are used.<br>Note, relative width values such as percentages adjust automatically according to page or parent item width.<br> Also see <a target="_blank" href="http://www.w3schools.com/cssref/css_units.asp">CSS units</a> for more info.
+    </p>    
+</span>
+    <md-input-container aria-label="textfield3"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:200px !important;    "
+>
+    <input type="text" 
+        name="textfield3"
+        ng-model="model.textfield3"
+        aria-label="Textfield"
+        id='ci154977'
+aria-label="textfield3"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield3.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield4"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:300px !important;    "
+>
+    <input type="text" 
+        name="textfield4"
+        ng-model="model.textfield4"
+        aria-label="Textfield"
+        id='ci154978'
+aria-label="textfield4"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield4.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield5"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:50% !important;    "
+>
+    <input type="text" 
+        name="textfield5"
+        ng-model="model.textfield5"
+        aria-label="Textfield"
+        id='ci154979'
+aria-label="textfield5"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield5.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield6"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:100% !important;    "
+>
+    <input type="text" 
+        name="textfield6"
+        ng-model="model.textfield6"
+        aria-label="Textfield"
+        id='ci154980'
+aria-label="textfield6"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield6.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield12"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:3.5in !important;    "
+>
+    <input type="text" 
+        name="textfield12"
+        ng-model="model.textfield12"
+        aria-label="Textfield"
+        id='ci154988'
+aria-label="textfield12"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield12.$error">
+    </div>
+</md-input-container>
+    <span aria-label="headheight"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154984'
+aria-label="headheight"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Height</span>
+</span>
+    <span aria-label="commentLabelHeight"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154985'
+aria-label="commentLabelHeight"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Implements the <a target="_blank" href="http://www.w3schools.com/cssref/pr_dim_height.asp">CSS height</a> property.<br>Below heights of 100px, 20mm and 2cm is used.
+    </p>    
+</span>
+    <md-input-container aria-label="textfield9"
+can-be-moved=true
+flex
+class="md-block"
+style="width:100% !important; height:100px !important; overflow:auto !important;   "
+>
+    <input type="text" 
+        name="textfield9"
+        ng-model="model.textfield9"
+        aria-label="Textfield (height of 100px - results in distancing other items below)"
+        id='ci154986'
+aria-label="textfield9"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield (height of 100px - results in distancing other items below)</label>
+    <div ng-messages="dibexLayout.textfield9.$error">
+    </div>
+</md-input-container>
+    <img aria-label="imagestatic"
+can-be-moved=true
+flex="none"
+style="width:200px !important; height:20mm !important; overflow:auto !important;   "
+     id='ci154989'
+aria-label="imagestatic"
+dib-container-name='dibexLayout'
+ng-click="dibCommon.location('/files/icons/errorlogs.jpg');"
+dib-config="{
+    listeners : {
+    }
+}"
+     src="/files/icons/errorlogs.jpg"
+/>  
+<md-button aria-label="button"
+can-be-moved=true
+class="md-accent md-raised md-hue-1"
+style=" height:2cm !important; overflow:auto !important;   "
+    id='ci154987'
+aria-label="button"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Button"
+>
+    Button
+</md-button>
+    <span aria-label="headMargins"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155000'
+aria-label="headMargins"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Margins</span>
+</span>
+    <span aria-label="commentMargins"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155001'
+aria-label="commentMargins"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Specifies the margins around the component. The margin can be a single value to apply to all sides<br>or it can be a CSS style specification for each side, eg: 10px 15px 30px 10px (top, right, bottom, left).<br>See <a target="_blank" href="http://www.w3schools.com/css/css_margin.asp">CSS Margins</a> for more info
+    </p>    
+</span>
+<md-button aria-label="btnNoMargins"
+can-be-moved=true
+class="md-accent md-raised md-hue-1"
+style="    "
+    id='ci155004'
+aria-label="btnNoMargins"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="No margins"
+>
+    No margins
+</md-button>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowMarginBtns"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154972'    
+    id='ci188600'
+aria-label="rowMarginBtns"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="button1"
+can-be-moved=true
+class="md-accent md-raised md-hue-1"
+style="  margin:20px !important;  "
+    id='ci155002'
+aria-label="button1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="margin : 20px"
+>
+    margin : 20px
+</md-button>
+<md-button aria-label="btnNoMargins1"
+can-be-moved=true
+class="md-accent md-raised md-hue-1"
+style="    "
+    id='ci188601'
+aria-label="btnNoMargins1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="No margins"
+>
+    No margins
+</md-button>
+</div>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowMarginBtns2"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154972'    
+    id='ci188602'
+aria-label="rowMarginBtns2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="button2"
+can-be-moved=true
+class="md-accent md-raised md-hue-1"
+style="  margin:0px 50px 10px 30px !important;  "
+    id='ci155003'
+aria-label="button2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="margin : 0px 0px 10px 30px"
+>
+    margin : 0px 0px 10px 30px
+</md-button>
+<md-button aria-label="btnNoMargins3"
+can-be-moved=true
+class="md-accent md-raised md-hue-1"
+style="    "
+    id='ci188603'
+aria-label="btnNoMargins3"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="No margins"
+>
+    No margins
+</md-button>
+</div>
+<md-button aria-label="btnNoMargins2"
+can-be-moved=true
+class="md-accent md-raised md-hue-1"
+style="    "
+    id='ci155005'
+aria-label="btnNoMargins2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="No margins"
+>
+    No margins
+</md-button>
+    <span aria-label="headPadding"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155006'
+aria-label="headPadding"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Padding</span>
+</span>
+    <span aria-label="commentPadding"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155007'
+aria-label="commentPadding"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Specifies the margins within the component around content (if item is eg a button), or other items (if item is a eg a layout component). The padding can be a single value to apply to all sides<br>or it can be a CSS style specification for each side, eg: 10px 15px 30px 10px' (top, right, bottom, left).<br>See <a target="_blank" href="http://www.w3schools.com/css/css_margin.asp">CSS Margins</a> for more info.
+    </p>    
+</span>
+<md-button aria-label="button5"
+can-be-moved=true
+class="md-raised md-primary"
+style="   padding:20px !important; "
+    id='ci155008'
+aria-label="button5"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="padding : 20px"
+>
+    padding : 20px
+</md-button>
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>Div element with padding (10px 30px 0px 60px) containing a fieldset</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="div"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex="none"
+style="   padding:10px 30px 0px 60px !important; "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154972'    
+    id='ci155009'
+aria-label="div"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-card  aria-label="fieldset5"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout="column" class="standard"
+style="    "
+    id='ci154996'
+aria-label="fieldset5"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+ >
+        <md-card-content>
+            <section layout-fill>
+                <md-subheader class="cl-md-accent md-no-sticky">heading 2</md-subheader>
+    <md-input-container aria-label="textfield101"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield101"
+        ng-model="model.textfield101"
+        aria-label="Textfield"
+        id='ci154997'
+aria-label="textfield101"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield101.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield131"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield131"
+        ng-model="model.textfield131"
+        aria-label="Textfield"
+        id='ci154998'
+aria-label="textfield131"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield131.$error">
+    </div>
+</md-input-container>
+<md-button aria-label="mybutton"
+can-be-moved=true
+class="md-raised md-primary"
+style="   padding:10px 30px 0px 30px !important; "
+    id='ci154999'
+aria-label="mybutton"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="10px 30px 0px 30px"
+>
+    10px 30px 0px 30px
+</md-button>
+            </section>
+    </md-card-content>
+</md-card>
+</div>
+</div>
+    <span aria-label="span1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style=" height:100px !important; overflow:auto !important;   "
+    id='ci177057'
+aria-label="span1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</span>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Layout Components' tabId="154876" 
+        aria-label="colLayoutComponents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="width:100% !important;   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colLayoutComponents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="width:100% !important;   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'    
+    id='ci154876'
+aria-label="colLayoutComponents"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span aria-label="commentLayoutComponents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154877'
+aria-label="commentLayoutComponents"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Layout components, eg layoutRow, determine how the immediate child components are positioned and sized internally.<br>Angular has two basic layout types, row (arranges child items horizontally) and column (arranges child items vertically).<br>Various directives and configs provide finer control over positioning and sizing, eg flex and layout-align.
+    </p>    
+</span>
+    <span aria-label="headlayoutrow"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154888'
+aria-label="headlayoutrow"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">layoutRow</span>
+</span>
+    <span aria-label="commentLayoutRow"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154878'
+aria-label="commentLayoutRow"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    layoutRow is used to arrange child items horizontally.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutrow"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'    
+    id='ci154879'
+aria-label="layoutrow"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-input-container aria-label="textfield"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield"
+        ng-model="model.textfield"
+        aria-label="Text1"
+        id='ci154880'
+aria-label="textfield"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text1</label>
+    <div ng-messages="dibexLayout.textfield.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield1"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield1"
+        ng-model="model.textfield1"
+        aria-label="Text2"
+        id='ci154881'
+aria-label="textfield1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text2</label>
+    <div ng-messages="dibexLayout.textfield1.$error">
+    </div>
+</md-input-container>
+    <div layout='row' aria-label="dropdownlist"
+can-be-moved=true
+flex="none"
+style="    "
+ >
+
+<md-input-container flex>
+    <label>Dropdownlist</label>    
+    <md-select   
+        dib-data-component='enum'
+        aria-label="dropdownlist"
+        dib-onload-service
+        placeholder="Dropdownlist"
+        aria-label="dropdownlist"
+        md-on-close="select154882(model)"
+        flex
+        ng-model="model.dropdownlist"
+        name='dropdownlist'
+        id='ci154882'
+aria-label="dropdownlist"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        <md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+            {{state}}
+        </md-option>
+    </md-select>
+    <div ng-messages="dibexLayout.dropdownlist.$error" ng-if="dibexLayout.dropdownlist.$touched">
+    </div>
+</md-input-container>
+</div>
+</div>
+    <span aria-label="commentRowWithConfigs"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154887'
+aria-label="commentRowWithConfigs"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Below is the same layoutRow, but with added margins and width configs to child items.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutrow52"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'    
+    id='ci154893'
+aria-label="layoutrow52"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-input-container aria-label="textfield22"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:170px !important;    "
+>
+    <input type="text" 
+        name="textfield22"
+        ng-model="model.textfield22"
+        aria-label="Text1"
+        id='ci154894'
+aria-label="textfield22"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text1</label>
+    <div ng-messages="dibexLayout.textfield22.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield112"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:250px !important;  margin:11px 20px 11px 20px !important;  "
+>
+    <input type="text" 
+        name="textfield112"
+        ng-model="model.textfield112"
+        aria-label="Text2"
+        id='ci154895'
+aria-label="textfield112"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text2</label>
+    <div ng-messages="dibexLayout.textfield112.$error">
+    </div>
+</md-input-container>
+    <div layout='row' aria-label="dropdownlist12"
+can-be-moved=true
+flex="none"
+style="width:200px !important;    "
+ >
+
+<md-input-container flex>
+    <label>Dropdownlist</label>    
+    <md-select   
+        dib-data-component='enum'
+        aria-label="dropdownlist12"
+        dib-onload-service
+        placeholder="Dropdownlist"
+        aria-label="dropdownlist12"
+        md-on-close="select154896(model)"
+        flex
+        ng-model="model.dropdownlist12"
+        name='dropdownlist12'
+        id='ci154896'
+aria-label="dropdownlist12"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        <md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+            {{state}}
+        </md-option>
+    </md-select>
+    <div ng-messages="dibexLayout.dropdownlist12.$error" ng-if="dibexLayout.dropdownlist12.$touched">
+    </div>
+</md-input-container>
+</div>
+</div>
+    <span aria-label="headlayoutColumn1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154898'
+aria-label="headlayoutColumn1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">layoutColumn</span>
+</span>
+    <span aria-label="commentLayoutColumn"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154897'
+aria-label="commentLayoutColumn"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    layoutColumn is used to arrange child items vertically.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout='column'
+    aria-label="layoutColumn2"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'    
+    id='ci154889'
+aria-label="layoutColumn2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-input-container aria-label="textfield21"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield21"
+        ng-model="model.textfield21"
+        aria-label="Text1"
+        id='ci154890'
+aria-label="textfield21"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text1</label>
+    <div ng-messages="dibexLayout.textfield21.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield111"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield111"
+        ng-model="model.textfield111"
+        aria-label="Text2"
+        id='ci154891'
+aria-label="textfield111"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text2</label>
+    <div ng-messages="dibexLayout.textfield111.$error">
+    </div>
+</md-input-container>
+    <div layout='row' aria-label="dropdownlist11"
+can-be-moved=true
+flex="none"
+style="width:200px !important;    "
+ >
+
+<md-input-container flex>
+    <label>Dropdownlist</label>    
+    <md-select   
+        dib-data-component='enum'
+        aria-label="dropdownlist11"
+        dib-onload-service
+        placeholder="Dropdownlist"
+        aria-label="dropdownlist11"
+        md-on-close="select154892(model)"
+        flex
+        ng-model="model.dropdownlist11"
+        name='dropdownlist11'
+        id='ci154892'
+aria-label="dropdownlist11"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        <md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+            {{state}}
+        </md-option>
+    </md-select>
+    <div ng-messages="dibexLayout.dropdownlist11.$error" ng-if="dibexLayout.dropdownlist11.$touched">
+    </div>
+</md-input-container>
+</div>
+</div>
+    <span aria-label="headlayoutColumnStart"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176915'
+aria-label="headlayoutColumnStart"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">layoutColumnStart</span>
+</span>
+    <span aria-label="commentLayoutColumnStart"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176914'
+aria-label="commentLayoutColumnStart"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    layoutColumnStart is a variation of layoutColumn. It differs only by means of not stretching child items horizontally.<br>Note, the same effect can be achieved by adding  ' layout-align="start start" ' to the layout_configs field of layoutColumn.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="column" layout-align="start start"
+    aria-label="layoutcolumnstart"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="width:100% !important; height:140px !important; overflow:auto !important;   "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'    
+    id='ci154906'
+aria-label="layoutcolumnstart"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+    <md-input-container aria-label="textfield23"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield23"
+        ng-model="model.textfield23"
+        aria-label="Text1"
+        id='ci154907'
+aria-label="textfield23"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text1</label>
+    <div ng-messages="dibexLayout.textfield23.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield113"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield113"
+        ng-model="model.textfield113"
+        aria-label="Text2"
+        id='ci154908'
+aria-label="textfield113"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text2</label>
+    <div ng-messages="dibexLayout.textfield113.$error">
+    </div>
+</md-input-container>
+    <div layout='row' aria-label="dropdownlist13"
+can-be-moved=true
+flex="none"
+style="    "
+ >
+
+<md-input-container flex>
+    <label>Dropdownlist</label>    
+    <md-select   
+        dib-data-component='enum'
+        aria-label="dropdownlist13"
+        dib-onload-service
+        placeholder="Dropdownlist"
+        aria-label="dropdownlist13"
+        md-on-close="select154909(model)"
+        flex
+        ng-model="model.dropdownlist13"
+        name='dropdownlist13'
+        id='ci154909'
+aria-label="dropdownlist13"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        <md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+            {{state}}
+        </md-option>
+    </md-select>
+    <div ng-messages="dibexLayout.dropdownlist13.$error" ng-if="dibexLayout.dropdownlist13.$touched">
+    </div>
+</md-input-container>
+</div>
+</div>
+    <span aria-label="headlayoutRowFill"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176920'
+aria-label="headlayoutRowFill"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">layoutRowFill</span>
+</span>
+    <span aria-label="commentLayoutRowFill"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176921'
+aria-label="commentLayoutRowFill"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    layoutRowFill is a variation of layoutRow. It uses the Angular layout-fill directive causing child items to vertically fill the available space.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" layout-fill
+    aria-label="layoutrowfill"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important; height:200px !important; overflow:auto !important;   "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'    
+    id='ci176916'
+aria-label="layoutrowfill"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+<md-button aria-label="buttonBig"
+can-be-moved=true
+class="md-raised"
+style="    "
+    id='ci176917'
+aria-label="buttonBig"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="my big button"
+>
+    my big button
+</md-button>
+<md-button aria-label="buttonBig1"
+can-be-moved=true
+class="md-raised"
+style="width:50% !important;    "
+    id='ci176922'
+aria-label="buttonBig1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="my other big button"
+>
+    my other big button
+</md-button>
+</div>
+    <span aria-label="headFieldsets"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154990'
+aria-label="headFieldsets"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Fieldsets</span>
+</span>
+    <span aria-label="commentFieldsets"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154991'
+aria-label="commentFieldsets"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    layoutFieldset and mdCard are often used to group sets of components, with optional headings. Note, layoutFieldset is based on mdCard with some added layout configs.
+    </p>    
+</span>
+    <md-card  aria-label="fieldset"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout="column" class="standard"
+style="    "
+    id='ci154992'
+aria-label="fieldset"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+ >
+        <md-card-content>
+            <section layout-fill>
+                <md-subheader class="cl-md-accent md-no-sticky">Fieldset Heading</md-subheader>
+    <md-input-container aria-label="textfield10"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield10"
+        ng-model="model.textfield10"
+        aria-label="Textfield"
+        id='ci154993'
+aria-label="textfield10"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield10.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield13"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield13"
+        ng-model="model.textfield13"
+        aria-label="Textfield"
+        id='ci154994'
+aria-label="textfield13"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield13.$error">
+    </div>
+</md-input-container>
+<md-button aria-label="textfield14"
+can-be-moved=true
+class="md-raised md-accent"
+style="width:280px !important;    "
+    id='ci154995'
+aria-label="textfield14"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Test"
+>
+    Test
+</md-button>
+            </section>
+    </md-card-content>
+</md-card>
+    <md-card aria-label="mdcard"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Card Heading</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=154876'
+        id="ci176947" dib-inject-content="replace" class="no-padding" style="padding:0px" 
+        id='ci176947'
+aria-label="mdcard"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+    <md-input-container aria-label="textfield102"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield102"
+        ng-model="model.textfield102"
+        aria-label="Textfield"
+        id='ci176948'
+aria-label="textfield102"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield102.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield132"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield132"
+        ng-model="model.textfield132"
+        aria-label="Textfield"
+        id='ci176949'
+aria-label="textfield132"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibexLayout.textfield132.$error">
+    </div>
+</md-input-container>
+<md-button aria-label="textfield142"
+can-be-moved=true
+class="md-raised md-accent"
+style="width:280px !important;    "
+    id='ci176950'
+aria-label="textfield142"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Test"
+>
+    Test
+</md-button>
+    </md-card-content>
+</md-card>
+    <span aria-label="span2"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style=" height:100px !important; overflow:auto !important;   "
+    id='ci177058'
+aria-label="span2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</span>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Responsive & Nested Layouts' tabId="155010" 
+        aria-label="colResponsiveNestedLayouts"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colResponsiveNestedLayouts"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=155010'    
+    id='ci155010'
+aria-label="colResponsiveNestedLayouts"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span aria-label="headResponsiveLayouts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154970'
+aria-label="headResponsiveLayouts"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Responsive Layouts</span>
+</span>
+    <span aria-label="commentResponsiveLayouts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154910'
+aria-label="commentResponsiveLayouts"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    You can use breakpoint alias suffixes to determine whether layoutColumn or layoutRow is used, depending on the size of the device's view.<br>For the demo below, as you shrink your browser window width notice the flow direction changes to "column" for mobile devices (xs). And as you expand it will reset to "row" for gt-sm view sizes.<br>See <a target="_blank" href="https://material.angularjs.org/latest/layout/container">Layouts and Responsive Breakpoints</a> for more information.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowResponsiveLayout"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs="column"
+style="width:100% !important;    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=155010'    
+    id='ci176923'
+aria-label="rowResponsiveLayout"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>I'm above on mobile, and to the left on larger devices.</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="button182"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+class="md-accent"
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=155010'    
+    id='ci176924'
+aria-label="button182"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+</div>
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>I'm below on mobile, and to the right on larger devices.</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="div2"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+class="md-accent"
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=155010'    
+    id='ci176925'
+aria-label="div2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+</div>
+</div>
+    <span aria-label="headsubcontainer"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155012'
+aria-label="headsubcontainer"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Subcontainers</span>
+</span>
+    <span aria-label="commentSubcontainers"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155013'
+aria-label="commentSubcontainers"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Dropinbase adds the subcontainer component in order to nest whole containers in one another.<br>See the <a href="/nav/dibexSubcontainers">Subcontainer examples</a> for more information.
+    </p>    
+</span>
+   <div layout-fill flex
+        aria-label="subcontainer"
+can-be-moved=true
+flex
+style="width:100% !important; height:400px !important; overflow:auto !important;   "
+        id='ci155014'
+aria-label="subcontainer"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-consultant-form
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibtest-consultant-form>
+    </div>
+    <span aria-label="headtabs"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155024'
+aria-label="headtabs"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">mdTabs</span>
+</span>
+    <span aria-label="commentTabs"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155023'
+aria-label="commentTabs"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Presents child layout components (eg layoutRow/mdCard/div/subcontainer) as horizontal tabs.<br>The current container makes use of mdTabs to categorize the components. <br>Below we used the md-align-tabs directive to position tabs at the bottom of the control.<br>NOTE: Angular shares the active index of all mdTabs components on the same view.<br>To nest mdTabs, or use more than one on the same container, use DIB subcontainer components.<br> Since the current container already makes use of mdTabs, the mdTabs below are in subcontainers.<br>See <a target="_blank" href="https://material.angularjs.org/latest/demo/tabs">Tabs</a> for more information.
+    </p>    
+</span>
+   <div layout-fill flex
+        aria-label="subcontainerTabs"
+can-be-moved=true
+flex
+style="    "
+        id='ci176957'
+aria-label="subcontainerTabs"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        >
+        <dibex-layout-tabs-subcontainer
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibex-layout-tabs-subcontainer>
+    </div>
+    <span aria-label="headNestedLayouts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176970'
+aria-label="headNestedLayouts"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Nested Layouts</span>
+</span>
+    <span aria-label="commentNestedLayouts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176971'
+aria-label="commentNestedLayouts"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Off-course we can nest layout components to create more complex layouts...<br>Instead of mdTabs, we used the mdTabsStepper component.<br>
+The grey bar at the bottom of the screen with NEXT / PREV TAB buttons is part of the mdTabsStepper component.
+    </p>    
+</span>
+   <div layout-fill flex
+        aria-label="subcontainerNested"
+can-be-moved=true
+flex
+style=" height:350px !important; overflow:auto !important;   "
+        id='ci176988'
+aria-label="subcontainerNested"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibex-layout-nested-components
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibex-layout-nested-components>
+    </div>
+    <span aria-label="span3"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style=" height:100px !important; overflow:auto !important;   "
+    id='ci177059'
+aria-label="span3"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</span>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Layout Configs' tabId="176951" 
+        aria-label="colLayoutConfigs"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colLayoutConfigs"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci176951'
+aria-label="colLayoutConfigs"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span aria-label="commentOverview"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176992'
+aria-label="commentOverview"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Angular Material provides various directives to customize the size and position of items. The flex and layout_configs fields in the DIB Item table can be used to configure them.<br>
+See <a target="_blank" href="https://material.angularjs.org/latest/layout/children">Layout Children</a> for more info.<br><br>
+Note: also see <a target="_blank" href="https://material.angularjs.org/latest/layout/tips">Troubleshooting</a> on the Angular site for important tips when developing responsive sites, and resolutions to issues.
+    </p>    
+</span>
+    <span aria-label="headFlex"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176993'
+aria-label="headFlex"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Flex</span>
+</span>
+    <span aria-label="commentFlex"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176994'
+aria-label="commentFlex"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Flex values are percentages assigned to items to dynamically stretch or shrink their width relative to the available space within their parent container.<br>The widths of any items with fixed widths is first subtracted from the available space before calculations are made.<br>Flex values can be multiples of five, 33, 66, or one of the following: flex,none,auto,initial,grow,nogrow or noshrink.<br>Probably the most used is a value of 'flex' which causes the item to use up all the remaining space after other items' widths have been calculated.<br>Flex values can be set in the <i>flex</i> field in the Item table.<br>See <a target="_blank" href="https://material.angularjs.org/latest/layout/children">Layout Children</a> for more information about other values.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" layout-fill
+    aria-label="rowFlex"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important; height:80px !important; overflow:auto !important;   "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154952'
+aria-label="rowFlex"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>No flex value, width 350</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="div18"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+class="md-raised md-primary"
+style="width:350px !important;    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154953'
+aria-label="div18"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+</div>
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>flex : 25</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="div19"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex="25"
+class="md-raised md-accent"
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154954'
+aria-label="div19"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+</div>
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>flex : 25</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="div193"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex="25"
+class="md-raised md-warn"
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154957'
+aria-label="div193"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+</div>
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>flex : 40</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="div192"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex="40"
+class="md-raised md-primary"
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154956'
+aria-label="div192"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+</div>
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>flex</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="div191"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+class="md-raised md-accent"
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154955'
+aria-label="div191"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+</div>
+</div>
+    <span aria-label="commentWidthPerc"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154964'
+aria-label="commentWidthPerc"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Using <b>percentages</b> for widths can achieve a similar goal. Notice that the percentages are relative to the parent's width<br>and unlike flex, the fixed width of other child item's are not taken into account.<br>Notice that the total width below is 100% of the parent's width plus 200px + 250px (and therefore components don't fit on the parent).<br>Percentages are used mostly on their own, or in combination with flex. Percentages can not be used to set height, but note that flex can when used with the vbox layout.
+    </p>    
+</span>
+    <span aria-label="WidthPerc"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154971'
+aria-label="WidthPerc"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:16px"><b>Width %</b></span>
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowPerc"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important; height:50px !important; overflow:auto !important;   "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154958'
+aria-label="rowPerc"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+<md-button aria-label="button181"
+can-be-moved=true
+class="md-raised md-primary"
+style="width:200px !important;    "
+    id='ci154959'
+aria-label="button181"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="width : 200"
+>
+    width : 200
+</md-button>
+<md-button aria-label="button194"
+can-be-moved=true
+class="md-raised md-primary"
+style="width:25% !important;    "
+    id='ci154960'
+aria-label="button194"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="width : 25%"
+>
+    width : 25%
+</md-button>
+<md-button aria-label="button1931"
+can-be-moved=true
+class="md-raised md-primary"
+style="width:25% !important;    "
+    id='ci154963'
+aria-label="button1931"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="width : 25%"
+>
+    width : 25%
+</md-button>
+<md-button aria-label="button1921"
+can-be-moved=true
+class="md-raised md-primary"
+style="width:50% !important;    "
+    id='ci154962'
+aria-label="button1921"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="width : 50%"
+>
+    width : 50%
+</md-button>
+<md-button aria-label="button1911"
+can-be-moved=true
+class="md-raised md-primary"
+style="width:250px !important;    "
+    id='ci154961'
+aria-label="button1911"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="width : 250"
+>
+    width : 250
+</md-button>
+</div>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowPerc2"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important; height:50px !important; overflow:auto !important;   "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154965'
+aria-label="rowPerc2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+<md-button aria-label="button1941"
+can-be-moved=true
+class="md-raised md-accent"
+style="width:25% !important;    "
+    id='ci154966'
+aria-label="button1941"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="width : 25%"
+>
+    width : 25%
+</md-button>
+<md-button aria-label="button19311"
+can-be-moved=true
+class="md-raised md-accent"
+style="width:25% !important;    "
+    id='ci154969'
+aria-label="button19311"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="width : 25%"
+>
+    width : 25%
+</md-button>
+<md-button aria-label="button19211"
+can-be-moved=true
+class="md-raised md-accent"
+style="width:10% !important;    "
+    id='ci154968'
+aria-label="button19211"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="width : 10%"
+>
+    width : 10%
+</md-button>
+<md-button aria-label="button19111"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci154967'
+aria-label="button19111"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex"
+>
+    flex
+</md-button>
+</div>
+    <span aria-label="headResponsiveFlex"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176995'
+aria-label="headResponsiveFlex"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:16px"><b>Responsive Flex</b></span>
+</span>
+    <span aria-label="commentResponsiveFlex"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci176996'
+aria-label="commentResponsiveFlex"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The flex, flex-order and flex-offset configs can all use responsive breakpoint aliases to cater for different device/view sizes.<br>
+See <a target="_blank" href="https://material.angularjs.org/latest/layout/children">Layout Children</a> and <a target="_blank" href="https://material.angularjs.org/latest/layout/options">Extra Options</a> for more info.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowResponsiveFlex"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs="column"
+style="width:100% !important;    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci176997'
+aria-label="rowResponsiveFlex"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="button1821"
+can-be-moved=true
+class="md-accent md-raised" flex-gt-sm="66"
+style="    "
+    id='ci176998'
+aria-label="button1821"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex 33% on mobile,  and 66% on gt-sm devices."
+>
+    flex 33% on mobile,  and 66% on gt-sm devices.
+</md-button>
+<md-button aria-label="button221"
+can-be-moved=true
+class="md-accent md-raised" flex-gt-sm="33"
+style="    "
+    id='ci176999'
+aria-label="button221"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex 66% on mobile,  and 33% on gt-sm devices."
+>
+    flex 66% on mobile,  and 33% on gt-sm devices.
+</md-button>
+</div>
+    <span aria-label="headFlexOrder"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154903'
+aria-label="headFlexOrder"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Flex Order</span>
+</span>
+    <span aria-label="commentFlexOrder1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177012'
+aria-label="commentFlexOrder1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The flex-order config sets the ordering position of the item within its parent.<br>Since the order_no field in the Item table (pef_item) determines the default position of items, flex-order is only useful in responsive or dynamic (set programmatically) contexts.<br>Valid values are integers between -20 and 20.<br>Use the following link for more information about <a target="_blank" href="https://material.angularjs.org/latest/layout/children">using flex-order responsively</a>.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowFlexOrder"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important; height:50px !important; overflow:auto !important;   "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci177000'
+aria-label="rowFlexOrder"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+<md-button aria-label="buttonFO2"
+can-be-moved=true
+class="md-raised md-accent" flex-order="2"
+style="    "
+    id='ci177002'
+aria-label="buttonFO2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex-order = 2"
+>
+    flex-order = 2
+</md-button>
+<md-button aria-label="buttonFOminus1"
+can-be-moved=true
+class="md-raised md-accent" flex-order="-1"
+style="width:25% !important;    "
+    id='ci177001'
+aria-label="buttonFOminus1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex-order = -1"
+>
+    flex-order = -1
+</md-button>
+<md-button aria-label="buttonFO1"
+can-be-moved=true
+class="md-raised md-accent" flex-order="1"
+style="width:10% !important;    "
+    id='ci177003'
+aria-label="buttonFO1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex-order = 1"
+>
+    flex-order = 1
+</md-button>
+<md-button aria-label="buttonFO0"
+can-be-moved=true
+class="md-raised md-accent" flex-order="0"
+style="width:25% !important;    "
+    id='ci177004'
+aria-label="buttonFO0"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex-order = 0"
+>
+    flex-order = 0
+</md-button>
+</div>
+    <span aria-label="headFlexOffset"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154917'
+aria-label="headFlexOffset"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Flex Offset</span>
+</span>
+    <span aria-label="commentFlexOffset"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154916'
+aria-label="commentFlexOffset"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Use flex-offset to adjust the left-margin offset percentage of the item with respect to the preceding item or the parent item's boundary.<br>Since the <i>margin</i> field in the Item table (pef_item) determines the default margin of items, flex-offset is only useful in responsive or dynamic contexts.<br>Values are percentages, and must be multiples of 5, or 33 / 66.<br>Use the following link for more information about <a target="_blank" href="https://material.angularjs.org/latest/layout/children">using flex-offset responsively</a>.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowFlexOffset"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important; height:60px !important; overflow:auto !important;   "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154913'
+aria-label="rowFlexOffset"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+<md-button aria-label="buttonFO20"
+can-be-moved=true
+class="md-raised md-warn" flex-offset="20"
+style="    "
+    id='ci154914'
+aria-label="buttonFO20"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex-offset = 20"
+>
+    flex-offset = 20
+</md-button>
+<md-button aria-label="button8"
+can-be-moved=true
+class="md-raised md-warn"
+style="    "
+    id='ci154915'
+aria-label="button8"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="flex"
+>
+    flex
+</md-button>
+</div>
+    <span aria-label="headLayoutAlign"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154911'
+aria-label="headLayoutAlign"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Layout Align</span>
+</span>
+    <span aria-label="commentLayoutAlign"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154904'
+aria-label="commentLayoutAlign"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The layout-align config works together with the layout type (row or column) to position items within the parent.<br>It makes use of two words. The first word (none,start(default),center,end,space-around,space-between) positions the items with respect to the layout direction (either horizontally for row, or vertically for column) of the parent layout component.<br>The second word (none, start,center,stretch(default),end) positions items with respect to the perpendicular axle of the layout direction.
+<br><br>Below is a layoutRow component (with a border around it for clarification) using layout-align="start start, with a responsive directive layout-align-gt-sm=""end stretch".<br>Note that fields do not stretch, but components like buttons, subcontainers and divs do.<br>
+<b>A clear illustration of the power of layout-align is provided <a href="">here</a></b>
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowLayoutAlign"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-align="start start" layout-align-gt-sm="end stretch"
+style="width:100% !important; height:200px !important; overflow:auto !important;   border : 2px solid blue"
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci154883'
+aria-label="rowLayoutAlign"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+    <md-input-container aria-label="textfield2"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:170px !important;    "
+>
+    <input type="text" 
+        name="textfield2"
+        ng-model="model.textfield2"
+        aria-label="Text1"
+        id='ci154884'
+aria-label="textfield2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text1</label>
+    <div ng-messages="dibexLayout.textfield2.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="textfield11"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="width:220px !important;    "
+>
+    <input type="text" 
+        name="textfield11"
+        ng-model="model.textfield11"
+        aria-label="Text2"
+        id='ci154885'
+aria-label="textfield11"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text2</label>
+    <div ng-messages="dibexLayout.textfield11.$error">
+    </div>
+</md-input-container>
+    <div layout='row' aria-label="dropdownlist1"
+can-be-moved=true
+flex="none"
+style="width:200px !important;    "
+ >
+
+<md-input-container flex>
+    <label>Dropdownlist</label>    
+    <md-select   
+        dib-data-component='enum'
+        aria-label="dropdownlist1"
+        dib-onload-service
+        placeholder="Dropdownlist"
+        aria-label="dropdownlist1"
+        md-on-close="select154886(model)"
+        flex
+        ng-model="model.dropdownlist1"
+        name='dropdownlist1'
+        id='ci154886'
+aria-label="dropdownlist1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        <md-option ng-repeat="state in ['a','b','c']" value="{{state}}"  >
+            {{state}}
+        </md-option>
+    </md-select>
+    <div ng-messages="dibexLayout.dropdownlist1.$error" ng-if="dibexLayout.dropdownlist1.$touched">
+    </div>
+</md-input-container>
+</div>
+<md-button aria-label="mdbutton"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci177005'
+aria-label="mdbutton"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="my button"
+>
+    my button
+</md-button>
+</div>
+    <span aria-label="headLayoutMargin"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177011'
+aria-label="headLayoutMargin"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Layout Margin</span>
+</span>
+    <span aria-label="commentLayoutMargin"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci154912'
+aria-label="commentLayoutMargin"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The layout-margin adds a margin around each child item, as well as the layout component it is configured on. Note the space surrounding the blue boxes.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowLayoutMargin"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-margin
+style="width:100% !important; height:50px !important; overflow:auto !important;   border : 4px solid red"
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci177006'
+aria-label="rowLayoutMargin"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+    <span aria-label="spanLM1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177008'
+aria-label="spanLM1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanLM2"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177007'
+aria-label="spanLM2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanLM3"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177009'
+aria-label="spanLM3"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanLM34"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="width:200px !important;    border : 3px solid blue"
+    id='ci177043'
+aria-label="spanLM34"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    width = 200px with no flex
+</span>
+</div>
+    <span aria-label="headLayoutPadding"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177017'
+aria-label="headLayoutPadding"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Layout Padding</span>
+</span>
+    <span aria-label="commentLayoutPadding"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177018'
+aria-label="commentLayoutPadding"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The layout-padding adds padding to each child, as well as the layout component it is configured on. Note the space surrounding the words inside the blue boxes.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowLayoutPadding"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-padding
+style="width:100% !important; height:50px !important; overflow:auto !important;   border : 4px solid red"
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci177013'
+aria-label="rowLayoutPadding"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+    <span aria-label="spanP1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177045'
+aria-label="spanP1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanP2"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177046'
+aria-label="spanP2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanP3"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177047'
+aria-label="spanP3"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanP4"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="width:200px !important;    border : 3px solid blue"
+    id='ci177044'
+aria-label="spanP4"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    width = 200px with no flex
+</span>
+</div>
+    <span aria-label="headLayoutFill"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177023'
+aria-label="headLayoutFill"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Layout Fill</span>
+</span>
+    <span aria-label="commentLayoutFill"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177024'
+aria-label="commentLayoutFill"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Layout-fill is configured on the child item, and forces it to fill its parent.<br>
+Note: The child item should be the only child item of its parent.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowLayoutFill"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important; height:100px !important; overflow:auto !important;   border : 4px solid red"
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci177019'
+aria-label="rowLayoutFill"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+    <span aria-label="spanF1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+layout-fill
+style="    border : 3px solid blue"
+    id='ci177051'
+aria-label="spanF1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    layout-fill with no flex
+</span>
+</div>
+    <span aria-label="headLayoutWrap"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177029'
+aria-label="headLayoutWrap"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Layout Wrap</span>
+</span>
+    <span aria-label="commentLayoutWrap"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177030'
+aria-label="commentLayoutWrap"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Layout-wrap allows child items to wrap within the parent component it is configured on, when the items use more than 100% of available space. 
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowLayoutWrap"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-wrap
+style="width:100% !important; height:50px !important; overflow:auto !important;   border : 4px solid red"
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci177025'
+aria-label="rowLayoutWrap"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+    <span aria-label="spanW1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177053'
+aria-label="spanW1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanW2"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177054'
+aria-label="spanW2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanW3"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="33"
+style="    border : 3px solid blue"
+    id='ci177055'
+aria-label="spanW3"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    flex = 33
+</span>
+    <span aria-label="spanW4"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="width:200px !important;    border : 3px solid blue"
+    id='ci177052'
+aria-label="spanW4"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    width = 200px with no flex
+</span>
+</div>
+    <span aria-label="headShowHideResp"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177065'
+aria-label="headShowHideResp"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Show &amp; Hide Responsively</span>
+</span>
+    <span aria-label="commentShowHideResp"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177066'
+aria-label="commentShowHideResp"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The <i>ng-show</i> and <i>ng-hide</i> directives can be used to responsively show and hide items.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowShowHideResp"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-wrap
+style="width:100% !important; height:80px !important; overflow:auto !important;   border : 4px solid red"
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=176951'    
+    id='ci177060'
+aria-label="rowShowHideResp"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+    <span aria-label="spanSH1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="25"
+hide show-gt-sm
+style="    border : 3px solid blue"
+    id='ci177062'
+aria-label="spanSH1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Only show on gt-sm devices.
+</span>
+    <span aria-label="spanW21"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="25"
+hide-gt-sm
+style="    border : 3px solid blue"
+    id='ci177063'
+aria-label="spanW21"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Shown on small and medium.<br>
+Hidden on gt-sm devices.
+</span>
+    <span aria-label="spanW31"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="25"
+show hide-gt-md
+style="    border : 3px solid blue"
+    id='ci177064'
+aria-label="spanW31"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Shown on small and medium size devices.<br>
+Hidden on gt-md devices.
+</span>
+    <span aria-label="spanW41"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="25"
+hide show-gt-md
+style="    border : 3px solid blue"
+    id='ci177061'
+aria-label="spanW41"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Shown on devices larger than 1200px wide only.
+</span>
+</div>
+    <span aria-label="span"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style=" height:100px !important; overflow:auto !important;   "
+    id='ci177056'
+aria-label="span"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</span>
+</div>
+        </md-tab-body>
+    </md-tab>
+</md-tabs>
 </div>

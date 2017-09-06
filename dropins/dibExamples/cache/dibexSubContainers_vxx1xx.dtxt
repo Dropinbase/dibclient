@@ -3,12 +3,12 @@
 	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
 	</md-progress-linear>
 	<div dib-inject-content="replace" layout='column' aria-label="layoutcolumn" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:10px !important; " id='ci180021' aria-label="layoutcolumn" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
-		<span aria-label="headQuickFacts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci180017' aria-label="headQuickFacts" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="headQuickFacts" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci180017' aria-label="headQuickFacts" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<span style="font-size:20px">
 				Quick Facts
 			</span>
 		</span>
-		<span aria-label="commentQuickFacts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci180016' aria-label="commentQuickFacts" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentQuickFacts" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci180016' aria-label="commentQuickFacts" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Containers can be embedded in one another to any level of nesting, using subcontainers.
 				<br>
@@ -21,7 +21,7 @@
 				field is unticked). 
 			</p>
 		</span>
-		<span aria-label="comment3" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155374' aria-label="comment3" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="comment3" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155374' aria-label="comment3" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Whenever an item or container has a Filter, DIB automatically adds an activeFilter parameter named after the container or item to the relevant read request (url).
 				<br>
@@ -30,12 +30,12 @@
 				The filter's SQL criteria must be compatible with the container's underlying SQL (which can be viewed on the Configuration-tab of the Designer using the View SQL tick). 
 			</p>
 		</span>
-		<span aria-label="headSubmissionData" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155383' aria-label="headSubmissionData" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="headSubmissionData" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155383' aria-label="headSubmissionData" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<span style="font-size:20px">
 				Submission Data
 			</span>
 		</span>
-		<span aria-label="commentSubmissionData" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci182603' aria-label="commentSubmissionData" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentSubmissionData" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci182603' aria-label="commentSubmissionData" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Data from the client is submitted to the server in the post data of most requests, using an array named 
 				<b>
@@ -104,7 +104,7 @@
 				This is also the standard way of referencing submission data in filters (see below). 
 			</p>
 		</span>
-		<span aria-label="commentBtnSubmitData" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci182604' aria-label="commentBtnSubmitData" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentBtnSubmitData" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci182604' aria-label="commentBtnSubmitData" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				The button below will submit the following Submission Data:
 				<br>
@@ -122,7 +122,7 @@
 				Experiment by selecting different records in the grid, and navigating between records in the 'self' and 'subConsult' forms. 
 			</p>
 		</span>
-		<md-button aria-label="btnSubmissionData" can-be-moved=true class="md-raised md-primary" style="width:300px !important;    " id='ci182601' aria-label="btnSubmissionData" dib-container-name='dibexSubContainers' dib-config="{ submitCheckedItem : 'subCompanyConsultGrid,testCompanySqlRptGrid', submitFormData : 'subConsultForm', listeners : { 'click___dib*2z01exj0k6' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexSubContainers', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*2z01exj0k6',         containerItemId: 182601, submitUrl: '/dropins/dibExamples/SubContainer/testSubmissionData',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Print Submission Data" >
+		<md-button aria-label="btnSubmissionData" can-be-moved=true class="md-raised md-primary" style="width:300px !important;    " id='ci182601' aria-label="btnSubmissionData" dib-container-name='dibexSubContainers' dib-config="{ submitCheckedItem : 'subCompanyConsultGrid,testCompanySqlRptGrid', submitFormData : 'subConsultForm', listeners : { 'click___dib*137hb517gx' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexSubContainers', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*137hb517gx',         containerItemId: 182601, submitUrl: '/dropins/dibExamples/SubContainer/testSubmissionData',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Print Submission Data" >
 			Print Submission Data 
 		</md-button>
 		<md-input-container aria-label="dibIgnore_SubmitData" can-be-moved=true item-alias="dibIgnore_SubmitData"    ng-show="!!view.dibIgnore_SubmitData == false || view.dibIgnore_SubmitData.visible"  dib-disable="{{view.dibIgnore_SubmitData.disabled}}" ng-class="view.dibIgnore_SubmitData.class"  ng-style="view.dibIgnore_SubmitData.style" flex="none" class="md-block" style="width:100% !important;  margin:10px 0px 20px 0px !important;  " >
@@ -131,12 +131,12 @@
 			<div ng-messages="dibexSubContainers.dibIgnore_SubmitData.$error">
 			</div>
 		</md-input-container>
-		<span aria-label="headSimpleFilter" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci182600' aria-label="headSimpleFilter" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="headSimpleFilter" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci182600' aria-label="headSimpleFilter" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<span style="font-size:20px">
 				Simple Filter
 			</span>
 		</span>
-		<span aria-label="commentSimpleFilter" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155371' aria-label="commentSimpleFilter" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentSimpleFilter" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155371' aria-label="commentSimpleFilter" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Scroll through the company records using the navigation buttons below and notice how the grid only displays Consultants contracted by the current company.
 				<br>
@@ -147,8 +147,8 @@
 				</b>
 			</p>
 		</span>
-		<div dib-inject-content="replace" layout="row"  aria-label="layoutrowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none layout-xs='column' style="    " id='ci155363' aria-label="layoutrowToolbar" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
-			<md-toolbar aria-label="toolbar" can-be-moved=true can-have-children=true flex=none style="    " id='ci155364' aria-label="toolbar" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<div dib-inject-content="replace" layout="row"  aria-label="layoutrowToolbar" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex="none" layout-xs='column' style="    " id='ci155363' aria-label="layoutrowToolbar" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+			<md-toolbar aria-label="toolbar" can-be-moved=true can-have-children=true flex="none" style="    " id='ci155364' aria-label="toolbar" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 				<div class="md-toolbar-tools">
 					<md-button aria-label="btnsave" can-be-moved=true class=" md-raised" style="    " ng-click="saveModel({redirect : true}, $event)" id='ci155365' aria-label="btnsave" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" aria-label="Save" >
 						<md-tooltip md-direction="top" md-delay="500">
@@ -166,7 +166,7 @@
 						</md-icon>
 						Refresh 
 					</md-button>
-					<dib-form-paging aria-label="buttonsformnavigation" can-be-moved=true flex=none style="    " id='ci155369' aria-label="buttonsformnavigation" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" data-container-name="dibexSubContainers" >
+					<dib-form-paging aria-label="buttonsformnavigation" can-be-moved=true flex="none" style="    " id='ci155369' aria-label="buttonsformnavigation" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" data-container-name="dibexSubContainers" >
 					</dib-form-paging >
 				</div>
 			</md-toolbar>
@@ -181,7 +181,7 @@
 							</b>
 						</i>
 					</md-subheader>
-					<md-input-container aria-label="id" can-be-moved=true item-alias="id"    ng-show="!!view.id == false || view.id.visible"  dib-disable="{{view.id.disabled}}" ng-class="view.id.class"  ng-style="view.id.style" flex=none class="md-block" style="    " dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+					<md-input-container aria-label="id" can-be-moved=true item-alias="id"    ng-show="!!view.id == false || view.id.visible"  dib-disable="{{view.id.disabled}}" ng-class="view.id.class"  ng-style="view.id.style" flex="none" class="md-block" style="    " dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
 						<input type="number"  ng-disabled="true" name="id" ng-model="model.id" aria-label="Id" id='ci155361' aria-label="id" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" dib-data-component='inputNumber' md-detect-hidden >
 						<label>
 							Id
@@ -189,7 +189,7 @@
 						<div ng-messages="dibexSubContainers.id.$error">
 						</div>
 					</md-input-container>
-					<md-input-container aria-label="name" can-be-moved=true flex=none class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+					<md-input-container aria-label="name" can-be-moved=true flex="none" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
 						<input type="text"  name="name" ng-model="model.name" aria-label="Name" id='ci155362' aria-label="name" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
 						<label>
 							Name
@@ -200,7 +200,7 @@
 				</section>
 			</md-card-content>
 		</md-card>
-		<span aria-label="commentBtnGridSubmitData1" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci182608' aria-label="commentBtnGridSubmitData1" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentBtnGridSubmitData1" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci182608' aria-label="commentBtnGridSubmitData1" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Note, the button in the grid below will print the following Submission Data:
 				<br>
@@ -217,7 +217,7 @@
 				submitFormData : 'parent.subConsultForm' 
 			</p>
 		</span>
-		<span aria-label="labelSubCompanyConsultGrid" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci198220' aria-label="labelSubCompanyConsultGrid" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="labelSubCompanyConsultGrid" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci198220' aria-label="labelSubCompanyConsultGrid" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<b>
 				<i>
 					subCompanyConsultGrid (dibtestCompanyConsultantGrid)
@@ -228,12 +228,12 @@
 			<dibtest-company-consultant-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
 			</dibtest-company-consultant-grid>
 		</div>
-		<span aria-label="headLinkedForm" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155384' aria-label="headLinkedForm" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+		<span aria-label="headLinkedForm" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155384' aria-label="headLinkedForm" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
 			<span style="font-size:20px">
 				Linked Form
 			</span>
 		</span>
-		<span aria-label="commentLinkedForm" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155373' aria-label="commentLinkedForm" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentLinkedForm" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155373' aria-label="commentLinkedForm" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Click on the records in the grid above and notice how the form below updates.
 				<br>
@@ -262,7 +262,7 @@
 				causing the form to refresh its data whenever a record in the child container above is clicked. 
 			</p>
 		</span>
-		<span aria-label="labelSubConsultForm" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci198219' aria-label="labelSubConsultForm" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="labelSubConsultForm" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci198219' aria-label="labelSubConsultForm" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<b>
 				<i>
 					SubConsultForm (dibtestConsultantForm)
@@ -273,12 +273,12 @@
 			<dibtest-consultant-form dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
 			</dibtest-consultant-form>
 		</div>
-		<span aria-label="headDependentDropdowns" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155385' aria-label="headDependentDropdowns" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+		<span aria-label="headDependentDropdowns" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155385' aria-label="headDependentDropdowns" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
 			<span style="font-size:20px">
 				Dependent Dropdowns
 			</span>
 		</span>
-		<span aria-label="commentDependentDropdowns" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155377' aria-label="commentDependentDropdowns" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentDependentDropdowns" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155377' aria-label="commentDependentDropdowns" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Filters can be added to any component or container that returns data.
 				<br>
@@ -295,8 +295,8 @@
 				causing the second dropdown to refresh its data whenever a record in the first is selected. 
 			</p>
 		</span>
-		<div layout='row' aria-label="parentCompanyId" can-be-moved=true item-alias="parentCompanyId"    ng-show="!!view.parentCompanyId == false || view.parentCompanyId.visible"  dib-disable="{{view.parentCompanyId.disabled}}" ng-class="view.parentCompanyId.class"  ng-style="view.parentCompanyId.style" flex=none style="width:350px !important;    " dib-help='&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Head Office or Parent Company&lt;/span&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
-			<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='parent_company_id' select-model="model.selected___parent_company_id.id" md-search-text-change="dropdowns.service155376.searchTextChange(dropdowns.service155376.searchText)" md-search-text="dropdowns.service155376.searchText" md-selected-item="model.selected___parent_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155376.getItems(dropdowns.service155376.searchText,'model')" md-floating-label="parentCompanyId" md-no-cache="true" md-selected-item-change="select155376(model,'model','parent_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="parentCompanyId" id='ci155376' aria-label="parentCompanyId" dib-container-name='dibexSubContainers' dib-config="{ listeners : { 'select___dib*vn*s@3p7v' : function(field, additionalInfoOnEvent) {  element.trigger('enableDependency', ['select' , 'parentCompanyContactId' , additionalInfoOnEvent]);     }  } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+		<div layout='row' aria-label="parentCompanyId" can-be-moved=true item-alias="parentCompanyId"    ng-show="!!view.parentCompanyId == false || view.parentCompanyId.visible"  dib-disable="{{view.parentCompanyId.disabled}}" ng-class="view.parentCompanyId.class"  ng-style="view.parentCompanyId.style" flex="none" style="width:350px !important;    " dib-help='&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Head Office or Parent Company&lt;/span&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+			<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='parent_company_id' select-model="model.selected___parent_company_id.id" md-search-text-change="loadServiceciid(dropdowns.service155376.searchTextmodel)" md-search-text="dropdowns.service155376.searchTextmodel" md-selected-item="model.selected___parent_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155376.getItems(dropdowns.service155376.searchTextmodel,'model')" md-floating-label="parentCompanyId" md-no-cache="true" md-selected-item-change="select155376(model,'model','parent_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="parentCompanyId" id='ci155376' aria-label="parentCompanyId" dib-container-name='dibexSubContainers' dib-config="{ listeners : { 'select___dib*vg4pbobp9' : function(field, additionalInfoOnEvent) {  element.trigger('enableDependency', ['select' , 'parentCompanyContactId' , additionalInfoOnEvent]);     }  } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
 				<md-item-template>
 					<span md-highlight-text="dropdowns.service155376.searchText">
 						{{item.id_display_value}}
@@ -309,8 +309,8 @@
 				</div>
 			</md-autocomplete>
 		</div>
-		<div layout='row' aria-label="parentCompanyContactId" can-be-moved=true item-alias="parentCompanyContactId"    ng-show="!!view.parentCompanyContactId == false || view.parentCompanyContactId.visible"  dib-disable="{{view.parentCompanyContactId.disabled}}" ng-class="view.parentCompanyContactId.class"  ng-style="view.parentCompanyContactId.style" flex=none style="width:350px !important;    " dib-help='&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Contact person at the Head Office or Parent Company&lt;/span&gt;&lt;br&gt;&lt;/div&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
-			<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='parent_company_contact_id' select-model="model.selected___parent_company_contact_id.id" md-search-text-change="dropdowns.service155375.searchTextChange(dropdowns.service155375.searchText)" md-search-text="dropdowns.service155375.searchText" md-selected-item="model.selected___parent_company_contact_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155375.getItems(dropdowns.service155375.searchText,'model')" md-floating-label="parentCompanyContactId" md-no-cache="true" md-selected-item-change="select155375(model,'model','parent_company_contact_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="parentCompanyContactId" dib-active-filter='dibexSubContainers_parentCompanyContactId' dib-container-filter-settings="{ 'dibexSubContainers_parentCompanyContactId' : 'submitItemAlias_self_parentCompanyId'}" id='ci155375' aria-label="parentCompanyContactId" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+		<div layout='row' aria-label="parentCompanyContactId" can-be-moved=true item-alias="parentCompanyContactId"    ng-show="!!view.parentCompanyContactId == false || view.parentCompanyContactId.visible"  dib-disable="{{view.parentCompanyContactId.disabled}}" ng-class="view.parentCompanyContactId.class"  ng-style="view.parentCompanyContactId.style" flex="none" style="width:350px !important;    " dib-help='&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Contact person at the Head Office or Parent Company&lt;/span&gt;&lt;br&gt;&lt;/div&gt; ' dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company' >
+			<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='parent_company_contact_id' select-model="model.selected___parent_company_contact_id.id" md-search-text-change="loadServiceciid(dropdowns.service155375.searchTextmodel)" md-search-text="dropdowns.service155375.searchTextmodel" md-selected-item="model.selected___parent_company_contact_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155375.getItems(dropdowns.service155375.searchTextmodel,'model')" md-floating-label="parentCompanyContactId" md-no-cache="true" md-selected-item-change="select155375(model,'model','parent_company_contact_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="parentCompanyContactId" dib-active-filter='dibexSubContainers_parentCompanyContactId' dib-container-filter-settings="{ 'dibexSubContainers_parentCompanyContactId' : 'submitItemAlias_self_parentCompanyId'}" id='ci155375' aria-label="parentCompanyContactId" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
 				<md-item-template>
 					<span md-highlight-text="dropdowns.service155375.searchText">
 						{{item.id_display_value}}
@@ -323,12 +323,12 @@
 				</div>
 			</md-autocomplete>
 		</div>
-		<span aria-label="headSqlGrids" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155386' aria-label="headSqlGrids" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+		<span aria-label="headSqlGrids" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155386' aria-label="headSqlGrids" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
 			<span style="font-size:20px">
 				Sql Grids
 			</span>
 		</span>
-		<span aria-label="commentSqlGrids" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155380' aria-label="commentSqlGrids" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentSqlGrids" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155380' aria-label="commentSqlGrids" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				The filter for grids based on Sql statements must be compatible with the underlying sql.
 				<br>
@@ -344,7 +344,7 @@
 				Choose any parent company (Head Office) record above. 
 			</p>
 		</span>
-		<span aria-label="labeltestCompanySqlRptGrid" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci198221' aria-label="labeltestCompanySqlRptGrid" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="labeltestCompanySqlRptGrid" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci198221' aria-label="labeltestCompanySqlRptGrid" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<b>
 				<i>
 					testCompanySqlRptGrid (dibtestCompanySqlRptGrid)
@@ -355,12 +355,12 @@
 			<dibtest-company-sql-rpt-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
 			</dibtest-company-sql-rpt-grid>
 		</div>
-		<span aria-label="headGoogleMaps" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155387' aria-label="headGoogleMaps" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+		<span aria-label="headGoogleMaps" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155387' aria-label="headGoogleMaps" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
 			<span style="font-size:20px">
 				Google Maps
 			</span>
 		</span>
-		<span aria-label="commentGoogleMaps" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155379' aria-label="commentGoogleMaps" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentGoogleMaps" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155379' aria-label="commentGoogleMaps" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Below is an example of how Google maps can be filtered to display only the selected Parent Company's employees
 				<br>
@@ -374,12 +374,12 @@
 		<span aria-label="subTestGoogleMap" can-be-moved=true item-alias="subTestGoogleMap"    ng-show="!!view.subTestGoogleMap == false || view.subTestGoogleMap.visible"  dib-disable="{{view.subTestGoogleMap.disabled}}" ng-class="view.subTestGoogleMap.class"  ng-style="view.subTestGoogleMap.style" on-move-refresh-preview=true flex style="width:100% !important; height:350px !important; overflow:auto !important;   " id='ci155378' aria-label="subTestGoogleMap" dib-container-name='dibexSubContainers' dib-active-filter='dibexSubContainers_subTestGoogleMap' dib-container-filter-settings="{ 'dibexSubContainers_subTestGoogleMap' : 'submitItemAlias_parent_parentCompanyId'}" dib-config="{ listeners : { } }" >
 			... google maps coming soon...  
 		</span>
-		<span aria-label="headContainerFilters" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155389' aria-label="headContainerFilters" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+		<span aria-label="headContainerFilters" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155389' aria-label="headContainerFilters" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
 			<span style="font-size:20px">
 				Container Filters
 			</span>
 		</span>
-		<span aria-label="commentContainerFilters" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155388' aria-label="commentContainerFilters" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentContainerFilters" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155388' aria-label="commentContainerFilters" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Filters can also be added directly to containers instead of the subcontainer components that host them.
 				<br>
@@ -399,12 +399,12 @@
 		<md-button aria-label="buttonContainerFilters" can-be-moved=true class="md-accent md-raised" style="width:300px !important;    " id='ci155390' aria-label="buttonContainerFilters" dib-container-name='dibexSubContainers' ng-click="dibCommon.goTo('dibtestCompanyConsultantPopup','',true,'','',$event);" dib-config="{ listeners : { } }" aria-label="Consultants working at Company" >
 			Consultants working at Company 
 		</md-button>
-		<span aria-label="headContainerSubFilters" can-be-moved=true on-move-refresh-preview=true flex=none style="  margin:10px 0px 0px 0px !important;  " id='ci155392' aria-label="headContainerSubFilters" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+		<span aria-label="headContainerSubFilters" can-be-moved=true on-move-refresh-preview=true flex="none" style="  margin:10px 0px 0px 0px !important;  " id='ci155392' aria-label="headContainerSubFilters" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
 			<span style="font-size:20px">
 				Container &amp; Subcontainer Filters
 			</span>
 		</span>
-		<span aria-label="commentContainerSubFilters" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155391' aria-label="commentContainerSubFilters" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentContainerSubFilters" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci155391' aria-label="commentContainerSubFilters" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				When both the container and the subcontainer component have filters, then the combination of the filter criteria (joined with AND) is applied.
 				<br>
@@ -419,7 +419,7 @@
 				Also note that the same container ('dibtestCompanyConsultantPopup') is reused and functions independently whether it also open as a popup or not. 
 			</p>
 		</span>
-		<span aria-label="labeldibtestCompanyConsultantPopup" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci198222' aria-label="labeldibtestCompanyConsultantPopup" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="labeldibtestCompanyConsultantPopup" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci198222' aria-label="labeldibtestCompanyConsultantPopup" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<b>
 				<i>
 					dibtestCompanyConsultantPopup (dibtestCompanyConsultantPopup)
@@ -430,12 +430,12 @@
 			<dibtest-company-consultant-popup dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
 			</dibtest-company-consultant-popup>
 		</div>
-		<span aria-label="headContainerSubFilters1" can-be-moved=true on-move-refresh-preview=true flex=none style="  margin:10px 0px 0px 0px !important;  " id='ci198613' aria-label="headContainerSubFilters1" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
+		<span aria-label="headContainerSubFilters1" can-be-moved=true on-move-refresh-preview=true flex="none" style="  margin:10px 0px 0px 0px !important;  " id='ci198613' aria-label="headContainerSubFilters1" dib-container-name='dibexSubContainers' dib-config="{ margins : '20 0 0 5', listeners : { } }" >
 			<span style="font-size:20px">
 				Port Filters
 			</span>
 		</span>
-		<span aria-label="commentContainerSubFilters1" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci198612' aria-label="commentContainerSubFilters1" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
+		<span aria-label="commentContainerSubFilters1" can-be-moved=true on-move-refresh-preview=true flex="none" style="    " id='ci198612' aria-label="commentContainerSubFilters1" dib-container-name='dibexSubContainers' dib-config="{ listeners : { } }" >
 			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
 				Filters can also be applied to Port Items. The container that is loaded into the target port will be filtered accordingly. 
 				<br>

@@ -1,60 +1,280 @@
- 
-<div component-loaded dib-container=dibexPhp dib-container-name="8062" dib-config="{ }" layout-fill flex>
-	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
-	</md-progress-linear>
-	<div dib-inject-content="replace" layout='column' aria-label="layoutcolumn" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:15px !important; " id='ci177071' aria-label="layoutcolumn" dib-container-name='dibexPhp' dib-config="{ listeners : { } }" >
-		<span aria-label="commentLoadingClasses" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci177074' aria-label="commentLoadingClasses" dib-container-name='dibexPhp' dib-config="{ listeners : { } }" >
-			<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-				Dropinbase provides a core library of functions that are commonly used in database systems and general applications. It is also easy to add your own favorite PHP modules via 'dropins'.
-				<br>
-				The buttons below call functions in the /dropinbase/dropins/dibExamples/PhpController.php class. The class contains extensive comments explaining the use of functions. 
-			</p>
-		</span>
-		<md-button aria-label="buttonLoadClasses" can-be-moved=true flex=none class="md-raised md-primary" style="    " id='ci177075' aria-label="buttonLoadClasses" dib-container-name='dibexPhp' dib-config="{ listeners : { 'click___dib*jb*4r31xa@' : function(field, additionalInfoOnEvent) {  actionService.executeAction({ scope : scope, field : element, containerName: 'dibexPhp', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*jb*4r31xa@',         containerItemId: 177075, submitUrl: '/dropins/dibExamples/Php/loadClasses',         itemAlias: '', refreshItemId : '', responseType: '1000' } , additionalInfoOnEvent); }  } }" aria-label="Load Classes" >
-			Load Classes 
-		</md-button>
-		<md-button aria-label="buttonDatabaseFunctions" can-be-moved=true flex=none class="md-raised md-primary" style="    " id='ci177079' aria-label="buttonDatabaseFunctions" dib-container-name='dibexPhp' dib-config="{ listeners : { 'click___dib*sra1y6xb21' : function(field, additionalInfoOnEvent) {  actionService.executeAction({ scope : scope, field : element, containerName: 'dibexPhp', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*sra1y6xb21',         containerItemId: 177079, submitUrl: '/dropins/dibExamples/Php/databaseFunctions',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Database Functions" >
-			Database Functions 
-		</md-button>
-		<md-button aria-label="buttonCrudFunctions" can-be-moved=true flex=none class="md-raised md-primary" style="    " id='ci177078' aria-label="buttonCrudFunctions" dib-container-name='dibexPhp' dib-config="{ listeners : { 'click___dib*xqj5mvg3k' : function(field, additionalInfoOnEvent) {  actionService.executeAction({ scope : scope, field : element, containerName: 'dibexPhp', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*xqj5mvg3k',         containerItemId: 177078, submitUrl: '/dropins/dibExamples/Php/crudFunctions',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Crud Functions" >
-			Crud Functions 
-		</md-button>
-		<md-input-container aria-label="sendText" can-be-moved=true item-alias="sendText"    ng-show="!!view.sendText == false || view.sendText.visible"  dib-disable="{{view.sendText.disabled}}" ng-class="view.sendText.class"  ng-style="view.sendText.style" flex=none class="md-block" style="  margin:40px !important;  " >
-			<textarea   maxlength='400' name="sendText" ng-model="model.sendText" aria-label="
-				<h3>
-					Provide some text... 
-				</h3>
-				" id='ci177082' aria-label="sendText" dib-container-name='dibexPhp' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
-			</textarea>
-			<label>
-				<h3>
-					Provide some text... 
-				</h3>
-			</label>
-			<div ng-messages="dibexPhp.sendText.$error">
-				<div ng-message="maxlength">
-					At most 400 characters are allowed.
-				</div>
-			</div>
-		</md-input-container>
-		<md-button aria-label="buttonGetFile" can-be-moved=true flex=none class="md-raised md-primary" style="    " id='ci177081' aria-label="buttonGetFile" dib-container-name='dibexPhp' dib-config="{ listeners : { 'click___dib*976al2s3o' : function(field, additionalInfoOnEvent) {  actionService.executeAction({ scope : scope, field : element, containerName: 'dibexPhp', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*976al2s3o',         containerItemId: 177081, submitUrl: '/dropins/dibExamples/Php/sendFile',         itemAlias: '', refreshItemId : '', responseType: 'redirect' } , additionalInfoOnEvent); }  } }" aria-label="Get File" >
-			Get File 
-		</md-button>
-		<md-input-container aria-label="msg" can-be-moved=true item-alias="msg"    ng-show="!!view.msg == false || view.msg.visible"  dib-disable="{{view.msg.disabled}}" ng-class="view.msg.class"  ng-style="view.msg.style" flex=none class="md-block" style="    " >
-			<textarea   name="msg" ng-model="model.msg" aria-label="Message for Async Test" id='ci177083' aria-label="msg" dib-container-name='dibexPhp' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
-			</textarea>
-			<label>
-				Message for Async Test
-			</label>
-			<div ng-messages="dibexPhp.msg.$error">
-			</div>
-		</md-input-container>
-		<md-button aria-label="buttonAsyncExecution" can-be-moved=true flex=none class="md-raised md-primary" style="    " id='ci177077' aria-label="buttonAsyncExecution" dib-container-name='dibexPhp' dib-config="{ listeners : { 'click___dib*eg3cy8z*s' : function(field, additionalInfoOnEvent) {  actionService.executeAction({ scope : scope, field : element, containerName: 'dibexPhp', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*eg3cy8z*s',         containerItemId: 177077, submitUrl: '/dropins/dibExamples/Php/asyncExecution',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Asynchronous Execution" >
-			Asynchronous Execution 
-		</md-button>
-		<div layout-fill flex aria-label="dibTestCompanyAsyncGrid" can-be-moved=true flex style=" height:450px !important; overflow:auto !important;   " id='ci177117' aria-label="dibTestCompanyAsyncGrid" dib-container-name='dibexPhp' dib-config="{ listeners : { } }" >
-			<dib-test-company-async-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         fill-height-for-child >
-			</dib-test-company-async-grid>
-		</div>
-	</div>
+
+<div
+component-loaded
+dib-container=dibexPhp dib-container-name="8062" dib-config="{
+}" layout-fill flex>
+    <md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+<div dib-inject-content="replace" layout='column'
+    aria-label="layoutcolumn"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="   padding:15px !important; "
+    id='ci177071'
+aria-label="layoutcolumn"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span aria-label="commentLoadingClasses"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci177074'
+aria-label="commentLoadingClasses"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Dropinbase provides a core library of functions that are commonly used in database systems and general applications. It is also easy to add your own favorite PHP modules via 'dropins'.<br>
+The buttons below call functions in the /dropinbase/dropins/dibExamples/PhpController.php class. The class contains extensive comments explaining the use of functions.
+    </p>    
+</span>
+<md-button aria-label="buttonLoadClasses"
+can-be-moved=true
+class="md-raised md-primary"
+style="    "
+    id='ci177075'
+aria-label="buttonLoadClasses"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    'click___dib*dnqnx212ue' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexPhp',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*dnqnx212ue',        
+        containerItemId: 177075,
+        submitUrl: '/dropins/dibExamples/Php/loadClasses',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: '1000'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load Classes"
+>
+    Load Classes
+</md-button>
+<md-button aria-label="buttonDatabaseFunctions"
+can-be-moved=true
+class="md-raised md-primary"
+style="    "
+    id='ci177079'
+aria-label="buttonDatabaseFunctions"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    'click___dib*as7sp11cld' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexPhp',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*as7sp11cld',        
+        containerItemId: 177079,
+        submitUrl: '/dropins/dibExamples/Php/databaseFunctions',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Database Functions"
+>
+    Database Functions
+</md-button>
+<md-button aria-label="buttonCrudFunctions"
+can-be-moved=true
+class="md-raised md-primary"
+style="    "
+    id='ci177078'
+aria-label="buttonCrudFunctions"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    'click___dib*tnd1dxokgz' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexPhp',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*tnd1dxokgz',        
+        containerItemId: 177078,
+        submitUrl: '/dropins/dibExamples/Php/crudFunctions',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Crud Functions"
+>
+    Crud Functions
+</md-button>
+    <md-input-container aria-label="sendText"
+can-be-moved=true
+item-alias="sendText"   
+    ng-show="!!view.sendText == false || view.sendText.visible" 
+    dib-disable="{{view.sendText.disabled}}"
+    ng-class="view.sendText.class" 
+    ng-style="view.sendText.style"
+flex="none"
+class="md-block"
+style="  margin:40px !important;  "
+>
+    <textarea  
+         maxlength='400'
+        name="sendText"
+        ng-model="model.sendText"
+        aria-label="<h3>Provide some text... </h3>"
+        id='ci177082'
+aria-label="sendText"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputTextarea'
+        md-detect-hidden
+    >
+    </textarea>
+    <label><h3>Provide some text... </h3></label>
+    <div ng-messages="dibexPhp.sendText.$error">
+         <div ng-message="maxlength">At most 400 characters are allowed.</div>
+    </div>
+</md-input-container>
+<md-button aria-label="buttonGetFile"
+can-be-moved=true
+class="md-raised md-primary"
+style="    "
+    id='ci177081'
+aria-label="buttonGetFile"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    'click___dib*gznc1rnbv' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexPhp',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*gznc1rnbv',        
+        containerItemId: 177081,
+        submitUrl: '/dropins/dibExamples/Php/sendFile',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'redirect'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Get File"
+>
+    Get File
+</md-button>
+    <md-input-container aria-label="msg"
+can-be-moved=true
+item-alias="msg"   
+    ng-show="!!view.msg == false || view.msg.visible" 
+    dib-disable="{{view.msg.disabled}}"
+    ng-class="view.msg.class" 
+    ng-style="view.msg.style"
+flex="none"
+class="md-block"
+style="    "
+>
+    <textarea  
+        name="msg"
+        ng-model="model.msg"
+        aria-label="Message for Async Test"
+        id='ci177083'
+aria-label="msg"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputTextarea'
+        md-detect-hidden
+    >
+    </textarea>
+    <label>Message for Async Test</label>
+    <div ng-messages="dibexPhp.msg.$error">
+    </div>
+</md-input-container>
+<md-button aria-label="buttonAsyncExecution"
+can-be-moved=true
+class="md-raised md-primary"
+style="    "
+    id='ci177077'
+aria-label="buttonAsyncExecution"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    'click___dib*pof161dqr' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexPhp',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*pof161dqr',        
+        containerItemId: 177077,
+        submitUrl: '/dropins/dibExamples/Php/asyncExecution',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Asynchronous Execution"
+>
+    Asynchronous Execution
+</md-button>
+   <div layout-fill flex
+        aria-label="dibTestCompanyAsyncGrid"
+can-be-moved=true
+flex
+style=" height:450px !important; overflow:auto !important;   "
+        id='ci177117'
+aria-label="dibTestCompanyAsyncGrid"
+dib-container-name='dibexPhp'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dib-test-company-async-grid
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dib-test-company-async-grid>
+    </div>
+</div>
 </div>

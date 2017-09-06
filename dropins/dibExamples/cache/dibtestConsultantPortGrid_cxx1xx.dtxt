@@ -1,10 +1,10 @@
 (function() {
     var require = [ 
-		'/dropins/setNgMaterial/dibGrid/js/components/dibTableWidth.js',
-  		'/dropins/setNgMaterial/dibGrid/js/components/dibInlineEdit.js',
-  		'/dropins/setNgMaterial/dibGrid/js/services/dibGrid.js',
-	    '/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
-  ];
+            '/dropins/setNgMaterial/dibGrid/js/components/dibTableWidth.js',
+            '/dropins/setNgMaterial/dibGrid/js/components/dibInlineEdit.js',
+            '/dropins/setNgMaterial/dibGrid/js/services/dibGrid.js',
+            '/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+    ];
     require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
     var files = [];
     angular.forEach(require, function (file,index) { 
@@ -18,7 +18,6 @@
                 list : list
             };       
             function list($scope, $element, query, modelType, page) {
-                var $defer = $q.defer();
                 var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/dibtestConsultantPortGrid?containerItemId=155622", query, modelType, page);
                 var requestInfo = dibDiscover.addToUrl({
                     field :$('#ci155622'),
@@ -34,162 +33,161 @@
                 });
             };
     };
-    dibtestConsultantPortGrid.service('service155622',service155622); 
-    service155622.$inject = ['dibAjax', 'dibDiscover', '$q'];
-    function service155622(dibAjax, dibDiscover, $q) {
-            return {
-                list : list
-            };       
-            function list($scope, $element, query, modelType, page) {
-                var $defer = $q.defer();
-                var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/dibtestConsultantPortGrid?containerItemId=155622", query, modelType, page);
-                var requestInfo = dibDiscover.addToUrl({
-                    field :$('#ci155622'),
-                    $scope : $scope,
-                    container : $element,
-                    url : url
-                });
-                return dibAjax.post(requestInfo, {
-                    excludeFromCancels : true,
-                    factoryResult : function (data) {
-                        return data.records;
-                    }
-                });
-            };
+        dibtestConsultantPortGrid.factory('dibtestConsultantPortGridDefinition',dibtestConsultantPortGridDefinition);
+    dibtestConsultantPortGridDefinition.$inject = ['dibContainer','service155622'];
+    function dibtestConsultantPortGridDefinition(dibContainer,service155622) {
+        return {
+            model : model,
+            view : view,
+            info : info,
+            primaryKeys : primaryKeys
+        };
+        function model() {
+            var model = {};
+            model._GET = {};
+            model['id'] = '';
+            model._GET['id'] = dibContainer.modelItem({
+                key : 'id',
+                dataType : "number", 
+                create : false,
+                update : false,
+                service : null,
+                itemAlias : false
+            });
+            model['name'] = '';
+            model._GET['name'] = dibContainer.modelItem({
+                key : 'name',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['notes'] = '';
+            model._GET['notes'] = dibContainer.modelItem({
+                key : 'notes',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['email'] = '';
+            model._GET['email'] = dibContainer.modelItem({
+                key : 'email',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['address1'] = '';
+            model._GET['address1'] = dibContainer.modelItem({
+                key : 'address1',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['address2'] = '';
+            model._GET['address2'] = dibContainer.modelItem({
+                key : 'address2',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['city_town'] = '';
+            model._GET['city_town'] = dibContainer.modelItem({
+                key : 'city_town',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['country'] = '';
+            model._GET['country'] = dibContainer.modelItem({
+                key : 'country',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['select___employed_at_id'] = '';
+            model._GET['employed_at_id'] = dibContainer.modelItem({
+                key : 'employed_at_id',
+                dataType : "select", 
+                create : true,
+                update : true,
+                service : service155622,
+                itemAlias : false
+            });
+            return model;
+        };
+        function view() {
+            var view = {};
+            return view;
+        };
+        function info(){
+            var container = {};
+            container.Id = '7166';
+            container.Name = 'dibtestConsultantPortGrid';
+            container.SubContainerItemAliases = []; 
+            return container;
+        };
+        function primaryKeys() {
+            return ["id"];
+        };
     };
-})();
-(function() {
-    var dibtestConsultantPortGrid = angular.module('dibtestConsultantPortGrid');
     dibtestConsultantPortGrid.component('dibtestConsultantPortGrid', {
         controllerAs: 'dibtestConsultantPortGrid',
         templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibGrid/Template/view/dibtestConsultantPortGrid.html',
         controller : component__dibtestConsultantPortGrid
     });
-    component__dibtestConsultantPortGrid.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
+    component__dibtestConsultantPortGrid.$inject = [ 'dibtestConsultantPortGridDefinition','$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
               'dibGrid', 'dibForm', '$location', '$timeout', 'dibMessage','dibKeysPressed','service155622'];
-    function component__dibtestConsultantPortGrid($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
+    function component__dibtestConsultantPortGrid(dibtestConsultantPortGridDefinition,$scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
               dibGrid, dibForm, $location, $timeout, dibMessage,dibKeysPressed,service155622) {
         var ctrl = this;
-                    $scope.container = {};
-            $scope.container.Id = '7166';
-            $scope.container.Name = 'dibtestConsultantPortGrid';
-            $scope.container.SubContainerItemAliases = []; 
-            var crudController = "/peff/Crud";
-                    $scope.model = {};
-        $scope.model._GET = {};
-        $scope.model['id'] = '';
-        $scope.model._GET['id'] = dibContainer.modelItem({
-            key : 'id',
-            dataType : "number", 
-            create : false,
-            update : false,
-            service : null,
-            itemAlias : false
+        var crudController = "/peff/Crud";
+        var $dibContainer = $element.first();
+        $scope.container = dibtestConsultantPortGridDefinition.info();
+        $scope.model = dibtestConsultantPortGridDefinition.model();
+        $scope.view = dibtestConsultantPortGridDefinition.view();
+        $scope.primaryKeys = dibtestConsultantPortGridDefinition.primaryKeys();
+        $scope.dibCommon = dibCommon;
+        dibContainer.watchModel($scope, function () {
         });
-        $scope.model['name'] = '';
-        $scope.model._GET['name'] = dibContainer.modelItem({
-            key : 'name',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['notes'] = '';
-        $scope.model._GET['notes'] = dibContainer.modelItem({
-            key : 'notes',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['email'] = '';
-        $scope.model._GET['email'] = dibContainer.modelItem({
-            key : 'email',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['address1'] = '';
-        $scope.model._GET['address1'] = dibContainer.modelItem({
-            key : 'address1',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['address2'] = '';
-        $scope.model._GET['address2'] = dibContainer.modelItem({
-            key : 'address2',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['city_town'] = '';
-        $scope.model._GET['city_town'] = dibContainer.modelItem({
-            key : 'city_town',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['country'] = '';
-        $scope.model._GET['country'] = dibContainer.modelItem({
-            key : 'country',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['select___employed_at_id'] = '';
-        $scope.model._GET['employed_at_id'] = dibContainer.modelItem({
-            key : 'employed_at_id',
-            dataType : "select", 
-            create : true,
-            update : true,
-            service : service155622,
-            itemAlias : false
-        });
-        $scope.view = {};
-            var reloadContainerFunctions = [];
-            dibContainer.watchModel($scope);
-	        $scope.dibCommon = dibCommon;
-            $scope.primaryKeys = ["id"];
         var $dibContainer = $element.first();
         $scope.menus = {};
+            function filterList($scope,$dibContainer,service, query, dropdown) {
+        return service.list($scope,$dibContainer, query).then(function (items) {
+            dropdown.items = items;
+            return $q.when();
+        });
+    }
     $scope.dropdowns = {};
     $scope.dropdowns.service155622 = {};
     $scope.dropdowns.service155622.items = [];
-    var setTimeoutCancel155622 = null;
-    var $dibContainer = $element.first();
-    var query155622;
+    var cancelService155622 = null;
+    var query155622 = '';
     $scope.loadService155622 = function (query, skipTimeout) {
         if (query155622 != query) {
             query155622 = query;
             if (!!skipTimeout) {
-                return service155622.list($scope,$dibContainer, query).then(function (items) {
-                    $scope.dropdowns.service155622.items = items;
-                });
+                return filterList($scope,$dibContainer,service155622, query, $scope.dropdowns.service155622);
             } else {
-                clearTimeout(setTimeoutCancel155622);
-                setTimeoutCancel155622 = setTimeout(function () { 
-                    service155622.list($scope,$dibContainer, query).then(function (items) {
-                        $scope.dropdowns.service155622.items = items;
-                    });
+                $timeout.clear(cancelService155622);
+                cancelService155622 = $timeout(function () { 
+                    return filterList($scope,$dibContainer,service155622, query, $scope.dropdowns.service155622);
                 }, 100);
+                return cancelService155622;
             }
-        } 
-    };
-    $scope.dropdowns.service155622.searchTextChange = function (query) {
-        $scope.loadService155622(query);
+        };
     };
     $scope.dropdowns.service155622.getItems = function (query,modelType) {
         return service155622.list($scope,$dibContainer, query,modelType);
@@ -212,18 +210,44 @@
             }
         });
     };
-            $scope.openAuditTrail = function (portAlias) {
-                            var primaryKeyData = dibRecord.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
-                            if (primaryKeyData.length > 0) {
-                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D1442&filter_record_id=%3D"+primaryKeyData);
-                        } else {
-                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D1442");
-                        }
-            };
+        $scope.openAuditTrail = function (portAlias) {
+                        var primaryKeyData = dibRecord.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                        if (primaryKeyData.length > 0) {
+                        dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D1442&filter_record_id=%3D"+primaryKeyData);
+                    } else {
+                        dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D1442");
+                    }
+        };
+        $scope.gridOptions = {};
+        $scope.gridOptions.data = 'gridData';
+                /**
+         * Custom sorting added Cobus Coetsee
+         */
+        $scope.gridOptions.sortFields = {};
+        $scope.gridOptions.sortNr = 0;
+        $scope.gridOptions.toggleSort = function (fieldName) { 
+            dibGrid.toggleSort($scope,"dibtestConsultantPortGrid",fieldName);
+            loadGrid();
+        };
+        $scope.search = {};
+$scope.clearSearch = function () { 
+    dibGrid.clearSearch($scope);
+};
+$scope.searchGrid = function () { 
+    dibGrid.prepareSearch($scope, "dibtestConsultantPortGrid");
+    loadGrid();
+};
+$scope.$watch("showSearch", function () {
+    //to ensure when the state change that the heights are calculated accordingly.
+    $timeout(function () { 
+        $("[dib-container=dibtestConsultantPortGrid]").find('.dib-grid-column-content').trigger('refreshHeight')
+    },50);
+    if (!!$scope.showSearch === false) {
+        $scope.search = {};
+        if (!!$scope.gridData) loadGrid();
+    }
+});
         ctrl.$onInit = function () {
-            $scope.gridOptions = {};
-            $scope.gridOptions.data = 'gridData';
-            $scope.gridOptions.enableFiltering = true;
             $scope.gridOptions.inlineAddShow = "" == "true";
             /**
             * Inline add show/hide
@@ -293,14 +317,12 @@
             * Double click event gets triggered then the row can be editable
             */
             $scope.rowEdit = function (element) {
+                $element.find('[dib-inline-edit=open]').trigger('editClose');   
                 var $rowElement = $(element).find('[dib-inline-edit]');
                 if ($rowElement.length > 0) {
                     //Open
                     $rowElement.trigger('edit');
                     $rowElement.removeClass('md-accent');    
-                } else {
-                    //Closed
-                    $containerItemElement.parents('[dib-inline-edit=open]').trigger('editClose');        
                 }
                 var $rowElement =$rowElement.parents('[dib-inline-edit=add-mode]');
                 if ($rowElement.length>0) {
@@ -316,125 +338,6 @@
                 angular.extend(itemSelected, dibRecord.getDataFromSelected($scope, $scope.lastSelectedItem, true).recordData);
                 return itemSelected;
             };
-        /**
-         * Custom sorting added Cobus
-         */
-        $scope.gridOptions.sortFields = {};
-        $scope.gridOptions.sortNr = 0;
-        function applySortFromUrl() { 
-            var sortUrlChange= dibContainer.urlContainer("dibtestConsultantPortGrid");
-             var searchLength = Object.keys($location.search()).length;
-            if (sortUrlChange && searchLength>0) {
-                //apply search from urlContainer
-                $scope.gridOptions.sortNr = 0;
-                angular.forEach($location.search(), function (item,index) {
-                    if (index.indexOf("sort_") !==-1) { 
-                        $scope.gridOptions.sortNr ++;
-                        var splitValues = item.split("::");
-                        $scope.gridOptions.sortFields[index.replace('sort_','')]= {
-                            "Order" : splitValues[0],
-                            "Count" :  splitValues[1]
-                        } 
-                    } 
-                });
-                //apply sort from urlContainer
-            }
-        }
-        $scope.gridOptions.toggleSort = function (fieldName) { 
-            var sortUrlChange= dibContainer.urlContainer("dibtestConsultantPortGrid");
-            if (!!$scope.gridOptions.sortFields[fieldName] && $scope.gridOptions.sortFields[fieldName]['Order'] === "ASC") { 
-                $scope.gridOptions.sortFields[fieldName]['Order'] = "DESC";
-                if (sortUrlChange ) $location.search("sort_"+fieldName,"DESC::"+$scope.gridOptions.sortFields[fieldName]['Count']);
-            } else if (!!$scope.gridOptions.sortFields[fieldName] && $scope.gridOptions.sortFields[fieldName]['Order'] === "DESC") { 
-                $scope.gridOptions.sortNr = 0;
-                delete $scope.gridOptions.sortFields[fieldName];
-                if (Object.keys($scope.gridOptions.sortFields).length == 0)  {
-                    dibContainer.cleanUrlState();
-                }
-                if (sortUrlChange ) $location.search("sort_"+fieldName,null);
-                angular.forEach($scope.gridOptions.sortFields, function (sort,index) { 
-                    if (!!sort) { 
-                        $scope.gridOptions.sortNr ++;
-                        sort['Count'] = $scope.gridOptions.sortNr;
-                        if (sortUrlChange ) $location.search("sort_"+index,sort['Order']+"::"+sort['Count']);
-                    }
-                });
-                return;
-            } else {
-                $scope.gridOptions.sortNr ++;
-                $scope.gridOptions.sortFields[fieldName] = {"Order" : "ASC", "Count" : $scope.gridOptions.sortNr };
-                if (sortUrlChange ) $location.search("sort_"+fieldName,"ASC::"+$scope.gridOptions.sortNr);
-            }
-            loadGrid();
-        };
-            $scope.search = {};
-$scope.clearSearch = function () { 
-    $scope.search = {};
-    dibContainer.cleanUrlState();
-    $scope.searchGrid();
-};
-$scope.searchGrid = function () { 
-    var searchUrlChange= dibContainer.urlContainer("dibtestConsultantPortGrid");
-    if (searchUrlChange ) {
-        //clear search
-        angular.forEach($location.search(), function (item,index) {
-            if (index.indexOf("filter_") ==0 || index.indexOf("filterDisplay_") ==0) { 
-                $location.search(index,null);
-            } 
-        });
-        //fill search
-        angular.forEach($scope.search, function (search, index) {
-            if (!!search == false) return;
-            if (typeof search != 'object') {
-                $location.search("filter_"+index,search.replace('&','~~~'));
-            } else if (!!search.id && !!search.id_display_value) {
-                var key = index.replace('selected___','');
-                var urlSearch = {};
-                urlSearch["filter_"+key]=search.id;
-                urlSearch["filterDisplay_"+key] = dibUtility.fixedEncodeURIComponent(search.id_display_value);
-                $location.search(urlSearch);
-            }
-        });
-    }
-    loadGrid();
-};
-$scope.$watch("showSearch", function () {
-    //to ensure when the state change that the heights are calculated accordingly.
-    $timeout(function () { 
-        $("[dib-container=dibtestConsultantPortGrid]").find('.dib-grid-column-content').trigger('refreshHeight')
-    },50);
-    if (!!$scope.showSearch === false) {
-        $scope.search = {};
-        if (!!$scope.gridData) loadGrid();
-    }
-});
-function applyFilterFromUrl() { 
-    var searchUrlChange= dibContainer.urlContainer("dibtestConsultantPortGrid");
-    var searchLength = Object.keys($location.search()).length;
-    if (searchUrlChange && searchLength>0) {
-        //apply search from urlContainer
-        $scope.search = {};
-        var urlSearch  =$location.search();
-        angular.forEach(urlSearch, function (item,index) {
-            if (index.indexOf('filter') === -1) return;
-            if (index.indexOf("filter_") ==0) { 
-                $scope.showSearch = true;
-                $scope.search[index.replace('filter_','')]= item.replace('~~~','&');
-            } 
-            if (index.indexOf("filterDisplay_") ==0) {
-                var selectKeyIndex=  index.replace('filterDisplay_','');
-                var selectKey ="selected___" + selectKeyIndex; 
-                $scope.search[selectKey]= {};
-                $scope.search[selectKey].id = urlSearch["filter_"+selectKeyIndex];
-                $scope.search[selectKey].id_display_value = decodeURI(item);
-            }
-        });
-        //apply sort from urlContainer
-    } else {
-        $scope.search = {};
-        $scope.showSearch = false;
-    }
-}
             $scope.scrollConfig = {
                 autoHideScrollbar: false,
                 theme: 'light',
@@ -530,11 +433,12 @@ function applyFilterFromUrl() {
         $scope.$watch("page.number", function () {
            if (!!$scope.gridData) loadGrid();
         });
-            applyFilterFromUrl();
-            applySortFromUrl();
+            $scope.gridOptions.enableFiltering = true;
+            dibGrid.applyFilterOnUrl($scope, "dibtestConsultantPortGrid");
+            dibGrid.applySortOnUrl($scope, "dibtestConsultantPortGrid");
             $scope.reloadContainer  = function (options) {
-                    applyFilterFromUrl();
-                    applySortFromUrl();
+                    dibGrid.applyFilterOnUrl($scope, "dibtestConsultantPortGrid");
+                    dibGrid.applySortOnUrl($scope, "dibtestConsultantPortGrid");
                     loadGrid();
             };
         };
@@ -562,6 +466,7 @@ function applyFilterFromUrl() {
                 }
                 $scope.loadingData = false;
                 $scope.gridData = data.records;
+                $scope.$broadcast('load');
                 $timeout(function () { 
                     $('[dib-container=dibtestConsultantPortGrid]').find('[select-default]').trigger('refreshDefault'); 
                 },100);

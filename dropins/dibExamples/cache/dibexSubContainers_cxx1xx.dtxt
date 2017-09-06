@@ -20,7 +20,6 @@
                 list : list
             };       
             function list($scope, $element, query, modelType, page) {
-                var $defer = $q.defer();
                 var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/dibexSubContainers?containerItemId=155375", query, modelType, page);
                 var requestInfo = dibDiscover.addToUrl({
                     activeFilter : 'parentCompanyContactId',
@@ -44,7 +43,6 @@
                 list : list
             };       
             function list($scope, $element, query, modelType, page) {
-                var $defer = $q.defer();
                 var url = dibDiscover.updateQueryStringDropdown(DIB.base_url + "/peff/Crud/componentlist/dibexSubContainers?containerItemId=155376", query, modelType, page);
                 var requestInfo = dibDiscover.addToUrl({
                     field :$('#ci155376'),
@@ -60,109 +58,133 @@
                 });
             };
     };
-    var dibexSubContainers = angular.module('dibexSubContainers');
+        dibexSubContainers.factory('dibexSubContainersDefinition',dibexSubContainersDefinition);
+    dibexSubContainersDefinition.$inject = ['dibContainer','service155375','service155376'];
+    function dibexSubContainersDefinition(dibContainer,service155375,service155376) {
+        return {
+            model : model,
+            view : view,
+            info : info,
+            primaryKeys : primaryKeys
+        };
+        function model() {
+            var model = {};
+            model._GET = {};
+            model['id'] = '';
+            model._GET['id'] = dibContainer.modelItem({
+                key : 'id',
+                dataType : "number", 
+                create : false,
+                update : false,
+                service : null,
+                itemAlias : 'id'
+            });
+            model['name'] = '';
+            model._GET['name'] = dibContainer.modelItem({
+                key : 'name',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['select___parent_company_contact_id'] = '';
+            model._GET['parent_company_contact_id'] = dibContainer.modelItem({
+                key : 'parent_company_contact_id',
+                dataType : "select", 
+                create : true,
+                update : true,
+                service : service155375,
+                itemAlias : 'parentCompanyContactId'
+            });
+            model['select___parent_company_id'] = '';
+            model._GET['parent_company_id'] = dibContainer.modelItem({
+                key : 'parent_company_id',
+                dataType : "select", 
+                create : true,
+                update : true,
+                service : service155376,
+                itemAlias : 'parentCompanyId'
+            });
+            model['dibIgnore_SubmitData'] = '';
+            model._GET['dibIgnore_SubmitData'] = dibContainer.modelItem({
+                key : 'dibIgnore_SubmitData',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : 'dibIgnore_SubmitData'
+            });
+            return model;
+        };
+        function view() {
+            var view = {};
+            view.id = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            view.subCompanyConsultGrid = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            view.subConsultForm = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            view.parentCompanyContactId = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            view.parentCompanyId = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            view.subTestGoogleMap = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            view.testCompanySqlRptGrid = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            view.dibIgnore_SubmitData = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            return view;
+        };
+        function info(){
+            var container = {};
+            container.Id = '7155';
+            container.Name = 'dibexSubContainers';
+            container.SubContainerItemAliases = ["subCompanyConsultGrid","subConsultForm","testCompanySqlRptGrid"]; 
+            return container;
+        };
+        function primaryKeys() {
+            return ["id"];
+        };
+    };
     dibexSubContainers.component('dibexSubContainers', {
         controllerAs: 'dibexSubContainers',
         templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibForm/Template/view/dibexSubContainers.html',
         controller : component__dibexSubContainers
     });
-    component__dibexSubContainers.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
+    component__dibexSubContainers.$inject = [ 'dibexSubContainersDefinition','$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
             'dibForm', 'dibMessage','$location','dibAction','dibUtility', '$timeout', 'dibActiveFilterState','service155375','service155376'];
-    function component__dibexSubContainers($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
+    function component__dibexSubContainers(dibexSubContainersDefinition,$scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
             dibForm, dibMessage,$location,dibAction,dibUtility, $timeout, dibActiveFilterState,service155375,service155376) {
         var ctrl = this;        
-                    $scope.container = {};
-            $scope.container.Id = '7155';
-            $scope.container.Name = 'dibexSubContainers';
-            $scope.container.SubContainerItemAliases = ["subCompanyConsultGrid","subConsultForm","testCompanySqlRptGrid"]; 
-            var crudController = "/peff/Crud";
-                    $scope.model = {};
-        $scope.model._GET = {};
-        $scope.model['id'] = '';
-        $scope.model._GET['id'] = dibContainer.modelItem({
-            key : 'id',
-            dataType : "number", 
-            create : false,
-            update : false,
-            service : null,
-            itemAlias : 'id'
+        var crudController = "/peff/Crud";
+        var $dibContainer = $element.first();
+        $scope.container = dibexSubContainersDefinition.info();
+        $scope.model = dibexSubContainersDefinition.model();
+        $scope.view = dibexSubContainersDefinition.view();
+        $scope.primaryKeys = dibexSubContainersDefinition.primaryKeys();
+        $scope.dibCommon = dibCommon;
+        dibContainer.watchModel($scope, function () {
         });
-        $scope.model['name'] = '';
-        $scope.model._GET['name'] = dibContainer.modelItem({
-            key : 'name',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['select___parent_company_contact_id'] = '';
-        $scope.model._GET['parent_company_contact_id'] = dibContainer.modelItem({
-            key : 'parent_company_contact_id',
-            dataType : "select", 
-            create : true,
-            update : true,
-            service : service155375,
-            itemAlias : 'parentCompanyContactId'
-        });
-        $scope.model['select___parent_company_id'] = '';
-        $scope.model._GET['parent_company_id'] = dibContainer.modelItem({
-            key : 'parent_company_id',
-            dataType : "select", 
-            create : true,
-            update : true,
-            service : service155376,
-            itemAlias : 'parentCompanyId'
-        });
-        $scope.model['dibIgnore_SubmitData'] = '';
-        $scope.model._GET['dibIgnore_SubmitData'] = dibContainer.modelItem({
-            key : 'dibIgnore_SubmitData',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : 'dibIgnore_SubmitData'
-        });
-        $scope.view = {};
-            $scope.view.id = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            $scope.view.subCompanyConsultGrid = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            $scope.view.subConsultForm = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            $scope.view.parentCompanyContactId = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            $scope.view.parentCompanyId = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            $scope.view.subTestGoogleMap = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            $scope.view.testCompanySqlRptGrid = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            $scope.view.dibIgnore_SubmitData = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            var reloadContainerFunctions = [];
-            dibContainer.watchModel($scope);
-	        $scope.dibCommon = dibCommon;
-            $scope.primaryKeys = ["id"];
         var $dibContainer = $element.first();
         $scope.menus = {};
+            function filterList($scope,$dibContainer,service, query, dropdown) {
+        return service.list($scope,$dibContainer, query).then(function (items) {
+            dropdown.items = items;
+            return $q.when();
+        });
+    }
     $scope.dropdowns = {};
     $scope.dropdowns.service155375 = {};
     $scope.dropdowns.service155375.items = [];
-    var setTimeoutCancel155375 = null;
-    var $dibContainer = $element.first();
-    var query155375;
+    var cancelService155375 = null;
+    var query155375 = '';
     $scope.loadService155375 = function (query, skipTimeout) {
         if (query155375 != query) {
             query155375 = query;
             if (!!skipTimeout) {
-                return service155375.list($scope,$dibContainer, query).then(function (items) {
-                    $scope.dropdowns.service155375.items = items;
-                });
+                return filterList($scope,$dibContainer,service155375, query, $scope.dropdowns.service155375);
             } else {
-                clearTimeout(setTimeoutCancel155375);
-                setTimeoutCancel155375 = setTimeout(function () { 
-                    service155375.list($scope,$dibContainer, query).then(function (items) {
-                        $scope.dropdowns.service155375.items = items;
-                    });
+                $timeout.clear(cancelService155375);
+                cancelService155375 = $timeout(function () { 
+                    return filterList($scope,$dibContainer,service155375, query, $scope.dropdowns.service155375);
                 }, 100);
+                return cancelService155375;
             }
-        } 
-    };
-    $scope.dropdowns.service155375.searchTextChange = function (query) {
-        $scope.loadService155375(query);
+        };
     };
     $scope.dropdowns.service155375.getItems = function (query,modelType) {
         return service155375.list($scope,$dibContainer, query,modelType);
@@ -187,28 +209,21 @@
     };
     $scope.dropdowns.service155376 = {};
     $scope.dropdowns.service155376.items = [];
-    var setTimeoutCancel155376 = null;
-    var $dibContainer = $element.first();
-    var query155376;
+    var cancelService155376 = null;
+    var query155376 = '';
     $scope.loadService155376 = function (query, skipTimeout) {
         if (query155376 != query) {
             query155376 = query;
             if (!!skipTimeout) {
-                return service155376.list($scope,$dibContainer, query).then(function (items) {
-                    $scope.dropdowns.service155376.items = items;
-                });
+                return filterList($scope,$dibContainer,service155376, query, $scope.dropdowns.service155376);
             } else {
-                clearTimeout(setTimeoutCancel155376);
-                setTimeoutCancel155376 = setTimeout(function () { 
-                    service155376.list($scope,$dibContainer, query).then(function (items) {
-                        $scope.dropdowns.service155376.items = items;
-                    });
+                $timeout.clear(cancelService155376);
+                cancelService155376 = $timeout(function () { 
+                    return filterList($scope,$dibContainer,service155376, query, $scope.dropdowns.service155376);
                 }, 100);
+                return cancelService155376;
             }
-        } 
-    };
-    $scope.dropdowns.service155376.searchTextChange = function (query) {
-        $scope.loadService155376(query);
+        };
     };
     $scope.dropdowns.service155376.getItems = function (query,modelType) {
         return service155376.list($scope,$dibContainer, query,modelType);
@@ -224,6 +239,9 @@
         if (!!model[modelName]  === false) { 
             return  false;
         }
+        if (!!model.selected___parent_company_contact_id && !!model.selected___parent_company_contact_id.id) {
+            delete model.selected___parent_company_contact_id;
+        }
         angular.forEach($scope.dropdowns.service155376.items, function (item, index)   {
             if (item.id == model[modelName]['id']) {
                 model[modelName]['id_display_value'] = item.id_display_value; 
@@ -231,20 +249,21 @@
             }
         });
     };
-            $scope.openAuditTrail = function (portAlias) {
-                            var primaryKeyData = dibRecord.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
-                            if (primaryKeyData.length > 0) {
-                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D1440&filter_record_id=%3D"+primaryKeyData);
-                        } else {
-                            dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D1440");
-                        }
-            };
+        $scope.openAuditTrail = function (portAlias) {
+                        var primaryKeyData = dibRecord.primaryKeyAuditIds($scope.primaryKeys, $scope.model);
+                        if (primaryKeyData.length > 0) {
+                        dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D1440&filter_record_id=%3D"+primaryKeyData);
+                    } else {
+                        dibCommon.goTo(DIB.audit_trail_container,portAlias,true,"?filter_pef_table_id=%3D1440");
+                    }
+        };
         ctrl.$onInit = function () {
             $scope.addModel = function () { 
                 dibForm.addModel($scope, "dibexSubContainers");
             };
             $scope.deleteRecord = function (options) {
                 dibForm.deleteRecord('dibexSubContainers', $scope, $scope.dibexSubContainers, options, crudController).then(function (){
+                }).catch(function (data) {
                 });
             };         
             /**
@@ -260,7 +279,7 @@
                         } else {
                             loadForm();
                         }
-                        return $q.when();
+                    }).catch(function (data) { 
                     });
                 }
             };
@@ -300,11 +319,10 @@
                 dibForm.clean($scope.dibexSubContainers,$scope.model);
             };
             $scope.reloadContainer = function (options) {
+                $element.find('[dib-container-name=dibexSubContainers][select-default]').trigger('refreshDefault');
                 $scope.autoRefresh = true;
                 loadForm ();
             };
-            $scope.$watch('model', function (oldVal, newVal) {
-            },true);  
         };
         ctrl.$postLink = function () {
             var isUrlContainer = dibContainer.urlContainer('dibexSubContainers');
@@ -330,6 +348,9 @@
                 //check if record is first or last
                 if (!!$location.search()['record'] && $location.search()['record']!='new') {
                     return;
+                }
+                if (!!$location.search()['record'] && $location.search()['record']=='new') {
+                    dibForm.clean($scope.dibexSubContainers,$scope.model);
                 }
             }
             //check if this is a child container 
@@ -364,7 +385,7 @@
         containerName: 'dibexSubContainers',
         triggerType: 'load',
         nextActionItem: '',
-        containerEventId: '122',        
+        containerEventId: 'dib*30vprjfz',        
         containerId: 7155,
         submitUrl: '/dropins/dibExamples/Events/containerEvents',        
         itemAlias: '',

@@ -21,7 +21,6 @@
     private function parseFilterArray($filterParams=array(), &$params=array(), &$fieldType=array()) {
         if (count($filterParams) === 0) 
             return '';
-
         $i = 0;
         $str = '';
         foreach($filterParams as $record) {
@@ -353,7 +352,6 @@ $sql = "SELECT `test_company`.`id`
                         	$orderStr .= $this->fkeyDisplay[$record['property']] . ' ' . $direction . ', ';
                         else 
                         	$orderStr .= '`test_company`.`' . $record['property'] . '` ' . $direction . ', ';
-
                     }
                     $orderStr = substr($orderStr, 0, strlen($orderStr) - 2);
                 }                
@@ -365,7 +363,6 @@ $sql = "SELECT `test_company`.`id`
     else
         $limit = ' LIMIT ' . ($page_size * ($page - 1)) .  ', ' . $page_size;    
                 // Template: main SQL statement for MySQL to fetch many records limited by paging. Used in eg CrudPdoTemplate.php.
-
 if($readType === 'exportlist')
     $sql = "SELECT 
                 `test_company`.`id` AS `Id`, `test_company`.`name` AS `Name`, `test_company`.`chinese_name` AS `Chinese Name`, `test_company`.`notes` AS `Notes`, `test_company`.`website` AS `Website`, `test_company`.`icon` AS `Icon` 
@@ -381,7 +378,6 @@ else
                      LEFT JOIN `test_company` `test_company1001` ON `test_company`.`parent_company_id` = `test_company1001`.`id` 
                      LEFT JOIN `test_consultant` `test_consultant1002` ON `test_company`.`parent_company_contact_id` = `test_consultant1002`.`id` 
                  ";   
-
 $sql .= $criteria . $orderStr . $limit;               
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
                 $attributes = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, false);
@@ -517,7 +513,6 @@ $sql .= $criteria . $orderStr . $limit;
             //Check Unique Values for name
             if(!array_key_exists('name', $attributes)) $attributes['name'] = null;
             $criteria ="`name` = :fk1 ";
-			// ***TODO - can add user criteria here for conditional uniques...
             $sql = "SELECT `test_company`.`id` AS pkv FROM `test_company` WHERE $criteria";
             $paramsU = array(":fk1" => $attributes["name"]);
             $rst = dibMySqlPdo::execute($sql, $targetDatabaseId, $paramsU, true);
@@ -764,7 +759,6 @@ $sql .= $criteria . $orderStr . $limit;
                 else
                     return array('error',"Permissions failure on existing(old) values. Only records satisfying the following condition(s) can be deleted: " . substr($crit, strpos($crit, " AND (") + 5));
             }
-
             if (dibMySqlPdo::count() > 0) {
                 $crit = TRUE;
                 if ($crit===TRUE) {
@@ -886,7 +880,6 @@ $sql .= $criteria . $orderStr . $limit;
     }
      /**
      * Drop a specific node on-to another
-
      * @param string $dropPosition 'after'/'before'/'append'
      * @param integer $dropNodeId
      * @param type $nodeId
@@ -938,7 +931,6 @@ $sql .= $criteria . $orderStr . $limit;
         $fieldType[":pk1"] = PDO::PARAM_INT;
         dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
         $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-
         if ($rst === FALSE)
             return array();
         else
@@ -981,7 +973,6 @@ $sql .= $criteria . $orderStr . $limit;
             $validAttributes = array_flip($validAttributes);
             $validAttributes = array_intersect_key($attributes, $validAttributes);
         }
-
         return $validAttributes;
     } 
     public function getCaptions() {

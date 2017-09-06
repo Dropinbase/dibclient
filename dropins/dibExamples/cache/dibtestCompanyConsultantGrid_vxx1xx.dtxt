@@ -1,6 +1,6 @@
  
 <div component-loaded dib-container="dibtestCompanyConsultantGrid" dib-grid  dib-config="{ }" >
-	<md-toolbar aria-label="toolbar" can-be-moved=true can-have-children=true flex=none style="    " id='ci155395' aria-label="toolbar" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" >
+	<md-toolbar aria-label="toolbar" can-be-moved=true can-have-children=true flex="none" style="    " id='ci155395' aria-label="toolbar" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" >
 		<div class="md-toolbar-tools">
 			<md-button aria-label="btninlineadd" can-be-moved=true class="md-icon-button md-raised md-squared " style="    " ng-click="toggleInlineAdd()" id='ci155396' aria-label="btninlineadd" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" >
 				<md-tooltip md-direction="top" md-delay="500">
@@ -23,13 +23,13 @@
 				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
 				</md-icon>
 			</md-button>
-			<md-button aria-label="btnSubmissionDataGrid" can-be-moved=true item-alias="btnSubmissionDataGrid"    ng-show="!!view.btnSubmissionDataGrid == false || view.btnSubmissionDataGrid.visible"  dib-disable="{{view.btnSubmissionDataGrid.disabled}}" ng-class="view.btnSubmissionDataGrid.class"  ng-style="view.btnSubmissionDataGrid.style" class="md-raised md-accent" style="    " id='ci182606' aria-label="btnSubmissionDataGrid" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ submitHeaderFilter : 'self', submitActiveFilter : 'self', submitFormData : 'parent.subConsultForm', listeners : { 'click___dib*gffd7ios01' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*gffd7ios01',         containerItemId: 182606, submitUrl: '/dropins/dibExamples/SubContainer/testSubmissionData',         itemAlias: 'btnSubmissionDataGrid', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Print Submission Data" >
+			<md-button aria-label="btnSubmissionDataGrid" can-be-moved=true item-alias="btnSubmissionDataGrid"    ng-show="!!view.btnSubmissionDataGrid == false || view.btnSubmissionDataGrid.visible"  dib-disable="{{view.btnSubmissionDataGrid.disabled}}" ng-class="view.btnSubmissionDataGrid.class"  ng-style="view.btnSubmissionDataGrid.style" class="md-raised md-accent" style="    " id='ci182606' aria-label="btnSubmissionDataGrid" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ submitHeaderFilter : 'self', submitActiveFilter : 'self', submitFormData : 'parent.subConsultForm', listeners : { 'click___dib*b2lknhcb5' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*b2lknhcb5',         containerItemId: 182606, submitUrl: '/dropins/dibExamples/SubContainer/testSubmissionData',         itemAlias: 'btnSubmissionDataGrid', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Print Submission Data" >
 				<md-tooltip md-direction="top" md-delay="500">
 					The following configs are on this button: submitHeaderFilter : \'self\', submitFilter : \'parent.subCompanyConsultGrid\', submitFormData : \'parent.subConsultForm\'
 				</md-tooltip>
 				Print Submission Data 
 			</md-button>
-			<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci155401' aria-label="emptyspan" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" >
+			<span flex=auto aria-label="emptyspan" can-be-moved=true flex="none" style="    " id='ci155401' aria-label="emptyspan" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" >
 			</span>
 			<md-button aria-label="btnfilteropen" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci182605' aria-label="btnfilteropen" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" >
 				<md-tooltip md-direction="top" md-delay="500">
@@ -52,7 +52,7 @@
 				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
 				</md-icon>
 			</md-button>
-			<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci155402' aria-label="gridtotals" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			<div aria-label="gridtotals" can-be-moved=true flex="none" layout="row" style="    " id='ci155402' aria-label="gridtotals" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
 				-1" >
 				<md-button ng-disabled="true" aria-label="Grid totals">
 					Records: {{page.fromRecord}}
@@ -79,9 +79,9 @@
 							Id*
 							<span ng-if="gridOptions.sortFields['id']">
 								({{gridOptions.sortFields['id']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -101,15 +101,15 @@
 							Test Company*
 							<span ng-if="gridOptions.sortFields['test_company_id']">
 								({{gridOptions.sortFields['test_company_id']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['test_company_id']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['test_company_id']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['test_company_id']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['test_company_id']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
 						<span ng-if="showSearch" dib-edit>
 							<div layout='row' aria-label="test_company_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company_id' select-model="search.selected___test_company_id.id" md-search-text-change="dropdowns.service155406.searchTextChange(dropdowns.service155406.searchText)" select-default="=parent.id" md-search-text="dropdowns.service155406.searchText" md-selected-item="search.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155406.getItems(dropdowns.service155406.searchText,'search')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155406(search,'search','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155406' aria-label="test_company_id" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company_id' select-model="search.selected___test_company_id.id" md-search-text-change="loadServiceciid(dropdowns.service155406.searchTextsearch)" select-default="=parent.id" md-search-text="dropdowns.service155406.searchTextsearch" md-selected-item="search.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155406.getItems(dropdowns.service155406.searchTextsearch,'search')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155406(search,'search','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155406' aria-label="test_company_id" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
 									<md-item-template>
 										<span md-highlight-text="dropdowns.service155406.searchText">
 											{{item.id_display_value}}
@@ -129,15 +129,15 @@
 							Consultant*
 							<span ng-if="gridOptions.sortFields['consultant_id']">
 								({{gridOptions.sortFields['consultant_id']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['consultant_id']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['consultant_id']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['consultant_id']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['consultant_id']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
 						<span ng-if="showSearch" dib-edit>
 							<div layout='row' aria-label="consultantId" can-be-moved=true item-alias="consultantId"    ng-show="!!view.consultantId == false || view.consultantId.visible"  dib-disable="{{view.consultantId.disabled}}" ng-class="view.consultantId.class"  ng-style="view.consultantId.style" flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='consultant_id' select-model="search.selected___consultant_id.id" md-search-text-change="dropdowns.service155407.searchTextChange(dropdowns.service155407.searchText)" md-search-text="dropdowns.service155407.searchText" md-selected-item="search.selected___consultant_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155407.getItems(dropdowns.service155407.searchText,'search')" md-floating-label="Consultant" md-no-cache="true" md-selected-item-change="select155407(search,'search','consultant_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Consultant" id='ci155407' aria-label="consultantId" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+								<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='consultant_id' select-model="search.selected___consultant_id.id" md-search-text-change="loadServiceciid(dropdowns.service155407.searchTextsearch)" md-search-text="dropdowns.service155407.searchTextsearch" md-selected-item="search.selected___consultant_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155407.getItems(dropdowns.service155407.searchTextsearch,'search')" md-floating-label="Consultant" md-no-cache="true" md-selected-item-change="select155407(search,'search','consultant_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Consultant" id='ci155407' aria-label="consultantId" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
 									<md-item-template>
 										<span md-highlight-text="dropdowns.service155407.searchText">
 											{{item.id_display_value}}
@@ -157,9 +157,9 @@
 							Date Started
 							<span ng-if="gridOptions.sortFields['date_started']">
 								({{gridOptions.sortFields['date_started']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['date_started']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['date_started']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['date_started']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['date_started']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -179,15 +179,15 @@
 							Position*
 							<span ng-if="gridOptions.sortFields['position']">
 								({{gridOptions.sortFields['position']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['position']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['position']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['position']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['position']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
 						<span ng-if="showSearch" dib-edit>
 							<md-input-container aria-label="position" can-be-moved=true item-alias="position"    ng-show="!!view.position == false || view.position.visible"  dib-disable="{{view.position.disabled}}" ng-class="view.position.class"  ng-style="view.position.style" flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-								<input type="text"  name="position" ng-model="search.position" aria-label="Position" ng-enter='searchGrid()' id='ci155410' aria-label="position" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'focus___dib*d289xko03' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'focus', nextActionItem: '', itemEventId: 'dib*d289xko03',         containerItemId: 155410, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'position', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
+								<input type="text"  name="position" ng-model="search.position" aria-label="Position" ng-enter='searchGrid()' id='ci155410' aria-label="position" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'focus___dib*ydk5y64je1' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'focus', nextActionItem: '', itemEventId: 'dib*ydk5y64je1',         containerItemId: 155410, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'position', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
 								<label>
 									Position
 								</label>
@@ -201,15 +201,15 @@
 							Scope*
 							<span ng-if="gridOptions.sortFields['scope']">
 								({{gridOptions.sortFields['scope']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['scope']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['scope']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['scope']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['scope']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
 						<span ng-if="showSearch" dib-edit>
 							<md-input-container aria-label="scope" can-be-moved=true item-alias="scope"    ng-show="!!view.scope == false || view.scope.visible"  dib-disable="{{view.scope.disabled}}" ng-class="view.scope.class"  ng-style="view.scope.style" flex="100" class="md-block" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-								<input type="text"  name="scope" ng-model="search.scope" aria-label="Scope" ng-enter='searchGrid()' id='ci155411' aria-label="scope" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'select___dib*ow21q0@*z9' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'select', nextActionItem: '', itemEventId: 'dib*ow21q0@*z9',         containerItemId: 155411, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'scope', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
+								<input type="text"  name="scope" ng-model="search.scope" aria-label="Scope" ng-enter='searchGrid()' id='ci155411' aria-label="scope" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'select___dib*eqb1a98sh81' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'select', nextActionItem: '', itemEventId: 'dib*eqb1a98sh81',         containerItemId: 155411, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'scope', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
 								<label>
 									Scope
 								</label>
@@ -223,15 +223,15 @@
 							Notes*
 							<span ng-if="gridOptions.sortFields['notes']">
 								({{gridOptions.sortFields['notes']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
 						<span ng-if="showSearch" dib-edit>
 							<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-								<input type="text"  name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155409' aria-label="notes" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'change___dib*b19mtgyax' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'change', nextActionItem: '', itemEventId: 'dib*b19mtgyax',         containerItemId: 155409, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
+								<input type="text"  name="notes" ng-model="search.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155409' aria-label="notes" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'change___dib*pz13l8l521' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'change', nextActionItem: '', itemEventId: 'dib*pz13l8l521',         containerItemId: 155409, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
 								<label>
 									Notes
 								</label>
@@ -243,7 +243,7 @@
 				</div>
 			</md-list-item>
 			<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='dibtestCompanyConsultantGrid' ng-if="gridOptions.inlineAddShow">
-				<ng-form name=dibtestCompanyConsultantGrid  dib-container-name="dibtestCompanyConsultantGrid" isolate-form layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+				<ng-form name=dibtestCompanyConsultantGrid  dib-container-name="dibtestCompanyConsultantGrid" layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
 					<div table-column layout="column" flex = 'none' dib-column="155405" style="width:80px;    " >
 						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
 							<div layout=row ng-if="!row.___editing" dib-view flex>
@@ -283,7 +283,7 @@
 							</div>
 							<span dib-edit ng-if="row.___editing" flex>
 								<div layout='row' aria-label="test_company_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='test_company_id' select-model="model.selected___test_company_id.id" md-search-text-change="dropdowns.service155406.searchTextChange(dropdowns.service155406.searchText)" select-default="=parent.id" md-search-text="dropdowns.service155406.searchText" md-selected-item="model.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155406.getItems(dropdowns.service155406.searchText,'model')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155406(model,'model','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155406' aria-label="test_company_id" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='test_company_id' select-model="model.selected___test_company_id.id" md-search-text-change="loadServiceciid(dropdowns.service155406.searchTextmodel)" select-default="=parent.id" md-search-text="dropdowns.service155406.searchTextmodel" md-selected-item="model.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155406.getItems(dropdowns.service155406.searchTextmodel,'model')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155406(model,'model','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155406' aria-label="test_company_id" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
 										<md-item-template>
 											<span md-highlight-text="dropdowns.service155406.searchText">
 												{{item.id_display_value}}
@@ -317,7 +317,7 @@
 							</div>
 							<span dib-edit ng-if="row.___editing" flex>
 								<div layout='row' aria-label="consultantId" can-be-moved=true item-alias="consultantId"    ng-show="!!view.consultantId == false || view.consultantId.visible"  dib-disable="{{view.consultantId.disabled}}" ng-class="view.consultantId.class"  ng-style="view.consultantId.style" flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='consultant_id' select-model="model.selected___consultant_id.id" md-search-text-change="dropdowns.service155407.searchTextChange(dropdowns.service155407.searchText)" md-search-text="dropdowns.service155407.searchText" md-selected-item="model.selected___consultant_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155407.getItems(dropdowns.service155407.searchText,'model')" md-floating-label="Consultant" md-no-cache="true" md-selected-item-change="select155407(model,'model','consultant_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Consultant" id='ci155407' aria-label="consultantId" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='consultant_id' select-model="model.selected___consultant_id.id" md-search-text-change="loadServiceciid(dropdowns.service155407.searchTextmodel)" md-search-text="dropdowns.service155407.searchTextmodel" md-selected-item="model.selected___consultant_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155407.getItems(dropdowns.service155407.searchTextmodel,'model')" md-floating-label="Consultant" md-no-cache="true" md-selected-item-change="select155407(model,'model','consultant_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Consultant" id='ci155407' aria-label="consultantId" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
 										<md-item-template>
 											<span md-highlight-text="dropdowns.service155407.searchText">
 												{{item.id_display_value}}
@@ -384,14 +384,14 @@
 										<label>
 											Position
 										</label>
-										<md-select    ng-required dib-data-component='enum' aria-label="position" dib-onload-service placeholder="Position" aria-label="position" md-on-close="select155410(model)" flex ng-model="model.position" name='position' id='ci155410' aria-label="position" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'focus___dib*d289xko03' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'focus', nextActionItem: '', itemEventId: 'dib*d289xko03',         containerItemId: 155410, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'position', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
+										<md-select    required md-require-match='true' dib-data-component='enum' aria-label="position" dib-onload-service placeholder="Position" aria-label="position" md-on-close="select155410(model)" flex ng-model="model.position" name='position' id='ci155410' aria-label="position" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'focus___dib*ydk5y64je1' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'focus', nextActionItem: '', itemEventId: 'dib*ydk5y64je1',         containerItemId: 155410, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'position', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
 											<md-option ng-repeat="state in ['supervisor','team member','administrator']" value="{{state}}"  >
 												{{state}} 
 											</md-option>
 										</md-select>
-										<div ng-messages="dibtestCompanyConsultantGrid.position.$error">
+										<div ng-messages="dibtestCompanyConsultantGrid.position.$error" ng-if="dibtestCompanyConsultantGrid.position.$touched">
 											<div ng-message="required">
-												Position required.
+												Please make a valid selection.
 											</div>
 										</div>
 									</md-input-container>
@@ -414,14 +414,14 @@
 										<label>
 											Scope
 										</label>
-										<md-select    ng-required dib-data-component='enum' aria-label="scope" dib-onload-service placeholder="Scope" aria-label="scope" md-on-close="select155411(model)" flex ng-model="model.scope" name='scope' id='ci155411' aria-label="scope" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'select___dib*ow21q0@*z9' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'select', nextActionItem: '', itemEventId: 'dib*ow21q0@*z9',         containerItemId: 155411, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'scope', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
+										<md-select    required md-require-match='true' dib-data-component='enum' aria-label="scope" dib-onload-service placeholder="Scope" aria-label="scope" md-on-close="select155411(model)" flex ng-model="model.scope" name='scope' id='ci155411' aria-label="scope" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'select___dib*eqb1a98sh81' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'select', nextActionItem: '', itemEventId: 'dib*eqb1a98sh81',         containerItemId: 155411, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'scope', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
 											<md-option ng-repeat="state in ['basic','smart','terrabyte','yottabyte']" value="{{state}}"  >
 												{{state}} 
 											</md-option>
 										</md-select>
-										<div ng-messages="dibtestCompanyConsultantGrid.scope.$error">
+										<div ng-messages="dibtestCompanyConsultantGrid.scope.$error" ng-if="dibtestCompanyConsultantGrid.scope.$touched">
 											<div ng-message="required">
-												Scope required.
+												Please make a valid selection.
 											</div>
 										</div>
 									</md-input-container>
@@ -440,7 +440,7 @@
 							</div>
 							<span dib-edit ng-if="row.___editing" flex>
 								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-									<input type="text"  required name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155409' aria-label="notes" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'change___dib*b19mtgyax' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'change', nextActionItem: '', itemEventId: 'dib*b19mtgyax',         containerItemId: 155409, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
+									<input type="text"  required name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155409' aria-label="notes" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'change___dib*pz13l8l521' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'change', nextActionItem: '', itemEventId: 'dib*pz13l8l521',         containerItemId: 155409, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
 									<label>
 										Notes*
 									</label>
@@ -479,7 +479,7 @@
 				</div>
 			</md-list-item>
 			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)" >
-				<ng-form name='dibtestCompanyConsultantGrid' dib-container-name="dibtestCompanyConsultantGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+				<ng-form name='dibtestCompanyConsultantGrid' dib-container-name="dibtestCompanyConsultantGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
 					<div table-column layout="column" flex = 'none' dib-column="155405" style="width:80px;    " >
 						<div aria-label="id" can-be-moved=true flex="100" class="md-body-2" layout="row" layout-align="start top" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
 							<div layout=row ng-if="!row.___editing" dib-view flex>
@@ -519,7 +519,7 @@
 							</div>
 							<span dib-edit ng-if="row.___editing" flex>
 								<div layout='row' aria-label="test_company_id" can-be-moved=true flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='test_company_id' select-model="model.selected___test_company_id.id" md-search-text-change="dropdowns.service155406.searchTextChange(dropdowns.service155406.searchText)" select-default="=parent.id" md-search-text="dropdowns.service155406.searchText" md-selected-item="model.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155406.getItems(dropdowns.service155406.searchText,'model')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155406(model,'model','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155406' aria-label="test_company_id" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='test_company_id' select-model="model.selected___test_company_id.id" md-search-text-change="loadServiceciid(dropdowns.service155406.searchTextmodel)" select-default="=parent.id" md-search-text="dropdowns.service155406.searchTextmodel" md-selected-item="model.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155406.getItems(dropdowns.service155406.searchTextmodel,'model')" md-floating-label="Test Company" md-no-cache="true" md-selected-item-change="select155406(model,'model','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Test Company" id='ci155406' aria-label="test_company_id" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
 										<md-item-template>
 											<span md-highlight-text="dropdowns.service155406.searchText">
 												{{item.id_display_value}}
@@ -553,7 +553,7 @@
 							</div>
 							<span dib-edit ng-if="row.___editing" flex>
 								<div layout='row' aria-label="consultantId" can-be-moved=true item-alias="consultantId"    ng-show="!!view.consultantId == false || view.consultantId.visible"  dib-disable="{{view.consultantId.disabled}}" ng-class="view.consultantId.class"  ng-style="view.consultantId.style" flex="100" style="    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='consultant_id' select-model="model.selected___consultant_id.id" md-search-text-change="dropdowns.service155407.searchTextChange(dropdowns.service155407.searchText)" md-search-text="dropdowns.service155407.searchText" md-selected-item="model.selected___consultant_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155407.getItems(dropdowns.service155407.searchText,'model')" md-floating-label="Consultant" md-no-cache="true" md-selected-item-change="select155407(model,'model','consultant_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Consultant" id='ci155407' aria-label="consultantId" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
+									<md-autocomplete  flex dib-onload-service  has-store="true" required md-require-match='true' md-input-name='consultant_id' select-model="model.selected___consultant_id.id" md-search-text-change="loadServiceciid(dropdowns.service155407.searchTextmodel)" md-search-text="dropdowns.service155407.searchTextmodel" md-selected-item="model.selected___consultant_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155407.getItems(dropdowns.service155407.searchTextmodel,'model')" md-floating-label="Consultant" md-no-cache="true" md-selected-item-change="select155407(model,'model','consultant_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Consultant" id='ci155407' aria-label="consultantId" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
 										<md-item-template>
 											<span md-highlight-text="dropdowns.service155407.searchText">
 												{{item.id_display_value}}
@@ -620,14 +620,14 @@
 										<label>
 											Position
 										</label>
-										<md-select    ng-required dib-data-component='enum' aria-label="position" dib-onload-service placeholder="Position" aria-label="position" md-on-close="select155410(model)" flex ng-model="model.position" name='position' id='ci155410' aria-label="position" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'focus___dib*d289xko03' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'focus', nextActionItem: '', itemEventId: 'dib*d289xko03',         containerItemId: 155410, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'position', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
+										<md-select    required md-require-match='true' dib-data-component='enum' aria-label="position" dib-onload-service placeholder="Position" aria-label="position" md-on-close="select155410(model)" flex ng-model="model.position" name='position' id='ci155410' aria-label="position" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'focus___dib*ydk5y64je1' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'focus', nextActionItem: '', itemEventId: 'dib*ydk5y64je1',         containerItemId: 155410, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'position', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
 											<md-option ng-repeat="state in ['supervisor','team member','administrator']" value="{{state}}"  >
 												{{state}} 
 											</md-option>
 										</md-select>
-										<div ng-messages="dibtestCompanyConsultantGrid.position.$error">
+										<div ng-messages="dibtestCompanyConsultantGrid.position.$error" ng-if="dibtestCompanyConsultantGrid.position.$touched">
 											<div ng-message="required">
-												Position required.
+												Please make a valid selection.
 											</div>
 										</div>
 									</md-input-container>
@@ -650,14 +650,14 @@
 										<label>
 											Scope
 										</label>
-										<md-select    ng-required dib-data-component='enum' aria-label="scope" dib-onload-service placeholder="Scope" aria-label="scope" md-on-close="select155411(model)" flex ng-model="model.scope" name='scope' id='ci155411' aria-label="scope" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'select___dib*ow21q0@*z9' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'select', nextActionItem: '', itemEventId: 'dib*ow21q0@*z9',         containerItemId: 155411, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'scope', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
+										<md-select    required md-require-match='true' dib-data-component='enum' aria-label="scope" dib-onload-service placeholder="Scope" aria-label="scope" md-on-close="select155411(model)" flex ng-model="model.scope" name='scope' id='ci155411' aria-label="scope" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'select___dib*eqb1a98sh81' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'select', nextActionItem: '', itemEventId: 'dib*eqb1a98sh81',         containerItemId: 155411, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: 'scope', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
 											<md-option ng-repeat="state in ['basic','smart','terrabyte','yottabyte']" value="{{state}}"  >
 												{{state}} 
 											</md-option>
 										</md-select>
-										<div ng-messages="dibtestCompanyConsultantGrid.scope.$error">
+										<div ng-messages="dibtestCompanyConsultantGrid.scope.$error" ng-if="dibtestCompanyConsultantGrid.scope.$touched">
 											<div ng-message="required">
-												Scope required.
+												Please make a valid selection.
 											</div>
 										</div>
 									</md-input-container>
@@ -676,7 +676,7 @@
 							</div>
 							<span dib-edit ng-if="row.___editing" flex>
 								<md-input-container aria-label="notes" can-be-moved=true flex="100" class="md-block" style="    " dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere. ' dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant' >
-									<input type="text"  required name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155409' aria-label="notes" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'change___dib*b19mtgyax' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'change', nextActionItem: '', itemEventId: 'dib*b19mtgyax',         containerItemId: 155409, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
+									<input type="text"  required name="notes" ng-model="model.notes" aria-label="Notes" ng-enter='searchGrid()' id='ci155409' aria-label="notes" dib-container-name='dibtestCompanyConsultantGrid' dib-config="{ listeners : { 'change___dib*pz13l8l521' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibtestCompanyConsultantGrid', triggerType: 'change', nextActionItem: '', itemEventId: 'dib*pz13l8l521',         containerItemId: 155409, submitUrl: 'Dropins.dibExamples.js.app.setItems',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
 									<label>
 										Notes*
 									</label>

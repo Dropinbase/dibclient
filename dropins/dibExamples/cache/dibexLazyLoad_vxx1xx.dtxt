@@ -1,169 +1,747 @@
- 
-<div component-loaded dib-container=dibexLazyLoad dib-container-name="7152" dib-config="{ }" layout-fill flex>
-	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
-	</md-progress-linear>
-	<span aria-label="headQuickFacts" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155325' aria-label="headQuickFacts" dib-container-name='dibexLazyLoad' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-		<span style="font-size:20px">
-			Quick Facts
-		</span>
-	</span>
-	<span aria-label="commentQuickFacts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155324' aria-label="commentQuickFacts" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-		<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-			While ports provide a way of deferring the load of containers until requested, lazy loading does the same for items within a specific container.
-			<br>
-			Items where the display_on_load field is unticked are not loaded to the browser until either a port or a lazy load action requires them.
-			<br>
-			There are three methods of performing lazy loading, illustrated by the buttons and links below
-			<br>
-			All methods of lazy loading use the following fields and basic principles: 
-			<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0">
-				<li>
-					A parent item is selected  (named the 
-					<strong>
-						lazyLoadParent
-					</strong>
-					) that must have an Alias, must already be loaded in the browser, and must be a common ancestor to all the items that should be loaded. It need not be a direct parent of them.
-				</li>
-				<li>
-					Dropinbase searches for the lazyLoadParent, and then issues a server call to fetch the child items that must be loaded.
-				</li>
-				<li>
-					If a 
-					<em>
-						tag 
-					</em>
-					is specified then all the items containing the tag string in the 
-					<em>
-						lazy_load_tag
-					</em>
-					field, plus all their parent items up to the lazyLoadParent is returned.
-				</li>
-				<li>
-					If no 
-					<em>
-						tag
-					</em>
-					is specified then all descendant items of lazyLoadParent are returned.
-				</li>
-				<li>
-					The logic of the &quot;Lazy Load Option&quot; (eg all, none, lazy, etc) is executed on all child items of the 
-					<em>
-						pef_lazy_load_parent_id 
-					</em>
-					item.
-				</li>
-			</ul>
-			<br>
-			<span style="border:1px; border-style:solid; border-color:#00137F; background-color: #FFF9E0">
-				<b>
-					See 
-					<a href="/nav/dibDocs?id=51&text=Lazy%20Loading%20Items">
-						Lazy Loading Items
-					</a>
-					for more info.
-				</b>
-			</span>
-		</p>
-	</span>
-	<span aria-label="headBasicLazyLoading" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155327' aria-label="headBasicLazyLoading" dib-container-name='dibexLazyLoad' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-		<span style="font-size:20px">
-			Basic Lazy Loading
-		</span>
-	</span>
-	<span aria-label="commentBasicLazyLoading" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155326' aria-label="commentBasicLazyLoading" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-		<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-			The fieldset below, with Alias fieldsetParent, is used as a lazyLoadParent.
-			<br>
-			The three htmllabels that are loaded have tag strings that allow us to load more than one, or all of them, with the same event.
-			<br>
-			The 'lazy' option is used on all events to replace items (with each new call) that have been previously lazy loaded. 
-		</p>
-	</span>
-	<md-toolbar aria-label="toolbarItemEvent" can-be-moved=true can-have-children=true flex=none class="md-menu-toolbar" style="    " id='ci155291' aria-label="toolbarItemEvent" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-		<div class="md-toolbar-tools">
-			<span aria-label="labelUsingItemEvent" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155295' aria-label="labelUsingItemEvent" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-				Using Item Event Parameters: 
-			</span>
-			<md-button aria-label="buttonTaga" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155292' aria-label="buttonTaga" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*lc3-n21rbw' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ containerName: 'dibexLazyLoad',    field : element , triggerType: 'click', nextActionItem: '', itemAlias: element.attr('item-alias'), itemEventId: 'dib*lc3-n21rbw',          containerItemId: 155292, submitUrl: 'dibGlobals.action.lazyLoadChildren', refreshItemId : '', responseType: 'actions', scope : scope, params : { containerName : 'dibexLazyLoad', parentItemId: '155287', removeExistingItems:  'lazy', activeItemAlias : '', tag: 'A', submitUrl :  '', responseType: 'actions', field : element } }, additionalInfoOnEvent); }  } }" aria-label="Load all: those with tag 'a'" >
-				Load all: those with tag 'a' 
-			</md-button>
-			<md-button aria-label="buttonTagAAA" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155293' aria-label="buttonTagAAA" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*@5utqm*1v' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ containerName: 'dibexLazyLoad',    field : element , triggerType: 'click', nextActionItem: '', itemAlias: element.attr('item-alias'), itemEventId: 'dib*@5utqm*1v',          containerItemId: 155293, submitUrl: 'dibGlobals.action.lazyLoadChildren', refreshItemId : '', responseType: 'actions', scope : scope, params : { containerName : 'dibexLazyLoad', parentItemId: '155287', removeExistingItems:  'lazy', activeItemAlias : '', tag: 'AAA', submitUrl :  '', responseType: 'actions', field : element } }, additionalInfoOnEvent); }  } }" aria-label="Load those with tag 'aaa'" >
-				Load those with tag 'aaa' 
-			</md-button>
-			<md-button aria-label="buttonTagCCC" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155294' aria-label="buttonTagCCC" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*ie1**2m9' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ containerName: 'dibexLazyLoad',    field : element , triggerType: 'click', nextActionItem: '', itemAlias: element.attr('item-alias'), itemEventId: 'dib*ie1**2m9',          containerItemId: 155294, submitUrl: 'dibGlobals.action.lazyLoadChildren', refreshItemId : '', responseType: 'actions', scope : scope, params : { containerName : 'dibexLazyLoad', parentItemId: '155287', removeExistingItems:  'lazy', activeItemAlias : '', tag: 'CCC', submitUrl :  '', responseType: 'actions', field : element } }, additionalInfoOnEvent); }  } }" aria-label="Load those with tag 'ccc'" >
-				Load those with tag 'ccc' 
-			</md-button>
-		</div>
-	</md-toolbar>
-	<md-toolbar aria-label="toolbarPHP" can-be-moved=true can-have-children=true flex=none class="md-menu-toolbar" style="    " id='ci155313' aria-label="toolbarPHP" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-		<div class="md-toolbar-tools">
-			<span aria-label="labelUsingPHP" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155317' aria-label="labelUsingPHP" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-				Using PHP Server Actions:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-			</span>
-			<md-button aria-label="buttonPHPA" can-be-moved=true item-alias="buttonPHPA"    ng-show="!!view.buttonPHPA == false || view.buttonPHPA.visible"  dib-disable="{{view.buttonPHPA.disabled}}" ng-class="view.buttonPHPA.class"  ng-style="view.buttonPHPA.style" flex=none class="md-raised md-primary" style="    " id='ci155314' aria-label="buttonPHPA" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*lqfzmh3jt' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexLazyLoad', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*lqfzmh3jt',         containerItemId: 155314, submitUrl: '/dropins/dibExamples/LazyLoad/loadInFieldset',         itemAlias: 'buttonPHPA', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Load all: those with tag 'a'" >
-				Load all: those with tag 'a' 
-			</md-button>
-			<md-button aria-label="buttonPHPAAA" can-be-moved=true item-alias="buttonPHPAAA"    ng-show="!!view.buttonPHPAAA == false || view.buttonPHPAAA.visible"  dib-disable="{{view.buttonPHPAAA.disabled}}" ng-class="view.buttonPHPAAA.class"  ng-style="view.buttonPHPAAA.style" flex=none class="md-raised md-primary" style="    " id='ci155315' aria-label="buttonPHPAAA" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*atb9e8skk' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexLazyLoad', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*atb9e8skk',         containerItemId: 155315, submitUrl: '/dropins/dibExamples/LazyLoad/loadInFieldset',         itemAlias: 'buttonPHPAAA', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Load those with tag 'aaa'" >
-				Load those with tag 'aaa' 
-			</md-button>
-			<md-button aria-label="buttonPHPCCC" can-be-moved=true item-alias="buttonPHPCCC"    ng-show="!!view.buttonPHPCCC == false || view.buttonPHPCCC.visible"  dib-disable="{{view.buttonPHPCCC.disabled}}" ng-class="view.buttonPHPCCC.class"  ng-style="view.buttonPHPCCC.style" flex=none class="md-raised md-primary" style="    " id='ci155316' aria-label="buttonPHPCCC" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*o7ybb266e' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexLazyLoad', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*o7ybb266e',         containerItemId: 155316, submitUrl: '/dropins/dibExamples/LazyLoad/loadInFieldset',         itemAlias: 'buttonPHPCCC', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Load those with tag 'ccc'" >
-				Load those with tag 'ccc' 
-			</md-button>
-		</div>
-	</md-toolbar>
-	<md-card  aria-label="parentFieldset" can-be-moved=true item-alias="parentFieldset"    ng-show="!!view.parentFieldset == false || view.parentFieldset.visible"  dib-disable="{{view.parentFieldset.disabled}}" ng-class="view.parentFieldset.class"  ng-style="view.parentFieldset.style" can-have-children=true on-move-refresh-preview=true flex layout="column" class="standard" style="    " id='ci155287' aria-label="parentFieldset" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-		<md-card-content>
-			<section layout-fill>
-				<md-subheader class="cl-md-accent md-no-sticky">
-					Alias = parentFieldset
-				</md-subheader>
-			</section>
-		</md-card-content>
-	</md-card>
-	<span aria-label="headLoadingNestedItems" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155329' aria-label="headLoadingNestedItems" dib-container-name='dibexLazyLoad' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-		<span style="font-size:20px">
-			Loading Nested Items
-		</span>
-	</span>
-	<span aria-label="commentLoadingNestedItems" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155328' aria-label="commentLoadingNestedItems" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-		<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-			A layoutColumn component (which does not display initially since it has no child items), with Alias colParent, is used as lazyLoadParent.
-			<br>
-			It has various nested components. We have allocated tag strings to the leaf items to indicate the bottom most items to be loaded with each event. 
-		</p>
-	</span>
-	<md-toolbar aria-label="toolbar3" can-be-moved=true can-have-children=true flex=none class="md-menu-toolbar" style="    " id='ci155296' aria-label="toolbar3" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-		<div class="md-toolbar-tools">
-			<span aria-label="labelUsingItemEvents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155300' aria-label="labelUsingItemEvents" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-				Using Item Event Parameters: 
-			</span>
-			<md-button aria-label="buttonTagD" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155297' aria-label="buttonTagD" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*9ja41yzqt' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ containerName: 'dibexLazyLoad',    field : element , triggerType: 'click', nextActionItem: '', itemAlias: element.attr('item-alias'), itemEventId: 'dib*9ja41yzqt',          containerItemId: 155297, submitUrl: 'dibGlobals.action.lazyLoadChildren', refreshItemId : '', responseType: 'actions', scope : scope, params : { containerName : 'dibexLazyLoad', parentItemId: '155301', removeExistingItems:  'lazy', activeItemAlias : '', tag: 'D', submitUrl :  '', responseType: 'actions', field : element } }, additionalInfoOnEvent); }  } }" aria-label="Load all: those with tag 'd'" >
-				Load all: those with tag 'd' 
-			</md-button>
-			<md-button aria-label="buttonTagDDD" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155298' aria-label="buttonTagDDD" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*q2s2m11lxt' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ containerName: 'dibexLazyLoad',    field : element , triggerType: 'click', nextActionItem: '', itemAlias: element.attr('item-alias'), itemEventId: 'dib*q2s2m11lxt',          containerItemId: 155298, submitUrl: 'dibGlobals.action.lazyLoadChildren', refreshItemId : '', responseType: 'actions', scope : scope, params : { containerName : 'dibexLazyLoad', parentItemId: '155301', removeExistingItems:  'lazy', activeItemAlias : '', tag: 'DDD', submitUrl :  '', responseType: 'actions', field : element } }, additionalInfoOnEvent); }  } }" aria-label="Load those with tag 'ddd'" >
-				Load those with tag 'ddd' 
-			</md-button>
-			<md-button aria-label="buttonTagFFF" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155299' aria-label="buttonTagFFF" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*6cyzcr4da' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ containerName: 'dibexLazyLoad',    field : element , triggerType: 'click', nextActionItem: '', itemAlias: element.attr('item-alias'), itemEventId: 'dib*6cyzcr4da',          containerItemId: 155299, submitUrl: 'dibGlobals.action.lazyLoadChildren', refreshItemId : '', responseType: 'actions', scope : scope, params : { containerName : 'dibexLazyLoad', parentItemId: '155301', removeExistingItems:  'lazy', activeItemAlias : '', tag: 'FFF', submitUrl :  '', responseType: 'actions', field : element } }, additionalInfoOnEvent); }  } }" aria-label="Load those with tag 'fff'" >
-				Load those with tag 'fff' 
-			</md-button>
-		</div>
-	</md-toolbar>
-	<md-toolbar aria-label="toolbar41" can-be-moved=true can-have-children=true flex=none class="md-menu-toolbar" style="    " id='ci155318' aria-label="toolbar41" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-		<div class="md-toolbar-tools">
-			<span aria-label="htmllabel42" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155322' aria-label="htmllabel42" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { } }" >
-				Using PHP Server Actions:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-			</span>
-			<md-button aria-label="buttonPHPD" can-be-moved=true item-alias="buttonPHPD"    ng-show="!!view.buttonPHPD == false || view.buttonPHPD.visible"  dib-disable="{{view.buttonPHPD.disabled}}" ng-class="view.buttonPHPD.class"  ng-style="view.buttonPHPD.style" flex=none class="md-raised md-primary" style="    " id='ci155319' aria-label="buttonPHPD" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*p6rv21tf5' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexLazyLoad', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*p6rv21tf5',         containerItemId: 155319, submitUrl: '/dropins/dibExamples/LazyLoad/loadInColParent',         itemAlias: 'buttonPHPD', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Load all: those with tag 'd'" >
-				Load all: those with tag 'd' 
-			</md-button>
-			<md-button aria-label="buttonPHPDDD" can-be-moved=true item-alias="buttonPHPDDD"    ng-show="!!view.buttonPHPDDD == false || view.buttonPHPDDD.visible"  dib-disable="{{view.buttonPHPDDD.disabled}}" ng-class="view.buttonPHPDDD.class"  ng-style="view.buttonPHPDDD.style" flex=none class="md-raised md-primary" style="    " id='ci155320' aria-label="buttonPHPDDD" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*yx-1hazvk' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexLazyLoad', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*yx-1hazvk',         containerItemId: 155320, submitUrl: '/dropins/dibExamples/LazyLoad/loadInColParent',         itemAlias: 'buttonPHPDDD', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Load those with tag 'ddd'" >
-				Load those with tag 'ddd' 
-			</md-button>
-			<md-button aria-label="buttonPHPFFF" can-be-moved=true item-alias="buttonPHPFFF"    ng-show="!!view.buttonPHPFFF == false || view.buttonPHPFFF.visible"  dib-disable="{{view.buttonPHPFFF.disabled}}" ng-class="view.buttonPHPFFF.class"  ng-style="view.buttonPHPFFF.style" flex=none class="md-raised md-primary" style="    " id='ci155321' aria-label="buttonPHPFFF" dib-container-name='dibexLazyLoad' dib-config="{ listeners : { 'click___dib*ilkvtr38l' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexLazyLoad', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*ilkvtr38l',         containerItemId: 155321, submitUrl: '/dropins/dibExamples/LazyLoad/loadInColParent',         itemAlias: 'buttonPHPFFF', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Load those with tag 'fff'" >
-				Load those with tag 'fff' 
-			</md-button>
-		</div>
-	</md-toolbar>
-	<div dib-inject-content="replace" layout='column' aria-label="colParent" can-be-moved=true item-alias="colParent"    ng-show="!!view.colParent == false || view.colParent.visible"  dib-disable="{{view.colParent.disabled}}" ng-class="view.colParent.class"  ng-style="view.colParent.style" can-have-children=true on-move-refresh-preview=true flex style="width:100% !important; height:450px !important; overflow:auto !important;   " id='ci155301' aria-label="colParent" dib-container-name='dibexLazyLoad' dib-config="{ margins : '20 0 0 0', listeners : { } }" fill-height-for-child >
-	</div>
+
+<div
+component-loaded
+dib-container=dibexLazyLoad dib-container-name="7152" dib-config="{
+}" layout-fill flex>
+    <md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+    <span aria-label="headQuickFacts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155325'
+aria-label="headQuickFacts"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Quick Facts</span>
+</span>
+    <span aria-label="commentQuickFacts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155324'
+aria-label="commentQuickFacts"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    While ports provide a way of deferring the load of containers until requested, lazy loading does the same for items within a specific container.<br>Items where the display_on_load field is unticked are not loaded to the browser until either a port or a lazy load action requires them.<br>There are three methods of performing lazy loading, illustrated by the buttons and links below<br>All methods of lazy loading use the following fields and basic principles:
+<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0"><li>A parent item is selected  (named the <strong>lazyLoadParent</strong>) that must have an Alias, must already be loaded in the browser, and must be a common ancestor to all the items that should be loaded. It need not be a direct parent of them.</li><li>Dropinbase searches for the lazyLoadParent, and then issues a server call to fetch the child items that must be loaded.</li><li>If a <em>tag </em>is specified then all the items containing the tag string in the <em>lazy_load_tag</em> field, plus all their parent items up to the lazyLoadParent is returned.</li><li>If no <em>tag</em> is specified then all descendant items of lazyLoadParent are returned.</li><li>The logic of the &quot;Lazy Load Option&quot; (eg all, none, lazy, etc) is executed on all child items of the <em>pef_lazy_load_parent_id </em>item.</li></ul><br>
+<span style="border:1px; border-style:solid; border-color:#00137F; background-color: #FFF9E0"><b>See <a href="/nav/dibDocs?id=51&text=Lazy%20Loading%20Items">Lazy Loading Items</a> for more info.</b></span>
+    </p>    
+</span>
+    <span aria-label="headBasicLazyLoading"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155327'
+aria-label="headBasicLazyLoading"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Basic Lazy Loading</span>
+</span>
+    <span aria-label="commentBasicLazyLoading"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155326'
+aria-label="commentBasicLazyLoading"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The fieldset below, with Alias fieldsetParent, is used as a lazyLoadParent.<br>The three htmllabels that are loaded have tag strings that allow us to load more than one, or all of them, with the same event.<br>The 'lazy' option is used on all events to replace items (with each new call) that have been previously lazy loaded.
+    </p>    
+</span>
+    <md-toolbar aria-label="toolbarItemEvent"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+class="md-menu-toolbar"
+style="    "
+   id='ci155291'
+aria-label="toolbarItemEvent"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <div class="md-toolbar-tools">
+    <span aria-label="labelUsingItemEvent"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155295'
+aria-label="labelUsingItemEvent"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Using Item Event Parameters:
+</span>
+<md-button aria-label="buttonTaga"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155292'
+aria-label="buttonTaga"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*xncm8w2j41' : function(field, additionalInfoOnEvent) { 
+    dibAction.executeAction({
+        containerName: 'dibexLazyLoad',   
+        field : element
+        ,
+        triggerType: 'click',
+        nextActionItem: '',
+        itemAlias: element.attr('item-alias'),
+        itemEventId: 'dib*xncm8w2j41',         
+        containerItemId: 155292,
+        submitUrl: 'dibGlobals.action.lazyLoadChildren',
+        refreshItemId : '',
+        responseType: 'actions',
+        scope : scope,
+        params : {
+		      containerName : 'dibexLazyLoad',
+              parentItemId: '155287',
+              removeExistingItems:  'lazy',
+              activeItemAlias : '',
+              tag: 'A',
+              submitUrl :  '',
+              responseType: 'actions',
+              field : element
+        }
+    }, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load all: those with tag 'a'"
+>
+    Load all: those with tag 'a'
+</md-button>
+<md-button aria-label="buttonTagAAA"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155293'
+aria-label="buttonTagAAA"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*cysjq11ww3' : function(field, additionalInfoOnEvent) { 
+    dibAction.executeAction({
+        containerName: 'dibexLazyLoad',   
+        field : element
+        ,
+        triggerType: 'click',
+        nextActionItem: '',
+        itemAlias: element.attr('item-alias'),
+        itemEventId: 'dib*cysjq11ww3',         
+        containerItemId: 155293,
+        submitUrl: 'dibGlobals.action.lazyLoadChildren',
+        refreshItemId : '',
+        responseType: 'actions',
+        scope : scope,
+        params : {
+		      containerName : 'dibexLazyLoad',
+              parentItemId: '155287',
+              removeExistingItems:  'lazy',
+              activeItemAlias : '',
+              tag: 'AAA',
+              submitUrl :  '',
+              responseType: 'actions',
+              field : element
+        }
+    }, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load those with tag 'aaa'"
+>
+    Load those with tag 'aaa'
+</md-button>
+<md-button aria-label="buttonTagCCC"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155294'
+aria-label="buttonTagCCC"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*t4wxch4f61' : function(field, additionalInfoOnEvent) { 
+    dibAction.executeAction({
+        containerName: 'dibexLazyLoad',   
+        field : element
+        ,
+        triggerType: 'click',
+        nextActionItem: '',
+        itemAlias: element.attr('item-alias'),
+        itemEventId: 'dib*t4wxch4f61',         
+        containerItemId: 155294,
+        submitUrl: 'dibGlobals.action.lazyLoadChildren',
+        refreshItemId : '',
+        responseType: 'actions',
+        scope : scope,
+        params : {
+		      containerName : 'dibexLazyLoad',
+              parentItemId: '155287',
+              removeExistingItems:  'lazy',
+              activeItemAlias : '',
+              tag: 'CCC',
+              submitUrl :  '',
+              responseType: 'actions',
+              field : element
+        }
+    }, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load those with tag 'ccc'"
+>
+    Load those with tag 'ccc'
+</md-button>
+    </div>
+</md-toolbar>
+    <md-toolbar aria-label="toolbarPHP"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+class="md-menu-toolbar"
+style="    "
+   id='ci155313'
+aria-label="toolbarPHP"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <div class="md-toolbar-tools">
+    <span aria-label="labelUsingPHP"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155317'
+aria-label="labelUsingPHP"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Using PHP Server Actions:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>
+<md-button aria-label="buttonPHPA"
+can-be-moved=true
+item-alias="buttonPHPA"   
+    ng-show="!!view.buttonPHPA == false || view.buttonPHPA.visible" 
+    dib-disable="{{view.buttonPHPA.disabled}}"
+    ng-class="view.buttonPHPA.class" 
+    ng-style="view.buttonPHPA.style"
+class="md-raised md-primary"
+style="    "
+    id='ci155314'
+aria-label="buttonPHPA"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*spxgxtf92' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexLazyLoad',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*spxgxtf92',        
+        containerItemId: 155314,
+        submitUrl: '/dropins/dibExamples/LazyLoad/loadInFieldset',        
+        itemAlias: 'buttonPHPA',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load all: those with tag 'a'"
+>
+    Load all: those with tag 'a'
+</md-button>
+<md-button aria-label="buttonPHPAAA"
+can-be-moved=true
+item-alias="buttonPHPAAA"   
+    ng-show="!!view.buttonPHPAAA == false || view.buttonPHPAAA.visible" 
+    dib-disable="{{view.buttonPHPAAA.disabled}}"
+    ng-class="view.buttonPHPAAA.class" 
+    ng-style="view.buttonPHPAAA.style"
+class="md-raised md-primary"
+style="    "
+    id='ci155315'
+aria-label="buttonPHPAAA"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*j47in31wzb1' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexLazyLoad',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*j47in31wzb1',        
+        containerItemId: 155315,
+        submitUrl: '/dropins/dibExamples/LazyLoad/loadInFieldset',        
+        itemAlias: 'buttonPHPAAA',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load those with tag 'aaa'"
+>
+    Load those with tag 'aaa'
+</md-button>
+<md-button aria-label="buttonPHPCCC"
+can-be-moved=true
+item-alias="buttonPHPCCC"   
+    ng-show="!!view.buttonPHPCCC == false || view.buttonPHPCCC.visible" 
+    dib-disable="{{view.buttonPHPCCC.disabled}}"
+    ng-class="view.buttonPHPCCC.class" 
+    ng-style="view.buttonPHPCCC.style"
+class="md-raised md-primary"
+style="    "
+    id='ci155316'
+aria-label="buttonPHPCCC"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*l9kuyw7tu' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexLazyLoad',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*l9kuyw7tu',        
+        containerItemId: 155316,
+        submitUrl: '/dropins/dibExamples/LazyLoad/loadInFieldset',        
+        itemAlias: 'buttonPHPCCC',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load those with tag 'ccc'"
+>
+    Load those with tag 'ccc'
+</md-button>
+    </div>
+</md-toolbar>
+    <md-card  aria-label="parentFieldset"
+can-be-moved=true
+item-alias="parentFieldset"   
+    ng-show="!!view.parentFieldset == false || view.parentFieldset.visible" 
+    dib-disable="{{view.parentFieldset.disabled}}"
+    ng-class="view.parentFieldset.class" 
+    ng-style="view.parentFieldset.style"
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout="column" class="standard"
+style="    "
+    id='ci155287'
+aria-label="parentFieldset"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+ >
+        <md-card-content>
+            <section layout-fill>
+                <md-subheader class="cl-md-accent md-no-sticky">Alias = parentFieldset</md-subheader>
+            </section>
+    </md-card-content>
+</md-card>
+    <span aria-label="headLoadingNestedItems"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155329'
+aria-label="headLoadingNestedItems"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Loading Nested Items</span>
+</span>
+    <span aria-label="commentLoadingNestedItems"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155328'
+aria-label="commentLoadingNestedItems"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    A layoutColumn component (which does not display initially since it has no child items), with Alias colParent, is used as lazyLoadParent.<br>It has various nested components. We have allocated tag strings to the leaf items to indicate the bottom most items to be loaded with each event.
+    </p>    
+</span>
+    <md-toolbar aria-label="toolbar3"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+class="md-menu-toolbar"
+style="    "
+   id='ci155296'
+aria-label="toolbar3"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <div class="md-toolbar-tools">
+    <span aria-label="labelUsingItemEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155300'
+aria-label="labelUsingItemEvents"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Using Item Event Parameters:
+</span>
+<md-button aria-label="buttonTagD"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155297'
+aria-label="buttonTagD"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*z8812krme' : function(field, additionalInfoOnEvent) { 
+    dibAction.executeAction({
+        containerName: 'dibexLazyLoad',   
+        field : element
+        ,
+        triggerType: 'click',
+        nextActionItem: '',
+        itemAlias: element.attr('item-alias'),
+        itemEventId: 'dib*z8812krme',         
+        containerItemId: 155297,
+        submitUrl: 'dibGlobals.action.lazyLoadChildren',
+        refreshItemId : '',
+        responseType: 'actions',
+        scope : scope,
+        params : {
+		      containerName : 'dibexLazyLoad',
+              parentItemId: '155301',
+              removeExistingItems:  'lazy',
+              activeItemAlias : '',
+              tag: 'D',
+              submitUrl :  '',
+              responseType: 'actions',
+              field : element
+        }
+    }, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load all: those with tag 'd'"
+>
+    Load all: those with tag 'd'
+</md-button>
+<md-button aria-label="buttonTagDDD"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155298'
+aria-label="buttonTagDDD"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*pre7me6a61' : function(field, additionalInfoOnEvent) { 
+    dibAction.executeAction({
+        containerName: 'dibexLazyLoad',   
+        field : element
+        ,
+        triggerType: 'click',
+        nextActionItem: '',
+        itemAlias: element.attr('item-alias'),
+        itemEventId: 'dib*pre7me6a61',         
+        containerItemId: 155298,
+        submitUrl: 'dibGlobals.action.lazyLoadChildren',
+        refreshItemId : '',
+        responseType: 'actions',
+        scope : scope,
+        params : {
+		      containerName : 'dibexLazyLoad',
+              parentItemId: '155301',
+              removeExistingItems:  'lazy',
+              activeItemAlias : '',
+              tag: 'DDD',
+              submitUrl :  '',
+              responseType: 'actions',
+              field : element
+        }
+    }, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load those with tag 'ddd'"
+>
+    Load those with tag 'ddd'
+</md-button>
+<md-button aria-label="buttonTagFFF"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155299'
+aria-label="buttonTagFFF"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*dmtxzdym7' : function(field, additionalInfoOnEvent) { 
+    dibAction.executeAction({
+        containerName: 'dibexLazyLoad',   
+        field : element
+        ,
+        triggerType: 'click',
+        nextActionItem: '',
+        itemAlias: element.attr('item-alias'),
+        itemEventId: 'dib*dmtxzdym7',         
+        containerItemId: 155299,
+        submitUrl: 'dibGlobals.action.lazyLoadChildren',
+        refreshItemId : '',
+        responseType: 'actions',
+        scope : scope,
+        params : {
+		      containerName : 'dibexLazyLoad',
+              parentItemId: '155301',
+              removeExistingItems:  'lazy',
+              activeItemAlias : '',
+              tag: 'FFF',
+              submitUrl :  '',
+              responseType: 'actions',
+              field : element
+        }
+    }, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load those with tag 'fff'"
+>
+    Load those with tag 'fff'
+</md-button>
+    </div>
+</md-toolbar>
+    <md-toolbar aria-label="toolbar41"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+class="md-menu-toolbar"
+style="    "
+   id='ci155318'
+aria-label="toolbar41"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <div class="md-toolbar-tools">
+    <span aria-label="htmllabel42"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155322'
+aria-label="htmllabel42"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Using PHP Server Actions:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>
+<md-button aria-label="buttonPHPD"
+can-be-moved=true
+item-alias="buttonPHPD"   
+    ng-show="!!view.buttonPHPD == false || view.buttonPHPD.visible" 
+    dib-disable="{{view.buttonPHPD.disabled}}"
+    ng-class="view.buttonPHPD.class" 
+    ng-style="view.buttonPHPD.style"
+class="md-raised md-primary"
+style="    "
+    id='ci155319'
+aria-label="buttonPHPD"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*mo3bp41c33' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexLazyLoad',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*mo3bp41c33',        
+        containerItemId: 155319,
+        submitUrl: '/dropins/dibExamples/LazyLoad/loadInColParent',        
+        itemAlias: 'buttonPHPD',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load all: those with tag 'd'"
+>
+    Load all: those with tag 'd'
+</md-button>
+<md-button aria-label="buttonPHPDDD"
+can-be-moved=true
+item-alias="buttonPHPDDD"   
+    ng-show="!!view.buttonPHPDDD == false || view.buttonPHPDDD.visible" 
+    dib-disable="{{view.buttonPHPDDD.disabled}}"
+    ng-class="view.buttonPHPDDD.class" 
+    ng-style="view.buttonPHPDDD.style"
+class="md-raised md-primary"
+style="    "
+    id='ci155320'
+aria-label="buttonPHPDDD"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*dla820v41' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexLazyLoad',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*dla820v41',        
+        containerItemId: 155320,
+        submitUrl: '/dropins/dibExamples/LazyLoad/loadInColParent',        
+        itemAlias: 'buttonPHPDDD',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load those with tag 'ddd'"
+>
+    Load those with tag 'ddd'
+</md-button>
+<md-button aria-label="buttonPHPFFF"
+can-be-moved=true
+item-alias="buttonPHPFFF"   
+    ng-show="!!view.buttonPHPFFF == false || view.buttonPHPFFF.visible" 
+    dib-disable="{{view.buttonPHPFFF.disabled}}"
+    ng-class="view.buttonPHPFFF.class" 
+    ng-style="view.buttonPHPFFF.style"
+class="md-raised md-primary"
+style="    "
+    id='ci155321'
+aria-label="buttonPHPFFF"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+    listeners : {
+    'click___dib*0lu4z91sg01' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexLazyLoad',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*0lu4z91sg01',        
+        containerItemId: 155321,
+        submitUrl: '/dropins/dibExamples/LazyLoad/loadInColParent',        
+        itemAlias: 'buttonPHPFFF',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Load those with tag 'fff'"
+>
+    Load those with tag 'fff'
+</md-button>
+    </div>
+</md-toolbar>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colParent"
+can-be-moved=true
+item-alias="colParent"   
+    ng-show="!!view.colParent == false || view.colParent.visible" 
+    dib-disable="{{view.colParent.disabled}}"
+    ng-class="view.colParent.class" 
+    ng-style="view.colParent.style"
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="width:100% !important; height:450px !important; overflow:auto !important;   "
+    id='ci155301'
+aria-label="colParent"
+dib-container-name='dibexLazyLoad'
+dib-config="{
+     margins : '20 0 0 0',
+    listeners : {
+    }
+}"
+    fill-height-for-child
+>
+</div>
 </div>

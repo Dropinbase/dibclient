@@ -1,6 +1,0 @@
- 
-<div component-loaded dib-container=testNestedPort dib-container-name="6799" dib-config="{ }" layout-fill flex>
-	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
-	</md-progress-linear>
-	*ET* Could not find any file referenced by the following inclfile function (last file tried was 'C:\wamp\www\dib2\dropinbase\dropins\setNgMaterial\dibGlobals\templates\includes\components\fieldset.et.html'): ~inclfile(/dropins/setNgMaterial/fld(dropin)/[**]fld(componentFolder)/, fld(component).et.html, crit: ci.pef_container_id = 6799 AND ci.pef_item_id=fld(id))~ PROCESSED SO FAR: inclfile(/dropins/setNgMaterial/dibGlobals/dibMem_0_templates/includes/components/, fieldset.et.html, crit: ci.pef_container_id = 6799 AND ci.pef_item_id=146313) 
-</div>

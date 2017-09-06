@@ -21,7 +21,6 @@
     private function parseFilterArray($filterParams=array(), &$params=array(), &$fieldType=array()) {
         if (count($filterParams) === 0) 
             return '';
-
         $i = 0;
         $str = '';
         foreach($filterParams as $record) {
@@ -355,7 +354,6 @@ $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`
                         	$orderStr .= $this->fkeyDisplay[$record['property']] . ' ' . $direction . ', ';
                         else 
                         	$orderStr .= '`test_child`.`' . $record['property'] . '` ' . $direction . ', ';
-
                     }
                     $orderStr = substr($orderStr, 0, strlen($orderStr) - 2);
                 }                
@@ -367,7 +365,6 @@ $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`
     else
         $limit = ' LIMIT ' . ($page_size * ($page - 1)) .  ', ' . $page_size;    
                 // Template: main SQL statement for MySQL to fetch many records limited by paging. Used in eg CrudPdoTemplate.php.
-
 if($readType === 'exportlist')
     $sql = "SELECT 
                 `test_child`.`primkey1` AS `Primkey1`, `test_child`.`primkey2` AS `Primkey2`, `test_child`.`unique1` AS `Unique1`, `test_child`.`unique2` AS `Unique2`, `test_child`.`date_fld` AS `Date Fld`, `test_child`.`notes` AS `Notes` 
@@ -381,7 +378,6 @@ else
             FROM `test_child` 
                      LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
                  ";   
-
 $sql .= $criteria . $orderStr . $limit;               
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
                 $attributes = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, false);
@@ -520,7 +516,6 @@ $sql .= $criteria . $orderStr . $limit;
             $criteria ="`unique1` = :fk1 AND ";
             if(!array_key_exists('unique2', $attributes)) $attributes['unique2'] = null;
             $criteria .="`unique2` = :fk2 ";
-			// ***TODO - can add user criteria here for conditional uniques...
             $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2` AS pkv FROM `test_child` WHERE $criteria";
             $paramsU = array(":fk1" => $attributes["unique1"], ":fk2" => $attributes["unique2"]);
             $rst = dibMySqlPdo::execute($sql, $targetDatabaseId, $paramsU, true);
@@ -749,7 +744,6 @@ $sql .= $criteria . $orderStr . $limit;
                 else
                     return array('error',"Permissions failure on existing(old) values. Only records satisfying the following condition(s) can be deleted: " . substr($crit, strpos($crit, " AND (") + 5));
             }
-
             if (dibMySqlPdo::count() > 0) {
                 $crit = TRUE;
                 if ($crit===TRUE) {
@@ -873,7 +867,6 @@ $sql .= $criteria . $orderStr . $limit;
     }
      /**
      * Drop a specific node on-to another
-
      * @param string $dropPosition 'after'/'before'/'append'
      * @param integer $dropNodeId
      * @param type $nodeId
@@ -926,7 +919,6 @@ $sql .= $criteria . $orderStr . $limit;
         $fieldType[":pk2"] = PDO::PARAM_STR;
         dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
         $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-
         if ($rst === FALSE)
             return array();
         else
@@ -969,7 +961,6 @@ $sql .= $criteria . $orderStr . $limit;
             $validAttributes = array_flip($validAttributes);
             $validAttributes = array_intersect_key($attributes, $validAttributes);
         }
-
         return $validAttributes;
     } 
     public function getCaptions() {

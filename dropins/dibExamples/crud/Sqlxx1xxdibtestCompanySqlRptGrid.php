@@ -1,5 +1,4 @@
 <?php
-
 class Sqlxx1xxdibtestCompanySqlRptGrid {
     public $page = 1;
 	public $page_size = 50;
@@ -120,7 +119,7 @@ class Sqlxx1xxdibtestCompanySqlRptGrid {
             } else {
                 $value = EvalCriteria::evalParam(':submitItemAlias_parent_parentCompanyId', $filterParams);
                 if(is_array($value))
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_parentCompanyId' for filter '' on dibtestCompanySqlRptGrid is missing from submitted values.");
+                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_parentCompanyId' for filter 'dibtestCompanyConsultantPopup' on dibtestCompanySqlRptGrid is missing from submitted values.");
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitItemAlias_parent_parentCompanyId'] = $value;
@@ -193,7 +192,6 @@ class Sqlxx1xxdibtestCompanySqlRptGrid {
                     } else
                         $direction = '';
                     $orderStr .= $this->sqlFields[$record['property']] . ' ' . $direction . ', ';
-
                 }            
                 $orderStr = substr($orderStr, 0, strlen($orderStr) - 2);
             }
@@ -239,7 +237,6 @@ class Sqlxx1xxdibtestCompanySqlRptGrid {
     	return array();
     }
     public function getSqlParts() {
-
 		return array('model' => 'Sql',
 				     'containerName' => "Sqlxx1xxdibtestCompanySqlRptGrid",
 					 'primary_field' => "",

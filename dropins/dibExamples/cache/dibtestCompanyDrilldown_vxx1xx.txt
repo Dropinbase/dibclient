@@ -1,6 +1,0 @@
-<iframe
-layout-fill fill-height  dib-container=dibtestCompanyDrilldown
-name='dibtestCompanyDrilldown' dib-config="{}"
-ng-if="model.url" ng-src="{{model.url}}" frameBorder="0" width="100%" flex="100"
-ng-style="{{frameStyle}}">
-</iframe>

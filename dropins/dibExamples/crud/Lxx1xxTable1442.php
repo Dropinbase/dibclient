@@ -1,5 +1,4 @@
 <?php
-
 class Lxx1xxTable1442 {    
     function __construct() {
         $dbClassPath = (DIB::$DATABASES[DIB::$ITEMLISTDATA[3]]['systemDropin']) ? DIB::$SYSTEMPATH.'dropins'.DIRECTORY_SEPARATOR : DIB::$DROPINPATHDEV;
@@ -24,7 +23,6 @@ class Lxx1xxTable1442 {
         	if(!$page || $page<=0) $page = 1;
             if(!$page_size || $page_size<0)
                 return array('error','Invalid request. Please contact the System Administrator');
-
             // * Note, a bound dropdown can only store one value... this value will reference a single primary key field, or a single field of a composite primary key 
             $criteria = ''; // ***TODO (minor) - note that activeFilter (if present) overrides phpFilter
             $params = array();
@@ -34,9 +32,9 @@ class Lxx1xxTable1442 {
             $pkey = "`test_consultant`.`id`";
             $order_by = ($phpFilter === '') ? " ORDER BY `test_consultant`.`name`" : '';
             $totalSql = "SELECT count(*) AS totalcount FROM `test_consultant` ";
-            // Add sql to show only used values (especially for filter dropdowns)
+            // Add sql to show only used values (especially for filter dropdowns) - does not work for mssql...
             if($showUsedOnly) { 
-            	$itemTables = array(155407=>'`test_company_consultant`.`consultant_id`', 155460=>'`test_company_consultant`.`consultant_id`', 155247=>'`test_company`.`parent_company_contact_id`', 155375=>'`test_company`.`parent_company_contact_id`', 173716=>'`test_company`.`parent_company_contact_id`', 177113=>'`test_company`.`parent_company_contact_id`');
+            	$itemTables = array(155407=>"`test_company_consultant`.`consultant_id`", 155460=>"`test_company_consultant`.`consultant_id`", 155247=>"`test_company`.`parent_company_contact_id`", 155375=>"`test_company`.`parent_company_contact_id`", 173716=>"`test_company`.`parent_company_contact_id`", 177113=>"`test_company`.`parent_company_contact_id`");
             	if(isset($itemTables[$containerItemId])) {
             		$foreignParts = explode('.', $itemTables[$containerItemId]);
 					$addSql = " INNER JOIN " . $foreignParts[0] . " dib___F ON dib___F." . $foreignParts[1] . " = `test_consultant`.`id` ";
@@ -57,7 +55,7 @@ class Lxx1xxTable1442 {
                     else {
                         $value = EvalCriteria::evalParam(':submitItemAlias_self_parentCompanyId', $filterParams);
                         if(is_array($value))
-                            //return array('error',"Error! The filter parameter 'submitItemAlias_self_parentCompanyId' for filter '' on containerName is missing from submitted values.");
+                            //return array('error',"Error! The filter parameter 'submitItemAlias_self_parentCompanyId' for filter 'wizBuildAppGrid' on containerName is missing from submitted values.");
                             $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                         else 
                             $params[':submitItemAlias_self_parentCompanyId'] = $value;
@@ -97,8 +95,9 @@ class Lxx1xxTable1442 {
 	        	$params = $phpFilterParams;
 	        }
 			if($criteria) $criteria = ' WHERE ' . $criteria;
+            $databaseId = DIB::$ITEMLISTDATA[3];
             // Get Count
-            $filterCountRst = dibMySqlPdo::execute($totalSql . $criteria, DIB::$ITEMLISTDATA[3], $params, TRUE);
+            $filterCountRst = dibMySqlPdo::execute($totalSql . $criteria, $databaseId, $params, TRUE);
             if($filterCountRst === FALSE)
                 return array('error', "Error! Could not read dropdown data information. Please contact the System Administrator");
             $filteredCount = intval($filterCountRst["totalcount"]);
@@ -109,8 +108,8 @@ class Lxx1xxTable1442 {
         $limit = ' LIMIT ' . $page_size;
     else
         $limit = ' LIMIT ' . ($page_size * ($page - 1)) .  ', ' . $page_size;    
-$sql = "SELECT $sql FROM $from_clause $criteria $group_by $order_by $limit";            
-            $records = dibMySqlPdo::execute($sql, DIB::$ITEMLISTDATA[3], $params);
+$sql = "SELECT $sql FROM $from_clause $criteria $group_by $order_by $limit";
+            $records = dibMySqlPdo::execute($sql, $databaseId, $params);
             if($records === FALSE)
                 return array('error', "Error! Could not obtain data for the list. Please contact the System Administrator");
             return array($records, $filteredCount);

@@ -1,120 +1,405 @@
- 
-<div component-loaded dib-container=dibexPorts dib-container-name="7154" dib-config="{ }" layout-fill flex>
-	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
-	</md-progress-linear>
-	<md-tabs id="ci155343" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci155343' aria-label="mdtabs" can-be-moved=true can-have-children=true flex md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci155343' aria-label="mdtabs" dib-container-name='dibexPorts' dib-config="{ margin : 10, listeners : { } }" >
-		<md-tab label='Info' tabId="179992"  aria-label="colInfo" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colInfo" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=179992'     id='ci179992' aria-label="colInfo" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-					<span aria-label="headQuickFacts" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155353' aria-label="headQuickFacts" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Quick Facts
-						</span>
-					</span>
-					<span aria-label="commentQuickFacts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155341' aria-label="commentQuickFacts" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Port records specify the items (named 'port-items') that containers attach themselves to when loaded.
-							<br>
-							A container can have multiple ports, ie the same container can be loaded into different locations.
-							<br>
-							Each port has an unique url.
-							<br>
-							A url of the form /nav/xxx will open the xxx container linked to the port-item defined in the default port (pef_port.port_alias is empty).
-							<br>
-							A url of the form /nav/xxx/yyy will find the port record of container xxx where the port-alias is yyy and use the corresponding port-item.
-							<br>
-							When a container is opened, all items or other containers that host this container are automatically loaded.
-							<br>
-							<br>
-							The buttons below use the pef_item.pef_port_id field to open the same container in various locations.
-							<br>
-							If the url changes, use the browser's Back-button to return to /nav/dibexPorts. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="layoutrowButtons" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=179992'     id='ci155344' aria-label="layoutrowButtons" dib-container-name='dibexPorts' dib-config="{ defaults : {margin : 5}, listeners : { } }" >
-						<md-button aria-label="buttonAbove" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155345' aria-label="buttonAbove" dib-container-name='dibexPorts' ng-click="dibCommon.goTo('dibtestConsultantPortGrid','',false,'','',$event);" dib-config="{ listeners : { } }" aria-label="Target tabs above" >
-							Target tabs above 
-						</md-button>
-						<md-button aria-label="buttonBelow" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155346' aria-label="buttonBelow" dib-container-name='dibexPorts' ng-click="dibCommon.goTo('dibtestConsultantPortGrid','EmployeesInCompanyForm',false,'','',$event);" dib-config="{ listeners : { } }" aria-label="Target tabs in subcontainer below" >
-							Target tabs in subcontainer below 
-						</md-button>
-						<md-button aria-label="buttonBaseContainer" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155347' aria-label="buttonBaseContainer" dib-container-name='dibexPorts' ng-click="dibCommon.goTo('dibtestConsultantPortGrid','EmployeesBaseContainer',true,'','',$event);" dib-config="{ listeners : { } }" aria-label="Target Base Container (dibAdmin)" >
-							<md-tooltip md-direction="top" md-delay="500">
-								Once clicked, use the browser\'s Back button to return to dibexPorts
-							</md-tooltip>
-							Target Base Container (dibAdmin) 
-						</md-button>
-					</div>
-					<span aria-label="headUsingPortFields" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155342' aria-label="headUsingPortFields" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Using the Port fields on Items
-						</span>
-					</span>
-					<span aria-label="commentUsingPortFields" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155340' aria-label="commentUsingPortFields" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							With the initial load of the main container (dibexPorts), the Consultants and Employees tabs below are empty (no containers loaded into them)
-							<br>
-							The tabs have their pef_port_id fields configured to load containers in them when clicked. 
-						</p>
-					</span>
-					<div layout-fill flex aria-label="dibtestCompanyForm" can-be-moved=true flex style=" height:340px !important; overflow:auto !important;   " id='ci179991' aria-label="dibtestCompanyForm" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" dib-injected-success=true >
-						<dibtest-company-form dib-subcontainer-loaded dib-subcontainer=true layout-fill         fill-height-for-child >
-						</dibtest-company-form>
-					</div>
-					<span aria-label="headUrls" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="    " id='ci155357' aria-label="headUrls" dib-container-name='dibexPorts' dib-config="{ margins : '20 0 0 0', listeners : { } }" >
-						<span style="font-size:20px">
-							Using Urls
-						</span>
-					</span>
-					<span aria-label="commentUrls" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155349' aria-label="commentUrls" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The buttons below use urls in the pef_item.expression field. A disadvantage is that if a container name or port alias changes, the url must be updated...
-							<br>
-							Urls are therefore mostly used from external pages or PHP/NodeJs calls. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="layoutrowUrls" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=179992'     id='ci155350' aria-label="layoutrowUrls" dib-container-name='dibexPorts' dib-config="{ defaults : {margin : 5}, listeners : { } }" >
-						<md-button aria-label="buttonDefaultPort" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155351' aria-label="buttonDefaultPort" dib-container-name='dibexPorts' ng-click="dibCommon.location('/nav/dibtestConsultantPortGrid');" dib-config="{ listeners : { } }" aria-label="Default port targetting Tabs above" >
-							<md-tooltip md-direction="top" md-delay="500">
-								Note, if you have already loaded the container, it does not load a second time.
-							</md-tooltip>
-							Default port targetting Tabs above 
-						</md-button>
-						<md-button aria-label="buttonEmployeesBaseContainer" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155352' aria-label="buttonEmployeesBaseContainer" dib-container-name='dibexPorts' ng-click="dibCommon.location('/nav/dibtestConsultantPortGrid/EmployeesBaseContainer');" dib-config="{ listeners : { } }" aria-label="Employees In Base Container" >
-							Employees In Base Container 
-						</md-button>
-					</div>
-					<span aria-label="commentLoadHiddenParents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155358' aria-label="commentLoadHiddenParents" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The buttons below demonstrate that all required items/containers above the target container
-							<br>
-							in the DOM are loaded automatically when containers are loaded.
-							<br>
-							<b>
-								Note:
-							</b>
-							tabs are an exception - they need to exist with the initial load of a container. For example we cannot delay the loading of the Employees-tab at the top of this container.
-							<br>
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="layoutrowLoadParents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=179992'     id='ci155354' aria-label="layoutrowLoadParents" dib-container-name='dibexPorts' dib-config="{ defaults : {margin : 5}, listeners : { } }" >
-						<md-button aria-label="buttonLoadLayouts" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155355' aria-label="buttonLoadLayouts" dib-container-name='dibexPorts' ng-click="dibCommon.goTo('dibtestConsultantPortGrid','EmployeesNested',false,'','',$event);" dib-config="{ listeners : { } }" aria-label="Load hidden layout components hosting target container" >
-							Load hidden layout components hosting target container 
-						</md-button>
-						<md-button aria-label="buttonLoadOtherContainer" can-be-moved=true flex=none class="md-raised md-accent" style="    " id='ci155356' aria-label="buttonLoadOtherContainer" dib-container-name='dibexPorts' ng-click="dibCommon.goTo('dibtestConsultantPortGrid','nestedInContainer',false,'','',$event);" dib-config="{ listeners : { } }" aria-label="Load other container hosting target container" >
-							Load other container hosting target container 
-						</md-button>
-					</div>
-					<span aria-label="span" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style=" height:100px !important; overflow:auto !important;   " id='ci198254' aria-label="span" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-					</span>
-				</div>
-			</md-tab-body>
-		</md-tab>
-		<md-tab label='Employees' tabId="184576"  aria-label="colPortTest" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="    " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colPortTest" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=184576'     id='ci184576' aria-label="colPortTest" dib-container-name='dibexPorts' dib-config="{ listeners : { } }" >
-				</div>
-			</md-tab-body>
-		</md-tab>
-	</md-tabs>
+
+<div
+component-loaded
+dib-container=dibexPorts dib-container-name="7154" dib-config="{
+}" layout-fill flex>
+    <md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+    <md-tabs id="ci155343" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false 
+    md-tabs-dummy-wrapper='ci155343'
+    aria-label="mdtabs"
+can-be-moved=true
+ can-have-children=true
+flex
+md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect
+style="    "
+    id='ci155343'
+aria-label="mdtabs"
+dib-container-name='dibexPorts'
+dib-config="{
+     margin : 10,
+    listeners : {
+    }
+}"
+>
+    <md-tab label='Info' tabId="179992" 
+        aria-label="colInfo"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colInfo"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=179992'    
+    id='ci179992'
+aria-label="colInfo"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span aria-label="headQuickFacts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155353'
+aria-label="headQuickFacts"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Quick Facts</span>
+</span>
+    <span aria-label="commentQuickFacts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155341'
+aria-label="commentQuickFacts"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Port records specify the items (named 'port-items') that containers attach themselves to when loaded.<br>A container can have multiple ports, ie the same container can be loaded into different locations.<br>Each port has an unique url.<br>A url of the form /nav/xxx will open the xxx container linked to the port-item defined in the default port (pef_port.port_alias is empty).<br>A url of the form /nav/xxx/yyy will find the port record of container xxx where the port-alias is yyy and use the corresponding port-item.<br>When a container is opened, all items or other containers that host this container are automatically loaded.<br><br>
+The buttons below use the pef_item.pef_port_id field to open the same container in various locations.<br>
+If the url changes, use the browser's Back-button to return to /nav/dibexPorts.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutrowButtons"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=179992'    
+    id='ci155344'
+aria-label="layoutrowButtons"
+dib-container-name='dibexPorts'
+dib-config="{
+     defaults : {margin : 5},
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="buttonAbove"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155345'
+aria-label="buttonAbove"
+dib-container-name='dibexPorts'
+    ng-click="dibCommon.goTo('dibtestConsultantPortGrid','',false,'','',$event);"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Target tabs above"
+>
+    Target tabs above
+</md-button>
+<md-button aria-label="buttonBelow"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155346'
+aria-label="buttonBelow"
+dib-container-name='dibexPorts'
+    ng-click="dibCommon.goTo('dibtestConsultantPortGrid','EmployeesInCompanyForm',false,'','',$event);"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Target tabs in subcontainer below"
+>
+    Target tabs in subcontainer below
+</md-button>
+<md-button aria-label="buttonBaseContainer"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155347'
+aria-label="buttonBaseContainer"
+dib-container-name='dibexPorts'
+    ng-click="dibCommon.goTo('dibtestConsultantPortGrid','EmployeesBaseContainer',true,'','',$event);"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Target Base Container (dibAdmin)"
+>
+    <md-tooltip md-direction="top" md-delay="500">Once clicked, use the browser\'s Back button to return to dibexPorts</md-tooltip>
+    Target Base Container (dibAdmin)
+</md-button>
+</div>
+    <span aria-label="headUsingPortFields"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155342'
+aria-label="headUsingPortFields"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Using the Port fields on Items</span>
+</span>
+    <span aria-label="commentUsingPortFields"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155340'
+aria-label="commentUsingPortFields"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    With the initial load of the main container (dibexPorts), the Consultants and Employees tabs below are empty (no containers loaded into them)<br>The tabs have their pef_port_id fields configured to load containers in them when clicked.
+    </p>    
+</span>
+   <div layout-fill flex
+        aria-label="dibtestCompanyForm"
+can-be-moved=true
+flex
+style=" height:340px !important; overflow:auto !important;   "
+        id='ci179991'
+aria-label="dibtestCompanyForm"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-company-form
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibtest-company-form>
+    </div>
+    <span aria-label="headUrls"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155357'
+aria-label="headUrls"
+dib-container-name='dibexPorts'
+dib-config="{
+     margins : '20 0 0 0',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Using Urls</span>
+</span>
+    <span aria-label="commentUrls"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155349'
+aria-label="commentUrls"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The buttons below use urls in the pef_item.expression field. A disadvantage is that if a container name or port alias changes, the url must be updated...<br>Urls are therefore mostly used from external pages or PHP/NodeJs calls.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutrowUrls"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=179992'    
+    id='ci155350'
+aria-label="layoutrowUrls"
+dib-container-name='dibexPorts'
+dib-config="{
+     defaults : {margin : 5},
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="buttonDefaultPort"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155351'
+aria-label="buttonDefaultPort"
+dib-container-name='dibexPorts'
+ng-click="dibCommon.location('/nav/dibtestConsultantPortGrid');"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Default port targetting Tabs above"
+>
+    <md-tooltip md-direction="top" md-delay="500">Note, if you have already loaded the container, it does not load a second time.</md-tooltip>
+    Default port targetting Tabs above
+</md-button>
+<md-button aria-label="buttonEmployeesBaseContainer"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155352'
+aria-label="buttonEmployeesBaseContainer"
+dib-container-name='dibexPorts'
+ng-click="dibCommon.location('/nav/dibtestConsultantPortGrid/EmployeesBaseContainer');"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Employees In Base Container"
+>
+    Employees In Base Container
+</md-button>
+</div>
+    <span aria-label="commentLoadHiddenParents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155358'
+aria-label="commentLoadHiddenParents"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The buttons below demonstrate that all required items/containers above the target container<br>in the DOM are loaded automatically when containers are loaded.<br>
+<b>Note:</b> tabs are an exception - they need to exist with the initial load of a container. For example we cannot delay the loading of the Employees-tab at the top of this container.<br>
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutrowLoadParents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=179992'    
+    id='ci155354'
+aria-label="layoutrowLoadParents"
+dib-container-name='dibexPorts'
+dib-config="{
+     defaults : {margin : 5},
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="buttonLoadLayouts"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155355'
+aria-label="buttonLoadLayouts"
+dib-container-name='dibexPorts'
+    ng-click="dibCommon.goTo('dibtestConsultantPortGrid','EmployeesNested',false,'','',$event);"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Load hidden layout components hosting target container"
+>
+    Load hidden layout components hosting target container
+</md-button>
+<md-button aria-label="buttonLoadOtherContainer"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci155356'
+aria-label="buttonLoadOtherContainer"
+dib-container-name='dibexPorts'
+    ng-click="dibCommon.goTo('dibtestConsultantPortGrid','nestedInContainer',false,'','',$event);"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Load other container hosting target container"
+>
+    Load other container hosting target container
+</md-button>
+</div>
+    <span aria-label="span"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style=" height:100px !important; overflow:auto !important;   "
+    id='ci198254'
+aria-label="span"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</span>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Employees' tabId="184576" 
+        aria-label="colPortTest"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="    "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colPortTest"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="    "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexPorts&itemId=184576'    
+    id='ci184576'
+aria-label="colPortTest"
+dib-container-name='dibexPorts'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+        </md-tab-body>
+    </md-tab>
+</md-tabs>
 </div>

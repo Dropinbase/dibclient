@@ -1,1003 +1,2944 @@
- 
-<div component-loaded dib-container=dibexEvents dib-container-name="7146" dib-config="{ }" layout-fill flex>
-	<md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading">
-	</md-progress-linear>
-	<md-tabs id="ci155087" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false  md-tabs-dummy-wrapper='ci155087' aria-label="mdtabs" can-be-moved=true item-alias="mdtabs"    ng-show="!!view.mdtabs == false || view.mdtabs.visible"  dib-disable="{{view.mdtabs.disabled}}" ng-class="view.mdtabs.class"  ng-style="view.mdtabs.style" can-have-children=true flex=none md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect style="    " id='ci155087' aria-label="mdtabs" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-		<md-tab label='Basics' tabId="155088"  aria-label="colBasics" can-be-moved=true item-alias="colBasics"    ng-show="!!view.colBasics == false || view.colBasics.visible"  dib-disable="{{view.colBasics.disabled}}" ng-class="view.colBasics.class"  ng-style="view.colBasics.style" can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="width:100% !important;   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout="column" layout-align="start start" aria-label="colBasics" can-be-moved=true item-alias="colBasics"    ng-show="!!view.colBasics == false || view.colBasics.visible"  dib-disable="{{view.colBasics.disabled}}" ng-class="view.colBasics.class"  ng-style="view.colBasics.style" can-have-children=true on-move-refresh-preview=true flex style="width:100% !important;   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'     id='ci155088' aria-label="colBasics" dib-container-name='dibexEvents' dib-config="{ autoScroll : true, autoHeight : true, listeners : { } }" >
-					<span aria-label="commentQuickFacts" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155090' aria-label="commentQuickFacts" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Events cause actions (eg disable a button) to occur on specified triggers (eg click, keydown or focus).
-							<br>
-							Dropinbase provides a powerful PHP event framework that makes it possible to link reusable functions to containers, items, tables and HTML documents, with configurable permissions.
-							<br>
-							<br>
-							Events linked to items, containers and HTML templates can be executed synchronously or asynchronously, and each origin can have multiple events linked to them. Server-side code can call client-side code and vice-versa, and client-side code can be placed in a Queue for execution, or executed directly with NodeJs (if available).
-							<br>
-							<br>
-							The easiest way to add events is using the Add Event buttons on the Item Overview and Container Configuration pages on the Designer.
-							<br>
-							<br>
-							The following types of events are available: 
-							<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0">
-								<li>
-									Navigation - open other containers and navigate to specific records.
-								</li>
-								<li>
-									Refresh events - refreshes the data in the target item/subcontainer
-								</li>
-								<li>
-									Call server-side functions - executes PHP/C# functions (which in turn can cause client-side functions to execute)
-								</li>
-								<li>
-									Load and call client-side JavaScript functions (which in turn can cause server-side functions to execute)
-								</li>
-								<li>
-									Table crud events - events configured on changes of data on table-level
-								</li>
-								<li>
-									HTML template events - call functions from within HTML templates
-								</li>
-								<li>
-									Container crud events - events configured when crud actions occur on container level
-								</li>
-								<li>
-									Lazy load events - loads items into the current container. See 
-									<a href="/nav/dibexLazyLoad">
-										Lazy Load Examples
-									</a>
-									and 
-									<a href="/nav/dibDocs?id=51&text=Lazy%20Loading%20Items">
-										Docs
-									</a>
-									for more info.
-								</li>
-							</ul>
-						</p>
-					</span>
-					<span aria-label="commentResponseType2" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci180030' aria-label="commentResponseType2" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The response expected by the client when calling server-side functions can be set in the even'ts 
-							<i>
-								response_type
-							</i>
-							field as follows:
-							<br>
-							<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0">
-								<li>
-									'actions' - the client will expect an array of actions to execute and/or a message to display, OR an empty array (use validResult(TRUE)).
-								</li>
-								<li>
-									'redirect' - the client will not wait for a response. The server can send Headers to redirect the client to another url (useful for eg downloading files).
-								</li>
-								<li>
-									an integer value (asyncInterval) - the client will activate polling the server every 
-									<b>
-										asyncInterval
-									</b>
-									milliseconds for actions to execute, until the server responds with 'stop', or a maximum 
-									<b>
-										retryCount
-									</b>
-									is reached.
-								</li>
-							</ul>
-						</p>
-					</span>
-					<span aria-label="headNavigation" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155099' aria-label="headNavigation" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Navigation
-						</span>
-					</span>
-					<span aria-label="commentServersideFunctions1" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194767' aria-label="commentServersideFunctions1" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							It is recommended to use the pef_port_id field on buttons and menuitems to navigate to other containers.
-							<br>
-							Alternatively a url can be specified in the expression field, though a change of eg container name would then also require the expression to be updated.
-							<br>
-							The '?record=xxx' query parameters can be used to navigate to records, where xxx is new/first/last/next/prev.
-							<br>
-							To open a specific record identified by a primary key value, use '?primary_PKEYNAME1=VALUE1&PKEYNAME2=VALUE2', eg '?primary_id=123' 
-						</p>
-					</span>
-					<md-button aria-label="btnNavPort" can-be-moved=true class="md-raised md-accent" style="    " id='ci194766' aria-label="btnNavPort" dib-container-name='dibexEvents' ng-click="dibCommon.goTo('dibtestCompanyForm','',true,'?record=first','',$event);" dib-config="{ listeners : { } }" aria-label="Use the pef_port_id field (go to the first record)" >
-						Use the pef_port_id field (go to the first record) 
-					</md-button>
-					<md-button aria-label="btnNavExpr" can-be-moved=true class="md-raised md-accent" style="    " id='ci194758' aria-label="btnNavExpr" dib-container-name='dibexEvents' ng-click="dibCommon.location('/nav/dibtestCompanyForm?record=last');" dib-config="{ listeners : { } }" aria-label="Use the expression field (go to the last record)" >
-						Use the expression field (go to the last record) 
-					</md-button>
-					<span aria-label="headEventTriggers" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci197138' aria-label="headEventTriggers" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Event Triggers
-						</span>
-					</span>
-					<span aria-label="commentEventTriggers" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci197139' aria-label="commentEventTriggers" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							For components, the common HTML events are available on components.
-							<br>
-							See 
-							<a href="https://www.w3schools.com/jsref/dom_obj_event.asp">
-								HTML Events
-							</a>
-							for more details. 
-							<b>
-								Note,
-							</b>
-							remove the &apos;on&apos; from each event type. Eg where the HTML event is &apos;onclick&apos;, use &apos;click&apos; instead when specifying the event in Dropinbase event tables.
-							<br>
-							The two text boxes and the button below have their specified events configured on them, which all call server-side code... try them out. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowEventTriggers" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="width:100% !important;    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'     id='ci197137' aria-label="rowEventTriggers" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<md-input-container aria-label="SelectTextEvent" can-be-moved=true flex="33" class="md-block" style="    " >
-							<input type="text"  name="SelectTextEvent" ng-model="model.SelectTextEvent" aria-label="Type and select some text in here" id='ci197134' aria-label="SelectTextEvent" dib-container-name='dibexEvents' dib-config="{ listeners : { 'select___1806' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'select', nextActionItem: '', itemEventId: '1806',         containerItemId: 197134, submitUrl: '/dropins/dibExamples/Events/eventTrigger',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Type and select some text in here
-							</label>
-							<div ng-messages="dibexEvents.SelectTextEvent.$error">
-							</div>
-						</md-input-container>
-						<md-input-container aria-label="CopyEvent" can-be-moved=true flex="33" class="md-block" style="    " >
-							<input type="text"  name="CopyEvent" ng-model="model.CopyEvent" aria-label="Select and copy some text in here" id='ci197136' aria-label="CopyEvent" dib-container-name='dibexEvents' dib-config="{ listeners : { 'copy___1808' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'copy', nextActionItem: '', itemEventId: '1808',         containerItemId: 197136, submitUrl: '/dropins/dibExamples/Events/eventTrigger',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Select and copy some text in here
-							</label>
-							<div ng-messages="dibexEvents.CopyEvent.$error">
-							</div>
-						</md-input-container>
-						<md-button aria-label="MouseoverEvent" can-be-moved=true class="md-primary md-raised" style="    " id='ci197135' aria-label="MouseoverEvent" dib-container-name='dibexEvents' dib-config="{ listeners : { 'mouseover___1807' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'mouseover', nextActionItem: '', itemEventId: '1807',         containerItemId: 197135, submitUrl: '/dropins/dibExamples/Events/eventTrigger',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Mouseover Event" >
-							Mouseover Event 
-						</md-button>
-					</div>
-					<span aria-label="headServersideFunctions1" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci194765' aria-label="headServersideFunctions1" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Server-side Functions
-						</span>
-					</span>
-					<span aria-label="commentServersideFunctions" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155098' aria-label="commentServersideFunctions" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The button and text fields below have actions configured on 'click' and 'change' events which call PHP functions defined by their submit-url fields.
-							<br>
-							Server-side events are easily added with the 
-							<b>
-								Add Event &amp; PHP
-							</b>
-							link in the Designer.
-							<br>
-							The execution of events can be traced and debugged using the browser's Developer Tools (press F12 normally).
-							<br>
-							Dropinbase automatically adds certain fixed parameters to the url requests :
-							<br>
-							<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 1.5em; background-color: #FFF9E0">
-								<li>
-									<b>
-										containerName
-									</b>
-									and 
-									<b>
-										itemEventId
-									</b>
-									- used to validate the user's permissions on respectively the container and the specific event.
-								</li>
-								<li>
-									<b>
-										submissionData
-									</b>
-									- specified user data. By default all item values with an Alias are submitted on the current ('self') and parent ('parent') containers. See Submission Data for more info about specifying additional values.
-								</li>
-								<li>
-									<b>
-										triggerType
-									</b>
-									- the type of event, eg click, focus or change
-								</li>
-								<li>
-									<b>
-										itemId
-									</b>
-									- the id of the item where the event originated from
-								</li>
-								<li>
-									<b>
-										itemAlias
-									</b>
-									- the Alias of the item where the event originated from - often used to re-use the same server-side code.
-								</li>
-							</ul>
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowHelloWorld" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'     id='ci155100' aria-label="rowHelloWorld" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<md-button aria-label="btnHelloWorld" can-be-moved=true item-alias="btnHelloWorld"    ng-show="!!view.btnHelloWorld == false || view.btnHelloWorld.visible"  dib-disable="{{view.btnHelloWorld.disabled}}" ng-class="view.btnHelloWorld.class"  ng-style="view.btnHelloWorld.style" class="md-accent md-raised" style="    " id='ci155101' aria-label="btnHelloWorld" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*fbkbg31wm1' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*fbkbg31wm1',         containerItemId: 155101, submitUrl: '/dropins/dibExamples/Events/btnHelloWorld_click',         itemAlias: 'btnHelloWorld', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Hello World" >
-							Hello World 
-						</md-button>
-						<md-input-container aria-label="Textfield1" can-be-moved=true item-alias="Textfield1"    ng-show="!!view.Textfield1 == false || view.Textfield1.visible"  dib-disable="{{view.Textfield1.disabled}}" ng-class="view.Textfield1.class"  ng-style="view.Textfield1.style" flex="none" class="md-block" style="width:350px !important;    " >
-							<input type="text"  name="Textfield1" ng-model="model.Textfield1" aria-label="Textfield1" id='ci155102' aria-label="Textfield1" dib-container-name='dibexEvents' dib-config="{ listeners : { 'change___dib*hy-1pnfq3' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'change', nextActionItem: '', itemEventId: 'dib*hy-1pnfq3',         containerItemId: 155102, submitUrl: '/dropins/dibExamples/Events/textfield_changed',         itemAlias: 'Textfield1', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Textfield1
-							</label>
-							<div ng-messages="dibexEvents.Textfield1.$error">
-							</div>
-						</md-input-container>
-						<md-input-container aria-label="Textfield2" can-be-moved=true item-alias="Textfield2"    ng-show="!!view.Textfield2 == false || view.Textfield2.visible"  dib-disable="{{view.Textfield2.disabled}}" ng-class="view.Textfield2.class"  ng-style="view.Textfield2.style" flex="none" class="md-block" style="width:350px !important;    " >
-							<input type="text"  name="Textfield2" ng-model="model.Textfield2" aria-label="Textfield2" id='ci155103' aria-label="Textfield2" dib-container-name='dibexEvents' dib-config="{ listeners : { 'change___dib*ekvgxmbqs' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'change', nextActionItem: '', itemEventId: 'dib*ekvgxmbqs',         containerItemId: 155103, submitUrl: '/dropins/dibExamples/Events/textfield_changed',         itemAlias: 'Textfield2', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Textfield2
-							</label>
-							<div ng-messages="dibexEvents.Textfield2.$error">
-							</div>
-						</md-input-container>
-					</div>
-					<span aria-label="headReturnActions" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155105' aria-label="headReturnActions" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:16px">
-							<b>
-								Returning Actions
-							</b>
-						</span>
-					</span>
-					<span aria-label="commentReturnActions" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155104' aria-label="commentReturnActions" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Dropinbase provides access to the client-side Api by means of action-lists. Server-side functions can return an array of actions that are executed in order on the client.
-							<br>
-							Dropinbase actions are added by programmers and perform specific functions like opening containers or setting item configs.
-							<br>
-							The button below uses generic actions to set the height, formatting and value of Textfield1. 
-						</p>
-					</span>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowHideDisableEvents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="  margin:10px 0px 10px 0px !important;  " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'     id='ci184232' aria-label="rowHideDisableEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<md-button aria-label="btnDisable" can-be-moved=true item-alias="btnDisable"    ng-show="!!view.btnDisable == false || view.btnDisable.visible"  dib-disable="{{view.btnDisable.disabled}}" ng-class="view.btnDisable.class"  ng-style="view.btnDisable.style" class="md-primary md-raised" style="    " id='ci184233' aria-label="btnDisable" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*@l1gbcj78' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*@l1gbcj78',         containerItemId: 184233, submitUrl: '/dropins/dibExamples/Events/btnDisable_click',         itemAlias: 'btnDisable', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Disable Textfield1 and this Button" >
-							Disable Textfield1 and this Button 
-						</md-button>
-						<md-button aria-label="btnHide" can-be-moved=true class="md-primary md-raised" style="    " id='ci184234' aria-label="btnHide" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*r1w187hn7' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*r1w187hn7',         containerItemId: 184234, submitUrl: '/dropins/dibExamples/Events/btnHide_click',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Hide Textfield2 &amp; Hello World" >
-							Hide Textfield2 &amp; Hello World 
-						</md-button>
-						<md-button aria-label="btnShowEnable" can-be-moved=true class="md-primary md-raised" style="    " id='ci184235' aria-label="btnShowEnable" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*lr**yx0df' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*lr**yx0df',         containerItemId: 184235, submitUrl: '/dropins/dibExamples/Events/btnShowEnable_click',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Show &amp; Enable All" >
-							Show &amp; Enable All 
-						</md-button>
-						<md-button aria-label="btnSetStyleClass" can-be-moved=true item-alias="btnSetStyleClass"    ng-show="!!view.btnSetStyleClass == false || view.btnSetStyleClass.visible"  dib-disable="{{view.btnSetStyleClass.disabled}}" ng-class="view.btnSetStyleClass.class"  ng-style="view.btnSetStyleClass.style" class="md-primary md-raised md-cornered" style="    " id='ci184236' aria-label="btnSetStyleClass" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*jgm8wkd@8' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*jgm8wkd@8',         containerItemId: 184236, submitUrl: '/dropins/dibExamples/Events/btnSetStyleClass_click',         itemAlias: 'btnSetStyleClass', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Set Style and Class" >
-							Set Style and Class 
-						</md-button>
-					</div>
-					<div dib-inject-content="replace" layout="row"  aria-label="rowYNCancel" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'     id='ci155128' aria-label="rowYNCancel" dib-container-name='dibexEvents' dib-config="{ margin : 5, listeners : { } }" >
-						<md-button aria-label="btnPopupYNCancel" can-be-moved=true class="md-accent md-raised" style="    " id='ci155129' aria-label="btnPopupYNCancel" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*qvz8wuxpe' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*qvz8wuxpe',         containerItemId: 155129, submitUrl: '/dropins/dibExamples/Events/btnPopupYNCancel_click',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Popup Y/N/Cancel Msg" >
-							Popup Y/N/Cancel Msg 
-						</md-button>
-						<md-button aria-label="hiddenPopupButton" can-be-moved=true item-alias="hiddenPopupButton"    ng-show="!!view.hiddenPopupButton == false || view.hiddenPopupButton.visible"  dib-disable="{{view.hiddenPopupButton.disabled}}" ng-class="view.hiddenPopupButton.class"  ng-style="view.hiddenPopupButton.style" hide class="md-accent md-raised" style="    " id='ci169798' aria-label="hiddenPopupButton" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*y0@6sflp9' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*y0@6sflp9',         containerItemId: 169798, submitUrl: '/dropins/dibExamples/Events/hiddenPopupButton',         itemAlias: 'hiddenPopupButton', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
-						</md-button>
-						<md-button aria-label="btnPrompt" can-be-moved=true item-alias="btnPrompt"    ng-show="!!view.btnPrompt == false || view.btnPrompt.visible"  dib-disable="{{view.btnPrompt.disabled}}" ng-class="view.btnPrompt.class"  ng-style="view.btnPrompt.style" class="md-accent md-raised" style="    " id='ci155130' aria-label="btnPrompt" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*e24prcbvh' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*e24prcbvh',         containerItemId: 155130, submitUrl: '/dropins/dibExamples/Events/promptQuestion',         itemAlias: 'btnPrompt', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Prompt" >
-							Prompt 
-						</md-button>
-						<md-button aria-label="hiddenPromptButton" can-be-moved=true item-alias="hiddenPromptButton"    ng-show="!!view.hiddenPromptButton == false || view.hiddenPromptButton.visible"  dib-disable="{{view.hiddenPromptButton.disabled}}" ng-class="view.hiddenPromptButton.class"  ng-style="view.hiddenPromptButton.style" hide class="md-accent md-raised" style="    " id='ci169799' aria-label="hiddenPromptButton" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*z*ht0011bg' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*z*ht0011bg',         containerItemId: 169799, submitUrl: '/dropins/dibExamples/Events/hiddenPromptButton',         itemAlias: 'hiddenPromptButton', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
-						</md-button>
-					</div>
-					<span aria-label="headRefreshEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155091' aria-label="headRefreshEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<span style="font-size:20px">
-							Refresh Events
-						</span>
-					</span>
-					<span aria-label="commentRefreshEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155096' aria-label="commentRefreshEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Refreshes the data of a dropdownlist or subcontainer identified by the pef_refresh_item_id field.
-							<br>
-							The targeted item must have a unique Alias within the container, since it is used to search for the item.
-							<br>
-							Often used when one item has a filter which is dependent on the value selected in another item, eg
-							<br>
-							dependent dropdowns, or forms linked to the selected item in a tree/grid (see 
-							<a href="nav/dibexSubContainersExtJs?record=first">
-								Subcontainers &amp; Filters
-							</a>
-							for more info). 
-						</p>
-					</span>
-					<md-button aria-label="buttonRefresh" can-be-moved=true class="md-accent md-raised" style="    " id='ci155097' aria-label="buttonRefresh" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*ry8zjnd59' : function(field, additionalInfoOnEvent) {  element.trigger('enableDependency', ['click' , 'dibtestConsultantGrid' , additionalInfoOnEvent]);     } , 'click___dib*nqwcm7y7x' : function(field, additionalInfoOnEvent) {  element.trigger('enableDependency', ['click' , 'companyId' , additionalInfoOnEvent]);     }  } }" aria-label="Refresh the subcontainer & dropdown below" >
-						Refresh the subcontainer & dropdown below 
-					</md-button>
-					<div layout='row' aria-label="companyId" can-be-moved=true item-alias="companyId"    ng-show="!!view.companyId == false || view.companyId.visible"  dib-disable="{{view.companyId.disabled}}" ng-class="view.companyId.class"  ng-style="view.companyId.style" flex=none style="width:490px !important;    " dib-help=' ' dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test' >
-						<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='test_company_id' select-model="model.selected___test_company_id.id" md-search-text-change="dropdowns.service155095.searchTextChange(dropdowns.service155095.searchText)" md-search-text="dropdowns.service155095.searchText" md-selected-item="model.selected___test_company_id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155095.getItems(dropdowns.service155095.searchText,'model')" md-floating-label="Selecting a value refreshes the dependent subcontainers below" md-no-cache="true" md-selected-item-change="select155095(model,'model','test_company_id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Selecting a value refreshes the dependent subcontainers below" id='ci155095' aria-label="companyId" dib-container-name='dibexEvents' dib-config="{ listeners : { 'select___dib*-v01856mi9' : function(field, additionalInfoOnEvent) {  element.trigger('enableDependency', ['select' , 'dibtestConsultantGrid' , additionalInfoOnEvent]);     } , 'select___dib*salii432t' : function(field, additionalInfoOnEvent) {  element.trigger('enableDependency', ['select' , 'subTestHtmlEvents' , additionalInfoOnEvent]);     }  } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
-							<md-item-template>
-								<span md-highlight-text="dropdowns.service155095.searchText">
-									{{item.id_display_value}}
-								</span>
-							</md-item-template>
-							<md-not-found>
-								No matches found.
-							</md-not-found>
-							<div ng-messages="dibexEvents.test_company_id.$error" ng-if="dibexEvents.test_company_id.$touched">
-							</div>
-						</md-autocomplete>
-					</div>
-					<div layout='column' layout-fill flex>
-						<md-toolbar class="md-theme-light">
-							<h2 class="md-toolbar-tools">
-								<span>
-									Test Consultant Grid
-								</span>
-							</h2>
-						</md-toolbar>
-						<div layout-fill flex aria-label="dibtestConsultantGrid" can-be-moved=true item-alias="dibtestConsultantGrid"    ng-show="!!view.dibtestConsultantGrid == false || view.dibtestConsultantGrid.visible"  dib-disable="{{view.dibtestConsultantGrid.disabled}}" ng-class="view.dibtestConsultantGrid.class"  ng-style="view.dibtestConsultantGrid.style" flex="50" style=" height:350px !important; overflow:auto !important;   " id='ci155093' aria-label="dibtestConsultantGrid" dib-container-name='dibexEvents' dib-active-filter='dibexEvents_dibtestConsultantGrid' dib-container-filter-settings="{ 'dibexEvents_dibtestConsultantGrid' : 'submitItemAlias_parent_companyId'}" dib-config="{ listeners : { } }" dib-injected-success=true fill-height-for-child >
-							<dibtest-consultant-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
-							</dibtest-consultant-grid>
-						</div>
-					</div>
-					<span aria-label="headNextAction" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155108' aria-label="headNextAction" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:16px">
-							<b>
-								Next Action
-							</b>
-						</span>
-					</span>
-					<span aria-label="commentNextAction" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155109' aria-label="commentNextAction" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Using the addSubmitUrl function, the server can respond with the next server-side API call that the client must execute. 
-						</p>
-					</span>
-					<md-button aria-label="btnNextAction" can-be-moved=true class="md-accent md-raised" style="    " id='ci155107' aria-label="btnNextAction" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*91hbtai*l' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*91hbtai*l',         containerItemId: 155107, submitUrl: '/dropins/dibExamples/Events/btnNextAction_click',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Next Action" >
-						Next Action 
-					</md-button>
-					<span aria-label="headOpenUrl" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155111' aria-label="headOpenUrl" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:16px">
-							<b>
-								Open Url
-							</b>
-						</span>
-					</span>
-					<span aria-label="commentOpenUrl" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155112' aria-label="commentOpenUrl" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							(***TODO - Coming soon... OpenUrl works but the 
-							<b>
-								wait
-							</b>
-							feature must still be implemented). The DIB OpenUrl action has a special behaviour. Since it can be at the start or middle of the action list, the actions that follow it may be dependent on items or data on the new container being opened.
-							<br>
-							The default behaviour is therefore to wait until the new container is open and all data is loaded, before executing the other actions.
-							<br>
-							To override this behaviour set the waituntilopen url parameter to false (?waituntilopen=false).
-							<br>
-							The following action opens a container and then appends 'xxx' to the varchar10 field. 
-						</p>
-					</span>
-					<md-button aria-label="btnOpenUrl" can-be-moved=true class="md-accent md-raised" style="    " id='ci155110' aria-label="btnOpenUrl" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*dm@zsj4fd' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*dm@zsj4fd',         containerItemId: 155110, submitUrl: '/dropins/dibExamples/Events/btnOpenUrl_click',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Open and append xxx to varchar10" >
-						Open and append xxx to varchar10 
-					</md-button>
-					<span aria-label="headSetActiveFilter" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155113' aria-label="headSetActiveFilter" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:16px">
-							<b>
-								Set Active Filter
-							</b>
-						</span>
-					</span>
-					<span aria-label="commentSetActiveFilter" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155114' aria-label="commentSetActiveFilter" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							The filter defined on an item (eg a subcontainer or dropdown) is named automatically using the following pattern: {containerName}_{itemName}
-							<br>
-							If the container inside the subcontainer itself has a filter, then ___{childContainerName} is appended.
-							<br>
-							This name is sent to the server-side Crud Controller to identify the criteria to apply (in the latter case  the filter of the child container is added to the criteria using the AND operator).
-							<br>
-							Using the pef_item_filter and pef_container_filter tables, multiple filters can be linked to items and containers. The active filter can be set/changed using code. 
-							<br>
-							<br>
-							Use the 'Set Active Filter' menu below to set the active filter on the grid. 
-						</p>
-					</span>
-					<div layout='row' aria-label="company1Id" can-be-moved=true item-alias="company1Id"    ng-show="!!view.company1Id == false || view.company1Id.visible"  dib-disable="{{view.company1Id.disabled}}" ng-class="view.company1Id.class"  ng-style="view.company1Id.style" flex=none style="width:220px !important;    " >
-						<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='company1Id' select-model="model.selected___company1Id.id" md-search-text-change="dropdowns.service155121.searchTextChange(dropdowns.service155121.searchText)" md-search-text="dropdowns.service155121.searchText" md-selected-item="model.selected___company1Id" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service155121.getItems(dropdowns.service155121.searchText,'model')" md-floating-label="Choose Company 1" md-no-cache="true" md-selected-item-change="select155121(model,'model','company1Id')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Choose Company 1" id='ci155121' aria-label="company1Id" dib-container-name='dibexEvents' dib-config="{ labelWidth : 70, listeners : { 'change___1844' : function(field, additionalInfoOnEvent) {  element.trigger('enableDependency', ['change' , 'CompanyConsultantGrid' , additionalInfoOnEvent]);     }  } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
-							<md-item-template>
-								<span md-highlight-text="dropdowns.service155121.searchText">
-									{{item.id_display_value}}
-								</span>
-							</md-item-template>
-							<md-not-found>
-								No matches found.
-							</md-not-found>
-							<div ng-messages="dibexEvents.company1Id.$error" ng-if="dibexEvents.company1Id.$touched">
-							</div>
-						</md-autocomplete>
-					</div>
-					<md-menu  aria-label="btnsetActiveFilter" can-be-moved=true can-have-children=true flex=none class="md-accent md-raised" style="  margin:20px !important;  " >
-						<md-button ng-click="$mdOpenMenu()"  id='ci155116' aria-label="btnsetActiveFilter" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							Set Active Filter Menu 
-						</md-button>
-						<md-menu-content width="4">
-							<md-menu-item aria-label="none" can-be-moved=true item-alias="none"    ng-show="!!view.none == false || view.none.visible"  dib-disable="{{view.none.disabled}}" ng-class="view.none.class"  ng-style="view.none.style" can-have-children=true flex=none style="    " >
-								<md-button  id='ci155119' aria-label="none" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*t*d7s71f21' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*t*d7s71f21',         containerItemId: 155119, submitUrl: '/dropins/dibExamples/Events/btnSetActiveFilter_click',         itemAlias: 'none', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
-									A. None 
-								</md-button>
-							</md-menu-item>
-							<md-menu-item aria-label="activeFilterCompany1" can-be-moved=true item-alias="activeFilterCompany1"    ng-show="!!view.activeFilterCompany1 == false || view.activeFilterCompany1.visible"  dib-disable="{{view.activeFilterCompany1.disabled}}" ng-class="view.activeFilterCompany1.class"  ng-style="view.activeFilterCompany1.style" can-have-children=true flex=none style="    " >
-								<md-button  id='ci155117' aria-label="activeFilterCompany1" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*-6c3pbb2@' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*-6c3pbb2@',         containerItemId: 155117, submitUrl: '/dropins/dibExamples/Events/btnSetActiveFilter_click',         itemAlias: 'activeFilterCompany1', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
-									B. Company 1 
-								</md-button>
-							</md-menu-item>
-							<md-menu-item aria-label="activeFilterSupervisors" can-be-moved=true item-alias="activeFilterSupervisors"    ng-show="!!view.activeFilterSupervisors == false || view.activeFilterSupervisors.visible"  dib-disable="{{view.activeFilterSupervisors.disabled}}" ng-class="view.activeFilterSupervisors.class"  ng-style="view.activeFilterSupervisors.style" can-have-children=true flex=none style="    " >
-								<md-button  id='ci155118' aria-label="activeFilterSupervisors" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*6vmg5h2@t' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*6vmg5h2@t',         containerItemId: 155118, submitUrl: '/dropins/dibExamples/Events/btnSetActiveFilter_click',         itemAlias: 'activeFilterSupervisors', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
-									C. All Supervisors 
-								</md-button>
-							</md-menu-item>
-							<md-menu-item aria-label="activeFilterOriginal" can-be-moved=true item-alias="activeFilterOriginal"    ng-show="!!view.activeFilterOriginal == false || view.activeFilterOriginal.visible"  dib-disable="{{view.activeFilterOriginal.disabled}}" ng-class="view.activeFilterOriginal.class"  ng-style="view.activeFilterOriginal.style" can-have-children=true flex=none style="    " >
-								<md-button  id='ci194828' aria-label="activeFilterOriginal" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___1782' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: '1782',         containerItemId: 194828, submitUrl: '/dropins/dibExamples/Events/btnSetActiveFilter_click',         itemAlias: 'activeFilterOriginal', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
-									D. Revert to Original Filter (position = 'team member') 
-								</md-button>
-							</md-menu-item>
-						</md-menu-content>
-					</md-menu>
-					<div layout-fill flex aria-label="CompanyConsultantGrid" can-be-moved=true item-alias="CompanyConsultantGrid"    ng-show="!!view.CompanyConsultantGrid == false || view.CompanyConsultantGrid.visible"  dib-disable="{{view.CompanyConsultantGrid.disabled}}" ng-class="view.CompanyConsultantGrid.class"  ng-style="view.CompanyConsultantGrid.style" flex style=" height:400px !important; overflow:auto !important;   " id='ci194827' aria-label="CompanyConsultantGrid" dib-container-name='dibexEvents' dib-active-filter='dibexEvents_CompanyConsultantGrid' dib-container-filter-settings="{ 'dibexEvents_CompanyConsultantGrid' : '',  'dibexEvents_Company1' : 'submitItemAlias_parent_company1Id',  'dibexEvents_Supervisors' : ''}" dib-config="{ listeners : { } }" dib-injected-success=true fill-height-for-child >
-						<dibtest-company-consultant-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
-						</dibtest-company-consultant-grid>
-					</div>
-					<span aria-label="headClientSideEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155124' aria-label="headClientSideEvents" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:20px">
-							Client-side Events
-						</span>
-					</span>
-					<span aria-label="commentClientSideEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155125' aria-label="commentClientSideEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							By using . instead of / in the submit_url field of events, JavaScript files can be loaded and executed on the client.
-							<br>
-							The JavaScript has full access to the Angular and Dropinbase API's.
-							<br>
-							The button below collects and displays item values on this container. 
-						</p>
-					</span>
-					<md-button aria-label="btnClientSide" can-be-moved=true class="md-accent md-raised" style="    " id='ci155123' aria-label="btnClientSide" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*le*lqn8ny' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*le*lqn8ny',         containerItemId: 155123, submitUrl: 'Dropins.dibExamples.js.app.dibExEventsTest',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Execute dibExEventsTest.js" >
-						Execute dibExEventsTest.js 
-					</md-button>
-				</div>
-			</md-tab-body>
-		</md-tab>
-		<md-tab label='Container Events' tabId="155146"  aria-label="colContainerEvents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="width:100% !important;   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colContainerEvents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="width:100% !important;   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155146'     id='ci155146' aria-label="colContainerEvents" dib-container-name='dibexEvents' dib-config="{ autoScroll : true, autoHeight : true, listeners : { } }" >
-					<span aria-label="headQuickFactsC" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155148' aria-label="headQuickFactsC" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:20px">
-							Quick Facts
-						</span>
-					</span>
-					<span aria-label="commentQuickFactsC" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155147' aria-label="commentQuickFactsC" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Containers are injected into the DOM via ports, or can be included with the load of the parent container via subcontainers.
-							<br>
-							Containers are in fact merely a special type of panel in the hierarchy of items, distinguished by certain configs (eg dibContainer). 
-							<br>
-							The following types of events can be triggered on container level: 
-							<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 1.5em; background-color: #FFF9E0">
-								<li>
-									Events triggered on the client that call either server-side dropin or core API functions, or client-side JavaScript functions.
-								</li>
-								<li>
-									Server-side events in the generated PHP container CRUD(data) classes
-								</li>
-								<li>
-									Also see the Table Events-tab...
-								</li>
-							</ul>
-						</p>
-					</span>
-					<span aria-label="headContainerEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155151' aria-label="headContainerEvents" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:20px">
-							Client-side Event Triggers
-						</span>
-					</span>
-					<span aria-label="commentContainerEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155152' aria-label="commentContainerEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							When the code is generated for a particular container, the client-side events that are specified for that container are merged into the code.
-							<br>
-							Each container dropin type has a specified set of available events - many of them are common to all dropin types, eg 
-							<b>
-								postLink
-							</b>
-							and 
-							<b>
-								init
-							</b>
-							.
-							<br>
-							View each container dropin's documentation for additional event triggers that may be available.
-							<br>
-							<br>
-							Here are descriptions for some common client-side container events:
-							<br>
-							<b>
-								onInit
-							</b>
-							- occurs when a container is loaded the first time into the view, and before any data is loaded. Note, certain items are not guaranteed to be loaded yet.
-							<br>
-							<b>
-								postLink
-							</b>
-							- occurs after a container, including all its items, is loaded into view.
-							<br>
-							<b>
-								reloadContainer
-							</b>
-							- occurs after each time data is loaded into the container. Note, also occurs on a child container when a parent container is refreshed and the subcontainer has a filter (all child containers with filters are automatically refreshed).
-							<br>
-							<br>
-							The following grid has all three the above, and 'load; and 'rowClick' container event triggers configured. dibexEvents has a 'postLink' event.  Check the 
-							<b>
-								Container Event Notices
-							</b>
-							field below as events fire... 
-						</p>
-					</span>
-					<md-input-container aria-label="containerEvents" can-be-moved=true item-alias="containerEvents"    ng-show="!!view.containerEvents == false || view.containerEvents.visible"  dib-disable="{{view.containerEvents.disabled}}" ng-class="view.containerEvents.class"  ng-style="view.containerEvents.style" flex class="md-block" style="width:100% !important;    " >
-						<textarea   name="containerEvents" ng-model="model.containerEvents" aria-label="Container Event Notices" id='ci194833' aria-label="containerEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
-						</textarea>
-						<label>
-							Container Event Notices
-						</label>
-						<div ng-messages="dibexEvents.containerEvents.$error">
-						</div>
-					</md-input-container>
-					<div layout='column' layout-fill flex>
-						<md-toolbar class="md-theme-light">
-							<h2 class="md-toolbar-tools">
-								<span>
-									Test Company Grid
-								</span>
-							</h2>
-						</md-toolbar>
-						<div layout-fill flex aria-label="test_company_grid" can-be-moved=true item-alias="test_company_grid"    ng-show="!!view.test_company_grid == false || view.test_company_grid.visible"  dib-disable="{{view.test_company_grid.disabled}}" ng-class="view.test_company_grid.class"  ng-style="view.test_company_grid.style" flex style=" height:400px !important; overflow:auto !important;   " id='ci155154' aria-label="test_company_grid" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-injected-success=true fill-height-for-child >
-							<dibtest-company-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
-							</dibtest-company-grid>
-						</div>
-					</div>
-					<span aria-label="headCRUDEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155150' aria-label="headCRUDEvents" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:20px">
-							Container CRUD Events
-						</span>
-					</span>
-					<span aria-label="commentCRUDEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155149' aria-label="commentCRUDEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Server-side Container CRUD (Create, Read, Update, Delete) events are configured in the pef_container_event table, and generated into the code when the CRUD classes are created.
-							<br>
-							The following list of events exists:
-							<br>
-							get defaults, before readone, after readone, before readmany, after readmany, before change, after change, before create, after create, before delete, after delete.
-							<br>
-							Each event calls a custom PHP function specified in the submit_url field. Parameters in the call can be passed by reference to allow for changes before eg data is stored.
-							<br>
-							A list of actions can be returned to the client for execution by using the PeffApp::$clientActions array (see the example for details).
-							<br>
-							It is also possible to cancel further execution of code and send a custom error message to the user.
-							<br>
-							<br>
-							The following grid has 'after readmany', 'before delete', 'after update' and 'get defaults' events specified.
-							<br>
-							See /public_html/dropins/dibExamples/components/ContainerEvents.php for details on handling of these events. 
-						</p>
-					</span>
-					<span aria-label="span" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci198255' aria-label="span" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<b>
-							dibtestConsultantEventsGrid
-						</b>
-					</span>
-					<div layout-fill flex aria-label="consultantEventsGrid" can-be-moved=true flex style=" height:400px !important; overflow:auto !important;   " id='ci155153' aria-label="consultantEventsGrid" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-injected-success=true fill-height-for-child >
-						<dibtest-consultant-events-grid dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
-						</dibtest-consultant-events-grid>
-					</div>
-				</div>
-			</md-tab-body>
-		</md-tab>
-		<md-tab label='Table Events' tabId="155155"  aria-label="colTableEvents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="width:100% !important;   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colTableEvents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="width:100% !important;   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155155'     id='ci155155' aria-label="colTableEvents" dib-container-name='dibexEvents' dib-config="{ autoScroll : true, autoHeight : true, listeners : { } }" >
-					<span aria-label="headQuickFactsT" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155157' aria-label="headQuickFactsT" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:20px">
-							Table Events
-						</span>
-					</span>
-					<span aria-label="commentQuickFactsT" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155156' aria-label="commentQuickFactsT" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Table events are specified in the 
-							<i>
-								pef_table.table_events
-							</i>
-							field and call custom PHP code in a associated TableEvents.php class. User CRUD actions on any container that is based on a table with table events cause the events to be triggered.
-							<br>
-							As with container CRUD events, the PeffApp::$clientActions array can be used to return a list of actions to the client for execution.
-							<br>
-							<br>
-							List the event types that must be triggered per table as a comma separated list. The following event types are available:
-							<br>
-							bc(before create), ac(after create), bu(before update), au(after update), bd(before delete), ad(after delete)
-							<br>
-							<br>
-							In the example below, the test_child table has the following value in the table_events field: bu, bd
-							<br>
-							The corresponding TableEvents.php class is stored in the container's dropin folder: /dropins/dibExamples/components/TableEvents.php.
-							<br>
-							Both the combinations of 'Primkey1, Primkey2' and 'Unique1, Unique2' have unique table indexes.
-							<br>
-							The table events only check uniqueness for the first case... The generated container CRUD class is left to handle the second case (Note, it would handle the first case too if we have not specified table events).
-							<br>
-							Try to save values that violate the uniqueness of either combination, or try to delete a record (also handled by the table event). 
-						</p>
-					</span>
-					<div layout='column' layout-fill flex>
-						<md-toolbar class="md-theme-light">
-							<h2 class="md-toolbar-tools">
-								<span>
-									Test Child Form
-								</span>
-							</h2>
-						</md-toolbar>
-						<div layout-fill flex aria-label="test_child_form" can-be-moved=true flex style="width:100% !important; height:300px !important; overflow:auto !important;   " id='ci155160' aria-label="test_child_form" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-injected-success=true fill-height-for-child >
-							<dibtest-child-form dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
-							</dibtest-child-form>
-						</div>
-					</div>
-				</div>
-			</md-tab-body>
-		</md-tab>
-		<md-tab label='Html Events' tabId="155161"  aria-label="colHtmlEvents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="width:100% !important;   padding:10px !important; " >
-			<md-tab-body flex layout-fill>
-				<div dib-inject-content="replace" layout='column' aria-label="colHtmlEvents" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="width:100% !important;   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155161'     id='ci155161' aria-label="colHtmlEvents" dib-container-name='dibexEvents' dib-config="{ autoScroll : true, autoHeight : true, listeners : { } }" >
-					<span aria-label="headQuickFacts14" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155163' aria-label="headQuickFacts14" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-						<span style="font-size:20px">
-							Quick Facts
-						</span>
-					</span>
-					<span aria-label="commentHtmlEvents" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155162' aria-label="commentHtmlEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-						<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-							Containers based on dibHtmlTemplate can execute Dropinbase events by including the TemplateActions.js script which makes the actions below available:
-							<br>
-							<br>
-							&lt;script type="text/javascript" src="/files/dropins/setNgMaterial/dibAngular/src/js/core/shared/TemplateActions.js"&gt;&lt;/script&gt; 
-							<br>
-							<br>
-							<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0">
-								<li>
-									common.goTo - navigates to a container 
-									<ul>
-										<li>
-											<b>
-												Syntax: 
-											</b>
-											common.goTo(containerName, portAlias, changeUrl, urlQueryString)
-										</li>
-										<li>
-											Eg &lt;a href="#" onClick="common.goTo('dibtestConsultantPortGrid', 'EmployeesBaseContainer', false, '?filter_id&gt;2');return false;"&gt;Items Grid&lt;/a&gt;
-										</li>
-										<li>
-											Use single quotes for string parameters.
-										</li>
-										<li>
-											If there is no portAlias (ie default port must be used) then use '' (two single quotes).
-										</li>
-										<li>
-											Url query strings must start with '?' (see example). If no url query string, just omit the last parameter. 
-										</ul>
-									</li>
-									<li>
-										common.startAction - executes Dropinbase server-side or client-side scripts (which in turn can cause client-side or server-side functions to execute). 
-										<ul>
-											<li>
-												<b>
-													Syntax: 
-												</b>
-												common.startAction(submitUrl))
-											</li>
-											<li>
-												Eg &lt;a href="#" onClick="common.startAction('/dropins/dibExamples/Events/btnHelloWorld_click/dibtestCompanyETReport/1234');return false;"&gt;Greetings&lt;/a&gt;
-											</li>
-											<li>
-												Use single quotes around the url
-											</li>
-											<li>
-												<b>
-													Important notes for server-side function calls:
-												</b>
-												the last two parts of the url in our example, provides values to the first two (required) parameters of the PHP function being called, namely $containerName and $itemEventId. They can be omitted from the PHP function declaration (and then the url above) unless you require permissions on respectively the container and the event level. 
-												<b>
-													Note
-												</b>
-												, omitting $containerName effectively makes the function available publicly! Including it ensures that only permission groups with rights to this container's events can execute this event. $itemEventId is often excluded from the function parameter list... If it is not omitted (to enable permission checking on event level) it is necessary to create a corresponding item on the container with an event calling the same url in order for the permission file for item events (eg /runtime/permFiles/_ItemEventsxx1xx.php)  to include an entry for this event. See eg the 'testAction' button with its event, in the dibtestCompanyETReport  container used in the example below.
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</p>
-						</span>
-						<span aria-label="commentDrilldown" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155164' aria-label="commentDrilldown" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								Note, drilldown reports, or navigation to other dibHtmlTemplate reports, can be achieved using normal HTML links.
-								<br>
-								<br>
-								The example dibHtmlTemplate report below incorporates all of the above. 
-							</p>
-						</span>
-						<div layout='row' aria-label="htmlCompanyId" can-be-moved=true item-alias="htmlCompanyId"    ng-show="!!view.htmlCompanyId == false || view.htmlCompanyId.visible"  dib-disable="{{view.htmlCompanyId.disabled}}" ng-class="view.htmlCompanyId.class"  ng-style="view.htmlCompanyId.style" flex=none style="width:490px !important;    " >
-							<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='htmlCompanyId' select-model="model.selected___htmlCompanyId.id" md-search-text-change="dropdowns.service194831.searchTextChange(dropdowns.service194831.searchText)" md-search-text="dropdowns.service194831.searchText" md-selected-item="model.selected___htmlCompanyId" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service194831.getItems(dropdowns.service194831.searchText,'model')" md-floating-label="Selecting a value refreshes the dependent subcontainers below" md-no-cache="true" md-selected-item-change="select194831(model,'model','htmlCompanyId')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Selecting a value refreshes the dependent subcontainers below" id='ci194831' aria-label="htmlCompanyId" dib-container-name='dibexEvents' dib-config="{ listeners : { 'select___1784' : function(field, additionalInfoOnEvent) {  element.trigger('enableDependency', ['select' , 'subTestHtmlEvents' , additionalInfoOnEvent]);     }  } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
-								<md-item-template>
-									<span md-highlight-text="dropdowns.service194831.searchText">
-										{{item.id_display_value}}
-									</span>
-								</md-item-template>
-								<md-not-found>
-									No matches found.
-								</md-not-found>
-								<div ng-messages="dibexEvents.htmlCompanyId.$error" ng-if="dibexEvents.htmlCompanyId.$touched">
-								</div>
-							</md-autocomplete>
-						</div>
-						<div layout-fill flex aria-label="subTestHtmlEvents" can-be-moved=true item-alias="subTestHtmlEvents"    ng-show="!!view.subTestHtmlEvents == false || view.subTestHtmlEvents.visible"  dib-disable="{{view.subTestHtmlEvents.disabled}}" ng-class="view.subTestHtmlEvents.class"  ng-style="view.subTestHtmlEvents.style" flex="50" style=" height:350px !important; overflow:auto !important;   " id='ci155094' aria-label="subTestHtmlEvents" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-injected-success=true fill-height-for-child >
-							<dibtest-e-t-events-report dib-subcontainer-loaded dib-subcontainer=true layout-fill         >
-							</dibtest-e-t-events-report>
-						</div>
-					</div>
-				</md-tab-body>
-			</md-tab>
-			<md-tab label='Queues' tabId="179995"  aria-label="colQueues" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none flex layout-fill style="   padding:10px !important; " >
-				<md-tab-body flex layout-fill>
-					<div dib-inject-content="replace" layout="column" layout-align="start start" aria-label="colQueues" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex=none style="   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=179995'     id='ci179995' aria-label="colQueues" dib-container-name='dibexEvents' dib-config="{ autoScroll : true, autoHeight : true, listeners : { } }" >
-						<span aria-label="headQuickFacts2" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci179997' aria-label="headQuickFacts2" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<span style="font-size:20px">
-								Quick Facts
-							</span>
-						</span>
-						<span aria-label="commentQueues" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci179996' aria-label="commentQueues" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								Queues provide a no-fuss-to-setup-or-maintain way of communicating asynchronously with the client.
-								<br>
-								They are particularly useful for long-running scripts. 
-							</p>
-						</span>
-						<span aria-label="commentHowItWorks" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci180010' aria-label="commentHowItWorks" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								<b>
-									How It Works
-								</b>
-								<br>
-								<br>
-								The client is instructed to start polling the server (by calling the QueueController) every asyncInterval milliseconds for any actions or messages that are waiting in the Queue (generated by long running server-side code).
-								<br>
-								This instruction is given if an asyncInterval is specified in the 
-								<i>
-									response_type
-								</i>
-								field of the Item/Container event,
-								<br>
-								 OR the server can include asyncInterval as part of a validResult response to the client.
-								<br>
-								Note, when 
-								<i>
-									response_type
-								</i>
-								contains an asyncInterval value, the client will not wait for the server to send a validResult or invalidResult response (as occurs if 'actions' is used in 
-								<i>
-									response_type
-								</i>
-								).
-								<br>
-								<br>
-								In the meantime, the server prepares actions and messages and adds them to the Queue.
-								<br>
-								 Actions/Messages are executed on the client in the order that they were added to the Queue.
-								<br>
-								The server can at any point change the value of asyncInterval, or set it to 'stop' (which instructs the client to stop polling).
-								<br>
-								<br>
-								If the client polls retryCount times (default is 10) without receiving any response, the polling will stop automatically.
-								<br>
-								The default value of retryCount is set in Dib.php, but can also be updated at any time.
-								<br>
-								<br>
-								Queues are initiated with a random unique Identifier which is used by Dropinbase server-side to keep responses to clients separate.
-								<br>
-								<br>
-								<b>
-									See the PHP code in /public_html/dropins/dibExamples/controllers/QueueController.php for more info.
-								</b>
-							</p>
-						</span>
-						<span aria-label="headResponseType" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci179999' aria-label="headResponseType" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<span style="font-size:20px">
-								Use Response Type
-							</span>
-						</span>
-						<span aria-label="commentResponseType" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci179998' aria-label="commentResponseType" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								The button below starts the Queue using a response_type/asyncInterval value of 1000.
-								<br>
-								If the text field below contains 'stop me' then it will immediately stop the Queue.
-								<br>
-								If not, it sends some messages as part of a loop, updates the asyncInterval and retryCount,
-								<br>
-								sets the value of the text field, refreshes the test_company_grid container (which triggers its reloadContainer event)
-								<br>
-								and then stops the client from polling further.
-								<br>
-								Note, the user can carry on with other tasks while code runs asynchronously. 
-							</p>
-						</span>
-						<md-button aria-label="btnGo" can-be-moved=true class="md-raised md-accent" style="    " id='ci180003' aria-label="btnGo" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*jr01cp6w28' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*jr01cp6w28',         containerItemId: 180003, submitUrl: '/dropins/dibExamples/Queue/startedWithResponseType',         itemAlias: '', refreshItemId : '', responseType: '1000' } , additionalInfoOnEvent); }  } }" aria-label="Go!" >
-							Go! 
-						</md-button>
-						<md-input-container aria-label="text1" can-be-moved=true item-alias="text1"    ng-show="!!view.text1 == false || view.text1.visible"  dib-disable="{{view.text1.disabled}}" ng-class="view.text1.class"  ng-style="view.text1.style" flex class="md-block" style="width:100% !important;    " >
-							<textarea   name="text1" ng-model="model.text1" aria-label="Text" id='ci180004' aria-label="text1" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
-							</textarea>
-							<label>
-								Text
-							</label>
-							<div ng-messages="dibexEvents.text1.$error">
-							</div>
-						</md-input-container>
-						<span aria-label="headUseValidResult" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci180002' aria-label="headUseValidResult" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<span style="font-size:20px">
-								Use validResult
-							</span>
-						</span>
-						<span aria-label="commentAnotherExample" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci180009' aria-label="commentAnotherExample" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								This example calls a function which returns a prompt action.
-								<br>
-								If the user clicks 'Yes', then a hidden buttons' event is triggered which will use validResult to initialize the Queue. 
-							</p>
-						</span>
-						<md-button aria-label="promptQuestion1" can-be-moved=true class="md-raised md-accent" style="    " id='ci180005' aria-label="promptQuestion1" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*6grbmo0-f' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*6grbmo0-f',         containerItemId: 180005, submitUrl: '/dropins/dibExamples/Queue/promptQuestion',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Question" >
-							Question 
-						</md-button>
-						<md-button aria-label="btnHidden" can-be-moved=true item-alias="btnHidden"    ng-show="!!view.btnHidden == false || view.btnHidden.visible"  dib-disable="{{view.btnHidden.disabled}}" ng-class="view.btnHidden.class"  ng-style="view.btnHidden.style" style="    " id='ci180011' aria-label="btnHidden" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*43r9it@5k' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*43r9it@5k',         containerItemId: 180011, submitUrl: '/dropins/dibExamples/Queue/handlePrompt',         itemAlias: 'btnHidden', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" >
-						</md-button>
-						<span aria-label="headCommunicate2" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci180000' aria-label="headCommunicate2" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<span style="font-size:20px">
-								Communicate with other users
-							</span>
-						</span>
-						<span aria-label="comment341" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci180001' aria-label="comment341" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								Queues are stored using login Id's. Therefore if your server code allows it, users can communicate with one another
-								<br>
-								For the following example, browse to /nav/dibexEvents in a different type of browser (eg Firefox if you are using Chrome), and login with a different user (eg user 'test' with password 'test'), and click the 'Listen' button.
-								<br>
-								Then select this other user on the dropdown below, type a message and click Send.
-								<br>
-								Server-side code will handle the Queues of both users, facilitating the communication.
-								<br>
-								Note, actions can be sent this way between users as well. 
-							</p>
-						</span>
-						<div layout='row' aria-label="queueLoginId" can-be-moved=true item-alias="queueLoginId"    ng-show="!!view.queueLoginId == false || view.queueLoginId.visible"  dib-disable="{{view.queueLoginId.disabled}}" ng-class="view.queueLoginId.class"  ng-style="view.queueLoginId.style" flex=none style="    " >
-							<md-autocomplete  flex dib-onload-service  has-store="true" md-input-name='queueLoginId' select-model="model.selected___queueLoginId.id" md-search-text-change="dropdowns.service180007.searchTextChange(dropdowns.service180007.searchText)" md-search-text="dropdowns.service180007.searchText" md-selected-item="model.selected___queueLoginId" md-item-text="item.id_display_value" md-delay="700" md-items="item in dropdowns.service180007.getItems(dropdowns.service180007.searchText,'model')" md-floating-label="Select Login" md-no-cache="true" md-selected-item-change="select180007(model,'model','queueLoginId')" md-select-on-match="true" md-min-length="0" dib-data-component='autocomplete' placeholder="Select Login" id='ci180007' aria-label="queueLoginId" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-enable-dependency-scope='md-autocomplete-wrap'    dib-enable-dependency-scope-object='selectedItem' >
-								<md-item-template>
-									<span md-highlight-text="dropdowns.service180007.searchText">
-										{{item.id_display_value}}
-									</span>
-								</md-item-template>
-								<md-not-found>
-									No matches found.
-								</md-not-found>
-								<div ng-messages="dibexEvents.queueLoginId.$error" ng-if="dibexEvents.queueLoginId.$touched">
-								</div>
-							</md-autocomplete>
-						</div>
-						<md-input-container aria-label="queueMsg" can-be-moved=true item-alias="queueMsg"    ng-show="!!view.queueMsg == false || view.queueMsg.visible"  dib-disable="{{view.queueMsg.disabled}}" ng-class="view.queueMsg.class"  ng-style="view.queueMsg.style" flex=none class="md-block" style="    " >
-							<input type="text"  name="queueMsg" ng-model="model.queueMsg" aria-label="Message" id='ci180008' aria-label="queueMsg" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Message
-							</label>
-							<div ng-messages="dibexEvents.queueMsg.$error">
-							</div>
-						</md-input-container>
-						<div dib-inject-content="replace" layout="row"  aria-label="layoutrowButtons" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=179995'     id='ci180012' aria-label="layoutrowButtons" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<md-button aria-label="btnSend1" can-be-moved=true class="md-raised md-accent" style="    " id='ci180006' aria-label="btnSend1" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*xef9qkbgz' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*xef9qkbgz',         containerItemId: 180006, submitUrl: '/dropins/dibExamples/Queue/sendMsg',         itemAlias: '', refreshItemId : '', responseType: '2000' } , additionalInfoOnEvent); }  } }" aria-label="Send" >
-								Send 
-							</md-button>
-							<md-button aria-label="btnListen" can-be-moved=true class="md-raised md-primary" style="    " id='ci180013' aria-label="btnListen" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*ooga*nh*' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*ooga*nh*',         containerItemId: 180013, submitUrl: '/dropins/dibExamples/Queue/listen',         itemAlias: '', refreshItemId : '', responseType: '1000' } , additionalInfoOnEvent); }  } }" aria-label="Listen" >
-								Listen 
-							</md-button>
-						</div>
-					</div>
-				</md-tab-body>
-			</md-tab>
-			<md-tab label='NodeJs' tabId="155131"  aria-label="colNodeJs" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex flex layout-fill style="width:100% !important;   padding:10px !important; " >
-				<md-tab-body flex layout-fill>
-					<div dib-inject-content="replace" layout='column' aria-label="colNodeJs" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex style="width:100% !important;   padding:10px !important; " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155131'     id='ci155131' aria-label="colNodeJs" dib-container-name='dibexEvents' dib-config="{ autoScroll : true, autoHeight : true, listeners : { } }" >
-						<span aria-label="headQuickFacts1" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155133' aria-label="headQuickFacts1" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-							<span style="font-size:20px">
-								Quick Facts
-							</span>
-						</span>
-						<span aria-label="comment313" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155132' aria-label="comment313" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								Dropinbase can utilize NodeJs to enable server-side scripts to easily send asynchronous commands to the client.
-								<br>
-								Using NodeJs can simplify your PHP code (when compared to Queues) in some cases, but can also be harder to maintain in certain network and server environments.
-								<br>
-								In addition to a few specialized functions, any action-list can be sent via NodeJs, and communication is tied to users' login id's.
-								<br>
-							</p>
-						</span>
-						<span aria-label="headSendAsync" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155135' aria-label="headSendAsync" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-							<span style="font-size:20px">
-								Send Async Messages and Actions
-							</span>
-						</span>
-						<span aria-label="comment3131" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155134' aria-label="comment3131" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								The button below loops through companies in the test_company table and sends messages and actions asynchronously while executing code.
-								<br>
-								Note, the user can carry on with other tasks while code runs asynchronously. 
-							</p>
-						</span>
-						<md-button aria-label="btnMsgAction" can-be-moved=true style="    " id='ci155139' aria-label="btnMsgAction" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*vxr3*se' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*vxr3*se',         containerItemId: 155139, submitUrl: '/dropins/dibExamples/NodeJs/btnMsgAction_click',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Msgs & Actions" >
-							Msgs & Actions 
-						</md-button>
-						<md-input-container aria-label="companyList" can-be-moved=true item-alias="companyList"    ng-show="!!view.companyList == false || view.companyList.visible"  dib-disable="{{view.companyList.disabled}}" ng-class="view.companyList.class"  ng-style="view.companyList.style" flex=none class="md-block" style="    " >
-							<textarea   name="companyList" ng-model="model.companyList" aria-label="Company List" id='ci155140' aria-label="companyList" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-data-component='inputTextarea' md-detect-hidden >
-							</textarea>
-							<label>
-								Company List
-							</label>
-							<div ng-messages="dibexEvents.companyList.$error">
-							</div>
-						</md-input-container>
-						<span aria-label="headAnotherExample" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155138' aria-label="headAnotherExample" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-							<span style="font-size:20px">
-								Another Example
-							</span>
-						</span>
-						<span aria-label="comment33" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155145' aria-label="comment33" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								This example calls the prompt action which then calls itself or executes the call to Hello word, depending on the user's actions. 
-							</p>
-						</span>
-						<md-button aria-label="promptQuestion" can-be-moved=true style="    " id='ci155141' aria-label="promptQuestion" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*bbk-l9hng' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*bbk-l9hng',         containerItemId: 155141, submitUrl: '/dropins/dibExamples/NodeJs/promptQuestion',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Quiz" >
-							Quiz 
-						</md-button>
-						<span aria-label="headCommunicate" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155136' aria-label="headCommunicate" dib-container-name='dibexEvents' dib-config="{ margins : '10 0 0 5', listeners : { } }" >
-							<span style="font-size:20px">
-								Communicate with other users
-							</span>
-						</span>
-						<span aria-label="comment34" can-be-moved=true on-move-refresh-preview=true flex=none style="    " id='ci155137' aria-label="comment34" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
-								NodeJs sends messages to login Id's. Therefore if your server code allows it, users can communicate with one another
-								<br>
-								For the following example, open the system in a different type of browser (eg Firefox if you are using Chrome), and login with a different user.
-								<br>
-								Then select this other user on the dropdown below, type a message and click Send.
-								<br>
-								Server-side code will send the message to the other user. 
-							</p>
-						</span>
-						<div dib-inject-content="replace" layout="row"  aria-label="layoutRow" can-be-moved=true can-have-children=true on-move-refresh-preview=true flex layout-xs='column' style="    " on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155131'     id='ci210172' aria-label="layoutRow" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" >
-							<md-input-container aria-label="userAlias" can-be-moved=true item-alias="userAlias"    ng-show="!!view.userAlias == false || view.userAlias.visible"  dib-disable="{{view.userAlias.disabled}}" ng-class="view.userAlias.class"  ng-style="view.userAlias.style" flex=none class="md-block" style="    " >
-								<input type="text"  name="userAlias" ng-model="model.userAlias" aria-label="My Alias" id='ci210170' aria-label="userAlias" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-								<label>
-									My Alias
-								</label>
-								<div ng-messages="dibexEvents.userAlias.$error">
-								</div>
-							</md-input-container>
-							<md-button aria-label="btnRegAlias" can-be-moved=true style="    " id='ci210171' aria-label="btnRegAlias" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___1836' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: '1836',         containerItemId: 210171, submitUrl: '/dropins/dibExamples/NodeJs/regAlias',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Register Alias" >
-								Register Alias 
-							</md-button>
-						</div>
-						<md-input-container aria-label="recipientAlias" can-be-moved=true item-alias="recipientAlias"    ng-show="!!view.recipientAlias == false || view.recipientAlias.visible"  dib-disable="{{view.recipientAlias.disabled}}" ng-class="view.recipientAlias.class"  ng-style="view.recipientAlias.style" flex=none class="md-block" style="    " >
-							<input type="text"  name="recipientAlias" ng-model="model.recipientAlias" aria-label="Recipient Alias" id='ci155143' aria-label="recipientAlias" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Recipient Alias
-							</label>
-							<div ng-messages="dibexEvents.recipientAlias.$error">
-							</div>
-						</md-input-container>
-						<md-input-container aria-label="msg" can-be-moved=true item-alias="msg"    ng-show="!!view.msg == false || view.msg.visible"  dib-disable="{{view.msg.disabled}}" ng-class="view.msg.class"  ng-style="view.msg.style" flex=none class="md-block" style="    " >
-							<input type="text"  name="msg" ng-model="model.msg" aria-label="Message" id='ci155144' aria-label="msg" dib-container-name='dibexEvents' dib-config="{ listeners : { } }" dib-data-component='inputText' md-detect-hidden >
-							<label>
-								Message
-							</label>
-							<div ng-messages="dibexEvents.msg.$error">
-							</div>
-						</md-input-container>
-						<md-button aria-label="btnSend" can-be-moved=true style="    " id='ci155142' aria-label="btnSend" dib-container-name='dibexEvents' dib-config="{ listeners : { 'click___dib*m-312k62sa' : function(field, additionalInfoOnEvent) {  dibAction.executeAction({ scope : scope, field : element, containerName: 'dibexEvents', triggerType: 'click', nextActionItem: '', itemEventId: 'dib*m-312k62sa',         containerItemId: 155142, submitUrl: '/dropins/dibExamples/NodeJs/btnSend_click',         itemAlias: '', refreshItemId : '', responseType: 'actions' } , additionalInfoOnEvent); }  } }" aria-label="Send" >
-							Send 
-						</md-button>
-					</div>
-				</md-tab-body>
-			</md-tab>
-		</md-tabs>
-	</div>
-	
+
+<div
+component-loaded
+dib-container=dibexEvents dib-container-name="7146" dib-config="{
+}" layout-fill flex>
+    <md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+    <md-tabs id="ci155087" md-selected="selectedIndex" md-swipe-content='false' md-autoselect=false 
+    md-tabs-dummy-wrapper='ci155087'
+    aria-label="mdtabs"
+can-be-moved=true
+item-alias="mdtabs"   
+    ng-show="!!view.mdtabs == false || view.mdtabs.visible" 
+    dib-disable="{{view.mdtabs.disabled}}"
+    ng-class="view.mdtabs.class" 
+    ng-style="view.mdtabs.style"
+ can-have-children=true
+flex="none"
+md-no-select-click md-dynamic-height class=" md-primary" md-align-tabs="top" md-border-bottom  md-autoselect
+style="    "
+    id='ci155087'
+aria-label="mdtabs"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tab label='Basics' tabId="155088" 
+        aria-label="colBasics"
+can-be-moved=true
+item-alias="colBasics"   
+    ng-show="!!view.colBasics == false || view.colBasics.visible" 
+    dib-disable="{{view.colBasics.disabled}}"
+    ng-class="view.colBasics.class" 
+    ng-style="view.colBasics.style"
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="width:100% !important;   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout="column" layout-align="start start"
+    aria-label="colBasics"
+can-be-moved=true
+item-alias="colBasics"   
+    ng-show="!!view.colBasics == false || view.colBasics.visible" 
+    dib-disable="{{view.colBasics.disabled}}"
+    ng-class="view.colBasics.class" 
+    ng-style="view.colBasics.style"
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="width:100% !important;   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'    
+    id='ci155088'
+aria-label="colBasics"
+dib-container-name='dibexEvents'
+dib-config="{
+     autoScroll : true,
+autoHeight : true,
+    listeners : {
+    }
+}"
+>
+    <span aria-label="commentQuickFacts"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155090'
+aria-label="commentQuickFacts"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Events cause actions (eg disable a button) to occur on specified triggers (eg click, keydown or focus).<br>
+Dropinbase provides a powerful PHP event framework that makes it possible to link reusable functions to containers, items, tables and HTML documents, with configurable permissions.<br><br>
+
+Events linked to items, containers and HTML templates can be executed synchronously or asynchronously, and each origin can have multiple events linked to them. Server-side code can call client-side code and vice-versa, and client-side code can be placed in a Queue for execution, or executed directly with NodeJs (if available).<br><br>
+
+The easiest way to add events is using the Add Event buttons on the Item Overview and Container Configuration pages on the Designer.<br><br>
+
+The following types of events are available:
+<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0">
+<li>Navigation - open other containers and navigate to specific records.</li>
+	<li>Refresh events - refreshes the data in the target item/subcontainer</li>
+    <li>Call server-side functions - executes PHP/C# functions (which in turn can cause client-side functions to execute)</li>
+	<li>Load and call client-side JavaScript functions (which in turn can cause server-side functions to execute)</li>
+<li>Table crud events - events configured on changes of data on table-level</li>
+<li>HTML template events - call functions from within HTML templates</li>
+<li>Container crud events - events configured when crud actions occur on container level</li>
+	<li>Lazy load events - loads items into the current container. See <a href="/nav/dibexLazyLoad">Lazy Load Examples</a> and <a href="/nav/dibDocs?id=51&text=Lazy%20Loading%20Items">Docs</a> for more info.</li>	
+</ul>
+    </p>    
+</span>
+    <span aria-label="commentResponseType2"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci180030'
+aria-label="commentResponseType2"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The response expected by the client when calling server-side functions can be set in the even'ts <i>response_type</i> field as follows:<br>
+<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0">
+<li>'actions' - the client will expect an array of actions to execute and/or a message to display, OR an empty array (use validResult(TRUE)).</li>
+<li>'redirect' - the client will not wait for a response. The server can send Headers to redirect the client to another url (useful for eg downloading files).</li>
+<li>an integer value (asyncInterval) - the client will activate polling the server every <b>asyncInterval</b> milliseconds for actions to execute, until the server responds with 'stop', or a maximum <b>retryCount</b> is reached.</li>
+</ul>
+    </p>    
+</span>
+    <span aria-label="headNavigation"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155099'
+aria-label="headNavigation"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Navigation</span>
+</span>
+    <span aria-label="commentServersideFunctions1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci194767'
+aria-label="commentServersideFunctions1"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    It is recommended to use the pef_port_id field on buttons and menuitems to navigate to other containers.<br>Alternatively a url can be specified in the expression field, though a change of eg container name would then also require the expression to be updated.<br>The '?record=xxx' query parameters can be used to navigate to records, where xxx is new/first/last/next/prev.<br>
+To open a specific record identified by a primary key value, use '?primary_PKEYNAME1=VALUE1&PKEYNAME2=VALUE2', eg '?primary_id=123'
+    </p>    
+</span>
+<md-button aria-label="btnNavPort"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci194766'
+aria-label="btnNavPort"
+dib-container-name='dibexEvents'
+    ng-click="dibCommon.goTo('dibtestCompanyForm','',true,'?record=first','',$event);"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Use the pef_port_id field (go to the first record)"
+>
+    Use the pef_port_id field (go to the first record)
+</md-button>
+<md-button aria-label="btnNavExpr"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci194758'
+aria-label="btnNavExpr"
+dib-container-name='dibexEvents'
+ng-click="dibCommon.location('/nav/dibtestCompanyForm?record=last');"
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="Use the expression field (go to the last record)"
+>
+    Use the expression field (go to the last record)
+</md-button>
+    <span aria-label="headEventTriggers"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci197138'
+aria-label="headEventTriggers"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Event Triggers</span>
+</span>
+    <span aria-label="commentEventTriggers"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci197139'
+aria-label="commentEventTriggers"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    For components, the common HTML events are available on components.<br>See <a href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML Events</a> for more details. <b>Note,</b> remove the &apos;on&apos; from each event type. Eg where the HTML event is &apos;onclick&apos;, use &apos;click&apos; instead when specifying the event in Dropinbase event tables.<br>
+The two text boxes and the button below have their specified events configured on them, which all call server-side code... try them out.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowEventTriggers"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important;    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'    
+    id='ci197137'
+aria-label="rowEventTriggers"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-input-container aria-label="SelectTextEvent"
+can-be-moved=true
+flex="33"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="SelectTextEvent"
+        ng-model="model.SelectTextEvent"
+        aria-label="Type and select some text in here"
+        id='ci197134'
+aria-label="SelectTextEvent"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'select___dib*py51zl61ps81' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'select',
+        nextActionItem: '',
+        itemEventId: 'dib*py51zl61ps81',        
+        containerItemId: 197134,
+        submitUrl: '/dropins/dibExamples/Events/eventTrigger',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Type and select some text in here</label>
+    <div ng-messages="dibexEvents.SelectTextEvent.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="CopyEvent"
+can-be-moved=true
+flex="33"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="CopyEvent"
+        ng-model="model.CopyEvent"
+        aria-label="Select and copy some text in here"
+        id='ci197136'
+aria-label="CopyEvent"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'copy___dib*zyl1y710u71' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'copy',
+        nextActionItem: '',
+        itemEventId: 'dib*zyl1y710u71',        
+        containerItemId: 197136,
+        submitUrl: '/dropins/dibExamples/Events/eventTrigger',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Select and copy some text in here</label>
+    <div ng-messages="dibexEvents.CopyEvent.$error">
+    </div>
+</md-input-container>
+<md-button aria-label="MouseoverEvent"
+can-be-moved=true
+class="md-primary md-raised"
+style="    "
+    id='ci197135'
+aria-label="MouseoverEvent"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'mouseover___dib*9491b41kw6' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'mouseover',
+        nextActionItem: '',
+        itemEventId: 'dib*9491b41kw6',        
+        containerItemId: 197135,
+        submitUrl: '/dropins/dibExamples/Events/eventTrigger',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Mouseover Event"
+>
+    Mouseover Event
+</md-button>
+</div>
+    <span aria-label="headServersideFunctions1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci194765'
+aria-label="headServersideFunctions1"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Server-side Functions</span>
+</span>
+    <span aria-label="commentServersideFunctions"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155098'
+aria-label="commentServersideFunctions"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The button and text fields below have actions configured on 'click' and 'change' events which call PHP functions defined by their submit-url fields.<br>Server-side events are easily added with the <b>Add Event &amp; PHP</b> link in the Designer.<br>The execution of events can be traced and debugged using the browser's Developer Tools (press F12 normally).<br>Dropinbase automatically adds certain fixed parameters to the url requests :<br>
+
+<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 1.5em; background-color: #FFF9E0">
+<li><b>containerName</b> and <b>itemEventId</b> - used to validate the user's permissions on respectively the container and the specific event.</li>
+<li><b>submissionData</b> - specified user data. By default all item values with an Alias are submitted on the current ('self') and parent ('parent') containers. See Submission Data for more info about specifying additional values.</li>
+<li><b>triggerType</b> - the type of event, eg click, focus or change</li>
+<li><b>itemId</b> - the id of the item where the event originated from</li>
+<li><b>itemAlias</b> - the Alias of the item where the event originated from - often used to re-use the same server-side code.</li>
+</ul>
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowHelloWorld"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'    
+    id='ci155100'
+aria-label="rowHelloWorld"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="btnHelloWorld"
+can-be-moved=true
+item-alias="btnHelloWorld"   
+    ng-show="!!view.btnHelloWorld == false || view.btnHelloWorld.visible" 
+    dib-disable="{{view.btnHelloWorld.disabled}}"
+    ng-class="view.btnHelloWorld.class" 
+    ng-style="view.btnHelloWorld.style"
+class="md-accent md-raised"
+style="    "
+    id='ci155101'
+aria-label="btnHelloWorld"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*kyjzvldx2' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*kyjzvldx2',        
+        containerItemId: 155101,
+        submitUrl: '/dropins/dibExamples/Events/btnHelloWorld_click',        
+        itemAlias: 'btnHelloWorld',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Hello World"
+>
+    Hello World
+</md-button>
+    <md-input-container aria-label="Textfield1"
+can-be-moved=true
+item-alias="Textfield1"   
+    ng-show="!!view.Textfield1 == false || view.Textfield1.visible" 
+    dib-disable="{{view.Textfield1.disabled}}"
+    ng-class="view.Textfield1.class" 
+    ng-style="view.Textfield1.style"
+flex="none"
+class="md-block"
+style="width:350px !important;    "
+>
+    <input type="text" 
+        name="Textfield1"
+        ng-model="model.Textfield1"
+        aria-label="Textfield1"
+        id='ci155102'
+aria-label="Textfield1"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'change___dib*30iq61z5d' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'change',
+        nextActionItem: '',
+        itemEventId: 'dib*30iq61z5d',        
+        containerItemId: 155102,
+        submitUrl: '/dropins/dibExamples/Events/textfield_changed',        
+        itemAlias: 'Textfield1',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield1</label>
+    <div ng-messages="dibexEvents.Textfield1.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="Textfield2"
+can-be-moved=true
+item-alias="Textfield2"   
+    ng-show="!!view.Textfield2 == false || view.Textfield2.visible" 
+    dib-disable="{{view.Textfield2.disabled}}"
+    ng-class="view.Textfield2.class" 
+    ng-style="view.Textfield2.style"
+flex="none"
+class="md-block"
+style="width:350px !important;    "
+>
+    <input type="text" 
+        name="Textfield2"
+        ng-model="model.Textfield2"
+        aria-label="Textfield2"
+        id='ci155103'
+aria-label="Textfield2"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'change___dib*4x1jtsqhb' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'change',
+        nextActionItem: '',
+        itemEventId: 'dib*4x1jtsqhb',        
+        containerItemId: 155103,
+        submitUrl: '/dropins/dibExamples/Events/textfield_changed',        
+        itemAlias: 'Textfield2',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield2</label>
+    <div ng-messages="dibexEvents.Textfield2.$error">
+    </div>
+</md-input-container>
+</div>
+    <span aria-label="headReturnActions"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155105'
+aria-label="headReturnActions"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:16px"><b>Returning Actions</b></span>
+</span>
+    <span aria-label="commentReturnActions"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155104'
+aria-label="commentReturnActions"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Dropinbase provides access to the client-side Api by means of action-lists. Server-side functions can return an array of actions that are executed in order on the client.<br>
+Dropinbase actions are added by programmers and perform specific functions like opening containers or setting item configs.<br>
+The button below uses generic actions to set the height, formatting and value of Textfield1.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowHideDisableEvents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="  margin:10px 0px 10px 0px !important;  "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'    
+    id='ci184232'
+aria-label="rowHideDisableEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="btnDisable"
+can-be-moved=true
+item-alias="btnDisable"   
+    ng-show="!!view.btnDisable == false || view.btnDisable.visible" 
+    dib-disable="{{view.btnDisable.disabled}}"
+    ng-class="view.btnDisable.class" 
+    ng-style="view.btnDisable.style"
+class="md-primary md-raised"
+style="    "
+    id='ci184233'
+aria-label="btnDisable"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*0t419riazq' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*0t419riazq',        
+        containerItemId: 184233,
+        submitUrl: '/dropins/dibExamples/Events/btnDisable_click',        
+        itemAlias: 'btnDisable',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Disable Textfield1 and this Button"
+>
+    Disable Textfield1 and this Button
+</md-button>
+<md-button aria-label="btnHide"
+can-be-moved=true
+class="md-primary md-raised"
+style="    "
+    id='ci184234'
+aria-label="btnHide"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*gpsbh9z83' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*gpsbh9z83',        
+        containerItemId: 184234,
+        submitUrl: '/dropins/dibExamples/Events/btnHide_click',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Hide Textfield2 &amp; Hello World"
+>
+    Hide Textfield2 &amp; Hello World
+</md-button>
+<md-button aria-label="btnShowEnable"
+can-be-moved=true
+class="md-primary md-raised"
+style="    "
+    id='ci184235'
+aria-label="btnShowEnable"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*l301xkyaj61' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*l301xkyaj61',        
+        containerItemId: 184235,
+        submitUrl: '/dropins/dibExamples/Events/btnShowEnable_click',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Show &amp; Enable All"
+>
+    Show &amp; Enable All
+</md-button>
+<md-button aria-label="btnSetStyleClass"
+can-be-moved=true
+item-alias="btnSetStyleClass"   
+    ng-show="!!view.btnSetStyleClass == false || view.btnSetStyleClass.visible" 
+    dib-disable="{{view.btnSetStyleClass.disabled}}"
+    ng-class="view.btnSetStyleClass.class" 
+    ng-style="view.btnSetStyleClass.style"
+class="md-primary md-raised md-cornered"
+style="    "
+    id='ci184236'
+aria-label="btnSetStyleClass"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*au51n1a1pr1' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*au51n1a1pr1',        
+        containerItemId: 184236,
+        submitUrl: '/dropins/dibExamples/Events/btnSetStyleClass_click',        
+        itemAlias: 'btnSetStyleClass',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Set Style and Class"
+>
+    Set Style and Class
+</md-button>
+</div>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowYNCancel"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155088'    
+    id='ci155128'
+aria-label="rowYNCancel"
+dib-container-name='dibexEvents'
+dib-config="{
+     margin : 5,
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="btnPopupYNCancel"
+can-be-moved=true
+class="md-accent md-raised"
+style="    "
+    id='ci155129'
+aria-label="btnPopupYNCancel"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*2kb7bmwqx' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*2kb7bmwqx',        
+        containerItemId: 155129,
+        submitUrl: '/dropins/dibExamples/Events/btnPopupYNCancel_click',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Popup Y/N/Cancel Msg"
+>
+    Popup Y/N/Cancel Msg
+</md-button>
+<md-button aria-label="hiddenPopupButton"
+can-be-moved=true
+item-alias="hiddenPopupButton"   
+    ng-show="!!view.hiddenPopupButton == false || view.hiddenPopupButton.visible" 
+    dib-disable="{{view.hiddenPopupButton.disabled}}"
+    ng-class="view.hiddenPopupButton.class" 
+    ng-style="view.hiddenPopupButton.style"
+ hide
+class="md-accent md-raised"
+style="    "
+    id='ci169798'
+aria-label="hiddenPopupButton"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*lee11i8cc71' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*lee11i8cc71',        
+        containerItemId: 169798,
+        submitUrl: '/dropins/dibExamples/Events/hiddenPopupButton',        
+        itemAlias: 'hiddenPopupButton',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+</md-button>
+<md-button aria-label="btnPrompt"
+can-be-moved=true
+item-alias="btnPrompt"   
+    ng-show="!!view.btnPrompt == false || view.btnPrompt.visible" 
+    dib-disable="{{view.btnPrompt.disabled}}"
+    ng-class="view.btnPrompt.class" 
+    ng-style="view.btnPrompt.style"
+class="md-accent md-raised"
+style="    "
+    id='ci155130'
+aria-label="btnPrompt"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*iwni311e1n' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*iwni311e1n',        
+        containerItemId: 155130,
+        submitUrl: '/dropins/dibExamples/Events/promptQuestion',        
+        itemAlias: 'btnPrompt',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Prompt"
+>
+    Prompt
+</md-button>
+<md-button aria-label="hiddenPromptButton"
+can-be-moved=true
+item-alias="hiddenPromptButton"   
+    ng-show="!!view.hiddenPromptButton == false || view.hiddenPromptButton.visible" 
+    dib-disable="{{view.hiddenPromptButton.disabled}}"
+    ng-class="view.hiddenPromptButton.class" 
+    ng-style="view.hiddenPromptButton.style"
+ hide
+class="md-accent md-raised"
+style="    "
+    id='ci169799'
+aria-label="hiddenPromptButton"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*pbm40yn2a' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*pbm40yn2a',        
+        containerItemId: 169799,
+        submitUrl: '/dropins/dibExamples/Events/hiddenPromptButton',        
+        itemAlias: 'hiddenPromptButton',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+</md-button>
+</div>
+    <span aria-label="headRefreshEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155091'
+aria-label="headRefreshEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Refresh Events</span>
+</span>
+    <span aria-label="commentRefreshEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155096'
+aria-label="commentRefreshEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+Refreshes the data of a dropdownlist or subcontainer identified by the pef_refresh_item_id field.<br>
+The targeted item must have a unique Alias within the container, since it is used to search for the item.<br>
+Often used when one item has a filter which is dependent on the value selected in another item, eg<br>
+dependent dropdowns, or forms linked to the selected item in a tree/grid (see <a href="nav/dibexSubContainersExtJs?record=first">Subcontainers &amp; Filters</a> for more info).
+    </p>    
+</span>
+<md-button aria-label="buttonRefresh"
+can-be-moved=true
+class="md-accent md-raised"
+style="    "
+    id='ci155097'
+aria-label="buttonRefresh"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*ghgjj1pde1' : function(field, additionalInfoOnEvent) { 
+        element.trigger('enableDependency', ['click' , 'dibtestConsultantGrid' , additionalInfoOnEvent]);    
+     } ,
+    'click___dib*zmk6ss98' : function(field, additionalInfoOnEvent) { 
+        element.trigger('enableDependency', ['click' , 'companyId' , additionalInfoOnEvent]);    
+     } 
+    }
+}"
+    aria-label="Refresh the subcontainer & dropdown below"
+>
+    Refresh the subcontainer & dropdown below
+</md-button>
+    <div layout='row' aria-label="companyId"
+can-be-moved=true
+item-alias="companyId"   
+    ng-show="!!view.companyId == false || view.companyId.visible" 
+    dib-disable="{{view.companyId.disabled}}"
+    ng-class="view.companyId.class" 
+    ng-style="view.companyId.style"
+flex="none"
+style="width:490px !important;    "
+dib-help='
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    md-input-name='test_company_id'
+    select-model="model.selected___test_company_id.id"
+    md-search-text-change="loadServiceciid(dropdowns.service155095.searchTextmodel)"
+    md-search-text="dropdowns.service155095.searchTextmodel"
+    md-selected-item="model.selected___test_company_id"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service155095.getItems(dropdowns.service155095.searchTextmodel,'model')"
+    md-floating-label="Selecting a value refreshes the dependent subcontainers below"
+    md-no-cache="true"
+    md-selected-item-change="select155095(model,'model','test_company_id')"
+    md-select-on-match="true"
+    md-min-length="0"
+    dib-data-component='autocomplete'
+    placeholder="Selecting a value refreshes the dependent subcontainers below"
+    id='ci155095'
+    aria-label="companyId"
+    dib-container-name='dibexEvents'
+    dib-config="{
+        listeners : {
+    'select___dib*str7xx5a31' : function(field, additionalInfoOnEvent) { 
+        element.trigger('enableDependency', ['select' , 'dibtestConsultantGrid' , additionalInfoOnEvent]);    
+     } ,
+    'select___dib*ux47t5p3s' : function(field, additionalInfoOnEvent) { 
+        element.trigger('enableDependency', ['select' , 'subTestHtmlEvents' , additionalInfoOnEvent]);    
+     } 
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service155095.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibexEvents.test_company_id.$error" ng-if="dibexEvents.test_company_id.$touched">
+    </div>
+</md-autocomplete>
+</div>
+<div layout='column' layout-fill flex>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>Test Consultant Grid</span>
+            </h2>
+    </md-toolbar>   <div layout-fill flex
+        aria-label="dibtestConsultantGrid"
+can-be-moved=true
+item-alias="dibtestConsultantGrid"   
+    ng-show="!!view.dibtestConsultantGrid == false || view.dibtestConsultantGrid.visible" 
+    dib-disable="{{view.dibtestConsultantGrid.disabled}}"
+    ng-class="view.dibtestConsultantGrid.class" 
+    ng-style="view.dibtestConsultantGrid.style"
+flex="50"
+style=" height:350px !important; overflow:auto !important;   "
+        id='ci155093'
+aria-label="dibtestConsultantGrid"
+dib-container-name='dibexEvents'
+    dib-active-filter='dibexEvents_dibtestConsultantGrid'
+    dib-container-filter-settings="{
+    'dibexEvents_dibtestConsultantGrid' : 'submitItemAlias_parent_companyId'}"
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-consultant-grid
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibtest-consultant-grid>
+    </div>
+</div>
+    <span aria-label="headNextAction"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155108'
+aria-label="headNextAction"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:16px"><b>Next Action</b></span>
+</span>
+    <span aria-label="commentNextAction"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155109'
+aria-label="commentNextAction"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Using the addSubmitUrl function, the server can respond with the next server-side API call that the client must execute.
+    </p>    
+</span>
+<md-button aria-label="btnNextAction"
+can-be-moved=true
+class="md-accent md-raised"
+style="    "
+    id='ci155107'
+aria-label="btnNextAction"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*hdhb5961' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*hdhb5961',        
+        containerItemId: 155107,
+        submitUrl: '/dropins/dibExamples/Events/btnNextAction_click',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Next Action"
+>
+    Next Action
+</md-button>
+    <span aria-label="headOpenUrl"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155111'
+aria-label="headOpenUrl"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:16px"><b>Open Url</b></span>
+</span>
+    <span aria-label="commentOpenUrl"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155112'
+aria-label="commentOpenUrl"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    (***TODO - Coming soon... OpenUrl works but the <b>wait</b> feature must still be implemented). The DIB OpenUrl action has a special behaviour. Since it can be at the start or middle of the action list, the actions that follow it may be dependent on items or data on the new container being opened.<br>
+The default behaviour is therefore to wait until the new container is open and all data is loaded, before executing the other actions.<br>
+To override this behaviour set the waituntilopen url parameter to false (?waituntilopen=false).<br>
+The following action opens a container and then appends 'xxx' to the varchar10 field.
+    </p>    
+</span>
+<md-button aria-label="btnOpenUrl"
+can-be-moved=true
+class="md-accent md-raised"
+style="    "
+    id='ci155110'
+aria-label="btnOpenUrl"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*geran61bd91' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*geran61bd91',        
+        containerItemId: 155110,
+        submitUrl: '/dropins/dibExamples/Events/btnOpenUrl_click',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Open and append xxx to varchar10"
+>
+    Open and append xxx to varchar10
+</md-button>
+    <span aria-label="headSetActiveFilter"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155113'
+aria-label="headSetActiveFilter"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:16px"><b>Set Active Filter</b></span>
+</span>
+    <span aria-label="commentSetActiveFilter"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155114'
+aria-label="commentSetActiveFilter"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The filter defined on an item (eg a subcontainer or dropdown) is named automatically using the following pattern: {containerName}_{itemName}<br>
+If the container inside the subcontainer itself has a filter, then ___{childContainerName} is appended.<br>
+This name is sent to the server-side Crud Controller to identify the criteria to apply (in the latter case 
+the filter of the child container is added to the criteria using the AND operator).<br>
+Using the pef_item_filter and pef_container_filter tables, multiple filters can be linked to items and containers. The active filter can be set/changed using code. <br><br>
+Use the 'Set Active Filter' menu below to set the active filter on the grid.
+    </p>    
+</span>
+    <div layout='row' aria-label="company1Id"
+can-be-moved=true
+item-alias="company1Id"   
+    ng-show="!!view.company1Id == false || view.company1Id.visible" 
+    dib-disable="{{view.company1Id.disabled}}"
+    ng-class="view.company1Id.class" 
+    ng-style="view.company1Id.style"
+flex="none"
+style="width:220px !important;    "
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    md-input-name='company1Id'
+    select-model="model.selected___company1Id.id"
+    md-search-text-change="loadServiceciid(dropdowns.service155121.searchTextmodel)"
+    md-search-text="dropdowns.service155121.searchTextmodel"
+    md-selected-item="model.selected___company1Id"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service155121.getItems(dropdowns.service155121.searchTextmodel,'model')"
+    md-floating-label="Choose Company 1"
+    md-no-cache="true"
+    md-selected-item-change="select155121(model,'model','company1Id')"
+    md-select-on-match="true"
+    md-min-length="0"
+    dib-data-component='autocomplete'
+    placeholder="Choose Company 1"
+    id='ci155121'
+    aria-label="company1Id"
+    dib-container-name='dibexEvents'
+    dib-config="{
+         labelWidth : 70,
+        listeners : {
+    'change___dib*9e819c11dsl' : function(field, additionalInfoOnEvent) { 
+        element.trigger('enableDependency', ['change' , 'CompanyConsultantGrid' , additionalInfoOnEvent]);    
+     } 
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service155121.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibexEvents.company1Id.$error" ng-if="dibexEvents.company1Id.$touched">
+    </div>
+</md-autocomplete>
+</div>
+    <md-menu  aria-label="btnsetActiveFilter"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+class="md-accent md-raised"
+style="  margin:20px !important;  "
+>
+    <md-button ng-click="$mdOpenMenu()" 
+        id='ci155116'
+aria-label="btnsetActiveFilter"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        Set Active Filter Menu
+    </md-button>
+    <md-menu-content width="4">
+    <md-menu-item aria-label="none"
+can-be-moved=true
+item-alias="none"   
+    ng-show="!!view.none == false || view.none.visible" 
+    dib-disable="{{view.none.disabled}}"
+    ng-class="view.none.class" 
+    ng-style="view.none.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci155119'
+aria-label="none"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*6c8k8lxc1' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*6c8k8lxc1',        
+        containerItemId: 155119,
+        submitUrl: '/dropins/dibExamples/Events/btnSetActiveFilter_click',        
+        itemAlias: 'none',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+A. None
+</md-button>
+</md-menu-item>
+    <md-menu-item aria-label="activeFilterCompany1"
+can-be-moved=true
+item-alias="activeFilterCompany1"   
+    ng-show="!!view.activeFilterCompany1 == false || view.activeFilterCompany1.visible" 
+    dib-disable="{{view.activeFilterCompany1.disabled}}"
+    ng-class="view.activeFilterCompany1.class" 
+    ng-style="view.activeFilterCompany1.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci155117'
+aria-label="activeFilterCompany1"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*19xq2iqa1' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*19xq2iqa1',        
+        containerItemId: 155117,
+        submitUrl: '/dropins/dibExamples/Events/btnSetActiveFilter_click',        
+        itemAlias: 'activeFilterCompany1',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+B. Company 1
+</md-button>
+</md-menu-item>
+    <md-menu-item aria-label="activeFilterSupervisors"
+can-be-moved=true
+item-alias="activeFilterSupervisors"   
+    ng-show="!!view.activeFilterSupervisors == false || view.activeFilterSupervisors.visible" 
+    dib-disable="{{view.activeFilterSupervisors.disabled}}"
+    ng-class="view.activeFilterSupervisors.class" 
+    ng-style="view.activeFilterSupervisors.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci155118'
+aria-label="activeFilterSupervisors"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*l151bgefj' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*l151bgefj',        
+        containerItemId: 155118,
+        submitUrl: '/dropins/dibExamples/Events/btnSetActiveFilter_click',        
+        itemAlias: 'activeFilterSupervisors',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+C. All Supervisors
+</md-button>
+</md-menu-item>
+    <md-menu-item aria-label="activeFilterOriginal"
+can-be-moved=true
+item-alias="activeFilterOriginal"   
+    ng-show="!!view.activeFilterOriginal == false || view.activeFilterOriginal.visible" 
+    dib-disable="{{view.activeFilterOriginal.disabled}}"
+    ng-class="view.activeFilterOriginal.class" 
+    ng-style="view.activeFilterOriginal.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci194828'
+aria-label="activeFilterOriginal"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*smoddlsee' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*smoddlsee',        
+        containerItemId: 194828,
+        submitUrl: '/dropins/dibExamples/Events/btnSetActiveFilter_click',        
+        itemAlias: 'activeFilterOriginal',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+D. Revert to Original Filter (position = 'team member')
+</md-button>
+</md-menu-item>
+    </md-menu-content>
+</md-menu>
+   <div layout-fill flex
+        aria-label="CompanyConsultantGrid"
+can-be-moved=true
+item-alias="CompanyConsultantGrid"   
+    ng-show="!!view.CompanyConsultantGrid == false || view.CompanyConsultantGrid.visible" 
+    dib-disable="{{view.CompanyConsultantGrid.disabled}}"
+    ng-class="view.CompanyConsultantGrid.class" 
+    ng-style="view.CompanyConsultantGrid.style"
+flex
+style=" height:400px !important; overflow:auto !important;   "
+        id='ci194827'
+aria-label="CompanyConsultantGrid"
+dib-container-name='dibexEvents'
+    dib-active-filter='dibexEvents_CompanyConsultantGrid'
+    dib-container-filter-settings="{
+    'dibexEvents_CompanyConsultantGrid' : '', 
+    'dibexEvents_Company1' : 'submitItemAlias_parent_company1Id', 
+    'dibexEvents_Supervisors' : ''}"
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-company-consultant-grid
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibtest-company-consultant-grid>
+    </div>
+    <span aria-label="headClientSideEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155124'
+aria-label="headClientSideEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Client-side Events</span>
+</span>
+    <span aria-label="commentClientSideEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155125'
+aria-label="commentClientSideEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    By using . instead of / in the submit_url field of events, JavaScript files can be loaded and executed on the client.<br>
+The JavaScript has full access to the Angular and Dropinbase API's.<br>
+The button below collects and displays item values on this container.
+    </p>    
+</span>
+<md-button aria-label="btnClientSide"
+can-be-moved=true
+class="md-accent md-raised"
+style="    "
+    id='ci155123'
+aria-label="btnClientSide"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*c52qy4pap' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*c52qy4pap',        
+        containerItemId: 155123,
+        submitUrl: 'Dropins.dibExamples.js.app.dibExEventsTest',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Execute dibExEventsTest.js"
+>
+    Execute dibExEventsTest.js
+</md-button>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Container Events' tabId="155146" 
+        aria-label="colContainerEvents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="width:100% !important;   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colContainerEvents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="width:100% !important;   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155146'    
+    id='ci155146'
+aria-label="colContainerEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+     autoScroll : true,
+autoHeight : true,
+    listeners : {
+    }
+}"
+>
+    <span aria-label="headQuickFactsC"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155148'
+aria-label="headQuickFactsC"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Quick Facts</span>
+</span>
+    <span aria-label="commentQuickFactsC"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155147'
+aria-label="commentQuickFactsC"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Containers are injected into the DOM via ports, or can be included with the load of the parent container via subcontainers.<br>Containers are in fact merely a special type of panel in the hierarchy of items, distinguished by certain configs (eg dibContainer). <br>The following types of events can be triggered on container level:
+<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 1.5em; background-color: #FFF9E0">
+<li>Events triggered on the client that call either server-side dropin or core API functions, or client-side JavaScript functions.</li>
+<li>Server-side events in the generated PHP container CRUD(data) classes</li>
+<li>Also see the Table Events-tab...</li>
+</ul>
+    </p>    
+</span>
+    <span aria-label="headContainerEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155151'
+aria-label="headContainerEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Client-side Event Triggers</span>
+</span>
+    <span aria-label="commentContainerEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155152'
+aria-label="commentContainerEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    When the code is generated for a particular container, the client-side events that are specified for that container are merged into the code.<br> Each container dropin type has a specified set of available events - many of them are common to all dropin types, eg <b>postLink</b> and <b>init</b>.<br>View each container dropin's documentation for additional event triggers that may be available.<br><br>
+
+Here are descriptions for some common client-side container events:<br>
+<b>onInit</b> - occurs when a container is loaded the first time into the view, and before any data is loaded. Note, items are not guaranteed to be loaded yet.<br>
+<b>postLink</b> - occurs after a container and all its items, is loaded into view.<br>
+<b>load</b> - occurs each time after data is loaded into the container and after postLink, which means all items already exist in the view.<br><br>
+
+The following grid has all three the above, and a 'rowClick' container event trigger configured. dibexEvents has a 'postLink' event.  Check the <b>Container Event Notices</b> field below as events fire...
+    </p>    
+</span>
+    <md-input-container aria-label="containerEvents"
+can-be-moved=true
+item-alias="containerEvents"   
+    ng-show="!!view.containerEvents == false || view.containerEvents.visible" 
+    dib-disable="{{view.containerEvents.disabled}}"
+    ng-class="view.containerEvents.class" 
+    ng-style="view.containerEvents.style"
+flex
+class="md-block"
+style="width:100% !important;    "
+>
+    <textarea  
+        name="containerEvents"
+        ng-model="model.containerEvents"
+        aria-label="Container Event Notices"
+        id='ci194833'
+aria-label="containerEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputTextarea'
+        md-detect-hidden
+    >
+    </textarea>
+    <label>Container Event Notices</label>
+    <div ng-messages="dibexEvents.containerEvents.$error">
+    </div>
+</md-input-container>
+<div layout='column' layout-fill flex>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>Test Company Grid</span>
+            </h2>
+    </md-toolbar>   <div layout-fill flex
+        aria-label="test_company_grid"
+can-be-moved=true
+item-alias="test_company_grid"   
+    ng-show="!!view.test_company_grid == false || view.test_company_grid.visible" 
+    dib-disable="{{view.test_company_grid.disabled}}"
+    ng-class="view.test_company_grid.class" 
+    ng-style="view.test_company_grid.style"
+flex
+style=" height:400px !important; overflow:auto !important;   "
+        id='ci155154'
+aria-label="test_company_grid"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-company-grid
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibtest-company-grid>
+    </div>
+</div>
+    <span aria-label="headCRUDEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155150'
+aria-label="headCRUDEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Container CRUD Events</span>
+</span>
+    <span aria-label="commentCRUDEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155149'
+aria-label="commentCRUDEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Server-side Container CRUD (Create, Read, Update, Delete) events are configured in the pef_container_event table, and generated into the code when the CRUD classes are created.<br>
+The following list of events exists:<br>
+get defaults, before readone, after readone, before readmany, after readmany, before change, after change, before create, after create, before delete, after delete.<br>
+Each event calls a custom PHP function specified in the submit_url field. Parameters in the call can be passed by reference to allow for changes before eg data is stored.<br>
+A list of actions can be returned to the client for execution by using the PeffApp::$clientActions array (see the example for details).<br>
+It is also possible to cancel further execution of code and send a custom error message to the user.<br><br>
+The following grid has 'after readmany', 'before delete', 'after update' and 'get defaults' events specified.<br>See /public_html/dropins/dibExamples/components/ContainerEvents.php for details on handling of these events.
+    </p>    
+</span>
+    <span aria-label="span"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci198255'
+aria-label="span"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <b>dibtestConsultantEventsGrid</b>
+</span>
+   <div layout-fill flex
+        aria-label="consultantEventsGrid"
+can-be-moved=true
+flex
+style=" height:400px !important; overflow:auto !important;   "
+        id='ci155153'
+aria-label="consultantEventsGrid"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-consultant-events-grid
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibtest-consultant-events-grid>
+    </div>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Table Events' tabId="155155" 
+        aria-label="colTableEvents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="width:100% !important;   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colTableEvents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="width:100% !important;   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155155'    
+    id='ci155155'
+aria-label="colTableEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+     autoScroll : true,
+autoHeight : true,
+    listeners : {
+    }
+}"
+>
+    <span aria-label="headQuickFactsT"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155157'
+aria-label="headQuickFactsT"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Table Events</span>
+</span>
+    <span aria-label="commentQuickFactsT"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155156'
+aria-label="commentQuickFactsT"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Table events are specified in the <i>pef_table.table_events</i> field and call custom PHP code in a associated TableEvents.php class. User CRUD actions on any container that is based on a table with table events cause the events to be triggered.<br>As with container CRUD events, the PeffApp::$clientActions array can be used to return a list of actions to the client for execution.<br><br>
+List the event types that must be triggered per table as a comma separated list. The following event types are available:<br>
+bc(before create), ac(after create), bu(before update), au(after update), bd(before delete), ad(after delete)<br><br>
+
+In the example below, the test_child table has the following value in the table_events field: bu, bd<br>
+The corresponding TableEvents.php class is stored in the container's dropin folder: /dropins/dibExamples/components/TableEvents.php.<br>
+Both the combinations of 'Primkey1, Primkey2' and 'Unique1, Unique2' have unique table indexes.<br>
+The table events only check uniqueness for the first case... The generated container CRUD class is left to handle the second case (Note, it would handle the first case too if we have not specified table events).<br>
+Try to save values that violate the uniqueness of either combination, or try to delete a record (also handled by the table event).
+    </p>    
+</span>
+<div layout='column' layout-fill flex>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>Test Child Form</span>
+            </h2>
+    </md-toolbar>   <div layout-fill flex
+        aria-label="test_child_form"
+can-be-moved=true
+flex
+style="width:100% !important; height:300px !important; overflow:auto !important;   "
+        id='ci155160'
+aria-label="test_child_form"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-child-form
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibtest-child-form>
+    </div>
+</div>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Html Events' tabId="155161" 
+        aria-label="colHtmlEvents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="width:100% !important;   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colHtmlEvents"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="width:100% !important;   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155161'    
+    id='ci155161'
+aria-label="colHtmlEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+     autoScroll : true,
+autoHeight : true,
+    listeners : {
+    }
+}"
+>
+    <span aria-label="headQuickFacts14"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155163'
+aria-label="headQuickFacts14"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Quick Facts</span>
+</span>
+    <span aria-label="commentHtmlEvents"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155162'
+aria-label="commentHtmlEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Containers based on dibHtmlTemplate can execute Dropinbase events by including the TemplateActions.js script which makes the actions below available:<br><br>
+
+&lt;script type="text/javascript" src="/files/dropins/setNgMaterial/dibAngular/src/js/core/shared/TemplateActions.js"&gt;&lt;/script&gt;
+<br><br>
+
+<ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0">
+
+	<li>common.goTo - navigates to a container
+<ul>
+      <li><b>Syntax: </b>common.goTo(containerName, portAlias, changeUrl, urlQueryString)</li>
+      <li>Eg &lt;a href="#" onClick="common.goTo('dibtestConsultantPortGrid', 'EmployeesBaseContainer', false, '?filter_id&gt;2');return false;"&gt;Items Grid&lt;/a&gt;</li>
+     <li>Use single quotes for string parameters.</li>
+     <li>If there is no portAlias (ie default port must be used) then use '' (two single quotes).</li>
+    <li>Url query strings must start with '?' (see example). If no url query string, just omit the last parameter.
+ </ul>
+</li>
+
+    <li>common.startAction - executes Dropinbase server-side or client-side scripts (which in turn can cause client-side or server-side functions to execute).
+<ul>
+      <li><b>Syntax: </b>common.startAction(submitUrl))</li>
+      <li>Eg &lt;a href="#" onClick="common.startAction('/dropins/dibExamples/Events/btnHelloWorld_click/dibtestCompanyETReport/1234');return false;"&gt;Greetings&lt;/a&gt;</li>
+     <li>Use single quotes around the url</li>
+     <li><b>Important notes for server-side function calls:</b> the last two parts of the url in our example, provides values to the first two (required) parameters of the PHP function being called, namely $containerName and $itemEventId. They can be omitted from the PHP function declaration (and then the url above) unless you require permissions on respectively the container and the event level. <b>Note</b>, omitting $containerName effectively makes the function available publicly! Including it ensures that only permission groups with rights to this container's events can execute this event. $itemEventId is often excluded from the function parameter list... If it is not omitted (to enable permission checking on event level) it is necessary to create a corresponding item on the container with an event calling the same url in order for the permission file for item events (eg /runtime/permFiles/_ItemEventsxx1xx.php)  to include an entry for this event. See eg the 'testAction' button with its event, in the dibtestCompanyETReport  container used in the example below.</li>
+ </ul>
+</li>	
+</ul>
+    </p>    
+</span>
+    <span aria-label="commentDrilldown"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155164'
+aria-label="commentDrilldown"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Note, drilldown reports, or navigation to other dibHtmlTemplate reports, can be achieved using normal HTML links.<br><br>
+The example dibHtmlTemplate report below incorporates all of the above.
+    </p>    
+</span>
+    <div layout='row' aria-label="htmlCompanyId"
+can-be-moved=true
+item-alias="htmlCompanyId"   
+    ng-show="!!view.htmlCompanyId == false || view.htmlCompanyId.visible" 
+    dib-disable="{{view.htmlCompanyId.disabled}}"
+    ng-class="view.htmlCompanyId.class" 
+    ng-style="view.htmlCompanyId.style"
+flex="none"
+style="width:490px !important;    "
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    md-input-name='htmlCompanyId'
+    select-model="model.selected___htmlCompanyId.id"
+    md-search-text-change="loadServiceciid(dropdowns.service194831.searchTextmodel)"
+    md-search-text="dropdowns.service194831.searchTextmodel"
+    md-selected-item="model.selected___htmlCompanyId"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service194831.getItems(dropdowns.service194831.searchTextmodel,'model')"
+    md-floating-label="Selecting a value refreshes the dependent subcontainers below"
+    md-no-cache="true"
+    md-selected-item-change="select194831(model,'model','htmlCompanyId')"
+    md-select-on-match="true"
+    md-min-length="0"
+    dib-data-component='autocomplete'
+    placeholder="Selecting a value refreshes the dependent subcontainers below"
+    id='ci194831'
+    aria-label="htmlCompanyId"
+    dib-container-name='dibexEvents'
+    dib-config="{
+        listeners : {
+    'select___dib*e1714vwgr11' : function(field, additionalInfoOnEvent) { 
+        element.trigger('enableDependency', ['select' , 'subTestHtmlEvents' , additionalInfoOnEvent]);    
+     } 
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service194831.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibexEvents.htmlCompanyId.$error" ng-if="dibexEvents.htmlCompanyId.$touched">
+    </div>
+</md-autocomplete>
+</div>
+   <div layout-fill flex
+        aria-label="subTestHtmlEvents"
+can-be-moved=true
+item-alias="subTestHtmlEvents"   
+    ng-show="!!view.subTestHtmlEvents == false || view.subTestHtmlEvents.visible" 
+    dib-disable="{{view.subTestHtmlEvents.disabled}}"
+    ng-class="view.subTestHtmlEvents.class" 
+    ng-style="view.subTestHtmlEvents.style"
+flex="50"
+style=" height:350px !important; overflow:auto !important;   "
+        id='ci155094'
+aria-label="subTestHtmlEvents"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-e-t-events-report
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill        
+        >
+        </dibtest-e-t-events-report>
+    </div>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Queues' tabId="179995" 
+        aria-label="colQueues"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex="none"
+flex layout-fill
+style="   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout="column" layout-align="start start"
+    aria-label="colQueues"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex="none"
+style="   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=179995'    
+    id='ci179995'
+aria-label="colQueues"
+dib-container-name='dibexEvents'
+dib-config="{
+     autoScroll : true,
+autoHeight : true,
+    listeners : {
+    }
+}"
+>
+    <span aria-label="headQuickFacts2"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci179997'
+aria-label="headQuickFacts2"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Quick Facts</span>
+</span>
+    <span aria-label="commentQueues"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci179996'
+aria-label="commentQueues"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Queues provide a no-fuss-to-setup-or-maintain way of communicating asynchronously with the client.<br>
+They are particularly useful for long-running scripts.
+    </p>    
+</span>
+    <span aria-label="commentHowItWorks"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci180010'
+aria-label="commentHowItWorks"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <b>How It Works</b><br><br>Queues are initiated with a secure random unique Identifier which is used by Dropinbase server-side to keep responses separate between events.<br><br>
+
+The client is instructed to start polling the server (by calling the QueueController) every asyncInterval milliseconds for any actions or messages that are waiting in the Queue (generated by long running server-side code).<br>
+This instruction is given if an asyncInterval is specified in the <i>response_type</i> field of the Item/Container event,<br> 
+  OR the server can include asyncInterval with a unique identifier as part of a validResult response to the client.<br>
+  Note, when <i>response_type</i> contains an asyncInterval value, the client will not wait for the server to send a validResult or invalidResult response (as occurs if 'actions' is used in <i>response_type</i>).<br><br>
+
+In the meantime, the server prepares actions and messages and adds them to the Queue.<br> 
+Actions/Messages are executed on the client in the order that they were added to the Queue.<br>
+The server can at any point change the value of asyncInterval, or set it to 'stop' (which instructs the client to stop polling).<br><br>
+
+If the client polls retryCount times (default is 10) without receiving any response, the polling will stop automatically.<br>
+  The default value of retryCount is set in Dib.php, but can also be updated at any time.<br><br>
+
+<b>See the PHP code in /public_html/dropins/dibExamples/controllers/QueueController.php for more info.</b>
+    </p>    
+</span>
+    <span aria-label="headResponseType"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci179999'
+aria-label="headResponseType"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Use Response Type</span>
+</span>
+    <span aria-label="commentResponseType"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci179998'
+aria-label="commentResponseType"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    The button below starts the Queue using a response_type/asyncInterval value of 1000.<br>If the text field below contains 'stop me' then it will immediately stop the Queue.<br>
+If not, it sends some messages as part of a loop, updates the asyncInterval and retryCount,<br>
+sets the value of the text field, refreshes the test_company_grid container (which triggers its reloadContainer event)<br> and then stops the client from polling further.<br>Note, the user can carry on with other tasks while code runs asynchronously.
+    </p>    
+</span>
+<md-button aria-label="btnGo"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci180003'
+aria-label="btnGo"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*zhui9gq6' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*zhui9gq6',        
+        containerItemId: 180003,
+        submitUrl: '/dropins/dibExamples/Queue/startedWithResponseType',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: '1000'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Go!"
+>
+    Go!
+</md-button>
+    <md-input-container aria-label="text1"
+can-be-moved=true
+item-alias="text1"   
+    ng-show="!!view.text1 == false || view.text1.visible" 
+    dib-disable="{{view.text1.disabled}}"
+    ng-class="view.text1.class" 
+    ng-style="view.text1.style"
+flex
+class="md-block"
+style="width:100% !important;    "
+>
+    <textarea  
+        name="text1"
+        ng-model="model.text1"
+        aria-label="Text"
+        id='ci180004'
+aria-label="text1"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputTextarea'
+        md-detect-hidden
+    >
+    </textarea>
+    <label>Text</label>
+    <div ng-messages="dibexEvents.text1.$error">
+    </div>
+</md-input-container>
+    <span aria-label="headUseValidResult"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci180002'
+aria-label="headUseValidResult"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Use validResult</span>
+</span>
+    <span aria-label="commentAnotherExample"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci180009'
+aria-label="commentAnotherExample"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    This example calls a function which returns a prompt action.<br>If the user clicks 'Yes', then a hidden buttons' event is triggered which will use validResult to initialize the Queue.
+    </p>    
+</span>
+<md-button aria-label="promptQuestion1"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci180005'
+aria-label="promptQuestion1"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*dnpj911gln' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*dnpj911gln',        
+        containerItemId: 180005,
+        submitUrl: '/dropins/dibExamples/Queue/promptQuestion',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Question"
+>
+    Question
+</md-button>
+<md-button aria-label="btnHidden"
+can-be-moved=true
+item-alias="btnHidden"   
+    ng-show="!!view.btnHidden == false || view.btnHidden.visible" 
+    dib-disable="{{view.btnHidden.disabled}}"
+    ng-class="view.btnHidden.class" 
+    ng-style="view.btnHidden.style"
+style="    "
+    id='ci180011'
+aria-label="btnHidden"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*jcn2q91mij' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*jcn2q91mij',        
+        containerItemId: 180011,
+        submitUrl: '/dropins/dibExamples/Queue/handlePrompt',        
+        itemAlias: 'btnHidden',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+</md-button>
+    <span aria-label="headCommunicate2"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci180000'
+aria-label="headCommunicate2"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Communicate with other users</span>
+</span>
+    <span aria-label="commentCommsWithOthers"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci180001'
+aria-label="commentCommsWithOthers"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <b>NOTE: You need to login for this example to work (ie it will not work on docs.dropinbase.com).</b><br>If your server code allows it, users can communicate with one another using the random identifiers mentioned above.<br>For the following example, browse to /nav/dibexEvents in a different type of browser (eg Firefox if you are using Chrome),<br>and  login with a different user (eg user 'test' with password 'test'). Click the 'Listen' button to initiate the Queue polling.<br>Then select this other user on the dropdown below, type a message and click Send.<br>Server-side code will handle the Queues of both users, facilitating the communication.<br>
+Note, actions can be sent this way between users as well.
+    </p>    
+</span>
+    <div layout='row' aria-label="queueLoginId"
+can-be-moved=true
+item-alias="queueLoginId"   
+    ng-show="!!view.queueLoginId == false || view.queueLoginId.visible" 
+    dib-disable="{{view.queueLoginId.disabled}}"
+    ng-class="view.queueLoginId.class" 
+    ng-style="view.queueLoginId.style"
+flex="none"
+style="    "
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    md-input-name='queueLoginId'
+    select-model="model.selected___queueLoginId.id"
+    md-search-text-change="loadServiceciid(dropdowns.service180007.searchTextmodel)"
+    md-search-text="dropdowns.service180007.searchTextmodel"
+    md-selected-item="model.selected___queueLoginId"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service180007.getItems(dropdowns.service180007.searchTextmodel,'model')"
+    md-floating-label="Select Login"
+    md-no-cache="true"
+    md-selected-item-change="select180007(model,'model','queueLoginId')"
+    md-select-on-match="true"
+    md-min-length="0"
+    dib-data-component='autocomplete'
+    placeholder="Select Login"
+    id='ci180007'
+    aria-label="queueLoginId"
+    dib-container-name='dibexEvents'
+    dib-config="{
+        listeners : {
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service180007.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibexEvents.queueLoginId.$error" ng-if="dibexEvents.queueLoginId.$touched">
+    </div>
+</md-autocomplete>
+</div>
+    <md-input-container aria-label="queueMsg"
+can-be-moved=true
+item-alias="queueMsg"   
+    ng-show="!!view.queueMsg == false || view.queueMsg.visible" 
+    dib-disable="{{view.queueMsg.disabled}}"
+    ng-class="view.queueMsg.class" 
+    ng-style="view.queueMsg.style"
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="queueMsg"
+        ng-model="model.queueMsg"
+        aria-label="Message"
+        id='ci180008'
+aria-label="queueMsg"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Message</label>
+    <div ng-messages="dibexEvents.queueMsg.$error">
+    </div>
+</md-input-container>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutrowButtons"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=179995'    
+    id='ci180012'
+aria-label="layoutrowButtons"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="btnSend1"
+can-be-moved=true
+class="md-raised md-accent"
+style="    "
+    id='ci180006'
+aria-label="btnSend1"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*6nq3ae1gxb1' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*6nq3ae1gxb1',        
+        containerItemId: 180006,
+        submitUrl: '/dropins/dibExamples/Queue/sendMsg',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: '2000'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Send"
+>
+    Send
+</md-button>
+<md-button aria-label="btnListen"
+can-be-moved=true
+class="md-raised md-primary"
+style="    "
+    id='ci180013'
+aria-label="btnListen"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*5md1ywzq59' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*5md1ywzq59',        
+        containerItemId: 180013,
+        submitUrl: '/dropins/dibExamples/Queue/listen',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: '1000'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Listen"
+>
+    Listen
+</md-button>
+</div>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='NodeJs' tabId="155131" 
+        aria-label="colNodeJs"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+flex layout-fill
+style="width:100% !important;   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colNodeJs"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="width:100% !important;   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155131'    
+    id='ci155131'
+aria-label="colNodeJs"
+dib-container-name='dibexEvents'
+dib-config="{
+     autoScroll : true,
+autoHeight : true,
+    listeners : {
+    }
+}"
+>
+    <span aria-label="headQuickFacts1"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155133'
+aria-label="headQuickFacts1"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Quick Facts</span>
+</span>
+    <span aria-label="comment313"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155132'
+aria-label="comment313"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Dropinbase can utilize NodeJs to enable server-side scripts to easily send asynchronous commands to the client.<br>Using NodeJs can simplify your PHP code (when compared to Queues) in some cases, but can also be harder to maintain in certain network and server environments.<br>
+In addition to a few specialized functions, any action-list can be sent via NodeJs, and communication is tied to users' login id's.<br>
+    </p>    
+</span>
+    <span aria-label="headSendAsync"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155135'
+aria-label="headSendAsync"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Send Async Messages and Actions</span>
+</span>
+    <span aria-label="comment3131"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155134'
+aria-label="comment3131"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+The button below loops through companies in the test_company table and sends messages and actions asynchronously while executing code.<br>Note, the user can carry on with other tasks while code runs asynchronously.
+    </p>    
+</span>
+<md-button aria-label="btnMsgAction"
+can-be-moved=true
+style="    "
+    id='ci155139'
+aria-label="btnMsgAction"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*rwaph81wn8' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*rwaph81wn8',        
+        containerItemId: 155139,
+        submitUrl: '/dropins/dibExamples/NodeJs/btnMsgAction_click',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Msgs & Actions"
+>
+    Msgs & Actions
+</md-button>
+    <md-input-container aria-label="companyList"
+can-be-moved=true
+item-alias="companyList"   
+    ng-show="!!view.companyList == false || view.companyList.visible" 
+    dib-disable="{{view.companyList.disabled}}"
+    ng-class="view.companyList.class" 
+    ng-style="view.companyList.style"
+flex="none"
+class="md-block"
+style="    "
+>
+    <textarea  
+        name="companyList"
+        ng-model="model.companyList"
+        aria-label="Company List"
+        id='ci155140'
+aria-label="companyList"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputTextarea'
+        md-detect-hidden
+    >
+    </textarea>
+    <label>Company List</label>
+    <div ng-messages="dibexEvents.companyList.$error">
+    </div>
+</md-input-container>
+    <span aria-label="headAnotherExample"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155138'
+aria-label="headAnotherExample"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Another Example</span>
+</span>
+    <span aria-label="comment33"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155145'
+aria-label="comment33"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    This example calls the prompt action which then calls itself or executes the call to Hello word, depending on the user's actions.
+    </p>    
+</span>
+<md-button aria-label="promptQuestion"
+can-be-moved=true
+style="    "
+    id='ci155141'
+aria-label="promptQuestion"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*v2komdhqt' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*v2komdhqt',        
+        containerItemId: 155141,
+        submitUrl: '/dropins/dibExamples/NodeJs/promptQuestion',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Quiz"
+>
+    Quiz
+</md-button>
+    <span aria-label="headCommunicate"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155136'
+aria-label="headCommunicate"
+dib-container-name='dibexEvents'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">Communicate with other users</span>
+</span>
+    <span aria-label="comment34"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci155137'
+aria-label="comment34"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    NodeJs sends messages to login Id's. Therefore if your server code allows it, users can communicate with one another<br>For the following example, open the system in a different type of browser (eg Firefox if you are using Chrome), and login with a different user.<br>Then select this other user on the dropdown below, type a message and click Send.<br>Server-side code will send the message to the other user.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutRow"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexEvents&itemId=155131'    
+    id='ci210172'
+aria-label="layoutRow"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-input-container aria-label="userAlias"
+can-be-moved=true
+item-alias="userAlias"   
+    ng-show="!!view.userAlias == false || view.userAlias.visible" 
+    dib-disable="{{view.userAlias.disabled}}"
+    ng-class="view.userAlias.class" 
+    ng-style="view.userAlias.style"
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="userAlias"
+        ng-model="model.userAlias"
+        aria-label="My Alias"
+        id='ci210170'
+aria-label="userAlias"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>My Alias</label>
+    <div ng-messages="dibexEvents.userAlias.$error">
+    </div>
+</md-input-container>
+<md-button aria-label="btnRegAlias"
+can-be-moved=true
+style="    "
+    id='ci210171'
+aria-label="btnRegAlias"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*p761v06kp3' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*p761v06kp3',        
+        containerItemId: 210171,
+        submitUrl: '/dropins/dibExamples/NodeJs/regAlias',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Register Alias"
+>
+    Register Alias
+</md-button>
+</div>
+    <md-input-container aria-label="recipientAlias"
+can-be-moved=true
+item-alias="recipientAlias"   
+    ng-show="!!view.recipientAlias == false || view.recipientAlias.visible" 
+    dib-disable="{{view.recipientAlias.disabled}}"
+    ng-class="view.recipientAlias.class" 
+    ng-style="view.recipientAlias.style"
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="recipientAlias"
+        ng-model="model.recipientAlias"
+        aria-label="Recipient Alias"
+        id='ci155143'
+aria-label="recipientAlias"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Recipient Alias</label>
+    <div ng-messages="dibexEvents.recipientAlias.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="msg"
+can-be-moved=true
+item-alias="msg"   
+    ng-show="!!view.msg == false || view.msg.visible" 
+    dib-disable="{{view.msg.disabled}}"
+    ng-class="view.msg.class" 
+    ng-style="view.msg.style"
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="msg"
+        ng-model="model.msg"
+        aria-label="Message"
+        id='ci155144'
+aria-label="msg"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Message</label>
+    <div ng-messages="dibexEvents.msg.$error">
+    </div>
+</md-input-container>
+<md-button aria-label="btnSend"
+can-be-moved=true
+style="    "
+    id='ci155142'
+aria-label="btnSend"
+dib-container-name='dibexEvents'
+dib-config="{
+    listeners : {
+    'click___dib*lghc7pqg01' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibexEvents',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*lghc7pqg01',        
+        containerItemId: 155142,
+        submitUrl: '/dropins/dibExamples/NodeJs/btnSend_click',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="Send"
+>
+    Send
+</md-button>
+</div>
+        </md-tab-body>
+    </md-tab>
+</md-tabs>
+</div>

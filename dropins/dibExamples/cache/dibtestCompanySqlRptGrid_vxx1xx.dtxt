@@ -1,6 +1,6 @@
  
 <div component-loaded dib-container="dibtestCompanySqlRptGrid" dib-grid  dib-config="{ }" >
-	<md-toolbar aria-label="toolbar" can-be-moved=true can-have-children=true flex=none style="    " id='ci155438' aria-label="toolbar" dib-container-name='dibtestCompanySqlRptGrid' dib-config="{ listeners : { } }" >
+	<md-toolbar aria-label="toolbar" can-be-moved=true can-have-children=true flex="none" style="    " id='ci155438' aria-label="toolbar" dib-container-name='dibtestCompanySqlRptGrid' dib-config="{ listeners : { } }" >
 		<div class="md-toolbar-tools">
 			<md-button aria-label="btnreload" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="reloadContainer({'force' : true})" id='ci155439' aria-label="btnreload" dib-container-name='dibtestCompanySqlRptGrid' dib-config="{ listeners : { } }" >
 				<md-tooltip md-direction="top" md-delay="500">
@@ -9,7 +9,7 @@
 				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg">
 				</md-icon>
 			</md-button>
-			<span flex=auto aria-label="emptyspan" can-be-moved=true flex=none style="    " id='ci155440' aria-label="emptyspan" dib-container-name='dibtestCompanySqlRptGrid' dib-config="{ listeners : { } }" >
+			<span flex=auto aria-label="emptyspan" can-be-moved=true flex="none" style="    " id='ci155440' aria-label="emptyspan" dib-container-name='dibtestCompanySqlRptGrid' dib-config="{ listeners : { } }" >
 			</span>
 			<md-button aria-label="btnfilteropen" can-be-moved=true class="md-icon-button md-squared md-raised" style="    " ng-click="showSearch = !showSearch"  id='ci173693' aria-label="btnfilteropen" dib-container-name='dibtestCompanySqlRptGrid' dib-config="{ listeners : { } }" >
 				<md-tooltip md-direction="top" md-delay="500">
@@ -32,7 +32,7 @@
 				<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg">
 				</md-icon>
 			</md-button>
-			<div aria-label="gridtotals" can-be-moved=true flex=none layout="row" style="    " id='ci155443' aria-label="gridtotals" dib-container-name='dibtestCompanySqlRptGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
+			<div aria-label="gridtotals" can-be-moved=true flex="none" layout="row" style="    " id='ci155443' aria-label="gridtotals" dib-container-name='dibtestCompanySqlRptGrid' dib-config="{ listeners : { } }" ng-if="page.fromRecord >
 				-1" >
 				<md-button ng-disabled="true" aria-label="Grid totals">
 					Records: {{page.fromRecord}}
@@ -59,9 +59,9 @@
 							Id
 							<span ng-if="gridOptions.sortFields['id']">
 								({{gridOptions.sortFields['id']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -81,9 +81,9 @@
 							Name
 							<span ng-if="gridOptions.sortFields['name']">
 								({{gridOptions.sortFields['name']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['name']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['name']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -103,9 +103,9 @@
 							Chinese Name
 							<span ng-if="gridOptions.sortFields['chinese_name']">
 								({{gridOptions.sortFields['chinese_name']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -125,9 +125,9 @@
 							I'm a comment component
 							<span ng-if="gridOptions.sortFields['comment']">
 								({{gridOptions.sortFields['comment']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['comment']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['comment']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['comment']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['comment']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -144,9 +144,9 @@
 							Parent Company
 							<span ng-if="gridOptions.sortFields['parent_company']">
 								({{gridOptions.sortFields['parent_company']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['parent_company']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['parent_company']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['parent_company']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['parent_company']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -166,9 +166,9 @@
 							Website
 							<span ng-if="gridOptions.sortFields['website']">
 								({{gridOptions.sortFields['website']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['website']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['website']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['website']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['website']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -188,9 +188,9 @@
 							Icon
 							<span ng-if="gridOptions.sortFields['icon']">
 								({{gridOptions.sortFields['icon']['Count']}}) 
-								<md-icon class="md-opacity-55"  md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['icon']['Order'] == 'ASC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['icon']['Order'] == 'ASC'">
 								</md-icon>
-								<md-icon class="md-opacity-55" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['icon']['Order'] == 'DESC'">
+								<md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['icon']['Order'] == 'DESC'">
 								</md-icon>
 							</span>
 						</div>
@@ -217,7 +217,7 @@
 				</div>
 			</md-list-item>
 			<md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"   >
-				<ng-form name='dibtestCompanySqlRptGrid' dib-container-name="dibtestCompanySqlRptGrid" isolate-form layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+				<ng-form name='dibtestCompanySqlRptGrid' dib-container-name="dibtestCompanySqlRptGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
 					<div table-column layout="column" flex = 'none' dib-column="155444" style="width:80px;    " >
 						<div aria-label="id" can-be-moved=true item-alias="id"    ng-show="!!view.id == false || view.id.visible"  dib-disable="{{view.id.disabled}}" ng-class="view.id.class"  ng-style="view.id.style" flex="none" class="md-body-2" layout="row" layout-align="start top" style="width:80px !important;    " >
 							<div layout=row ng-if="!row.___editing" dib-view flex>
@@ -241,7 +241,7 @@
 						</div>
 					</div>
 					<div table-column layout="column" flex  dib-column="155446" style="    " >
-						<div aria-label="chinese_name" can-be-moved=true flex=none class="md-body-2" layout="row" layout-align="start top" style="    " >
+						<div aria-label="chinese_name" can-be-moved=true flex="none" class="md-body-2" layout="row" layout-align="start top" style="    " >
 							<div layout=row ng-if="!row.___editing" dib-view flex>
 								<span flex data-type="text" >
 									<span >
@@ -274,7 +274,7 @@
 						</div>
 					</div>
 					<div table-column layout="column" flex  dib-column="155449" style="    " >
-						<div aria-label="website" can-be-moved=true flex=none class="md-body-2" layout="row" layout-align="start top" style="    " >
+						<div aria-label="website" can-be-moved=true flex="none" class="md-body-2" layout="row" layout-align="start top" style="    " >
 							<div layout=row ng-if="!row.___editing" dib-view flex>
 								<span flex data-type="text" >
 									<span >
@@ -285,7 +285,7 @@
 						</div>
 					</div>
 					<div table-column layout="column" flex  dib-column="155450" style="    " >
-						<div aria-label="icon" can-be-moved=true flex=none class="md-body-2" layout="row" layout-align="start top" style="    " >
+						<div aria-label="icon" can-be-moved=true flex="none" class="md-body-2" layout="row" layout-align="start top" style="    " >
 							<div layout=row ng-if="!row.___editing" dib-view flex>
 								<span flex data-type="text" >
 									<span >

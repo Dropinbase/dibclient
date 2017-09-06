@@ -1,116 +1,171 @@
 (function() {
     var require = [ 
-		'/dropins/setNgMaterial/dibGrid/js/components/dibTableWidth.js',
-  		'/dropins/setNgMaterial/dibGrid/js/components/dibInlineEdit.js',
-  		'/dropins/setNgMaterial/dibGrid/js/services/dibGrid.js',
-	    '/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
-  ];
+            '/dropins/setNgMaterial/dibGrid/js/components/dibTableWidth.js',
+            '/dropins/setNgMaterial/dibGrid/js/components/dibInlineEdit.js',
+            '/dropins/setNgMaterial/dibGrid/js/services/dibGrid.js',
+            '/dropins/setNgMaterial/dibForm/js/services/dibForm.js'
+    ];
     require.push('/dropins/setNgMaterial/dibGlobals/js/component/selectDefault.js');
     var files = [];
     angular.forEach(require, function (file,index) { 
         files.push(DIB.base_url+'/files'+file);
     });
     var dibtestCompanySqlRptGrid = angular.module('dibtestCompanySqlRptGrid', [files]);
-})();
-(function() {
-    var dibtestCompanySqlRptGrid = angular.module('dibtestCompanySqlRptGrid');
+        dibtestCompanySqlRptGrid.factory('dibtestCompanySqlRptGridDefinition',dibtestCompanySqlRptGridDefinition);
+    dibtestCompanySqlRptGridDefinition.$inject = ['dibContainer'];
+    function dibtestCompanySqlRptGridDefinition(dibContainer) {
+        return {
+            model : model,
+            view : view,
+            info : info,
+            primaryKeys : primaryKeys
+        };
+        function model() {
+            var model = {};
+            model._GET = {};
+            model['id'] = '';
+            model._GET['id'] = dibContainer.modelItem({
+                key : 'id',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : 'id'
+            });
+            model['name'] = '';
+            model._GET['name'] = dibContainer.modelItem({
+                key : 'name',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : 'name'
+            });
+            model['chinese_name'] = '';
+            model._GET['chinese_name'] = dibContainer.modelItem({
+                key : 'chinese_name',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['parent_company'] = '';
+            model._GET['parent_company'] = dibContainer.modelItem({
+                key : 'parent_company',
+                dataType : "sqltext", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['website'] = '';
+            model._GET['website'] = dibContainer.modelItem({
+                key : 'website',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            model['icon'] = '';
+            model._GET['icon'] = dibContainer.modelItem({
+                key : 'icon',
+                dataType : "text", 
+                create : true,
+                update : true,
+                service : null,
+                itemAlias : false
+            });
+            return model;
+        };
+        function view() {
+            var view = {};
+            view.id = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            view.name = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
+            return view;
+        };
+        function info(){
+            var container = {};
+            container.Id = '7159';
+            container.Name = 'dibtestCompanySqlRptGrid';
+            container.SubContainerItemAliases = []; 
+            return container;
+        };
+        function primaryKeys() {
+            return [];
+        };
+    };
     dibtestCompanySqlRptGrid.component('dibtestCompanySqlRptGrid', {
         controllerAs: 'dibtestCompanySqlRptGrid',
         templateUrl: DIB.base_url + '/dropins/setNgMaterial/dibGrid/Template/view/dibtestCompanySqlRptGrid.html',
         controller : component__dibtestCompanySqlRptGrid
     });
-    component__dibtestCompanySqlRptGrid.$inject = [ '$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
+    component__dibtestCompanySqlRptGrid.$inject = [ 'dibtestCompanySqlRptGridDefinition','$scope','$element','dibCrud','dibNavigation','dibAction','dibContainer','dibDiscover','dibRecord','dibUtility','dibCommon','$log','$q','$ocLazyLoad', 
              'dibGrid', 'dibForm', '$location', '$timeout', 'dibMessage','dibKeysPressed'];
-    function component__dibtestCompanySqlRptGrid($scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
+    function component__dibtestCompanySqlRptGrid(dibtestCompanySqlRptGridDefinition,$scope,$element,dibCrud,dibNavigation,dibAction,dibContainer,dibDiscover,dibRecord,dibUtility,dibCommon,$log,$q,$ocLazyLoad, 
              dibGrid, dibForm, $location, $timeout, dibMessage,dibKeysPressed) {
         var ctrl = this;
-                    $scope.container = {};
-            $scope.container.Id = '7159';
-            $scope.container.Name = 'dibtestCompanySqlRptGrid';
-            $scope.container.SubContainerItemAliases = []; 
-            var crudController = "/peff/Crud";
-                    $scope.model = {};
-        $scope.model._GET = {};
-        $scope.model['id'] = '';
-        $scope.model._GET['id'] = dibContainer.modelItem({
-            key : 'id',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : 'id'
+        var crudController = "/peff/Crud";
+        var $dibContainer = $element.first();
+        $scope.container = dibtestCompanySqlRptGridDefinition.info();
+        $scope.model = dibtestCompanySqlRptGridDefinition.model();
+        $scope.view = dibtestCompanySqlRptGridDefinition.view();
+        $scope.primaryKeys = dibtestCompanySqlRptGridDefinition.primaryKeys();
+        $scope.dibCommon = dibCommon;
+        dibContainer.watchModel($scope, function () {
         });
-        $scope.model['name'] = '';
-        $scope.model._GET['name'] = dibContainer.modelItem({
-            key : 'name',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : 'name'
-        });
-        $scope.model['chinese_name'] = '';
-        $scope.model._GET['chinese_name'] = dibContainer.modelItem({
-            key : 'chinese_name',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['parent_company'] = '';
-        $scope.model._GET['parent_company'] = dibContainer.modelItem({
-            key : 'parent_company',
-            dataType : "sqltext", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['website'] = '';
-        $scope.model._GET['website'] = dibContainer.modelItem({
-            key : 'website',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.model['icon'] = '';
-        $scope.model._GET['icon'] = dibContainer.modelItem({
-            key : 'icon',
-            dataType : "text", 
-            create : true,
-            update : true,
-            service : null,
-            itemAlias : false
-        });
-        $scope.view = {};
-            $scope.view.id = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            $scope.view.name = {'disabled' : false,'visible' : true, 'class' : null, 'style' : null };
-            var reloadContainerFunctions = [];
-            dibContainer.watchModel($scope);
-	        $scope.dibCommon = dibCommon;
-            $scope.primaryKeys = [];
         var $dibContainer = $element.first();
         $scope.menus = {};
+            function filterList($scope,$dibContainer,service, query, dropdown) {
+        return service.list($scope,$dibContainer, query).then(function (items) {
+            dropdown.items = items;
+            return $q.when();
+        });
+    }
     $scope.dropdowns = {};
-            $scope.openAuditTrail = function (portAlias) {
-                $log.warn('Audit trail not available for this container, as a table is not linked to this view');
-            };
+        $scope.openAuditTrail = function (portAlias) {
+            $log.warn('Audit trail not available for this container, as a table is not linked to this view');
+        };
+        $scope.gridOptions = {};
+                /**
+         * Custom sorting added Cobus Coetsee
+         */
+        $scope.gridOptions.sortFields = {};
+        $scope.gridOptions.sortNr = 0;
+        $scope.gridOptions.toggleSort = function (fieldName) { 
+            dibGrid.toggleSort($scope,"dibtestCompanySqlRptGrid",fieldName);
+            loadGrid();
+        };
+        $scope.search = {};
+$scope.clearSearch = function () { 
+    dibGrid.clearSearch($scope);
+};
+$scope.searchGrid = function () { 
+    dibGrid.prepareSearch($scope, "dibtestCompanySqlRptGrid");
+    loadGrid();
+};
+$scope.$watch("showSearch", function () {
+    //to ensure when the state change that the heights are calculated accordingly.
+    $timeout(function () { 
+        $("[dib-container=dibtestCompanySqlRptGrid]").find('.dib-grid-column-content').trigger('refreshHeight')
+    },50);
+    if (!!$scope.showSearch === false) {
+        $scope.search = {};
+        if (!!$scope.gridData) loadGrid();
+    }
+});
         ctrl.$onInit = function () {
-            $scope.gridOptions = {};
-            $scope.gridOptions.data = 'gridData';
             $scope.gridOptions.inlineAddShow = "" == "true";
+            $scope.selectedItems = [];
+            $scope.lastSelectedItem = null;
+            var arraySelected = [];
             /**
             * Copy the selected record to the current row.
             */
             $scope.useSelectedRow = function ($event, model) { 
                 dibGrid.useSelectedRow($scope, $event, model);
             } 
-            $scope.selectedItems = [];
-            $scope.lastSelectedItem = null;
-            var arraySelected = [];
             /**
             * Select the row
             */
@@ -129,125 +184,6 @@
                 angular.extend(itemSelected, dibRecord.getDataFromSelected($scope, $scope.lastSelectedItem, true).recordData);
                 return itemSelected;
             };
-        /**
-         * Custom sorting added Cobus
-         */
-        $scope.gridOptions.sortFields = {};
-        $scope.gridOptions.sortNr = 0;
-        function applySortFromUrl() { 
-            var sortUrlChange= dibContainer.urlContainer("dibtestCompanySqlRptGrid");
-             var searchLength = Object.keys($location.search()).length;
-            if (sortUrlChange && searchLength>0) {
-                //apply search from urlContainer
-                $scope.gridOptions.sortNr = 0;
-                angular.forEach($location.search(), function (item,index) {
-                    if (index.indexOf("sort_") !==-1) { 
-                        $scope.gridOptions.sortNr ++;
-                        var splitValues = item.split("::");
-                        $scope.gridOptions.sortFields[index.replace('sort_','')]= {
-                            "Order" : splitValues[0],
-                            "Count" :  splitValues[1]
-                        } 
-                    } 
-                });
-                //apply sort from urlContainer
-            }
-        }
-        $scope.gridOptions.toggleSort = function (fieldName) { 
-            var sortUrlChange= dibContainer.urlContainer("dibtestCompanySqlRptGrid");
-            if (!!$scope.gridOptions.sortFields[fieldName] && $scope.gridOptions.sortFields[fieldName]['Order'] === "ASC") { 
-                $scope.gridOptions.sortFields[fieldName]['Order'] = "DESC";
-                if (sortUrlChange ) $location.search("sort_"+fieldName,"DESC::"+$scope.gridOptions.sortFields[fieldName]['Count']);
-            } else if (!!$scope.gridOptions.sortFields[fieldName] && $scope.gridOptions.sortFields[fieldName]['Order'] === "DESC") { 
-                $scope.gridOptions.sortNr = 0;
-                delete $scope.gridOptions.sortFields[fieldName];
-                if (Object.keys($scope.gridOptions.sortFields).length == 0)  {
-                    dibContainer.cleanUrlState();
-                }
-                if (sortUrlChange ) $location.search("sort_"+fieldName,null);
-                angular.forEach($scope.gridOptions.sortFields, function (sort,index) { 
-                    if (!!sort) { 
-                        $scope.gridOptions.sortNr ++;
-                        sort['Count'] = $scope.gridOptions.sortNr;
-                        if (sortUrlChange ) $location.search("sort_"+index,sort['Order']+"::"+sort['Count']);
-                    }
-                });
-                return;
-            } else {
-                $scope.gridOptions.sortNr ++;
-                $scope.gridOptions.sortFields[fieldName] = {"Order" : "ASC", "Count" : $scope.gridOptions.sortNr };
-                if (sortUrlChange ) $location.search("sort_"+fieldName,"ASC::"+$scope.gridOptions.sortNr);
-            }
-            loadGrid();
-        };
-            $scope.search = {};
-$scope.clearSearch = function () { 
-    $scope.search = {};
-    dibContainer.cleanUrlState();
-    $scope.searchGrid();
-};
-$scope.searchGrid = function () { 
-    var searchUrlChange= dibContainer.urlContainer("dibtestCompanySqlRptGrid");
-    if (searchUrlChange ) {
-        //clear search
-        angular.forEach($location.search(), function (item,index) {
-            if (index.indexOf("filter_") ==0 || index.indexOf("filterDisplay_") ==0) { 
-                $location.search(index,null);
-            } 
-        });
-        //fill search
-        angular.forEach($scope.search, function (search, index) {
-            if (!!search == false) return;
-            if (typeof search != 'object') {
-                $location.search("filter_"+index,search.replace('&','~~~'));
-            } else if (!!search.id && !!search.id_display_value) {
-                var key = index.replace('selected___','');
-                var urlSearch = {};
-                urlSearch["filter_"+key]=search.id;
-                urlSearch["filterDisplay_"+key] = dibUtility.fixedEncodeURIComponent(search.id_display_value);
-                $location.search(urlSearch);
-            }
-        });
-    }
-    loadGrid();
-};
-$scope.$watch("showSearch", function () {
-    //to ensure when the state change that the heights are calculated accordingly.
-    $timeout(function () { 
-        $("[dib-container=dibtestCompanySqlRptGrid]").find('.dib-grid-column-content').trigger('refreshHeight')
-    },50);
-    if (!!$scope.showSearch === false) {
-        $scope.search = {};
-        if (!!$scope.gridData) loadGrid();
-    }
-});
-function applyFilterFromUrl() { 
-    var searchUrlChange= dibContainer.urlContainer("dibtestCompanySqlRptGrid");
-    var searchLength = Object.keys($location.search()).length;
-    if (searchUrlChange && searchLength>0) {
-        //apply search from urlContainer
-        $scope.search = {};
-        var urlSearch  =$location.search();
-        angular.forEach(urlSearch, function (item,index) {
-            if (index.indexOf('filter') === -1) return;
-            if (index.indexOf("filter_") ==0) { 
-                $scope.showSearch = true;
-                $scope.search[index.replace('filter_','')]= item.replace('~~~','&');
-            } 
-            if (index.indexOf("filterDisplay_") ==0) {
-                var selectKeyIndex=  index.replace('filterDisplay_','');
-                var selectKey ="selected___" + selectKeyIndex; 
-                $scope.search[selectKey]= {};
-                $scope.search[selectKey].id = urlSearch["filter_"+selectKeyIndex];
-                $scope.search[selectKey].id_display_value = decodeURI(item);
-            }
-        });
-        //apply sort from urlContainer
-    } else {
-        $scope.search = {};
-        $scope.showSearch = false;
-    }
-}
             $scope.scrollConfig = {
                 autoHideScrollbar: false,
                 theme: 'light',
@@ -281,11 +217,11 @@ function applyFilterFromUrl() {
         $scope.$watch("page.number", function () {
            if (!!$scope.gridData) loadGrid();
         });
-            applyFilterFromUrl();
-            applySortFromUrl();
+            dibGrid.applyFilterOnUrl($scope, "dibtestCompanySqlRptGrid");
+            dibGrid.applySortOnUrl($scope, "dibtestCompanySqlRptGrid");
             $scope.reloadContainer  = function (options) {
-                    applyFilterFromUrl();
-                    applySortFromUrl();
+                    dibGrid.applyFilterOnUrl($scope, "dibtestCompanySqlRptGrid");
+                    dibGrid.applySortOnUrl($scope, "dibtestCompanySqlRptGrid");
                     loadGrid();
             };    
         }
@@ -313,6 +249,7 @@ function applyFilterFromUrl() {
                 }
                 $scope.loadingData = false;
                 $scope.gridData= data.records;
+                $scope.$broadcast('load');
                 $timeout(function () { 
                     $('[dib-container=dibtestCompanySqlRptGrid]').find('[select-default]').trigger('refreshDefault'); 
                 },100);

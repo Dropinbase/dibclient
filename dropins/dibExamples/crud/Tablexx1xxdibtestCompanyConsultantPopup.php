@@ -21,7 +21,6 @@
     private function parseFilterArray($filterParams=array(), &$params=array(), &$fieldType=array()) {
         if (count($filterParams) === 0) 
             return '';
-
         $i = 0;
         $str = '';
         foreach($filterParams as $record) {
@@ -63,7 +62,7 @@
                 $value = EvalCriteria::evalParam(':submitItemAlias_dibexSubContainers_id', $filterParams);
                 if(is_array($value) || $value === ':submitItemAlias_dibexSubContainers_id')
                     // ***TODO LogERROR!
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_dibexSubContainers_id' for filter '' on dibtestCompanyConsultantPopup is missing from submitted values.");
+                    //return array('error',"Error! The filter parameter 'submitItemAlias_dibexSubContainers_id' for filter 'dibexEvents_Supervisors' on dibtestCompanyConsultantPopup is missing from submitted values.");
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitItemAlias_dibexSubContainers_id'] = $value;
@@ -398,7 +397,6 @@ $sql = "SELECT `test_company_consultant`.`id`
                         	$orderStr .= $this->fkeyDisplay[$record['property']] . ' ' . $direction . ', ';
                         else 
                         	$orderStr .= '`test_company_consultant`.`' . $record['property'] . '` ' . $direction . ', ';
-
                     }
                     $orderStr = substr($orderStr, 0, strlen($orderStr) - 2);
                 }                
@@ -410,7 +408,6 @@ $sql = "SELECT `test_company_consultant`.`id`
     else
         $limit = ' LIMIT ' . ($page_size * ($page - 1)) .  ', ' . $page_size;    
                 // Template: main SQL statement for MySQL to fetch many records limited by paging. Used in eg CrudPdoTemplate.php.
-
 if($readType === 'exportlist')
     $sql = "SELECT 
                 `test_company_consultant`.`id` AS `Id`, `test_company_consultant`.`date_started` AS `Date Started`, `test_company_consultant`.`notes` AS `Notes`, `test_company_consultant`.`position` AS `Position`, `test_company_consultant`.`scope` AS `Scope` 
@@ -426,7 +423,6 @@ else
                      LEFT JOIN `test_company` `test_company1001` ON `test_company_consultant`.`test_company_id` = `test_company1001`.`id` 
                      LEFT JOIN `test_consultant` `test_consultant1002` ON `test_company_consultant`.`consultant_id` = `test_consultant1002`.`id` 
                  ";   
-
 $sql .= $criteria . $orderStr . $limit;               
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
                 $attributes = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, false);
@@ -783,7 +779,6 @@ $sql .= $criteria . $orderStr . $limit;
                 else
                     return array('error',"Permissions failure on existing(old) values. Only records satisfying the following condition(s) can be deleted: " . substr($crit, strpos($crit, " AND (") + 5));
             }
-
             if (dibMySqlPdo::count() > 0) {
                 $crit = TRUE;
                 if ($crit===TRUE) {
@@ -905,7 +900,6 @@ $sql .= $criteria . $orderStr . $limit;
     }
      /**
      * Drop a specific node on-to another
-
      * @param string $dropPosition 'after'/'before'/'append'
      * @param integer $dropNodeId
      * @param type $nodeId
@@ -959,7 +953,6 @@ $sql .= $criteria . $orderStr . $limit;
         $fieldType[":pk1"] = PDO::PARAM_INT;
         dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
         $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-
         if ($rst === FALSE)
             return array();
         else
@@ -1002,7 +995,6 @@ $sql .= $criteria . $orderStr . $limit;
             $validAttributes = array_flip($validAttributes);
             $validAttributes = array_intersect_key($attributes, $validAttributes);
         }
-
         return $validAttributes;
     } 
     public function getCaptions() {
