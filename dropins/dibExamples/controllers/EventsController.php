@@ -251,7 +251,7 @@ class EventsController extends Controller {
 		//   To avoid the hasssle, using itemAlias pointing to a hidden button is a simpler solution
         ClientFunctions::addPrompt($actionList, 
             'Math Test', "Well done! And what is 2 + 3? If you cancel you will start the quiz again, else you will be greeted :)...",
-            'submitUrl', "/dropins/dibExamples/Events/btnHelloWorld_click/$containerName/dib*dpzbp1x7", 
+            'submitUrl', "/dropins/dibExamples/Events/btnHelloWorld_click/$containerName/dib*kyjzvldx2", 
             false, 
             'itemAlias', 'btnPrompt');
         
