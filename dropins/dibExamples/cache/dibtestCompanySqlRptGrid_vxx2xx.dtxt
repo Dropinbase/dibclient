@@ -1,0 +1,636 @@
+
+<div component-loaded dib-container="dibtestCompanySqlRptGrid" dib-grid  dib-config="{
+}"
+     >
+    <md-toolbar aria-label="toolbar"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+style="    "
+   id='ci155438'
+aria-label="toolbar"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <div class="md-toolbar-tools">
+<md-button aria-label="btnreload"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="reloadContainer({'force' : true})"
+    id='ci155439'
+aria-label="btnreload"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Refresh the grid records with the active filter (if any)</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg"></md-icon>
+</md-button>
+    <span flex=auto
+    aria-label="emptyspan"
+can-be-moved=true
+flex="none"
+style="    "
+    id='ci155440'
+aria-label="emptyspan"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+></span>
+<md-button aria-label="btnfilteropen"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="showSearch = !showSearch" 
+    id='ci173693'
+aria-label="btnfilteropen"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Display headers for filtering records</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg"></md-icon>
+</md-button>
+<md-button aria-label="btnfilterapply"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="searchGrid()"
+    id='ci155441'
+aria-label="btnfilterapply"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Apply the filter criteria specified in the grid headings</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg"></md-icon>
+</md-button>
+<md-button aria-label="btnfilterclear"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="clearSearch()"
+    id='ci155442'
+aria-label="btnfilterclear"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Remove any filters (show all records)</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg"></md-icon>
+</md-button>
+    <div aria-label="gridtotals"
+can-be-moved=true
+flex="none"
+layout="row"
+style="    "
+    id='ci155443'
+aria-label="gridtotals"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+    ng-if="page.fromRecord > -1"
+>
+    <md-button ng-disabled="true" aria-label="Grid totals">
+        Records: {{page.fromRecord}}<span ng-if='page.fromRecord>0'> to {{page.toRecord}} of {{page.records}}</span> <span ng-if='page.totalRecords!=page.records'>(Total: {{page.totalRecords}})</span>
+    </md-button>
+</div>
+    </div>
+</md-toolbar>
+        <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+        <div flex dib-table-width >
+            <md-list class='dib-grid-column-header'>
+                <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+                    <div layout="row" flex="100" dib-grid-search  ng-show="!loadingData || gridData.length > 0">
+                        <!--TODO checkbox<div flex> </div> -->
+        <div table-column 
+            flex = 'none'
+            class="md-subhead"
+            dib-column-heading='155444'
+            style="width:80px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+            Id<span ng-if="gridOptions.sortFields['id']">
+                        ({{gridOptions.sortFields['id']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="id"
+can-be-moved=true
+item-alias="id"   
+    ng-show="!!view.id == false || view.id.visible" 
+    dib-disable="{{view.id.disabled}}"
+    ng-class="view.id.class" 
+    ng-style="view.id.style"
+flex="100"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="id"
+        ng-model="search.id"
+        aria-label="Id"
+        ng-enter='searchGrid()'
+        id='ci155444'
+aria-label="id"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Id</label>
+    <div ng-messages="dibtestCompanySqlRptGrid.id.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex = 'none'
+            class="md-subhead"
+            dib-column-heading='155445'
+            style="width:200px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('name')" >
+            Name<span ng-if="gridOptions.sortFields['name']">
+                        ({{gridOptions.sortFields['name']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['name']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="name"
+can-be-moved=true
+item-alias="name"   
+    ng-show="!!view.name == false || view.name.visible" 
+    dib-disable="{{view.name.disabled}}"
+    ng-class="view.name.class" 
+    ng-style="view.name.style"
+flex="100"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="name"
+        ng-model="search.name"
+        aria-label="Name"
+        ng-enter='searchGrid()'
+        id='ci155445'
+aria-label="name"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Name</label>
+    <div ng-messages="dibtestCompanySqlRptGrid.name.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='155446'
+            style="    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('chinese_name')" >
+            Chinese Name<span ng-if="gridOptions.sortFields['chinese_name']">
+                        ({{gridOptions.sortFields['chinese_name']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="chinese_name"
+can-be-moved=true
+flex="100"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="chinese_name"
+        ng-model="search.chinese_name"
+        aria-label="Chinese Name"
+        ng-enter='searchGrid()'
+        id='ci155446'
+aria-label="chinese_name"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Chinese Name</label>
+    <div ng-messages="dibtestCompanySqlRptGrid.chinese_name.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex = 'none'
+            class="md-subhead"
+            dib-column-heading='179990'
+            style="width:220px;    "
+>
+            <div class="dib-column-header dib-long-text-column"  >
+            I'm a comment component<span ng-if="gridOptions.sortFields['comment']">
+                        ({{gridOptions.sortFields['comment']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['comment']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['comment']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="comment"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="100"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="comment"
+        ng-model="search.comment"
+        aria-label="I'm a comment component"
+        ng-enter='searchGrid()'
+        id='ci179990'
+aria-label="comment"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <div ng-messages="dibtestCompanySqlRptGrid.comment.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex = 'none'
+            class="md-subhead"
+            dib-column-heading='155447'
+            style="width:200px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('parent_company')" >
+            Parent Company<span ng-if="gridOptions.sortFields['parent_company']">
+                        ({{gridOptions.sortFields['parent_company']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['parent_company']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['parent_company']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="parent_company"
+can-be-moved=true
+flex="100"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="parent_company"
+        ng-model="search.parent_company"
+        aria-label="Parent Company"
+        ng-enter='searchGrid()'
+        id='ci155447'
+aria-label="parent_company"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Parent Company</label>
+    <div ng-messages="dibtestCompanySqlRptGrid.parent_company.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='155449'
+            style="    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('website')" >
+            Website<span ng-if="gridOptions.sortFields['website']">
+                        ({{gridOptions.sortFields['website']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['website']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['website']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="website"
+can-be-moved=true
+flex="100"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="website"
+        ng-model="search.website"
+        aria-label="Website"
+        ng-enter='searchGrid()'
+        id='ci155449'
+aria-label="website"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Website</label>
+    <div ng-messages="dibtestCompanySqlRptGrid.website.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='155450'
+            style="    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('icon')" >
+            Icon<span ng-if="gridOptions.sortFields['icon']">
+                        ({{gridOptions.sortFields['icon']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['icon']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['icon']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="icon"
+can-be-moved=true
+flex="100"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="icon"
+        ng-model="search.icon"
+        aria-label="Icon"
+        ng-enter='searchGrid()'
+        id='ci155450'
+aria-label="icon"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Icon</label>
+    <div ng-messages="dibtestCompanySqlRptGrid.icon.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+        <md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+            <md-list dib-table-column-width >
+                <md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+                     <div class="no-records-available">  
+                        No records available
+                     </div>
+                </md-list-item>
+                <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  
+                >
+                        <ng-form name='dibtestCompanySqlRptGrid' dib-container-name="dibtestCompanySqlRptGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+    <div table-column layout="column"
+                flex = 'none'
+                dib-column="155444"
+                style="width:80px;    "
+    >
+        <div aria-label="id"
+can-be-moved=true
+item-alias="id"   
+    ng-show="!!view.id == false || view.id.visible" 
+    dib-disable="{{view.id.disabled}}"
+    ng-class="view.id.class" 
+    ng-style="view.id.style"
+flex="none"
+class="md-body-2" layout="row" layout-align="start top"
+style="width:80px !important;    "
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+            <span > 
+             {{$parent.viewModel['id']}}
+            </span>
+        </span>
+     </div>
+</div>
+                <!-- NOT IN USE LETS DELETE REFERENCE TO THIS-->
+    </div>
+    <div table-column layout="column"
+                flex = 'none'
+                dib-column="155445"
+                style="width:200px;    "
+    >
+        <div aria-label="name"
+can-be-moved=true
+item-alias="name"   
+    ng-show="!!view.name == false || view.name.visible" 
+    dib-disable="{{view.name.disabled}}"
+    ng-class="view.name.class" 
+    ng-style="view.name.style"
+flex="none"
+class="md-body-2" layout="row" layout-align="start top"
+style="width:200px !important;    "
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+            <span > 
+             {{$parent.viewModel['name']}}
+            </span>
+        </span>
+     </div>
+</div>
+                <!-- NOT IN USE LETS DELETE REFERENCE TO THIS-->
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="155446"
+                style="    "
+    >
+        <div aria-label="chinese_name"
+can-be-moved=true
+flex="none"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+            <span > 
+             {{$parent.viewModel['chinese_name']}}
+            </span>
+        </span>
+     </div>
+</div>
+                <!-- NOT IN USE LETS DELETE REFERENCE TO THIS-->
+    </div>
+    <div table-column layout="column"
+                flex = 'none'
+                dib-column="179990"
+                style="width:220px;    "
+    >
+        <span aria-label="comment"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="width:220px !important;    "
+    id='ci179990'
+aria-label="comment"
+dib-container-name='dibtestCompanySqlRptGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    smelling the roses...
+    </p>    
+</span>
+    </div>
+    <div table-column layout="column"
+                flex = 'none'
+                dib-column="155447"
+                style="width:200px;    "
+    >
+        <div aria-label="parent_company"
+can-be-moved=true
+flex="none"
+class="md-body-2" layout="row" layout-align="start top"
+style="width:200px !important;    "
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="sqltext" >
+            <span > 
+             {{$parent.viewModel['parent_company']}}
+            </span>
+        </span>
+    <md-button  aria-label="Link to page for dibtestCompanyForm"
+    class="md-icon-button md-raised md-squared "
+            ng-click="dibCommon.goToForDropdowns('dibtestCompanyForm','',true,'selected___parent_company','',model,row,$event);"
+    >
+        <!-- <md-tooltip md-direction="top" ></md-tooltip> @TODO define tooltip-->  
+        <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg"></md-icon>
+    </md-button>
+     </div>
+</div>
+                <!-- NOT IN USE LETS DELETE REFERENCE TO THIS-->
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="155449"
+                style="    "
+    >
+        <div aria-label="website"
+can-be-moved=true
+flex="none"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+            <span > 
+             {{$parent.viewModel['website']}}
+            </span>
+        </span>
+     </div>
+</div>
+                <!-- NOT IN USE LETS DELETE REFERENCE TO THIS-->
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="155450"
+                style="    "
+    >
+        <div aria-label="icon"
+can-be-moved=true
+flex="none"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+            <span > 
+             {{$parent.viewModel['icon']}}
+            </span>
+        </span>
+     </div>
+</div>
+                <!-- NOT IN USE LETS DELETE REFERENCE TO THIS-->
+    </div>
+                        </ng-form>
+                 </md-list-item>     
+            </md-list>
+    </md-content>
+    <div layout-fill layout='row' flex class='dib-grid-footer'>
+        <div flex=20 layout='row'>
+            <md-button disabled>Page limit</md-button>
+            <md-select ng-model="page.limit" aria-label="Page Limit">
+                <md-option ng-value="10">10</md-option>
+                <md-option ng-value="20">20</md-option>
+                <md-option ng-value="50">50</md-option>
+            </md-select>
+        </div>
+        <div  ng-if="page.count>1" flex=80 layout='row'  layout-align="center center" >
+            <md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+                First
+            </md-button>
+            <md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+                Prev
+            </md-button>
+            <div layout='row'>
+                <md-button disabled>Page</md-button>
+                <md-input-container>
+                    <input type='number' ng-model="page.number" aria-label="Page number">
+                </md-input-container>
+                <md-button disabled>
+                of {{ page.count }}
+                </md-button>
+            </div>
+            <md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+                Next
+            </md-button>
+            <md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+                Last
+            </md-button>
+        </div>
+     </div>
+</div>

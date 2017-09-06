@@ -1,0 +1,28 @@
+
+<div layout='column' layout-fill>
+    <md-toolbar class="md-theme-light">
+            <h2 class="md-toolbar-tools">
+                <span>Employees</span>
+            </h2>
+    </md-toolbar>
+<div dib-inject-content="replace" 
+    aria-label="dibtestConsultantGrid"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+style="    "
+            ,        
+    id='ci173736'
+aria-label="dibtestConsultantGrid"
+dib-container-name='dibtestCompanyForm'
+    dib-active-filter='dibtestCompanyForm_dibtestConsultantGrid'
+    dib-container-filter-settings="{
+    'dibtestCompanyForm_dibtestConsultantGrid' : 'submitItemAlias_parent_id'}"
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</div>
+</div>

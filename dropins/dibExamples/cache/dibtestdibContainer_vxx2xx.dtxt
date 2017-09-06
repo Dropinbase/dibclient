@@ -1,0 +1,154 @@
+
+<div
+component-loaded
+dib-container=dibtestdibContainer dib-container-name="7163" dib-config="{
+}" layout-fill flex>
+    <md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutrow"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important;    "
+    id='ci155578'
+aria-label="layoutrow"
+dib-container-name='dibtestdibContainer'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-icon aria-label="iconstatic"
+can-be-moved=true
+flex="none"
+style="    "
+    id='ci155579'
+aria-label="iconstatic"
+dib-container-name='dibtestdibContainer'
+dib-config="{
+    listeners : {
+    }
+}"
+    md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/notfound.svg"
+    aria-label="iconstatic"
+>
+</md-icon>
+    <md-icon aria-label="iconstatic1"
+can-be-moved=true
+flex="none"
+style="    "
+    id='ci155580'
+aria-label="iconstatic1"
+dib-container-name='dibtestdibContainer'
+dib-config="{
+    listeners : {
+    }
+}"
+    md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/notfound.svg"
+    aria-label="iconstatic1"
+>
+</md-icon>
+</div>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="layoutrow1"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="width:100% !important;    "
+    id='ci155581'
+aria-label="layoutrow1"
+dib-container-name='dibtestdibContainer'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-input-container aria-label="textfield"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="textfield"
+        ng-model="model.textfield"
+        aria-label="Textfield"
+        id='ci155582'
+aria-label="textfield"
+dib-container-name='dibtestdibContainer'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Textfield</label>
+    <div ng-messages="dibtestdibContainer.textfield.$error">
+    </div>
+</md-input-container>
+    <md-input-container class="md-block"  aria-label="checkboxfield"
+can-be-moved=true
+flex="none"
+style="    "
+>
+    <md-checkbox 
+        dib-data-component='checkbox'
+        name="checkboxfield"
+        ng-model="model.checkboxfield"
+        aria-label="Checkboxfield"
+        id='ci155583'
+aria-label="checkboxfield"
+dib-container-name='dibtestdibContainer'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='mdCheckbox'
+        md-detect-hidden
+    >
+    Checkboxfield</md-checkbox>
+    <div ng-messages="dibtestdibContainer.checkboxfield.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="datefield"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text"
+        theme="material"
+        ng-model="model.datefield"
+        name=datefield
+        aria-label="Datefield"
+        placeholder="Datefield"
+        dib-data-component='datePickerInput'
+        time-date-picker-input
+        display-mode="material"
+        display-format="d MMMM yyyy"
+        mindate="1800-01-01"
+        maxdate="2999-12-31"
+        aria-invalid="true"
+        id='ci155584'
+aria-label="datefield"
+dib-container-name='dibtestdibContainer'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+    <div ng-messages="dibtestdibContainer.model.datefield.$error">
+        <div ng-message="valid">The entered value is not a date!</div>
+        <div ng-message="required">This date is required!</div>
+        <div ng-message="mindate">Date is too early!</div>
+        <div ng-message="maxdate">Date is too late!</div>
+        <div ng-message="filtered">Only weekends are allowed!</div>
+    </div>
+</md-input-container>
+</div>
+</div>
