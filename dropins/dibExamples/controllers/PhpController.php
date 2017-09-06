@@ -154,7 +154,7 @@ class PhpController extends Controller {
 		$newName = uniqid('NewCo ', true);
 		$params = array('name'=>$newName, 'chinese_name'=>'T达拉斯', 'notes'=>'xxx');
 		// Again, the third parameter can be a database index or a container name
-		$result = Database::create('test_company', $params, 'dibtestCompanyGrid'); 
+		$pkeyValue = Database::create('test_company', $params, 'dibtestCompanyGrid'); 
 
 
 		$params = array('chinese_name'=>'123 T达拉斯', 'notes'=>'yyy');
@@ -165,9 +165,10 @@ class PhpController extends Controller {
 		$params = array('name'=>$newName, 'chinese_name'=>'123 T达拉斯', 'notes'=>'yyy');
 		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', 'name = :name');
 
-		// Let's delete that record 
-		$result = Database::execute("DELETE FROM test_company WHERE name=:name", array(':name'=>$newName), 'dibtestCompanyGrid');
-
+		// Let's delete that record (or any range of records defined by criteria)
+		$result = Database::delete('test_company', array(':name'=>$newName), 'dibtestCompanyGrid', 'name=:name');
+		// Since we have the primary key value we could also do this:
+		$result = Database::delete('test_company', array('id'=>$pkeyValue), 'dibtestCompanyGrid');		
 
         // *** Fetching records in a different PDO Style
         // See http://php.net/manual/en/pdostatement.fetch.php
