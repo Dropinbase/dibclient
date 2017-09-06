@@ -9,6 +9,8 @@
     public $fkeyDisplay = array(
                  );
     protected $filterArray = null;
+    protected $now = null;
+    protected $ipAddress = null;
     function __construct() {
         $dbClassPath = (DIB::$DATABASES[DIB::$CONTAINERDATA[2]]['systemDropin']) ? DIB::$SYSTEMPATH.'dropins'.DIRECTORY_SEPARATOR : DIB::$DROPINPATHDEV;
         require_once $dbClassPath.'setData/dibMySqlPdo'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'dibMySqlPdo.php';
@@ -505,6 +507,8 @@ $sql .= $criteria . $orderStr . $limit;
             if ($crit===TRUE) {
                 // Insert audit trail record - first set unique_record
                 $this->unique_record = 1;
+                $this->now = date('Y-m-d H:i:s', time());
+                $this->ipAddress = PeffApp::getRealIpAddr();
                 // Get pk values
                 $recordId='';
                 $recordId = $value;
@@ -580,7 +584,9 @@ $sql .= $criteria . $orderStr . $limit;
             $crit = TRUE;
             if ($crit===TRUE) {
                 // Insert audit trail record - first set unique_record
-                $this->unique_record = 1;               
+                $this->unique_record = 1;
+                $this->now = date('Y-m-d H:i:s', time());
+                $this->ipAddress = PeffApp::getRealIpAddr();
                 if (count($pkValues) > 1) {
                     $recordId = '';
                     foreach ($pkValues as $k => $v)
@@ -639,7 +645,9 @@ $sql .= $criteria . $orderStr . $limit;
                 $crit = TRUE;
                 if ($crit===TRUE) {
                     // Insert audit trail record - first set unique_record
-                    $this->unique_record = 1;                    
+                    $this->unique_record = 1;
+                    $this->now = date('Y-m-d H:i:s', time());
+                    $this->ipAddress = PeffApp::getRealIpAddr();
                     if (count($pkValues) > 1) {
                         $recordId = '';
                         foreach ($pkValues as $k => $v)
@@ -814,21 +822,21 @@ $sql .= $criteria . $orderStr . $limit;
      /**
      * Adds the actual record to pef_audit_trail
      * 
-     * @var string $crudType - create/read/update/delete
-     * @var string $fieldName - name of field
-     * @var array $oldValue - string containing old values
-     * @var array $newValue - string containing new values
-     * @var integer $tableId - table_id
-     * @var string $tableName - name of table
-     * @var integer $recordId - primary key value
+     * @var string $crudType create/read/update/delete
+     * @var string $fieldName name of field
+     * @var array $oldValue string containing old values
+     * @var array $newValue string containing new values
+     * @var integer $tableId table_id
+     * @var string $tableName name of table
+     * @var integer $recordId primary key value
      */
     protected function auditInsert($crudType, $fieldName, $oldValue, $newValue, $tableId, $recordId) {
         $sql = "INSERT INTO `pef_audit_trail` 
              (action, pef_table_id, pef_container_id, table_name, record_id, date_time, ip_address, field_name, old_value, new_value, pef_login_id, username, unique_record) 
              VALUES ('$crudType', $tableId, 7161, 'test', :recordId, :dateTime, :ipAddress, :fieldName, :oldValue, :newValue, :loginId, :username, :unique_record)";
-        Database::execute($sql, array(':dateTime'=>date('Y-m-d H:i:s', time()), ':fieldName'=> $fieldName, ':recordId'=>$recordId, 
-        	':oldValue'=>$oldValue, ':newValue'=> $newValue, ':username'=>DIB::$USER['username'], ':unique_record'=>$this->unique_record, 
-        	':ipAddress'=>$_SERVER['REMOTE_ADDR'], ':loginId'=>DIB::$USER['id']),
+        Database::execute($sql, array(':dateTime'=>$this->now, ':fieldName'=> $fieldName, ':recordId'=>$recordId, 
+        	':oldValue'=>$oldValue, ':newValue'=>$newValue, ':username'=>DIB::$USER['username'], ':unique_record'=>$this->unique_record, 
+        	':ipAddress'=>$this->ipAddress, ':loginId'=>DIB::$USER['id']),
         	DIB::DBINDEX
         );
         $this->unique_record = 0;

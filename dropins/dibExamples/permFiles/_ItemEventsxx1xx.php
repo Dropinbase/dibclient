@@ -34,9 +34,9 @@ dib*v2tzbro9w/dibexLazyLoad/dropins/dibExamples/Events/btnHelloWorld_click
 dib*0lu4z91sg01/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInColParent
 dib*dla820v41/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInColParent
 dib*mo3bp41c33/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInColParent
-dib*l9kuyw7tu/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInFieldset
 dib*j47in31wzb1/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInFieldset
 dib*spxgxtf92/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInFieldset
+dib*l9kuyw7tu/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInFieldset
 dib*pof161dqr/dibexPhp/dropins/dibExamples/Php/asyncExecution
 dib*tnd1dxokgz/dibexPhp/dropins/dibExamples/Php/crudFunctions
 dib*as7sp11cld/dibexPhp/dropins/dibExamples/Php/databaseFunctions

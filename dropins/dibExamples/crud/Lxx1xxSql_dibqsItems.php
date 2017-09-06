@@ -35,6 +35,7 @@ class Lxx1xxSql_dibqsItems {
         $params = array();
         $group_by = '';
         $permCrit = '';
+        $databaseId = DIB::$ITEMLISTDATA[3];
         // Set sql parts                  
         $totalSql = "SELECT Count(*) AS totalcount FROM pef_item ci1 LEFT JOIN pef_container c1 ON c1.id = ci1.pef_container_id ";             
         $sql = "    ci1.id AS `id` ,  ^^CONCAT(c1.`name`, '.', ci1.`name`,'(', CAST(ci1.id AS CHAR),')') ^^ AS id_display_value ";
@@ -66,18 +67,7 @@ class Lxx1xxSql_dibqsItems {
         	$criteria = $phpFilter; 
         	$params = $phpFilterParams;
         }
-        /*if($pageNoFromValue) {
-        	// Determine page no of pkey value. First need to find corresponding display value
-        	$rst = dibMySqlPdo::execute("SELECT $display_field AS dib__Display FROM $from_clause WHERE $pkey = :pkey", 1, array(':pkey'=>$pageNoFromValue), TRUE);
-            if($rst === FALSE)
-                return array('error', "Error! Could not read dropdown data information. Please contact the System Administrator");
-			if($criteria) 
-				$criteria = " WHERE $criteria AND $display_field <= :dib__Display $order_by";
-			else 
-				$criteria = " WHERE $display_field <= :dib__Display $order_by";
-			$params[':dib__Display'] = $rst['dib__Display'];
-		} else*/ if($criteria) $criteria = ' WHERE ' . $criteria;
-        //if($pageNoFromValue) return array(array(), ceil($filteredCount / $page_size)); 
+        if($criteria) $criteria = ' WHERE ' . $criteria;
             // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg CrudPdoTemplate.php.
     if($page === 1)
         $limit = ' LIMIT ' . $page_size;
@@ -85,16 +75,16 @@ class Lxx1xxSql_dibqsItems {
         $limit = ' LIMIT ' . ($page_size * ($page - 1)) .  ', ' . $page_size;    
 $sql = "SELECT $sql FROM $from_clause $criteria $group_by $order_by $limit";
         // Get the data
-        $records = dibMySqlPdo::execute($sql, 1, $params);
+        $records = dibMySqlPdo::execute($sql, $databaseId, $params);
         // Get $totalCount
 		if($group_by === '') 
-    		$filterCountRst = dibMySqlPdo::execute($totalSql . $criteria, DIB::$ITEMLISTDATA[3], $params, TRUE);	            
+    		$filterCountRst = dibMySqlPdo::execute($totalSql . $criteria, $databaseId, $params, TRUE);	            
         else 
-            $filterCountRst = dibMySqlPdo::execute("SELECT FOUND_ROWS() AS totalcount", DIB::$ITEMLISTDATA[3], array(), true);
+            $filterCountRst = dibMySqlPdo::execute("SELECT FOUND_ROWS() AS totalcount", $databaseId, array(), true);
 		if($filterCountRst === FALSE)
             return array('error', "Error! Could not read dropdown data information. Please contact the System Administrator");
         $filteredCount = intval($filterCountRst["totalcount"]);			
- //-----------------        
+        // -----------------        
         // Add hard-coded rows if any (to first page only). Semicolon delimitted list of values where every two values forms a id and display_value pair)
         if($records === FALSE)
             return array('error', "Error! Could not read dropdown data information. Please contact the System Administrator");
