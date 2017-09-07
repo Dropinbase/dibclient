@@ -11,6 +11,5 @@ DIB::$DATABASES = array(
   //            'username'=>'root', 'password'=>'123456', 'host'=>'127.0.0.1', 'port'=>'', 'emulatePrepare'=>true,  'dbDropin'=>'dibMySqlPdo', 'systemDropin'=>true), 
      
 
-); 
+);
 
-?>
