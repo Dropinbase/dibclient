@@ -67,23 +67,6 @@
             }
             $criteria .= " AND ($crit) ";
         }
-        if(strpos($activeFilter, 'dibtestCompanyForm_dibtestConsultantGrid') === 0) {
-            $crit = "`test_consultant`.`employed_at_id` = :submitItemAlias_parent_id"; 
-            if (array_key_exists('submitItemAlias_parent_id',$filterParams)) {
-                $params[':submitItemAlias_parent_id'] = $filterParams['submitItemAlias_parent_id'];
-                // Remove from array so that Related Records' parseFilterArray can add any other params, e.g. if Related Records and activeFilter both apply
-                // unset($filterParams["submitItemAlias_parent_id"]);
-            } else {
-                $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
-                if(is_array($value) || $value === ':submitItemAlias_parent_id')
-                    // ***TODO LogERROR!
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestCompanyConsultantPopup' on dibtestConsultantGrid is missing from submitted values.");
-                    $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
-                else 
-                    $params[':submitItemAlias_parent_id'] = $value;
-            }
-            $criteria .= " AND ($crit) ";
-        }
         if($criteria==='') return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
         return substr($criteria, 4);
 	}
@@ -141,20 +124,6 @@
                     else 
                         $params[':submitItemAlias_parent_companyId'] = $value;
                 }
-            } elseif($activeFilter === 'dibtestCompanyForm_dibtestConsultantGrid') {  
-                $crit = "`test_consultant`.`employed_at_id` = :submitItemAlias_parent_id"; 
-                if (array_key_exists('submitItemAlias_parent_id',$filterParams)) {
-                    $params[':submitItemAlias_parent_id'] = $filterParams['submitItemAlias_parent_id'];
-                    // Remove from array so that Related Records' parseFilterArray can add any other params, e.g. if Related Records and activeFilter both apply
-                    // unset($filterParams['submitItemAlias_parent_id']);
-                } else {
-                    $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
-                    if(is_array($value))
-                        //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestConsultantGrid' on dibtestConsultantGrid is missing from submitted values.");
-                        $crit = ' 1=2 '; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
-                    else 
-                        $params[':submitItemAlias_parent_id'] = $value;
-                }
             } else
                 return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
             $criteria = ($criteria!=='') ? $criteria . " AND ($crit) " : " WHERE $crit";
@@ -194,20 +163,6 @@ $sql = "SELECT $pkList FROM `test_consultant` $criteria $order LIMIT 1";
                         $crit = ' 1=2 '; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                     else 
                         $params[':submitItemAlias_parent_companyId'] = $value;
-                }
-            } elseif($activeFilter === 'dibtestCompanyForm_dibtestConsultantGrid') {  
-                $crit = "`test_consultant`.`employed_at_id` = :submitItemAlias_parent_id"; 
-                if (array_key_exists('submitItemAlias_parent_id',$filterParams)) {
-                    $params[':submitItemAlias_parent_id'] = $filterParams['submitItemAlias_parent_id'];
-                    // Remove from array so that Related Records' parseFilterArray can add any other params, e.g. if Related Records and activeFilter both apply
-                    // unset($filterParams['submitItemAlias_parent_id']);
-                } else {
-                    $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
-                    if(is_array($value))
-                        //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestConsultantGrid' on dibtestConsultantGrid is missing from submitted values.");
-                        $crit = ' 1=2 '; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
-                    else 
-                        $params[':submitItemAlias_parent_id'] = $value;
                 }
             } else
                 return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");

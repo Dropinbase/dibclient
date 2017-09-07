@@ -873,23 +873,6 @@ dib-config="{
     <md-tooltip md-direction="top" md-delay="500">Add a new record using a form</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg"></md-icon>
 </md-button>
-<md-button aria-label="buttonformdelete"
-can-be-moved=true
-class="md-icon-button md-squared md-raised "
-style="    "
-    ng-click="deleteRecord({'redirect' : true})"
-    id='ci154814'
-aria-label="buttonformdelete"
-dib-container-name='dibexComponents'
-dib-config="{
-    listeners : {
-    }
-}"
-        ng-disabled="true"
->
-    <md-tooltip md-direction="top" md-delay="500">Delete current record</md-tooltip>
-    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg"></md-icon>
-</md-button>
 <md-button aria-label="buttonformsave"
 can-be-moved=true
 class="md-icon-button md-squared md-raised"
@@ -1040,26 +1023,21 @@ dib-config="{
 >
     File Uploader:
 </span>
-    <dib-file-uploader class="md-block" aria-label="fileuploader"
+    <span aria-label="spanNoticeForPublicUsers"
 can-be-moved=true
+ on-move-refresh-preview=true
 flex="none"
 style="    "
-dib-help='
-    '
-dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
-    data-container-name='dibexComponents'
-    ngf-model-invalid="errorFile"
-    ng-model="model.file_fld"
-    name='file_fld'
-    id='ci154822'
-aria-label="fileuploader"
+    id='ci213977'
+aria-label="spanNoticeForPublicUsers"
 dib-container-name='dibexComponents'
 dib-config="{
     listeners : {
     }
 }"
 >
-</dib-file-uploader>
+    <p><i>NOTE: the image and file-uploaders are not available for public users</i></p>
+</span>
     <div layout='row' aria-label="parentCompanyId"
 can-be-moved=true
 item-alias="parentCompanyId"   
@@ -1183,26 +1161,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
         <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg"></md-icon>
     </md-button>
 </div>
-    <dib-img-preview class="md-block" aria-label="imagefield"
-can-be-moved=true
-flex="none"
-style="  margin:10px !important;  "
-dib-help='
-    '
-dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
-    data-container-name='dibexComponents'
-    ngf-model-invalid="errorFile"
-    ng-model="model.image_fld"
-    name='image_fld'
-    id='ci154820'
-aria-label="imagefield"
-dib-container-name='dibexComponents'
-dib-config="{
-    listeners : {
-    }
-}"
->
-</dib-img-preview>  
             </section>
     </md-card-content>
 </md-card>
@@ -1915,25 +1873,6 @@ dib-config="{
     <md-tooltip md-direction="top" md-delay="500">View audit trail of record changes</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg"></md-icon>
     Audit trail
-</md-button>
-<md-button aria-label="btndelete"
-can-be-moved=true
-class=" md-raised "
-style="    "
-    ng-click="deleteRecord({'redirect' : true})"
-    id='ci165890'
-aria-label="btndelete"
-dib-container-name='dibexComponents'
-dib-config="{
-    listeners : {
-    }
-}"
-        ng-disabled="true"
-    aria-label="Delete"
->
-    <md-tooltip md-direction="top" md-delay="500">Delete current record</md-tooltip>
-    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg"></md-icon>
-    Delete
 </md-button>
 <md-button aria-label="btnreload"
 can-be-moved=true

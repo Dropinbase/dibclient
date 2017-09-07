@@ -60,7 +60,7 @@
                 $value = EvalCriteria::evalParam(':submitLastRecord_subCompanyConsultGrid_consultant_id', $filterParams);
                 if(is_array($value) || $value === ':submitLastRecord_subCompanyConsultGrid_consultant_id')
                     // ***TODO LogERROR!
-                    //return array('error',"Error! The filter parameter 'submitLastRecord_subCompanyConsultGrid_consultant_id' for filter '' on dibtestConsultantForm is missing from submitted values.");
+                    //return array('error',"Error! The filter parameter 'submitLastRecord_subCompanyConsultGrid_consultant_id' for filter 'subcontainer' on dibtestConsultantForm is missing from submitted values.");
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitLastRecord_subCompanyConsultGrid_consultant_id'] = $value;

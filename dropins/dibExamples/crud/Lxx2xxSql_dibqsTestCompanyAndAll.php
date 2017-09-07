@@ -1,6 +1,6 @@
 <?php
 /* Obtain dropdown list data from pef_sql statements */
-class Lxx1xxSql_dibqsItems {    
+class Lxx2xxSql_dibqsTestCompanyAndAll {    
     public $displayErrorsInBrowser = FALSE;
 	public $count = 0;
 	protected $dbh;
@@ -37,12 +37,12 @@ class Lxx1xxSql_dibqsItems {
         $permCrit = '';
         $databaseId = DIB::$ITEMLISTDATA[3];
         // Set sql parts                  
-        $totalSql = "SELECT Count(*) AS totalcount FROM pef_item ci1 LEFT JOIN pef_container c1 ON c1.id = ci1.pef_container_id ";             
-        $sql = "    ci1.id AS `id` ,  ^^CONCAT(c1.`name`, '.', ci1.`name`,'(', CAST(ci1.id AS CHAR),')') ^^ AS id_display_value ";
-        $from_clause = "pef_item ci1 LEFT JOIN pef_container c1 ON c1.id = ci1.pef_container_id";
-        $display_field = "^^CONCAT(c1.`name`, '.', ci1.`name`,'(', CAST(ci1.id AS CHAR),')') ^^";
-        $pkey = "ci1.id";        
-        $order_by = ($phpFilter==='') ? " ORDER BY c1.`name`, ci1.`name`" : ''; 
+        $totalSql = "SELECT Count(*) AS totalcount FROM test_company ";             
+        $sql = "    id AS `id` ,  name AS id_display_value ";
+        $from_clause = "test_company";
+        $display_field = "name";
+        $pkey = "id";        
+        $order_by = ($phpFilter==='') ? " ORDER BY `name`" : ''; 
         // Process user filter
         if($query) {
             $query = urldecode($query);
@@ -84,8 +84,18 @@ $sql = "SELECT $sql FROM $from_clause $criteria $group_by $order_by $limit";
 		if($filterCountRst === FALSE)
             return array('error', "Error! Could not read dropdown data information. Please contact the System Administrator");
         $filteredCount = intval($filterCountRst["totalcount"]);			
-        // -----------------        
+        // ----------------- -1;(All);-2;(Top 5)       
         // Add hard-coded rows if any (to first page only). Semicolon delimitted list of values where every two values forms a id and display_value pair)
+        if($page===1) {
+			$rows = explode(';', "-1;(All);-2;(Top 5)");
+			$counter = count($rows);
+			if($counter & 1) $rows[] = null; // for uneven amount of elements, add one.
+			$a = array();
+			for($i=0; $i<$counter; $i = $i + 2)
+				$a[] = array('id'=>$rows[$i], 'id_display_value'=>$rows[$i+1]);
+			$records = array_merge($a, $records);
+			$filteredCount = $filteredCount + ($counter/2);			
+		}
         if($records === FALSE)
             return array('error', "Error! Could not read dropdown data information. Please contact the System Administrator");
         return array($records, $filteredCount);

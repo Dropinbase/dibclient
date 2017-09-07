@@ -396,7 +396,7 @@ $sql .= $criteria . $orderStr . $limit;
             if ($action === 'add') {
                 // Inline adding in the grid - add a blank row
                 // NOTE!: If the keys are not a continuous numeric sequence starting from 0, all keys are encoded as strings, and specified explicitly for each key-value pair.
-                $blankRecord = array("primkey1"=>null, "primkey2"=>null, "pef_test_id"=>null, "unique1"=>null, "unique2"=>null, "date_fld"=>null, "notes"=>null);
+                $blankRecord = array("primkey1"=>null, "primkey2"=>null, "pef_test_id"=>null, "date_fld"=>null, "unique1"=>null, "unique2"=>null, "notes"=>null);
                 $blankRecord = $this->getDefaults($blankRecord, $filterParams);
                 if(isset($blankRecord[0]) && $blankRecord[0]==='error')
                 	return array('error', $blankRecord[1]);

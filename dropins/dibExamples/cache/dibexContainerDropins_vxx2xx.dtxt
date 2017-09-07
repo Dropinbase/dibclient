@@ -281,7 +281,7 @@ item-alias="testdibContainer"
     ng-class="view.testdibContainer.class" 
     ng-style="view.testdibContainer.style"
 flex
-style="width:100% !important; height:200px !important; overflow:auto !important;   "
+style="width:100% !important; height:240px !important; overflow:auto !important;   "
         id='ci155492'
 aria-label="testdibContainer"
 dib-container-name='dibexContainerDropins'
@@ -347,7 +347,7 @@ item-alias="subConsult"
     ng-class="view.subConsult.class" 
     ng-style="view.subConsult.style"
 flex
-style="width:100% !important; height:350px !important; overflow:auto !important;   "
+style="width:100% !important; height:400px !important; overflow:auto !important;   "
         id='ci155491'
 aria-label="subConsult"
 dib-container-name='dibexContainerDropins'

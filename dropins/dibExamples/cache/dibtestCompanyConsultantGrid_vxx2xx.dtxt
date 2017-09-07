@@ -32,23 +32,6 @@ dib-config="{
     <md-tooltip md-direction="top" md-delay="500">Add record inline</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg"></md-icon>
 </md-button>
-<md-button aria-label="btngriddelete"
-can-be-moved=true
-class="md-icon-button md-squared md-raised"
-style="    "
-    ng-click="deleteSelected()"
-    id='ci155397'
-aria-label="btngriddelete"
-dib-container-name='dibtestCompanyConsultantGrid'
-dib-config="{
-    listeners : {
-    }
-}"
-        ng-disabled="true"
->
-    <md-tooltip md-direction="top" md-delay="500">Delete selected records</md-tooltip>
-    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg"></md-icon>
-</md-button>
 <md-button aria-label="btnreload"
 can-be-moved=true
 class="md-icon-button md-squared md-raised"

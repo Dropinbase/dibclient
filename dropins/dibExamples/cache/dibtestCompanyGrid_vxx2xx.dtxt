@@ -51,23 +51,6 @@ dib-config="{
     <md-tooltip md-direction="top" md-delay="500">Add a new record using a form</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg"></md-icon>
 </md-button>
-<md-button aria-label="btngriddelete"
-can-be-moved=true
-class="md-icon-button md-squared md-raised"
-style="    "
-    ng-click="deleteSelected()"
-    id='ci155220'
-aria-label="btngriddelete"
-dib-container-name='dibtestCompanyGrid'
-dib-config="{
-    listeners : {
-    }
-}"
-        ng-disabled="true"
->
-    <md-tooltip md-direction="top" md-delay="500">Delete selected records</md-tooltip>
-    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg"></md-icon>
-</md-button>
 <md-button aria-label="btnreload"
 can-be-moved=true
 class="md-icon-button md-squared md-raised"

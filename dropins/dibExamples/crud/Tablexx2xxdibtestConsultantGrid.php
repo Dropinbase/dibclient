@@ -10,6 +10,8 @@
                  'employed_at_id'=>"^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^", 
                  );
     protected $filterArray = null;
+    protected $now = null;
+    protected $ipAddress = null;
     function __construct() {
         $dbClassPath = (DIB::$DATABASES[DIB::$CONTAINERDATA[2]]['systemDropin']) ? DIB::$SYSTEMPATH.'dropins'.DIRECTORY_SEPARATOR : DIB::$DROPINPATHDEV;
         require_once $dbClassPath.'setData/dibMySqlPdo'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'dibMySqlPdo.php';
@@ -62,23 +64,6 @@
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitItemAlias_parent_companyId'] = $value;
-            }
-            $criteria .= " AND ($crit) ";
-        }
-        if(strpos($activeFilter, 'dibtestCompanyForm_dibtestConsultantGrid') === 0) {
-            $crit = "`test_consultant`.`employed_at_id` = :submitItemAlias_parent_id"; 
-            if (array_key_exists('submitItemAlias_parent_id',$filterParams)) {
-                $params[':submitItemAlias_parent_id'] = $filterParams['submitItemAlias_parent_id'];
-                // Remove from array so that Related Records' parseFilterArray can add any other params, e.g. if Related Records and activeFilter both apply
-                // unset($filterParams["submitItemAlias_parent_id"]);
-            } else {
-                $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
-                if(is_array($value) || $value === ':submitItemAlias_parent_id')
-                    // ***TODO LogERROR!
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestCompanyConsultantPopup' on dibtestConsultantGrid is missing from submitted values.");
-                    $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
-                else 
-                    $params[':submitItemAlias_parent_id'] = $value;
             }
             $criteria .= " AND ($crit) ";
         }
@@ -139,20 +124,6 @@
                     else 
                         $params[':submitItemAlias_parent_companyId'] = $value;
                 }
-            } elseif($activeFilter === 'dibtestCompanyForm_dibtestConsultantGrid') {  
-                $crit = "`test_consultant`.`employed_at_id` = :submitItemAlias_parent_id"; 
-                if (array_key_exists('submitItemAlias_parent_id',$filterParams)) {
-                    $params[':submitItemAlias_parent_id'] = $filterParams['submitItemAlias_parent_id'];
-                    // Remove from array so that Related Records' parseFilterArray can add any other params, e.g. if Related Records and activeFilter both apply
-                    // unset($filterParams['submitItemAlias_parent_id']);
-                } else {
-                    $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
-                    if(is_array($value))
-                        //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestConsultantGrid' on dibtestConsultantGrid is missing from submitted values.");
-                        $crit = ' 1=2 '; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
-                    else 
-                        $params[':submitItemAlias_parent_id'] = $value;
-                }
             } else
                 return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
             $criteria = ($criteria!=='') ? $criteria . " AND ($crit) " : " WHERE $crit";
@@ -192,20 +163,6 @@ $sql = "SELECT $pkList FROM `test_consultant` $criteria $order LIMIT 1";
                         $crit = ' 1=2 '; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                     else 
                         $params[':submitItemAlias_parent_companyId'] = $value;
-                }
-            } elseif($activeFilter === 'dibtestCompanyForm_dibtestConsultantGrid') {  
-                $crit = "`test_consultant`.`employed_at_id` = :submitItemAlias_parent_id"; 
-                if (array_key_exists('submitItemAlias_parent_id',$filterParams)) {
-                    $params[':submitItemAlias_parent_id'] = $filterParams['submitItemAlias_parent_id'];
-                    // Remove from array so that Related Records' parseFilterArray can add any other params, e.g. if Related Records and activeFilter both apply
-                    // unset($filterParams['submitItemAlias_parent_id']);
-                } else {
-                    $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
-                    if(is_array($value))
-                        //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestConsultantGrid' on dibtestConsultantGrid is missing from submitted values.");
-                        $crit = ' 1=2 '; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
-                    else 
-                        $params[':submitItemAlias_parent_id'] = $value;
                 }
             } else
                 return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
@@ -698,6 +655,8 @@ $sql .= $criteria . $orderStr . $limit;
             if ($crit===TRUE) {
                 // Insert audit trail record - first set unique_record
                 $this->unique_record = 1;
+                $this->now = date('Y-m-d H:i:s', time());
+                $this->ipAddress = PeffApp::getRealIpAddr();
                 // Get pk values
                 $recordId='';
                 $recordId = $value;
@@ -850,7 +809,9 @@ $sql .= $criteria . $orderStr . $limit;
             $crit = TRUE;
             if ($crit===TRUE) {
                 // Insert audit trail record - first set unique_record
-                $this->unique_record = 1;               
+                $this->unique_record = 1;
+                $this->now = date('Y-m-d H:i:s', time());
+                $this->ipAddress = PeffApp::getRealIpAddr();
                 if (count($pkValues) > 1) {
                     $recordId = '';
                     foreach ($pkValues as $k => $v)
@@ -877,57 +838,7 @@ $sql .= $criteria . $orderStr . $limit;
      * @return boolean success of delete
      */
     public function delete($pkValues) {
-        try {      
-            // Check if values in $pkValues are indeed pk's and of the right type.
-            $params = array();
-            $fieldType = array();
-            if (!array_key_exists("id", $pkValues))
-                return array ('error',"The primary key fields specified in the request are invalid.");
-             if ($pkValues["id"] != (string)(float)$pkValues["id"])
-                return array ('error',"Error! The primary key field values specified in the request are invalid.");
-            $params[":pk1"] = $pkValues["id"];
-            $fieldType[":pk1"] = PDO::PARAM_INT;
-            $pkCrit = "`test_consultant`.`id` = :pk1";            
-            $attributes = 'Not yet loaded';
-            // Get criteria for old values
-             $crit = $pkCrit;
-            // Get old values before we delete the record...
-            $sql = "SELECT * FROM `test_consultant` WHERE $pkCrit";
-            $attributes = $this->getRecordByPk($sql, $pkValues);
-            if(count($attributes) === 0)
-                return TRUE; // Other user deleted this record
-            $sql = "DELETE FROM `test_consultant` WHERE $crit";
-            dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);       
-            $result = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params);
-            if ($result === FALSE || dibMySqlPdo::count() === 0) {
-                if($result === FALSE && Database::lastErrorUserMsg())
-                    return array('error',Database::lastErrorUserMsg());
-                else
-                    return array('error',"Permissions failure on existing(old) values. Only records satisfying the following condition(s) can be deleted: " . substr($crit, strpos($crit, " AND (") + 5));
-            }
-            if (dibMySqlPdo::count() > 0) {
-                $crit = TRUE;
-                if ($crit===TRUE) {
-                    // Insert audit trail record - first set unique_record
-                    $this->unique_record = 1;                    
-                    if (count($pkValues) > 1) {
-                        $recordId = '';
-                        foreach ($pkValues as $k => $v)
-                            $recordId .= "$k=$v, ";
-                        $recordId = substr($recordId, 0, strlen($recordId) - 2);
-                    } else {
-                        foreach ($pkValues as $k => $v)
-                            $recordId = $v;
-                    }
-                    foreach ($attributes AS $fieldName => $oldValue) 
-                        $this->auditInsert("delete", $fieldName, $oldValue, NULL, 1442, $recordId);
-                } elseif (is_array($crit)) return $crit;
-                return true;
-            }
-        }  catch (Exception $e) {        
-			return array('error',"A system error occured while deleting the record. Please contact the System Administrator.");
-		}
-        // ***TODO if user deletes many records, and he has no permissions on some of them, he shouldn't get 10x permission messages?
+        return array('error',"Sorry, the permission system restricts you from deleting records from this table.");
     }
     /**
      * Creates a duplicate of a record - will only work is the primary key is an auto-increment or supplied in $setValues.
@@ -1085,21 +996,21 @@ $sql .= $criteria . $orderStr . $limit;
      /**
      * Adds the actual record to pef_audit_trail
      * 
-     * @var string $crudType - create/read/update/delete
-     * @var string $fieldName - name of field
-     * @var array $oldValue - string containing old values
-     * @var array $newValue - string containing new values
-     * @var integer $tableId - table_id
-     * @var string $tableName - name of table
-     * @var integer $recordId - primary key value
+     * @var string $crudType create/read/update/delete
+     * @var string $fieldName name of field
+     * @var array $oldValue string containing old values
+     * @var array $newValue string containing new values
+     * @var integer $tableId table_id
+     * @var string $tableName name of table
+     * @var integer $recordId primary key value
      */
     protected function auditInsert($crudType, $fieldName, $oldValue, $newValue, $tableId, $recordId) {
         $sql = "INSERT INTO `pef_audit_trail` 
              (action, pef_table_id, pef_container_id, table_name, record_id, date_time, ip_address, field_name, old_value, new_value, pef_login_id, username, unique_record) 
              VALUES ('$crudType', $tableId, 7147, 'test_consultant', :recordId, :dateTime, :ipAddress, :fieldName, :oldValue, :newValue, :loginId, :username, :unique_record)";
-        Database::execute($sql, array(':dateTime'=>date('Y-m-d H:i:s', time()), ':fieldName'=> $fieldName, ':recordId'=>$recordId, 
-        	':oldValue'=>$oldValue, ':newValue'=> $newValue, ':username'=>DIB::$USER['username'], ':unique_record'=>$this->unique_record, 
-        	':ipAddress'=>$_SERVER['REMOTE_ADDR'], ':loginId'=>DIB::$USER['id']),
+        Database::execute($sql, array(':dateTime'=>$this->now, ':fieldName'=> $fieldName, ':recordId'=>$recordId, 
+        	':oldValue'=>$oldValue, ':newValue'=>$newValue, ':username'=>DIB::$USER['username'], ':unique_record'=>$this->unique_record, 
+        	':ipAddress'=>$this->ipAddress, ':loginId'=>DIB::$USER['id']),
         	DIB::DBINDEX
         );
         $this->unique_record = 0;

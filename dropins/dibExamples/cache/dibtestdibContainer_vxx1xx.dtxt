@@ -4,6 +4,21 @@ component-loaded
 dib-container=dibtestdibContainer dib-container-name="7163" dib-config="{
 }" layout-fill flex>
     <md-progress-linear component-loaded md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+    <span aria-label="span"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213156'
+aria-label="span"
+dib-container-name='dibtestdibContainer'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <h4>Mostly any component can be added to dibContainers, even dropdowns based on fields or queries...</h4>
+</span>
 <div dib-inject-content="replace" layout="row" 
     aria-label="layoutrow"
 can-be-moved=true
@@ -35,6 +50,51 @@ dib-config="{
     aria-label="iconstatic"
 >
 </md-icon>
+    <div layout='row' aria-label="mdAutocomplete"
+can-be-moved=true
+flex="none"
+style="width:300px !important;    "
+dib-help='
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    md-input-name='test_company_id'
+    select-model="model.selected___test_company_id.id"
+    md-search-text-change="loadServiceciid(dropdowns.service213157.searchTextmodel)"
+    md-search-text="dropdowns.service213157.searchTextmodel"
+    md-selected-item="model.selected___test_company_id"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service213157.getItems(dropdowns.service213157.searchTextmodel,'model')"
+    md-floating-label="Company"
+    md-no-cache="true"
+    md-selected-item-change="select213157(model,'model','test_company_id')"
+    md-select-on-match="true"
+    md-min-length="0"
+    dib-data-component='autocomplete'
+    placeholder="Company"
+    id='ci213157'
+    aria-label="mdAutocomplete"
+    dib-container-name='dibtestdibContainer'
+    dib-config="{
+        listeners : {
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service213157.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibtestdibContainer.test_company_id.$error" ng-if="dibtestdibContainer.test_company_id.$touched">
+    </div>
+</md-autocomplete>
+</div>
     <md-icon aria-label="iconstatic1"
 can-be-moved=true
 flex="none"

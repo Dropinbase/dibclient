@@ -885,7 +885,6 @@ dib-config="{
     listeners : {
     }
 }"
-        ng-disabled="true"
 >
     <md-tooltip md-direction="top" md-delay="500">Delete current record</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg"></md-icon>
@@ -1928,7 +1927,6 @@ dib-config="{
     listeners : {
     }
 }"
-        ng-disabled="true"
     aria-label="Delete"
 >
     <md-tooltip md-direction="top" md-delay="500">Delete current record</md-tooltip>

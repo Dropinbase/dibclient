@@ -54,23 +54,6 @@ dib-config="{
     <md-tooltip md-direction="top" md-delay="500">Add new record</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg"></md-icon>
 </md-button>
-<md-button aria-label="btndelete"
-can-be-moved=true
-class="md-icon-button md-squared md-raised "
-style="    "
-    ng-click="deleteRecord({'redirect' : true})"
-    id='ci173698'
-aria-label="btndelete"
-dib-container-name='dibtestCompanyForm'
-dib-config="{
-    listeners : {
-    }
-}"
-        ng-disabled="true"
->
-    <md-tooltip md-direction="top" md-delay="500">Delete record</md-tooltip>
-    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg"></md-icon>
-</md-button>
 <md-button aria-label="btnreload"
 can-be-moved=true
 class="md-icon-button md-squared md-raised"

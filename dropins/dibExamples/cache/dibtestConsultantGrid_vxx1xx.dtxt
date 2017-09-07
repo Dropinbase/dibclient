@@ -45,7 +45,6 @@ dib-config="{
     listeners : {
     }
 }"
-        ng-disabled="true"
     aria-label="Delete"
 >
     <md-tooltip md-direction="top" md-delay="500">Delete selected records</md-tooltip>
@@ -70,6 +69,7 @@ dib-config="{
 </md-button>
 <md-button aria-label="buttonGeoEncode"
 can-be-moved=true
+ hide
 style="    "
     id='ci155178'
 aria-label="buttonGeoEncode"

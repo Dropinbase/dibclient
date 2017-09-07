@@ -551,7 +551,7 @@ dib-config="{
     }
 }"
 >
-    <md-card  aria-label="fieldset5"
+    <md-card  aria-label="fieldset52"
 can-be-moved=true
  can-have-children=true
  on-move-refresh-preview=true
@@ -559,7 +559,7 @@ flex
 layout="column" class="standard"
 style="    "
     id='ci154996'
-aria-label="fieldset5"
+aria-label="fieldset52"
 dib-container-name='dibexLayout'
 dib-config="{
     listeners : {
@@ -3192,6 +3192,841 @@ dib-config="{
 }"
 >
 </span>
+</div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab label='Angular Directives' tabId="213893" 
+        aria-label="colNgDirectives"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-align="start start"
+style="   padding:10px !important; "
+    >   <md-tab-body flex layout-fill>
+<div dib-inject-content="replace" layout='column'
+    aria-label="colNgDirectives"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-align="start start"
+style="   padding:10px !important; "
+                on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=213893'    
+    id='ci213893'
+aria-label="colNgDirectives"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span aria-label="commentNgDirectives"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213894'
+aria-label="commentNgDirectives"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    AngularJs ships with many useful directives, all of which can be used in Dropinbase.<br>Use the <i>Layout Configs/Attributes</i> field in the Designer to apply them to items.<br>Refer to the <a href="https://docs.angularjs.org/api/ng/directive">AngularJs API</a> for more info, and use the Designer to view the directives that are applied below.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowInputs"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=213893'    
+    id='ci213943'
+aria-label="rowInputs"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-input-container class="md-block"  aria-label="checkbox"
+can-be-moved=true
+flex="none"
+style="    "
+>
+    <md-checkbox 
+        dib-data-component='checkbox'
+        name="checkbox"
+        ng-model="model.checkbox"
+        aria-label="Checkbox"
+        id='ci213917'
+aria-label="checkbox"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='mdCheckbox'
+        md-detect-hidden
+    >
+    Checkbox</md-checkbox>
+    <div ng-messages="dibexLayout.checkbox.$error">
+    </div>
+</md-input-container>
+    <div layout='row' aria-label="valueList"
+can-be-moved=true
+flex="none"
+style="width:300px !important;    "
+ >
+
+<md-input-container flex>
+    <label>Value List</label>    
+    <md-select   
+        dib-data-component='enum'
+        aria-label="valueList"
+        dib-onload-service
+        placeholder="Value List"
+        aria-label="valueList"
+        md-on-close="select213918(model)"
+        flex
+        ng-model="model.valueList"
+        name='valueList'
+        id='ci213918'
+aria-label="valueList"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        <md-option ng-repeat="state in ['apples','oranges','pears']" value="{{state}}"  >
+            {{state}}
+        </md-option>
+    </md-select>
+    <div ng-messages="dibexLayout.valueList.$error" ng-if="dibexLayout.valueList.$touched">
+    </div>
+</md-input-container>
+</div>
+    <div layout='row' aria-label="dropdown"
+can-be-moved=true
+flex="none"
+style="width:300px !important;    "
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    md-input-name='dropdown'
+    select-model="model.selected___dropdown.id"
+    md-search-text-change="loadServiceciid(dropdowns.service213935.searchTextmodel)"
+    md-search-text="dropdowns.service213935.searchTextmodel"
+    md-selected-item="model.selected___dropdown"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service213935.getItems(dropdowns.service213935.searchTextmodel,'model')"
+    md-floating-label="Dropdown"
+    md-no-cache="true"
+    md-selected-item-change="select213935(model,'model','dropdown')"
+    md-select-on-match="true"
+    md-min-length="0"
+    dib-data-component='autocomplete'
+    placeholder="Dropdown"
+    id='ci213935'
+    aria-label="dropdown"
+    dib-container-name='dibexLayout'
+    dib-config="{
+        listeners : {
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service213935.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibexLayout.dropdown.$error" ng-if="dibexLayout.dropdown.$touched">
+    </div>
+</md-autocomplete>
+</div>
+</div>
+    <span aria-label="headNgDisabled"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213913'
+aria-label="headNgDisabled"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">ng-disabled and ng-readonly</span>
+</span>
+    <span aria-label="commentNgDisabled"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213897'
+aria-label="commentNgDisabled"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Disables or makes an item read-only, based on an expression evaluating to true.<br>
+Check the checkbox, and select &apos;pears&apos; in the Value List above.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowNgDisabled"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=213893'    
+    id='ci213951'
+aria-label="rowNgDisabled"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="aButton"
+can-be-moved=true
+ng-disabled="!model.checkbox"  ng-click="count = count + 1" ng-init="count=0"  class="md-raised md-accent"
+style="width:300px !important;    "
+    id='ci213919'
+aria-label="aButton"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+    aria-label="A Button"
+>
+    A Button
+</md-button>
+    <md-input-container aria-label="text1"
+can-be-moved=true
+flex="none"
+ng-readonly="model.valueList==='pears'"
+style="    "
+>
+    <input type="text" 
+        name="text1"
+        ng-model="model.text1"
+        aria-label="Text 1"
+        id='ci213920'
+aria-label="text1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 1</label>
+    <div ng-messages="dibexLayout.text1.$error">
+    </div>
+</md-input-container>
+    <span aria-label="spanCount"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="  margin:0px 0px 0px 20px !important;  "
+    id='ci213957'
+aria-label="spanCount"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <h3>counter: {{count}}</h3>
+</span>
+</div>
+    <span aria-label="headNgShowHide"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213908'
+aria-label="headNgShowHide"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">ng-show and ng-hide</span>
+</span>
+    <span aria-label="commentNgShowHide"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213907'
+aria-label="commentNgShowHide"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Shows/hides an item based on an expression evaluating to true.<br>Check the checkbox and select a company > 'B' in the dropdown.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowNgShowHide"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=213893'    
+    id='ci213924'
+aria-label="rowNgShowHide"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-card  aria-label="fieldSet1"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+ng-show="model.selected___dropdown.id_display_value > 'B'"
+style="    "
+    id='ci213921'
+aria-label="fieldSet1"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+ >
+        <md-card-content>
+            <section layout-fill>
+                <md-subheader class="cl-md-accent md-no-sticky">Fieldset 1</md-subheader>
+    <md-input-container aria-label="text2"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="text2"
+        ng-model="model.text2"
+        aria-label="Text 2"
+        id='ci213922'
+aria-label="text2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 2</label>
+    <div ng-messages="dibexLayout.text2.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="text3"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="text3"
+        ng-model="model.text3"
+        aria-label="Text 3"
+        id='ci213923'
+aria-label="text3"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 3</label>
+    <div ng-messages="dibexLayout.text3.$error">
+    </div>
+</md-input-container>
+            </section>
+    </md-card-content>
+</md-card>
+    <md-card  aria-label="fieldSet2"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout="column" class="standard"
+style="    "
+    id='ci213925'
+aria-label="fieldSet2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+ >
+        <md-card-content>
+            <section layout-fill>
+                <md-subheader class="cl-md-accent md-no-sticky">Fieldset 2</md-subheader>
+    <md-input-container aria-label="text4"
+can-be-moved=true
+flex="none"
+ng-hide="common.$mdMedia('gt-sm')"
+style="width:300px !important;    "
+>
+    <input type="text" 
+        name="text4"
+        ng-model="model.text4"
+        aria-label="Text 4 - I dissapear in gt-sm browser windows"
+        id='ci213926'
+aria-label="text4"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 4 - I dissapear in gt-sm browser windows</label>
+    <div ng-messages="dibexLayout.text4.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="text5"
+can-be-moved=true
+flex
+ng-hide="model.checkbox"
+style="width:300px !important;    "
+>
+    <input type="text" 
+        name="text5"
+        ng-model="model.text5"
+        aria-label="Text 5 - I dissapear if checkbox is ticked"
+        id='ci213927'
+aria-label="text5"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 5 - I dissapear if checkbox is ticked</label>
+    <div ng-messages="dibexLayout.text5.$error">
+    </div>
+</md-input-container>
+            </section>
+    </md-card-content>
+</md-card>
+</div>
+    <span aria-label="headNgIf"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213896'
+aria-label="headNgIf"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">ng-if</span>
+</span>
+    <span aria-label="commentNgIf"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213914'
+aria-label="commentNgIf"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Completely removes and recreates an item in the DOM based on an expression evaluating to true.<br>Select any value in Value List and either (All) or (Top 5) in the dropdown.
+    </p>    
+</span>
+    <span aria-label="spanNote"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+ng-if="model.valueList && model.selected___dropdown.id<0"
+style=" height:100px !important; overflow:auto !important;   "
+    id='ci213916'
+aria-label="spanNote"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <h3>I'm back!</h3>
+</span>
+    <span aria-label="headNgSwitch"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213952'
+aria-label="headNgSwitch"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">ng-switch</span>
+</span>
+    <span aria-label="commentNgSwitch"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213953'
+aria-label="commentNgSwitch"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Displays child items where their ng-swtch-when directive matches the ng-switch expression of the parent. If no match is made, a child item with the ng-switch-default directive is shown.<br>Select values in the Value List.
+    </p>    
+</span>
+<div dib-inject-content="replace" layout="row" 
+    aria-label="rowNgSwitch"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+ng-switch="model.valueList"
+style="    "
+        on-inject='dibGlobals.action.ActivateTab?containerName=dibexLayout&itemId=213893'    
+    id='ci213936'
+aria-label="rowNgSwitch"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-card  aria-label="fieldSet3"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+ng-switch-when="apples"
+style="    "
+    id='ci213937'
+aria-label="fieldSet3"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+ >
+        <md-card-content>
+            <section layout-fill>
+                <md-subheader class="cl-md-accent md-no-sticky">Fieldset 3</md-subheader>
+    <md-input-container aria-label="text6"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="text6"
+        ng-model="model.text6"
+        aria-label="Text 6"
+        id='ci213938'
+aria-label="text6"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 6</label>
+    <div ng-messages="dibexLayout.text6.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="text7"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="text7"
+        ng-model="model.text7"
+        aria-label="Text 7"
+        id='ci213939'
+aria-label="text7"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 7</label>
+    <div ng-messages="dibexLayout.text7.$error">
+    </div>
+</md-input-container>
+            </section>
+    </md-card-content>
+</md-card>
+    <md-card  aria-label="fieldSet4"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+ng-switch-when="pears"
+style="    "
+    id='ci213940'
+aria-label="fieldSet4"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+ >
+        <md-card-content>
+            <section layout-fill>
+                <md-subheader class="cl-md-accent md-no-sticky">Fieldset 4</md-subheader>
+    <md-input-container aria-label="text8"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="text8"
+        ng-model="model.text8"
+        aria-label="Text 8"
+        id='ci213941'
+aria-label="text8"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 8</label>
+    <div ng-messages="dibexLayout.text8.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="text9"
+can-be-moved=true
+flex
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="text9"
+        ng-model="model.text9"
+        aria-label="Text 9"
+        id='ci213942'
+aria-label="text9"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 9</label>
+    <div ng-messages="dibexLayout.text9.$error">
+    </div>
+</md-input-container>
+            </section>
+    </md-card-content>
+</md-card>
+    <md-card  aria-label="fieldSet5"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+ng-switch-default
+style="    "
+    id='ci213954'
+aria-label="fieldSet5"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+ >
+        <md-card-content>
+            <section layout-fill>
+                <md-subheader class="cl-md-accent md-no-sticky">Fieldset 5</md-subheader>
+    <md-input-container aria-label="text10"
+can-be-moved=true
+flex="none"
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="text10"
+        ng-model="model.text10"
+        aria-label="Text 10"
+        id='ci213955'
+aria-label="text10"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 10</label>
+    <div ng-messages="dibexLayout.text10.$error">
+    </div>
+</md-input-container>
+    <md-input-container aria-label="text11"
+can-be-moved=true
+flex
+class="md-block"
+style="    "
+>
+    <input type="text" 
+        name="text11"
+        ng-model="model.text11"
+        aria-label="Text 11"
+        id='ci213956'
+aria-label="text11"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 11</label>
+    <div ng-messages="dibexLayout.text11.$error">
+    </div>
+</md-input-container>
+            </section>
+    </md-card-content>
+</md-card>
+</div>
+    <span aria-label="headNgStyle"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213958'
+aria-label="headNgStyle"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <span style="font-size:20px">ng-style</span>
+</span>
+    <span aria-label="commentNgStyle"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci213959'
+aria-label="commentNgStyle"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    Applies styles conditionally to items, based on one or more expressions evaluating to true.<br>Select any value in Value List.
+    </p>    
+</span>
+    <span aria-label="spanNote2"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+ng-style="model.valueList==='oranges' && {'background-color':'DarkSlateGrey', 'color': 'white'}  || model.valueList==='apples' && {'background-color':'DarkGoldenRod', 'color':'black'} || model.valueList==='pears' && {'text-shadow': '2px 2px DarkCyan'}"
+style=" height:100px !important; overflow:auto !important;   "
+    id='ci213960'
+aria-label="spanNote2"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <h3>Stylish ...</h3>
+</span>
+    <md-input-container aria-label="text12"
+can-be-moved=true
+flex
+ng-style="model.valueList==='oranges' && {position: 'relative', left: '30px', border: '3px solid GreenYellow'}  || model.valueList==='apples' && {position: 'fixed', left: '0px', top: '300px', border: '3px solid GreenYellow'}  || model.valueList==='pears' && {position: 'absolute', left: '400px', top : '500px', border: '3px solid GreenYellow'}"
+style="width:300px !important;    "
+>
+    <input type="text" 
+        name="text12"
+        ng-model="model.text12"
+        aria-label="Text 12"
+        select-default="I move along with the fruit"
+        id='ci213965'
+aria-label="text12"
+dib-container-name='dibexLayout'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Text 12</label>
+    <div ng-messages="dibexLayout.text12.$error">
+    </div>
+</md-input-container>
 </div>
         </md-tab-body>
     </md-tab>

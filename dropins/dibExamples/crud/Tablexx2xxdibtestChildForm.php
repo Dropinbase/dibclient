@@ -10,6 +10,8 @@
                  'pef_test_id'=>"^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^", 
                  );
     protected $filterArray = null;
+    protected $now = null;
+    protected $ipAddress = null;
     function __construct() {
         $dbClassPath = (DIB::$DATABASES[DIB::$CONTAINERDATA[2]]['systemDropin']) ? DIB::$SYSTEMPATH.'dropins'.DIRECTORY_SEPARATOR : DIB::$DROPINPATHDEV;
         require_once $dbClassPath.'setData/dibMySqlPdo'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'dibMySqlPdo.php';
@@ -567,6 +569,8 @@ $sql .= $criteria . $orderStr . $limit;
             if ($crit===TRUE) {
                 // Insert audit trail record - first set unique_record
                 $this->unique_record = 1;
+                $this->now = date('Y-m-d H:i:s', time());
+                $this->ipAddress = PeffApp::getRealIpAddr();
                 // Get pk values
                 $recordId='';
                 $recordId .= "primkey1=" . $attributes["primkey1"] . ", ";
@@ -687,7 +691,9 @@ $sql .= $criteria . $orderStr . $limit;
             $crit = TRUE;
             if ($crit===TRUE) {
                 // Insert audit trail record - first set unique_record
-                $this->unique_record = 1;               
+                $this->unique_record = 1;
+                $this->now = date('Y-m-d H:i:s', time());
+                $this->ipAddress = PeffApp::getRealIpAddr();
                 if (count($pkValues) > 1) {
                     $recordId = '';
                     foreach ($pkValues as $k => $v)
@@ -714,59 +720,7 @@ $sql .= $criteria . $orderStr . $limit;
      * @return boolean success of delete
      */
     public function delete($pkValues) {
-        try {      
-            // Check if values in $pkValues are indeed pk's and of the right type.
-            $params = array();
-            $fieldType = array();
-            if (!array_key_exists("primkey1", $pkValues))
-                return array ('error',"The primary key fields specified in the request are invalid.");
-            $params[":pk1"] = $pkValues["primkey1"];
-            $fieldType[":pk1"] = PDO::PARAM_STR;
-            if (!array_key_exists("primkey2", $pkValues))
-                return array ('error',"The primary key fields specified in the request are invalid.");
-            $params[":pk2"] = $pkValues["primkey2"];
-            $fieldType[":pk2"] = PDO::PARAM_STR;
-            $pkCrit = "`test_child`.`primkey1` = :pk1 AND `test_child`.`primkey2` = :pk2";            
-            $attributes = 'Not yet loaded';
-            // Get criteria for old values
-             $crit = $pkCrit;
-            // Get old values before we delete the record...
-            $sql = "SELECT * FROM `test_child` WHERE $pkCrit";
-            $attributes = $this->getRecordByPk($sql, $pkValues);
-            if(count($attributes) === 0)
-                return TRUE; // Other user deleted this record
-            $sql = "DELETE FROM `test_child` WHERE $crit";
-            dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);       
-            $result = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params);
-            if ($result === FALSE || dibMySqlPdo::count() === 0) {
-                if($result === FALSE && Database::lastErrorUserMsg())
-                    return array('error',Database::lastErrorUserMsg());
-                else
-                    return array('error',"Permissions failure on existing(old) values. Only records satisfying the following condition(s) can be deleted: " . substr($crit, strpos($crit, " AND (") + 5));
-            }
-            if (dibMySqlPdo::count() > 0) {
-                $crit = TRUE;
-                if ($crit===TRUE) {
-                    // Insert audit trail record - first set unique_record
-                    $this->unique_record = 1;                    
-                    if (count($pkValues) > 1) {
-                        $recordId = '';
-                        foreach ($pkValues as $k => $v)
-                            $recordId .= "$k=$v, ";
-                        $recordId = substr($recordId, 0, strlen($recordId) - 2);
-                    } else {
-                        foreach ($pkValues as $k => $v)
-                            $recordId = $v;
-                    }
-                    foreach ($attributes AS $fieldName => $oldValue) 
-                        $this->auditInsert("delete", $fieldName, $oldValue, NULL, 1438, $recordId);
-                } elseif (is_array($crit)) return $crit;
-                return true;
-            }
-        }  catch (Exception $e) {        
-			return array('error',"A system error occured while deleting the record. Please contact the System Administrator.");
-		}
-        // ***TODO if user deletes many records, and he has no permissions on some of them, he shouldn't get 10x permission messages?
+        return array('error',"Sorry, the permission system restricts you from deleting records from this table.");
     }
     /**
      * Creates a duplicate of a record - will only work is the primary key is an auto-increment or supplied in $setValues.
@@ -927,21 +881,21 @@ $sql .= $criteria . $orderStr . $limit;
      /**
      * Adds the actual record to pef_audit_trail
      * 
-     * @var string $crudType - create/read/update/delete
-     * @var string $fieldName - name of field
-     * @var array $oldValue - string containing old values
-     * @var array $newValue - string containing new values
-     * @var integer $tableId - table_id
-     * @var string $tableName - name of table
-     * @var integer $recordId - primary key value
+     * @var string $crudType create/read/update/delete
+     * @var string $fieldName name of field
+     * @var array $oldValue string containing old values
+     * @var array $newValue string containing new values
+     * @var integer $tableId table_id
+     * @var string $tableName name of table
+     * @var integer $recordId primary key value
      */
     protected function auditInsert($crudType, $fieldName, $oldValue, $newValue, $tableId, $recordId) {
         $sql = "INSERT INTO `pef_audit_trail` 
              (action, pef_table_id, pef_container_id, table_name, record_id, date_time, ip_address, field_name, old_value, new_value, pef_login_id, username, unique_record) 
              VALUES ('$crudType', $tableId, 7151, 'test_child', :recordId, :dateTime, :ipAddress, :fieldName, :oldValue, :newValue, :loginId, :username, :unique_record)";
-        Database::execute($sql, array(':dateTime'=>date('Y-m-d H:i:s', time()), ':fieldName'=> $fieldName, ':recordId'=>$recordId, 
-        	':oldValue'=>$oldValue, ':newValue'=> $newValue, ':username'=>DIB::$USER['username'], ':unique_record'=>$this->unique_record, 
-        	':ipAddress'=>$_SERVER['REMOTE_ADDR'], ':loginId'=>DIB::$USER['id']),
+        Database::execute($sql, array(':dateTime'=>$this->now, ':fieldName'=> $fieldName, ':recordId'=>$recordId, 
+        	':oldValue'=>$oldValue, ':newValue'=>$newValue, ':username'=>DIB::$USER['username'], ':unique_record'=>$this->unique_record, 
+        	':ipAddress'=>$this->ipAddress, ':loginId'=>DIB::$USER['id']),
         	DIB::DBINDEX
         );
         $this->unique_record = 0;
