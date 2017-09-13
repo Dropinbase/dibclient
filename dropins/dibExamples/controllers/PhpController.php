@@ -572,7 +572,7 @@ class PhpController extends Controller {
 		6. msgPopup
 		7. Prompt
 		8. setValue
-		9. itemHandler		
+		9. ItemHandler		
 		
 		The first 4 cases are handled by Angular's ng-bind and ng-bind-html directives that escapes data 
 		

@@ -32,7 +32,7 @@ class SubContainerController extends Controller {
         if($itemAlias === 'btnSubmissionDataGrid')
         	return $this->validResult(NULL, $str, 'dialog');
         
-        ClientFunctions::addAction($actionList, 'setValue', array('dibIgnore_SubmitData' => $str));
+        ClientFunctions::addAction($actionList, 'SetValue', array('dibIgnore_SubmitData' => $str));
 
         return $this->validResult($actionList);
     }

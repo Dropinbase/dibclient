@@ -57,7 +57,7 @@ class QueueController extends Controller {
         
       	// Set the value of a field - first strip insecure chars
       	$text = (empty($text)) ? 'a new value...' : preg_replace('/[^\w ]/', '', $text);
-      	ClientFunctions::addAction($actionList, 'setValue', array('text1'=> 'The Queue did this: ' . $text));
+      	ClientFunctions::addAction($actionList, 'SetValue', array('text1'=> 'The Queue did this: ' . $text));
       	ClientFunctions::addAction($actionList, 'RefreshContainer', array('value'=>'test_company_grid'));
       	
       	Queue::addMsg('Progress', "We're done", 'dialog');

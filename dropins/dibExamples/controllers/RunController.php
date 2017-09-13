@@ -106,8 +106,8 @@ class RunController extends Controller {
 		} elseif($itemAlias === 'setGlobalSearchContainer') {//DONE
 	    	// parent.ALIAS - references item on parent container (button is on testCompanyForm... Actions/References menu)
 			//$itemValues['parent.globalSearchContainer'] = 'testCompanyGrid';
-		    //$actionList[] = ClientFunctions::action('setValue', $itemValues);
-	        ClientFunctions::addAction($actionList,'setValue', array('parent.globalSearchContainer' =>'testCompanyGrid' ));
+		    //$actionList[] = ClientFunctions::action('SetValue', $itemValues);
+	        ClientFunctions::addAction($actionList,'SetValue', array('parent.globalSearchContainer' =>'testCompanyGrid' ));
             
 	        //$executeList['parent.globalSearchContainer'] = array(array('exec'=>'setDisabled','args'=>array(TRUE)));
 	        //$actionList[] = ClientFunctions::itemMethods($executeList);
@@ -229,14 +229,14 @@ class RunController extends Controller {
         $actionList[] = ClientFunctions::itemMethods($executeList);
         */
         
-        ClientFunctions::addAction($actionList, 'setValue', array('website' => 'www.dropinbase'));
+        ClientFunctions::addAction($actionList, 'SetValue', array('website' => 'www.dropinbase'));
         // Note multiple fields can be targetted with the same action:
         ClientFunctions::addAction($actionList, 'appendToField', array('chinese_name' => '**', 'website' => '.com'));
         
         /*
         // Alternative way of accomplishing the same:
 		$itemValues['website'] = 'www.dropinbase.com';
-		$actionList[] = ClientFunctions::action('setValue', $itemValues);
+		$actionList[] = ClientFunctions::action('SetValue', $itemValues);
 		$itemValues2['chinese_name'] = '**';
 		$itemValues2['website'] = '.com';
 		$actionList[] = ClientFunctions::action('appendToField', $itemValues2);

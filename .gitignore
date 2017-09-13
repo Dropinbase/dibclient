@@ -3,3 +3,4 @@ runtime/
 configs/Conn.php
 configs/Mail.php
 configs/MimeTypeWhiteList.php
+composer.lock
