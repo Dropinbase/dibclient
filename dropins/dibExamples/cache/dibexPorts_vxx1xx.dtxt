@@ -180,10 +180,10 @@ dib-config="{
     With the initial load of the main container (dibexPorts), the Consultants and Employees tabs below are empty (no containers loaded into them)<br>The tabs have their pef_port_id fields configured to load containers in them when clicked.
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="dibtestCompanyForm"
 can-be-moved=true
-flex
+flex="none"
 style=" height:340px !important; overflow:auto !important;   "
         id='ci179991'
 aria-label="dibtestCompanyForm"

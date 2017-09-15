@@ -448,7 +448,7 @@ dib-config="{
 >
     <b><i>subCompanyConsultGrid (dibtestCompanyConsultantGrid)</i></b>
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="subCompanyConsultGrid"
 can-be-moved=true
 item-alias="subCompanyConsultGrid"   
@@ -456,7 +456,7 @@ item-alias="subCompanyConsultGrid"
     dib-disable="{{view.subCompanyConsultGrid.disabled}}"
     ng-class="view.subCompanyConsultGrid.class" 
     ng-style="view.subCompanyConsultGrid.style"
-flex
+flex="none"
 style=" height:350px !important; overflow:auto !important;   "
         id='ci155370'
 aria-label="subCompanyConsultGrid"
@@ -527,7 +527,7 @@ dib-config="{
 >
     <b><i>SubConsultForm (dibtestConsultantForm)</i></b>
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="subConsultForm"
 can-be-moved=true
 item-alias="subConsultForm"   
@@ -535,7 +535,7 @@ item-alias="subConsultForm"
     dib-disable="{{view.subConsultForm.disabled}}"
     ng-class="view.subConsultForm.class" 
     ng-style="view.subConsultForm.style"
-flex
+flex="none"
 style=" height:380px !important; overflow:auto !important;   "
         id='ci155372'
 aria-label="subConsultForm"
@@ -745,7 +745,7 @@ dib-config="{
 >
     <b><i>testCompanySqlRptGrid (dibtestCompanySqlRptGrid)</i></b>
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="testCompanySqlRptGrid"
 can-be-moved=true
 item-alias="testCompanySqlRptGrid"   
@@ -753,7 +753,7 @@ item-alias="testCompanySqlRptGrid"
     dib-disable="{{view.testCompanySqlRptGrid.disabled}}"
     ng-class="view.testCompanySqlRptGrid.class" 
     ng-style="view.testCompanySqlRptGrid.style"
-flex
+flex="none"
 style=" height:350px !important; overflow:auto !important;   "
         id='ci155381'
 aria-label="testCompanySqlRptGrid"
@@ -929,10 +929,10 @@ dib-config="{
 >
     <b><i>dibtestCompanyConsultantPopup (dibtestCompanyConsultantPopup)</i></b>
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="dibtestCompanyConsultantPopup"
 can-be-moved=true
-flex
+flex="none"
 style=" height:350px !important; overflow:auto !important;   "
         id='ci155393'
 aria-label="dibtestCompanyConsultantPopup"
@@ -1010,7 +1010,7 @@ dib-config="{
 can-be-moved=true
  can-have-children=true
  on-move-refresh-preview=true
-flex
+flex="none"
 style=" height:350px !important; overflow:auto !important;  padding:15px !important; "
     id='ci198614'
 aria-label="divPortItem"

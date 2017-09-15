@@ -1174,7 +1174,7 @@ flex
 flex layout-fill
 style="    "
     >   <md-tab-body flex layout-fill>
-   <div layout-fill flex
+   <div layout-fill  flex 
         aria-label="subContainerGrid"
 can-be-moved=true
 flex

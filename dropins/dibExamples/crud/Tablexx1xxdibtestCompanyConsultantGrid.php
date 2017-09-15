@@ -60,7 +60,7 @@
                 $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
                 if(is_array($value) || $value === ':submitItemAlias_parent_id')
                     // ***TODO LogERROR!
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'tableRecords' on dibtestCompanyConsultantGrid is missing from submitted values.");
+                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'subConsultForm' on dibtestCompanyConsultantGrid is missing from submitted values.");
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitItemAlias_parent_id'] = $value;
@@ -77,7 +77,7 @@
                 $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
                 if(is_array($value) || $value === ':submitItemAlias_parent_id')
                     // ***TODO LogERROR!
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'tableRecords' on dibtestCompanyConsultantGrid is missing from submitted values.");
+                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'subConsultForm' on dibtestCompanyConsultantGrid is missing from submitted values.");
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitItemAlias_parent_id'] = $value;
@@ -98,7 +98,7 @@
                 $value = EvalCriteria::evalParam(':submitItemAlias_parent_company1Id', $filterParams);
                 if(is_array($value) || $value === ':submitItemAlias_parent_company1Id')
                     // ***TODO LogERROR!
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_company1Id' for filter 'tableRecords' on dibtestCompanyConsultantGrid is missing from submitted values.");
+                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_company1Id' for filter 'subConsultForm' on dibtestCompanyConsultantGrid is missing from submitted values.");
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitItemAlias_parent_company1Id'] = $value;

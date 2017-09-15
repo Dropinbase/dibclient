@@ -133,10 +133,10 @@ dib-config="{
 Note, fields from other (joined) tables can be included, and if they are from parent tables, they can be updated.<br>See <a href="/nav/dibDocs?id=225&text=dibGrid%20-%20Table">dibGrid-Table</a> for more info.
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="dibtestConsultantGrid"
 can-be-moved=true
-flex
+flex="none"
 style=" height:450px !important; overflow:auto !important;   "
         id='ci155467'
 aria-label="dibtestConsultantGrid"
@@ -189,7 +189,7 @@ dib-config="{
  and another field with the same name and "_display_value" as suffix, in this example parent_company_display_value.<br>See <a href="/nav/dibDocs?id=219&text=dibGrid%20-%20Sql">dibGrid-Sql</a> for more info.
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="testCompanySqlRpt_grid"
 can-be-moved=true
 flex="none"
@@ -272,7 +272,7 @@ dib-config="{
     This container dropin is useful for functional purposes that do not require a datasource, eg base containers or dashboards.
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="testdibContainer"
 can-be-moved=true
 item-alias="testdibContainer"   
@@ -280,7 +280,7 @@ item-alias="testdibContainer"
     dib-disable="{{view.testdibContainer.disabled}}"
     ng-class="view.testdibContainer.class" 
     ng-style="view.testdibContainer.style"
-flex
+flex="none"
 style="width:100% !important; height:240px !important; overflow:auto !important;   "
         id='ci155492'
 aria-label="testdibContainer"
@@ -338,7 +338,7 @@ dib-config="{
             <h2 class="md-toolbar-tools">
                 <span>Test Consultant Form</span>
             </h2>
-    </md-toolbar>   <div layout-fill flex
+    </md-toolbar>   <div layout-fill   
         aria-label="subConsult"
 can-be-moved=true
 item-alias="subConsult"   
@@ -346,7 +346,7 @@ item-alias="subConsult"
     dib-disable="{{view.subConsult.disabled}}"
     ng-class="view.subConsult.class" 
     ng-style="view.subConsult.style"
-flex
+flex="none"
 style="width:100% !important; height:400px !important; overflow:auto !important;   "
         id='ci155491'
 aria-label="subConsult"
@@ -513,7 +513,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     </div>
 </md-autocomplete>
 </div>
-   <div layout-fill flex
+   <div layout-fill  flex 
         aria-label="subHtmlReport"
 can-be-moved=true
 item-alias="subHtmlReport"   
@@ -604,7 +604,7 @@ Developers can copy the /dropins/dibExamples/TreeController.php file provided an
 <br><b>Note,</b> in both tree examples below, drag-and-drop actions will have no effect other than informing the user of the action that took place. Adapt the PHP code according to the desired business logic.<br>
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill  flex 
         aria-label="tree"
 can-be-moved=true
 flex
@@ -659,10 +659,10 @@ dib-config="{
 <b>NOTE:</b> on some systems the tree may not initially display items until the user clicks the Search button (will be fixed in the next version).
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="dibtestHorTree"
 can-be-moved=true
-flex
+flex="none"
 style=" height:200px !important; overflow:auto !important;   "
         id='ci179983'
 aria-label="dibtestHorTree"
@@ -709,7 +709,7 @@ dib-config="{
     }
 }"
 >
-   <div layout-fill flex
+   <div layout-fill  flex 
         aria-label="subChartJs"
 can-be-moved=true
 item-alias="subChartJs"   

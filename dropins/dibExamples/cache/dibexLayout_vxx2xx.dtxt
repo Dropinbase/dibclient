@@ -1665,10 +1665,10 @@ dib-config="{
     Dropinbase adds the subcontainer component in order to nest whole containers in one another.<br>See the <a href="/nav/dibexSubcontainers">Subcontainer examples</a> for more information.
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="subcontainer"
 can-be-moved=true
-flex
+flex="none"
 style="width:100% !important; height:400px !important; overflow:auto !important;   "
         id='ci155014'
 aria-label="subcontainer"
@@ -1719,7 +1719,7 @@ dib-config="{
     Presents child layout components (eg layoutRow/mdCard/div/subcontainer) as horizontal tabs.<br>The current container makes use of mdTabs to categorize the components. <br>Below we used the md-align-tabs directive to position tabs at the bottom of the control.<br>NOTE: Angular shares the active index of all mdTabs components on the same view.<br>To nest mdTabs, or use more than one on the same container, use DIB subcontainer components.<br> Since the current container already makes use of mdTabs, the mdTabs below are in subcontainers.<br>See <a target="_blank" href="https://material.angularjs.org/latest/demo/tabs">Tabs</a> for more information.
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill  flex 
         aria-label="subcontainerTabs"
 can-be-moved=true
 flex
@@ -1773,10 +1773,10 @@ dib-config="{
 The grey bar at the bottom of the screen with NEXT / PREV TAB buttons is part of the mdTabsStepper component.
     </p>    
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="subcontainerNested"
 can-be-moved=true
-flex
+flex="none"
 style=" height:350px !important; overflow:auto !important;   "
         id='ci176988'
 aria-label="subcontainerNested"

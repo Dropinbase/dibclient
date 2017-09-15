@@ -6,10 +6,10 @@ dib*gpsbh9z83/dibexEvents/dropins/dibExamples/Events/btnHide_click
 dib*hdhb5961/dibexEvents/dropins/dibExamples/Events/btnNextAction_click
 dib*geran61bd91/dibexEvents/dropins/dibExamples/Events/btnOpenUrl_click
 dib*2kb7bmwqx/dibexEvents/dropins/dibExamples/Events/btnPopupYNCancel_click
-dib*smoddlsee/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
 dib*6c8k8lxc1/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
 dib*l151bgefj/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
 dib*19xq2iqa1/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
+dib*smoddlsee/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
 dib*au51n1a1pr1/dibexEvents/dropins/dibExamples/Events/btnSetStyleClass_click
 dib*l301xkyaj61/dibexEvents/dropins/dibExamples/Events/btnShowEnable_click
 dib*zyl1y710u71/dibexEvents/dropins/dibExamples/Events/eventTrigger
@@ -34,9 +34,9 @@ dib*v2tzbro9w/dibexLazyLoad/dropins/dibExamples/Events/btnHelloWorld_click
 dib*0lu4z91sg01/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInColParent
 dib*dla820v41/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInColParent
 dib*mo3bp41c33/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInColParent
-dib*l9kuyw7tu/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInFieldset
 dib*j47in31wzb1/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInFieldset
 dib*spxgxtf92/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInFieldset
+dib*l9kuyw7tu/dibexLazyLoad/dropins/dibExamples/LazyLoad/loadInFieldset
 dib*pof161dqr/dibexPhp/dropins/dibExamples/Php/asyncExecution
 dib*tnd1dxokgz/dibexPhp/dropins/dibExamples/Php/crudFunctions
 dib*as7sp11cld/dibexPhp/dropins/dibExamples/Php/databaseFunctions

@@ -1,164 +1,260 @@
-<div component-loaded dib-container="dibtestTree"  dib-config="{}"
-dib-enable-dependency-scope-object="lastSelectedItem"
+
+<div component-loaded dib-container="dibtestTree"  dib-config="{
+}"
+    dib-enable-dependency-scope-object="lastSelectedItem"
 >
-<md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
-<md-content layout="column" flex>
-<md-toolbar aria-label="mdtoolbar"
+    <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+    <md-content layout="column" flex>
+    <md-toolbar aria-label="mdtoolbar"
 can-be-moved=true
-can-have-children=true
+ can-have-children=true
 flex="none"
 class="md-menu-toolbar"
 style="    "
-id='ci179977'
+   id='ci179977'
 aria-label="mdtoolbar"
 dib-container-name='dibtestTree'
-dib-config="{listeners : {}}"
+dib-config="{
+    listeners : {
+    }
+}"
 >
-<div class="md-toolbar-tools">
+    <div class="md-toolbar-tools">
 <md-button aria-label="doSomething"
 can-be-moved=true
 class="md-accent md-raised"
 style="    "
-id='ci179976'
+    id='ci179976'
 aria-label="doSomething"
 dib-container-name='dibtestTree'
-dib-config="{listeners : {'click___dib*ae210161kwb1' : function(field, additionalInfoOnEvent) {dibAction.executeAction({scope : scope,field : element,containerName: 'dibtestTree',triggerType: 'click',nextActionItem: '',itemEventId: 'dib*ae210161kwb1',containerItemId: 179976,submitUrl: '/dropins/dibExamples/Tree/oddFunc',itemAlias: '',refreshItemId : '',responseType: 'actions'}
-, additionalInfoOnEvent);}}}"
-aria-label="do something"
+dib-config="{
+    listeners : {
+    'click___dib*ae210161kwb1' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibtestTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*ae210161kwb1',        
+        containerItemId: 179976,
+        submitUrl: '/dropins/dibExamples/Tree/oddFunc',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+    aria-label="do something"
 >
-do something
+    do something
 </md-button>
-<md-input-container class="md-block"  aria-label="checkSomething"
+    <md-input-container class="md-block"  aria-label="checkSomething"
 can-be-moved=true
-item-alias="checkSomething"
-ng-show="!!view.checkSomething == false || view.checkSomething.visible"
-dib-disable="{{view.checkSomething.disabled}}"
-ng-class="view.checkSomething.class"
-ng-style="view.checkSomething.style"
+item-alias="checkSomething"   
+    ng-show="!!view.checkSomething == false || view.checkSomething.visible" 
+    dib-disable="{{view.checkSomething.disabled}}"
+    ng-class="view.checkSomething.class" 
+    ng-style="view.checkSomething.style"
 flex="none"
 style="    "
 >
-<md-checkbox
-dib-data-component='checkbox'
-name="checkSomething"
-ng-model="model.checkSomething"
-aria-label="check something"
-id='ci179978'
+    <md-checkbox 
+        dib-data-component='checkbox'
+        name="checkSomething"
+        ng-model="model.checkSomething"
+        aria-label="check something"
+        id='ci179978'
 aria-label="checkSomething"
 dib-container-name='dibtestTree'
-dib-config="{listeners : {}}"
-dib-data-component='mdCheckbox'
-md-detect-hidden
->
-check something</md-checkbox>
-<div ng-messages="dibtestTree.checkSomething.$error">
-</div>
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='mdCheckbox'
+        md-detect-hidden
+    >
+    check something</md-checkbox>
+    <div ng-messages="dibtestTree.checkSomething.$error">
+    </div>
 </md-input-container>
-</div>
+    </div>
 </md-toolbar>
-<md-fab-speed-dial
+    <md-fab-speed-dial
 md-hover-full
-ng-mouseenter='isFabSpeedDailOpen179949=true'
+ng-mouseenter='isFabSpeedDailOpen179949=true' 
 ng-mouseleave='isFabSpeedDailOpen179949=false'
 md-open='isFabSpeedDailOpen179949'
-aria-label="mdfabspeeddial"
+ aria-label="mdfabspeeddial"
 can-be-moved=true
-can-have-children=true
+ can-have-children=true
 flex="none"
 md-direction="up" class="md-scale md-fab-bottom-right"
 style="    "
 >
-<md-fab-trigger>
-<md-button aria-label="menu" class="md-fab md-warn"
-id='ci179949'
+    <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn" 
+        id='ci179949'
 aria-label="mdfabspeeddial"
 dib-container-name='dibtestTree'
-dib-config="{listeners : {}}"
+dib-config="{
+    listeners : {
+    }
+}"
 >
-<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/settings.svg"></md-icon>
-</md-button>
-</md-fab-trigger>
-<md-fab-actions>
+            <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/settings.svg"></md-icon>
+        </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
 <md-button aria-label="btnreload"
 can-be-moved=true
 class="md-fab md-raised md-mini"
 style="    "
-ng-click="reloadContainer({'force' : true})"
-id='ci179950'
+    ng-click="reloadContainer({'force' : true})"
+    id='ci179950'
 aria-label="btnreload"
 dib-container-name='dibtestTree'
-dib-config="{listeners : {}}"
+dib-config="{
+    listeners : {
+    }
+}"
 >
-<md-tooltip md-direction="top" md-delay="500">Refresh tree items</md-tooltip>
-<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg"></md-icon>
+    <md-tooltip md-direction="top" md-delay="500">Refresh tree items</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg"></md-icon>
 </md-button>
-<md-button aria-label="buttonDelete"
+    <md-button aria-label="buttonDelete"
 can-be-moved=true
 class="md-fab md-raised md-mini"
 style="    "
-id='ci179954'
+    id='ci179954'
 aria-label="buttonDelete"
 dib-container-name='dibtestTree'
-dib-config="{submitCheckedItem : 'self',listeners : {}}"
+dib-config="{
+     submitCheckedItem : 'self',
+    listeners : {
+    }
+}"
 >
-<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/delete.svg"></md-icon>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/delete.svg"></md-icon>
 </md-button>
-<md-button aria-label="cut1"
+    <md-button aria-label="cut1"
 can-be-moved=true
 class="md-fab md-raised md-mini"
 style="    "
-id='ci179951'
+    id='ci179951'
 aria-label="cut1"
 dib-container-name='dibtestTree'
-dib-config="{submitCheckedItem : 'self',listeners : {'click___dib*ma3155chg91' : function(field, additionalInfoOnEvent) {dibAction.executeAction({scope : scope,field : element,containerName: 'dibtestTree',triggerType: 'click',nextActionItem: '',itemEventId: 'dib*ma3155chg91',containerItemId: 179951,submitUrl: '/dropins/dibExamples/Tree/oddFunc',itemAlias: '',refreshItemId : '',responseType: 'actions'}
-, additionalInfoOnEvent);}}}"
+dib-config="{
+     submitCheckedItem : 'self',
+    listeners : {
+    'click___dib*ma3155chg91' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibtestTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*ma3155chg91',        
+        containerItemId: 179951,
+        submitUrl: '/dropins/dibExamples/Tree/oddFunc',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
 >
-<md-tooltip md-direction="top" md-delay="500">Cut Item with Children</md-tooltip>
-<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/cut.svg"></md-icon>
+    <md-tooltip md-direction="top" md-delay="500">Cut Item with Children</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/cut.svg"></md-icon>
 </md-button>
-<md-button aria-label="copy1"
+    <md-button aria-label="copy1"
 can-be-moved=true
 class="md-fab md-raised md-mini"
 style="    "
-id='ci179952'
+    id='ci179952'
 aria-label="copy1"
 dib-container-name='dibtestTree'
-dib-config="{submitCheckedItem : 'self',listeners : {'click___dib*0m8i0c0rb' : function(field, additionalInfoOnEvent) {dibAction.executeAction({scope : scope,field : element,containerName: 'dibtestTree',triggerType: 'click',nextActionItem: '',itemEventId: 'dib*0m8i0c0rb',containerItemId: 179952,submitUrl: '/dropins/dibExamples/Tree/oddFunc',itemAlias: '',refreshItemId : '',responseType: 'actions'}
-, additionalInfoOnEvent);}}}"
+dib-config="{
+     submitCheckedItem : 'self',
+    listeners : {
+    'click___dib*0m8i0c0rb' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibtestTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*0m8i0c0rb',        
+        containerItemId: 179952,
+        submitUrl: '/dropins/dibExamples/Tree/oddFunc',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
 >
-<md-tooltip md-direction="top" md-delay="500">Copy Item with Children</md-tooltip>
-<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/copy.svg"></md-icon>
+    <md-tooltip md-direction="top" md-delay="500">Copy Item with Children</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/copy.svg"></md-icon>
 </md-button>
-<md-button aria-label="pasteChildrenAllRelated1"
+    <md-button aria-label="pasteChildrenAllRelated1"
 can-be-moved=true
-item-alias="pasteChildrenAllRelated1"
-ng-show="!!view.pasteChildrenAllRelated1 == false || view.pasteChildrenAllRelated1.visible"
-dib-disable="{{view.pasteChildrenAllRelated1.disabled}}"
-ng-class="view.pasteChildrenAllRelated1.class"
-ng-style="view.pasteChildrenAllRelated1.style"
+item-alias="pasteChildrenAllRelated1"   
+    ng-show="!!view.pasteChildrenAllRelated1 == false || view.pasteChildrenAllRelated1.visible" 
+    dib-disable="{{view.pasteChildrenAllRelated1.disabled}}"
+    ng-class="view.pasteChildrenAllRelated1.class" 
+    ng-style="view.pasteChildrenAllRelated1.style"
 class="md-fab md-raised md-mini"
 style="    "
-id='ci179953'
+    id='ci179953'
 aria-label="pasteChildrenAllRelated1"
 dib-container-name='dibtestTree'
-dib-config="{submitCheckedItem : 'self',listeners : {'click___dib*6hhej21dfe1' : function(field, additionalInfoOnEvent) {dibAction.executeAction({scope : scope,field : element,containerName: 'dibtestTree',triggerType: 'click',nextActionItem: '',itemEventId: 'dib*6hhej21dfe1',containerItemId: 179953,submitUrl: '/dropins/dibExamples/Tree/oddFunc',itemAlias: 'pasteChildrenAllRelated1',refreshItemId : '',responseType: '1000'}
-, additionalInfoOnEvent);}}}"
+dib-config="{
+     submitCheckedItem : 'self',
+    listeners : {
+    'click___dib*6hhej21dfe1' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        scope : scope,
+        field : element,
+        containerName: 'dibtestTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*6hhej21dfe1',        
+        containerItemId: 179953,
+        submitUrl: '/dropins/dibExamples/Tree/oddFunc',        
+        itemAlias: 'pasteChildrenAllRelated1',
+        refreshItemId : '',
+        responseType: '1000'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
 >
-<md-tooltip md-direction="top" md-delay="500">Paste Item with Children</md-tooltip>
-<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/paste.svg"></md-icon>
+    <md-tooltip md-direction="top" md-delay="500">Paste Item with Children</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/paste.svg"></md-icon>
 </md-button>
-</md-fab-actions>
+    </md-fab-actions>
 </md-fab-speed-dial>
-<div layout="row" flex style='
-position: absolute;background: white;z-index: 1000;width:100%;'>
-<md-input-container flex>
-<label>Search</label>
-<input ng-model="search" ng-enter="searchTree()">
-</md-input-container>
-<md-button class="md-icon-button md-raised md-squared " ng-click="searchTree()">
-<md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibTree/img/icons/search.svg"></md-icon>
-</md-button>
-</div>
-<dib-tree-node style='margin-top:60px' ng-model='treeData' dib-container-name='container.Name' dib-service='service' dib-search='search'  dib-active-filter='activeFilter'></dib-tree-node>
-</md-content>
+        <div layout="row" flex style='
+                position: absolute;
+                background: white;
+                z-index: 1000;
+                width:100%;'>
+                <md-input-container flex>
+                    <label>Search</label>
+                    <input ng-model="search" ng-enter="searchTree()"> 
+                </md-input-container>
+                <md-button class="md-icon-button md-raised md-squared " ng-click="searchTree()">
+                    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibTree/img/icons/search.svg"></md-icon>
+                </md-button>
+            </div>
+        <dib-tree-node style='margin-top:60px' ng-model='treeData' dib-container-name='container.Name' dib-service='service' dib-search='search'  dib-active-filter='activeFilter'></dib-tree-node>
+    </md-content>
 </div>

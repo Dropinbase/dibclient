@@ -254,10 +254,10 @@ dib-config="{
 >
     Asynchronous Execution
 </md-button>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="dibTestCompanyAsyncGrid"
 can-be-moved=true
-flex
+flex="none"
 style=" height:450px !important; overflow:auto !important;   "
         id='ci177117'
 aria-label="dibTestCompanyAsyncGrid"

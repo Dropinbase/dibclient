@@ -25,8 +25,8 @@ class Sqlxx1xxdibtestCompanySqlRptGrid {
             if(!array_key_exists($field, $this->sqlFields))
                 return array('error',"An unknown fieldname was used in filter criteria. Please contact the System Administrator.");
             if(array_key_exists($field.'_display_value', $this->sqlFields))
-            	$field = $this->sqlFields[$field.'_display_value'];
-            else
+            	$field = $field.'_display_value';
+             else
             	$field = $this->sqlFields[$field];
             $subparts = explode ('&', str_replace('|', '|&', $value));
             $fieldCrit = "";
@@ -191,8 +191,8 @@ class Sqlxx1xxdibtestCompanySqlRptGrid {
                             $direction = $record['direction'];
                     } else
                         $direction = '';
-                    $orderStr .= $this->sqlFields[$record['property']] . ' ' . $direction . ', ';
-                }            
+                    $orderStr .=  $this->sqlFields[$record['property']] . ' ' . $direction . ', ';
+                }
                 $orderStr = substr($orderStr, 0, strlen($orderStr) - 2);
             }
             if ($criteria) $whereCrit = ' WHERE ' . substr($criteria, 4);

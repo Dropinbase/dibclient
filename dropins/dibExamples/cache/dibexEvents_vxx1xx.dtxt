@@ -989,7 +989,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
             <h2 class="md-toolbar-tools">
                 <span>Test Consultant Grid</span>
             </h2>
-    </md-toolbar>   <div layout-fill flex
+    </md-toolbar>   <div layout-fill   
         aria-label="dibtestConsultantGrid"
 can-be-moved=true
 item-alias="dibtestConsultantGrid"   
@@ -1417,7 +1417,7 @@ D. Revert to Original Filter (position = 'team member')
 </md-menu-item>
     </md-menu-content>
 </md-menu>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="CompanyConsultantGrid"
 can-be-moved=true
 item-alias="CompanyConsultantGrid"   
@@ -1425,7 +1425,7 @@ item-alias="CompanyConsultantGrid"
     dib-disable="{{view.CompanyConsultantGrid.disabled}}"
     ng-class="view.CompanyConsultantGrid.class" 
     ng-style="view.CompanyConsultantGrid.style"
-flex
+flex="none"
 style=" height:400px !important; overflow:auto !important;   "
         id='ci194827'
 aria-label="CompanyConsultantGrid"
@@ -1658,7 +1658,7 @@ dib-config="{
             <h2 class="md-toolbar-tools">
                 <span>Test Company Grid</span>
             </h2>
-    </md-toolbar>   <div layout-fill flex
+    </md-toolbar>   <div layout-fill   
         aria-label="test_company_grid"
 can-be-moved=true
 item-alias="test_company_grid"   
@@ -1666,7 +1666,7 @@ item-alias="test_company_grid"
     dib-disable="{{view.test_company_grid.disabled}}"
     ng-class="view.test_company_grid.class" 
     ng-style="view.test_company_grid.style"
-flex
+flex="none"
 style=" height:400px !important; overflow:auto !important;   "
         id='ci155154'
 aria-label="test_company_grid"
@@ -1740,10 +1740,10 @@ dib-config="{
 >
     <b>dibtestConsultantEventsGrid</b>
 </span>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="consultantEventsGrid"
 can-be-moved=true
-flex
+flex="none"
 style=" height:400px !important; overflow:auto !important;   "
         id='ci155153'
 aria-label="consultantEventsGrid"
@@ -1838,10 +1838,10 @@ Try to save values that violate the uniqueness of either combination, or try to 
             <h2 class="md-toolbar-tools">
                 <span>Test Child Form</span>
             </h2>
-    </md-toolbar>   <div layout-fill flex
+    </md-toolbar>   <div layout-fill   
         aria-label="test_child_form"
 can-be-moved=true
-flex
+flex="none"
 style="width:100% !important; height:300px !important; overflow:auto !important;   "
         id='ci155160'
 aria-label="test_child_form"
@@ -2017,7 +2017,7 @@ style="width:490px !important;    "
     </div>
 </md-autocomplete>
 </div>
-   <div layout-fill flex
+   <div layout-fill   
         aria-label="subTestHtmlEvents"
 can-be-moved=true
 item-alias="subTestHtmlEvents"   

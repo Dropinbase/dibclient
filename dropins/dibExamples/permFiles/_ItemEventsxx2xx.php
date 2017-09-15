@@ -6,10 +6,10 @@ dib*gpsbh9z83/dibexEvents/dropins/dibExamples/Events/btnHide_click
 dib*hdhb5961/dibexEvents/dropins/dibExamples/Events/btnNextAction_click
 dib*geran61bd91/dibexEvents/dropins/dibExamples/Events/btnOpenUrl_click
 dib*2kb7bmwqx/dibexEvents/dropins/dibExamples/Events/btnPopupYNCancel_click
-dib*smoddlsee/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
 dib*6c8k8lxc1/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
 dib*l151bgefj/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
 dib*19xq2iqa1/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
+dib*smoddlsee/dibexEvents/dropins/dibExamples/Events/btnSetActiveFilter_click
 dib*au51n1a1pr1/dibexEvents/dropins/dibExamples/Events/btnSetStyleClass_click
 dib*l301xkyaj61/dibexEvents/dropins/dibExamples/Events/btnShowEnable_click
 dib*zyl1y710u71/dibexEvents/dropins/dibExamples/Events/eventTrigger
@@ -53,8 +53,8 @@ dib*9uzjv61c5a1/dibtestCompanyGrid/dropins/dibAdmin/DFindReplace/rememberSubmiss
 dib*68kh321zgx/dibtestCompanyGrid/dropins/dibCsv/CsvExport/exportContainerCsv
 dib*ddckc01wec/dibtestCompanyGrid/dropins/dibExamples/Run/gridDropdownSelect
 dib*egb3qgx1z/dibtestCompanyGrid/dropins/dibExamples/Run/helloWorld
-dib*wxb1c3e1742/dibtestCompanyGrid/dropins/dibExcel/Export/exportDibExcel
 dib*l5013t5d0y/dibtestCompanyGrid/dropins/dibExcel/Export/exportDibExcel
+dib*wxb1c3e1742/dibtestCompanyGrid/dropins/dibExcel/Export/exportDibExcel
 dib*uin3kmn5l/dibtestCompanyGrid/dropins/dibExcel/Export/exportPHPExcel
 dib*hpc1hhnb26/dibtestCompanyGrid/dropins/dibExcel/Export/exportPHPExcel
 dib*hrgw9hwo51/dibtestConsultantForm/dropins/dibExamples/Run/setValues
