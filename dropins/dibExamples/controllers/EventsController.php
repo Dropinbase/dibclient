@@ -279,4 +279,18 @@ class EventsController extends Controller {
         return $this->validResult(null, 'hello world', 'dialog');
     }
 
+    // Location: Test Consulant Grid on /nav/dibexEvents
+    public function btnHot_click($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {        
+        list($id) = PeffApp::getSubmitVal($submissionData, 'sIA.s', array('id'));
+        
+        if($id !== (string)(int)$id)
+            return $this->invalidResult('Are you hacking?');
+    
+        // Return the primary key value of the record in the grid that was clicked
+        if($itemAlias === 'btnHotTheSecond')
+            return $this->validResult(null, "I'm still here", 'dialog');
+        
+        return $this->validResult(null, "hello world. Your id is '$id'", 'dialog');
+    }
+
 }
