@@ -51,7 +51,7 @@ dib-config="{
 >
     do something
 </md-button>
-    <md-input-container class="md-block"  aria-label="checkSomething"
+    <md-input-container aria-label="checkSomething"
 can-be-moved=true
 item-alias="checkSomething"   
     ng-show="!!view.checkSomething == false || view.checkSomething.visible" 
@@ -60,6 +60,7 @@ item-alias="checkSomething"
     ng-style="view.checkSomething.style"
 flex="none"
 style="    "
+class="md-block"
 >
     <md-checkbox 
         dib-data-component='checkbox'

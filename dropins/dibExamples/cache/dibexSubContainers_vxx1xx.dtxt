@@ -192,8 +192,8 @@ item-alias="dibIgnore_SubmitData"
     ng-class="view.dibIgnore_SubmitData.class" 
     ng-style="view.dibIgnore_SubmitData.style"
 flex="none"
-class="md-block"
 style="width:100% !important;  margin:10px 0px 20px 0px !important;  "
+class="md-block"
 >
     <textarea  
         readOnly
@@ -355,11 +355,11 @@ item-alias="id"
     ng-class="view.id.class" 
     ng-style="view.id.style"
 flex="none"
-class="md-block"
 style="    "
 dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt;
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
 >
     <input type="number" 
         ng-disabled="true"
@@ -383,11 +383,11 @@ dib-config="{
     <md-input-container aria-label="name"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
 >
     <input type="text" 
         name="name"
@@ -608,6 +608,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='parent_company_id'
     select-model="model.selected___parent_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155376.searchTextmodel)"
@@ -661,6 +662,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='parent_company_contact_id'
     select-model="model.selected___parent_company_contact_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155375.searchTextmodel)"

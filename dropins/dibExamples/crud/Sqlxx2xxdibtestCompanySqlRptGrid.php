@@ -38,7 +38,7 @@ class Sqlxx2xxdibtestCompanySqlRptGrid {
                     $fieldCrit .= $conjunction; // $conjunction is found in prev. loop
                 if (substr($stringValue, -1) === "|") {
                     $conjunction = ' OR ';
-                    $stringValue = substr($stringValue, 0, strlen($stringValue) - 1);
+                    $stringValue = trim(substr($stringValue, 0, strlen($stringValue) - 1));
                 } else
                     $conjunction = ' AND ';
                 $intValue = trim($stringValue, "=!>< ");
@@ -59,6 +59,11 @@ class Sqlxx2xxdibtestCompanySqlRptGrid {
                 //is not empty
                 elseif (strtolower(substr($stringValue, 0, 7)) === "<>empty") {
                     $fieldCrit .= "$field <> ''";                    
+                }
+                //not like
+                elseif (strtolower(substr($stringValue, 0, 7)) === "<>like ") {
+                    $fieldCrit .= "$field NOT LIKE :f" . $i;
+                    $params[':f'.$i] = str_replace('*', '%', substr($stringValue, 7)); //note, this allows user to put * or _ inside $stringValue... which is okay...
                 }
                 //equal to
                 elseif (substr($stringValue, 0, 1) === "=") {
@@ -91,10 +96,10 @@ class Sqlxx2xxdibtestCompanySqlRptGrid {
                     $params[":f".$i] = $intValue;
                 }                
                 //like
-                elseif (strtolower(substr(ltrim($stringValue), 0, 5)) === "like ") {
-                    $fieldCrit .= "$fieldExpr LIKE :f" . $i;
-                    $params[':f'.$i] = str_replace('*', '%', substr(ltrim($stringValue), 5)); //note, this allows user to put * or _ inside $stringValue... which is okay...
-                }
+                elseif (strtolower(substr($stringValue, 0, 5)) === "like ") {
+                    $fieldCrit .= "$field LIKE :f" . $i;
+                    $params[':f'.$i] = str_replace('*', '%', substr($stringValue, 5)); //note, this allows user to put * or _ inside $stringValue... which is okay...
+                }                
                 //anything else
                 else {
                     $fieldCrit .= "$field LIKE :f" . $i;
@@ -119,7 +124,7 @@ class Sqlxx2xxdibtestCompanySqlRptGrid {
             } else {
                 $value = EvalCriteria::evalParam(':submitItemAlias_parent_parentCompanyId', $filterParams);
                 if(is_array($value))
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_parentCompanyId' for filter 'dibtestCompanyConsultantPopup' on dibtestCompanySqlRptGrid is missing from submitted values.");
+                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_parentCompanyId' for filter 'dibexComponents_companyId' on dibtestCompanySqlRptGrid is missing from submitted values.");
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitItemAlias_parent_parentCompanyId'] = $value;

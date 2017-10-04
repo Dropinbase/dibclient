@@ -477,6 +477,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155500.searchTextmodel)"

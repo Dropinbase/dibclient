@@ -7,8 +7,8 @@
     public $storeType = array("primkey1"=>'none', "primkey2"=>'none', "pef_test_id"=>'dropdown', "date_fld"=>'none', "unique1"=>'none', "unique2"=>'none', "notes"=>'none');
     public $sqlFields = array();
     public $fkeyDisplay = array(
-                 'pef_test_id'=>"^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^", 
-                 );
+            'pef_test_id'=>"^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^", 
+            );
     protected $filterArray = null;
     protected $now = null;
     protected $ipAddress = null;
@@ -52,54 +52,144 @@
 		$criteria = ''; 
         if($criteria==='') return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
         return substr($criteria, 4);
-	}
+    }
     /**
      * Fetches the primary key values of the next, previous, etc. records for use with the Form's toolbar
      */
-    public function getToolbarInfo($pkValues, $option, $activeFilter, $filterParams) {
-        $params = array();
+    public function getToolbarInfo($pkValues, $activeFilter, $filterParams, $getFirstOnly=FALSE) {        
+        $params = array();   
+        $criteria = '';
+        if(!empty($activeFilter)) {
+            $criteria = $this->parseFilter($activeFilter, $params, $filterParams);
+            if(isset($criteria[0]) && $criteria[0]==='error')
+                return $criteria;
+            $criteria .= " AND ($criteria)";
+            $fromClause = "`test_child`
+                LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
+                ";
+        } else 
+            $fromClause = "`test_child`";
+        if($criteria !== '') $criteria = 'WHERE ' . substr($criteria, 4);
+        if($getFirstOnly) { // Used after deletes to navigate to first record
+            $sql = "SELECT primkey1,primkey2 FROM $fromClause $criteria ORDER BY primkey1,primkey2 limit 1";
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+            if($rst === FALSE)
+                return array('error', 'Could not get first record. Please contact the System Administrator. (#0).');
+            return $rst;
+        }
+        // First get total count        
+        $sql = "SELECT count(*) as `total` FROM $fromClause $criteria";
+        $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+        if(dibMySqlPdo::count() === 0)
+            return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#1).');
+        $totalCount = $rst['total'];
+        // Add pkeys to $params
         $fieldType = array();
         if (!array_key_exists("primkey1", $pkValues))
-            return array ('error',"The primary key fields specified in the request are invalid.");        
+            return array ('error',"The primary key field names specified in the request are invalid.");        
         $params[":pk1"] = $pkValues["primkey1"];
         $fieldType[":pk1"] = PDO::PARAM_STR;    
         if (!array_key_exists("primkey2", $pkValues))
-            return array ('error',"The primary key fields specified in the request are invalid.");        
+            return array ('error',"The primary key field names specified in the request are invalid.");        
         $params[":pk2"] = $pkValues["primkey2"];
         $fieldType[":pk2"] = PDO::PARAM_STR;    
-        $pkList = "`test_child`.`primkey1`,`test_child`.`primkey2`";
-        $criteria = '';
-        $order ='';
-        if ($option === 'next')  { 
-            $criteria = "WHERE `primkey1` > :pk1 AND `primkey2` > :pk2";
-            $order = "ORDER BY `test_child`.`primkey1`,`test_child`.`primkey2`";
-        } elseif ($option === 'prev') {
-            $order = "ORDER BY `primkey1` DESC , `primkey2` DESC";
-            $criteria = "WHERE `primkey1` < :pk1  AND `primkey2` < :pk2";
-        } elseif ($option === 'last') {
-            $order = "ORDER BY `test_child`.`primkey1` DESC, `test_child`.`primkey2` DESC";
-            $params = array();
-            $fieldType = array();
-        } elseif ($option === 'total') {
-            $pkList = 'Count(*) as `total`';
-            $params = array();
-            $fieldType = array();
-        } elseif ($option === 'current') {
-            $pkList = 'Count(*) as `current`';
-            $criteria = "WHERE `primkey1` <= :pk1  AND `primkey2` <= :pk2";
-        } elseif ($option ==='first') {
-            $order = "ORDER BY `test_child`.`primkey1`,`test_child`.`primkey2` ASC";
-            $params = array();
-            $fieldType = array();
-        }
-        // Template: sql statement for MySql to fetch records for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
-$sql = "SELECT $pkList FROM `test_child` $criteria $order LIMIT 1";
-        dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);       
-        $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-        if(dibMySqlPdo::count() > 0)
-            return $rst;
-        else
-            return null;
+        // Get current, first and last 
+        if($totalCount>1) {
+            $pkCriteria = "(`primkey1` = :pk1 AND `primkey2` = :pk2)";
+            $rankCriteria = " OR dib__rank=1 OR dib__rank=$totalCount";
+            $sql = "SELECT `dib__rank`, primkey1,primkey2, $pkCriteria AS dib__IsCurrent FROM (
+                SELECT @rownum:=@rownum+1 AS `dib__rank`, `test_child`.`primkey1`,`test_child`.`primkey2` 
+                FROM $fromClause, 
+                  (SELECT @rownum:=0) r 
+                $criteria
+                ORDER BY `test_child`.`primkey1`,`test_child`.`primkey2`) dibt1
+                WHERE $pkCriteria $rankCriteria";
+            $currentRst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, false);
+            if(dibMySqlPdo::count() === 0)
+                return array('error', 'Could not set form navigation counts. Please contact the System Administrator (#2).');
+            $countRec = count($currentRst);
+            if($countRec >= 3) {                
+                list($first, $current, $last) = $currentRst;
+                $currentNo = (int)$current['dib__rank']; 
+                unset($last['dib__rank']);
+                unset($first['dib__rank']);
+            } elseif($countRec > 1) { // at least 2 records (can happen if eg first and last are same record, or either is same as current)
+                list($first, $current) = $currentRst;
+                $currentNo = ($first['dib__IsCurrent']) ? (int)$first['dib__rank'] : (int)$current['dib__rank'];
+                unset($first['dib__rank']);
+                unset($current['dib__rank']);
+                $last = $current;
+            } else { // 1 record
+                $currentNo = (int)$currentRst[0]['dib__rank']; 
+                unset($currentRst[0]['dib__rank']);
+                $first = $currentRst[0];
+                $last = $first;
+            }
+            unset($last['dib__IsCurrent']);
+            unset($first['dib__IsCurrent']);
+            // Now get prev, next
+            $rankCriteria = '';
+            $pkCriteria = '0';
+            if($currentNo - 1 < 1) {
+                if($currentNo + 1 > $totalCount)                
+                    $getNos = 'none';
+                else {
+                    $rankCriteria = ' OR dib__rank=' . ($currentNo + 1);
+                    $getNos = 'next';
+                }
+            } elseif($currentNo + 1 > $totalCount) {           
+                $getNos = 'prev';
+                $rankCriteria = ' OR dib__rank=' . ($currentNo - 1);
+            } else {
+                $rankCriteria = ' OR dib__rank=' . ($currentNo - 1) . ' OR dib__rank=' . ($currentNo + 1);
+                $getNos = 'both';
+            }
+            if($getNos !== 'none') {
+            $sql = "SELECT `dib__rank`, primkey1,primkey2, $pkCriteria AS dib__IsCurrent FROM (
+                SELECT @rownum:=@rownum+1 AS `dib__rank`, `test_child`.`primkey1`,`test_child`.`primkey2` 
+                FROM $fromClause, 
+                  (SELECT @rownum:=0) r 
+                $criteria
+                ORDER BY `test_child`.`primkey1`,`test_child`.`primkey2`) dibt1
+                WHERE $pkCriteria $rankCriteria";
+                $prevNextRst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, false);
+                if(dibMySqlPdo::count() === 0)
+                    return array('error', '#2 Could not set form navigation counts. Please contact the System Administrator (#3).');
+                $countRec = count($prevNextRst);
+                if($getNos === 'prev') {
+                    unset($prevNextRst[0]['dib__rank']);
+                    $prev = $prevNextRst[0];
+                    $next = null;
+                } elseif($getNos === 'next') {
+                    unset($prevNextRst[0]['dib__rank']);
+                    $next = $prevNextRst[0];
+                    $prev = null;
+                } else {
+                    list($prev, $next) = $prevNextRst;
+                    unset($prev['dib__rank']);
+                    unset($next['dib__rank']);                   
+                }
+                unset($prev['dib__IsCurrent']);
+                unset($next['dib__IsCurrent']);
+            } else {
+                $prev = null;
+                $next = null;
+            }
+        } else { // no records
+            $first = null;
+            $currentNo = 1;
+            $last = null;
+            $prev = null;
+            $next = null;
+        }        
+        return array(
+            'next' => $next,
+            'prev' => $prev,
+            'first' => $first,
+            'last' => $last,
+            'current' => array('current'=>$currentNo),
+            'total' => array('total'=>$totalCount)
+        );       
     }
     /**
      * Fetches the primary key values of the nth record
@@ -109,11 +199,22 @@ $sql = "SELECT $pkList FROM `test_child` $criteria $order LIMIT 1";
         if(!$position || $position < 0)
             return array('error', 'Position must be a positive integer');
         if($position < 1) $position = 1;
-		$criteria = '';
-        $params = array();
-        // Template: sql statement for MySql to fetch nth record for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
+        $params = array();   
+        $criteria = '';
+        if(!empty($activeFilter)) {
+            $criteria = $this->parseFilter($activeFilter, $params, $filterParams);
+            if(isset($criteria[0]) && $criteria[0]==='error')
+                return $criteria;
+            $criteria .= " AND ($criteria)";
+            $fromClause = "`test_child`
+                LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
+                ";
+        } else 
+            $fromClause = "`test_child`";
+        if($criteria !== '') $criteria = 'WHERE ' . substr($criteria, 4);
+        // Template: SQL statement for MySql to fetch nth record for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
 $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2` 
-        FROM `test_child`
+        FROM $fromClause
         $criteria
         ORDER BY `test_child`.`primkey1`,`test_child`.`primkey2` 
         LIMIT " . ($position - 1) . ', 1'; 
@@ -153,7 +254,7 @@ $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`
                     $fieldCrit .= $conjunction; //$conjunction is found in prev. loop
                 if (substr($stringValue, -1) === '|') {
                     $conjunction = ' OR ';
-                    $stringValue = substr($stringValue, 0, strlen($stringValue) - 1);
+                    $stringValue = trim(substr($stringValue, 0, strlen($stringValue) - 1));
                 } else
                     $conjunction = ' AND ';
                 $intValue = trim($stringValue, '=!>< ');
@@ -180,6 +281,12 @@ $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`
                 //is not empty
                 elseif (strtolower(substr($stringValue, 0, 7)) === "<>empty") {
                     $fieldCrit .= "$fieldExpr <> ''";                    
+                }
+                //not like
+                elseif (strtolower(substr($stringValue, 0, 7)) === "<>like ") {
+                    $fieldCrit .= "$fieldExpr NOT LIKE :f" . $i;
+                    $params[':f'.$i] = str_replace('*', '%', substr($stringValue, 7)); //note, this allows user to put * or _ inside $stringValue... which is okay...
+                    $fieldType[':f'.$i] = $this->fieldType[$field];                   
                 }
                 //equal to
                 elseif (substr($stringValue, 0, 1) === "=") {
@@ -217,11 +324,11 @@ $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`
                     $fieldType[':f'.$i] = $this->fieldType[$field];
                 }
                 //like
-                elseif (strtolower(substr(ltrim($stringValue), 0, 5)) === "like ") {
+                elseif (strtolower(substr($stringValue, 0, 5)) === "like ") {
                     $fieldCrit .= "$fieldExpr LIKE :f" . $i;
-                    $params[':f'.$i] = str_replace('*', '%', substr(ltrim($stringValue), 5)); //note, this allows user to put * or _ inside $stringValue... which is okay...
+                    $params[':f'.$i] = str_replace('*', '%', substr($stringValue, 5)); //note, this allows user to put * or _ inside $stringValue... which is okay...
                     $fieldType[':f'.$i] = $this->fieldType[$field];                   
-                }
+                }                
                 //anything else - use LIKE
                 else {
                     $fieldCrit .= "$fieldExpr LIKE :f" . $i;
@@ -271,9 +378,9 @@ $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`
                 $fieldType[":pk2"] = PDO::PARAM_STR;
                 $criteria = "`test_child`.`primkey1` = :pk1 AND `test_child`.`primkey2` = :pk2 ";
                 $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`,`test_child`.`pef_test_id`,`test_child`.`unique1`,`test_child`.`unique2`,`test_child`.`date_fld`,`test_child`.`notes` 
-                     , ^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^ AS `pef_test_id_display_value`
+                , ^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^ AS `pef_test_id_display_value`
                          FROM `test_child`                  
-                     LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
+                LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
                          WHERE $criteria";
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
                 $attributes = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true); // not making it false since sometimes joins of pef_sql dropins return multiple records...
@@ -325,8 +432,8 @@ $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`
                     $criteria = ' WHERE ' . substr($criteria, 4);
                     if($usedSqlField) {
 						$join = "                 
-                     LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
-                 ";
+                LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
+            ";
                  	} else 
                  		$join = '';
                     if($page === 1 || $countMode==='all'){
@@ -370,15 +477,15 @@ $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`
 if($readType === 'exportlist')
     $sql = "SELECT 
                 `test_child`.`primkey1` AS `Primkey1`, `test_child`.`primkey2` AS `Primkey2`, `test_child`.`unique1` AS `Unique1`, `test_child`.`unique2` AS `Unique2`, `test_child`.`date_fld` AS `Date Fld`, `test_child`.`notes` AS `Notes` 
-                     , ^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^ AS `Test`
+                , ^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^ AS `Test`
             FROM `test_child` 
-                     LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
+                LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
                  ";
 else
     $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2`,`test_child`.`pef_test_id`,`test_child`.`unique1`,`test_child`.`unique2`,`test_child`.`date_fld`,`test_child`.`notes` 
-                     , ^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^ AS `pef_test_id_display_value`
+                , ^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^ AS `pef_test_id_display_value`
             FROM `test_child` 
-                     LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
+                LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
                  ";   
 $sql .= $criteria . $orderStr . $limit;               
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
@@ -460,10 +567,10 @@ $sql .= $criteria . $orderStr . $limit;
      * @param int $targetDatabaseId - if specified, record is created in the target database (must have the same table structure).
      * @return type
      */
-    public function create($attributes, $makeUniqueValues=FALSE, $targetDatabaseId=NULL) {        
-        // User can only provide values for fields they have rights to AND where ci.exclude_crud=0. 
+    public function create(&$attributes, $makeUniqueValues=FALSE, $targetDatabaseId=NULL) {        
+        // User can only provide values for fields they have rights to AND where ci.crud_include<>0. 
     	// The rest must get default values - prevent user from updating them, even if provided...
-    	// So if (exclude_crud=1 OR user lacks permissions (and is not relatedrecordsitem)) AND there is a default, then set the default
+    	// So if (crud_include=0 OR user lacks permissions (and is not relatedrecordsitem)) AND there is a default, then set the default
     	//    else if no default AND field is required, then give an error msg 
     	//    else if field is not required, unset it.
         if(!$targetDatabaseId) $targetDatabaseId = DIB::$CONTAINERDATA[2];
@@ -513,11 +620,18 @@ $sql .= $criteria . $orderStr . $limit;
 	            if(trim((string)($attributes['notes'])) !== '') {
 	            } 
 	        }             
-            //Check Unique Values for unique_fld
-            if(!array_key_exists('unique1', $attributes)) $attributes['unique1'] = null;
-            $criteria ="`unique1` = :fk1 AND ";
-            if(!array_key_exists('unique2', $attributes)) $attributes['unique2'] = null;
-            $criteria .="`unique2` = :fk2 ";
+            //Check Unique Values for table option 23305
+            $criteria = '1=1';
+            if(!array_key_exists('unique1', $attributes)) {
+                Log::err("Unique value validation failed. Ensure that values for all fields that are involved in checking unique index of pef_table_option.id  are submitted to the server (ie they exist as (hidden) fields in container id 7151), or have defaults in pef_field.");
+                return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
+            }
+            $criteria .= " AND `unique1` = :fk1";
+            if(!array_key_exists('unique2', $attributes)) {
+                Log::err("Unique value validation failed. Ensure that values for all fields that are involved in checking unique index of pef_table_option.id  are submitted to the server (ie they exist as (hidden) fields in container id 7151), or have defaults in pef_field.");
+                return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
+            }
+            $criteria .= " AND `unique2` = :fk2";
             $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2` AS pkv FROM `test_child` WHERE $criteria";
             $paramsU = array(":fk1" => $attributes["unique1"], ":fk2" => $attributes["unique2"]);
             $rst = dibMySqlPdo::execute($sql, $targetDatabaseId, $paramsU, true);
@@ -591,7 +705,7 @@ $sql .= $criteria . $orderStr . $limit;
      * @return array $pkValues  OR  array('error', $errMsg) on failure
      */
     public function update($pkValues, $attributes) {
-        // Updates must occur only for fields that users have rights to AND where ci.exclude_crud=0. The rest must retain old values - prevent user from updating them...
+        // Updates must occur only for fields that users have rights to AND where ci.crud_include<>0. The rest must retain old values - prevent user from updating them...
         try {    
             // Check Validation - note the PeffApp::jsonDecode() function in the CrudController already ensures $attributes contain no arrays
             // primkey1 (plain text)	        
@@ -646,13 +760,36 @@ $sql .= $criteria . $orderStr . $limit;
                 return array ('error',"The primary key fields specified in the request are invalid.");            
             $params[":pk2"] = $pkValues["primkey2"];
             $fieldType[":pk2"] = PDO::PARAM_STR;            
-            // `id` = :pk0    
             $pkCrit = "`test_child`.`primkey1` = :pk1 AND `test_child`.`primkey2` = :pk2";                   
+            // Check Unique Values for table option unique_fld(23305)
+            $criteria = '1=1 ';           
+            if(!array_key_exists('unique1', $attributes)) {
+                $uRst = Database::fetch("SELECT `unique1` FROM `test_child` WHERE $pkCrit", $params);
+                $attributes['unique1'] = $uRst['unique1'];
+            }
+            $criteria .= " AND `unique1` = :fk1 ";
+            if(!array_key_exists('unique2', $attributes)) {
+                $uRst = Database::fetch("SELECT `unique2` FROM `test_child` WHERE $pkCrit", $params);
+                $attributes['unique2'] = $uRst['unique2'];
+            }
+            $criteria .= " AND `unique2` = :fk2 ";
+            $criteria .= "AND `primkey1` <> :pk1   AND `primkey2` <> :pk2";
+            $sql = "SELECT `test_child`.`primkey1`,`test_child`.`primkey2` AS pkv FROM `test_child` WHERE $criteria";
+            $paramsU = array(":fk1" => $attributes["unique1"], ":fk2" => $attributes["unique2"]);
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $paramsU + $params, true);
+            if ($rst === FALSE)
+                return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
+            if( dibMySqlPdo::count() > 0) {
+                if(count($paramsU) > 1)
+                    return array('error',"Update record cancelled. The combination of values in 'unique1 , unique2' needs to be unique. Another record already contains the same combination of values.");
+                else
+                    return array('error',"Update record cancelled. The value in 'unique1,unique2' needs to be unique. Another record already contains the same value.");
+            }            
             $crit = $pkCrit;
             // Get record's existing (old) values
             $sql = "SELECT `test_child`.* 
 		            FROM `test_child`
-                     LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
+                LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
 		                WHERE $crit";
             $recordOld = $this->getRecordByPk($sql, $pkValues);
             if (count($recordOld) === 0)
@@ -979,15 +1116,15 @@ $sql .= $criteria . $orderStr . $limit;
 					 'containerName' => "Tablexx1xxdibtestChildForm",
 					 'selectFields' => "`test_child`.`primkey1`,`test_child`.`primkey2`,`test_child`.`pef_test_id`,`test_child`.`unique1`,`test_child`.`unique2`,`test_child`.`date_fld`,`test_child`.`notes`",
 				     'selectSqlFields' => trim("
-                 ", ", \r\n"),
+            ", ", \r\n"),
 				     'selectSqlDisplay' =>  trim("
-                 ", ", \r\n"),
+            ", ", \r\n"),
 				     'selectTableDisplay' => trim("
-                     , ^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^ AS `pef_test_id_display_value`
-                 ", ", \r\n"),          
+                , ^^CONCAT(`test1001`.`varchar10_required`, '-', CAST(`test1001`.`has_default` AS CHAR))^^ AS `pef_test_id_display_value`
+            ", ", \r\n"),          
                      'from' => trim("`test_child`                  
-                     LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
-                  ", ", \r\n")
+                LEFT JOIN `test` `test1001` ON `test_child`.`pef_test_id` = `test1001`.`id` 
+             ", ", \r\n")
         );
 	}
 } // end Class                

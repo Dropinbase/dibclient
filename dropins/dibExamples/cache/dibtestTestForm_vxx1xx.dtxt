@@ -166,11 +166,11 @@ dib-config="{
     <md-input-container aria-label="id"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="number" 
         ng-disabled="true"
@@ -201,11 +201,11 @@ item-alias="varchar10"
     ng-class="view.varchar10.class" 
     ng-style="view.varchar10.style"
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='10'
@@ -232,11 +232,11 @@ dib-config="{
     <md-input-container aria-label="has_default"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='80'
@@ -263,11 +263,11 @@ dib-config="{
     <md-input-container aria-label="time_stamp"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
 <input type="text"
     theme="material"
@@ -295,11 +295,11 @@ dib-config="{
     <md-input-container aria-label="unique_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='50'
@@ -324,11 +324,11 @@ dib-config="{
     <md-input-container aria-label="nvarchar80"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='80'
@@ -353,11 +353,11 @@ dib-config="{
     <md-input-container aria-label="text_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <textarea  
         name="text_fld"
@@ -381,11 +381,11 @@ dib-config="{
     <md-input-container aria-label="tinytext_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <textarea  
         name="tinytext_fld"
@@ -409,11 +409,11 @@ dib-config="{
     <md-input-container aria-label="mediumtext_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <textarea  
         name="mediumtext_fld"
@@ -437,11 +437,11 @@ dib-config="{
     <md-input-container aria-label="longtext_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <textarea  
         name="longtext_fld"
@@ -465,11 +465,11 @@ dib-config="{
     <md-input-container aria-label="bit_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='2'
@@ -491,13 +491,14 @@ dib-config="{
          <div ng-message="maxlength">At most 2 characters are allowed.</div>
     </div>
 </md-input-container>
-    <md-input-container class="md-block"  aria-label="tinyint_fld"
+    <md-input-container aria-label="tinyint_fld"
 can-be-moved=true
 flex="none"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <md-checkbox 
         dib-data-component='checkbox'
@@ -541,11 +542,11 @@ dib-config="{
     <md-input-container aria-label="smallint_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="number" 
         name="smallint_fld"
@@ -568,11 +569,11 @@ dib-config="{
     <md-input-container aria-label="int_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="number" 
         name="int_fld"
@@ -595,11 +596,11 @@ dib-config="{
     <md-input-container aria-label="bigint_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="number" 
         name="bigint_fld"
@@ -622,11 +623,11 @@ dib-config="{
     <md-input-container aria-label="float_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="number" 
         name="float_fld"
@@ -649,11 +650,11 @@ dib-config="{
     <md-input-container aria-label="double_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="number" 
         name="double_fld"
@@ -676,11 +677,11 @@ dib-config="{
     <md-input-container aria-label="decimal_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="number" 
         name="decimal_fld"
@@ -703,11 +704,11 @@ dib-config="{
     <md-input-container aria-label="date_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text"
         theme="material"
@@ -741,11 +742,11 @@ dib-config="{
     <md-input-container aria-label="time_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='7'
@@ -770,11 +771,11 @@ dib-config="{
     <md-input-container aria-label="datetime_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
 <input type="text"
     theme="material"
@@ -801,11 +802,11 @@ dib-config="{
     <md-input-container aria-label="year_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="number" 
         name="year_fld"
@@ -833,10 +834,10 @@ dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
  >
-
 <md-input-container flex>
     <label>Enum Fld</label>    
     <md-select   
+        data-item-alias-location="parentElement"
         dib-data-component='enum'
         aria-label="enum_fld"
         dib-onload-service
@@ -870,10 +871,10 @@ dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
  >
-
 <md-input-container flex>
     <label>Set Fld</label>    
     <md-select   
+        data-item-alias-location="parentElement"
         dib-data-component='enum'
         aria-label="set_fld"
         dib-onload-service
@@ -922,11 +923,11 @@ dib-config="{
     <md-input-container aria-label="email"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='120'
@@ -951,11 +952,11 @@ dib-config="{
     <md-input-container aria-label="url"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='200'
@@ -980,11 +981,11 @@ dib-config="{
     <md-input-container aria-label="longitude"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='200'
@@ -1009,11 +1010,11 @@ dib-config="{
     <md-input-container aria-label="lattitude"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='200'
@@ -1038,11 +1039,11 @@ dib-config="{
     <md-input-container aria-label="file_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='200'
@@ -1067,11 +1068,11 @@ dib-config="{
     <md-input-container aria-label="image_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='200'
@@ -1096,11 +1097,11 @@ dib-config="{
     <md-input-container aria-label="document_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='200'
@@ -1125,11 +1126,11 @@ dib-config="{
     <md-input-container aria-label="expression_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='200'
@@ -1154,11 +1155,11 @@ dib-config="{
     <md-input-container aria-label="notes"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere.
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='255'
@@ -1192,6 +1193,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service194824.searchTextmodel)"
@@ -1244,6 +1246,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='test_company2_id'
     select-model="model.selected___test_company2_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service194825.searchTextmodel)"
@@ -1287,11 +1290,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     <md-input-container aria-label="dibuid"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
+class="md-block"
 >
     <input type="text" 
          maxlength='30'

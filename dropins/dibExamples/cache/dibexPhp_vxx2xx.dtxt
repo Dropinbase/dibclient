@@ -138,8 +138,8 @@ item-alias="sendText"
     ng-class="view.sendText.class" 
     ng-style="view.sendText.style"
 flex="none"
-class="md-block"
 style="  margin:40px !important;  "
+class="md-block"
 >
     <textarea  
          maxlength='400'
@@ -201,8 +201,8 @@ item-alias="msg"
     ng-class="view.msg.class" 
     ng-style="view.msg.style"
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <textarea  
         name="msg"

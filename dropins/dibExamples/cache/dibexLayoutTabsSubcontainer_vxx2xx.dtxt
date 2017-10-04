@@ -67,8 +67,8 @@ dib-config="{
     <md-input-container aria-label="inputdate"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="date" 
         name="inputdate"
@@ -90,8 +90,8 @@ dib-config="{
     <md-input-container aria-label="inputnumber"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="number" 
         name="inputnumber"

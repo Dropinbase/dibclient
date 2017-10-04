@@ -55,7 +55,7 @@ class Lxx2xxTable1442 {
                     else {
                         $value = EvalCriteria::evalParam(':submitItemAlias_self_parentCompanyId', $filterParams);
                         if(is_array($value))
-                            //return array('error',"Error! The filter parameter 'submitItemAlias_self_parentCompanyId' for filter 'divPortItem' on containerName is missing from submitted values.");
+                            //return array('error',"Error! The filter parameter 'submitItemAlias_self_parentCompanyId' for filter 'dibexComponents_companyId' on containerName is missing from submitted values.");
                             $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                         else 
                             $params[':submitItemAlias_self_parentCompanyId'] = $value;

@@ -117,12 +117,13 @@ dib-config="{
 </div>
     </div>
 </md-toolbar>
-        <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
-        <div flex dib-table-width >
-            <md-list class='dib-grid-column-header'>
-                <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
-                    <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0">
-                        <!--TODO checkbox<div flex> </div> -->
+        <div dib-grid-container>
+            <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+            <div flex dib-table-width >
+                <md-list class='dib-grid-column-header'>
+                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0">
+                            <!--TODO checkbox<div flex> </div> -->
         <div table-column 
             flex = 'none'
             class="md-subhead"
@@ -140,11 +141,11 @@ dib-config="{
                         <md-input-container aria-label="id"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="id"
@@ -184,11 +185,11 @@ dib-config="{
                         <md-input-container aria-label="name"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="name"
@@ -237,6 +238,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='employed_at_id'
     select-model="search.selected___employed_at_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155216.searchTextsearch)"
@@ -290,11 +292,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
                         <md-input-container aria-label="mobile"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="mobile"
@@ -334,11 +336,11 @@ dib-config="{
                         <md-input-container aria-label="email"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
          maxlength='120'
@@ -380,11 +382,11 @@ dib-config="{
                         <md-input-container aria-label="address1"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="address1"
@@ -424,11 +426,11 @@ dib-config="{
                         <md-input-container aria-label="address2"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="address2"
@@ -468,11 +470,11 @@ dib-config="{
                         <md-input-container aria-label="city_town"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="city_town"
@@ -512,11 +514,11 @@ dib-config="{
                         <md-input-container aria-label="country"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="country"
@@ -556,11 +558,11 @@ dib-config="{
                         <md-input-container aria-label="longitude"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="longitude"
@@ -600,11 +602,11 @@ dib-config="{
                         <md-input-container aria-label="latitude"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="latitude"
@@ -644,11 +646,11 @@ dib-config="{
                         <md-input-container aria-label="notes"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere.
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="notes"
@@ -671,10 +673,10 @@ dib-config="{
 </md-input-container>
                 </span>
         </div>
-                    </div>
-                </md-list-item>
+                        </div>
+                    </md-list-item>
 <md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='dibtestConsultantEventsGrid' ng-if="gridOptions.inlineAddShow">
-        <ng-form name=dibtestConsultantEventsGrid  dib-container-name="dibtestConsultantEventsGrid" layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'>
+        <ng-form name=dibtestConsultantEventsGrid  dib-container-name="dibtestConsultantEventsGrid" layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'  isolate-form>
     <div table-column layout="column"
                 flex = 'none'
                 dib-column="155205"
@@ -698,11 +700,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="id"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         ng-disabled="true"
@@ -752,11 +754,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="name"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         required
@@ -821,6 +823,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='employed_at_id'
     select-model="model.selected___employed_at_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155216.searchTextmodel)"
@@ -888,11 +891,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="mobile"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="mobile"
@@ -939,11 +942,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="email"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
          maxlength='120'
@@ -992,11 +995,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="address1"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="address1"
@@ -1043,11 +1046,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="address2"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="address2"
@@ -1094,11 +1097,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="city_town"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="city_town"
@@ -1145,11 +1148,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="country"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="country"
@@ -1196,11 +1199,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="longitude"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         name="longitude"
@@ -1247,11 +1250,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="latitude"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         name="latitude"
@@ -1298,11 +1301,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="notes"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere.
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="notes"
@@ -1330,30 +1333,30 @@ dib-config="{
                 <md-button ng-click='toggleInlineAdd()' class="md-raised ">
                         Close
                     </md-button>
-                <md-button ng-click='cleanRow($event,model, dibtestConsultantEventsGrid)' class="md-raised "  ng-disabled='!dibtestConsultantEventsGrid.$dirty'>
+                <md-button ng-click='cleanRow(dibtestConsultantEventsGrid, $event,model)' class="md-raised "  ng-disabled='!dibtestConsultantEventsGrid.$dirty'>
                     Clear  
                 </md-button>
-                <md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+                <md-button ng-click='useSelectedRow(dibtestConsultantEventsGrid,$event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
                     Use selected data
                 </md-button>
-                <md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!dibtestConsultantEventsGrid.$valid">
+                <md-button ng-click='addRow(dibtestConsultantEventsGrid,$event,row)' class="md-raised  md-accent  "  >
                     Add  
                 </md-button>
             </div>
         </ng-form>
 </md-list-item>
-            </md-list>
-        </div>
-        <md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
-            <md-list dib-table-column-width >
-                <md-list-item ng-if="gridData.length == 0"  layout-align="center center">
-                     <div class="no-records-available">  
-                        No records available
-                     </div>
-                </md-list-item>
-                <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)"
-                >
-                        <ng-form name='dibtestConsultantEventsGrid' dib-container-name="dibtestConsultantEventsGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+                </md-list>
+            </div>
+            <md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+                <md-list dib-table-column-width >
+                    <md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+                        <div class="no-records-available">  
+                            No records available
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)"
+                    >
+                            <ng-form name='dibtestConsultantEventsGrid' dib-container-name="dibtestConsultantEventsGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="{{row.___editing? 'start start' :'start center' }}" ng-enter='saveRow($event,row)' isolate-form >
     <div table-column layout="column"
                 flex = 'none'
                 dib-column="155205"
@@ -1377,11 +1380,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="id"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         ng-disabled="true"
@@ -1431,11 +1434,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="name"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         required
@@ -1500,6 +1503,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='employed_at_id'
     select-model="model.selected___employed_at_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155216.searchTextmodel)"
@@ -1567,11 +1571,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="mobile"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="mobile"
@@ -1618,11 +1622,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="email"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
          maxlength='120'
@@ -1671,11 +1675,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="address1"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="address1"
@@ -1722,11 +1726,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="address2"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="address2"
@@ -1773,11 +1777,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="city_town"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="city_town"
@@ -1824,11 +1828,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="country"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="country"
@@ -1875,11 +1879,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="longitude"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         name="longitude"
@@ -1926,11 +1930,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="latitude"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         name="latitude"
@@ -1977,11 +1981,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
         <md-input-container aria-label="notes"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
 dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere.
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="notes"
@@ -2005,49 +2009,50 @@ dib-config="{
     </span>
 </div>
     </div>
-                                <div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
-                                    <md-button ng-click='cancelRow($event,row)' class="md-raised ">
-                                        Cancel
-                                    </md-button>
-                                    <md-button ng-click='saveRow($event,row)' class="md-raised  md-accent " ng-disabled="!dibtestConsultantEventsGrid.$valid" >
-                                        Save  
-                                    </md-button>
-                                </div>
-                        </ng-form>
-                 </md-list-item>     
-            </md-list>
-        </md-content>
-        <div layout-fill layout='row' flex class='dib-grid-footer'>
-            <div flex=20 layout='row'>
-                <md-button disabled>Page limit</md-button>
-                <md-select ng-model="page.limit" aria-label="Page Limit">
-                    <md-option ng-value="10">10</md-option>
-                    <md-option ng-value="20">20</md-option>
-                    <md-option ng-value="50">50</md-option>
-                </md-select>
-            </div>
-            <div  ng-if="page.count>1" flex=80 layout='row'  layout-align="center center" >
-                <md-button ng-disabled="page.number==1" ng-click='firstPage()'>
-                    First
-                </md-button>
-                <md-button ng-disabled="page.number==1" ng-click='previousPage()'>
-                    Prev
-                </md-button>
-                <div layout='row'>
-                    <md-button disabled>Page</md-button>
-                    <md-input-container>
-                        <input type='number' ng-model="page.number" aria-label="Page number">
-                    </md-input-container>
-                    <md-button disabled>
-                    of {{ page.count }}
+                                    <div class='dib-inline-edit-buttons' flex="none" ng-if="row.___editing">
+                                        <md-button ng-click='cancelRow($event,row)' class="md-raised ">
+                                            Cancel
+                                        </md-button>
+                                        <md-button ng-click='saveRow(dibtestConsultantEventsGrid,$event,row)' class="md-raised  md-accent "  >
+                                            Save  
+                                        </md-button>
+                                    </div>
+                            </ng-form>
+                    </md-list-item>     
+                </md-list>
+            </md-content>
+            <div layout-fill layout='row' flex class='dib-grid-footer'>
+                <div flex=20 layout='row'>
+                    <md-button disabled>Page limit</md-button>
+                    <md-select ng-model="page.limit" aria-label="Page Limit">
+                        <md-option ng-value="10">10</md-option>
+                        <md-option ng-value="20">20</md-option>
+                        <md-option ng-value="50">50</md-option>
+                    </md-select>
+                </div>
+                <div  ng-if="page.count>1" flex=80 layout='row'  layout-align="center center" >
+                    <md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+                        First
+                    </md-button>
+                    <md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+                        Prev
+                    </md-button>
+                    <div layout='row'>
+                        <md-button disabled>Page</md-button>
+                        <md-input-container>
+                            <input type='number' ng-model="page.number" aria-label="Page number">
+                        </md-input-container>
+                        <md-button disabled>
+                        of {{ page.count }}
+                        </md-button>
+                    </div>
+                    <md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+                        Next
+                    </md-button>
+                    <md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+                        Last
                     </md-button>
                 </div>
-                <md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
-                    Next
-                </md-button>
-                <md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
-                    Last
-                </md-button>
             </div>
         </div>
 </div>

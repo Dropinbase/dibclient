@@ -7,8 +7,8 @@
     public $storeType = array("id"=>'none', "smallint_fld"=>'none', "email"=>'none', "varchar10_required"=>'none', "int_fld"=>'none', "url"=>'none', "has_default"=>'none', "bigint_fld"=>'none', "longitude"=>'none', "time_stamp"=>'none', "float_fld"=>'none', "lattitude"=>'none', "unique_fld"=>'none', "double_fld"=>'none', "file_fld"=>'none', "nvarchar80"=>'none', "decimal_fld"=>'none', "image_fld"=>'none', "text_fld"=>'none', "date_fld"=>'none', "document_fld"=>'none', "tinytext_fld"=>'none', "time_fld"=>'none', "expression_fld"=>'none', "mediumtext_fld"=>'none', "datetime_fld"=>'none', "notes"=>'none', "longtext_fld"=>'none', "year_fld"=>'none', "test_company_id"=>'dropdown', "bit_fld"=>'none', "enum_fld"=>'none', "test_company2_id"=>'dropdown', "tinyint_fld"=>'none', "set_fld"=>'none', "dibuid"=>'none');
     public $sqlFields = array();
     public $fkeyDisplay = array(
-                 'test_company_id'=>"^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^", 'test_company2_id'=>"^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^", 
-                 );
+            'test_company_id'=>"^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^", 'test_company2_id'=>"^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^", 
+            );
     protected $filterArray = null;
     protected $now = null;
     protected $ipAddress = null;
@@ -52,52 +52,79 @@
 		$criteria = ''; 
         if($criteria==='') return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
         return substr($criteria, 4);
-	}
+    }
     /**
      * Fetches the primary key values of the next, previous, etc. records for use with the Form's toolbar
      */
-    public function getToolbarInfo($pkValues, $option, $activeFilter, $filterParams) {
-        $params = array();
-        $fieldType = array();
-        if (!array_key_exists("id", $pkValues))
-            return array ('error',"The primary key fields specified in the request are invalid.");        
-         if ($pkValues["id"] != (string)(float)$pkValues["id"])
-            return array ('error',"Error! The primary key field values specified in the request are invalid.");
-        $params[":pk1"] = $pkValues["id"];
-        $fieldType[":pk1"] = PDO::PARAM_INT;    
-        $pkList = "`test`.`id`";
+    public function getToolbarInfo($pkValues, $activeFilter, $filterParams, $getFirstOnly=FALSE) {        
+        $params = array();   
         $criteria = '';
-        $order ='';
-        if ($option === 'next')  { 
-            $criteria = "WHERE `id` > :pk1";
-            $order = "ORDER BY `test`.`id`";
-        } elseif ($option === 'prev') {
-            $order = "ORDER BY `id` DESC";
-            $criteria = "WHERE `id` < :pk1";
-        } elseif ($option === 'last') {
-            $order = "ORDER BY `test`.`id` DESC";
-            $params = array();
-            $fieldType = array();
-        } elseif ($option === 'total') {
-            $pkList = 'Count(*) as `total`';
-            $params = array();
-            $fieldType = array();
-        } elseif ($option === 'current') {
-            $pkList = 'Count(*) as `current`';
-            $criteria = "WHERE `id` <= :pk1";
-        } elseif ($option ==='first') {
-            $order = "ORDER BY `test`.`id` ASC";
-            $params = array();
-            $fieldType = array();
-        }
-        // Template: sql statement for MySql to fetch records for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
-$sql = "SELECT $pkList FROM `test` $criteria $order LIMIT 1";
-        dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);       
-        $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-        if(dibMySqlPdo::count() > 0)
+        if(!empty($activeFilter)) {
+            $criteria = $this->parseFilter($activeFilter, $params, $filterParams);
+            if(isset($criteria[0]) && $criteria[0]==='error')
+                return $criteria;
+            $criteria .= " AND ($criteria)";
+            $fromClause = "`test`
+                LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
+                ";
+        } else 
+            $fromClause = "`test`";
+        if($criteria !== '') $criteria = 'WHERE ' . substr($criteria, 4);
+        if($getFirstOnly) { // Used after deletes to navigate to first record
+            $sql = "SELECT id FROM $fromClause $criteria ORDER BY id limit 1";
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+            if($rst === FALSE)
+                return array('error', 'Could not get first record. Please contact the System Administrator. (#0).');
             return $rst;
-        else
-            return null;
+        }
+        // Get total, first and last
+        $sql = "SELECT count(*) as dib__total, min(`test`.`id`) as dib__minId, max(`test`.`id`) as dib__maxId FROM $fromClause $criteria";
+        $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+        if(dibMySqlPdo::count() === 0)
+            return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#1).');
+        $totalCount = $rst['dib__total'];
+        $first = array('id' => $rst['dib__minId']);
+        $last = array('id' => $rst['dib__maxId']);
+        if($totalCount>0) {
+            // Add pkeys to $params
+            $fieldType = array();
+            if (!array_key_exists("id", $pkValues))
+                return array ('error',"The primary key field names specified in the request are invalid.");        
+            if ($pkValues["id"] != (string)(float)$pkValues["id"])
+                return array ('error',"Error! The primary key field values specified in the request are invalid.");
+            $params[":pk1"] = $pkValues["id"];
+            $fieldType[":pk1"] = PDO::PARAM_INT;    
+            // Get prev and current
+            $tempCrit = ($criteria === '') ? "WHERE `test`.`id` < :pk1" : "$criteria AND `test`.`id` < :pk1";
+            $sql = "SELECT max(`test`.`id`) as dib__Id, count(`test`.`id`) as dib__counter FROM $fromClause $tempCrit";
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+            if(dibMySqlPdo::count() === 0)
+                return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#1).');
+            $prev = array('id' => $rst['dib__Id']);
+            $currentNo = (int)$rst['dib__counter'] + 1;
+            // Get next
+            $tempCrit = ($criteria === '') ? "WHERE `test`.`id` > :pk1" : "$criteria AND `test`.`id` > :pk1";
+            $sql = "SELECT min(`test`.`id`) as dib__Id FROM $fromClause $tempCrit";
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+            if(dibMySqlPdo::count() === 0)
+                return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#1).');
+            $next = array('id' => $rst['dib__Id']);
+        } else {
+            $first = null;
+            $currentNo = 1;
+            $last = null;
+            $prev = null;
+            $next = null;
+        }
+        return array(
+            'next' => $next,
+            'prev' => $prev,
+            'first' => $first,
+            'last' => $last,
+            'current' => array('current'=>$currentNo),
+            'total' => array('total'=>$totalCount)
+        );       
     }
     /**
      * Fetches the primary key values of the nth record
@@ -107,11 +134,23 @@ $sql = "SELECT $pkList FROM `test` $criteria $order LIMIT 1";
         if(!$position || $position < 0)
             return array('error', 'Position must be a positive integer');
         if($position < 1) $position = 1;
-		$criteria = '';
-        $params = array();
-        // Template: sql statement for MySql to fetch nth record for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
+        $params = array();   
+        $criteria = '';
+        if(!empty($activeFilter)) {
+            $criteria = $this->parseFilter($activeFilter, $params, $filterParams);
+            if(isset($criteria[0]) && $criteria[0]==='error')
+                return $criteria;
+            $criteria .= " AND ($criteria)";
+            $fromClause = "`test`
+                LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
+                ";
+        } else 
+            $fromClause = "`test`";
+        if($criteria !== '') $criteria = 'WHERE ' . substr($criteria, 4);
+        // Template: SQL statement for MySql to fetch nth record for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
 $sql = "SELECT `test`.`id` 
-        FROM `test`
+        FROM $fromClause
         $criteria
         ORDER BY `test`.`id` 
         LIMIT " . ($position - 1) . ', 1'; 
@@ -151,7 +190,7 @@ $sql = "SELECT `test`.`id`
                     $fieldCrit .= $conjunction; //$conjunction is found in prev. loop
                 if (substr($stringValue, -1) === '|') {
                     $conjunction = ' OR ';
-                    $stringValue = substr($stringValue, 0, strlen($stringValue) - 1);
+                    $stringValue = trim(substr($stringValue, 0, strlen($stringValue) - 1));
                 } else
                     $conjunction = ' AND ';
                 $intValue = trim($stringValue, '=!>< ');
@@ -178,6 +217,12 @@ $sql = "SELECT `test`.`id`
                 //is not empty
                 elseif (strtolower(substr($stringValue, 0, 7)) === "<>empty") {
                     $fieldCrit .= "$fieldExpr <> ''";                    
+                }
+                //not like
+                elseif (strtolower(substr($stringValue, 0, 7)) === "<>like ") {
+                    $fieldCrit .= "$fieldExpr NOT LIKE :f" . $i;
+                    $params[':f'.$i] = str_replace('*', '%', substr($stringValue, 7)); //note, this allows user to put * or _ inside $stringValue... which is okay...
+                    $fieldType[':f'.$i] = $this->fieldType[$field];                   
                 }
                 //equal to
                 elseif (substr($stringValue, 0, 1) === "=") {
@@ -215,11 +260,11 @@ $sql = "SELECT `test`.`id`
                     $fieldType[':f'.$i] = $this->fieldType[$field];
                 }
                 //like
-                elseif (strtolower(substr(ltrim($stringValue), 0, 5)) === "like ") {
+                elseif (strtolower(substr($stringValue, 0, 5)) === "like ") {
                     $fieldCrit .= "$fieldExpr LIKE :f" . $i;
-                    $params[':f'.$i] = str_replace('*', '%', substr(ltrim($stringValue), 5)); //note, this allows user to put * or _ inside $stringValue... which is okay...
+                    $params[':f'.$i] = str_replace('*', '%', substr($stringValue, 5)); //note, this allows user to put * or _ inside $stringValue... which is okay...
                     $fieldType[':f'.$i] = $this->fieldType[$field];                   
-                }
+                }                
                 //anything else - use LIKE
                 else {
                     $fieldCrit .= "$fieldExpr LIKE :f" . $i;
@@ -267,10 +312,10 @@ $sql = "SELECT `test`.`id`
                 $fieldType[":pk1"] = PDO::PARAM_INT;
                 $criteria = "`test`.`id` = :pk1 ";
                 $sql = "SELECT `test`.`id`,`test`.`varchar10_required`,`test`.`has_default`,`test`.`time_stamp`,`test`.`unique_fld`,`test`.`nvarchar80`,`test`.`text_fld`,`test`.`tinytext_fld`,`test`.`mediumtext_fld`,`test`.`longtext_fld`,`test`.`bit_fld`,`test`.`tinyint_fld`,`test`.`smallint_fld`,`test`.`int_fld`,`test`.`bigint_fld`,`test`.`float_fld`,`test`.`double_fld`,`test`.`decimal_fld`,`test`.`date_fld`,`test`.`time_fld`,`test`.`datetime_fld`,`test`.`year_fld`,`test`.`enum_fld`,`test`.`set_fld`,`test`.`email`,`test`.`url`,`test`.`longitude`,`test`.`lattitude`,`test`.`file_fld`,`test`.`image_fld`,`test`.`document_fld`,`test`.`expression_fld`,`test`.`notes`,`test`.`test_company_id`,`test`.`test_company2_id`,`test`.`dibuid` 
-                     , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `test_company_id_display_value`, ^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^ AS `test_company2_id_display_value`
+                , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `test_company_id_display_value`, ^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^ AS `test_company2_id_display_value`
                          FROM `test`                  
-                     LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
-                     LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
+                LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
                          WHERE $criteria";
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
                 $attributes = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true); // not making it false since sometimes joins of pef_sql dropins return multiple records...
@@ -322,9 +367,9 @@ $sql = "SELECT `test`.`id`
                     $criteria = ' WHERE ' . substr($criteria, 4);
                     if($usedSqlField) {
 						$join = "                 
-                     LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
-                     LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
-                 ";
+                LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
+            ";
                  	} else 
                  		$join = '';
                     if($page === 1 || $countMode==='all'){
@@ -368,17 +413,17 @@ $sql = "SELECT `test`.`id`
 if($readType === 'exportlist')
     $sql = "SELECT 
                 `test`.`id` AS `Id`, `test`.`varchar10_required` AS `Varchar10 Required`, `test`.`has_default` AS `Has Default`, `test`.`time_stamp` AS `Time Stamp`, `test`.`unique_fld` AS `Unique Fld`, `test`.`nvarchar80` AS `Nvarchar80`, `test`.`text_fld` AS `Text Fld`, `test`.`tinytext_fld` AS `Tinytext Fld`, `test`.`mediumtext_fld` AS `Mediumtext Fld`, `test`.`longtext_fld` AS `Longtext Fld`, `test`.`bit_fld` AS `Bit Fld`, `test`.`tinyint_fld` AS `Tinyint Fld`, `test`.`smallint_fld` AS `Smallint Fld`, `test`.`int_fld` AS `Int Fld`, `test`.`bigint_fld` AS `Bigint Fld`, `test`.`float_fld` AS `Float Fld`, `test`.`double_fld` AS `Double Fld`, `test`.`decimal_fld` AS `Decimal Fld`, `test`.`date_fld` AS `Date Fld`, `test`.`time_fld` AS `Time Fld`, `test`.`datetime_fld` AS `Datetime Fld`, `test`.`year_fld` AS `Year Fld`, `test`.`enum_fld` AS `Enum Fld`, `test`.`set_fld` AS `Set Fld`, `test`.`email` AS `Email`, `test`.`url` AS `Url`, `test`.`longitude` AS `Longitude`, `test`.`lattitude` AS `Lattitude`, `test`.`file_fld` AS `File Fld`, `test`.`image_fld` AS `Image Fld`, `test`.`document_fld` AS `Document Fld`, `test`.`expression_fld` AS `Expression Fld`, `test`.`notes` AS `Notes`, `test`.`dibuid` AS `Dibuid` 
-                     , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `Test Company`, ^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^ AS `Test Company2`
+                , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `Test Company`, ^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^ AS `Test Company2`
             FROM `test` 
-                     LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
-                     LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
+                LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
                  ";
 else
     $sql = "SELECT `test`.`id`,`test`.`varchar10_required`,`test`.`has_default`,`test`.`time_stamp`,`test`.`unique_fld`,`test`.`nvarchar80`,`test`.`text_fld`,`test`.`tinytext_fld`,`test`.`mediumtext_fld`,`test`.`longtext_fld`,`test`.`bit_fld`,`test`.`tinyint_fld`,`test`.`smallint_fld`,`test`.`int_fld`,`test`.`bigint_fld`,`test`.`float_fld`,`test`.`double_fld`,`test`.`decimal_fld`,`test`.`date_fld`,`test`.`time_fld`,`test`.`datetime_fld`,`test`.`year_fld`,`test`.`enum_fld`,`test`.`set_fld`,`test`.`email`,`test`.`url`,`test`.`longitude`,`test`.`lattitude`,`test`.`file_fld`,`test`.`image_fld`,`test`.`document_fld`,`test`.`expression_fld`,`test`.`notes`,`test`.`test_company_id`,`test`.`test_company2_id`,`test`.`dibuid` 
-                     , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `test_company_id_display_value`, ^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^ AS `test_company2_id_display_value`
+                , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `test_company_id_display_value`, ^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^ AS `test_company2_id_display_value`
             FROM `test` 
-                     LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
-                     LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
+                LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
                  ";   
 $sql .= $criteria . $orderStr . $limit;               
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
@@ -460,15 +505,15 @@ $sql .= $criteria . $orderStr . $limit;
      * @param int $targetDatabaseId - if specified, record is created in the target database (must have the same table structure).
      * @return type
      */
-    public function create($attributes, $makeUniqueValues=FALSE, $targetDatabaseId=NULL) {        
-        // User can only provide values for fields they have rights to AND where ci.exclude_crud=0. 
+    public function create(&$attributes, $makeUniqueValues=FALSE, $targetDatabaseId=NULL) {        
+        // User can only provide values for fields they have rights to AND where ci.crud_include<>0. 
     	// The rest must get default values - prevent user from updating them, even if provided...
-    	// So if (exclude_crud=1 OR user lacks permissions (and is not relatedrecordsitem)) AND there is a default, then set the default
+    	// So if (crud_include=0 OR user lacks permissions (and is not relatedrecordsitem)) AND there is a default, then set the default
     	//    else if no default AND field is required, then give an error msg 
     	//    else if field is not required, unset it.
         if(!$targetDatabaseId) $targetDatabaseId = DIB::$CONTAINERDATA[2];
         try { 
-            // Add defaults where permissions or exclude_crud restricts user to provide values 
+            // Add defaults where permissions restricts user to provide values, or value missing due to crud_include or not included in container 
              if(isset($attributes["id"])) unset($attributes["id"]);
              if(isset($attributes["dibuid"])) unset($attributes["dibuid"]);
              unset($attributes["dibuid"]);      
@@ -723,9 +768,13 @@ $sql .= $criteria . $orderStr . $limit;
 		                return array ('error',"The 'Dibuid (dibuid)' field cannot contain more than 30 characters");
 	            } 
 	        }             
-            //Check Unique Values for unique_fld
-            if(!array_key_exists('unique_fld', $attributes)) $attributes['unique_fld'] = null;
-            $criteria ="`unique_fld` = :fk1 ";
+            //Check Unique Values for table option 23300
+            $criteria = '1=1';
+            if(!array_key_exists('unique_fld', $attributes)) {
+                Log::err("Unique value validation failed. Ensure that values for all fields that are involved in checking unique index of pef_table_option.id  are submitted to the server (ie they exist as (hidden) fields in container id 8580), or have defaults in pef_field.");
+                return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
+            }
+            $criteria .= " AND `unique_fld` = :fk1";
             $sql = "SELECT `test`.`id` AS pkv FROM `test` WHERE $criteria";
             $paramsU = array(":fk1" => $attributes["unique_fld"]);
             $rst = dibMySqlPdo::execute($sql, $targetDatabaseId, $paramsU, true);
@@ -797,7 +846,7 @@ $sql .= $criteria . $orderStr . $limit;
      * @return array $pkValues  OR  array('error', $errMsg) on failure
      */
     public function update($pkValues, $attributes) {
-        // Updates must occur only for fields that users have rights to AND where ci.exclude_crud=0. The rest must retain old values - prevent user from updating them...
+        // Updates must occur only for fields that users have rights to AND where ci.crud_include<>0. The rest must retain old values - prevent user from updating them...
         try {    
             // Check Validation - note the PeffApp::jsonDecode() function in the CrudController already ensures $attributes contain no arrays
             // id (integer)	        
@@ -1063,14 +1112,32 @@ $sql .= $criteria . $orderStr . $limit;
                 return array ('error',"Error! The primary key field values specified in the request are invalid.");
             $params[":pk1"] = $pkValues["id"];
             $fieldType[":pk1"] = PDO::PARAM_INT;            
-            // `id` = :pk0    
             $pkCrit = "`test`.`id` = :pk1";                   
+            // Check Unique Values for table option unique_fld(23300)
+            $criteria = '1=1 ';           
+            if(!array_key_exists('unique_fld', $attributes)) {
+                $uRst = Database::fetch("SELECT `unique_fld` FROM `test` WHERE $pkCrit", $params);
+                $attributes['unique_fld'] = $uRst['unique_fld'];
+            }
+            $criteria .= " AND `unique_fld` = :fk1 ";
+            $criteria .= "AND `id` <> :pk1";
+            $sql = "SELECT `test`.`id` AS pkv FROM `test` WHERE $criteria";
+            $paramsU = array(":fk1" => $attributes["unique_fld"]);
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $paramsU + $params, true);
+            if ($rst === FALSE)
+                return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
+            if( dibMySqlPdo::count() > 0) {
+                if(count($paramsU) > 1)
+                    return array('error',"Update record cancelled. The combination of values in 'unique_fld' needs to be unique. Another record already contains the same combination of values.");
+                else
+                    return array('error',"Update record cancelled. The value in 'unique_fld' needs to be unique. Another record already contains the same value.");
+            }            
             $crit = $pkCrit;
             // Get record's existing (old) values
             $sql = "SELECT `test`.* 
 		            FROM `test`
-                     LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
-                     LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
+                LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
 		                WHERE $crit";
             $recordOld = $this->getRecordByPk($sql, $pkValues);
             if (count($recordOld) === 0)
@@ -1393,16 +1460,16 @@ $sql .= $criteria . $orderStr . $limit;
 					 'containerName' => "Tablexx1xxdibtestTestForm",
 					 'selectFields' => "`test`.`id`,`test`.`varchar10_required`,`test`.`has_default`,`test`.`time_stamp`,`test`.`unique_fld`,`test`.`nvarchar80`,`test`.`text_fld`,`test`.`tinytext_fld`,`test`.`mediumtext_fld`,`test`.`longtext_fld`,`test`.`bit_fld`,`test`.`tinyint_fld`,`test`.`smallint_fld`,`test`.`int_fld`,`test`.`bigint_fld`,`test`.`float_fld`,`test`.`double_fld`,`test`.`decimal_fld`,`test`.`date_fld`,`test`.`time_fld`,`test`.`datetime_fld`,`test`.`year_fld`,`test`.`enum_fld`,`test`.`set_fld`,`test`.`email`,`test`.`url`,`test`.`longitude`,`test`.`lattitude`,`test`.`file_fld`,`test`.`image_fld`,`test`.`document_fld`,`test`.`expression_fld`,`test`.`notes`,`test`.`test_company_id`,`test`.`test_company2_id`,`test`.`dibuid`",
 				     'selectSqlFields' => trim("
-                 ", ", \r\n"),
+            ", ", \r\n"),
 				     'selectSqlDisplay' =>  trim("
-                 ", ", \r\n"),
+            ", ", \r\n"),
 				     'selectTableDisplay' => trim("
-                     , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `test_company_id_display_value`, ^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^ AS `test_company2_id_display_value`
-                 ", ", \r\n"),          
+                , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `test_company_id_display_value`, ^^CONCAT(`test_company1002`.`name`, ' (' , CAST(`test_company1002`.`id` AS CHAR), ')')^^ AS `test_company2_id_display_value`
+            ", ", \r\n"),          
                      'from' => trim("`test`                  
-                     LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
-                     LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
-                  ", ", \r\n")
+                LEFT JOIN `test_company` `test_company1001` ON `test`.`test_company_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1002` ON `test`.`test_company2_id` = `test_company1002`.`id` 
+             ", ", \r\n")
         );
 	}
 } // end Class                

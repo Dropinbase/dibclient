@@ -110,7 +110,7 @@ can-be-moved=true
 flex="none"
 style="    "
 >
-    <md-button ng-click="$mdOpenMenu()" 
+    <md-button ng-click="$mdOpenMenu()"  class=""
         id='ci155418'
 aria-label="buttonTools"
 dib-container-name='dibtestConsultantForm'
@@ -261,11 +261,11 @@ item-alias="id"
     ng-class="view.id.class" 
     ng-style="view.id.style"
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         ng-disabled="true"
@@ -291,11 +291,11 @@ dib-config="{
     <md-input-container aria-label="name"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         required
@@ -329,6 +329,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='employed_at_id'
     select-model="model.selected___employed_at_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155435.searchTextmodel)"
@@ -378,11 +379,11 @@ item-alias="mobile"
     ng-class="view.mobile.class" 
     ng-style="view.mobile.style"
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="mobile"
@@ -405,11 +406,11 @@ dib-config="{
     <md-input-container aria-label="email"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
          maxlength='120'
@@ -460,11 +461,11 @@ item-alias="address1"
     ng-class="view.address1.class" 
     ng-style="view.address1.style"
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="address1"
@@ -487,11 +488,11 @@ dib-config="{
     <md-input-container aria-label="address2"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="address2"
@@ -514,11 +515,11 @@ dib-config="{
     <md-input-container aria-label="city_town"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="city_town"
@@ -541,11 +542,11 @@ dib-config="{
     <md-input-container aria-label="country"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="text" 
         name="country"
@@ -608,11 +609,11 @@ dib-config="{
     <md-input-container aria-label="longitude"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         name="longitude"
@@ -635,11 +636,11 @@ dib-config="{
     <md-input-container aria-label="latitude"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <input type="number" 
         name="latitude"
@@ -662,11 +663,11 @@ dib-config="{
     <md-input-container aria-label="notes"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere.
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
+class="md-block"
 >
     <textarea  
         name="notes"

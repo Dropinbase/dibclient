@@ -11,5 +11,5 @@ dib*in94r01h491/dibtestConsultantEventsGrid/dropins/dibExamples/ContainerEvents/
 dib*lpqo7vaw1/dibtestConsultantEventsGrid/dropins/dibExamples/ContainerEvents/afterUpdate
 dib*igya6sydg/dibtestConsultantEventsGrid/dropins/dibExamples/ContainerEvents/beforeDelete
 dib*rqxy6u2d6/dibtestConsultantEventsGrid/dropins/dibExamples/ContainerEvents/getDefaults
-dib*d751r08zt4/dibtestHorTreedibGlobals.action.RefreshHeight?itemAlias=designerPreview
 dib*n2czv11ub1/dibtestHorTreedibGlobals.action.RefreshHeight?itemAlias=designerPreview
+dib*d751r08zt4/dibtestHorTreedibGlobals.action.RefreshHeight?itemAlias=designerPreview

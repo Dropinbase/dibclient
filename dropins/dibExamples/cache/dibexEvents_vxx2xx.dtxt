@@ -236,24 +236,24 @@ dib-config="{
     <md-input-container aria-label="SelectTextEvent"
 can-be-moved=true
 flex="33"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="SelectTextEvent"
         ng-model="model.SelectTextEvent"
-        aria-label="Type and select some text in here"
+        aria-label="Hover over and then leave this text box"
         id='ci197134'
 aria-label="SelectTextEvent"
 dib-container-name='dibexEvents'
 dib-config="{
     listeners : {
-    'select___dib*py51zl61ps81' : function(field, additionalInfoOnEvent) { 
+    'mouseout___dib*py51zl61ps81' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
         scope : scope,
         field : element,
         containerName: 'dibexEvents',
-        triggerType: 'select',
+        triggerType: 'mouseout',
         nextActionItem: '',
         itemEventId: 'dib*py51zl61ps81',        
         containerItemId: 197134,
@@ -269,15 +269,15 @@ dib-config="{
         dib-data-component='inputText'
         md-detect-hidden
     >
-    <label>Type and select some text in here</label>
+    <label>Hover over and then leave this text box</label>
     <div ng-messages="dibexEvents.SelectTextEvent.$error">
     </div>
 </md-input-container>
     <md-input-container aria-label="CopyEvent"
 can-be-moved=true
 flex="33"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="CopyEvent"
@@ -446,8 +446,8 @@ item-alias="Textfield1"
     ng-class="view.Textfield1.class" 
     ng-style="view.Textfield1.style"
 flex="none"
-class="md-block"
 style="width:350px !important;    "
+class="md-block"
 >
     <input type="text" 
         name="Textfield1"
@@ -491,8 +491,8 @@ item-alias="Textfield2"
     ng-class="view.Textfield2.class" 
     ng-style="view.Textfield2.style"
 flex="none"
-class="md-block"
 style="width:350px !important;    "
+class="md-block"
 >
     <input type="text" 
         name="Textfield2"
@@ -945,6 +945,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155095.searchTextmodel)"
@@ -1203,6 +1204,7 @@ style="width:220px !important;    "
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='company1Id'
     select-model="model.selected___company1Id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155121.searchTextmodel)"
@@ -1247,7 +1249,7 @@ flex="none"
 class="md-accent md-raised"
 style="  margin:20px !important;  "
 >
-    <md-button ng-click="$mdOpenMenu()" 
+    <md-button ng-click="$mdOpenMenu()"  class=""
         id='ci155116'
 aria-label="btnsetActiveFilter"
 dib-container-name='dibexEvents'
@@ -1631,8 +1633,8 @@ item-alias="containerEvents"
     ng-class="view.containerEvents.class" 
     ng-style="view.containerEvents.style"
 flex
-class="md-block"
 style="width:100% !important;    "
+class="md-block"
 >
     <textarea  
         name="containerEvents"
@@ -1981,6 +1983,7 @@ style="width:490px !important;    "
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='htmlCompanyId'
     select-model="model.selected___htmlCompanyId.id"
     md-search-text-change="loadServiceciid(dropdowns.service194831.searchTextmodel)"
@@ -2211,8 +2214,8 @@ item-alias="text1"
     ng-class="view.text1.class" 
     ng-style="view.text1.style"
 flex
-class="md-block"
 style="width:100% !important;    "
+class="md-block"
 >
     <textarea  
         name="text1"
@@ -2376,6 +2379,7 @@ style="    "
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     md-input-name='queueLoginId'
     select-model="model.selected___queueLoginId.id"
     md-search-text-change="loadServiceciid(dropdowns.service180007.searchTextmodel)"
@@ -2417,8 +2421,8 @@ item-alias="queueMsg"
     ng-class="view.queueMsg.class" 
     ng-style="view.queueMsg.style"
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="queueMsg"
@@ -2653,8 +2657,8 @@ item-alias="companyList"
     ng-class="view.companyList.class" 
     ng-style="view.companyList.style"
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <textarea  
         name="companyList"
@@ -2797,8 +2801,8 @@ item-alias="userAlias"
     ng-class="view.userAlias.class" 
     ng-style="view.userAlias.style"
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="userAlias"
@@ -2857,8 +2861,8 @@ item-alias="recipientAlias"
     ng-class="view.recipientAlias.class" 
     ng-style="view.recipientAlias.style"
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="recipientAlias"
@@ -2886,8 +2890,8 @@ item-alias="msg"
     ng-class="view.msg.class" 
     ng-style="view.msg.style"
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="msg"

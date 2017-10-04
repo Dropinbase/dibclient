@@ -172,11 +172,11 @@ dib-config="{
     <md-input-container aria-label="primkey1"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
+class="md-block"
 >
     <input type="text" 
         required
@@ -201,11 +201,11 @@ dib-config="{
     <md-input-container aria-label="primkey2"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
+class="md-block"
 >
     <input type="text" 
         required
@@ -239,6 +239,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
     required md-require-match='true'
     md-input-name='pef_test_id'
     select-model="model.selected___pef_test_id.id"
@@ -277,11 +278,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
     <md-input-container aria-label="date_fld"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
+class="md-block"
 >
     <input type="text"
         theme="material"
@@ -336,11 +337,11 @@ dib-config="{
     <md-input-container aria-label="unique1"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
+class="md-block"
 >
     <input type="text" 
         name="unique1"
@@ -363,11 +364,11 @@ dib-config="{
     <md-input-container aria-label="unique2"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
+class="md-block"
 >
     <input type="text" 
         name="unique2"
@@ -390,11 +391,11 @@ dib-config="{
     <md-input-container aria-label="notes"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="width:260px !important;    "
 dib-help='Any comments to be stored with the record - has no effect and is not displayed anywhere.
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
+class="md-block"
 >
     <input type="text" 
         name="notes"
