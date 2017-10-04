@@ -1,6 +1,6 @@
 <?php
 
-// NOTES: The index for the main dropinbase database must match the DBINDEX value in Dib.php
+// NOTES: The index (below) for the main dropinbase database must match the value of DBINDEX in Dib.php
 //        Using an IP address as host (eg 127.0.0.1 instead of 'localhost') can dramatically increase performance
 
 DIB::$DATABASES = array(
