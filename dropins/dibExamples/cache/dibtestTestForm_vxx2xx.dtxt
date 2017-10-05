@@ -157,7 +157,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="number" 
-        ng-disabled="true"
+ng-disabled="true"
         required
         name="id"
         ng-model="model.id"

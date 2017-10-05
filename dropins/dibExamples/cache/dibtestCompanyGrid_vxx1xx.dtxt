@@ -949,7 +949,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
 class="md-block"
 >
     <input type="number" 
-        ng-disabled="true"
+ng-disabled="true"
         required
         name="id"
         ng-model="model.id"
@@ -1457,7 +1457,7 @@ dib-config="{
                             No records available
                         </div>
                     </md-list-item>
-                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)"
+                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
                     >
                             <ng-form name='dibtestCompanyGrid' dib-container-name="dibtestCompanyGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="{{row.___editing? 'start start' :'start center' }}" ng-enter='saveRow($event,row)' isolate-form >
     <div table-column layout="column"
@@ -1490,7 +1490,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
 class="md-block"
 >
     <input type="number" 
-        ng-disabled="true"
+ng-disabled="true"
         required
         name="id"
         ng-model="model.id"

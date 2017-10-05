@@ -62,7 +62,7 @@
             $criteria = $this->parseFilter($activeFilter, $params, $filterParams);
             if(isset($criteria[0]) && $criteria[0]==='error')
                 return $criteria;
-            $criteria .= " AND ($criteria)";
+            $criteria = " AND $criteria";
             $fromClause = "`test`
                 ";
         } else 
@@ -78,7 +78,7 @@
         // Get total, first and last
         $sql = "SELECT count(*) as dib__total, min(`test`.`id`) as dib__minId, max(`test`.`id`) as dib__maxId FROM $fromClause $criteria";
         $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-        if(dibMySqlPdo::count() === 0)
+        if(empty($rst))
             return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#1).');
         $totalCount = $rst['dib__total'];
         $first = array('id' => $rst['dib__minId']);
@@ -96,16 +96,16 @@
             $tempCrit = ($criteria === '') ? "WHERE `test`.`id` < :pk1" : "$criteria AND `test`.`id` < :pk1";
             $sql = "SELECT max(`test`.`id`) as dib__Id, count(`test`.`id`) as dib__counter FROM $fromClause $tempCrit";
             $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-            if(dibMySqlPdo::count() === 0)
-                return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#1).');
+            if(empty($rst))
+                return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#2).');
             $prev = array('id' => $rst['dib__Id']);
             $currentNo = (int)$rst['dib__counter'] + 1;
             // Get next
             $tempCrit = ($criteria === '') ? "WHERE `test`.`id` > :pk1" : "$criteria AND `test`.`id` > :pk1";
             $sql = "SELECT min(`test`.`id`) as dib__Id FROM $fromClause $tempCrit";
             $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-            if(dibMySqlPdo::count() === 0)
-                return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#1).');
+            if(empty($rst))
+                return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#3).');
             $next = array('id' => $rst['dib__Id']);
         } else {
             $first = null;
@@ -137,7 +137,7 @@
             $criteria = $this->parseFilter($activeFilter, $params, $filterParams);
             if(isset($criteria[0]) && $criteria[0]==='error')
                 return $criteria;
-            $criteria .= " AND ($criteria)";
+            $criteria = " AND $criteria";
             $fromClause = "`test`
                 ";
         } else 
@@ -150,10 +150,9 @@ $sql = "SELECT `test`.`id`
         ORDER BY `test`.`id` 
         LIMIT " . ($position - 1) . ', 1'; 
         $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-        if(dibMySqlPdo::count() > 0)
-            return $rst;
-        else
+        if(empty($rst))
             return null;
+        return $rst ;
     }
     /**
      * parses $gridFilter and returns a SQL WHERE clause string, and PDO parameters (passed by reference)
@@ -511,7 +510,7 @@ $sql .= $criteria . $orderStr . $limit;
 				Log::err("Unique value validation failed. Ensure that values for all fields that are involved in checking unique index of pef_table_option.id 23300 are submitted to the server (ie they exist as fields in container id 7161)");
                 return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
             }
-            if(dibMySqlPdo::count() > 0) {
+            if(!empty($rst)) {
                 if($makeUniqueValues)
                     // Force unique values - for combinations, only enforce on first 
                     $attributes['unique_fld'] = SyncFunctions::cleanName($attributes['unique_fld'],'test', '');
@@ -540,7 +539,7 @@ $sql .= $criteria . $orderStr . $limit;
             $sql .= $fieldList . ") VALUES (" . $valueList . ")";
             dibMySqlPdo::setParamsType($fieldType, $targetDatabaseId);       
             $value = dibMySqlPdo::execute($sql, $targetDatabaseId, $params);           
-            if ($value === FALSE || dibMySqlPdo::count() === 0) {
+            if (empty($value)) {
                 if($value === FALSE && Database::lastErrorUserMsg())
                     return array('error', Database::lastErrorUserMsg());
                 else
@@ -720,7 +719,7 @@ $sql .= $criteria . $orderStr . $limit;
 						} else {
 							// Run 2nd query, eg SELECT id FROM pef_field f INNER JOIN pef_table t ON f.pef_table_id = t.id WHERE f.name=:fname and t.name=:name
 							$result = Database::fetch($value[1], $args, $targetDatabaseId);
-							if($result === FALSE || Database::count() === 0) {
+							if(empty($result)) {
 								// Check if 'create' is required
 								if(isset($value[2]) && $value[2]==='create') {
 									$result = Crud::duplicate($value[3], array('id'=>$record[$field]), $value[4], $targetDatabaseId);

@@ -362,7 +362,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
 class="md-block"
 >
     <input type="number" 
-        ng-disabled="true"
+ng-disabled="true"
         name="id"
         ng-model="model.id"
         aria-label="Id"
