@@ -1384,21 +1384,14 @@ $sql .= $criteria . $orderStr . $limit;
     }
     /**
      * Strips the attributes from any columns the user may not update
-     * @param $validColumns
      * @param $attributes
      * @return string
      */
-    private function removeSecuredColumns($validColumns, &$attributes) {
-        // *!* ***TODO the if statement below can be part of the template creation...        
-        if ($validColumns === "*")
-            $validAttributes = $attributes;
-        else {
-            $validAttributes = explode(",", $validColumns);
-            $validAttributes = array_flip($validAttributes);
-            $validAttributes = array_intersect_key($attributes, $validAttributes);
-        }
-        return $validAttributes;
-    } 
+    private function removeSecuredColumns(&$attributes) {
+        // Define list of fields that may be updated
+        $validAttributes = array();
+        return array_intersect_key($attributes, $validAttributes);
+    }
     public function getCaptions() {
     	return array('Id', 'Smallint Fld', 'Email', 'Varchar10 Required', 'Int Fld', 'Url', 'Has Default', 'Bigint Fld', 'Longitude', 'Time Stamp', 'Float Fld', 'Lattitude', 'Unique Fld', 'Double Fld', 'File Fld', 'Nvarchar80', 'Decimal Fld', 'Image Fld', 'Text Fld', 'Date Fld', 'Document Fld', 'Tinytext Fld', 'Time Fld', 'Expression Fld', 'Mediumtext Fld', 'Datetime Fld', 'Notes', 'Longtext Fld', 'Year Fld', 'Test Company', 'Bit Fld', 'Enum Fld', 'Test Company2', 'Tinyint Fld', 'Set Fld', 'Dibuid' );
     }

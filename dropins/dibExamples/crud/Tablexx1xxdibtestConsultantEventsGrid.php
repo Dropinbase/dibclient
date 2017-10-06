@@ -1091,21 +1091,14 @@ $result = $t->getDefaults('dibtestConsultantEventsGrid', $attributes, 'get defau
     }
     /**
      * Strips the attributes from any columns the user may not update
-     * @param $validColumns
      * @param $attributes
      * @return string
      */
-    private function removeSecuredColumns($validColumns, &$attributes) {
-        // *!* ***TODO the if statement below can be part of the template creation...        
-        if ($validColumns === "*")
-            $validAttributes = $attributes;
-        else {
-            $validAttributes = explode(",", $validColumns);
-            $validAttributes = array_flip($validAttributes);
-            $validAttributes = array_intersect_key($attributes, $validAttributes);
-        }
-        return $validAttributes;
-    } 
+    private function removeSecuredColumns(&$attributes) {
+        // Define list of fields that may be updated
+        $validAttributes = array();
+        return array_intersect_key($attributes, $validAttributes);
+    }
     public function getCaptions() {
     	return array('Id', 'Name', 'Employed At', 'Mobile', 'Email', 'Address1', 'Address2', 'City Town', 'Country', 'Longitude', 'Latitude', 'Notes' );
     }

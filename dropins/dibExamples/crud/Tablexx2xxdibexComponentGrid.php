@@ -1373,21 +1373,14 @@ $sql .= $criteria . $orderStr . $limit;
     }
     /**
      * Strips the attributes from any columns the user may not update
-     * @param $validColumns
      * @param $attributes
      * @return string
      */
-    private function removeSecuredColumns($validColumns, &$attributes) {
-        // *!* ***TODO the if statement below can be part of the template creation...        
-        if ($validColumns === "*")
-            $validAttributes = $attributes;
-        else {
-            $validAttributes = explode(",", $validColumns);
-            $validAttributes = array_flip($validAttributes);
-            $validAttributes = array_intersect_key($attributes, $validAttributes);
-        }
-        return $validAttributes;
-    } 
+    private function removeSecuredColumns(&$attributes) {
+        // Define list of fields that may be updated
+        $validAttributes = array();
+        return array_intersect_key($attributes, $validAttributes);
+    }
     public function getCaptions() {
     	return array('Id', 'Test Company', 'Test Company2', 'Varchar10 Required', 'Has Default', 'Time Stamp', 'Unique Fld', 'Nvarchar80', 'Text Fld', 'Tinytext Fld', 'Mediumtext Fld', 'Longtext Fld', 'Bit Fld', 'Tinyint Fld', 'Smallint Fld', 'Int Fld', 'Bigint Fld', 'Float Fld', 'Double Fld', 'Decimal Fld', 'Date Fld', 'Time Fld', 'Datetime Fld', 'Year Fld', 'Enum Fld', 'Set Fld', 'Email', 'Url', 'Longitude', 'Lattitude', 'File Fld', 'Image Fld', 'Document Fld', 'Expression Fld', 'Notes' );
     }
