@@ -146,7 +146,7 @@ class Sqlxx1xxdibtestCompanySqlRptGrid {
             $havingCrit = '';
             $userCrit = '';
             $criteria = "";
-            // php generated / developer filter
+            // PHP generated / developer filter
             if($phpFilter) { 
                 $params = $phpFilterParams;
                 $criteria .= " AND ($phpFilter) ";
@@ -232,7 +232,7 @@ class Sqlxx1xxdibtestCompanySqlRptGrid {
 	            // Store in cache
 	            //file_put_contents($path, $filteredCount)
 			//}
-            } 
+            }
             return array($records, $filteredCount, $totalCount, array());
         } catch (Exception $e) {
 			return array('error',"Error! Could not obtain data. Please contact the System Administrator");

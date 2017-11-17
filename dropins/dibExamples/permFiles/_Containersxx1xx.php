@@ -26,7 +26,8 @@
 |dibtestConsultantPortGrid;Table;1;test_consultant;1;pub/dropins/dibExamples/crud/Tablexx1xxdibtestConsultantPortGrid;pub/dropins/dibExamples/cache;;*;7166
 |dibtestdibContainer;None;;;1;;pub/dropins/dibExamples/cache;;*;7163
 |dibtestETEventsReport;None;;;1;;pub/dropins/dibExamples/cache;;*;8581
-|dibtestHorTree;None;;;1;;pub/dropins/dibExamples/cache;;*;8178
+|dibtestGridTree;Table;1;test_company;1;pub/dropins/dibExamples/crud/Tablexx1xxdibtestGridTree;pub/dropins/dibExamples/cache;;*;9564
+|dibtestHorTree;Custom;;;1;>/dropins/dibExamples/Tree;pub/dropins/dibExamples/cache;;*;8178
 |dibtestNestedPort;None;;;1;;pub/dropins/dibExamples/cache;;*;7167
 |dibtestTestForm;Table;1;test;1;pub/dropins/dibExamples/crud/Tablexx1xxdibtestTestForm;pub/dropins/dibExamples/cache;;*;8580
 |dibtestTree;None;;;1;;pub/dropins/dibExamples/cache;;*;7165

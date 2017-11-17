@@ -72,7 +72,7 @@
             $fromClause = "`test`";
         if($criteria !== '') $criteria = 'WHERE ' . substr($criteria, 4);
         if($getFirstOnly) { // Used after deletes to navigate to first record
-            $sql = "SELECT id FROM $fromClause $criteria ORDER BY id limit 1";
+            $sql = "SELECT `test`.`id` FROM $fromClause $criteria ORDER BY `test`.`id` limit 1";
             $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
             if($rst === FALSE)
                 return array('error', 'Could not get first record. Please contact the System Administrator. (#0).');
@@ -148,7 +148,7 @@
         } else 
             $fromClause = "`test`";
         if($criteria !== '') $criteria = 'WHERE ' . substr($criteria, 4);
-        // Template: SQL statement for MySql to fetch nth record for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
+        // Template: SQL statement for MySql to fetch nth record for the Toolbar on Forms. Used in eg Table.php.
 $sql = "SELECT `test`.`id` 
         FROM $fromClause
         $criteria
@@ -403,12 +403,12 @@ $sql = "SELECT `test`.`id`
                 }                
                 // Fetch records - handle only specific columns that may be viewed by this permgroup
                 // Set SQL statement
-                    // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg CrudPdoTemplate.php.
+                    // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg Table.php.
     if($page === 1)
         $limit = ' LIMIT ' . $page_size;
     else
         $limit = ' LIMIT ' . ($page_size * ($page - 1)) .  ', ' . $page_size;    
-                // Template: main SQL statement for MySQL to fetch many records limited by paging. Used in eg CrudPdoTemplate.php.
+                // Template: main SQL statement for MySQL to fetch many records limited by paging. Used in eg Table.php.
 if($readType === 'exportlist')
     $sql = "SELECT 
                 `test`.`id` AS `Id`, `test`.`varchar10_required` AS `Varchar10 Required`, `test`.`has_default` AS `Has Default`, `test`.`time_stamp` AS `Time Stamp`, `test`.`unique_fld` AS `Unique Fld`, `test`.`nvarchar80` AS `Nvarchar80`, `test`.`text_fld` AS `Text Fld`, `test`.`tinytext_fld` AS `Tinytext Fld`, `test`.`mediumtext_fld` AS `Mediumtext Fld`, `test`.`longtext_fld` AS `Longtext Fld`, `test`.`bit_fld` AS `Bit Fld`, `test`.`tinyint_fld` AS `Tinyint Fld`, `test`.`smallint_fld` AS `Smallint Fld`, `test`.`int_fld` AS `Int Fld`, `test`.`bigint_fld` AS `Bigint Fld`, `test`.`float_fld` AS `Float Fld`, `test`.`double_fld` AS `Double Fld`, `test`.`decimal_fld` AS `Decimal Fld`, `test`.`date_fld` AS `Date Fld`, `test`.`time_fld` AS `Time Fld`, `test`.`datetime_fld` AS `Datetime Fld`, `test`.`year_fld` AS `Year Fld`, `test`.`enum_fld` AS `Enum Fld`, `test`.`set_fld` AS `Set Fld`, `test`.`email` AS `Email`, `test`.`url` AS `Url`, `test`.`longitude` AS `Longitude`, `test`.`lattitude` AS `Lattitude`, `test`.`file_fld` AS `File Fld`, `test`.`image_fld` AS `Image Fld`, `test`.`document_fld` AS `Document Fld`, `test`.`expression_fld` AS `Expression Fld`, `test`.`notes` AS `Notes`, `test`.`dibuid` AS `Dibuid` 
@@ -436,60 +436,6 @@ $sql .= $criteria . $orderStr . $limit;
                     	return array('error',"Error! Could not read table information. Please contact the System Administrator.");
                 }
             // Get values where dropdowns are based on queries based on other db's...
-            }
-            if ($action === 'add') {
-                // Inline adding in the grid - add a blank row
-                // NOTE!: If the keys are not a continuous numeric sequence starting from 0, all keys are encoded as strings, and specified explicitly for each key-value pair.
-                $blankRecord = array("id"=>null, "varchar10_required"=>null, "unique_fld"=>null, "nvarchar80"=>null, "text_fld"=>null, "tinytext_fld"=>null, "mediumtext_fld"=>null, "longtext_fld"=>null, "bit_fld"=>null, "tinyint_fld"=>null, "smallint_fld"=>null, "int_fld"=>null, "bigint_fld"=>null, "float_fld"=>null, "double_fld"=>null, "decimal_fld"=>null, "date_fld"=>null, "time_fld"=>null, "datetime_fld"=>null, "year_fld"=>null, "enum_fld"=>null, "set_fld"=>null, "email"=>null, "url"=>null, "longitude"=>null, "lattitude"=>null, "file_fld"=>null, "image_fld"=>null, "document_fld"=>null, "expression_fld"=>null, "notes"=>null, "test_company_id"=>null, "test_company2_id"=>null, "dibuid"=>null);
-                $blankRecord = $this->getDefaults($blankRecord, $filterParams);
-                if(isset($blankRecord[0]) && $blankRecord[0]==='error')
-                	return array('error', $blankRecord[1]);
-                // Find offset in $attributes where pkey values from $actionData are in $attributes:
-                $actionData = json_decode(urldecode($actionData), true);
-                $found = FALSE;
-                $k=0;
-                if($actionData) {
-                	if(!array_key_exists('id', $actionData)) {
-						Log::err('To use inline adding, the primary key must be included in submitted fields.');
-	                	return array('error','Configuration error. Please contact the System Administrator.');
-	                }
-                    foreach($attributes as $k => $r) {
-                        if($r['id'] === $actionData['id']) {
-                            $found = TRUE;
-                            break;
-                        }
-                    }
-                }
-                if ($found === TRUE) // Insert the $blankRecord array at this offset
-                    array_splice($attributes, $k+1, 0, $blankRecord);
-                else // Insert the $blankRecord array at position 0
-                    array_unshift($attributes, $blankRecord);
-                $filteredCount++;
-            } elseif ($action === 'addreuse') {
-                // Inline adding in the grid - add a copy of the previous row
-                // NOTE!: If the keys are not a continuous numeric sequence starting from 0, all keys are encoded as strings, and specified explicitly for each key-value pair.
-                // Find offset where pkey values from $actionData are in $attributes:
-                $actionData = json_decode(urldecode($actionData), true);
-                $found = FALSE;
-                if($actionData) {
-                	if(!array_key_exists('id', $actionData)) {
-						Log::err('To use inline adding, the primary key must be included in submitted fields.');
-	                	return array('error','Configuration error. Please contact the System Administrator.');
-	                }
-                    foreach($attributes as $k => $r) {
-                        if($r['id'] === $actionData['id']) {
-                            $found = TRUE;
-                            break;
-                        }
-                    }
-                    if ($found === TRUE) {
-                        // Set primary key values to NULL
-                        $r['id'] = NULL;
-                        // Insert the $blankRecord array at this offset
-                        array_splice($attributes, $k+1, 0, array(0=>$r));
-                        $filteredCount++;
-                    }
-                }                
             }
             return array($attributes, $filteredCount, $totalCount, array());
         } catch (Exception $e) {

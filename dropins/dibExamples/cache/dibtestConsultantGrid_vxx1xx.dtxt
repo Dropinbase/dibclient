@@ -69,7 +69,7 @@ dib-config="{
 </md-button>
 <md-button aria-label="buttonGeoEncode"
 can-be-moved=true
- hide
+hide
 style="    "
     id='ci155178'
 aria-label="buttonGeoEncode"
@@ -157,7 +157,7 @@ dib-config="{
 }"
     ng-if="page.fromRecord > -1"
 >
-    <md-button ng-disabled="true" aria-label="Grid totals">
+    <md-button read-only aria-label="Grid totals">
         Records: {{page.fromRecord}}<span ng-if='page.fromRecord>0'> to {{page.toRecord}} of {{page.records}}</span> <span ng-if='page.totalRecords!=page.records'>(Total: {{page.totalRecords}})</span>
     </md-button>
 </div>
@@ -167,8 +167,8 @@ dib-config="{
             <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
             <div flex dib-table-width >
                 <md-list class='dib-grid-column-header'>
-                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
-                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0">
+                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" ng-class="{ 'search-open' : showSearch }" >
+                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0" >
                             <!--TODO checkbox<div flex> </div> -->
         <div table-column 
             flex = 'none'
@@ -181,6 +181,7 @@ dib-config="{
             flex = 'none'
             class="md-subhead"
             dib-column-heading='223342'
+            ng-if="view.btnHotTheSecond.visible"
             style="    "
 >
         </div>
@@ -232,6 +233,7 @@ dib-config="{
             flex 
             class="md-subhead"
             dib-column-heading='155183'
+            ng-if="view.name.visible"
             style="width:160px;    "
 >
             <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('name')" >
@@ -244,6 +246,11 @@ dib-config="{
                 <span ng-if="showSearch" dib-edit>
                         <md-input-container aria-label="name"
 can-be-moved=true
+item-alias="name" 
+    ng-show="view.name.visible || view.name == undefined"
+    dib-disable="{{view.name.disabled}}"
+    ng-class="view.name.class" 
+    ng-style="view.name.style"
 flex="100"
 style="    "
 dib-help='
@@ -299,6 +306,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='employed_at_id'
     select-model="search.selected___employed_at_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155193.searchTextsearch)"
@@ -313,6 +322,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     md-selected-item-change="select155193(search,'search','employed_at_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Employed At"
     id='ci155193'
@@ -341,7 +353,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
             dib-column-heading='223340'
             style="width:100px;    "
 >
-            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('dibsqli_insertedSql')" >
+            <div class="dib-column-header dib-long-text-column"  >
             Inserted SQL<span ng-if="gridOptions.sortFields['dibsqli_insertedSql']">
                         ({{gridOptions.sortFields['dibsqli_insertedSql']['Count']}})
                         <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['dibsqli_insertedSql']['Order'] == 'ASC'"></md-icon>
@@ -382,7 +394,7 @@ dib-config="{
             dib-column-heading='223341'
             style="    "
 >
-            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('dibsqli_moreInsertedSql')" >
+            <div class="dib-column-header dib-long-text-column"  >
             More Inserted SQL<span ng-if="gridOptions.sortFields['dibsqli_moreInsertedSql']">
                         ({{gridOptions.sortFields['dibsqli_moreInsertedSql']['Count']}})
                         <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['dibsqli_moreInsertedSql']['Order'] == 'ASC'"></md-icon>
@@ -421,7 +433,7 @@ dib-config="{
             flex = 'none'
             class="md-subhead"
             dib-column-heading='179921'
-            style="width:150px;    "
+            style="width:200px;    "
 >
             <div class="dib-column-header dib-long-text-column"  >
             Inserted HTML<span ng-if="gridOptions.sortFields['insertedHtml']">
@@ -527,7 +539,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
 class="md-block"
 >
     <input type="text" 
-         maxlength='120'
         name="email"
         ng-model="search.email"
         aria-label="Email"
@@ -544,7 +555,6 @@ dib-config="{
     >
     <label>Email</label>
     <div ng-messages="dibtestConsultantGrid.email.$error">
-         <div ng-message="maxlength">At most 120 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -877,14 +887,14 @@ dib-config="{
     listeners : {
     'click___dib*3zwl9qvh5' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestConsultantGrid',
         triggerType: 'click',
         nextActionItem: '',
         itemEventId: 'dib*3zwl9qvh5',        
         containerItemId: 179922,
-        submitUrl: '/dropins/dibExamples/Events/btnHot_click',        
+        submitUrl: '/dropins/dibExamples/Events/btnHot_click/{{row.id}}',        
         itemAlias: '',
         refreshItemId : '',
         responseType: 'actions'
@@ -901,10 +911,16 @@ dib-config="{
     <div table-column layout="column"
                 flex = 'none'
                 dib-column="223342"
+                ng-if="view.btnHotTheSecond.visible"
                 style="    "
     >
 <md-button aria-label="btnHotTheSecond"
 can-be-moved=true
+item-alias="btnHotTheSecond" 
+    ng-show="view.btnHotTheSecond.visible || view.btnHotTheSecond == undefined"
+    dib-disable="{{view.btnHotTheSecond.disabled}}"
+    ng-class="view.btnHotTheSecond.class" 
+    ng-style="view.btnHotTheSecond.style"
 class="md-raised md-squared md-icon-button"
 style="    "
     id='ci223342'
@@ -914,15 +930,15 @@ dib-config="{
     listeners : {
     'click___dib*edr3ge1jh3' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestConsultantGrid',
         triggerType: 'click',
         nextActionItem: '',
         itemEventId: 'dib*edr3ge1jh3',        
         containerItemId: 223342,
         submitUrl: '/dropins/dibExamples/Events/btnHot_click',        
-        itemAlias: '',
+        itemAlias: 'btnHotTheSecond',
         refreshItemId : '',
         responseType: 'actions'
     }
@@ -992,10 +1008,16 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155183"
+                ng-if="view.name.visible"
                 style="width:160px;    "
     >
         <div aria-label="name"
 can-be-moved=true
+item-alias="name" 
+    ng-show="view.name.visible || view.name == undefined"
+    dib-disable="{{view.name.disabled}}"
+    ng-class="view.name.class" 
+    ng-style="view.name.style"
 flex="100"
 class="md-body-2" layout="row" layout-align="start top"
 style="    "
@@ -1011,6 +1033,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <md-input-container aria-label="name"
 can-be-moved=true
+item-alias="name" 
+    ng-show="view.name.visible || view.name == undefined"
+    dib-disable="{{view.name.disabled}}"
+    ng-class="view.name.class" 
+    ng-style="view.name.style"
 flex="100"
 style="    "
 dib-help='
@@ -1082,6 +1109,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='employed_at_id'
     select-model="model.selected___employed_at_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155193.searchTextmodel)"
@@ -1096,6 +1125,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     md-selected-item-change="select155193(model,'model','employed_at_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Employed At"
     id='ci155193'
@@ -1171,9 +1203,9 @@ style="    "
     <div table-column layout="column"
                 flex = 'none'
                 dib-column="179921"
-                style="width:150px;    "
+                style="width:200px;    "
     >
-        <i style="color:red;">To set widths, remember to make <b>flex</b> = 'none'</i>
+        <i style="color:red; line-height: 17px">To set column widths, remember to set <b>flex</b> = 'none'</i>
     </div>
     <div table-column layout="column"
                 flex 
@@ -1661,7 +1693,7 @@ dib-config="{
                             No records available
                         </div>
                     </md-list-item>
-                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
+                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  md-colors="!row.___selected ? {} : {'color': 'default-accent-600', 'background': 'default-primary-100'}" ng-class="{  'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
                     >
                             <ng-form name='dibtestConsultantGrid' dib-container-name="dibtestConsultantGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="{{row.___editing? 'start start' :'start center' }}" ng-enter='saveRow($event,row)' isolate-form >
     <div table-column layout="column"
@@ -1680,14 +1712,14 @@ dib-config="{
     listeners : {
     'click___dib*3zwl9qvh5' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestConsultantGrid',
         triggerType: 'click',
         nextActionItem: '',
         itemEventId: 'dib*3zwl9qvh5',        
         containerItemId: 179922,
-        submitUrl: '/dropins/dibExamples/Events/btnHot_click',        
+        submitUrl: '/dropins/dibExamples/Events/btnHot_click/{{row.id}}',        
         itemAlias: '',
         refreshItemId : '',
         responseType: 'actions'
@@ -1704,10 +1736,16 @@ dib-config="{
     <div table-column layout="column"
                 flex = 'none'
                 dib-column="223342"
+                ng-if="view.btnHotTheSecond.visible"
                 style="    "
     >
 <md-button aria-label="btnHotTheSecond"
 can-be-moved=true
+item-alias="btnHotTheSecond" 
+    ng-show="view.btnHotTheSecond.visible || view.btnHotTheSecond == undefined"
+    dib-disable="{{view.btnHotTheSecond.disabled}}"
+    ng-class="view.btnHotTheSecond.class" 
+    ng-style="view.btnHotTheSecond.style"
 class="md-raised md-squared md-icon-button"
 style="    "
     id='ci223342'
@@ -1717,15 +1755,15 @@ dib-config="{
     listeners : {
     'click___dib*edr3ge1jh3' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestConsultantGrid',
         triggerType: 'click',
         nextActionItem: '',
         itemEventId: 'dib*edr3ge1jh3',        
         containerItemId: 223342,
         submitUrl: '/dropins/dibExamples/Events/btnHot_click',        
-        itemAlias: '',
+        itemAlias: 'btnHotTheSecond',
         refreshItemId : '',
         responseType: 'actions'
     }
@@ -1795,10 +1833,16 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155183"
+                ng-if="view.name.visible"
                 style="width:160px;    "
     >
         <div aria-label="name"
 can-be-moved=true
+item-alias="name" 
+    ng-show="view.name.visible || view.name == undefined"
+    dib-disable="{{view.name.disabled}}"
+    ng-class="view.name.class" 
+    ng-style="view.name.style"
 flex="100"
 class="md-body-2" layout="row" layout-align="start top"
 style="    "
@@ -1814,6 +1858,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <md-input-container aria-label="name"
 can-be-moved=true
+item-alias="name" 
+    ng-show="view.name.visible || view.name == undefined"
+    dib-disable="{{view.name.disabled}}"
+    ng-class="view.name.class" 
+    ng-style="view.name.style"
 flex="100"
 style="    "
 dib-help='
@@ -1885,6 +1934,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='employed_at_id'
     select-model="model.selected___employed_at_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155193.searchTextmodel)"
@@ -1899,6 +1950,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1442&text=test_consultant'
     md-selected-item-change="select155193(model,'model','employed_at_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Employed At"
     id='ci155193'
@@ -1974,9 +2028,9 @@ style="    "
     <div table-column layout="column"
                 flex = 'none'
                 dib-column="179921"
-                style="width:150px;    "
+                style="width:200px;    "
     >
-        <i style="color:red;">To set widths, remember to make <b>flex</b> = 'none'</i>
+        <i style="color:red; line-height: 17px">To set column widths, remember to set <b>flex</b> = 'none'</i>
     </div>
     <div table-column layout="column"
                 flex 

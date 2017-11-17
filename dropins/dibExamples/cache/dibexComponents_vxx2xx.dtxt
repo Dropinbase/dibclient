@@ -60,7 +60,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
 Fields, like any other component, can be drag-and-dropped to containers from the Components tree in the Designer.<br>
 Below are the components that are generally used on form-containers (eg dibForm and dibContainer), but can be used in the dockedItems section of eg grids and treegrids as well.<br>These are all unbound to the database - bound fields are displayed on the next tab.<br>
 Click on the other tabs to view other types of components.
@@ -141,7 +141,7 @@ dib-config="{
     listeners : {
     }
 }"
-        dib-data-component='inputTextarea'
+        dib-data-component='inputTextArea'
         md-detect-hidden
     >
     </textarea>
@@ -289,6 +289,8 @@ style="    "
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='mdautocomplete'
     select-model="model.selected___mdautocomplete.id"
     md-search-text-change="loadServiceciid(dropdowns.service154791.searchTextmodel)"
@@ -302,6 +304,9 @@ style="    "
     md-selected-item-change="select154791(model,'model','mdautocomplete')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="mdAutocomplete"
     id='ci154791'
@@ -549,7 +554,7 @@ dib-config="{
     listeners : {
     }
 }"
-        dib-data-component='inputDatetimeLocal'
+        dib-data-component='inputDateTimeLocal'
         md-detect-hidden
     >
     <label>inputDatetimeLocal</label>
@@ -589,13 +594,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.datepickerinput"
-        name=datepickerinput
+        name="datepickerinput"
         aria-label="datePickerInput"
         placeholder="datePickerInput"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"
@@ -630,7 +635,7 @@ class="md-block"
     dib-data-component='timeDatePickerInput'
     time-date-picker-input
     display-mode="material"
-    display-format="d MMMM yyyy  HH:mm"
+    display-format="YYYY/MM/DD HH:mm"
     mindate="1800-01-01"
     maxdate="2999-12-31"
     aria-invalid="true"
@@ -695,6 +700,7 @@ dib-config="{
     }
 }"
      src="/files/dropins/setNgMaterial/dibAdmin/images/diblogo.png"
+      title="img"
 />  
             </section>
     </md-card-content>
@@ -713,7 +719,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Websites can be included with a dibIframe component
     </p>    
 </span>
@@ -748,7 +754,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Rich text can be created and stored with the htmlEditor
     </p>    
 </span>
@@ -878,6 +884,21 @@ dib-config="{
     <md-tooltip md-direction="top" md-delay="500">Reload records</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg"></md-icon>
 </md-button>
+    <span aria-label="span"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="width:300px !important;  margin:15px 0px 0px 10px !important;  color : blue;"
+    id='ci242597'
+aria-label="span"
+dib-container-name='dibexComponents'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    Use the navigation buttons to navigate between records. Also note the URL changing.
+</span>
     <dib-form-paging aria-label="buttonsformnavigation"
 can-be-moved=true
 flex="none"
@@ -997,7 +1018,7 @@ class="md-block"
     dib-data-component='timeDatePickerInput'
     time-date-picker-input
     display-mode="material"
-    display-format="d MMMM yyyy  HH:mm"
+    display-format="YYYY/MM/DD HH:mm"
     mindate="1800-01-01"
     maxdate="2999-12-31"
     aria-invalid="true"
@@ -1027,8 +1048,8 @@ dib-config="{
 </span>
     <div layout='row' aria-label="parentCompanyId"
 can-be-moved=true
-item-alias="parentCompanyId"   
-    ng-show="!!view.parentCompanyId == false || view.parentCompanyId.visible" 
+item-alias="parentCompanyId" 
+    ng-show="view.parentCompanyId.visible || view.parentCompanyId == undefined"
     dib-disable="{{view.parentCompanyId.disabled}}"
     ng-class="view.parentCompanyId.class" 
     ng-style="view.parentCompanyId.style"
@@ -1043,6 +1064,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service154824.searchTextmodel)"
@@ -1056,6 +1079,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select154824(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Company Head-office"
         dib-active-filter='dibexComponents_parentCompanyId'
@@ -1067,7 +1093,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-config="{
         listeners : {
     'select___dib*0w2vda1mv7' : function(field, additionalInfoOnEvent) { 
-        element.trigger('enableDependency', ['select' , 'companyId' , additionalInfoOnEvent]);    
+        $element.trigger('enableDependency', ['select' , 'companyId' , additionalInfoOnEvent]);
+        if (!!$scope.loadService154825) {
+            $scope.loadService154825(null,true,true);
+            dibContainer.setItemAliasValue('dibexComponents.companyId',null,'dibexComponents');
+        }    
      } 
         }
     }"
@@ -1091,8 +1121,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 </div>
     <div layout='row' aria-label="companyId"
 can-be-moved=true
-item-alias="companyId"   
-    ng-show="!!view.companyId == false || view.companyId.visible" 
+item-alias="companyId" 
+    ng-show="view.companyId.visible || view.companyId == undefined"
     dib-disable="{{view.companyId.disabled}}"
     ng-class="view.companyId.class" 
     ng-style="view.companyId.style"
@@ -1107,6 +1137,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company2_id'
     select-model="model.selected___test_company2_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service154825.searchTextmodel)"
@@ -1120,6 +1152,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select154825(model,'model','test_company2_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Company"
         dib-active-filter='dibexComponents_companyId'
@@ -1163,7 +1198,7 @@ flex
 flex layout-fill
 style="    "
     >   <md-tab-body flex layout-fill>
-   <div layout-fill  flex 
+   <div layout-fill 
         aria-label="subContainerGrid"
 can-be-moved=true
 flex
@@ -1180,7 +1215,7 @@ dib-config="{
         <dibex-component-grid
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibex-component-grid>
     </div>
@@ -1224,12 +1259,16 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Buttons can be styled using the following Angular directives in layout_configs:<br>
 Intent is specified with <b>md-primary, md-accent, md-warn.</b><br>
 A round button style can be used by specifying <b>md-fab.</b>Use  <b>md-mini</b> for a smaller size button.<br>
 The hue can be altered with <b>md-hue-1, md-hue-2</b><br>
 Icons is implemented with <b>md-icon-button</b><br><br>
+
+Note, many fabulous icons are available here: <a target="blank" href="https://material.io/icons/">https://material.io/icons/</a>.
+
+<br><br>
 Hover over each button to see the content of the layout_configs field in the tooltip.
     </p>    
 </span>
@@ -1791,7 +1830,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The following buttons are examples of Dropinbase components used for very specific purposes, such as deleting records on a form, or clearing the filters in a grid.<br>Warning: clicking them here may "break" something as they are being used outside their intended contexts.
     </p>    
 </span>
@@ -1975,7 +2014,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     md-fab-speed-dial is a separate component that is often used for menu's as it floats above other components and takes up little space.<br>
 See <a target="_blank" href="https://material.angularjs.org/latest/demo/fabSpeedDial">Fab Speed Dial</a> for more info.
     </p>    
@@ -2146,7 +2185,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The sidenav-menu component is used as part of the Dropinbase basecontainer, dibAdmin, to form a menu structure that slides in from the left/right when the menu button is clicked..<br>Simply add sidenav-menu-node components to sidenav-menu to create a tree-structure. Items kan be nested up to two levels deep.<br><br>NOTE: For a menu node to display, at least one of the following conditions must be met:<br>
 - must have a port linked to it, pointing to a container that the user has permissions to open,<br>
 - must have an 'click' event linked to it with the necessary permissions,<br>
@@ -2156,8 +2195,8 @@ dib-config="{
 </span>
 <md-button aria-label="openMenu"
 can-be-moved=true
-item-alias="openMenu"   
-    ng-show="!!view.openMenu == false || view.openMenu.visible" 
+item-alias="openMenu" 
+    ng-show="view.openMenu.visible || view.openMenu == undefined"
     dib-disable="{{view.openMenu.disabled}}"
     ng-class="view.openMenu.class" 
     ng-style="view.openMenu.style"
@@ -2177,8 +2216,8 @@ dib-config="{
     <md-sidenav 
        aria-label="sidenavMenuEg"
 can-be-moved=true
-item-alias="sidenavMenuEg"   
-    ng-show="!!view.sidenavMenuEg == false || view.sidenavMenuEg.visible" 
+item-alias="sidenavMenuEg" 
+    ng-show="view.sidenavMenuEg.visible || view.sidenavMenuEg == undefined"
     dib-disable="{{view.sidenavMenuEg.disabled}}"
     ng-class="view.sidenavMenuEg.class" 
     ng-style="view.sidenavMenuEg.style"
@@ -2188,7 +2227,8 @@ class="md-sidenav-left"  md-is-locked-open="$mdMedia('sm')"
 style="    "
        id="ci179858"
        dib-side-bar-status
-       md-is-open="sideNavs.sidenavMenuEg" md-component-id="sidenavMenuEg"
+       md-is-open="sideNavs.sidenavMenuEg" 
+       md-component-id="sidenavMenuEg"
        id='ci179858'
 aria-label="sidenavMenuEg"
 dib-container-name='dibexComponents'
@@ -2200,7 +2240,7 @@ dib-config="{
     <md-toolbar >
         <div class="md-toolbar-tools">    
             <h2>What's for dinner?</h2>
-            <md-button ng-if='!dibCommon.navConfigSize("sidenavMenuEg")' class="md-icon-button" aria-label="Settings" ng-click="dibCommon.toggleNavigation('sidenavMenuEg')">
+            <md-button ng-if='!dibCommon.navConfigSize("sidenavMenuEg")' class="md-icon-button" aria-label="Settings" ng-click="dibCommon.toggleNavigation(null,'sidenavMenuEg')">
                 <md-icon md-svg-icon="/files/dropins/setNgMaterial/dibAngular/src/img/icons/menu.svg"></md-icon>
             </md-button> 
         </div>
@@ -2209,7 +2249,7 @@ dib-config="{
         <md-progress-linear ng-if="menus.service179858.loading" md-mode="indeterminate" class="dib-data-loading"></md-progress-linear>
         <md-list>
             <md-list-item class="dib-main-menu-item secondary-button-padding" ng-repeat="item in menus.service179858.menu" ng-if="item.text" 
-            ng-click="dibCommon.toggleNavigation(item,'menuItems')"  
+            ng-click="dibCommon.toggleNavigation(item,'sidenavMenuEg')"  
             dib-selected>
                 <div layout="column" flex>
                     <div layout="row" flex>
@@ -2227,7 +2267,7 @@ dib-config="{
                     </div>
                     <md-list ng-if="item.children"> 
                         <md-list-item ng-repeat="child in item.children"   
-                        ng-click="dibCommon.toggleNavigation(child,'menuItems')"  
+                        ng-click="dibCommon.toggleNavigation(child,'sidenavMenuEg')"  
                         ng-if="child.text" 
                         dib-selected
                         >
@@ -2274,7 +2314,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The md-menu and md-menu-item components are used to create simple menus.<br>
 See <a target="_blank" href="https://material.angularjs.org/latest/demo/menu">Menu</a> for more details.
     </p>    
@@ -2455,7 +2495,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Md-menubar is used to make more complex menus. Below a md-toolbar was used to group two buttons with it.<br>
 See <a target="_blank" href="https://material.angularjs.org/latest/demo/menuBar">Menu Bar</a> for a more elaborate example.
     </p>    

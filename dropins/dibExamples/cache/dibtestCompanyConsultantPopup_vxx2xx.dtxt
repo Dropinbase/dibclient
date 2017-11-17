@@ -97,7 +97,7 @@ dib-config="{
 }"
     ng-if="page.fromRecord > -1"
 >
-    <md-button ng-disabled="true" aria-label="Grid totals">
+    <md-button read-only aria-label="Grid totals">
         Records: {{page.fromRecord}}<span ng-if='page.fromRecord>0'> to {{page.toRecord}} of {{page.records}}</span> <span ng-if='page.totalRecords!=page.records'>(Total: {{page.totalRecords}})</span>
     </md-button>
 </div>
@@ -107,8 +107,8 @@ dib-config="{
             <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
             <div flex dib-table-width >
                 <md-list class='dib-grid-column-header'>
-                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
-                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0">
+                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" ng-class="{ 'search-open' : showSearch }" >
+                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0" >
                             <!--TODO checkbox<div flex> </div> -->
         <div table-column 
             flex = 'none'
@@ -181,6 +181,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="search.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155459.searchTextsearch)"
@@ -195,6 +197,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155459(search,'search','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155459'
@@ -244,6 +249,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='consultant_id'
     select-model="search.selected___consultant_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155460.searchTextsearch)"
@@ -257,6 +264,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155460(search,'search','consultant_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Consultant"
     id='ci155460'
@@ -347,7 +357,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
 class="md-block"
 >
     <input type="text" 
-         maxlength='250'
         name="notes"
         ng-model="search.notes"
         aria-label="Notes"
@@ -364,7 +373,6 @@ dib-config="{
     >
     <label>Notes</label>
     <div ng-messages="dibtestCompanyConsultantPopup.notes.$error">
-         <div ng-message="maxlength">At most 250 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -393,7 +401,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
 class="md-block"
 >
     <input type="text" 
-         maxlength='255'
         name="position"
         ng-model="search.position"
         aria-label="Position"
@@ -410,7 +417,6 @@ dib-config="{
     >
     <label>Position</label>
     <div ng-messages="dibtestCompanyConsultantPopup.position.$error">
-         <div ng-message="maxlength">At most 255 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -439,7 +445,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
 class="md-block"
 >
     <input type="text" 
-         maxlength='255'
         name="scope"
         ng-model="search.scope"
         aria-label="Scope"
@@ -456,7 +461,6 @@ dib-config="{
     >
     <label>Scope</label>
     <div ng-messages="dibtestCompanyConsultantPopup.scope.$error">
-         <div ng-message="maxlength">At most 255 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -560,6 +564,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155459.searchTextmodel)"
@@ -574,6 +580,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155459(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155459'
@@ -639,6 +648,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='consultant_id'
     select-model="model.selected___consultant_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155460.searchTextmodel)"
@@ -652,6 +663,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155460(model,'model','consultant_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Consultant"
     id='ci155460'
@@ -708,13 +722,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.date_started"
-        name=date_started
+        name="date_started"
         aria-label="Date Started"
         placeholder="Date Started"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"
@@ -939,7 +953,7 @@ dib-config="{
                             No records available
                         </div>
                     </md-list-item>
-                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
+                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  md-colors="!row.___selected ? {} : {'color': 'default-accent-600', 'background': 'default-primary-100'}" ng-class="{  'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
                     >
                             <ng-form name='dibtestCompanyConsultantPopup' dib-container-name="dibtestCompanyConsultantPopup" layout="row" flex="100" dib-inline-edit="closed" layout-align="{{row.___editing? 'start start' :'start center' }}" ng-enter='saveRow($event,row)' isolate-form >
     <div table-column layout="column"
@@ -1037,6 +1051,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155459.searchTextmodel)"
@@ -1051,6 +1067,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155459(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155459'
@@ -1116,6 +1135,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='consultant_id'
     select-model="model.selected___consultant_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155460.searchTextmodel)"
@@ -1129,6 +1150,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155460(model,'model','consultant_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Consultant"
     id='ci155460'
@@ -1185,13 +1209,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.date_started"
-        name=date_started
+        name="date_started"
         aria-label="Date Started"
         placeholder="Date Started"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"

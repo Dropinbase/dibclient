@@ -111,8 +111,8 @@ dib-config="{
     <md-menu-content width="4">
     <md-menu-item aria-label="xlsx"
 can-be-moved=true
-item-alias="xlsx"   
-    ng-show="!!view.xlsx == false || view.xlsx.visible" 
+item-alias="xlsx" 
+    ng-show="view.xlsx.visible || view.xlsx == undefined"
     dib-disable="{{view.xlsx.disabled}}"
     ng-class="view.xlsx.class" 
     ng-style="view.xlsx.style"
@@ -130,8 +130,8 @@ submitHeaderFilter : 'self',
     listeners : {
     'click___dib*l5013t5d0y' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'click',
         nextActionItem: '',
@@ -152,8 +152,8 @@ Excel (*.xlsx)
 </md-menu-item>
     <md-menu-item aria-label="xlsxA"
 can-be-moved=true
-item-alias="xlsxA"   
-    ng-show="!!view.xlsxA == false || view.xlsxA.visible" 
+item-alias="xlsxA" 
+    ng-show="view.xlsxA.visible || view.xlsxA == undefined"
     dib-disable="{{view.xlsxA.disabled}}"
     ng-class="view.xlsxA.class" 
     ng-style="view.xlsxA.style"
@@ -171,8 +171,8 @@ submitHeaderFilter : 'self',
     listeners : {
     'click___dib*wxb1c3e1742' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'click',
         nextActionItem: '',
@@ -193,8 +193,8 @@ Excel (*.xlsx Async)
 </md-menu-item>
     <md-menu-item aria-label="xlsxE"
 can-be-moved=true
-item-alias="xlsxE"   
-    ng-show="!!view.xlsxE == false || view.xlsxE.visible" 
+item-alias="xlsxE" 
+    ng-show="view.xlsxE.visible || view.xlsxE == undefined"
     dib-disable="{{view.xlsxE.disabled}}"
     ng-class="view.xlsxE.class" 
     ng-style="view.xlsxE.style"
@@ -212,8 +212,8 @@ submitHeaderFilter : 'self',
     listeners : {
     'click___dib*hpc1hhnb26' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'click',
         nextActionItem: '',
@@ -234,8 +234,8 @@ Excel PhpExcel (*.xlsx)
 </md-menu-item>
     <md-menu-item aria-label="xls"
 can-be-moved=true
-item-alias="xls"   
-    ng-show="!!view.xls == false || view.xls.visible" 
+item-alias="xls" 
+    ng-show="view.xls.visible || view.xls == undefined"
     dib-disable="{{view.xls.disabled}}"
     ng-class="view.xls.class" 
     ng-style="view.xls.style"
@@ -253,8 +253,8 @@ submitCheckedItem : 'self',
     listeners : {
     'click___dib*uin3kmn5l' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'click',
         nextActionItem: '',
@@ -275,8 +275,8 @@ Excel PhpExcel (*.xls)
 </md-menu-item>
     <md-menu-item aria-label="csv"
 can-be-moved=true
-item-alias="csv"   
-    ng-show="!!view.csv == false || view.csv.visible" 
+item-alias="csv" 
+    ng-show="view.csv.visible || view.csv == undefined"
     dib-disable="{{view.csv.disabled}}"
     ng-class="view.csv.class" 
     ng-style="view.csv.style"
@@ -294,8 +294,8 @@ submitCheckedItem : 'self',
     listeners : {
     'click___dib*68kh321zgx' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'click',
         nextActionItem: '',
@@ -413,7 +413,7 @@ dib-config="{
 }"
     ng-if="page.fromRecord > -1"
 >
-    <md-button ng-disabled="true" aria-label="Grid totals">
+    <md-button read-only aria-label="Grid totals">
         Records: {{page.fromRecord}}<span ng-if='page.fromRecord>0'> to {{page.toRecord}} of {{page.records}}</span> <span ng-if='page.totalRecords!=page.records'>(Total: {{page.totalRecords}})</span>
     </md-button>
 </div>
@@ -422,8 +422,8 @@ dib-config="{
             <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
             <div flex dib-table-width >
                 <md-list class='dib-grid-column-header'>
-                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
-                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0">
+                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" ng-class="{ 'search-open' : showSearch }" >
+                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0" >
                             <!--TODO checkbox<div flex> </div> -->
         <div table-column 
             flex = 'none'
@@ -517,6 +517,7 @@ dib-config="{
             flex 
             class="md-subhead"
             dib-column-heading='155243'
+            ng-if="view.chineseName.visible"
             style="width:160px;    "
 >
             <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('chinese_name')" >
@@ -529,8 +530,8 @@ dib-config="{
                 <span ng-if="showSearch" dib-edit>
                         <md-input-container aria-label="chineseName"
 can-be-moved=true
-item-alias="chineseName"   
-    ng-show="!!view.chineseName == false || view.chineseName.visible" 
+item-alias="chineseName" 
+    ng-show="view.chineseName.visible || view.chineseName == undefined"
     dib-disable="{{view.chineseName.disabled}}"
     ng-class="view.chineseName.class" 
     ng-style="view.chineseName.style"
@@ -566,6 +567,7 @@ dib-config="{
             flex 
             class="md-subhead"
             dib-column-heading='155244'
+            ng-if="view.parCompanyId.visible"
             style="width:200px;    "
 >
             <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('parent_company_id')" >
@@ -578,8 +580,8 @@ dib-config="{
                 <span ng-if="showSearch" dib-edit>
                         <div layout='row' aria-label="parCompanyId"
 can-be-moved=true
-item-alias="parCompanyId"   
-    ng-show="!!view.parCompanyId == false || view.parCompanyId.visible" 
+item-alias="parCompanyId" 
+    ng-show="view.parCompanyId.visible || view.parCompanyId == undefined"
     dib-disable="{{view.parCompanyId.disabled}}"
     ng-class="view.parCompanyId.class" 
     ng-style="view.parCompanyId.style"
@@ -594,6 +596,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='parent_company_id'
     select-model="search.selected___parent_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155244.searchTextsearch)"
@@ -608,6 +612,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     md-selected-item-change="select155244(search,'search','parent_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Parent Company"
     id='ci155244'
@@ -701,6 +708,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='parent_company_contact_id'
     select-model="search.selected___parent_company_contact_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155247.searchTextsearch)"
@@ -714,6 +723,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     md-selected-item-change="select155247(search,'search','parent_company_contact_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Parent Company Contact"
     id='ci155247'
@@ -724,8 +736,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
         listeners : {
     'select___dib*ddckc01wec' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'select',
         nextActionItem: '',
@@ -740,8 +752,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
      } ,
     'click___dib*egb3qgx1z' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'click',
         nextActionItem: '',
@@ -971,12 +983,13 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155243"
+                ng-if="view.chineseName.visible"
                 style="width:160px;    "
     >
         <div aria-label="chineseName"
 can-be-moved=true
-item-alias="chineseName"   
-    ng-show="!!view.chineseName == false || view.chineseName.visible" 
+item-alias="chineseName" 
+    ng-show="view.chineseName.visible || view.chineseName == undefined"
     dib-disable="{{view.chineseName.disabled}}"
     ng-class="view.chineseName.class" 
     ng-style="view.chineseName.style"
@@ -995,8 +1008,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     <span dib-edit ng-if="row.___editing" flex>
         <md-input-container aria-label="chineseName"
 can-be-moved=true
-item-alias="chineseName"   
-    ng-show="!!view.chineseName == false || view.chineseName.visible" 
+item-alias="chineseName" 
+    ng-show="view.chineseName.visible || view.chineseName == undefined"
     dib-disable="{{view.chineseName.disabled}}"
     ng-class="view.chineseName.class" 
     ng-style="view.chineseName.style"
@@ -1034,12 +1047,13 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155244"
+                ng-if="view.parCompanyId.visible"
                 style="width:200px;    "
     >
         <div aria-label="parCompanyId"
 can-be-moved=true
-item-alias="parCompanyId"   
-    ng-show="!!view.parCompanyId == false || view.parCompanyId.visible" 
+item-alias="parCompanyId" 
+    ng-show="view.parCompanyId.visible || view.parCompanyId == undefined"
     dib-disable="{{view.parCompanyId.disabled}}"
     ng-class="view.parCompanyId.class" 
     ng-style="view.parCompanyId.style"
@@ -1065,8 +1079,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     <span dib-edit ng-if="row.___editing" flex>
         <div layout='row' aria-label="parCompanyId"
 can-be-moved=true
-item-alias="parCompanyId"   
-    ng-show="!!view.parCompanyId == false || view.parCompanyId.visible" 
+item-alias="parCompanyId" 
+    ng-show="view.parCompanyId.visible || view.parCompanyId == undefined"
     dib-disable="{{view.parCompanyId.disabled}}"
     ng-class="view.parCompanyId.class" 
     ng-style="view.parCompanyId.style"
@@ -1081,6 +1095,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='parent_company_id'
     select-model="model.selected___parent_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155244.searchTextmodel)"
@@ -1095,6 +1111,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     md-selected-item-change="select155244(model,'model','parent_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Parent Company"
     id='ci155244'
@@ -1209,6 +1228,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='parent_company_contact_id'
     select-model="model.selected___parent_company_contact_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155247.searchTextmodel)"
@@ -1222,6 +1243,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     md-selected-item-change="select155247(model,'model','parent_company_contact_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Parent Company Contact"
     id='ci155247'
@@ -1232,8 +1256,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
         listeners : {
     'select___dib*ddckc01wec' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'select',
         nextActionItem: '',
@@ -1248,8 +1272,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
      } ,
     'click___dib*egb3qgx1z' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'click',
         nextActionItem: '',
@@ -1399,7 +1423,7 @@ dib-config="{
                             No records available
                         </div>
                     </md-list-item>
-                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
+                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  md-colors="!row.___selected ? {} : {'color': 'default-accent-600', 'background': 'default-primary-100'}" ng-class="{  'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
                     >
                             <ng-form name='dibtestCompanyGrid' dib-container-name="dibtestCompanyGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="{{row.___editing? 'start start' :'start center' }}" ng-enter='saveRow($event,row)' isolate-form >
     <div table-column layout="column"
@@ -1512,12 +1536,13 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155243"
+                ng-if="view.chineseName.visible"
                 style="width:160px;    "
     >
         <div aria-label="chineseName"
 can-be-moved=true
-item-alias="chineseName"   
-    ng-show="!!view.chineseName == false || view.chineseName.visible" 
+item-alias="chineseName" 
+    ng-show="view.chineseName.visible || view.chineseName == undefined"
     dib-disable="{{view.chineseName.disabled}}"
     ng-class="view.chineseName.class" 
     ng-style="view.chineseName.style"
@@ -1536,8 +1561,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     <span dib-edit ng-if="row.___editing" flex>
         <md-input-container aria-label="chineseName"
 can-be-moved=true
-item-alias="chineseName"   
-    ng-show="!!view.chineseName == false || view.chineseName.visible" 
+item-alias="chineseName" 
+    ng-show="view.chineseName.visible || view.chineseName == undefined"
     dib-disable="{{view.chineseName.disabled}}"
     ng-class="view.chineseName.class" 
     ng-style="view.chineseName.style"
@@ -1575,12 +1600,13 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155244"
+                ng-if="view.parCompanyId.visible"
                 style="width:200px;    "
     >
         <div aria-label="parCompanyId"
 can-be-moved=true
-item-alias="parCompanyId"   
-    ng-show="!!view.parCompanyId == false || view.parCompanyId.visible" 
+item-alias="parCompanyId" 
+    ng-show="view.parCompanyId.visible || view.parCompanyId == undefined"
     dib-disable="{{view.parCompanyId.disabled}}"
     ng-class="view.parCompanyId.class" 
     ng-style="view.parCompanyId.style"
@@ -1606,8 +1632,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     <span dib-edit ng-if="row.___editing" flex>
         <div layout='row' aria-label="parCompanyId"
 can-be-moved=true
-item-alias="parCompanyId"   
-    ng-show="!!view.parCompanyId == false || view.parCompanyId.visible" 
+item-alias="parCompanyId" 
+    ng-show="view.parCompanyId.visible || view.parCompanyId == undefined"
     dib-disable="{{view.parCompanyId.disabled}}"
     ng-class="view.parCompanyId.class" 
     ng-style="view.parCompanyId.style"
@@ -1622,6 +1648,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='parent_company_id'
     select-model="model.selected___parent_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155244.searchTextmodel)"
@@ -1636,6 +1664,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     md-selected-item-change="select155244(model,'model','parent_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Parent Company"
     id='ci155244'
@@ -1750,6 +1781,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='parent_company_contact_id'
     select-model="model.selected___parent_company_contact_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155247.searchTextmodel)"
@@ -1763,6 +1796,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     md-selected-item-change="select155247(model,'model','parent_company_contact_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Parent Company Contact"
     id='ci155247'
@@ -1773,8 +1809,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
         listeners : {
     'select___dib*ddckc01wec' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'select',
         nextActionItem: '',
@@ -1789,8 +1825,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
      } ,
     'click___dib*egb3qgx1z' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyGrid',
         triggerType: 'click',
         nextActionItem: '',

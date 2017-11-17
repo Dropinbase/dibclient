@@ -82,6 +82,21 @@ dib-config="{
     <md-tooltip md-direction="top" md-delay="500">View audit trail of record changes</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/audit_trail.svg"></md-icon>
 </md-button>
+    <span aria-label="span"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="  margin:20px 0px 0px 10px !important;  color : blue;"
+    id='ci242596'
+aria-label="span"
+dib-container-name='dibexComponentGrid'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <i>Double-click rows to edit them</i>
+</span>
     <span flex=auto
     aria-label="emptyspan"
 can-be-moved=true
@@ -157,7 +172,7 @@ dib-config="{
 }"
     ng-if="page.fromRecord > -1"
 >
-    <md-button ng-disabled="true" aria-label="Grid totals">
+    <md-button read-only aria-label="Grid totals">
         Records: {{page.fromRecord}}<span ng-if='page.fromRecord>0'> to {{page.toRecord}} of {{page.records}}</span> <span ng-if='page.totalRecords!=page.records'>(Total: {{page.totalRecords}})</span>
     </md-button>
 </div>
@@ -166,8 +181,8 @@ dib-config="{
             <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
             <div flex dib-table-width >
                 <md-list class='dib-grid-column-header'>
-                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
-                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0">
+                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" ng-class="{ 'search-open' : showSearch }" >
+                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0" >
                             <!--TODO checkbox<div flex> </div> -->
         <div table-column 
             flex = 'none'
@@ -240,6 +255,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="search.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155576.searchTextsearch)"
@@ -253,6 +270,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select155576(search,'search','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155576'
@@ -302,6 +322,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company2_id'
     select-model="search.selected___test_company2_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155577.searchTextsearch)"
@@ -315,6 +337,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select155577(search,'search','test_company2_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company2"
     id='ci155577'
@@ -361,7 +386,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='10'
         name="varchar10_required"
         ng-model="search.varchar10_required"
         aria-label="Varchar10 Required"
@@ -378,7 +402,6 @@ dib-config="{
     >
     <label>Varchar10 Required</label>
     <div ng-messages="dibexComponentGrid.varchar10_required.$error">
-         <div ng-message="maxlength">At most 10 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -407,7 +430,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='80'
         name="has_default"
         ng-model="search.has_default"
         aria-label="Has Default"
@@ -424,7 +446,6 @@ dib-config="{
     >
     <label>Has Default</label>
     <div ng-messages="dibexComponentGrid.has_default.$error">
-         <div ng-message="maxlength">At most 80 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -497,7 +518,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='50'
         name="unique_fld"
         ng-model="search.unique_fld"
         aria-label="Unique Fld"
@@ -514,7 +534,6 @@ dib-config="{
     >
     <label>Unique Fld</label>
     <div ng-messages="dibexComponentGrid.unique_fld.$error">
-         <div ng-message="maxlength">At most 50 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -543,7 +562,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='80'
         name="nvarchar80"
         ng-model="search.nvarchar80"
         aria-label="Nvarchar80"
@@ -560,7 +578,6 @@ dib-config="{
     >
     <label>Nvarchar80</label>
     <div ng-messages="dibexComponentGrid.nvarchar80.$error">
-         <div ng-message="maxlength">At most 80 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -765,7 +782,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='2'
         name="bit_fld"
         ng-model="search.bit_fld"
         aria-label="Bit Fld"
@@ -782,7 +798,6 @@ dib-config="{
     >
     <label>Bit Fld</label>
     <div ng-messages="dibexComponentGrid.bit_fld.$error">
-         <div ng-message="maxlength">At most 2 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1163,7 +1178,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='7'
         name="time_fld"
         ng-model="search.time_fld"
         aria-label="Time Fld"
@@ -1180,7 +1194,6 @@ dib-config="{
     >
     <label>Time Fld</label>
     <div ng-messages="dibexComponentGrid.time_fld.$error">
-         <div ng-message="maxlength">At most 7 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1297,7 +1310,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='255'
         name="enum_fld"
         ng-model="search.enum_fld"
         aria-label="Enum Fld"
@@ -1314,7 +1326,6 @@ dib-config="{
     >
     <label>Enum Fld</label>
     <div ng-messages="dibexComponentGrid.enum_fld.$error">
-         <div ng-message="maxlength">At most 255 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1343,7 +1354,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='255'
         name="set_fld"
         ng-model="search.set_fld"
         aria-label="Set Fld"
@@ -1360,7 +1370,6 @@ dib-config="{
     >
     <label>Set Fld</label>
     <div ng-messages="dibexComponentGrid.set_fld.$error">
-         <div ng-message="maxlength">At most 255 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1389,7 +1398,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='120'
         name="email"
         ng-model="search.email"
         aria-label="Email"
@@ -1406,7 +1414,6 @@ dib-config="{
     >
     <label>Email</label>
     <div ng-messages="dibexComponentGrid.email.$error">
-         <div ng-message="maxlength">At most 120 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1435,7 +1442,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='200'
         name="url"
         ng-model="search.url"
         aria-label="Url"
@@ -1452,7 +1458,6 @@ dib-config="{
     >
     <label>Url</label>
     <div ng-messages="dibexComponentGrid.url.$error">
-         <div ng-message="maxlength">At most 200 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1481,7 +1486,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='200'
         name="longitude"
         ng-model="search.longitude"
         aria-label="Longitude"
@@ -1498,7 +1502,6 @@ dib-config="{
     >
     <label>Longitude</label>
     <div ng-messages="dibexComponentGrid.longitude.$error">
-         <div ng-message="maxlength">At most 200 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1527,7 +1530,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='200'
         name="lattitude"
         ng-model="search.lattitude"
         aria-label="Lattitude"
@@ -1544,7 +1546,6 @@ dib-config="{
     >
     <label>Lattitude</label>
     <div ng-messages="dibexComponentGrid.lattitude.$error">
-         <div ng-message="maxlength">At most 200 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1573,7 +1574,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='200'
         name="file_fld"
         ng-model="search.file_fld"
         aria-label="File Fld"
@@ -1590,7 +1590,6 @@ dib-config="{
     >
     <label>File Fld</label>
     <div ng-messages="dibexComponentGrid.file_fld.$error">
-         <div ng-message="maxlength">At most 200 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1619,7 +1618,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='200'
         name="image_fld"
         ng-model="search.image_fld"
         aria-label="Image Fld"
@@ -1636,7 +1634,6 @@ dib-config="{
     >
     <label>Image Fld</label>
     <div ng-messages="dibexComponentGrid.image_fld.$error">
-         <div ng-message="maxlength">At most 200 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1665,7 +1662,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='200'
         name="document_fld"
         ng-model="search.document_fld"
         aria-label="Document Fld"
@@ -1682,7 +1678,6 @@ dib-config="{
     >
     <label>Document Fld</label>
     <div ng-messages="dibexComponentGrid.document_fld.$error">
-         <div ng-message="maxlength">At most 200 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1711,7 +1706,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='200'
         name="expression_fld"
         ng-model="search.expression_fld"
         aria-label="Expression Fld"
@@ -1728,7 +1722,6 @@ dib-config="{
     >
     <label>Expression Fld</label>
     <div ng-messages="dibexComponentGrid.expression_fld.$error">
-         <div ng-message="maxlength">At most 200 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1757,7 +1750,6 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
 class="md-block"
 >
     <input type="text" 
-         maxlength='255'
         name="notes"
         ng-model="search.notes"
         aria-label="Notes"
@@ -1774,7 +1766,6 @@ dib-config="{
     >
     <label>Notes</label>
     <div ng-messages="dibexComponentGrid.notes.$error">
-         <div ng-message="maxlength">At most 255 characters are allowed.</div>
     </div>
 </md-input-container>
                 </span>
@@ -1877,6 +1868,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155576.searchTextmodel)"
@@ -1890,6 +1883,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select155576(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155576'
@@ -1960,6 +1956,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company2_id'
     select-model="model.selected___test_company2_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155577.searchTextmodel)"
@@ -1973,6 +1971,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select155577(model,'model','test_company2_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company2"
     id='ci155577'
@@ -2152,7 +2153,7 @@ class="md-block"
     dib-data-component='timeDatePickerInput'
     time-date-picker-input
     display-mode="material"
-    display-format="d MMMM yyyy  HH:mm"
+    display-format="YYYY/MM/DD HH:mm"
     mindate="1800-01-01"
     maxdate="2999-12-31"
     aria-invalid="true"
@@ -2921,13 +2922,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.date_fld"
-        name=date_fld
+        name="date_fld"
         aria-label="Date Fld"
         placeholder="Date Fld"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"
@@ -3041,7 +3042,7 @@ class="md-block"
     dib-data-component='timeDatePickerInput'
     time-date-picker-input
     display-mode="material"
-    display-format="d MMMM yyyy  HH:mm"
+    display-format="YYYY/MM/DD HH:mm"
     mindate="1800-01-01"
     maxdate="2999-12-31"
     aria-invalid="true"
@@ -3730,7 +3731,7 @@ dib-config="{
                             No records available
                         </div>
                     </md-list-item>
-                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
+                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  md-colors="!row.___selected ? {} : {'color': 'default-accent-600', 'background': 'default-primary-100'}" ng-class="{  'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
                     >
                             <ng-form name='dibexComponentGrid' dib-container-name="dibexComponentGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="{{row.___editing? 'start start' :'start center' }}" ng-enter='saveRow($event,row)' isolate-form >
     <div table-column layout="column"
@@ -3827,6 +3828,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155576.searchTextmodel)"
@@ -3840,6 +3843,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select155576(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155576'
@@ -3910,6 +3916,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company2_id'
     select-model="model.selected___test_company2_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155577.searchTextmodel)"
@@ -3923,6 +3931,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select155577(model,'model','test_company2_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company2"
     id='ci155577'
@@ -4102,7 +4113,7 @@ class="md-block"
     dib-data-component='timeDatePickerInput'
     time-date-picker-input
     display-mode="material"
-    display-format="d MMMM yyyy  HH:mm"
+    display-format="YYYY/MM/DD HH:mm"
     mindate="1800-01-01"
     maxdate="2999-12-31"
     aria-invalid="true"
@@ -4871,13 +4882,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.date_fld"
-        name=date_fld
+        name="date_fld"
         aria-label="Date Fld"
         placeholder="Date Fld"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"
@@ -4991,7 +5002,7 @@ class="md-block"
     dib-data-component='timeDatePickerInput'
     time-date-picker-input
     display-mode="material"
-    display-format="d MMMM yyyy  HH:mm"
+    display-format="YYYY/MM/DD HH:mm"
     mindate="1800-01-01"
     maxdate="2999-12-31"
     aria-invalid="true"

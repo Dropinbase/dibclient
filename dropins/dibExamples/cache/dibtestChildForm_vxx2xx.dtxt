@@ -70,11 +70,12 @@ dib-config="{
     <md-tooltip md-direction="top" md-delay="500">Reload records</md-tooltip>
     <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg"></md-icon>
 </md-button>
-<md-button aria-label="gridButton"
+<md-button aria-label="btnGrid"
 can-be-moved=true
+class="md-raised"
 style="    "
     id='ci155255'
-aria-label="gridButton"
+aria-label="btnGrid"
 dib-container-name='dibtestChildForm'
 dib-config="{
     listeners : {
@@ -225,6 +226,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='pef_test_id'
     select-model="model.selected___pef_test_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155266.searchTextmodel)"
@@ -238,6 +241,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1438&text=test_child'
     md-selected-item-change="select155266(model,'model','pef_test_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test"
     id='ci155266'
@@ -271,13 +277,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.date_fld"
-        name=date_fld
+        name="date_fld"
         aria-label="Date Fld"
         placeholder="Date Fld"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"

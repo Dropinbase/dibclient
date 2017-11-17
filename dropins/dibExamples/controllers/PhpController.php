@@ -456,7 +456,7 @@ class PhpController extends Controller {
 		Use the "dibIgnore_" prefix to item names to exclude items from being included where needed.
 	*/
 	
-		$sendText = (!isset($submissionData['submitItemAlias.self']['sendText'])) ? '<h2>Empty :)</h2>' : $submissionData['submitItemAlias.self']['sendText'];
+		$sendText = (!isset($submissionData['submitItemAlias.self']['sendText'])) ? 'Empty :)' : $submissionData['submitItemAlias.self']['sendText'];
 		
 		// Let's put $sendText in a PDF file and return it to the user
 		
@@ -464,7 +464,7 @@ class PhpController extends Controller {
 		$sendText = strip_tags($sendText);
 		$sendText = substr($sendText, 0, 1000);
 		
-		if(trim($sendText)==='') $sendText = 'We may have stripped that...';
+		if(trim($sendText)==='') $sendText = '<h2>We may have stripped that...</h2>';
 		
 		// Replace line feeds with <br>
 		$sendText = str_replace("\n", '<br>', $sendText);
@@ -480,9 +480,9 @@ class PhpController extends Controller {
 		';
 		
 		// First load DPdf 
-		PeffApp::load('dibPdf', 'DPdf.php', 'components');
-		
-		DPdf::convertHtml($sendText, TRUE, 'myPdf.pdf');
+		PeffApp::load('dibPdf', 'DPdf.php', 'components');		
+
+		DPdf::convertHtml($sendText, true, 'myPdf.pdf');
 		
 		/* 
 		// ALTERNATIVE ... store the HTML in a file and export it to the client...

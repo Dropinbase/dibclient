@@ -195,8 +195,8 @@ dib-config="{
 </md-input-container>
     <md-input-container aria-label="varchar10"
 can-be-moved=true
-item-alias="varchar10"   
-    ng-show="!!view.varchar10 == false || view.varchar10.visible" 
+item-alias="varchar10" 
+    ng-show="view.varchar10.visible || view.varchar10 == undefined"
     dib-disable="{{view.varchar10.disabled}}"
     ng-class="view.varchar10.class" 
     ng-style="view.varchar10.style"
@@ -279,7 +279,7 @@ class="md-block"
     dib-data-component='timeDatePickerInput'
     time-date-picker-input
     display-mode="material"
-    display-format="d MMMM yyyy  HH:mm"
+    display-format="YYYY/MM/DD HH:mm"
     mindate="1800-01-01"
     maxdate="2999-12-31"
     aria-invalid="true"
@@ -370,7 +370,7 @@ dib-config="{
     listeners : {
     }
 }"
-        dib-data-component='inputTextarea'
+        dib-data-component='inputTextArea'
         md-detect-hidden
     >
     </textarea>
@@ -398,7 +398,7 @@ dib-config="{
     listeners : {
     }
 }"
-        dib-data-component='inputTextarea'
+        dib-data-component='inputTextArea'
         md-detect-hidden
     >
     </textarea>
@@ -426,7 +426,7 @@ dib-config="{
     listeners : {
     }
 }"
-        dib-data-component='inputTextarea'
+        dib-data-component='inputTextArea'
         md-detect-hidden
     >
     </textarea>
@@ -454,7 +454,7 @@ dib-config="{
     listeners : {
     }
 }"
-        dib-data-component='inputTextarea'
+        dib-data-component='inputTextArea'
         md-detect-hidden
     >
     </textarea>
@@ -713,13 +713,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.date_fld"
-        name=date_fld
+        name="date_fld"
         aria-label="Date Fld"
         placeholder="Date Fld"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"
@@ -786,7 +786,7 @@ class="md-block"
     dib-data-component='timeDatePickerInput'
     time-date-picker-input
     display-mode="material"
-    display-format="d MMMM yyyy  HH:mm"
+    display-format="YYYY/MM/DD HH:mm"
     mindate="1800-01-01"
     maxdate="2999-12-31"
     aria-invalid="true"
@@ -1194,6 +1194,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service194824.searchTextmodel)"
@@ -1207,6 +1209,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select194824(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci194824'
@@ -1247,6 +1252,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company2_id'
     select-model="model.selected___test_company2_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service194825.searchTextmodel)"
@@ -1260,6 +1267,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select194825(model,'model','test_company2_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company2"
     id='ci194825'

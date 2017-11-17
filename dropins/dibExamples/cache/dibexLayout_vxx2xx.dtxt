@@ -59,7 +59,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The design of Angular Material is based in the excellent research done by Google&apos;s  <a target="_blank" href="https://material.io/">Material Design</a> team. Under the hood it uses the powerful CSS3 <a href="http://www.w3.org/TR/css3-flexbox/">flexbox</a> to enable feature rich and responsive layouts.<br> All the complex CSS styling is implemented for you by means of a set of directives (eg layout-fill or flex=33) which works consistently across the range of modern devices and browsers. The developer uses directives to communicate intent, and the layout engine figures out how best to implement it.<br><br>
 
 Angular Material is ready for production sites, and has one of the most active developer communities on <a href="https://github.com/angular/material">Github</a>. The Angular Material site has <a href="https://material.angularjs.org/latest/demo/button">demo's</a>, <a href="https://material.angularjs.org/latest/api/directive/mdButton">API definitions</a>, <a href="https://material.angularjs.org/latest/layout/tips">troubleshooting tips</a>, and more. The Github site lists compatible browsers.<br><br>
@@ -83,7 +83,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The Width, Height, Margin, and Padding properties below are set in the corresponding fields in the DIB Item table (See Pg2 under "Selected Item" in the Designer).<br> They do not implement Angular Material directives; normal inline CSS styling is used.<br>Additional CSS styling can be configured using the Item table's css field.<br><b>Note</b>, it is normally best to follow the Angular approach of using directives as far as possible instead of specifying CSS directly.<br> Certain cases  do require CSS however. See the "Layout Configs"-tab for the use of AM directives.
     </p>    
 </span>
@@ -115,7 +115,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Implements the <a target="_blank" href="http://www.w3schools.com/css/pr_dim_width.asp">CSS width property</a>.<br>Below widths of 200px, 300px, 50%, 100% and 3.5in are used.<br>Note, relative width values such as percentages adjust automatically according to page or parent item width.<br> Also see <a target="_blank" href="http://www.w3schools.com/cssref/css_units.asp">CSS units</a> for more info.
     </p>    
 </span>
@@ -267,7 +267,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Implements the <a target="_blank" href="http://www.w3schools.com/cssref/pr_dim_height.asp">CSS height</a> property.<br>Below heights of 100px, 20mm and 2cm is used.
     </p>    
 </span>
@@ -308,6 +308,7 @@ dib-config="{
     }
 }"
      src="/files/icons/errorlogs.jpg"
+      title="Imagestatic"
 />  
 <md-button aria-label="button"
 can-be-moved=true
@@ -352,7 +353,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Specifies the margins around the component. The margin can be a single value to apply to all sides<br>or it can be a CSS style specification for each side, eg: 10px 15px 30px 10px (top, right, bottom, left).<br>See <a target="_blank" href="http://www.w3schools.com/css/css_margin.asp">CSS Margins</a> for more info
     </p>    
 </span>
@@ -510,7 +511,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Specifies the margins within the component around content (if item is eg a button), or other items (if item is a eg a layout component). The padding can be a single value to apply to all sides<br>or it can be a CSS style specification for each side, eg: 10px 15px 30px 10px' (top, right, bottom, left).<br>See <a target="_blank" href="http://www.w3schools.com/css/css_margin.asp">CSS Margins</a> for more info.
     </p>    
 </span>
@@ -692,7 +693,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Layout components, eg layoutRow, determine how the immediate child components are positioned and sized internally.<br>Angular has two basic layout types, row (arranges child items horizontally) and column (arranges child items vertically).<br>Various directives and configs provide finer control over positioning and sizing, eg flex and layout-align.
     </p>    
 </span>
@@ -724,7 +725,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     layoutRow is used to arrange child items horizontally.
     </p>    
 </span>
@@ -841,7 +842,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Below is the same layoutRow, but with added margins and width configs to child items.
     </p>    
 </span>
@@ -973,7 +974,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     layoutColumn is used to arrange child items vertically.
     </p>    
 </span>
@@ -1104,7 +1105,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     layoutColumnStart is a variation of layoutColumn. It differs only by means of not stretching child items horizontally.<br>Note, the same effect can be achieved by adding  ' layout-align="start start" ' to the layout_configs field of layoutColumn.
     </p>    
 </span>
@@ -1236,7 +1237,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     layoutRowFill is a variation of layoutRow. It uses the Angular layout-fill directive causing child items to vertically fill the available space.
     </p>    
 </span>
@@ -1317,7 +1318,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     layoutFieldset and mdCard are often used to group sets of components, with optional headings. Note, layoutFieldset is based on mdCard with some added layout configs.
     </p>    
 </span>
@@ -1561,7 +1562,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     You can use breakpoint alias suffixes to determine whether layoutColumn or layoutRow is used, depending on the size of the device's view.<br>For the demo below, as you shrink your browser window width notice the flow direction changes to "column" for mobile devices (xs). And as you expand it will reset to "row" for gt-sm view sizes.<br>See <a target="_blank" href="https://material.angularjs.org/latest/layout/container">Layouts and Responsive Breakpoints</a> for more information.
     </p>    
 </span>
@@ -1661,11 +1662,11 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Dropinbase adds the subcontainer component in order to nest whole containers in one another.<br>See the <a href="/nav/dibexSubcontainers">Subcontainer examples</a> for more information.
     </p>    
 </span>
-   <div layout-fill   
+   <div layout-fill 
         aria-label="subcontainer"
 can-be-moved=true
 flex="none"
@@ -1683,7 +1684,7 @@ dib-config="{
         <dibtest-consultant-form
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtest-consultant-form>
     </div>
@@ -1715,11 +1716,11 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Presents child layout components (eg layoutRow/mdCard/div/subcontainer) as horizontal tabs.<br>The current container makes use of mdTabs to categorize the components. <br>Below we used the md-align-tabs directive to position tabs at the bottom of the control.<br>NOTE: Angular shares the active index of all mdTabs components on the same view.<br>To nest mdTabs, or use more than one on the same container, use DIB subcontainer components.<br> Since the current container already makes use of mdTabs, the mdTabs below are in subcontainers.<br>See <a target="_blank" href="https://material.angularjs.org/latest/demo/tabs">Tabs</a> for more information.
     </p>    
 </span>
-   <div layout-fill  flex 
+   <div layout-fill 
         aria-label="subcontainerTabs"
 can-be-moved=true
 flex
@@ -1736,7 +1737,7 @@ dib-config="{
         <dibex-layout-tabs-subcontainer
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibex-layout-tabs-subcontainer>
     </div>
@@ -1768,12 +1769,12 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Off-course we can nest layout components to create more complex layouts...<br>Instead of mdTabs, we used the mdTabsStepper component.<br>
 The grey bar at the bottom of the screen with NEXT / PREV TAB buttons is part of the mdTabsStepper component.
     </p>    
 </span>
-   <div layout-fill   
+   <div layout-fill 
         aria-label="subcontainerNested"
 can-be-moved=true
 flex="none"
@@ -1791,7 +1792,7 @@ dib-config="{
         <dibex-layout-nested-components
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibex-layout-nested-components>
     </div>
@@ -1891,7 +1892,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Angular Material provides various directives to customize the size and position of items. The flex and layout_configs fields in the DIB Item table can be used to configure them.<br>
 See <a target="_blank" href="https://material.angularjs.org/latest/layout/children">Layout Children</a> for more info.<br><br>
 Note: also see <a target="_blank" href="https://material.angularjs.org/latest/layout/tips">Troubleshooting</a> on the Angular site for important tips when developing responsive sites, and resolutions to issues.
@@ -1925,7 +1926,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Flex values are percentages assigned to items to dynamically stretch or shrink their width relative to the available space within their parent container.<br>The widths of any items with fixed widths is first subtracted from the available space before calculations are made.<br>Flex values can be multiples of five, 33, 66, or one of the following: flex,none,auto,initial,grow,nogrow or noshrink.<br>Probably the most used is a value of 'flex' which causes the item to use up all the remaining space after other items' widths have been calculated.<br>Flex values can be set in the <i>flex</i> field in the Item table.<br>See <a target="_blank" href="https://material.angularjs.org/latest/layout/children">Layout Children</a> for more information about other values.
     </p>    
 </span>
@@ -2086,7 +2087,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Using <b>percentages</b> for widths can achieve a similar goal. Notice that the percentages are relative to the parent's width<br>and unlike flex, the fixed width of other child item's are not taken into account.<br>Notice that the total width below is 100% of the parent's width plus 200px + 250px (and therefore components don't fit on the parent).<br>Percentages are used mostly on their own, or in combination with flex. Percentages can not be used to set height, but note that flex can when used with the vbox layout.
     </p>    
 </span>
@@ -2306,7 +2307,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The flex, flex-order and flex-offset configs can all use responsive breakpoint aliases to cater for different device/view sizes.<br>
 See <a target="_blank" href="https://material.angularjs.org/latest/layout/children">Layout Children</a> and <a target="_blank" href="https://material.angularjs.org/latest/layout/options">Extra Options</a> for more info.
     </p>    
@@ -2387,7 +2388,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The flex-order config sets the ordering position of the item within its parent.<br>Since the order_no field in the Item table (pef_item) determines the default position of items, flex-order is only useful in responsive or dynamic (set programmatically) contexts.<br>Valid values are integers between -20 and 20.<br>Use the following link for more information about <a target="_blank" href="https://material.angularjs.org/latest/layout/children">using flex-order responsively</a>.
     </p>    
 </span>
@@ -2498,7 +2499,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Use flex-offset to adjust the left-margin offset percentage of the item with respect to the preceding item or the parent item's boundary.<br>Since the <i>margin</i> field in the Item table (pef_item) determines the default margin of items, flex-offset is only useful in responsive or dynamic contexts.<br>Values are percentages, and must be multiples of 5, or 33 / 66.<br>Use the following link for more information about <a target="_blank" href="https://material.angularjs.org/latest/layout/children">using flex-offset responsively</a>.
     </p>    
 </span>
@@ -2579,7 +2580,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The layout-align config works together with the layout type (row or column) to position items within the parent.<br>It makes use of two words. The first word (none,start(default),center,end,space-around,space-between) positions the items with respect to the layout direction (either horizontally for row, or vertically for column) of the parent layout component.<br>The second word (none, start,center,stretch(default),end) positions items with respect to the perpendicular axle of the layout direction.
 <br><br>Below is a layoutRow component (with a border around it for clarification) using layout-align="start start, with a responsive directive layout-align-gt-sm=""end stretch".<br>Note that fields do not stretch, but components like buttons, subcontainers and divs do.<br>
 <b>A clear illustration of the power of layout-align is provided <a href="">here</a></b>
@@ -2729,7 +2730,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The layout-margin adds a margin around each child item, as well as the layout component it is configured on. Note the space surrounding the blue boxes.
     </p>    
 </span>
@@ -2840,7 +2841,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The layout-padding adds padding to each child, as well as the layout component it is configured on. Note the space surrounding the words inside the blue boxes.
     </p>    
 </span>
@@ -2951,7 +2952,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Layout-fill is configured on the child item, and forces it to fill its parent.<br>
 Note: The child item should be the only child item of its parent.
     </p>    
@@ -3019,7 +3020,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Layout-wrap allows child items to wrap within the parent component it is configured on, when the items use more than 100% of available space. 
     </p>    
 </span>
@@ -3130,7 +3131,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The <i>ng-show</i> and <i>ng-hide</i> directives can be used to responsively show and hide items.
     </p>    
 </span>
@@ -3275,7 +3276,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     AngularJs ships with many useful directives, all of which can be used in Dropinbase.<br>Use the <i>Layout Configs/Attributes</i> field in the Designer to apply them to items.<br>Refer to the <a href="https://docs.angularjs.org/api/ng/directive">AngularJs API</a> for more info, and use the Designer to view the directives that are applied below.
     </p>    
 </span>
@@ -3365,6 +3366,8 @@ style="width:300px !important;    "
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='dropdown'
     select-model="model.selected___dropdown.id"
     md-search-text-change="loadServiceciid(dropdowns.service213935.searchTextmodel)"
@@ -3378,6 +3381,9 @@ style="width:300px !important;    "
     md-selected-item-change="select213935(model,'model','dropdown')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Dropdown"
     id='ci213935'
@@ -3427,7 +3433,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Disables or makes an item read-only, based on an expression evaluating to true.<br>
 Check the checkbox, and select &apos;pears&apos; in the Value List above.
     </p>    
@@ -3533,7 +3539,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Shows/hides an item based on an expression evaluating to true.<br>Check the checkbox and select a company > 'B' in the dropdown.
     </p>    
 </span>
@@ -3723,7 +3729,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Completely removes and recreates an item in the DOM based on an expression evaluating to true.<br>Select any value in Value List and either (All) or (Top 5) in the dropdown.
     </p>    
 </span>
@@ -3771,7 +3777,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Displays child items where their ng-swtch-when directive matches the ng-switch expression of the parent. If no match is made, a child item with the ng-switch-default directive is shown.<br>Select values in the Value List.
     </p>    
 </span>
@@ -4028,7 +4034,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Applies styles conditionally to items, based on one or more expressions evaluating to true.<br>Select any value in Value List.
     </p>    
 </span>

@@ -66,8 +66,8 @@ dib-config="{
 </md-button>
 <md-button aria-label="btnSubmissionDataGrid"
 can-be-moved=true
-item-alias="btnSubmissionDataGrid"   
-    ng-show="!!view.btnSubmissionDataGrid == false || view.btnSubmissionDataGrid.visible" 
+item-alias="btnSubmissionDataGrid" 
+    ng-show="view.btnSubmissionDataGrid.visible || view.btnSubmissionDataGrid == undefined"
     dib-disable="{{view.btnSubmissionDataGrid.disabled}}"
     ng-class="view.btnSubmissionDataGrid.class" 
     ng-style="view.btnSubmissionDataGrid.style"
@@ -83,8 +83,8 @@ submitFormData : 'parent.subConsultForm',
     listeners : {
     'click___dib*b2lknhcb5' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'click',
         nextActionItem: '',
@@ -179,7 +179,7 @@ dib-config="{
 }"
     ng-if="page.fromRecord > -1"
 >
-    <md-button ng-disabled="true" aria-label="Grid totals">
+    <md-button read-only aria-label="Grid totals">
         Records: {{page.fromRecord}}<span ng-if='page.fromRecord>0'> to {{page.toRecord}} of {{page.records}}</span> <span ng-if='page.totalRecords!=page.records'>(Total: {{page.totalRecords}})</span>
     </md-button>
 </div>
@@ -189,8 +189,8 @@ dib-config="{
             <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
             <div flex dib-table-width >
                 <md-list class='dib-grid-column-header'>
-                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
-                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0">
+                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" ng-class="{ 'search-open' : showSearch }" >
+                        <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0" >
                             <!--TODO checkbox<div flex> </div> -->
         <div table-column 
             flex = 'none'
@@ -263,6 +263,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="search.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155406.searchTextsearch)"
@@ -277,6 +279,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155406(search,'search','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155406'
@@ -303,6 +308,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
             flex 
             class="md-subhead"
             dib-column-heading='155407'
+            ng-if="view.consultantId.visible"
             style="width:200px;    "
 >
             <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('consultant_id')" >
@@ -315,8 +321,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
                 <span ng-if="showSearch" dib-edit>
                         <div layout='row' aria-label="consultantId"
 can-be-moved=true
-item-alias="consultantId"   
-    ng-show="!!view.consultantId == false || view.consultantId.visible" 
+item-alias="consultantId" 
+    ng-show="view.consultantId.visible || view.consultantId == undefined"
     dib-disable="{{view.consultantId.disabled}}"
     ng-class="view.consultantId.class" 
     ng-style="view.consultantId.style"
@@ -331,6 +337,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     dib-onload-service 
     has-store="true"
     data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='consultant_id'
     select-model="search.selected___consultant_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155407.searchTextsearch)"
@@ -344,6 +352,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155407(search,'search','consultant_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Consultant"
     id='ci155407'
@@ -370,6 +381,7 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
             flex 
             class="md-subhead"
             dib-column-heading='155408'
+            ng-if="view.dateStarted.visible"
             style="width:80px;    "
 >
             <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('date_started')" >
@@ -382,8 +394,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
                 <span ng-if="showSearch" dib-edit>
                         <md-input-container aria-label="dateStarted"
 can-be-moved=true
-item-alias="dateStarted"   
-    ng-show="!!view.dateStarted == false || view.dateStarted.visible" 
+item-alias="dateStarted" 
+    ng-show="view.dateStarted.visible || view.dateStarted == undefined"
     dib-disable="{{view.dateStarted.disabled}}"
     ng-class="view.dateStarted.class" 
     ng-style="view.dateStarted.style"
@@ -419,6 +431,7 @@ dib-config="{
             flex 
             class="md-subhead"
             dib-column-heading='155410'
+            ng-if="view.position.visible"
             style="width:130px;    "
 >
             <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('position')" >
@@ -431,8 +444,8 @@ dib-config="{
                 <span ng-if="showSearch" dib-edit>
                         <md-input-container aria-label="position"
 can-be-moved=true
-item-alias="position"   
-    ng-show="!!view.position == false || view.position.visible" 
+item-alias="position" 
+    ng-show="view.position.visible || view.position == undefined"
     dib-disable="{{view.position.disabled}}"
     ng-class="view.position.class" 
     ng-style="view.position.style"
@@ -455,8 +468,8 @@ dib-config="{
     listeners : {
     'focus___dib*ydk5y64je1' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'focus',
         nextActionItem: '',
@@ -484,6 +497,7 @@ dib-config="{
             flex 
             class="md-subhead"
             dib-column-heading='155411'
+            ng-if="view.scope.visible"
             style="width:130px;    "
 >
             <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('scope')" >
@@ -496,8 +510,8 @@ dib-config="{
                 <span ng-if="showSearch" dib-edit>
                         <md-input-container aria-label="scope"
 can-be-moved=true
-item-alias="scope"   
-    ng-show="!!view.scope == false || view.scope.visible" 
+item-alias="scope" 
+    ng-show="view.scope.visible || view.scope == undefined"
     dib-disable="{{view.scope.disabled}}"
     ng-class="view.scope.class" 
     ng-style="view.scope.style"
@@ -520,8 +534,8 @@ dib-config="{
     listeners : {
     'select___dib*eqb1a98sh81' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'select',
         nextActionItem: '',
@@ -580,8 +594,8 @@ dib-config="{
     listeners : {
     'change___dib*pz13l8l521' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'change',
         nextActionItem: '',
@@ -704,6 +718,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155406.searchTextmodel)"
@@ -718,6 +734,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155406(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155406'
@@ -752,12 +771,13 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <div table-column layout="column"
                 flex 
                 dib-column="155407"
+                ng-if="view.consultantId.visible"
                 style="width:200px;    "
     >
         <div aria-label="consultantId"
 can-be-moved=true
-item-alias="consultantId"   
-    ng-show="!!view.consultantId == false || view.consultantId.visible" 
+item-alias="consultantId" 
+    ng-show="view.consultantId.visible || view.consultantId == undefined"
     dib-disable="{{view.consultantId.disabled}}"
     ng-class="view.consultantId.class" 
     ng-style="view.consultantId.style"
@@ -776,8 +796,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <div layout='row' aria-label="consultantId"
 can-be-moved=true
-item-alias="consultantId"   
-    ng-show="!!view.consultantId == false || view.consultantId.visible" 
+item-alias="consultantId" 
+    ng-show="view.consultantId.visible || view.consultantId == undefined"
     dib-disable="{{view.consultantId.disabled}}"
     ng-class="view.consultantId.class" 
     ng-style="view.consultantId.style"
@@ -793,6 +813,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='consultant_id'
     select-model="model.selected___consultant_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155407.searchTextmodel)"
@@ -806,6 +828,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155407(model,'model','consultant_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Consultant"
     id='ci155407'
@@ -833,12 +858,13 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <div table-column layout="column"
                 flex 
                 dib-column="155408"
+                ng-if="view.dateStarted.visible"
                 style="width:80px;    "
     >
         <div aria-label="dateStarted"
 can-be-moved=true
-item-alias="dateStarted"   
-    ng-show="!!view.dateStarted == false || view.dateStarted.visible" 
+item-alias="dateStarted" 
+    ng-show="view.dateStarted.visible || view.dateStarted == undefined"
     dib-disable="{{view.dateStarted.disabled}}"
     ng-class="view.dateStarted.class" 
     ng-style="view.dateStarted.style"
@@ -857,8 +883,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <md-input-container aria-label="dateStarted"
 can-be-moved=true
-item-alias="dateStarted"   
-    ng-show="!!view.dateStarted == false || view.dateStarted.visible" 
+item-alias="dateStarted" 
+    ng-show="view.dateStarted.visible || view.dateStarted == undefined"
     dib-disable="{{view.dateStarted.disabled}}"
     ng-class="view.dateStarted.class" 
     ng-style="view.dateStarted.style"
@@ -872,13 +898,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.date_started"
-        name=date_started
+        name="date_started"
         aria-label="Date Started"
         placeholder="Date Started"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"
@@ -904,12 +930,13 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155410"
+                ng-if="view.position.visible"
                 style="width:130px;    "
     >
         <div aria-label="position"
 can-be-moved=true
-item-alias="position"   
-    ng-show="!!view.position == false || view.position.visible" 
+item-alias="position" 
+    ng-show="view.position.visible || view.position == undefined"
     dib-disable="{{view.position.disabled}}"
     ng-class="view.position.class" 
     ng-style="view.position.style"
@@ -928,8 +955,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <div layout='row' aria-label="position"
 can-be-moved=true
-item-alias="position"   
-    ng-show="!!view.position == false || view.position.visible" 
+item-alias="position" 
+    ng-show="view.position.visible || view.position == undefined"
     dib-disable="{{view.position.disabled}}"
     ng-class="view.position.class" 
     ng-style="view.position.style"
@@ -960,8 +987,8 @@ dib-config="{
     listeners : {
     'focus___dib*ydk5y64je1' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'focus',
         nextActionItem: '',
@@ -992,12 +1019,13 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155411"
+                ng-if="view.scope.visible"
                 style="width:130px;    "
     >
         <div aria-label="scope"
 can-be-moved=true
-item-alias="scope"   
-    ng-show="!!view.scope == false || view.scope.visible" 
+item-alias="scope" 
+    ng-show="view.scope.visible || view.scope == undefined"
     dib-disable="{{view.scope.disabled}}"
     ng-class="view.scope.class" 
     ng-style="view.scope.style"
@@ -1016,8 +1044,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <div layout='row' aria-label="scope"
 can-be-moved=true
-item-alias="scope"   
-    ng-show="!!view.scope == false || view.scope.visible" 
+item-alias="scope" 
+    ng-show="view.scope.visible || view.scope == undefined"
     dib-disable="{{view.scope.disabled}}"
     ng-class="view.scope.class" 
     ng-style="view.scope.style"
@@ -1048,8 +1076,8 @@ dib-config="{
     listeners : {
     'select___dib*eqb1a98sh81' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'select',
         nextActionItem: '',
@@ -1119,8 +1147,8 @@ dib-config="{
     listeners : {
     'change___dib*pz13l8l521' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'change',
         nextActionItem: '',
@@ -1171,7 +1199,7 @@ dib-config="{
                             No records available
                         </div>
                     </md-list-item>
-                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
+                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  md-colors="!row.___selected ? {} : {'color': 'default-accent-600', 'background': 'default-primary-100'}" ng-class="{  'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(row, $event, element)"
                     >
                             <ng-form name='dibtestCompanyConsultantGrid' dib-container-name="dibtestCompanyConsultantGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="{{row.___editing? 'start start' :'start center' }}" ng-enter='saveRow($event,row)' isolate-form >
     <div table-column layout="column"
@@ -1269,6 +1297,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155406.searchTextmodel)"
@@ -1283,6 +1313,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155406(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Test Company"
     id='ci155406'
@@ -1317,12 +1350,13 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <div table-column layout="column"
                 flex 
                 dib-column="155407"
+                ng-if="view.consultantId.visible"
                 style="width:200px;    "
     >
         <div aria-label="consultantId"
 can-be-moved=true
-item-alias="consultantId"   
-    ng-show="!!view.consultantId == false || view.consultantId.visible" 
+item-alias="consultantId" 
+    ng-show="view.consultantId.visible || view.consultantId == undefined"
     dib-disable="{{view.consultantId.disabled}}"
     ng-class="view.consultantId.class" 
     ng-style="view.consultantId.style"
@@ -1341,8 +1375,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <div layout='row' aria-label="consultantId"
 can-be-moved=true
-item-alias="consultantId"   
-    ng-show="!!view.consultantId == false || view.consultantId.visible" 
+item-alias="consultantId" 
+    ng-show="view.consultantId.visible || view.consultantId == undefined"
     dib-disable="{{view.consultantId.disabled}}"
     ng-class="view.consultantId.class" 
     ng-style="view.consultantId.style"
@@ -1358,6 +1392,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     has-store="true"
     data-item-alias-location="parentElement"
     required md-require-match='true'
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='consultant_id'
     select-model="model.selected___consultant_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155407.searchTextmodel)"
@@ -1371,6 +1407,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155407(model,'model','consultant_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Consultant"
     id='ci155407'
@@ -1398,12 +1437,13 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <div table-column layout="column"
                 flex 
                 dib-column="155408"
+                ng-if="view.dateStarted.visible"
                 style="width:80px;    "
     >
         <div aria-label="dateStarted"
 can-be-moved=true
-item-alias="dateStarted"   
-    ng-show="!!view.dateStarted == false || view.dateStarted.visible" 
+item-alias="dateStarted" 
+    ng-show="view.dateStarted.visible || view.dateStarted == undefined"
     dib-disable="{{view.dateStarted.disabled}}"
     ng-class="view.dateStarted.class" 
     ng-style="view.dateStarted.style"
@@ -1422,8 +1462,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <md-input-container aria-label="dateStarted"
 can-be-moved=true
-item-alias="dateStarted"   
-    ng-show="!!view.dateStarted == false || view.dateStarted.visible" 
+item-alias="dateStarted" 
+    ng-show="view.dateStarted.visible || view.dateStarted == undefined"
     dib-disable="{{view.dateStarted.disabled}}"
     ng-class="view.dateStarted.class" 
     ng-style="view.dateStarted.style"
@@ -1437,13 +1477,13 @@ class="md-block"
     <input type="text"
         theme="material"
         ng-model="model.date_started"
-        name=date_started
+        name="date_started"
         aria-label="Date Started"
         placeholder="Date Started"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"
@@ -1469,12 +1509,13 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155410"
+                ng-if="view.position.visible"
                 style="width:130px;    "
     >
         <div aria-label="position"
 can-be-moved=true
-item-alias="position"   
-    ng-show="!!view.position == false || view.position.visible" 
+item-alias="position" 
+    ng-show="view.position.visible || view.position == undefined"
     dib-disable="{{view.position.disabled}}"
     ng-class="view.position.class" 
     ng-style="view.position.style"
@@ -1493,8 +1534,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <div layout='row' aria-label="position"
 can-be-moved=true
-item-alias="position"   
-    ng-show="!!view.position == false || view.position.visible" 
+item-alias="position" 
+    ng-show="view.position.visible || view.position == undefined"
     dib-disable="{{view.position.disabled}}"
     ng-class="view.position.class" 
     ng-style="view.position.style"
@@ -1525,8 +1566,8 @@ dib-config="{
     listeners : {
     'focus___dib*ydk5y64je1' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'focus',
         nextActionItem: '',
@@ -1557,12 +1598,13 @@ dib-config="{
     <div table-column layout="column"
                 flex 
                 dib-column="155411"
+                ng-if="view.scope.visible"
                 style="width:130px;    "
     >
         <div aria-label="scope"
 can-be-moved=true
-item-alias="scope"   
-    ng-show="!!view.scope == false || view.scope.visible" 
+item-alias="scope" 
+    ng-show="view.scope.visible || view.scope == undefined"
     dib-disable="{{view.scope.disabled}}"
     ng-class="view.scope.class" 
     ng-style="view.scope.style"
@@ -1581,8 +1623,8 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     <span dib-edit ng-if="row.___editing" flex>
         <div layout='row' aria-label="scope"
 can-be-moved=true
-item-alias="scope"   
-    ng-show="!!view.scope == false || view.scope.visible" 
+item-alias="scope" 
+    ng-show="view.scope.visible || view.scope == undefined"
     dib-disable="{{view.scope.disabled}}"
     ng-class="view.scope.class" 
     ng-style="view.scope.style"
@@ -1613,8 +1655,8 @@ dib-config="{
     listeners : {
     'select___dib*eqb1a98sh81' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'select',
         nextActionItem: '',
@@ -1684,8 +1726,8 @@ dib-config="{
     listeners : {
     'change___dib*pz13l8l521' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestCompanyConsultantGrid',
         triggerType: 'change',
         nextActionItem: '',
