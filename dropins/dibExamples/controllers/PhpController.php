@@ -161,13 +161,37 @@ class PhpController extends Controller {
 		// The 4th parameter is a SQL WHERE clause
 		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', "name = '$newName'");
 
-		// To avoid SQL injection, we could use :name, but then need to include it in $params
+		// To avoid SQL injection, it is best to use PDO parameters in criteria, ie :name, but then we must include `name` in $params too
 		$params = array('name'=>$newName, 'chinese_name'=>'123 T达拉斯', 'notes'=>'yyy');
 		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', 'name = :name');
 
+		// Prefixing the key with # indicates that the value is not a constant, but a SQL expression (which can contain PDO parameters)
+		// Prefixing the key with ! indicates that no attempt must be made to update this field, ie the parameter must not be included in the update. 
+		//    The parameter will be used for criteria or expressions and is probably not a field name. The value in this case will always be treated as a constant.
+
+		$suffix = 'some user value';
+		$newName2 = uniqid('NewCo2 ', true);
+		$params = array(
+			'name'=>$newName2,
+			'#notes'=>"CONCAT(notes, ' *--', name, '--*')", // note the # prefix to indicate the value is not a constant
+			'#chinese_name'=>'CONCAT(chinese_name, :suffix)', // note the # prefix and the use of :suffix
+			'!suffix'=>$suffix, // note the ! prefix to exclude the parameter from any update operation
+			'id'=>$pkeyValue
+		);
+
+		// The (optional) last parameter is used to specify the level of AUDIT TRAILING to apply (by default no audit trailing is done)		
+		//    detail - individual records for old and new values of each field that has changed is stored in the audit_trail for the given container
+		//    summary - one record is used to store old and new values of each field that has changed
+		//    basic - only the primary key value(s) is stored 
+		// NOTE: when activating audit trailing, a container name must be used to indicate the database index (third parameter). 
+		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', 'id = :id', 'detail');
+
+		// NOTE, multiple records can be affected by Database::update and Database::delete actions - values changed in all will be captured in the audit trail
+
 		// Let's delete that record (or any range of records defined by criteria)
-		$result = Database::delete('test_company', array(':name'=>$newName), 'dibtestCompanyGrid', 'name=:name');
-		// Since we have the primary key value we could also do this:
+		$result = Database::delete('test_company', array(':name'=>$newName), 'dibtestCompanyGrid', 'id=:name');
+
+		// Since we have the primary key value we can also simply do this:
 		$result = Database::delete('test_company', array('id'=>$pkeyValue), 'dibtestCompanyGrid');		
 
         // *** Fetching records in a different PDO Style
