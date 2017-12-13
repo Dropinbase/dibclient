@@ -184,12 +184,13 @@ class PhpController extends Controller {
 		//    summary - one record is used to store old and new values of each field that has changed
 		//    basic - only the primary key value(s) is stored 
 		// NOTE: when activating audit trailing, a container name must be used to indicate the database index (third parameter). 
-		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', 'id = :id', 'detail');
+	    $result = Database::update('test_company', $params, 'dibtestCompanyGrid', 'id = :id', 'basic');
 
 		// NOTE, multiple records can be affected by Database::update and Database::delete actions - values changed in all will be captured in the audit trail
 
 		// Let's delete that record (or any range of records defined by criteria)
-		$result = Database::delete('test_company', array(':name'=>$newName), 'dibtestCompanyGrid', 'id=:name');
+		// Note we opt to store a single record in the audit trail for demo purposes
+		$result = Database::delete('test_company', array(':name'=>$newName2), 'dibtestCompanyGrid', 'name=:name', 'summary');
 
 		// Since we have the primary key value we can also simply do this:
 		$result = Database::delete('test_company', array('id'=>$pkeyValue), 'dibtestCompanyGrid');		
