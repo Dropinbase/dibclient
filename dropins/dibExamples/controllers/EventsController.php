@@ -41,7 +41,7 @@ class EventsController extends Controller {
         
         // Since hackers can change the automated $itemAlias value, and we're returning it to the client, let's validate it with a whitelist
         if(!in_array($itemAlias, array('Textfield1', 'Textfield2')))
-            return $this->invalidResult("Invalid request", 'dialog');
+            return $this->invalidResult("Invalid request");
     
         // We use the PeffApp::getSubmitVal() function to return NULL if nothing was submitted
         // Note the abbreviation 'sIA.s' means 'submitItemAlias.self', 
@@ -59,13 +59,13 @@ class EventsController extends Controller {
         //    but should we want to allow only certain characters, we can validate or santize the string
         
         if(!DValidate::_string($value, ' '))
-        	return $this->invalidResult("Invalid value supplied. The textbox may only contain alpha-numeric characters, underscore and spaces", 'dialog');
+        	return $this->invalidResult("Invalid value supplied. The textbox may only contain alpha-numeric characters, underscore and spaces");
         	
         // Note, using invalidResult above serves no other purpose but to display a dialog message.
         // In other cases (such as crud events on trees) invalidResult instructs the client to 
         //    perform an alternative action than it normally would with a validResult.
         
-        // Return an empty actionlist, and a message using style 'dialog'
+        // Return an empty actionlist, and a message using style 'dialog' (the default style for validResult is 'notice' which displays for 3000 miliseconds)
         return $this->validResult(null, "Server-side function was called by '$itemAlias' with a value of '$value'", 'dialog'); 
     }   
     
