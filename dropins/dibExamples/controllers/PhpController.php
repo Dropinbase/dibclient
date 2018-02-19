@@ -479,7 +479,7 @@ class PhpController extends Controller {
         $msg = ($filteredCount == 1) ?  '1 record was involved' : $filteredCount . ' records were involved';
         return $this->validResult(NULL, $msg);
     }    
-      
+
     // Post data, and returning files
     public function sendFile($containerName, $itemEventId, $submissionData=null) {
     /*	
@@ -539,7 +539,77 @@ class PhpController extends Controller {
 	    unlink($filePath);
 	    */
     }
-    
+	
+	 //
+	 public function buildDocxXslx($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
+        
+		list($sendText, $msg) = PeffApp::getSubmitVal($submissionData, 'sIA.s', array('sendText','msg'));
+		
+		// Note $itemAlias contains the type of template being merged : docx / xlsx
+
+		$tmplFile = DIB::$DROPINPATHDEV . 'dibExamples' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $itemAlias . 'Tmpl.' . $itemAlias;
+		$resultFile = DIB::$DROPINPATHDEV . 'dibExamples' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'test.' . $itemAlias;
+
+		$params = array('profile_id'=>2, 'name'=>'John', 'path'=>DIB::$FILESPATH . 'icons' . DIRECTORY_SEPARATOR);
+
+		$el = new Eleutheria();
+		
+		$el->mergeTmpl($itemAlias, $tmplFile, $resultFile, TRUE, FALSE, $params);
+
+		/**
+		 * mergeTmpl($InputFormat, $TemplateFile, $OutputFile='', $OutputToBrowser=false, $OutputToMemory=false, $Parameters=array(), $cacheKey='', $configs='')	
+		 *
+		 * @params $InputFormat - One of 'html','text','htmlbody','textbody','docx','xlsx'
+		 * @params $TemplateFile - If 'htmlbody' or 'textbody', then template content, else physical path to template file
+		 * @params $OutputFile = '' - (Optional) Physical path to where result must be stored
+		 * @params $OutputToBrowser = FALSE - Whether result must be sent to browser
+		 * @params $OutputToMemory = FALSE - Whether result is kept in public class variables docHeader, docBody and docFooter after function exits
+		 * @params $Parameters = array() - (Optional) Global merge parameters
+		 * @params $cacheKey = '' - (Optional) Stores result in cache using $cacheKey
+		 * @params $configs = '' - (Optional) Comma delimited string eg 'cj,bj,js'. Options: 'ca' (compress javaccript) 'cj' (compress json), 
+		 *							'ph' (purify html with HtmlPurifier), 'bh' (beautify html), 'bj' beautify js with JsBeautifier
+		*/
+		
+		// NOTE: We could set $OutputToBrowser to FALSE above, and then use the function below to specify a specific name for our download
+		//DibFunctions::exportFileToClient($resultFile, 'testFile.' . $itemAlias);
+	}
+	
+	//
+    public function buildPDF($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
+        
+		$tmplFile = DIB::$DROPINPATHDEV . 'dibExamples' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'pdfTmpl.html';
+
+		$params = array('profile_id'=>2, 'name'=>'John');
+
+		$el = new Eleutheria();
+		// Export to memory so that we can get hold of the content
+		$el->mergeTmpl('html', $tmplFile, '', FALSE, TRUE, $params);
+		
+		$content = $el->docBody[0];
+
+		// First load DPdf 
+		PeffApp::load('dibPdf', 'DPdf.php', 'components');
+		
+		$result = DPdf::convertHtml($content, true, 'myPdf.pdf');
+		/**
+		 * public static function convertHtml($html, $exportToClient, $file)
+		 * 
+		 * Converts HTML to a PDF and saves the file to the supplied filename location, or sends the file to the client.
+		 * 
+		 * Input:
+		 *    $html - The html to convert
+		 *    $exportToclient - whether resulting pdf file must be streamed to the client or not 
+		 *    $file - The physical location to save the PDF, OR (if $exportToClient=True) the name of the file to send to the client
+		 * 
+		 * Output:
+		 *    true/false - If conversion was successful or not
+		 */
+
+		 if($result === FALSE)
+		 	echo "Conversion to PDF failed, please contact the System Administrator for more info (error.log)";
+
+	}
+	
     // Asynchronous execution
     public function asyncExecution($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
 	/*
@@ -627,5 +697,7 @@ class PhpController extends Controller {
 		Log::err("mmm");
 	
     }
-    
+
+   
+
 }
