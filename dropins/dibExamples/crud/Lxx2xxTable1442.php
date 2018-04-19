@@ -34,7 +34,7 @@ class Lxx2xxTable1442 {
             $totalSql = "SELECT count(*) AS totalcount FROM `test_consultant` ";
             // Add sql to show only used values (especially for filter dropdowns) - does not work for mssql...
             if($showUsedOnly) { 
-            	$itemTables = array(155407=>"`test_company_consultant`.`consultant_id`", 155460=>"`test_company_consultant`.`consultant_id`", 155247=>"`test_company`.`parent_company_contact_id`", 155375=>"`test_company`.`parent_company_contact_id`", 173716=>"`test_company`.`parent_company_contact_id`", 177113=>"`test_company`.`parent_company_contact_id`");
+            	$itemTables = array(155407=>"`test_company_consultant`.`consultant_id`", 155460=>"`test_company_consultant`.`consultant_id`", 155247=>"`test_company`.`parent_company_contact_id`", 155375=>"`test_company`.`parent_company_contact_id`", 173716=>"`test_company`.`parent_company_contact_id`", 177113=>"`test_company`.`parent_company_contact_id`", 242611=>"`test_company`.`parent_company_contact_id`");
             	if(isset($itemTables[$containerItemId])) {
             		$foreignParts = explode('.', $itemTables[$containerItemId]);
 					$addSql = " INNER JOIN " . $foreignParts[0] . " dib___F ON dib___F." . $foreignParts[1] . " = `test_consultant`.`id` ";
@@ -55,7 +55,7 @@ class Lxx2xxTable1442 {
                     else {
                         $value = EvalCriteria::evalParam(':submitItemAlias_self_parentCompanyId', $filterParams);
                         if(is_array($value))
-                            //return array('error',"Error! The filter parameter 'submitItemAlias_self_parentCompanyId' for filter 'divPortItem' on containerName is missing from submitted values.");
+                            //return array('error',"Error! The filter parameter 'submitItemAlias_self_parentCompanyId' for filter 'dibexComponents_companyId' on containerName is missing from submitted values.");
                             $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                         else 
                             $params[':submitItemAlias_self_parentCompanyId'] = $value;
@@ -103,7 +103,7 @@ class Lxx2xxTable1442 {
             $filteredCount = intval($filterCountRst["totalcount"]);
             if($pageNoFromValue) return array(array(), ceil($filteredCount / $page_size)); 
             $group_by = '';
-                // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg CrudPdoTemplate.php.
+                // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg Table.php.
     if($page === 1)
         $limit = ' LIMIT ' . $page_size;
     else

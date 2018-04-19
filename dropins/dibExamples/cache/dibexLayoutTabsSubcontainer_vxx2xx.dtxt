@@ -27,10 +27,18 @@ flex="none"
 flex layout-fill
 style="    "
     >   <md-tab-body flex layout-fill>
-            <md-content aria-label="mdcontent"
+            <md-content 
+aria-label="mdcontent"
 can-be-moved=true
 flex="none"
 style="    "
+id='ci176953'
+aria-label="mdcontent"
+dib-container-name='dibexLayoutTabsSubcontainer'
+dib-config="{
+    listeners : {
+    }
+}"
 >
 <h1>An HTML Heading</h1>
 <p>With some <b>html content</b>...</p>
@@ -67,8 +75,8 @@ dib-config="{
     <md-input-container aria-label="inputdate"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="date" 
         name="inputdate"
@@ -90,8 +98,8 @@ dib-config="{
     <md-input-container aria-label="inputnumber"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="number" 
         name="inputnumber"

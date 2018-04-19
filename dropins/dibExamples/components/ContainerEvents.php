@@ -48,10 +48,10 @@ class ContainerEvents extends Controller {
         	$attributes[0]['name'] = "Container Events classified this info, if >3 records ;-)";
         
         // We'll include a notice for the user. 
-        // By setting PeffApp::clientMsg we override any other message that may have been configured using validResult(...)
+        // By setting PeffApp::clientMsg we set (and override) any other message that may have been configured using validResult(...)
         PeffApp::setClientMsg("Container Events triggered to change values in the 'name' field", 'notice', 4000);
         
-        // We can also add any other client actions ... 
+        // We can also send client actions by adding them to the PeffApp::$clientActions array...
         ClientFunctions::addAction(PeffApp::$clientActions, 'AppendValue', array('dibexEvents.containerEvents'=>"$containerName: $trigger (fired from Container Crud Events); "));
  
     } 

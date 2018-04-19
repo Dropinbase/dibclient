@@ -29,5 +29,7 @@
 155193/dibtestConsultantGrid	pub/dibExamples/	1440	1
 155622/dibtestConsultantPortGrid	pub/dibExamples/	1440	1
 213157/dibtestdibContainer	pub/dibExamples/	1440	1
+242608/dibtestGridTree	pub/dibExamples/	1440	1
+242611/dibtestGridTree	pub/dibExamples/	1442	1
 194824/dibtestTestForm	pub/dibExamples/	1440	1
 194825/dibtestTestForm	pub/dibExamples/	1440	1

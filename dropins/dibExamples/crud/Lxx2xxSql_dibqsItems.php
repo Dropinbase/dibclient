@@ -55,7 +55,7 @@ class Lxx2xxSql_dibqsItems {
 					$params = array_merge($params, $permParams);
 				}
             } else {
-                $params[":f1"] = $query."%";
+                $params[":f1"] = $query.'%';   
                 if($criteria === '')
                     $criteria = $display_field . ' LIKE :f1';
                 else
@@ -68,7 +68,7 @@ class Lxx2xxSql_dibqsItems {
         	$params = $phpFilterParams;
         }
         if($criteria) $criteria = ' WHERE ' . $criteria;
-            // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg CrudPdoTemplate.php.
+            // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg Table.php.
     if($page === 1)
         $limit = ' LIMIT ' . $page_size;
     else

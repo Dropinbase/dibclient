@@ -191,20 +191,20 @@ dib-config="{
             <section layout-fill>
     <md-input-container aria-label="id"
 can-be-moved=true
-item-alias="id"   
-    ng-show="!!view.id == false || view.id.visible" 
+item-alias="id" 
+    ng-show="view.id.visible || view.id == undefined"
     dib-disable="{{view.id.disabled}}"
     ng-class="view.id.class" 
     ng-style="view.id.style"
 flex="none"
-class="md-block"
 style="    "
 dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt;
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
 >
     <input type="number" 
-        ng-disabled="true"
+ng-disabled="true"
         required
         name="id"
         ng-model="model.id"
@@ -227,11 +227,11 @@ dib-config="{
     <md-input-container aria-label="name"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
 >
     <input type="text" 
          maxlength='70'
@@ -258,11 +258,11 @@ dib-config="{
     <md-input-container aria-label="chinese_name"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
 >
     <input type="text" 
          maxlength='70'
@@ -296,6 +296,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='parent_company_id'
     select-model="model.selected___parent_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service173713.searchTextmodel)"
@@ -309,6 +312,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     md-selected-item-change="select173713(model,'model','parent_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Parent Company"
     id='ci173713'
@@ -359,11 +365,11 @@ dib-config="{
     <md-input-container aria-label="website"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='&lt;font color=&quot;#333333&quot; face=&quot;helvetica, arial, verdana, sans-serif&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Website address&lt;/span&gt;&lt;/font&gt;
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
 >
     <input type="text" 
          maxlength='250'
@@ -397,6 +403,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='parent_company_contact_id'
     select-model="model.selected___parent_company_contact_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service173716.searchTextmodel)"
@@ -410,6 +419,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     md-selected-item-change="select173716(model,'model','parent_company_contact_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Parent Company Contact"
     id='ci173716'
@@ -433,11 +445,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
     <md-input-container aria-label="icon"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
 dib-help='Image attached to this record. Allowed file types: .jpg/.jpeg/.png/.gif/.bmp
     '
 dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
 >
     <input type="text" 
          maxlength='250'

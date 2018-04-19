@@ -41,7 +41,7 @@ class EventsController extends Controller {
         
         // Since hackers can change the automated $itemAlias value, and we're returning it to the client, let's validate it with a whitelist
         if(!in_array($itemAlias, array('Textfield1', 'Textfield2')))
-            return $this->invalidResult("Invalid request", 'dialog');
+            return $this->invalidResult("Invalid request");
     
         // We use the PeffApp::getSubmitVal() function to return NULL if nothing was submitted
         // Note the abbreviation 'sIA.s' means 'submitItemAlias.self', 
@@ -59,13 +59,13 @@ class EventsController extends Controller {
         //    but should we want to allow only certain characters, we can validate or santize the string
         
         if(!DValidate::_string($value, ' '))
-        	return $this->invalidResult("Invalid value supplied. The textbox may only contain alpha-numeric characters, underscore and spaces", 'dialog');
+        	return $this->invalidResult("Invalid value supplied. The textbox may only contain alpha-numeric characters, underscore and spaces");
         	
         // Note, using invalidResult above serves no other purpose but to display a dialog message.
         // In other cases (such as crud events on trees) invalidResult instructs the client to 
         //    perform an alternative action than it normally would with a validResult.
         
-        // Return an empty actionlist, and a message using style 'dialog'
+        // Return an empty actionlist, and a message using style 'dialog' (the default style for validResult is 'notice' which displays for 3000 miliseconds)
         return $this->validResult(null, "Server-side function was called by '$itemAlias' with a value of '$value'", 'dialog'); 
     }   
     
@@ -83,7 +83,7 @@ class EventsController extends Controller {
         /***
             NOTES:
             - Targeted items must have aliases! Any item (including layout components) can be targeted.
-            - The last parameter ($containerName) is optional and is omitted above. It indicates where searching starts to find the item referenced by its Alias. 
+            - The last parameter, $containerName, is optional and is omitted above. It indicates where searching starts to find the item referenced by its Alias. 
             - If $containerName is not provided, the current container is used. 
               This will only work if $containerName is a parameter in the controller function above (see declaration of btnDisable_click above in this case).
             - If the target container is loaded in a port with an alias (not the default port), then $containerName below should use the following format:
@@ -98,13 +98,16 @@ class EventsController extends Controller {
     
     public function btnHide_click($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {        
         // Multiple calls to addMethod can also be used, but using a single call is more efficient ...
+
+        // See NOTES in btnDisable_click for more info
         ClientFunctions::addMethod($actionList, array('view.Textfield2.visible'=>FALSE));
         ClientFunctions::addMethod($actionList, array('view.btnHelloWorld.visible'=>FALSE)); 
         
         return $this->validResult($actionList);
     }
     
-    public function btnShowEnable_click($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {        
+    public function btnShowEnable_click($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
+        // See NOTES in btnDisable_click for more info
         ClientFunctions::addMethod($actionList,
             array('view.Textfield1.disabled'=>FALSE,
                   'view.Textfield2.visible'=>TRUE,
@@ -135,6 +138,7 @@ class EventsController extends Controller {
         	$class = array($classes[$rnd]=>true);
         }
         
+        // See NOTES in btnDisable_click for more info
         ClientFunctions::addMethod($actionList,
             array('view.btnHelloWorld.style'=>$style,
                   'view.btnHelloWorld.class'=>$class,
@@ -166,7 +170,7 @@ class EventsController extends Controller {
         
         // Open the dibtestTestForm container, wait until it is open and data is loaded (the default behaviour of OpenUrl), 
         //   and append 'xxx' to the item with Alias 'varchar10'
-        ClientFunctions::addAction($actionList, 'OpenUrl', array('value'=>'/nav/dibtestTestForm'));
+        ClientFunctions::addAction($actionList, 'OpenUrl', array('url'=>'/nav/dibtestTestForm'));
 		ClientFunctions::addAction($actionList, 'AppendValue', array('varchar10'=>'xxx'));
         return $this->validResult($actionList);
     }
@@ -277,6 +281,47 @@ class EventsController extends Controller {
         list($client_pk) = PeffApp::getSubmitVal($submissionData, 'sIA.s', array('client_pk'));
 
         return $this->validResult(null, 'hello world', 'dialog');
+    }
+
+    // Location: Test Consulant Grid on /nav/dibexEvents
+    public function btnHot_click($rowId=null, $rowName=null, $containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {        
+        list($id, $name) = PeffApp::getSubmitVal($submissionData, 'sIA.s', array('id', 'name'));
+        
+        // Handle the 2nd button quickly...
+        if($itemAlias === 'btnHotTheSecond')
+            return $this->validResult(null, "I'm still here", 'dialog');
+
+        // Handle the first button
+
+        // Note, if the user selected a row in the grid, 
+        //    the last selected row's items with aliases are available in $submissionData
+        //    This is NOT necessarily the values from the row of the button that was clicked!
+
+        //    So when we work with buttons in rows, we normally rely on values configured in the URL (see below)
+
+        if(empty($id)) {
+            // User has not selected a row in the grid
+            // Use the id and name values from the event URL: /dropins/dibExamples/Events/btnHot_click/{{row.id}}           
+            $id = $rowId;
+
+            // Get the name from the database
+            $rst = Database::fetch("SELECT name FROM test_consultant WHERE id = :id", array(':id'=>$id));
+            if(empty($rst))
+                return $this->invalidResult("Eish... seems this record was deleted.");
+            $name = $rst['name'];
+            $msg = 'THIS ROW VALUES';
+        } else 
+            $msg = 'LAST SELECTED ROW VALUES (click refresh btn to clear)';
+
+        // Validate variables
+        if($id !== (string)(int)$id)
+            return $this->invalidResult('Are you hacking?');
+        
+        // Purge the name 
+        $name = preg_replace("/[^A-Za-z0-9 ]/", '', $name);
+
+        // Return the primary key value of the record in the grid that was clicked
+        return $this->validResult(null, "$msg: Hello $name. Your id is '$id'", 'dialog');
     }
 
 }

@@ -59,7 +59,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     A Dropinbase application consists of containers that are loaded into one another, either via ports or subcontainers.<br>Each container is configured to use a certain <b>display dropin</b> which determines the Template Controller that is called to create the view.<br>This in turn affects the functionality and features of that container and the type of components which can be used in the main body of the container, eg. md-tabs can't be used as a grid column.<br>Certain display dropin types can be configured to use different types of <b>models</b> which determines the type of datasource (CRUD class that will be generated) - see below for more info.<br>The various available container types are provided here. Use the Designer to examine their design (mainly the Configuration and Layout tabs).
     </p>    
 </span>
@@ -92,7 +92,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The dibGrid container dropin presents data in rows and columns.<br>
 The fields/components used as columns in grid containers are placed under a contentFor component named 'columns'.<br>Normally a toolbar with buttons is placed above the contentFor component... but any conceivable design is theoretically possible.<br>
 Note certain components, eg btnGridEdit and btnFilterApply can only be used in context of a grid.<br>
@@ -128,12 +128,12 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The record source is a single table. Users can edit data in the grid by double-clicking cells.<br>
 Note, fields from other (joined) tables can be included, and if they are from parent tables, they can be updated.<br>See <a href="/nav/dibDocs?id=225&text=dibGrid%20-%20Table">dibGrid-Table</a> for more info.
     </p>    
 </span>
-   <div layout-fill   
+   <div layout-fill 
         aria-label="dibtestConsultantGrid"
 can-be-moved=true
 flex="none"
@@ -151,7 +151,7 @@ dib-config="{
         <dibtest-consultant-grid
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtest-consultant-grid>
     </div>
@@ -184,12 +184,12 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Based on a sql statement in pef_sql.<br>Use the Designer to drag-and-drop fields from the Field List.<br>Note the use of the sqlText component in the designer to display values.<br>Navigation links can be configured (see Parent Company below) by using the sqlTextDisplayValue component with a value in pef_port_id. The SQL statement must also have a foreignkey field, eg parent_company,
  and another field with the same name and "_display_value" as suffix, in this example parent_company_display_value.<br>See <a href="/nav/dibDocs?id=219&text=dibGrid%20-%20Sql">dibGrid-Sql</a> for more info.
     </p>    
 </span>
-   <div layout-fill   
+   <div layout-fill 
         aria-label="testCompanySqlRpt_grid"
 can-be-moved=true
 flex="none"
@@ -207,7 +207,7 @@ dib-config="{
         <dibtest-company-sql-rpt-grid
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtest-company-sql-rpt-grid>
     </div>
@@ -268,15 +268,15 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     This container dropin is useful for functional purposes that do not require a datasource, eg base containers or dashboards.
     </p>    
 </span>
-   <div layout-fill   
+   <div layout-fill 
         aria-label="testdibContainer"
 can-be-moved=true
-item-alias="testdibContainer"   
-    ng-show="!!view.testdibContainer == false || view.testdibContainer.visible" 
+item-alias="testdibContainer" 
+    ng-show="view.testdibContainer.visible || view.testdibContainer == undefined"
     dib-disable="{{view.testdibContainer.disabled}}"
     ng-class="view.testdibContainer.class" 
     ng-style="view.testdibContainer.style"
@@ -296,7 +296,7 @@ dib-config="{
         <dibtestdib-container
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtestdib-container>
     </div>
@@ -329,7 +329,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     dibForm is used to display single records, mostly for editing purposes.<br>Any filters that are applied, on the form container or any subcontainer component that hosts it, will limit the available records.<br>Use the navigation buttons to move between records.
     </p>    
 </span>
@@ -338,11 +338,11 @@ dib-config="{
             <h2 class="md-toolbar-tools">
                 <span>Test Consultant Form</span>
             </h2>
-    </md-toolbar>   <div layout-fill   
+    </md-toolbar>   <div layout-fill 
         aria-label="subConsult"
 can-be-moved=true
-item-alias="subConsult"   
-    ng-show="!!view.subConsult == false || view.subConsult.visible" 
+item-alias="subConsult" 
+    ng-show="view.subConsult.visible || view.subConsult == undefined"
     dib-disable="{{view.subConsult.disabled}}"
     ng-class="view.subConsult.class" 
     ng-style="view.subConsult.style"
@@ -362,7 +362,7 @@ dib-config="{
         <dibtest-consultant-form
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtest-consultant-form>
     </div>
@@ -424,7 +424,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Processes and displays an Eleutheria HTML template.<br>Eleutheria is a powerful and flexible templating engine that incorporates coding principles (eg loops and conditions) to produce results.<br>Eleutheria aims to be safe by default, but as with any programming language, the wrong use can lead to security vulnerabilities - consult docs for more info.
     </p>    
 </span>
@@ -441,7 +441,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The actual HTML template can be stored in any dropin folder. Store the last part of the physical path in the <i>pef_container.template</i> field, eg /myDropin/reports/scores.html<br>The <i>pef_container.valid_params</i> field is used to specify which client fields are valid global merge fields that may be used in the template.<br>For each parameter, a default value can be specified, or '*required*' can be used to indicate that the user must provide a value before the template can be rendered.<br>dibUser_ parameters (field values from the login table, eg dibUser_first_name) are also available (if specified in <i>valid_params)</i>.<br>Parameter values are sanitized to allow only the following characters by default: a-zA-Z0-9_ and space.<br>To override, use a container setting record with name = 'GlobalsReplaceList' and value being a regular expression eg #[^a-zA-Z]*#.<br>Note, using an expression specifying a whitelist as above, is far more secure than using a blacklist!
     </p>    
 </span>
@@ -462,8 +462,8 @@ dib-config="{
 </span>
     <div layout='row' aria-label="companyId"
 can-be-moved=true
-item-alias="companyId"   
-    ng-show="!!view.companyId == false || view.companyId.visible" 
+item-alias="companyId" 
+    ng-show="view.companyId.visible || view.companyId == undefined"
     dib-disable="{{view.companyId.disabled}}"
     ng-class="view.companyId.class" 
     ng-style="view.companyId.style"
@@ -477,6 +477,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service155500.searchTextmodel)"
@@ -490,6 +493,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     md-selected-item-change="select155500(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder=""
     id='ci155500'
@@ -498,7 +504,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     dib-config="{
         listeners : {
     'change___dib*lsjymq5r7' : function(field, additionalInfoOnEvent) { 
-        element.trigger('enableDependency', ['change' , 'subHtmlReport' , additionalInfoOnEvent]);    
+        $element.trigger('enableDependency', ['change' , 'subHtmlReport' , additionalInfoOnEvent]);
+        if (!!$scope.loadService155499) {
+            $scope.loadService155499(null,true,true);
+            dibContainer.setItemAliasValue('dibexContainerDropins.subHtmlReport',null,'dibexContainerDropins');
+        }    
      } 
         }
     }"
@@ -513,11 +523,11 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1441&text=test_company_consultant'
     </div>
 </md-autocomplete>
 </div>
-   <div layout-fill  flex 
+   <div layout-fill 
         aria-label="subHtmlReport"
 can-be-moved=true
-item-alias="subHtmlReport"   
-    ng-show="!!view.subHtmlReport == false || view.subHtmlReport.visible" 
+item-alias="subHtmlReport" 
+    ng-show="view.subHtmlReport.visible || view.subHtmlReport == undefined"
     dib-disable="{{view.subHtmlReport.disabled}}"
     ng-class="view.subHtmlReport.class" 
     ng-style="view.subHtmlReport.style"
@@ -535,7 +545,7 @@ dib-config="{
         <dibtest-company-e-t-report
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtest-company-e-t-report>
     </div>
@@ -596,7 +606,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Data in dibTree cannot be changed, other than delete or drag and drop to arrange items.<br>Actions are performed on selected items. The Ctrl-key can be used to select multiple items.<br>If two trees are present, items can be dragged between them (try dragging nodes between the two trees below).<br>
 Since implementations of trees are specific the PHP controller functions need to be customized.<br>
 The controller is set in the <i>crud_store_controller</i> field of the container.<br>
@@ -604,11 +614,11 @@ Developers can copy the /dropins/dibExamples/TreeController.php file provided an
 <br><b>Note,</b> in both tree examples below, drag-and-drop actions will have no effect other than informing the user of the action that took place. Adapt the PHP code according to the desired business logic.<br>
     </p>    
 </span>
-   <div layout-fill  flex 
+   <div layout-fill 
         aria-label="tree"
 can-be-moved=true
-flex
-style="    "
+flex="none"
+style=" height:350px !important; overflow:auto !important;   "
         id='ci155513'
 aria-label="tree"
 dib-container-name='dibexContainerDropins'
@@ -617,21 +627,22 @@ dib-config="{
     }
 }"
         dib-injected-success=true
+        fill-height-for-child
         >
         <dibtest-tree
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtest-tree>
     </div>
-    <span aria-label="headdibTree2"
+    <span aria-label="headHorTree"
 can-be-moved=true
  on-move-refresh-preview=true
 flex="none"
 style="    "
     id='ci179985'
-aria-label="headdibTree2"
+aria-label="headHorTree"
 dib-container-name='dibexContainerDropins'
 dib-config="{
      margins : '10 0 0 5',
@@ -639,31 +650,31 @@ dib-config="{
     }
 }"
 >
-    <span style="font-size:20px">dibHorizontalTree</span>
+    <br><span style="font-size:20px">dibHorizontalTree</span>
 </span>
-    <span aria-label="comment312111"
+    <span aria-label="commentHorTree"
 can-be-moved=true
  on-move-refresh-preview=true
 flex="none"
 style="    "
     id='ci179984'
-aria-label="comment312111"
+aria-label="commentHorTree"
 dib-container-name='dibexContainerDropins'
 dib-config="{
     listeners : {
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The Horizontal Tree supports the drag-and-drop action internally as well as to other trees. The tree below is based on the same crud controller as the first tree.
 <b>NOTE:</b> on some systems the tree may not initially display items until the user clicks the Search button (will be fixed in the next version).
     </p>    
 </span>
-   <div layout-fill   
+   <div layout-fill 
         aria-label="dibtestHorTree"
 can-be-moved=true
 flex="none"
-style=" height:200px !important; overflow:auto !important;   "
+style=" height:250px !important; overflow:auto !important;   "
         id='ci179983'
 aria-label="dibtestHorTree"
 dib-container-name='dibexContainerDropins'
@@ -677,9 +688,64 @@ dib-config="{
         <dibtest-hor-tree
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtest-hor-tree>
+    </div>
+    <span aria-label="headdibGridTree"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci242602'
+aria-label="headdibGridTree"
+dib-container-name='dibexContainerDropins'
+dib-config="{
+     margins : '10 0 0 5',
+    listeners : {
+    }
+}"
+>
+    <br><span style="font-size:20px">dibGridTree</span>
+</span>
+    <span aria-label="commentGridTree"
+can-be-moved=true
+ on-move-refresh-preview=true
+flex="none"
+style="    "
+    id='ci242600'
+aria-label="commentGridTree"
+dib-container-name='dibexContainerDropins'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
+    The Grid Tree combines the functionality of dibGrid and dibTree. It supports drag-and-drop and inline adding (but not editing). The tree below is based on the test_company table. The pef_container.pef_treedata_parentlink_id field is used to identify the linking field (parent_company_id). The "display field" is identified by the Item Settings record on the name field.
+    </p>    
+</span>
+   <div layout-fill 
+        aria-label="dibtestGridTree"
+can-be-moved=true
+flex="none"
+style=" height:550px !important; overflow:auto !important;   "
+        id='ci242601'
+aria-label="dibtestGridTree"
+dib-container-name='dibexContainerDropins'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-injected-success=true
+        fill-height-for-child
+        >
+        <dibtest-grid-tree
+            dib-subcontainer-loaded
+            dib-subcontainer=true
+            layout-fill    
+        >
+        </dibtest-grid-tree>
     </div>
 </div>
         </md-tab-body>
@@ -709,11 +775,11 @@ dib-config="{
     }
 }"
 >
-   <div layout-fill  flex 
+   <div layout-fill 
         aria-label="subChartJs"
 can-be-moved=true
-item-alias="subChartJs"   
-    ng-show="!!view.subChartJs == false || view.subChartJs.visible" 
+item-alias="subChartJs" 
+    ng-show="view.subChartJs.visible || view.subChartJs == undefined"
     dib-disable="{{view.subChartJs.disabled}}"
     ng-class="view.subChartJs.class" 
     ng-style="view.subChartJs.style"
@@ -731,7 +797,7 @@ dib-config="{
         <dibex-sub-chart-js-html
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibex-sub-chart-js-html>
     </div>

@@ -62,6 +62,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     flex
     dib-onload-service 
     has-store="true"
+    data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
     md-input-name='test_company_id'
     select-model="model.selected___test_company_id.id"
     md-search-text-change="loadServiceciid(dropdowns.service213157.searchTextmodel)"
@@ -75,6 +78,9 @@ dib-help-url='/nav/dibDocs?id=dibTableForm*1437&text=test'
     md-selected-item-change="select213157(model,'model','test_company_id')"
     md-select-on-match="true"
     md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
     dib-data-component='autocomplete'
     placeholder="Company"
     id='ci213157'
@@ -130,8 +136,8 @@ dib-config="{
     <md-input-container aria-label="textfield"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="textfield"
@@ -151,10 +157,11 @@ dib-config="{
     <div ng-messages="dibtestdibContainer.textfield.$error">
     </div>
 </md-input-container>
-    <md-input-container class="md-block"  aria-label="checkboxfield"
+    <md-input-container aria-label="checkboxfield"
 can-be-moved=true
 flex="none"
 style="    "
+class="md-block"
 >
     <md-checkbox 
         dib-data-component='checkbox'
@@ -178,19 +185,19 @@ dib-config="{
     <md-input-container aria-label="datefield"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text"
         theme="material"
         ng-model="model.datefield"
-        name=datefield
+        name="datefield"
         aria-label="Datefield"
         placeholder="Datefield"
         dib-data-component='datePickerInput'
         time-date-picker-input
         display-mode="material"
-        display-format="d MMMM yyyy"
+        display-format="YYYY/MM/DD"
         mindate="1800-01-01"
         maxdate="2999-12-31"
         aria-invalid="true"

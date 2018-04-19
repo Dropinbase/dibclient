@@ -33,7 +33,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     While ports provide a way of deferring the load of containers until requested, lazy loading does the same for items within a specific container.<br>Items where the display_on_load field is unticked are not loaded to the browser until either a port or a lazy load action requires them.<br>There are three methods of performing lazy loading, illustrated by the buttons and links below<br>All methods of lazy loading use the following fields and basic principles:
 <ul style="border:1px; border-style:solid; border-color:#00137F; padding: 2em; background-color: #FFF9E0"><li>A parent item is selected  (named the <strong>lazyLoadParent</strong>) that must have an Alias, must already be loaded in the browser, and must be a common ancestor to all the items that should be loaded. It need not be a direct parent of them.</li><li>Dropinbase searches for the lazyLoadParent, and then issues a server call to fetch the child items that must be loaded.</li><li>If a <em>tag </em>is specified then all the items containing the tag string in the <em>lazy_load_tag</em> field, plus all their parent items up to the lazyLoadParent is returned.</li><li>If no <em>tag</em> is specified then all descendant items of lazyLoadParent are returned.</li><li>The logic of the &quot;Lazy Load Option&quot; (eg all, none, lazy, etc) is executed on all child items of the <em>pef_lazy_load_parent_id </em>item.</li></ul><br>
 <span style="border:1px; border-style:solid; border-color:#00137F; background-color: #FFF9E0"><b>See <a href="/nav/dibDocs?id=51&text=Lazy%20Loading%20Items">Lazy Loading Items</a> for more info.</b></span>
@@ -68,7 +68,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The fieldset below, with Alias fieldsetParent, is used as a lazyLoadParent.<br>The three htmllabels that are loaded have tag strings that allow us to load more than one, or all of them, with the same event.<br>The 'lazy' option is used on all events to replace items (with each new call) that have been previously lazy loaded.
     </p>    
 </span>
@@ -114,17 +114,16 @@ dib-config="{
     'click___dib*xncm8w2j41' : function(field, additionalInfoOnEvent) { 
     dibAction.executeAction({
         containerName: 'dibexLazyLoad',   
-        field : element
-        ,
+        field : $element,
         triggerType: 'click',
         nextActionItem: '',
-        itemAlias: element.attr('item-alias'),
+        itemAlias: $element.attr('item-alias'),
         itemEventId: 'dib*xncm8w2j41',         
         containerItemId: 155292,
         submitUrl: 'dibGlobals.action.lazyLoadChildren',
         refreshItemId : '',
         responseType: 'actions',
-        scope : scope,
+        scope : $scope,
         params : {
 		      containerName : 'dibexLazyLoad',
               parentItemId: '155287',
@@ -133,7 +132,7 @@ dib-config="{
               tag: 'A',
               submitUrl :  '',
               responseType: 'actions',
-              field : element
+              field : $element
         }
     }, additionalInfoOnEvent);
      } 
@@ -155,17 +154,16 @@ dib-config="{
     'click___dib*cysjq11ww3' : function(field, additionalInfoOnEvent) { 
     dibAction.executeAction({
         containerName: 'dibexLazyLoad',   
-        field : element
-        ,
+        field : $element,
         triggerType: 'click',
         nextActionItem: '',
-        itemAlias: element.attr('item-alias'),
+        itemAlias: $element.attr('item-alias'),
         itemEventId: 'dib*cysjq11ww3',         
         containerItemId: 155293,
         submitUrl: 'dibGlobals.action.lazyLoadChildren',
         refreshItemId : '',
         responseType: 'actions',
-        scope : scope,
+        scope : $scope,
         params : {
 		      containerName : 'dibexLazyLoad',
               parentItemId: '155287',
@@ -174,7 +172,7 @@ dib-config="{
               tag: 'AAA',
               submitUrl :  '',
               responseType: 'actions',
-              field : element
+              field : $element
         }
     }, additionalInfoOnEvent);
      } 
@@ -196,17 +194,16 @@ dib-config="{
     'click___dib*t4wxch4f61' : function(field, additionalInfoOnEvent) { 
     dibAction.executeAction({
         containerName: 'dibexLazyLoad',   
-        field : element
-        ,
+        field : $element,
         triggerType: 'click',
         nextActionItem: '',
-        itemAlias: element.attr('item-alias'),
+        itemAlias: $element.attr('item-alias'),
         itemEventId: 'dib*t4wxch4f61',         
         containerItemId: 155294,
         submitUrl: 'dibGlobals.action.lazyLoadChildren',
         refreshItemId : '',
         responseType: 'actions',
-        scope : scope,
+        scope : $scope,
         params : {
 		      containerName : 'dibexLazyLoad',
               parentItemId: '155287',
@@ -215,7 +212,7 @@ dib-config="{
               tag: 'CCC',
               submitUrl :  '',
               responseType: 'actions',
-              field : element
+              field : $element
         }
     }, additionalInfoOnEvent);
      } 
@@ -259,8 +256,8 @@ dib-config="{
 </span>
 <md-button aria-label="buttonPHPA"
 can-be-moved=true
-item-alias="buttonPHPA"   
-    ng-show="!!view.buttonPHPA == false || view.buttonPHPA.visible" 
+item-alias="buttonPHPA" 
+    ng-show="view.buttonPHPA.visible || view.buttonPHPA == undefined"
     dib-disable="{{view.buttonPHPA.disabled}}"
     ng-class="view.buttonPHPA.class" 
     ng-style="view.buttonPHPA.style"
@@ -273,8 +270,8 @@ dib-config="{
     listeners : {
     'click___dib*spxgxtf92' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexLazyLoad',
         triggerType: 'click',
         nextActionItem: '',
@@ -295,8 +292,8 @@ dib-config="{
 </md-button>
 <md-button aria-label="buttonPHPAAA"
 can-be-moved=true
-item-alias="buttonPHPAAA"   
-    ng-show="!!view.buttonPHPAAA == false || view.buttonPHPAAA.visible" 
+item-alias="buttonPHPAAA" 
+    ng-show="view.buttonPHPAAA.visible || view.buttonPHPAAA == undefined"
     dib-disable="{{view.buttonPHPAAA.disabled}}"
     ng-class="view.buttonPHPAAA.class" 
     ng-style="view.buttonPHPAAA.style"
@@ -309,8 +306,8 @@ dib-config="{
     listeners : {
     'click___dib*j47in31wzb1' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexLazyLoad',
         triggerType: 'click',
         nextActionItem: '',
@@ -331,8 +328,8 @@ dib-config="{
 </md-button>
 <md-button aria-label="buttonPHPCCC"
 can-be-moved=true
-item-alias="buttonPHPCCC"   
-    ng-show="!!view.buttonPHPCCC == false || view.buttonPHPCCC.visible" 
+item-alias="buttonPHPCCC" 
+    ng-show="view.buttonPHPCCC.visible || view.buttonPHPCCC == undefined"
     dib-disable="{{view.buttonPHPCCC.disabled}}"
     ng-class="view.buttonPHPCCC.class" 
     ng-style="view.buttonPHPCCC.style"
@@ -345,8 +342,8 @@ dib-config="{
     listeners : {
     'click___dib*l9kuyw7tu' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexLazyLoad',
         triggerType: 'click',
         nextActionItem: '',
@@ -369,8 +366,8 @@ dib-config="{
 </md-toolbar>
     <md-card  aria-label="parentFieldset"
 can-be-moved=true
-item-alias="parentFieldset"   
-    ng-show="!!view.parentFieldset == false || view.parentFieldset.visible" 
+item-alias="parentFieldset" 
+    ng-show="view.parentFieldset.visible || view.parentFieldset == undefined"
     dib-disable="{{view.parentFieldset.disabled}}"
     ng-class="view.parentFieldset.class" 
     ng-style="view.parentFieldset.style"
@@ -422,7 +419,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     A layoutColumn component (which does not display initially since it has no child items), with Alias colParent, is used as lazyLoadParent.<br>It has various nested components. We have allocated tag strings to the leaf items to indicate the bottom most items to be loaded with each event.
     </p>    
 </span>
@@ -468,17 +465,16 @@ dib-config="{
     'click___dib*z8812krme' : function(field, additionalInfoOnEvent) { 
     dibAction.executeAction({
         containerName: 'dibexLazyLoad',   
-        field : element
-        ,
+        field : $element,
         triggerType: 'click',
         nextActionItem: '',
-        itemAlias: element.attr('item-alias'),
+        itemAlias: $element.attr('item-alias'),
         itemEventId: 'dib*z8812krme',         
         containerItemId: 155297,
         submitUrl: 'dibGlobals.action.lazyLoadChildren',
         refreshItemId : '',
         responseType: 'actions',
-        scope : scope,
+        scope : $scope,
         params : {
 		      containerName : 'dibexLazyLoad',
               parentItemId: '155301',
@@ -487,7 +483,7 @@ dib-config="{
               tag: 'D',
               submitUrl :  '',
               responseType: 'actions',
-              field : element
+              field : $element
         }
     }, additionalInfoOnEvent);
      } 
@@ -509,17 +505,16 @@ dib-config="{
     'click___dib*pre7me6a61' : function(field, additionalInfoOnEvent) { 
     dibAction.executeAction({
         containerName: 'dibexLazyLoad',   
-        field : element
-        ,
+        field : $element,
         triggerType: 'click',
         nextActionItem: '',
-        itemAlias: element.attr('item-alias'),
+        itemAlias: $element.attr('item-alias'),
         itemEventId: 'dib*pre7me6a61',         
         containerItemId: 155298,
         submitUrl: 'dibGlobals.action.lazyLoadChildren',
         refreshItemId : '',
         responseType: 'actions',
-        scope : scope,
+        scope : $scope,
         params : {
 		      containerName : 'dibexLazyLoad',
               parentItemId: '155301',
@@ -528,7 +523,7 @@ dib-config="{
               tag: 'DDD',
               submitUrl :  '',
               responseType: 'actions',
-              field : element
+              field : $element
         }
     }, additionalInfoOnEvent);
      } 
@@ -550,17 +545,16 @@ dib-config="{
     'click___dib*dmtxzdym7' : function(field, additionalInfoOnEvent) { 
     dibAction.executeAction({
         containerName: 'dibexLazyLoad',   
-        field : element
-        ,
+        field : $element,
         triggerType: 'click',
         nextActionItem: '',
-        itemAlias: element.attr('item-alias'),
+        itemAlias: $element.attr('item-alias'),
         itemEventId: 'dib*dmtxzdym7',         
         containerItemId: 155299,
         submitUrl: 'dibGlobals.action.lazyLoadChildren',
         refreshItemId : '',
         responseType: 'actions',
-        scope : scope,
+        scope : $scope,
         params : {
 		      containerName : 'dibexLazyLoad',
               parentItemId: '155301',
@@ -569,7 +563,7 @@ dib-config="{
               tag: 'FFF',
               submitUrl :  '',
               responseType: 'actions',
-              field : element
+              field : $element
         }
     }, additionalInfoOnEvent);
      } 
@@ -613,8 +607,8 @@ dib-config="{
 </span>
 <md-button aria-label="buttonPHPD"
 can-be-moved=true
-item-alias="buttonPHPD"   
-    ng-show="!!view.buttonPHPD == false || view.buttonPHPD.visible" 
+item-alias="buttonPHPD" 
+    ng-show="view.buttonPHPD.visible || view.buttonPHPD == undefined"
     dib-disable="{{view.buttonPHPD.disabled}}"
     ng-class="view.buttonPHPD.class" 
     ng-style="view.buttonPHPD.style"
@@ -627,8 +621,8 @@ dib-config="{
     listeners : {
     'click___dib*mo3bp41c33' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexLazyLoad',
         triggerType: 'click',
         nextActionItem: '',
@@ -649,8 +643,8 @@ dib-config="{
 </md-button>
 <md-button aria-label="buttonPHPDDD"
 can-be-moved=true
-item-alias="buttonPHPDDD"   
-    ng-show="!!view.buttonPHPDDD == false || view.buttonPHPDDD.visible" 
+item-alias="buttonPHPDDD" 
+    ng-show="view.buttonPHPDDD.visible || view.buttonPHPDDD == undefined"
     dib-disable="{{view.buttonPHPDDD.disabled}}"
     ng-class="view.buttonPHPDDD.class" 
     ng-style="view.buttonPHPDDD.style"
@@ -663,8 +657,8 @@ dib-config="{
     listeners : {
     'click___dib*dla820v41' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexLazyLoad',
         triggerType: 'click',
         nextActionItem: '',
@@ -685,8 +679,8 @@ dib-config="{
 </md-button>
 <md-button aria-label="buttonPHPFFF"
 can-be-moved=true
-item-alias="buttonPHPFFF"   
-    ng-show="!!view.buttonPHPFFF == false || view.buttonPHPFFF.visible" 
+item-alias="buttonPHPFFF" 
+    ng-show="view.buttonPHPFFF.visible || view.buttonPHPFFF == undefined"
     dib-disable="{{view.buttonPHPFFF.disabled}}"
     ng-class="view.buttonPHPFFF.class" 
     ng-style="view.buttonPHPFFF.style"
@@ -699,8 +693,8 @@ dib-config="{
     listeners : {
     'click___dib*0lu4z91sg01' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexLazyLoad',
         triggerType: 'click',
         nextActionItem: '',
@@ -724,8 +718,8 @@ dib-config="{
 <div dib-inject-content="replace" layout='column'
     aria-label="colParent"
 can-be-moved=true
-item-alias="colParent"   
-    ng-show="!!view.colParent == false || view.colParent.visible" 
+item-alias="colParent" 
+    ng-show="view.colParent.visible || view.colParent == undefined"
     dib-disable="{{view.colParent.disabled}}"
     ng-class="view.colParent.class" 
     ng-style="view.colParent.style"

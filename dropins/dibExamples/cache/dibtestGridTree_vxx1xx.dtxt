@@ -1,0 +1,1521 @@
+
+<div component-loaded dib-container="dibtestGridTree" dib-grid  dib-config="{
+}"
+     >
+<div dib-inject-content="replace" layout="row" 
+    aria-label="toolbar"
+can-be-moved=true
+ can-have-children=true
+ on-move-refresh-preview=true
+flex
+layout-xs='column'
+style="    "
+    id='ci242613'
+aria-label="toolbar"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+<md-button aria-label="btninlineadd"
+can-be-moved=true
+class="md-icon-button md-raised md-squared "
+style="    "
+    ng-click="toggleInlineAdd()"
+    id='ci242620'
+aria-label="btninlineadd"
+dib-container-name='dibtestGridTree'
+    ng-click="dibCommon.goTo('dibtestCompanyForm','',true,'?record=new','',$event);"
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Add record inline</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/add.svg"></md-icon>
+</md-button>
+<md-button aria-label="btnadd"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    id='ci242614'
+aria-label="btnadd"
+dib-container-name='dibtestGridTree'
+    ng-click="dibCommon.goTo('dibtestCompanyForm','',true,'?record=new','',$event);"
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Add a new record using a form</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/btn_add.svg"></md-icon>
+</md-button>
+<md-button aria-label="btngriddelete"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="deleteSelected()"
+    id='ci242615'
+aria-label="btngriddelete"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Delete selected records</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/delete.svg"></md-icon>
+</md-button>
+<md-button aria-label="btnreload"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="reloadContainer({'force' : true})"
+    id='ci242616'
+aria-label="btnreload"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Reload records</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/reload.svg"></md-icon>
+</md-button>
+<md-menu-bar aria-label="mdmenubar"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+style="    "
+>
+    <md-menu  aria-label="menuTools"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+style="    "
+>
+    <md-button ng-click="$mdOpenMenu()"  class=""
+        id='ci242623'
+aria-label="menuTools"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        Tools
+    </md-button>
+    <md-menu-content width="4">
+    <md-menu  aria-label="Export"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+style="    "
+>
+    <md-button ng-click="$mdOpenMenu()"  class=""
+        id='ci242624'
+aria-label="Export"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+    >
+        Export
+    </md-button>
+    <md-menu-content width="4">
+    <md-menu-item aria-label="xlsx"
+can-be-moved=true
+item-alias="xlsx" 
+    ng-show="view.xlsx.visible || view.xlsx == undefined"
+    dib-disable="{{view.xlsx.disabled}}"
+    ng-class="view.xlsx.class" 
+    ng-style="view.xlsx.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci242628'
+aria-label="xlsx"
+dib-container-name='dibtestGridTree'
+dib-config="{
+     submitCheckedItem : 'self',
+submitHeaderFilter : 'self',
+    listeners : {
+    'click___dib*tocgs98bp' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*tocgs98bp',        
+        containerItemId: 242628,
+        submitUrl: '/dropins/dibExcel/Export/exportDibExcel',        
+        itemAlias: 'xlsx',
+        refreshItemId : '',
+        responseType: '500'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+Excel (*.xlsx)
+</md-button>
+</md-menu-item>
+    <md-menu-item aria-label="xlsxA"
+can-be-moved=true
+item-alias="xlsxA" 
+    ng-show="view.xlsxA.visible || view.xlsxA == undefined"
+    dib-disable="{{view.xlsxA.disabled}}"
+    ng-class="view.xlsxA.class" 
+    ng-style="view.xlsxA.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci242629'
+aria-label="xlsxA"
+dib-container-name='dibtestGridTree'
+dib-config="{
+     submitCheckedItem : 'self',
+submitHeaderFilter : 'self',
+    listeners : {
+    'click___dib*ii34071sua' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*ii34071sua',        
+        containerItemId: 242629,
+        submitUrl: '/dropins/dibExcel/Export/exportDibExcel',        
+        itemAlias: 'xlsxA',
+        refreshItemId : '',
+        responseType: '500'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+Excel (*.xlsx Async)
+</md-button>
+</md-menu-item>
+    <md-menu-item aria-label="xlsxE"
+can-be-moved=true
+item-alias="xlsxE" 
+    ng-show="view.xlsxE.visible || view.xlsxE == undefined"
+    dib-disable="{{view.xlsxE.disabled}}"
+    ng-class="view.xlsxE.class" 
+    ng-style="view.xlsxE.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci242625'
+aria-label="xlsxE"
+dib-container-name='dibtestGridTree'
+dib-config="{
+     submitCheckedItem : 'self',
+submitHeaderFilter : 'self',
+    listeners : {
+    'click___dib*nm574p223' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*nm574p223',        
+        containerItemId: 242625,
+        submitUrl: '/dropins/dibExcel/Export/exportPHPExcel',        
+        itemAlias: 'xlsxE',
+        refreshItemId : '',
+        responseType: '500'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+Excel PhpExcel (*.xlsx)
+</md-button>
+</md-menu-item>
+    <md-menu-item aria-label="xls"
+can-be-moved=true
+item-alias="xls" 
+    ng-show="view.xls.visible || view.xls == undefined"
+    dib-disable="{{view.xls.disabled}}"
+    ng-class="view.xls.class" 
+    ng-style="view.xls.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci242626'
+aria-label="xls"
+dib-container-name='dibtestGridTree'
+dib-config="{
+     submitHeaderFilter : 'self',
+submitCheckedItem : 'self',
+    listeners : {
+    'click___dib*25xay81z9p' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*25xay81z9p',        
+        containerItemId: 242626,
+        submitUrl: '/dropins/dibExcel/Export/exportPHPExcel',        
+        itemAlias: 'xls',
+        refreshItemId : '',
+        responseType: '500'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+Excel PhpExcel (*.xls)
+</md-button>
+</md-menu-item>
+    <md-menu-item aria-label="csv"
+can-be-moved=true
+item-alias="csv" 
+    ng-show="view.csv.visible || view.csv == undefined"
+    dib-disable="{{view.csv.disabled}}"
+    ng-class="view.csv.class" 
+    ng-style="view.csv.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci242627'
+aria-label="csv"
+dib-container-name='dibtestGridTree'
+dib-config="{
+     submitHeaderFilter : 'self',
+submitCheckedItem : 'self',
+    listeners : {
+    'click___dib*5a78r80b31' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*5a78r80b31',        
+        containerItemId: 242627,
+        submitUrl: '/dropins/dibCsv/CsvExport/exportContainerCsv',        
+        itemAlias: 'csv',
+        refreshItemId : '',
+        responseType: '500.redirect'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+Comma Separated (*.csv)
+</md-button>
+</md-menu-item>
+    </md-menu-content>
+</md-menu>
+    <md-menu-item aria-label="findReplace"
+can-be-moved=true
+item-alias="findReplace" 
+    ng-show="view.findReplace.visible || view.findReplace == undefined"
+    dib-disable="{{view.findReplace.disabled}}"
+    ng-class="view.findReplace.class" 
+    ng-style="view.findReplace.style"
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci242630'
+aria-label="findReplace"
+dib-container-name='dibtestGridTree'
+dib-config="{
+     submitCheckedItem : 'self',
+submitHeaderFilter : 'self',
+set : {'hiddenContainerId' : '{containerId}', 'headingFindReplace' : '{dibCaption}'},
+    listeners : {
+    'click___dib*ya8j0cg761' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*ya8j0cg761',        
+        containerItemId: 242630,
+        submitUrl: '/dropins/dibAdmin/DFindReplace/rememberSubmissionData',        
+        itemAlias: 'findReplace',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+    }
+}"
+>
+Find and Replace
+</md-button>
+</md-menu-item>
+    <md-menu-item aria-label="DocsNavTest"
+can-be-moved=true
+ can-have-children=true
+flex="none"
+style="    "
+>
+<md-button 
+    id='ci242631'
+aria-label="DocsNavTest"
+dib-container-name='dibtestGridTree'
+ng-click="dibCommon.location('/nav/dibDocs?id=34&text=Item%20Events');"
+dib-config="{
+    listeners : {
+    }
+}"
+>
+Test Docs Navigation
+</md-button>
+</md-menu-item>
+    </md-menu-content>
+</md-menu>
+</md-menu-bar>
+    <span flex=auto
+    aria-label="emptySpan"
+can-be-moved=true
+flex="none"
+style="    "
+    id='ci242632'
+aria-label="emptySpan"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+></span>
+<md-button aria-label="btnfilteropen"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="showSearch = !showSearch" 
+    id='ci242621'
+aria-label="btnfilteropen"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Display headers for filtering records</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/search.svg"></md-icon>
+</md-button>
+<md-button aria-label="btnfilterapply"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="searchGrid()"
+    id='ci242617'
+aria-label="btnfilterapply"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Apply filter criteria specified in grid headers</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/applyFilters.svg"></md-icon>
+</md-button>
+<md-button aria-label="btnfilterclear"
+can-be-moved=true
+class="md-icon-button md-squared md-raised"
+style="    "
+    ng-click="clearSearch()"
+    id='ci242618'
+aria-label="btnfilterclear"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+    <md-tooltip md-direction="top" md-delay="500">Show all records and clear filter criteria</md-tooltip>
+    <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibGlobals/images/svg/cancelFilters.svg"></md-icon>
+</md-button>
+    <div aria-label="gridtotals"
+can-be-moved=true
+flex="none"
+layout="row"
+style="    "
+    id='ci242619'
+aria-label="gridtotals"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+    ng-if="page.fromRecord > -1"
+>
+    <md-button read-only aria-label="Grid totals">
+        Records: {{page.fromRecord}}<span ng-if='page.fromRecord>0'> to {{page.toRecord}} of {{page.records}}</span> <span ng-if='page.totalRecords!=page.records'>(Total: {{page.totalRecords}})</span>
+    </md-button>
+</div>
+</div>
+        <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+        <div flex dib-table-tree-width >
+            <md-list class='dib-grid-column-header'>
+                <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
+                    <div layout="row" flex="100" dib-grid-search ng-show="!loadingData || gridData.length > 0">
+                        <!--TODO checkbox<div flex> </div> -->
+        <div table-column 
+            flex = 'none'
+            class="md-subhead"
+            dib-column-heading='242605'
+            style="width:80px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+            Id*<span ng-if="gridOptions.sortFields['id']">
+                        ({{gridOptions.sortFields['id']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['id']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="id"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        name="id"
+        ng-model="search.id"
+        aria-label="Id"
+        ng-enter='searchGrid()'
+        id='ci242605'
+aria-label="id"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Id</label>
+    <div ng-messages="dibtestGridTree.id.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='242606'
+            style="width:160px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('name')" >
+            Name*<span ng-if="gridOptions.sortFields['name']">
+                        ({{gridOptions.sortFields['name']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['name']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="name"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        name="name"
+        ng-model="search.name"
+        aria-label="Name"
+        ng-enter='searchGrid()'
+        id='ci242606'
+aria-label="name"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Name</label>
+    <div ng-messages="dibtestGridTree.name.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='242607'
+            ng-if="view.chineseName.visible"
+            style="width:160px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('chinese_name')" >
+            Chinese Name*<span ng-if="gridOptions.sortFields['chinese_name']">
+                        ({{gridOptions.sortFields['chinese_name']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="chineseName"
+can-be-moved=true
+item-alias="chineseName" 
+    ng-show="view.chineseName.visible || view.chineseName == undefined"
+    dib-disable="{{view.chineseName.disabled}}"
+    ng-class="view.chineseName.class" 
+    ng-style="view.chineseName.style"
+flex="100"
+style="    "
+dib-help='
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        name="chinese_name"
+        ng-model="search.chinese_name"
+        aria-label="Chinese Name"
+        ng-enter='searchGrid()'
+        id='ci242607'
+aria-label="chineseName"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Chinese Name</label>
+    <div ng-messages="dibtestGridTree.chinese_name.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='242608'
+            ng-if="view.parCompanyId.visible"
+            style="width:200px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('parent_company_id')" >
+            Parent Company<span ng-if="gridOptions.sortFields['parent_company_id']">
+                        ({{gridOptions.sortFields['parent_company_id']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['parent_company_id']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['parent_company_id']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <div layout='row' aria-label="parCompanyId"
+can-be-moved=true
+item-alias="parCompanyId" 
+    ng-show="view.parCompanyId.visible || view.parCompanyId == undefined"
+    dib-disable="{{view.parCompanyId.disabled}}"
+    ng-class="view.parCompanyId.class" 
+    ng-style="view.parCompanyId.style"
+flex="100"
+style="    "
+dib-help='&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Head Office or Parent Company&lt;/span&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
+    md-input-name='parent_company_id'
+    select-model="search.selected___parent_company_id.id"
+    md-search-text-change="loadServiceciid(dropdowns.service242608.searchTextsearch)"
+    select-default="=parent.id"
+    md-search-text="dropdowns.service242608.searchTextsearch"
+    md-selected-item="search.selected___parent_company_id"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service242608.getItems(dropdowns.service242608.searchTextsearch,'search')"
+    md-floating-label="Parent Company"
+    md-no-cache="true"
+    md-selected-item-change="select242608(search,'search','parent_company_id')"
+    md-select-on-match="true"
+    md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
+    dib-data-component='autocomplete'
+    placeholder="Parent Company"
+    id='ci242608'
+    aria-label="parCompanyId"
+    dib-container-name='dibtestGridTree'
+    dib-config="{
+        listeners : {
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service242608.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibtestGridTree.parent_company_id.$error" ng-if="dibtestGridTree.parent_company_id.$touched">
+    </div>
+</md-autocomplete>
+</div>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='242610'
+            style="width:160px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('website')" >
+            Website<span ng-if="gridOptions.sortFields['website']">
+                        ({{gridOptions.sortFields['website']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['website']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['website']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="website"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='&lt;font color=&quot;#333333&quot; face=&quot;helvetica, arial, verdana, sans-serif&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Website address&lt;/span&gt;&lt;/font&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        name="website"
+        ng-model="search.website"
+        aria-label="Website"
+        ng-enter='searchGrid()'
+        id='ci242610'
+aria-label="website"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Website</label>
+    <div ng-messages="dibtestGridTree.website.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='242611'
+            style="width:200px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('parent_company_contact_id')" >
+            Parent Company Contact<span ng-if="gridOptions.sortFields['parent_company_contact_id']">
+                        ({{gridOptions.sortFields['parent_company_contact_id']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['parent_company_contact_id']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['parent_company_contact_id']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <div layout='row' aria-label="parent_company_contact_id"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Contact person at the Head Office or Parent Company&lt;/span&gt;&lt;br&gt;&lt;/div&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
+    md-input-name='parent_company_contact_id'
+    select-model="search.selected___parent_company_contact_id.id"
+    md-search-text-change="loadServiceciid(dropdowns.service242611.searchTextsearch)"
+    md-search-text="dropdowns.service242611.searchTextsearch"
+    md-selected-item="search.selected___parent_company_contact_id"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service242611.getItems(dropdowns.service242611.searchTextsearch,'search')"
+    md-floating-label="Parent Company Contact"
+    md-no-cache="true"
+    md-selected-item-change="select242611(search,'search','parent_company_contact_id')"
+    md-select-on-match="true"
+    md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
+    dib-data-component='autocomplete'
+    placeholder="Parent Company Contact"
+    id='ci242611'
+    aria-label="parent_company_contact_id"
+    dib-container-name='dibtestGridTree'
+    dib-config="{
+         submitItemAlias : 'test_company_form',
+        listeners : {
+    'select___dib*3gbyae129e' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'select',
+        nextActionItem: '',
+        itemEventId: 'dib*3gbyae129e',        
+        containerItemId: 242611,
+        submitUrl: '/dropins/dibExamples/Run/gridDropdownSelect',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } ,
+    'click___dib*upqveh59j' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*upqveh59j',        
+        containerItemId: 242611,
+        submitUrl: '/dropins/dibExamples/Run/helloWorld',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service242611.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibtestGridTree.parent_company_contact_id.$error" ng-if="dibtestGridTree.parent_company_contact_id.$touched">
+    </div>
+</md-autocomplete>
+</div>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='242612'
+            style="width:160px;    "
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('icon')" >
+            Icon<span ng-if="gridOptions.sortFields['icon']">
+                        ({{gridOptions.sortFields['icon']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['icon']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['icon']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="icon"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='Image attached to this record. Allowed file types: .jpg/.jpeg/.png/.gif/.bmp
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        name="icon"
+        ng-model="search.icon"
+        aria-label="Icon"
+        ng-enter='searchGrid()'
+        id='ci242612'
+aria-label="icon"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Icon</label>
+    <div ng-messages="dibtestGridTree.icon.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+        <div table-column 
+            flex 
+            class="md-subhead"
+            dib-column-heading='242609'
+            style="width:250px;    max-height:70px;overflow:hidden;"
+>
+            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('notes')" >
+            Notes<span ng-if="gridOptions.sortFields['notes']">
+                        ({{gridOptions.sortFields['notes']['Count']}})
+                        <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['notes']['Order'] == 'ASC'"></md-icon>
+                        <md-icon class="md-opacity-55" aria-label="Sort Asc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/up.svg"  ng-if="gridOptions.sortFields['notes']['Order'] == 'DESC'"></md-icon>
+                    </span>
+                </div>
+                <span ng-if="showSearch" dib-edit>
+                        <md-input-container aria-label="notes"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='Comments / Notes
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        name="notes"
+        ng-model="search.notes"
+        aria-label="Notes"
+        ng-enter='searchGrid()'
+        id='ci242609'
+aria-label="notes"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Notes</label>
+    <div ng-messages="dibtestGridTree.notes.$error">
+    </div>
+</md-input-container>
+                </span>
+        </div>
+                    </div>
+                </md-list-item>
+<md-list-item class="md-1-line _md-no-proxy dib-inline-edit  first-record-padding inline-add" dib-container-name='dibtestGridTree' ng-if="gridOptions.inlineAddShow">
+        <ng-form name=dibtestGridTree  dib-container-name="dibtestGridTree" layout="row" flex="100" dib-inline-edit='add-mode'  layout-align="start start" ng-enter='addRow($event,row)'  isolate-form>
+    <div table-column layout="column"
+                flex = 'none'
+                dib-column="242605"
+                style="width:80px;    "
+    >
+        <div aria-label="id"
+can-be-moved=true
+flex="100"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="number" >
+        <span>
+             {{$parent.viewModel['id']}}</span></span>
+     </div>
+    <span dib-edit ng-if="row.___editing" flex>
+        <md-input-container aria-label="id"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='Unique r&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;eference number for the record (primary key)&lt;/span&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="number" 
+ng-disabled="true"
+        required
+        name="id"
+        ng-model="model.id"
+        aria-label="Id"
+        ng-enter='searchGrid()'
+        id='ci242605'
+aria-label="id"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputNumber'
+        md-detect-hidden
+    >
+    <label>Id*</label>
+    <div ng-messages="dibtestGridTree.id.$error">
+        <div ng-message="required">Id required.</div>
+    </div>
+</md-input-container>
+    </span>
+</div>
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="242606"
+                style="width:160px;    "
+    >
+        <div aria-label="name"
+can-be-moved=true
+flex="100"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+dib-help='
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+        <span>
+             {{$parent.viewModel['name']}}</span></span>
+     </div>
+    <span dib-edit ng-if="row.___editing" flex>
+        <md-input-container aria-label="name"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        required
+        name="name"
+        ng-model="model.name"
+        aria-label="Name"
+        ng-enter='searchGrid()'
+        id='ci242606'
+aria-label="name"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Name*</label>
+    <div ng-messages="dibtestGridTree.name.$error">
+        <div ng-message="required">Name required.</div>
+    </div>
+</md-input-container>
+    </span>
+</div>
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="242607"
+                style="width:160px;    "
+    >
+        <div aria-label="chineseName"
+can-be-moved=true
+item-alias="chineseName" 
+    ng-show="view.chineseName.visible || view.chineseName == undefined"
+    dib-disable="{{view.chineseName.disabled}}"
+    ng-class="view.chineseName.class" 
+    ng-style="view.chineseName.style"
+flex="100"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+dib-help='
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+        <span>
+             {{$parent.viewModel['chinese_name']}}</span></span>
+     </div>
+    <span dib-edit ng-if="row.___editing" flex>
+        <md-input-container aria-label="chineseName"
+can-be-moved=true
+item-alias="chineseName" 
+    ng-show="view.chineseName.visible || view.chineseName == undefined"
+    dib-disable="{{view.chineseName.disabled}}"
+    ng-class="view.chineseName.class" 
+    ng-style="view.chineseName.style"
+flex="100"
+style="    "
+dib-help='
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        required
+        name="chinese_name"
+        ng-model="model.chinese_name"
+        aria-label="Chinese Name"
+        ng-enter='searchGrid()'
+        id='ci242607'
+aria-label="chineseName"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Chinese Name*</label>
+    <div ng-messages="dibtestGridTree.chinese_name.$error">
+        <div ng-message="required">Chinese Name required.</div>
+    </div>
+</md-input-container>
+    </span>
+</div>
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="242608"
+                style="width:200px;    "
+    >
+        <div aria-label="parCompanyId"
+can-be-moved=true
+item-alias="parCompanyId" 
+    ng-show="view.parCompanyId.visible || view.parCompanyId == undefined"
+    dib-disable="{{view.parCompanyId.disabled}}"
+    ng-class="view.parCompanyId.class" 
+    ng-style="view.parCompanyId.style"
+flex="100"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+dib-help='&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Head Office or Parent Company&lt;/span&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="select" >
+        <span>
+             {{$parent.viewModel['parent_company_id']}}</span></span>
+    <md-button  aria-label="Link to page for dibtestCompanyForm"
+    class="md-icon-button md-raised md-squared "
+            ng-click="dibCommon.goToForDropdowns('dibtestCompanyForm','',true,'selected___parent_company_id','id',model,row,$event);"
+    >
+        <!-- <md-tooltip md-direction="top" ></md-tooltip> @TODO define tooltip-->  
+        <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg"></md-icon>
+    </md-button>
+     </div>
+    <span dib-edit ng-if="row.___editing" flex>
+        <div layout='row' aria-label="parCompanyId"
+can-be-moved=true
+item-alias="parCompanyId" 
+    ng-show="view.parCompanyId.visible || view.parCompanyId == undefined"
+    dib-disable="{{view.parCompanyId.disabled}}"
+    ng-class="view.parCompanyId.class" 
+    ng-style="view.parCompanyId.style"
+flex="100"
+style="    "
+dib-help='&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Head Office or Parent Company&lt;/span&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
+    md-input-name='parent_company_id'
+    select-model="model.selected___parent_company_id.id"
+    md-search-text-change="loadServiceciid(dropdowns.service242608.searchTextmodel)"
+    select-default="=parent.id"
+    md-search-text="dropdowns.service242608.searchTextmodel"
+    md-selected-item="model.selected___parent_company_id"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service242608.getItems(dropdowns.service242608.searchTextmodel,'model')"
+    md-floating-label="Parent Company"
+    md-no-cache="true"
+    md-selected-item-change="select242608(model,'model','parent_company_id')"
+    md-select-on-match="true"
+    md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
+    dib-data-component='autocomplete'
+    placeholder="Parent Company"
+    id='ci242608'
+    aria-label="parCompanyId"
+    dib-container-name='dibtestGridTree'
+    dib-config="{
+        listeners : {
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service242608.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibtestGridTree.parent_company_id.$error" ng-if="dibtestGridTree.parent_company_id.$touched">
+    </div>
+</md-autocomplete>
+    <md-button  aria-label="Link to page for dibtestCompanyForm"
+    class="md-icon-button md-raised md-squared "
+            ng-click="dibCommon.goToForDropdowns('dibtestCompanyForm','',true,'selected___parent_company_id','id',model,row,$event);"
+    >
+        <!-- <md-tooltip md-direction="top" ></md-tooltip> @TODO define tooltip-->  
+        <md-icon class="md-opacity-55" md-svg-icon="/files/dropins/setNgMaterial/dibAdmin/images/link.svg"></md-icon>
+    </md-button>
+</div>
+    </span>
+</div>
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="242610"
+                style="width:160px;    "
+    >
+        <div aria-label="website"
+can-be-moved=true
+flex="100"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+dib-help='&lt;font color=&quot;#333333&quot; face=&quot;helvetica, arial, verdana, sans-serif&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Website address&lt;/span&gt;&lt;/font&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+        <span>
+             {{$parent.viewModel['website']}}</span></span>
+     </div>
+    <span dib-edit ng-if="row.___editing" flex>
+        <md-input-container aria-label="website"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='&lt;font color=&quot;#333333&quot; face=&quot;helvetica, arial, verdana, sans-serif&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Website address&lt;/span&gt;&lt;/font&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        name="website"
+        ng-model="model.website"
+        aria-label="Website"
+        ng-enter='searchGrid()'
+        id='ci242610'
+aria-label="website"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Website</label>
+    <div ng-messages="dibtestGridTree.website.$error">
+    </div>
+</md-input-container>
+    </span>
+</div>
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="242611"
+                style="width:200px;    "
+    >
+        <div aria-label="parent_company_contact_id"
+can-be-moved=true
+flex="100"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+dib-help='&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Contact person at the Head Office or Parent Company&lt;/span&gt;&lt;br&gt;&lt;/div&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="select" >
+        <span>
+             {{$parent.viewModel['parent_company_contact_id']}}</span></span>
+     </div>
+    <span dib-edit ng-if="row.___editing" flex>
+        <div layout='row' aria-label="parent_company_contact_id"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Contact person at the Head Office or Parent Company&lt;/span&gt;&lt;br&gt;&lt;/div&gt;
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+ >
+<md-autocomplete 
+    flex
+    dib-onload-service 
+    has-store="true"
+    data-item-alias-location="parentElement"
+    md-clear-button="true"
+    md-select-on-focus="true"
+    md-input-name='parent_company_contact_id'
+    select-model="model.selected___parent_company_contact_id.id"
+    md-search-text-change="loadServiceciid(dropdowns.service242611.searchTextmodel)"
+    md-search-text="dropdowns.service242611.searchTextmodel"
+    md-selected-item="model.selected___parent_company_contact_id"
+    md-item-text="item.id_display_value"
+    md-delay="700"
+    md-items="item in dropdowns.service242611.getItems(dropdowns.service242611.searchTextmodel,'model')"
+    md-floating-label="Parent Company Contact"
+    md-no-cache="true"
+    md-selected-item-change="select242611(model,'model','parent_company_contact_id')"
+    md-select-on-match="true"
+    md-min-length="0"
+    md-match-case-insensitive="true"
+    md-dropdown-items="25"
+    md-select-on-match="true"
+    dib-data-component='autocomplete'
+    placeholder="Parent Company Contact"
+    id='ci242611'
+    aria-label="parent_company_contact_id"
+    dib-container-name='dibtestGridTree'
+    dib-config="{
+         submitItemAlias : 'test_company_form',
+        listeners : {
+    'select___dib*3gbyae129e' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'select',
+        nextActionItem: '',
+        itemEventId: 'dib*3gbyae129e',        
+        containerItemId: 242611,
+        submitUrl: '/dropins/dibExamples/Run/gridDropdownSelect',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } ,
+    'click___dib*upqveh59j' : function(field, additionalInfoOnEvent) { 
+        dibAction.executeAction({
+        field : $element,
+        scope : $scope,
+        containerName: 'dibtestGridTree',
+        triggerType: 'click',
+        nextActionItem: '',
+        itemEventId: 'dib*upqveh59j',        
+        containerItemId: 242611,
+        submitUrl: '/dropins/dibExamples/Run/helloWorld',        
+        itemAlias: '',
+        refreshItemId : '',
+        responseType: 'actions'
+    }
+, additionalInfoOnEvent);
+     } 
+        }
+    }"
+    dib-enable-dependency-scope='md-autocomplete-wrap'   
+    dib-enable-dependency-scope-object='selectedItem'
+>
+    <md-item-template>
+        <span md-highlight-text="dropdowns.service242611.searchText">{{item.id_display_value}}</span>
+    </md-item-template>
+    <md-not-found>No matches found.</md-not-found>
+    <div ng-messages="dibtestGridTree.parent_company_contact_id.$error" ng-if="dibtestGridTree.parent_company_contact_id.$touched">
+    </div>
+</md-autocomplete>
+</div>
+    </span>
+</div>
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="242612"
+                style="width:160px;    "
+    >
+        <div aria-label="icon"
+can-be-moved=true
+flex="100"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+dib-help='Image attached to this record. Allowed file types: .jpg/.jpeg/.png/.gif/.bmp
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+        <span>
+             {{$parent.viewModel['icon']}}</span></span>
+     </div>
+    <span dib-edit ng-if="row.___editing" flex>
+        <dib-file-uploader  aria-label="icon"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='Image attached to this record. Allowed file types: .jpg/.jpeg/.png/.gif/.bmp
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+    class="md-block"
+    data-container-name='dibtestGridTree'
+    ngf-model-invalid="errorFile"
+    ng-model="model.icon"
+    name='icon'
+    ng-caption="Icon"
+    id='ci242612'
+aria-label="icon"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+>
+</dib-file-uploader>
+    </span>
+</div>
+    </div>
+    <div table-column layout="column"
+                flex 
+                dib-column="242609"
+                style="width:250px;    max-height:70px;overflow:hidden;"
+    >
+        <div aria-label="notes"
+can-be-moved=true
+flex="100"
+class="md-body-2" layout="row" layout-align="start top"
+style="    "
+dib-help='Comments / Notes
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+>    
+    <div layout=row ng-if="!row.___editing" dib-view flex>
+        <span flex data-type="text" >
+        <span>
+             {{$parent.viewModel['notes']}}</span></span>
+     </div>
+    <span dib-edit ng-if="row.___editing" flex>
+        <md-input-container aria-label="notes"
+can-be-moved=true
+flex="100"
+style="    "
+dib-help='Comments / Notes
+    '
+dib-help-url='/nav/dibDocs?id=dibTableForm*1440&text=test_company'
+class="md-block"
+>
+    <input type="text" 
+        name="notes"
+        ng-model="model.notes"
+        aria-label="Notes"
+        ng-enter='searchGrid()'
+        id='ci242609'
+aria-label="notes"
+dib-container-name='dibtestGridTree'
+dib-config="{
+    listeners : {
+    }
+}"
+        dib-data-component='inputText'
+        md-detect-hidden
+    >
+    <label>Notes</label>
+    <div ng-messages="dibtestGridTree.notes.$error">
+    </div>
+</md-input-container>
+    </span>
+</div>
+    </div>
+            <div class='dib-inline-edit-buttons' flex='none' dib-edit >
+                <md-button ng-click='toggleInlineAdd()' class="md-raised ">
+                        Close
+                    </md-button>
+                <md-button ng-click='cleanRow($event,model, dibtestGridTree)' class="md-raised "  ng-disabled='!dibtestGridTree.$dirty'>
+                    Clear  
+                </md-button>
+                <md-button ng-click='useSelectedRow($event,model)' class="md-raised md-primary"  ng-disabled="!lastSelectedItem">
+                    Use selected data
+                </md-button>
+                <md-button ng-click='addRow($event,row)' class="md-raised  md-accent  "  ng-disabled="!dibtestGridTree.$valid">
+                    Add  
+                </md-button>
+            </div>
+        </ng-form>
+</md-list-item>
+            </md-list>
+        </div>
+        <md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+            <md-list dib-table-column-width >
+                <md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+                     <div class="no-records-available">  
+                        No records available
+                     </div>
+                </md-list-item>
+                <md-list-item class="dib-tree-grid-children md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  dib-double-click="rowEdit(element)"
+                >
+                        <dibtest-grid-tree-row row=row flex view=view model=model>
+                        </dibtest-grid-tree-row>
+                 </md-list-item>     
+            </md-list>
+        </md-content>
+        <div layout-fill layout='row' flex class='dib-grid-footer'>
+            <div flex=20 layout='row'>
+                <md-button disabled>Page limit</md-button>
+                <md-select ng-model="page.limit" aria-label="Page Limit">
+                    <md-option ng-value="10">10</md-option>
+                    <md-option ng-value="20">20</md-option>
+                    <md-option ng-value="50">50</md-option>
+                </md-select>
+            </div>
+            <div  ng-if="page.count>1" flex=80 layout='row'  layout-align="center center" >
+                <md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+                    First
+                </md-button>
+                <md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+                    Prev
+                </md-button>
+                <div layout='row'>
+                    <md-button disabled>Page</md-button>
+                    <md-input-container>
+                        <input type='number' ng-model="page.number" aria-label="Page number">
+                    </md-input-container>
+                    <md-button disabled>
+                    of {{ page.count }}
+                    </md-button>
+                </div>
+                <md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+                    Next
+                </md-button>
+                <md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+                    Last
+                </md-button>
+            </div>
+        </div>
+</div>

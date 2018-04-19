@@ -74,7 +74,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Port records specify the items (named 'port-items') that containers attach themselves to when loaded.<br>A container can have multiple ports, ie the same container can be loaded into different locations.<br>Each port has an unique url.<br>A url of the form /nav/xxx will open the xxx container linked to the port-item defined in the default port (pef_port.port_alias is empty).<br>A url of the form /nav/xxx/yyy will find the port record of container xxx where the port-alias is yyy and use the corresponding port-item.<br>When a container is opened, all items or other containers that host this container are automatically loaded.<br><br>
 The buttons below use the pef_item.pef_port_id field to open the same container in various locations.<br>
 If the url changes, use the browser's Back-button to return to /nav/dibexPorts.
@@ -176,11 +176,11 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     With the initial load of the main container (dibexPorts), the Consultants and Employees tabs below are empty (no containers loaded into them)<br>The tabs have their pef_port_id fields configured to load containers in them when clicked.
     </p>    
 </span>
-   <div layout-fill   
+   <div layout-fill 
         aria-label="dibtestCompanyForm"
 can-be-moved=true
 flex="none"
@@ -198,7 +198,7 @@ dib-config="{
         <dibtest-company-form
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dibtest-company-form>
     </div>
@@ -231,7 +231,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The buttons below use urls in the pef_item.expression field. A disadvantage is that if a container name or port alias changes, the url must be updated...<br>Urls are therefore mostly used from external pages or PHP/NodeJs calls.
     </p>    
 </span>
@@ -300,7 +300,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     The buttons below demonstrate that all required items/containers above the target container<br>in the DOM are loaded automatically when containers are loaded.<br>
 <b>Note:</b> tabs are an exception - they need to exist with the initial load of a container. For example we cannot delay the loading of the Employees-tab at the top of this container.<br>
     </p>    

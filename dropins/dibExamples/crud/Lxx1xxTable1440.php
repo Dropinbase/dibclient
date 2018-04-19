@@ -34,7 +34,7 @@ class Lxx1xxTable1440 {
             $totalSql = "SELECT count(*) AS totalcount FROM `test_company` ";
             // Add sql to show only used values (especially for filter dropdowns) - does not work for mssql...
             if($showUsedOnly) { 
-            	$itemTables = array(155244=>"`test_company`.`parent_company_id`", 155376=>"`test_company`.`parent_company_id`", 173713=>"`test_company`.`parent_company_id`", 177110=>"`test_company`.`parent_company_id`", 155406=>"`test_company_consultant`.`test_company_id`", 155459=>"`test_company_consultant`.`test_company_id`", 155500=>"`test_company_consultant`.`test_company_id`", 154824=>"`test`.`test_company_id`", 155095=>"`test`.`test_company_id`", 155576=>"`test`.`test_company_id`", 194824=>"`test`.`test_company_id`", 213157=>"`test`.`test_company_id`", 154825=>"`test`.`test_company2_id`", 155577=>"`test`.`test_company2_id`", 194825=>"`test`.`test_company2_id`", 155193=>"`test_consultant`.`employed_at_id`", 155216=>"`test_consultant`.`employed_at_id`", 155435=>"`test_consultant`.`employed_at_id`", 155622=>"`test_consultant`.`employed_at_id`");
+            	$itemTables = array(155244=>"`test_company`.`parent_company_id`", 155376=>"`test_company`.`parent_company_id`", 173713=>"`test_company`.`parent_company_id`", 177110=>"`test_company`.`parent_company_id`", 242608=>"`test_company`.`parent_company_id`", 155406=>"`test_company_consultant`.`test_company_id`", 155459=>"`test_company_consultant`.`test_company_id`", 155500=>"`test_company_consultant`.`test_company_id`", 154824=>"`test`.`test_company_id`", 155095=>"`test`.`test_company_id`", 155576=>"`test`.`test_company_id`", 194824=>"`test`.`test_company_id`", 213157=>"`test`.`test_company_id`", 154825=>"`test`.`test_company2_id`", 155577=>"`test`.`test_company2_id`", 194825=>"`test`.`test_company2_id`", 155193=>"`test_consultant`.`employed_at_id`", 155216=>"`test_consultant`.`employed_at_id`", 155435=>"`test_consultant`.`employed_at_id`", 155622=>"`test_consultant`.`employed_at_id`");
             	if(isset($itemTables[$containerItemId])) {
             		$foreignParts = explode('.', $itemTables[$containerItemId]);
 					$addSql = " INNER JOIN " . $foreignParts[0] . " dib___F ON dib___F." . $foreignParts[1] . " = `test_company`.`id` ";
@@ -93,7 +93,7 @@ class Lxx1xxTable1440 {
             $filteredCount = intval($filterCountRst["totalcount"]);
             if($pageNoFromValue) return array(array(), ceil($filteredCount / $page_size)); 
             $group_by = '';
-                // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg CrudPdoTemplate.php.
+                // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg Table.php.
     if($page === 1)
         $limit = ' LIMIT ' . $page_size;
     else

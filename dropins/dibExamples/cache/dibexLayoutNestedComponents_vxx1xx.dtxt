@@ -66,8 +66,8 @@ dib-config="{
     <md-input-container aria-label="textfield263"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="textfield263"
@@ -104,10 +104,11 @@ dib-config="{
     }
 }"
 >
-    <md-input-container class="md-block"  aria-label="checkboxfield32"
+    <md-input-container aria-label="checkboxfield32"
 can-be-moved=true
 flex="none"
 style="    "
+class="md-block"
 >
     <md-checkbox 
         dib-data-component='checkbox'
@@ -128,10 +129,11 @@ dib-config="{
     <div ng-messages="dibexLayoutNestedComponents.checkboxfield32.$error">
     </div>
 </md-input-container>
-    <md-input-container class="md-block"  aria-label="checkboxfield33"
+    <md-input-container aria-label="checkboxfield33"
 can-be-moved=true
 flex="none"
 style="    "
+class="md-block"
 >
     <md-checkbox 
         dib-data-component='checkbox'
@@ -152,10 +154,11 @@ dib-config="{
     <div ng-messages="dibexLayoutNestedComponents.checkboxfield33.$error">
     </div>
 </md-input-container>
-    <md-input-container class="md-block"  aria-label="checkboxfield34"
+    <md-input-container aria-label="checkboxfield34"
 can-be-moved=true
 flex="none"
 style="    "
+class="md-block"
 >
     <md-checkbox 
         dib-data-component='checkbox'
@@ -216,8 +219,8 @@ dib-config="{
     <md-input-container aria-label="textfield2612"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="textfield2612"
@@ -240,8 +243,8 @@ dib-config="{
     <md-input-container aria-label="textfield282"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="textfield282"
@@ -261,19 +264,24 @@ dib-config="{
     <div ng-messages="dibexLayoutNestedComponents.textfield282.$error">
     </div>
 </md-input-container>
-    <md-content class="md-block" aria-label="datefield4"
+      <md-input-container  aria-label="datefield4"
 can-be-moved=true
 flex="none"
 style="    "
+ class="md-block" 
 >
-    <p>datefield</p>
-    <md-datepicker type="text"
-        placeholder="datefield"
+    <label>datefield</label>
+    <md-datepicker  flex=100
+        md-hide-icons="calendar"
+        md-placeholder="datefield"
+        md-open-on-focus
         theme="material"
         dib-data-component='mdDatefield'
         name=datefield4
         ng-model="model.datefield4"
         aria-label="datefield"
+        mindate="1800-01-01"
+        maxdate="2999-12-31"
         id='ci176983'
 aria-label="datefield4"
 dib-container-name='dibexLayoutNestedComponents'
@@ -290,7 +298,7 @@ dib-config="{
         <div ng-message="maxdate">Date is too late!</div>
         <div ng-message="filtered">Only weekends are allowed!</div>
     </div>
-</md-content>
+</md-input-container>
             </section>
     </md-card-content>
 </md-card>
@@ -327,8 +335,8 @@ dib-config="{
     <md-input-container aria-label="inputdate1"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="date" 
         name="inputdate1"
@@ -350,8 +358,8 @@ dib-config="{
     <md-input-container aria-label="inputemail"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="email" 
         name="inputemail"
@@ -404,8 +412,8 @@ dib-config="{
     <md-input-container aria-label="inputdate"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="date" 
         name="inputdate"
@@ -427,8 +435,8 @@ dib-config="{
     <md-input-container aria-label="inputnumber"
 can-be-moved=true
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="number" 
         name="inputnumber"

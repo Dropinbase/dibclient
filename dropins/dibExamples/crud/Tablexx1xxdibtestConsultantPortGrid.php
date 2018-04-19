@@ -7,8 +7,8 @@
     public $storeType = array("id"=>'none', "name"=>'none', "employed_at_id"=>'dropdown', "email"=>'none', "address1"=>'none', "address2"=>'none', "city_town"=>'none', "country"=>'none', "notes"=>'none');
     public $sqlFields = array();
     public $fkeyDisplay = array(
-                 'employed_at_id'=>"^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^", 
-                 );
+            'employed_at_id'=>"^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^", 
+            );
     protected $filterArray = null;
     protected $now = null;
     protected $ipAddress = null;
@@ -60,7 +60,7 @@
                 $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
                 if(is_array($value) || $value === ':submitItemAlias_parent_id')
                     // ***TODO LogERROR!
-                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestConsultantGrid' on dibtestConsultantPortGrid is missing from submitted values.");
+                    //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter '' on dibtestConsultantPortGrid is missing from submitted values.");
                     $crit = '1 = 2'; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
                 else 
                     $params[':submitItemAlias_parent_id'] = $value;
@@ -73,75 +73,78 @@
         }
         if($criteria==='') return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
         return substr($criteria, 4);
-	}
+    }
     /**
      * Fetches the primary key values of the next, previous, etc. records for use with the Form's toolbar
      */
-    public function getToolbarInfo($pkValues, $option, $activeFilter, $filterParams) {
-        $params = array();
-        $fieldType = array();
-        if (!array_key_exists("id", $pkValues))
-            return array ('error',"The primary key fields specified in the request are invalid.");        
-         if ($pkValues["id"] != (string)(float)$pkValues["id"])
-            return array ('error',"Error! The primary key field values specified in the request are invalid.");
-        $params[":pk1"] = $pkValues["id"];
-        $fieldType[":pk1"] = PDO::PARAM_INT;    
-        $pkList = "`test_consultant`.`id`";
+    public function getToolbarInfo($pkValues, $activeFilter, $filterParams, $getFirstOnly=FALSE) {        
+        $params = array();   
         $criteria = '';
-        $order ='';
-        if ($option === 'next')  { 
-            $criteria = "WHERE `id` > :pk1";
-            $order = "ORDER BY `test_consultant`.`id`";
-        } elseif ($option === 'prev') {
-            $order = "ORDER BY `id` DESC";
-            $criteria = "WHERE `id` < :pk1";
-        } elseif ($option === 'last') {
-            $order = "ORDER BY `test_consultant`.`id` DESC";
-            $params = array();
-            $fieldType = array();
-        } elseif ($option === 'total') {
-            $pkList = 'Count(*) as `total`';
-            $params = array();
-            $fieldType = array();
-        } elseif ($option === 'current') {
-            $pkList = 'Count(*) as `current`';
-            $criteria = "WHERE `id` <= :pk1";
-        } elseif ($option ==='first') {
-            $order = "ORDER BY `test_consultant`.`id` ASC";
-            $params = array();
-            $fieldType = array();
-        }
-        // activeFilter                
-        if(!empty($activeFilter)){  
-            $crit = ''; 
-            if($activeFilter === 'dibtestCompanyForm_dibtestConsultantGrid') {  
-                $crit = "`test_consultant`.`employed_at_id` = :submitItemAlias_parent_id"; 
-                if (array_key_exists('submitItemAlias_parent_id',$filterParams)) {
-                    $params[':submitItemAlias_parent_id'] = $filterParams['submitItemAlias_parent_id'];
-                    // Remove from array so that Related Records' parseFilterArray can add any other params, e.g. if Related Records and activeFilter both apply
-                    // unset($filterParams['submitItemAlias_parent_id']);
-                } else {
-                    $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
-                    if(is_array($value))
-                        //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestConsultantGrid' on dibtestConsultantPortGrid is missing from submitted values.");
-                        $crit = ' 1=2 '; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
-                    else 
-                        $params[':submitItemAlias_parent_id'] = $value;
-                }
-            } elseif($activeFilter === 'dibexSubContainers_divPortItem') {  
-                $crit = "`country` = 'USA'"; 
-            } else
-                return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
-            $criteria = ($criteria!=='') ? $criteria . " AND ($crit) " : " WHERE $crit";
-        }
-        // Template: sql statement for MySql to fetch records for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
-$sql = "SELECT $pkList FROM `test_consultant` $criteria $order LIMIT 1";
-        dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);       
-        $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-        if(dibMySqlPdo::count() > 0)
+        if(!empty($activeFilter)) {
+            $criteria = $this->parseFilter($activeFilter, $params, $filterParams);
+            if(isset($criteria[0]) && $criteria[0]==='error')
+                return $criteria;
+            $criteria = " AND $criteria";
+            $fromClause = "`test_consultant`
+                LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
+                ";
+        } else 
+            $fromClause = "`test_consultant`";
+        if($criteria !== '') $criteria = 'WHERE ' . substr($criteria, 4);
+        if($getFirstOnly) { // Used after deletes to navigate to first record
+            $sql = "SELECT `test_consultant`.`id` FROM $fromClause $criteria ORDER BY `test_consultant`.`id` limit 1";
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+            if($rst === FALSE)
+                return array('error', 'Could not get first record. Please contact the System Administrator. (#0).');
             return $rst;
-        else
-            return null;
+        }
+        // Get total, first and last
+        $sql = "SELECT count(*) as dib__total, min(`test_consultant`.`id`) as dib__minId, max(`test_consultant`.`id`) as dib__maxId FROM $fromClause $criteria";
+        $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+        if(empty($rst))
+            return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#1).');
+        $totalCount = $rst['dib__total'];
+        $first = array('id' => $rst['dib__minId']);
+        $last = array('id' => $rst['dib__maxId']);
+        if($totalCount>0) {
+            // Add pkeys to $params
+            $fieldType = array();
+            if (!array_key_exists("id", $pkValues))
+                return array ('error',"The primary key field names specified in the request are invalid.");        
+            if ($pkValues["id"] != (string)(float)$pkValues["id"])
+                return array ('error',"Error! The primary key field values specified in the request are invalid.");
+            $params[":pk1"] = $pkValues["id"];
+            $fieldType[":pk1"] = PDO::PARAM_INT;    
+            // Get prev and current
+            $tempCrit = ($criteria === '') ? "WHERE `test_consultant`.`id` < :pk1" : "$criteria AND `test_consultant`.`id` < :pk1";
+            $sql = "SELECT max(`test_consultant`.`id`) as dib__Id, count(`test_consultant`.`id`) as dib__counter FROM $fromClause $tempCrit";
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+            if(empty($rst))
+                return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#2).');
+            $prev = array('id' => $rst['dib__Id']);
+            $currentNo = (int)$rst['dib__counter'] + 1;
+            // Get next
+            $tempCrit = ($criteria === '') ? "WHERE `test_consultant`.`id` > :pk1" : "$criteria AND `test_consultant`.`id` > :pk1";
+            $sql = "SELECT min(`test_consultant`.`id`) as dib__Id FROM $fromClause $tempCrit";
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
+            if(empty($rst))
+                return array('error', 'Could not set form navigation counts. Please contact the System Administrator. (#3).');
+            $next = array('id' => $rst['dib__Id']);
+        } else {
+            $first = null;
+            $currentNo = 1;
+            $last = null;
+            $prev = null;
+            $next = null;
+        }
+        return array(
+            'next' => $next,
+            'prev' => $prev,
+            'first' => $first,
+            'last' => $last,
+            'current' => array('current'=>$currentNo),
+            'total' => array('total'=>$totalCount)
+        );       
     }
     /**
      * Fetches the primary key values of the nth record
@@ -151,42 +154,29 @@ $sql = "SELECT $pkList FROM `test_consultant` $criteria $order LIMIT 1";
         if(!$position || $position < 0)
             return array('error', 'Position must be a positive integer');
         if($position < 1) $position = 1;
-		$criteria = '';
-        $params = array();
-        // activeFilter                
-        if(!empty($activeFilter)){  
-            $crit = ''; 
-            if($activeFilter === 'dibtestCompanyForm_dibtestConsultantGrid') {  
-                $crit = "`test_consultant`.`employed_at_id` = :submitItemAlias_parent_id"; 
-                if (array_key_exists('submitItemAlias_parent_id',$filterParams)) {
-                    $params[':submitItemAlias_parent_id'] = $filterParams['submitItemAlias_parent_id'];
-                    // Remove from array so that Related Records' parseFilterArray can add any other params, e.g. if Related Records and activeFilter both apply
-                    // unset($filterParams['submitItemAlias_parent_id']);
-                } else {
-                    $value = EvalCriteria::evalParam(':submitItemAlias_parent_id', $filterParams);
-                    if(is_array($value))
-                        //return array('error',"Error! The filter parameter 'submitItemAlias_parent_id' for filter 'dibtestConsultantGrid' on dibtestConsultantPortGrid is missing from submitted values.");
-                        $crit = ' 1=2 '; // We're returning no records since if eg submitCheckedItems is used and there are no checked records then this error will occur.
-                    else 
-                        $params[':submitItemAlias_parent_id'] = $value;
-                }
-            } elseif($activeFilter === 'dibexSubContainers_divPortItem') {  
-                $crit = "`country` = 'USA'"; 
-            } else
-                return  array('error',"Error! The named active filter could not be found in the crud class. Please contact the System Administrator.");
-            $criteria = ($criteria!=='') ? $criteria . " AND ($crit) " : " WHERE $crit";
-        }
-        // Template: sql statement for MySql to fetch nth record for the Toolbar on Forms. Used in eg CrudPdoTemplate.php.
+        $params = array();   
+        $criteria = '';
+        if(!empty($activeFilter)) {
+            $criteria = $this->parseFilter($activeFilter, $params, $filterParams);
+            if(isset($criteria[0]) && $criteria[0]==='error')
+                return $criteria;
+            $criteria = " AND $criteria";
+            $fromClause = "`test_consultant`
+                LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
+                ";
+        } else 
+            $fromClause = "`test_consultant`";
+        if($criteria !== '') $criteria = 'WHERE ' . substr($criteria, 4);
+        // Template: SQL statement for MySql to fetch nth record for the Toolbar on Forms. Used in eg Table.php.
 $sql = "SELECT `test_consultant`.`id` 
-        FROM `test_consultant`
+        FROM $fromClause
         $criteria
         ORDER BY `test_consultant`.`id` 
         LIMIT " . ($position - 1) . ', 1'; 
         $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true);
-        if(dibMySqlPdo::count() > 0)
-            return $rst;
-        else
+        if(empty($rst))
             return null;
+        return $rst ;
     }
     /**
      * parses $gridFilter and returns a SQL WHERE clause string, and PDO parameters (passed by reference)
@@ -218,7 +208,7 @@ $sql = "SELECT `test_consultant`.`id`
                     $fieldCrit .= $conjunction; //$conjunction is found in prev. loop
                 if (substr($stringValue, -1) === '|') {
                     $conjunction = ' OR ';
-                    $stringValue = substr($stringValue, 0, strlen($stringValue) - 1);
+                    $stringValue = trim(substr($stringValue, 0, strlen($stringValue) - 1));
                 } else
                     $conjunction = ' AND ';
                 $intValue = trim($stringValue, '=!>< ');
@@ -245,6 +235,12 @@ $sql = "SELECT `test_consultant`.`id`
                 //is not empty
                 elseif (strtolower(substr($stringValue, 0, 7)) === "<>empty") {
                     $fieldCrit .= "$fieldExpr <> ''";                    
+                }
+                //not like
+                elseif (strtolower(substr($stringValue, 0, 7)) === "<>like ") {
+                    $fieldCrit .= "$fieldExpr NOT LIKE :f" . $i;
+                    $params[':f'.$i] = str_replace('*', '%', substr($stringValue, 7)); //note, this allows user to put * or _ inside $stringValue... which is okay...
+                    $fieldType[':f'.$i] = $this->fieldType[$field];                   
                 }
                 //equal to
                 elseif (substr($stringValue, 0, 1) === "=") {
@@ -282,11 +278,11 @@ $sql = "SELECT `test_consultant`.`id`
                     $fieldType[':f'.$i] = $this->fieldType[$field];
                 }
                 //like
-                elseif (strtolower(substr(ltrim($stringValue), 0, 5)) === "like ") {
+                elseif (strtolower(substr($stringValue, 0, 5)) === "like ") {
                     $fieldCrit .= "$fieldExpr LIKE :f" . $i;
-                    $params[':f'.$i] = str_replace('*', '%', substr(ltrim($stringValue), 5)); //note, this allows user to put * or _ inside $stringValue... which is okay...
+                    $params[':f'.$i] = str_replace('*', '%', substr($stringValue, 5)); //note, this allows user to put * or _ inside $stringValue... which is okay...
                     $fieldType[':f'.$i] = $this->fieldType[$field];                   
-                }
+                }                
                 //anything else - use LIKE
                 else {
                     $fieldCrit .= "$fieldExpr LIKE :f" . $i;
@@ -334,9 +330,9 @@ $sql = "SELECT `test_consultant`.`id`
                 $fieldType[":pk1"] = PDO::PARAM_INT;
                 $criteria = "`test_consultant`.`id` = :pk1 ";
                 $sql = "SELECT `test_consultant`.`id`,`test_consultant`.`name`,`test_consultant`.`notes`,`test_consultant`.`email`,`test_consultant`.`address1`,`test_consultant`.`address2`,`test_consultant`.`city_town`,`test_consultant`.`country`,`test_consultant`.`employed_at_id` 
-                     , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `employed_at_id_display_value`
+                , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `employed_at_id_display_value`
                          FROM `test_consultant`                  
-                     LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
                          WHERE $criteria";
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
                 $attributes = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $params, true); // not making it false since sometimes joins of pef_sql dropins return multiple records...
@@ -394,8 +390,8 @@ $sql = "SELECT `test_consultant`.`id`
                     $criteria = ' WHERE ' . substr($criteria, 4);
                     if($usedSqlField) {
 						$join = "                 
-                     LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
-                 ";
+                LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
+            ";
                  	} else 
                  		$join = '';
                     if($page === 1 || $countMode==='all'){
@@ -430,24 +426,24 @@ $sql = "SELECT `test_consultant`.`id`
                 }                
                 // Fetch records - handle only specific columns that may be viewed by this permgroup
                 // Set SQL statement
-                    // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg CrudPdoTemplate.php.
+                    // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg Table.php.
     if($page === 1)
         $limit = ' LIMIT ' . $page_size;
     else
         $limit = ' LIMIT ' . ($page_size * ($page - 1)) .  ', ' . $page_size;    
-                // Template: main SQL statement for MySQL to fetch many records limited by paging. Used in eg CrudPdoTemplate.php.
+                // Template: main SQL statement for MySQL to fetch many records limited by paging. Used in eg Table.php.
 if($readType === 'exportlist')
     $sql = "SELECT 
                 `test_consultant`.`id` AS `Id`, `test_consultant`.`name` AS `Name`, `test_consultant`.`notes` AS `Notes`, `test_consultant`.`email` AS `Email`, `test_consultant`.`address1` AS `Address1`, `test_consultant`.`address2` AS `Address2`, `test_consultant`.`city_town` AS `City Town`, `test_consultant`.`country` AS `Country` 
-                     , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `Employed At`
+                , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `Employed At`
             FROM `test_consultant` 
-                     LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
                  ";
 else
     $sql = "SELECT `test_consultant`.`id`,`test_consultant`.`name`,`test_consultant`.`notes`,`test_consultant`.`email`,`test_consultant`.`address1`,`test_consultant`.`address2`,`test_consultant`.`city_town`,`test_consultant`.`country`,`test_consultant`.`employed_at_id` 
-                     , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `employed_at_id_display_value`
+                , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `employed_at_id_display_value`
             FROM `test_consultant` 
-                     LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
                  ";   
 $sql .= $criteria . $orderStr . $limit;               
                 dibMySqlPdo::setParamsType($fieldType, DIB::$CONTAINERDATA[2]);
@@ -462,60 +458,6 @@ $sql .= $criteria . $orderStr . $limit;
                 }
             // Get values where dropdowns are based on queries based on other db's...
             }
-            if ($action === 'add') {
-                // Inline adding in the grid - add a blank row
-                // NOTE!: If the keys are not a continuous numeric sequence starting from 0, all keys are encoded as strings, and specified explicitly for each key-value pair.
-                $blankRecord = array("id"=>null, "name"=>null, "notes"=>null, "email"=>null, "address1"=>null, "address2"=>null, "city_town"=>null, "country"=>null, "employed_at_id"=>null);
-                $blankRecord = $this->getDefaults($blankRecord, $filterParams);
-                if(isset($blankRecord[0]) && $blankRecord[0]==='error')
-                	return array('error', $blankRecord[1]);
-                // Find offset in $attributes where pkey values from $actionData are in $attributes:
-                $actionData = json_decode(urldecode($actionData), true);
-                $found = FALSE;
-                $k=0;
-                if($actionData) {
-                	if(!array_key_exists('id', $actionData)) {
-						Log::err('To use inline adding, the primary key must be included in submitted fields.');
-	                	return array('error','Configuration error. Please contact the System Administrator.');
-	                }
-                    foreach($attributes as $k => $r) {
-                        if($r['id'] === $actionData['id']) {
-                            $found = TRUE;
-                            break;
-                        }
-                    }
-                }
-                if ($found === TRUE) // Insert the $blankRecord array at this offset
-                    array_splice($attributes, $k+1, 0, $blankRecord);
-                else // Insert the $blankRecord array at position 0
-                    array_unshift($attributes, $blankRecord);
-                $filteredCount++;
-            } elseif ($action === 'addreuse') {
-                // Inline adding in the grid - add a copy of the previous row
-                // NOTE!: If the keys are not a continuous numeric sequence starting from 0, all keys are encoded as strings, and specified explicitly for each key-value pair.
-                // Find offset where pkey values from $actionData are in $attributes:
-                $actionData = json_decode(urldecode($actionData), true);
-                $found = FALSE;
-                if($actionData) {
-                	if(!array_key_exists('id', $actionData)) {
-						Log::err('To use inline adding, the primary key must be included in submitted fields.');
-	                	return array('error','Configuration error. Please contact the System Administrator.');
-	                }
-                    foreach($attributes as $k => $r) {
-                        if($r['id'] === $actionData['id']) {
-                            $found = TRUE;
-                            break;
-                        }
-                    }
-                    if ($found === TRUE) {
-                        // Set primary key values to NULL
-                        $r['id'] = NULL;
-                        // Insert the $blankRecord array at this offset
-                        array_splice($attributes, $k+1, 0, array(0=>$r));
-                        $filteredCount++;
-                    }
-                }                
-            }
             return array($attributes, $filteredCount, $totalCount, array());
         } catch (Exception $e) {
             return array('error',"Error! Could not read table information. Please contact the System Administrator");
@@ -529,15 +471,15 @@ $sql .= $criteria . $orderStr . $limit;
      * @param int $targetDatabaseId - if specified, record is created in the target database (must have the same table structure).
      * @return type
      */
-    public function create($attributes, $makeUniqueValues=FALSE, $targetDatabaseId=NULL) {        
-        // User can only provide values for fields they have rights to AND where ci.exclude_crud=0. 
+    public function create(&$attributes, $makeUniqueValues=FALSE, $targetDatabaseId=NULL) {        
+        // User can only provide values for fields they have rights to AND where ci.crud_include<>0. 
     	// The rest must get default values - prevent user from updating them, even if provided...
-    	// So if (exclude_crud=1 OR user lacks permissions (and is not relatedrecordsitem)) AND there is a default, then set the default
+    	// So if (crud_include=0 OR user lacks permissions (and is not relatedrecordsitem)) AND there is a default, then set the default
     	//    else if no default AND field is required, then give an error msg 
     	//    else if field is not required, unset it.
         if(!$targetDatabaseId) $targetDatabaseId = DIB::$CONTAINERDATA[2];
         try { 
-            // Add defaults where permissions or exclude_crud restricts user to provide values 
+            // Add defaults where permissions restricts user to provide values, or value missing due to crud_include or not included in container 
              if(isset($attributes["id"])) unset($attributes["id"]);
             // Check Validation
 	        // name (plain text)
@@ -585,9 +527,13 @@ $sql .= $criteria . $orderStr . $limit;
 		                return array ('error',"The 'Employed At (employed_at_id)' field must be an integer value.");
 	            } 
 	        }             
-            //Check Unique Values for name
-            if(!array_key_exists('name', $attributes)) $attributes['name'] = null;
-            $criteria ="`name` = :fk1 ";
+            //Check Unique Values for table option 23321
+            $criteria = '1=1';
+            if(!array_key_exists('name', $attributes)) {
+                Log::err("Unique value validation failed. Ensure that values for all fields that are involved in checking unique index of pef_table_option.id  are submitted to the server (ie they exist as (hidden) fields in container id 7166), or have defaults in pef_field.");
+                return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
+            }
+            $criteria .= " AND `name` = :fk1";
             $sql = "SELECT `test_consultant`.`id` AS pkv FROM `test_consultant` WHERE $criteria";
             $paramsU = array(":fk1" => $attributes["name"]);
             $rst = dibMySqlPdo::execute($sql, $targetDatabaseId, $paramsU, true);
@@ -595,7 +541,7 @@ $sql .= $criteria . $orderStr . $limit;
 				Log::err("Unique value validation failed. Ensure that values for all fields that are involved in checking unique index of pef_table_option.id 23321 are submitted to the server (ie they exist as fields in container id 7166)");
                 return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
             }
-            if(dibMySqlPdo::count() > 0) {
+            if(!empty($rst)) {
                 if($makeUniqueValues)
                     // Force unique values - for combinations, only enforce on first 
                     $attributes['name'] = SyncFunctions::cleanName($attributes['name'],'test_consultant', '');
@@ -624,7 +570,7 @@ $sql .= $criteria . $orderStr . $limit;
             $sql .= $fieldList . ") VALUES (" . $valueList . ")";
             dibMySqlPdo::setParamsType($fieldType, $targetDatabaseId);       
             $value = dibMySqlPdo::execute($sql, $targetDatabaseId, $params);           
-            if ($value === FALSE || dibMySqlPdo::count() === 0) {
+            if (empty($value)) {
                 if($value === FALSE && Database::lastErrorUserMsg())
                     return array('error', Database::lastErrorUserMsg());
                 else
@@ -659,7 +605,7 @@ $sql .= $criteria . $orderStr . $limit;
      * @return array $pkValues  OR  array('error', $errMsg) on failure
      */
     public function update($pkValues, $attributes) {
-        // Updates must occur only for fields that users have rights to AND where ci.exclude_crud=0. The rest must retain old values - prevent user from updating them...
+        // Updates must occur only for fields that users have rights to AND where ci.crud_include<>0. The rest must retain old values - prevent user from updating them...
         try {    
             // Check Validation - note the PeffApp::jsonDecode() function in the CrudController already ensures $attributes contain no arrays
             // id (integer)	        
@@ -722,13 +668,31 @@ $sql .= $criteria . $orderStr . $limit;
                 return array ('error',"Error! The primary key field values specified in the request are invalid.");
             $params[":pk1"] = $pkValues["id"];
             $fieldType[":pk1"] = PDO::PARAM_INT;            
-            // `id` = :pk0    
             $pkCrit = "`test_consultant`.`id` = :pk1";                   
+            // Check Unique Values for table option name(23321)
+            $criteria = '1=1 ';           
+            if(!array_key_exists('name', $attributes)) {
+                $uRst = Database::fetch("SELECT `name` FROM `test_consultant` WHERE $pkCrit", $params);
+                $attributes['name'] = $uRst['name'];
+            }
+            $criteria .= " AND `name` = :fk1 ";
+            $criteria .= "AND `id` <> :pk1";
+            $sql = "SELECT `test_consultant`.`id` AS pkv FROM `test_consultant` WHERE $criteria";
+            $paramsU = array(":fk1" => $attributes["name"]);
+            $rst = dibMySqlPdo::execute($sql, DIB::$CONTAINERDATA[2], $paramsU + $params, true);
+            if ($rst === FALSE)
+                return array('error',"Could not perform unique value validation. Please contact the System Administrator.");
+            if(!empty($rst)) {
+                if(count($paramsU) > 1)
+                    return array('error',"Update record cancelled. The combination of values in 'name' needs to be unique. Another record already contains the same combination of values.");
+                else
+                    return array('error',"Update record cancelled. The value in 'name' needs to be unique. Another record already contains the same value.");
+            }            
             $crit = $pkCrit;
             // Get record's existing (old) values
             $sql = "SELECT `test_consultant`.* 
 		            FROM `test_consultant`
-                     LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
+                LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
 		                WHERE $crit";
             $recordOld = $this->getRecordByPk($sql, $pkValues);
             if (count($recordOld) === 0)
@@ -909,7 +873,7 @@ $sql .= $criteria . $orderStr . $limit;
 						} else {
 							// Run 2nd query, eg SELECT id FROM pef_field f INNER JOIN pef_table t ON f.pef_table_id = t.id WHERE f.name=:fname and t.name=:name
 							$result = Database::fetch($value[1], $args, $targetDatabaseId);
-							if($result === FALSE || Database::count() === 0) {
+							if(empty($result)) {
 								// Check if 'create' is required
 								if(isset($value[2]) && $value[2]==='create') {
 									$result = Crud::duplicate($value[3], array('id'=>$record[$field]), $value[4], $targetDatabaseId);
@@ -1027,21 +991,14 @@ $sql .= $criteria . $orderStr . $limit;
     }
     /**
      * Strips the attributes from any columns the user may not update
-     * @param $validColumns
      * @param $attributes
      * @return string
      */
-    private function removeSecuredColumns($validColumns, &$attributes) {
-        // *!* ***TODO the if statement below can be part of the template creation...        
-        if ($validColumns === "*")
-            $validAttributes = $attributes;
-        else {
-            $validAttributes = explode(",", $validColumns);
-            $validAttributes = array_flip($validAttributes);
-            $validAttributes = array_intersect_key($attributes, $validAttributes);
-        }
-        return $validAttributes;
-    } 
+    private function removeSecuredColumns(&$attributes) {
+        // Define list of fields that may be updated
+        $validAttributes = array();
+        return array_intersect_key($attributes, $validAttributes);
+    }
     public function getCaptions() {
     	return array('Id', 'Name', 'Employed At', 'Email', 'Address1', 'Address2', 'City Town', 'Country', 'Notes' );
     }
@@ -1050,15 +1007,15 @@ $sql .= $criteria . $orderStr . $limit;
 					 'containerName' => "Tablexx1xxdibtestConsultantPortGrid",
 					 'selectFields' => "`test_consultant`.`id`,`test_consultant`.`name`,`test_consultant`.`notes`,`test_consultant`.`email`,`test_consultant`.`address1`,`test_consultant`.`address2`,`test_consultant`.`city_town`,`test_consultant`.`country`,`test_consultant`.`employed_at_id`",
 				     'selectSqlFields' => trim("
-                 ", ", \r\n"),
+            ", ", \r\n"),
 				     'selectSqlDisplay' =>  trim("
-                 ", ", \r\n"),
+            ", ", \r\n"),
 				     'selectTableDisplay' => trim("
-                     , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `employed_at_id_display_value`
-                 ", ", \r\n"),          
+                , ^^CONCAT(`test_company1001`.`name`, ' (' , CAST(`test_company1001`.`id` AS CHAR), ')')^^ AS `employed_at_id_display_value`
+            ", ", \r\n"),          
                      'from' => trim("`test_consultant`                  
-                     LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
-                  ", ", \r\n")
+                LEFT JOIN `test_company` `test_company1001` ON `test_consultant`.`employed_at_id` = `test_company1001`.`id` 
+             ", ", \r\n")
         );
 	}
 } // end Class                

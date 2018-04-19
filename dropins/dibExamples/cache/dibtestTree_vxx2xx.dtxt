@@ -31,8 +31,8 @@ dib-config="{
     listeners : {
     'click___dib*ae210161kwb1' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestTree',
         triggerType: 'click',
         nextActionItem: '',
@@ -51,15 +51,16 @@ dib-config="{
 >
     do something
 </md-button>
-    <md-input-container class="md-block"  aria-label="checkSomething"
+    <md-input-container aria-label="checkSomething"
 can-be-moved=true
-item-alias="checkSomething"   
-    ng-show="!!view.checkSomething == false || view.checkSomething.visible" 
+item-alias="checkSomething" 
+    ng-show="view.checkSomething.visible || view.checkSomething == undefined"
     dib-disable="{{view.checkSomething.disabled}}"
     ng-class="view.checkSomething.class" 
     ng-style="view.checkSomething.style"
 flex="none"
 style="    "
+class="md-block"
 >
     <md-checkbox 
         dib-data-component='checkbox'
@@ -151,8 +152,8 @@ dib-config="{
     listeners : {
     'click___dib*ma3155chg91' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestTree',
         triggerType: 'click',
         nextActionItem: '',
@@ -183,8 +184,8 @@ dib-config="{
     listeners : {
     'click___dib*0m8i0c0rb' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestTree',
         triggerType: 'click',
         nextActionItem: '',
@@ -205,8 +206,8 @@ dib-config="{
 </md-button>
     <md-button aria-label="pasteChildrenAllRelated1"
 can-be-moved=true
-item-alias="pasteChildrenAllRelated1"   
-    ng-show="!!view.pasteChildrenAllRelated1 == false || view.pasteChildrenAllRelated1.visible" 
+item-alias="pasteChildrenAllRelated1" 
+    ng-show="view.pasteChildrenAllRelated1.visible || view.pasteChildrenAllRelated1 == undefined"
     dib-disable="{{view.pasteChildrenAllRelated1.disabled}}"
     ng-class="view.pasteChildrenAllRelated1.class" 
     ng-style="view.pasteChildrenAllRelated1.style"
@@ -220,8 +221,8 @@ dib-config="{
     listeners : {
     'click___dib*6hhej21dfe1' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibtestTree',
         triggerType: 'click',
         nextActionItem: '',

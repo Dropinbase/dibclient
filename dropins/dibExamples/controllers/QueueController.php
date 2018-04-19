@@ -31,14 +31,23 @@ class QueueController extends Controller {
       		return Queue::addMsg('Title', "Action blocked :)", 'dialog', 0, true, 'stop');
       	
       	// If the server will potentially be busy for a long time it is a good idea to set the PHP timeout...
-      	//set_time_limit(600);
+		  //set_time_limit(600);
+		  
+		// The client request that initiated the call always waits for a result so let's satisfy its need:
+		$this->flushResult(); 
+		// the available parameters are the same as invalidResult, so you could do this:
+		// $this->flushResult("Please wait, this script can take up to 40 seconds to complete!", 'notice', 5000); 
       	
       	$this->doSomeWork($t);
       	
-        // Since the client is not waiting for a response, we don't send a validResult or invalidResult
+        // Since the client is no longer waiting for a response, we don't send a validResult or invalidResult
     }
 	
 	protected function doSomeWork($text) {
+		// The client request that initiated the call always waits for a result so let's satisfy its need:
+		// Note, this call will always appear after validation tests that use invalidResult to return error messages to the user.
+		$this->flushResult(); 
+
 		// Let's give the client something to do...
       	for($i=1; $i<5; $i++) {
 			// The Queue class has a native function to send messages
@@ -96,6 +105,9 @@ class QueueController extends Controller {
 			return $this->validResult($actionList, null, null, null, 1000);
 		}
 		
+		// The client request that initiated the call always waits for a result so let's satisfy its need:
+		$this->flushResult();
+
         // Call our worker function which adds actions to the Queue...
         $this->doSomeWork($t);
     }
@@ -106,7 +118,10 @@ class QueueController extends Controller {
 			return  $this->invalidResult('This function is not available for public users');
 		
         list($msg, $loginId) = PeffApp::getSubmitVal($submissionData, 'sIA.s', array('queueMsg', 'queueLoginId'));
-        
+		
+		// The client request that initiated the call always waits for a result so let's satisfy its need:
+		$this->flushResult();
+
         // Change the retryCount - now the queue will stop automatically after receiving 20 empty results
         Queue::updateIntervals(null, 20);
         
@@ -138,9 +153,10 @@ class QueueController extends Controller {
 
 		// Store queueUid against Login id (***TODO, handle reset of pef_login field after 20s of no activity)
     	Database::execute("UPDATE pef_login SET notes = :uid WHERE id = " . DIB::$USER['id'], array(':uid'=> PeffApp::$queueUid));
-        Queue::addMsg('Messages', 'Listening for messages... The queue will automatically stop after 20s of no activity', 'notice', 5000, true, 1000);
+		Queue::addMsg('Messages', 'Listening for messages... The queue will automatically stop after 20s of no activity', 'notice', 5000, true, 1000);
+		
+		// The client request that initiated the call always waits for a result so let's satisfy its need:
+		$this->flushResult();
 	}
-	
-
 
 }

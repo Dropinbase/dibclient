@@ -32,7 +32,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     Dropinbase provides a core library of functions that are commonly used in database systems and general applications. It is also easy to add your own favorite PHP modules via 'dropins'.<br>
 The buttons below call functions in the /dropinbase/dropins/dibExamples/PhpController.php class. The class contains extensive comments explaining the use of functions.
     </p>    
@@ -48,8 +48,8 @@ dib-config="{
     listeners : {
     'click___dib*dnqnx212ue' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexPhp',
         triggerType: 'click',
         nextActionItem: '',
@@ -79,8 +79,8 @@ dib-config="{
     listeners : {
     'click___dib*as7sp11cld' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexPhp',
         triggerType: 'click',
         nextActionItem: '',
@@ -110,8 +110,8 @@ dib-config="{
     listeners : {
     'click___dib*tnd1dxokgz' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexPhp',
         triggerType: 'click',
         nextActionItem: '',
@@ -132,14 +132,14 @@ dib-config="{
 </md-button>
     <md-input-container aria-label="sendText"
 can-be-moved=true
-item-alias="sendText"   
-    ng-show="!!view.sendText == false || view.sendText.visible" 
+item-alias="sendText" 
+    ng-show="view.sendText.visible || view.sendText == undefined"
     dib-disable="{{view.sendText.disabled}}"
     ng-class="view.sendText.class" 
     ng-style="view.sendText.style"
 flex="none"
-class="md-block"
 style="  margin:40px !important;  "
+class="md-block"
 >
     <textarea  
          maxlength='400'
@@ -153,7 +153,7 @@ dib-config="{
     listeners : {
     }
 }"
-        dib-data-component='inputTextarea'
+        dib-data-component='inputTextArea'
         md-detect-hidden
     >
     </textarea>
@@ -173,8 +173,8 @@ dib-config="{
     listeners : {
     'click___dib*gznc1rnbv' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexPhp',
         triggerType: 'click',
         nextActionItem: '',
@@ -195,14 +195,14 @@ dib-config="{
 </md-button>
     <md-input-container aria-label="msg"
 can-be-moved=true
-item-alias="msg"   
-    ng-show="!!view.msg == false || view.msg.visible" 
+item-alias="msg" 
+    ng-show="view.msg.visible || view.msg == undefined"
     dib-disable="{{view.msg.disabled}}"
     ng-class="view.msg.class" 
     ng-style="view.msg.style"
 flex="none"
-class="md-block"
 style="    "
+class="md-block"
 >
     <textarea  
         name="msg"
@@ -215,7 +215,7 @@ dib-config="{
     listeners : {
     }
 }"
-        dib-data-component='inputTextarea'
+        dib-data-component='inputTextArea'
         md-detect-hidden
     >
     </textarea>
@@ -234,8 +234,8 @@ dib-config="{
     listeners : {
     'click___dib*pof161dqr' : function(field, additionalInfoOnEvent) { 
         dibAction.executeAction({
-        scope : scope,
-        field : element,
+        field : $element,
+        scope : $scope,
         containerName: 'dibexPhp',
         triggerType: 'click',
         nextActionItem: '',
@@ -254,7 +254,7 @@ dib-config="{
 >
     Asynchronous Execution
 </md-button>
-   <div layout-fill   
+   <div layout-fill 
         aria-label="dibTestCompanyAsyncGrid"
 can-be-moved=true
 flex="none"
@@ -272,7 +272,7 @@ dib-config="{
         <dib-test-company-async-grid
             dib-subcontainer-loaded
             dib-subcontainer=true
-            layout-fill        
+            layout-fill    
         >
         </dib-test-company-async-grid>
     </div>

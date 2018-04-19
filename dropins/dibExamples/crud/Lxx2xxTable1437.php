@@ -83,7 +83,7 @@ class Lxx2xxTable1437 {
             $filteredCount = intval($filterCountRst["totalcount"]);
             if($pageNoFromValue) return array(array(), ceil($filteredCount / $page_size)); 
             $group_by = '';
-                // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg CrudPdoTemplate.php.
+                // Template: MySql - Get SQL for paging purposes for database engines that support the LIMIT keyword. Used in eg Table.php.
     if($page === 1)
         $limit = ' LIMIT ' . $page_size;
     else

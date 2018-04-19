@@ -107,25 +107,27 @@ dib-config="{
 }"
     ng-if="page.fromRecord > -1"
 >
-    <md-button ng-disabled="true" aria-label="Grid totals">
+    <md-button read-only aria-label="Grid totals">
         Records: {{page.fromRecord}}<span ng-if='page.fromRecord>0'> to {{page.toRecord}} of {{page.records}}</span> <span ng-if='page.totalRecords!=page.records'>(Total: {{page.totalRecords}})</span>
     </md-button>
 </div>
     </div>
 </md-toolbar>
-        <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
-        <div flex dib-table-width >
-            <md-list class='dib-grid-column-header'>
-                <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" >
-                    <div layout="row" flex="100" dib-grid-search  ng-show="!loadingData || gridData.length > 0">
-                        <!--TODO checkbox<div flex> </div> -->
+        <div dib-grid-container>
+            <md-progress-linear md-mode="indeterminate" ng-if="loadingData" class="dib-data-loading"></md-progress-linear>
+            <div flex dib-table-width >
+                <md-list class='dib-grid-column-header'>
+                    <md-list-item class="md-1-line _md-no-proxy dib-table-header dib-inline-edit" ng-class="{ 'search-open' : showSearch }" >
+                        <div layout="row" flex="100" dib-grid-search  ng-show="!loadingData || gridData.length > 0">
+                            <!--TODO checkbox<div flex> </div> -->
         <div table-column 
             flex = 'none'
             class="md-subhead"
             dib-column-heading='155444'
+            ng-if="view.id.visible"
             style="width:80px;    "
 >
-            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('id')" >
+            <div class="dib-column-header dib-long-text-column"  >
             Id<span ng-if="gridOptions.sortFields['id']">
                         ({{gridOptions.sortFields['id']['Count']}})
                         <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['id']['Order'] == 'ASC'"></md-icon>
@@ -135,14 +137,14 @@ dib-config="{
                 <span ng-if="showSearch" dib-edit>
                         <md-input-container aria-label="id"
 can-be-moved=true
-item-alias="id"   
-    ng-show="!!view.id == false || view.id.visible" 
+item-alias="id" 
+    ng-show="view.id.visible || view.id == undefined"
     dib-disable="{{view.id.disabled}}"
     ng-class="view.id.class" 
     ng-style="view.id.style"
 flex="100"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="id"
@@ -169,9 +171,10 @@ dib-config="{
             flex = 'none'
             class="md-subhead"
             dib-column-heading='155445'
+            ng-if="view.name.visible"
             style="width:200px;    "
 >
-            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('name')" >
+            <div class="dib-column-header dib-long-text-column"  >
             Name<span ng-if="gridOptions.sortFields['name']">
                         ({{gridOptions.sortFields['name']['Count']}})
                         <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['name']['Order'] == 'ASC'"></md-icon>
@@ -181,14 +184,14 @@ dib-config="{
                 <span ng-if="showSearch" dib-edit>
                         <md-input-container aria-label="name"
 can-be-moved=true
-item-alias="name"   
-    ng-show="!!view.name == false || view.name.visible" 
+item-alias="name" 
+    ng-show="view.name.visible || view.name == undefined"
     dib-disable="{{view.name.disabled}}"
     ng-class="view.name.class" 
     ng-style="view.name.style"
 flex="100"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="name"
@@ -217,7 +220,7 @@ dib-config="{
             dib-column-heading='155446'
             style="    "
 >
-            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('chinese_name')" >
+            <div class="dib-column-header dib-long-text-column"  >
             Chinese Name<span ng-if="gridOptions.sortFields['chinese_name']">
                         ({{gridOptions.sortFields['chinese_name']['Count']}})
                         <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['chinese_name']['Order'] == 'ASC'"></md-icon>
@@ -228,8 +231,8 @@ dib-config="{
                         <md-input-container aria-label="chinese_name"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="chinese_name"
@@ -270,8 +273,8 @@ dib-config="{
 can-be-moved=true
  on-move-refresh-preview=true
 flex="100"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="comment"
@@ -299,7 +302,7 @@ dib-config="{
             dib-column-heading='155447'
             style="width:200px;    "
 >
-            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('parent_company')" >
+            <div class="dib-column-header dib-long-text-column"  >
             Parent Company<span ng-if="gridOptions.sortFields['parent_company']">
                         ({{gridOptions.sortFields['parent_company']['Count']}})
                         <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['parent_company']['Order'] == 'ASC'"></md-icon>
@@ -310,8 +313,8 @@ dib-config="{
                         <md-input-container aria-label="parent_company"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="parent_company"
@@ -340,7 +343,7 @@ dib-config="{
             dib-column-heading='155449'
             style="    "
 >
-            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('website')" >
+            <div class="dib-column-header dib-long-text-column"  >
             Website<span ng-if="gridOptions.sortFields['website']">
                         ({{gridOptions.sortFields['website']['Count']}})
                         <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['website']['Order'] == 'ASC'"></md-icon>
@@ -351,8 +354,8 @@ dib-config="{
                         <md-input-container aria-label="website"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="website"
@@ -381,7 +384,7 @@ dib-config="{
             dib-column-heading='155450'
             style="    "
 >
-            <div class="dib-column-header dib-long-text-column" ng-click="gridOptions.toggleSort('icon')" >
+            <div class="dib-column-header dib-long-text-column"  >
             Icon<span ng-if="gridOptions.sortFields['icon']">
                         ({{gridOptions.sortFields['icon']['Count']}})
                         <md-icon class="md-opacity-55" aria-label="Sort Desc" md-svg-src="/files/dropins/setNgMaterial/dibAngular/src/img/icons/down.svg" ng-if="gridOptions.sortFields['icon']['Order'] == 'ASC'"></md-icon>
@@ -392,8 +395,8 @@ dib-config="{
                         <md-input-container aria-label="icon"
 can-be-moved=true
 flex="100"
-class="md-block"
 style="    "
+class="md-block"
 >
     <input type="text" 
         name="icon"
@@ -416,20 +419,20 @@ dib-config="{
 </md-input-container>
                 </span>
         </div>
-                    </div>
-                </md-list-item>
-            </md-list>
-        </div>
-        <md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
-            <md-list dib-table-column-width >
-                <md-list-item ng-if="gridData.length == 0"  layout-align="center center">
-                     <div class="no-records-available">  
-                        No records available
-                     </div>
-                </md-list-item>
-                <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData"  ng-class="{ 'md-custom-accent' : row.___selected, 'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event)"  
-                >
-                        <ng-form name='dibtestCompanySqlRptGrid' dib-container-name="dibtestCompanySqlRptGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="start start" ng-enter='saveRow($event,row)' >
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <md-content  fill-height footer-element='.dib-grid-footer' class='dib-grid-column-content'>
+                <md-list dib-table-column-width >
+                    <md-list-item ng-if="gridData.length == 0"  layout-align="center center">
+                        <div class="no-records-available">  
+                            No records available
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-1-line _md-no-proxy " ng-repeat="row in gridData" md-colors="!row.___selected ? {} : {'color': 'default-accent-600', 'background': 'default-primary-100'}" ng-class="{  'first-record-padding' : $index==0 && row.___editing }" ng-click="selectRow(row, $event,$element)"  
+                    >
+                            <ng-form name='dibtestCompanySqlRptGrid' dib-container-name="dibtestCompanySqlRptGrid" layout="row" flex="100" dib-inline-edit="closed" layout-align="start center" ng-enter='saveRow($event,row)' >
     <div table-column layout="column"
                 flex = 'none'
                 dib-column="155444"
@@ -437,8 +440,8 @@ dib-config="{
     >
         <div aria-label="id"
 can-be-moved=true
-item-alias="id"   
-    ng-show="!!view.id == false || view.id.visible" 
+item-alias="id" 
+    ng-show="view.id.visible || view.id == undefined"
     dib-disable="{{view.id.disabled}}"
     ng-class="view.id.class" 
     ng-style="view.id.style"
@@ -463,8 +466,8 @@ style="width:80px !important;    "
     >
         <div aria-label="name"
 can-be-moved=true
-item-alias="name"   
-    ng-show="!!view.name == false || view.name.visible" 
+item-alias="name" 
+    ng-show="view.name.visible || view.name == undefined"
     dib-disable="{{view.name.disabled}}"
     ng-class="view.name.class" 
     ng-style="view.name.style"
@@ -521,7 +524,7 @@ dib-config="{
     }
 }"
 >
-    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 1em; background-color: #FFF9E0">
+    <p style="border:1px; border-style:solid; border-color:#00137F; padding: 7px; background-color: #FFF9E0">
     smelling the roses...
     </p>    
 </span>
@@ -596,41 +599,42 @@ style="    "
 </div>
                 <!-- NOT IN USE LETS DELETE REFERENCE TO THIS-->
     </div>
-                        </ng-form>
-                 </md-list-item>     
-            </md-list>
-    </md-content>
-    <div layout-fill layout='row' flex class='dib-grid-footer'>
-        <div flex=20 layout='row'>
-            <md-button disabled>Page limit</md-button>
-            <md-select ng-model="page.limit" aria-label="Page Limit">
-                <md-option ng-value="10">10</md-option>
-                <md-option ng-value="20">20</md-option>
-                <md-option ng-value="50">50</md-option>
-            </md-select>
-        </div>
-        <div  ng-if="page.count>1" flex=80 layout='row'  layout-align="center center" >
-            <md-button ng-disabled="page.number==1" ng-click='firstPage()'>
-                First
-            </md-button>
-            <md-button ng-disabled="page.number==1" ng-click='previousPage()'>
-                Prev
-            </md-button>
-            <div layout='row'>
-                <md-button disabled>Page</md-button>
-                <md-input-container>
-                    <input type='number' ng-model="page.number" aria-label="Page number">
-                </md-input-container>
-                <md-button disabled>
-                of {{ page.count }}
+                            </ng-form>
+                    </md-list-item>     
+                </md-list>
+        </md-content>
+        <div layout-fill layout='row' flex class='dib-grid-footer'>
+            <div flex=20 layout='row'>
+                <md-button disabled>Page limit</md-button>
+                <md-select ng-model="page.limit" aria-label="Page Limit">
+                    <md-option ng-value="10">10</md-option>
+                    <md-option ng-value="20">20</md-option>
+                    <md-option ng-value="50">50</md-option>
+                </md-select>
+            </div>
+            <div  ng-if="page.count>1" flex=80 layout='row'  layout-align="center center" >
+                <md-button ng-disabled="page.number==1" ng-click='firstPage()'>
+                    First
+                </md-button>
+                <md-button ng-disabled="page.number==1" ng-click='previousPage()'>
+                    Prev
+                </md-button>
+                <div layout='row'>
+                    <md-button disabled>Page</md-button>
+                    <md-input-container>
+                        <input type='number' ng-model="page.number" aria-label="Page number">
+                    </md-input-container>
+                    <md-button disabled>
+                    of {{ page.count }}
+                    </md-button>
+                </div>
+                <md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
+                    Next
+                </md-button>
+                <md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
+                    Last
                 </md-button>
             </div>
-            <md-button ng-disabled="page.count==page.number" ng-click='nextPage()'>
-                Next
-            </md-button>
-            <md-button  ng-disabled="page.count==page.number" ng-click='lastPage()'>
-                Last
-            </md-button>
         </div>
      </div>
 </div>
