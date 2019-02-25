@@ -1,0 +1,169 @@
+GENERIC DATABASE SYNC TOOL
+
+1. Add sync-field to pef_dropin as indication of which module dropins (with all related records) are included.
+
+2. Init Repo button -> 
+Assign dibuid values to all new records
+
+Store all data of all related records as a snapshot (json_encoded array)
+[tablename][dibuid] => array of field values
+filename: full_20190122101010_[dibcode]
+DIB version must be stored in delta and full files ... and compared and executed if needed.
+This is stored on the server and the pc 
+
+3. Commit button ->
+Assign dibuid values to all new records
+
+Process table-by-table:
+- Read array 2 above in memory
+- Read current db data in memory in array structured same as array 2
+
+- Get delta of changed records (use array_intersect etc.):
+  - new records
+  - updated records
+  - deleted records
+
+Get this system's revision id
+- We store it in the database, so that if this database is copied somewhere else (or backup restored), the revision is intact
+		
+Download and read all foreign delta files and process one-by-one:
+- See if any clashes:
+  - updated same field values 
+  - deleted records that were updated 
+- Per clash (or all), present user ability to decide whether to keep their, or apply foreign change
+- See SPERCIAL CASE CLASHES below ..
+
+- Apply deltas (see APPLY DELTAS below)
+
+Write own delta file (incorporating clash decisions above) to pc disk 
+
+4. Push own delta file to server 
+
+5. Zip & push full snapshot file to server (this becomes the latest HEAD)
+
+---- 
+
+APPLY DELTAS
+
+*** Order of actions below is important
+
+1. Foreignkey values are replaced with dibuids
+   Create warning for those records where there are no dibuids -> make null or temp value. 
+
+2. insert new records. 
+Where foreignkeys point to other new records, insert null or temp values.
+temp values are replaced at end
+
+3. update records -> should have no conflicts 
+
+4. delete records -> first build a queue... loop through records to be deleted 
+ - ask, is this record dependent on any already listed record (for deletion)?
+ - if so, move up the queue (subtract 1). 
+ - for tables / foreignkeys involved in circular references there is a strategy 
+   needed per case: set to null or temp value.
+
+SPECIAL CASE CLASHES 
+
+Clashes exist if:
+ - this user and other users updated same field values 
+ - this user deleted records that other(s) updated, or vice-versa
+ - this user deleted records that other(s) linked new records to, or vice-versa
+ - this user deleted records that other(s) linked existing records to, or vice-versa
+
+Deleted records present more complex cases:
+ 
+    This user deleted records:
+    - See if fkeys updated by other users now point to them
+    - See if they should be parents of new records other users created
+    AFFECTED (recursively): 
+    - all the child (and their new parent) records of these new records 
+    - all the deleted parent (and their child) records			
+
+    The above scenarios work both ways for my or their records 
+
+    The problem is how do we report this to the user and to what level do we let him make decisions about records?
+    Solution:
+    - If there is a clash, display a tree (in text) of the deleted record with its parents (and children to 1st level)
+    - display this tree on the left, and on the right display dependant records
+    - let the user chose between keeping the tree and its dependancies, or discarding it
+      -> in case of an update, discarding means update is reversed
+      -> in case of an insert, discarding means both tree and inserted records are discarded
+
+    When an update of a fkey is reversed, make sure the old record it used to point to still exists:
+     - may have been deleted by this, or other users
+    Solution:
+    - All deleted records' dibuids go in a DELETED BOX
+    - Any fkey update's new AND old value is compared with items in this BOX
+    - For every old value hit, display a similar tree
+    -> now the user choses between two sets of trees and their dependencies
+    - Note, if only old values hit items in the BOX, there is no clash 
+
+    SO... STEP-BY-STEP STRATEGY:
+    - dibuids of all deleted records are added to DELETED BOX
+    - updates: if new or old fkey values (of this or other users) point to items in the DELETED BOX, then store these items in UPDATE CLASH BOX
+      -> if only old, then ignore
+    - inserts: if their fkeys (of this or other users) point to items in the DELETED BOX, then store these items in DELETE CLASH BOX
+
+    - UPDATE CLASH BOX must contain : 
+    - array(deleted => user, dibuid, id, table name, record name
+            updated => array(
+                1 => user, dibuid, id, table name, record name, field name, old_value, new_value, clash_value = 'new'/'old'
+                2 => user, dibuid, id, table name, record name, field name, old_value, new_value, clash_value = 'new'/'old'
+            )
+      )
+    - to display the trees, we need a algorithm to find which items in boxes are connected - it must handle recursive relationships among them... 
+    - Many fkeys in group of inserted/updated records can point to various groups of deleted records
+    - Use textual trees to present user with groups of deleted records, with groups of records depending on them
+    - Use colour coding to indicate where they link to.
+    - Add non-deleted items (colour grey) to tree solely for purpose of giving context to deleted items (colour red)
+    - will need to think about unique name clashes when restoring items / containers etc. -> give user ability to rename easily.
+
+    DELETED RECORDS:			   DEPENDANT RECORDS
+    Group 1:				       Inserted Group A:
+    - fieldset1 (fieldset) (GREEN) - fieldset1 (fieldset) (Group 1 RED)
+      - firstname (text)		     - span1 (span)
+      - lastname (text)			     - button zzz with port_id (Group 2 BLUE)
+      - layoutrow (row) (RED) 
+        - age 					   Updated Group B: 
+        - length				   - item (firstname, pef_item_id_old: Group 1 GREEN, pef_item_id_new: Group 3 ORANGE)
+
+    Group 2:
+    - container ABC
+      - port 123 (BLUE)
+
+    Group 3:
+    - container ABC
+    - fieldset4 (fieldset) (ORANGE)
+
+    ===> NOTE: the Updated Group B example above illustrates when both old and new value are linked to 
+               deleted records of trees which themselves are linked to eg inserts (Group A)
+
+---- 
+NOTES
+- With very first repo setup, a full snapshot is made as a baseline and committed with revision no 1.
+- With subsequent commits, delta's are made by comparison to the latest full snapshot that was comitted by the same user, and labeled with same revision no too.
+  Thereafter another full snapshot (with revision no + 1) is made, stored and uploaded to the server. 
+- First time checkouts, checks out the latest full snapshot committed.
+- Currently a commit makes a delta, pulls forreign deltas, applies deltas, commits delta and the latest full snapshot.
+  In future we can allow user to make a delta and a full snapshot, followed by another delta and full snapshot
+  and so on, and then only committing to the server. (The extra full snapshots are needed to make each delta).
+  This will allow user to revert their own (interrim) delta's.
+- If two or more people changed same record but different fields, create warning
+- If three of more people changed same field in same record, then list all three ... 
+
+Other: 
+- Comparison to get delta can have 3 options:
+  A. this machine
+  B. Latest HEAD on server (drawback: can't revert changes made by both users)
+  C. (Kicks in if A. was deleted) - this machine's snapshot stored on server 
+  
+- Ability to sync database design changes -> compares info in pef_table & pef_field ...  ver. 2
+  -> Note DIB design: Migration Script version is compared!
+  
+- Think about easy deployment scripts ... from dev to prod and new server setup
+  ->each server can have a user and simply PULL.
+- Write unit tester that does random CRUDs, commit, push, etc.... and then revert.
+- Ability to export selected container only 
+  -> rather do this with dropin scripts ... must also have ability to create dashboard & menu entries, and set port values to basecontainer etc.
+- A check to ensure dibuid is unique
+   

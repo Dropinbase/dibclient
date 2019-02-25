@@ -1,0 +1,175 @@
+User-Interface ideas:
+- User has floating design window where he has dropdowns for 'container', 'table' and a multiselect for 'fields in table'
+- Eg he chooses individualForm, item  and  ticks  name, width, expression (id is always ticked)
+- When he clicks in UI on an item, following Dropin Script is generated in floating window: 
+  update item (name: xxx, width: 100px, expression: yyy) WHERE id = 123;
+
+SYNTAX:
+ Eg.
+ INSERT INTO [ database_name . [ schema_name ] . | schema_name . ] table_name   
+    [ ( column_name [ ,...n ] ) ]  
+    {   
+      VALUES ( { NULL | expression } )  
+      | SELECT <select_criteria>  
+    }  
+    [ OPTION ( <query_option> [ ,...n ] ) ]  
+[;]
+  
+  
+SQL:
+define sql xxx 
+- SELECT a, b, c FROM tb WHERE ... 
+
+BASE CONTAINER:
+DEFINE BASE container_name
+TEMPLATE: tmpl_container_name
+[MENU: <size>[, options (option_caption[, ...n])]     eg xl, options (Main, Reports)
+[logo: <file_path>]    eg /files/xxx/logo.png
+[tabs: caption1, caption2
+- welcome
+
+
+CONTAINER:
+define [dropin] <name>
+module_dropin: fitproper
+sql: xxx
+items: {
+[component] : ({[field]: <value>}) eg:
+    row: (name: xxx, flex: flex) {
+        col: (name: xxx, flex: flex) {
+            inputtext: (name: ) {
+                events: {
+                    'change' : ()
+                }
+            }
+        }
+    }      
+}
+ports: {
+
+}
+events: {
+}
+
+
+Another useful directive would be 'tmpl: baseTmpl1' ... ie container templates.
+--> NO, rather the following:
+
+copy <table>[s] <id> [all] to <id> [where <sql criteria>]
+copy container xxx to yyy
+copy container xxx to devfitan_dib.zzz 
+copy container xxx to c:/aaa/  or c:/aaa/my_file.txt 
+copy container c:/aaa/my_file.txt to zzz
+copy containers to yyy where name in (xxx,ttt,www)
+copy item xxx to 
+ 
+
+ACTIONS (these are performed in separate window, else they are removed after execution... )
+
+actions:
+// following is a way of inserting a new item somewhere in the structure
+create item row: (container: xxx, parent: WHATEVERNAME/COMPONENTNAME, name: yyy, order_on: last/first/30) - this item will be linked to existing item named WHATEVERNAME
+
+create items {
+
+}
+delete item <id>
+delete item where container = xxx and caption = xxx
+OR use <container name> delete item <id>
+--> display warning msg how many rows will be affected... 
+
+update item (width: 100px) where container = xxx AND parent = row;
+-> THIS WILL UPDATE ALL items with this parent, setting width = 100px 
+-> same works for delete! 
+
+add feature <name> where parent =  ;
+
+sql: UPDATE xxx SET yyy=1 WHERE ... ;
+
+
+
+
+GO
+-> after execution, all records will get dibuid: xxx added to them
+-> so any record missing a dibuid is seen as a new record 
+-> any record with a dibuid is scanned for changes and update is executed
+-> missing dibuid records are deleted 
+
+
+
+INTERNAL DROPIN SCRIPT WORKINGS:
+User definable list of name maps eg. menu -> mdMenu
+
+User definable list of replaces 
+eg welcome -> span (name: welcome, expression: <b>Welcome:</b> <span style="color: blue">{{first_name}} {{last_name}}</span>)
+left -> class="md-sidenav-left"  md-whiteframe="4"
+xl -> expression: 
+
+User definable defaults for fields 
+
+Container Template definitions also use dropin script (with actions)
+
+Actions: 
+
+save def set david
+-> saves all replaces and name maps etc. under certain name.
+
+use def set david
+-> implements this def set 
+
+add item welcome
+- containers: all
+- parent_id: 
+
+show replace welcome
+-> shows the text that is inserted for each occurance of 'welcome'
+
+
+--- IDEAS --- 
+- syntax should cover ability to populate records of any client table too and run actions like update and copy... 
+- whenever strings contain the following characters, then use quotes to enclose them: ,:
+  -> use \ to escape quotes
+  -> either ' or " can be used to start/end string
+- generate definitions from tables, and populate tables from definitions 
+- generate delta script of changes (OR store state of system, run compare and apply changes)
+- generate definition of container for export to other systems 
+- script syntax checking and preliminary error checking 
+- script runtime error handling
+- loops that do things like generate random data 
+- if statements?
+- statements that can bulk update / set permissions with criteria etc... ?
+- statements that show lists or count records, stats, etc. 
+- ? is used to get help and can also be used to display object definitions or prepare update statements etc.
+
+
+
+ALTERNATIVE SYNTAX for container defintion: 
+
+
+
+define container <name> {
+    tmpl : <pef_design.name> 
+    (repeat)[pef_container.field] : <value>
+    items : {[def.item]}
+    ports : {[def.port]}
+    events : {[def.event]}
+    settings : {[def.setting]}
+    permissions : {[def.container-permission]}
+    filters : {[def.item-filter]}
+}
+
+define item <name> {
+    [pef_item.field] : <value>
+}
+
+define [dropin] <pef_dropin.name>
+
+array(
+    'define [dropin] <name>]': array (
+        array('[pef_container.field] : <value>', 'repeat'),
+        
+    
+)
+
+
+
