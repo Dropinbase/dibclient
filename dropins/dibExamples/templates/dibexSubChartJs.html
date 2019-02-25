@@ -87,8 +87,9 @@
 <body ng-controller="MainCtrl" ~if(getval(print)=true, [*onload="window.print()"*])~>   
     
 ~$// DIB function definitions made available by TemplateActions.js referenced above: 
-    dibCommon.goTo(containerName, portAlias, changeUrl, urlQueryString)    -- note, use '' for empty values, not null
+    dibCommon.goTo(containerName, portAlias, changeUrl, urlQueryString) - use '' for empty values, not null
     dibCommon.startAction(submitUrl, containerName)   -- note, the containerName parameter indicates the starting place to search for submissionData values
+    dibCommon.clearUrlSearch(containerName, portAlias=''); - clears the url query string when a search string is not specified.
 ~
 
 ~$// 
