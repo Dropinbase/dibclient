@@ -151,7 +151,7 @@ class PhpController extends Controller {
         $str .= "\r\nChinese name 2: " . $rst['minName'];
 		
 		
-		// Using Database::create and Database::update. 	
+		// Using Database::create, Database::update and Database::delete
 
 		// *** Note that field names containing spaces or other non-alphanumeric characters (except underscore(_)) could cause bugs. 
 
@@ -189,17 +189,18 @@ class PhpController extends Controller {
 		//    detail - individual records for old and new values of each field that has changed is stored in the audit_trail for the given container
 		//    summary - one record is used to store old and new values of each field that has changed
 		//    basic - only the primary key value(s) is stored 
-		// NOTE: when activating audit trailing, a container name must be used to indicate the database index (third parameter). 
-	    $result = Database::update('test_company', $params, 'dibtestCompanyGrid', 'id = :id', 'basic');
+		 
+	    $result = Database::update('test_company', $params, DIB::DBINDEX, 'id = :id', 'summary');
 
 		// NOTE, multiple records can be affected by Database::update and Database::delete actions - values changed in all will be captured in the audit trail
 
 		// Let's delete that record (or any range of records defined by criteria)
 		// Note we opt to store a single record in the audit trail for demo purposes
-		$result = Database::delete('test_company', array(':name'=>$newName2), 'dibtestCompanyGrid', 'name=:name', 'summary');
+		// Also note that we can use the a database index OR a container name as 3d parameter (same as the Database::execute or Database::fetch commands)
+		$result = Database::delete('test_company', array(':name'=>$newName2), DIB::DBINDEX, 'name=:name', 'summary');
 
 		// Since we have the primary key value we can also simply do this:
-		$result = Database::delete('test_company', array('id'=>$pkeyValue), 'dibtestCompanyGrid');		
+		$result = Database::delete('test_company', array('id'=>$pkeyValue), DIB::DBINDEX);		
 
         // *** Fetching records in a different PDO Style
         // See http://php.net/manual/en/pdostatement.fetch.php
