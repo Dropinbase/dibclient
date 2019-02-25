@@ -22,12 +22,13 @@
             case 'js' :
                 return 'application/x-javascript';
             case 'css' :
-                return 'text/css';
-            case 'svg' :
+                return 'text/css';           
             case 'html' :
             case 'htm' :
+               return 'text/html';            
             case 'txt' :
-                return 'text/plain'; // Note, as an example, this code will return 'text/plain' for the following extensions: svg, html, htm and txt
+            case 'svg' :
+                return 'text/plain'; // Note, as an example, this code will return 'text/plain' for the following extensions: svg and txt
             case 'json' :
                 return 'application/json';
             case 'csv' :
@@ -36,8 +37,7 @@
             	return 'image/x-icon';
             case 'jpg' :
             case 'jpeg' :
-            case 'jpe' :
-                return 'image/jpg';
+                return array('image/jpg','image/jpeg');
             case 'png' :
             case 'gif' :
             case 'bmp' :
@@ -57,7 +57,7 @@
             case 'xlc' :
             case 'xlw' :
             case 'xll' :
-                return 'application/vnd.ms-excel';
+                return array('application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             case 'ppt' :
             case 'pptx' :
             case 'pps' :
