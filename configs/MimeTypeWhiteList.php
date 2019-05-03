@@ -16,8 +16,8 @@
 		etjs      (certain Eleutheria templates outside of /templates/ folders)
 	*/
 	
-    function mimeType($ext) {
-    	
+	function mimeType($ext) {
+
         switch (strtolower($ext)) {
             case 'js' :
                 return 'application/x-javascript';
@@ -33,16 +33,15 @@
             case 'csv' :
                 return 'text/csv';
             case 'ico' :
-            	return 'image/x-icon';
+                return 'image/x-icon';
             case 'jpg' :
             case 'jpeg' :
-            case 'jpe' :
-                return 'image/jpg';
+                return array('image/jpg','image/jpeg');
             case 'png' :
             case 'gif' :
             case 'bmp' :
             case 'tiff' :
-                return 'image/' . strtolower($ext);            
+                return 'image/' . strtolower($ext);
             case 'xml' :
                 return 'application/xml';
             case 'doc' :
@@ -57,7 +56,7 @@
             case 'xlc' :
             case 'xlw' :
             case 'xll' :
-                return 'application/vnd.ms-excel';
+                return array('application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             case 'ppt' :
             case 'pptx' :
             case 'pps' :
@@ -66,7 +65,7 @@
                 return 'application/rtf';
             case 'pdf' :
                 return 'application/pdf';
-            
+
             case 'mpeg' :
             case 'mpg' :
             case 'mpe' :
@@ -94,3 +93,4 @@
                 return FALSE;
         }
     }
+    
