@@ -23,7 +23,7 @@ class DIB {
 								'setSencha'=>'/setSencha/dibSencha/src/index.php',
 						 	); // Path to the index file in a dropin used to bootstrap the application
 	public static $DEFAULTFRAMEWORK='setNgMaterial'; // client framework to load at startup
-	
+	public static $AUDITDBINDEX=1;
 	public static $OVERRIDEQUEUEWITH = 'None'; // None/NodeJs (Note, NodeJs requires expertise to maintain and run stably in some client environments)
 	public static $NODEJSHOST=null; // NodeJs server connection details (eg 'http://localhost:8080'), OR null (NodeJs will not be initialized)
 	public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
