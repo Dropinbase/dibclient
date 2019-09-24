@@ -39,6 +39,10 @@ class DIB {
     // Database connection index to the main Dropinbase database in Conn.php and pef_database
 	const DBINDEX=1; // id value of the main Dropinbase database in pef_database
 	const LOGINDBINDEX=1; // id value of the database containing the pef_login and pef_security_policy tables
+	
+	public static $VERIFY_IP=1; // check if we have to verify the IP
+	public static $VERIFY_USER_AGENT=1; // check if we have to verify for the user agent
+
 	public static $AUDITDBINDEX=1; // Determine where the audit trails will be stored
 	
 	// A SQL statement that is executed when users authenticate. The return values, if any, are added to the PHP session and replace any existing values.

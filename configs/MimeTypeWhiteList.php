@@ -17,7 +17,6 @@
 	*/
 	
 	function mimeType($ext) {
-
         switch (strtolower($ext)) {
             case 'js' :
                 return 'application/x-javascript';
