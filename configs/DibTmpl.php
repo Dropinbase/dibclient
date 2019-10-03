@@ -27,6 +27,14 @@ class DIB {
 	public static $TIMEZONE='Africa/Johannesburg'; // See http://php.net/manual/en/timezones.php
     public static $SITENAME='Dropinbase'; // The title of the browser tab
 	public static $SITELOGO='files/icons/logo.png'; // Available in pef_item.expression
+
+	public static $CACHEUSE=0; // 0 = Always overwrite cache files
+							   // 1 = Delete a container's cache file if affected by design changes, else use cache if available (speeds up loads during development). 
+							   // 2 = Use a cache file if it exists, else create it
+							   // 3 = Allways use cache (assume all necessary files exist)
+	const DBINDEX=1; // id/index value of the main Dropinbase database in pef_database and Conn.php
+	const LOGINDBINDEX=1; // Database containing the pef_login and pef_security_policy tables
+	public static $AUDITDBINDEX=1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
 	
     public static $DEBUG_LEVEL=2; // 0 = no errors logged to error.log. 1 = errors logged with some detail. 2 = most detail logged.
     public static $CLIENT_DEBUG_LEVEL=1; // 0 = no debug messages printed in client Console. 1 = debug messages printed in client Console
@@ -34,17 +42,24 @@ class DIB {
                                              // 2 = SECURITY RISK: Adds echo-ing of errors to (1). 3 = SECURITY RISK: Adds creation of detailed trace file to (2).
 	public static $LOGPERMISSUES=1; // 0 = Don't log anything. 1 = Log permission issues. 2 = Log permission and authentication issues.
 	public static $INFORM_ADMIN_ERRORLEVEL=2; // Administrator will be informed of any error logged with level equal to or higher than this value. Errors logged with unspecified level defaults to 3.
-	public static $ADMIN_EMAIL=null; // Administrator's email address. NOTE: See /config/mail.php for mail account settings
-	
-	public static $CACHEUSE=0; // 0 = Always overwrite cache files (also occurs in 'development' mode); 
-							   // 1 = Delete a container's cache file if affected by design changes, else use cache if available (speeds up loads during development). 
-							   // 2 = Use a cache file if it exists, else create it; 
-							   // 3 = Allways use cache (assume all necessary files exist)
+	public static $ADMIN_EMAIL=null; // Administrator's email address. NOTE: See /config/mail.php for mail account settings	
+	public static $VERIFY_IP = TRUE; // Whether successive requests from the same web user must originate from the same IP address. 
+	public static $VERIFY_USER_AGENT = TRUE; // Whether successive requests from the same web user must have the same USER AGENT. 
+	public static $VERIFY_AUTH_TOKEN = TRUE; // Whether authentication tokens are checked on server requests
+	public static $USERNAME_REGEX='#^\w{4,30}$#'; // A semicolon delimited list of regular expressions that must validate successfully in order for usernames to be accepted
+    public static $USERNAME_REGEXMSG='The username must contain between 4 and 30 alpha-numeric characters (no spaces, but underscore (_) is allowed).';
+	public static $PUBLICFILEPERMS = array( 
+		'allow_uploads'=>TRUE, // Allow system_public user to upload files.
+		'allow_downloads'=>TRUE, // Allow system_public user to download files.
+		'allow_deletes'=>TRUE, // Allow system_public user to delete files.
+	);	
+
+	// Paths to the possible ui dropin index files used to bootstrap the application
 	public static $INDEXPATH=array(
-								'setNgMaterial'=>'/setNgMaterial/dibAngular/dist/index.html',
-								'setSencha'=>'/setSencha/dibSencha/src/index.php',
-						 	); // Path to the index file in a dropin used to bootstrap the application
-	public static $DEFAULTFRAMEWORK='setNgMaterial'; // client framework to load at startup
+		'setNgMaterial'=>'/setNgMaterial/dibAngular/dist/index.html',
+		'setSencha'=>'/setSencha/dibSencha/src/index.php',
+	);
+	public static $DEFAULTFRAMEWORK='setNgMaterial'; // choice of ui dropin to use
 	
 	public static $OVERRIDEQUEUEWITH = 'None'; // None/NodeJs (Note, NodeJs requires expertise to maintain and run stably in some client environments)
 	public static $NODEJSHOST=null; // NodeJs server connection details (eg 'http://localhost:8080'), OR null (NodeJs will not be initialized)
@@ -52,24 +67,14 @@ class DIB {
 	
 	public static $SETUPSCRIPT=null; // Path to any script that is run just before calls to any controllers are made, eg '/dropins/myDropin/components/setValues.php'
 	public static $AFTERLOGINSCRIPT = null; // Path to any script that is run just after a user has manually logged in, eg '/dropins/myDropin/components/RunOnceDaily.php'
-    public static $RECORDUNITTEST=FALSE; // FALSE, or TRUE (or Batch Name) - Whether all requests must be recorded in pef_unit_test
+	public static $RECORDUNITTEST=FALSE; // FALSE, or TRUE (or Batch Name) - Whether all requests must be recorded in pef_unit_test
+	public static $ALLOWEDCHARS=array(' ','_'); // Array of allowed characters (other than non-aplhanumeric) in Submission Data validated by the s_ prefix
     public static $PARAMVALIDATION=FALSE; // Whether global validation of Submission Data parameters prefixed with a_ or n_ must occur.
-    public static $ALLOWEDCHARS=array(' ','_'); // Array of allowed characters (other than non-aplhanumeric) in Submission Data validated by the s_ prefix
-    public static $USERNAME_REGEX='#^\w{4,30}$#'; // A semicolon delimited list of regular expressions that must validate successfully in order for usernames to be accepted
-    public static $USERNAME_REGEXMSG='The username must contain between 4 and 30 alpha-numeric characters (no spaces, but underscore (_) is allowed).';
-    public static $USERSPATH='C:/dibUploads/'; // Physical path to user-file uploads folder (NOTE, keep outside webserver's reach for security reasons)
-												 // IMPORTANT: See https://www.owasp.org/index.php/Unrestricted_File_Upload
-	public static $CODEEDITORPATH='C:\Program Files (x86)\Microsoft VS Code\Code.exe'; // (Windows only) full path to PHP Code editor application
-	public static $PUBLICFILEPERMS = array( 
-		'allow_uploads'=>TRUE, // Allow system_public user to upload files.
-		'allow_downloads'=>TRUE, // Allow system_public user to download files.
-		'allow_deletes'=>TRUE, // Allow system_public user to delete files.
-	);
-
-	const DBINDEX=1; // id/index value of the main Dropinbase database in pef_database and Conn.php
-	const LOGINDBINDEX=1; // Database containing the pef_login and pef_security_policy tables
-	public static $AUDITDBINDEX=1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
-
+	
+	public static $USERSPATH='C:/dibUploads/'; // Physical path to user-file uploads folder (NOTE, keep outside webserver's reach for security reasons)
+											   // Note, use forward slashes ... back-slashes escape characters... 	
+											   // IMPORTANT: See https://www.owasp.org/index.php/Unrestricted_File_Upload
+	   
 	// A SQL statement that is executed when users authenticate. The return values, if any, are added to the PHP session (accessible via DIB::$USER) and replace any existing values.
 	// Eg. Null, OR array('databaseId'=>self::LOGINDBINDEX, 'sql'=>'SELECT first_name, last_name, company_id FROM staff WHERE id = :staff_id', 'params'=>'staff_id')
 	// The 'params' argument is a semicolon-delimitted list of parameter names used in 'sql' and must match field names in pef_login.

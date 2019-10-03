@@ -246,7 +246,7 @@ class EventsController extends Controller {
         
         If(trim($answer) !== '3')
             return $this->invalidResult("I'm afraid you need some tuition!", 'warning', 4000);
-        
+             
         // Note, instead of using itemAlias (as in promptQuestion above), we specify an event url to execute btnHelloWorld_click.
         // But since the btnHelloWorld_click function has $itemEventId as a parameter, we are forced to send the dibuid value (if specified), or the pef_item_event.id value for it. 
         // This is for extra security in a scenario where certain item events on a specific container may not be executed by certain permgroups
@@ -324,4 +324,5 @@ class EventsController extends Controller {
         return $this->validResult(null, "$msg: Hello $name. Your id is '$id'", 'dialog');
     }
 
+   
 }

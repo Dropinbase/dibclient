@@ -32,6 +32,8 @@ $args = array(
     'primary_palette' => (isset($settings['primaryPalette']) ? $settings['primaryPalette'] : 'dibPrimary'),
     'accent_palette' => (isset($settings['accentPalette']) ? $settings['accentPalette'] : 'dibAccent'),
 
+    'larger_font' =>  (DIB::$USER['larger_font'] == '1') ? TRUE : FALSE, // Accessibility option
+
     'queue_retry_count' => DIB::$ASYNCRETRYCOUNT,
     'nodejs' => (!empty(DIB::$NODEJSHOST)) ? TRUE : FALSE,  
     'nodejs_server_host' => DIB::$NODEJSHOST,

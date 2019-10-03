@@ -4,9 +4,12 @@ GENERIC DATABASE SYNC TOOL
 
 2. Init Repo button -> 
 Assign dibuid values to all new records
+Each developer has unique dibcode 
 
-Store all data of all related records as a snapshot (json_encoded array)
-[tablename][dibuid] => array of field values
+Store all data of all related records (related to the containers that must be sync'ed) as a snapshot 
+  => SELECT * FROM ... WHERE ... 
+  => store json_encoded array: [tablename][dibuid] => array of record field values
+  
 filename: full_20190122101010_[dibcode]
 DIB version must be stored in delta and full files ... and compared and executed if needed.
 This is stored on the server and the pc 
@@ -16,21 +19,24 @@ Assign dibuid values to all new records
 
 Process table-by-table:
 - Read array 2 above in memory
-- Read current db data in memory in array structured same as array 2
+- Read stored current db data in memory in array structured same as array 2
 
-- Get delta of changed records (use array_intersect etc.):
+- Get delta of changed records (use array_intersect etc. based on dibuid):
   - new records
   - updated records
   - deleted records
 
 Get this system's revision id
 - We store it in the database, so that if this database is copied somewhere else (or backup restored), the revision is intact
-		
-Download and read all foreign delta files and process one-by-one:
+
+Download and read all foreign delta files (of other developers) and process one-by-one:
 - See if any clashes:
   - updated same field values 
   - deleted records that were updated 
 - Per clash (or all), present user ability to decide whether to keep their, or apply foreign change
+
+- It is critical that developer is presented with clear picture of choices - needs some thought!
+
 - See SPERCIAL CASE CLASHES below ..
 
 - Apply deltas (see APPLY DELTAS below)
@@ -69,6 +75,7 @@ Clashes exist if:
  - this user deleted records that other(s) updated, or vice-versa
  - this user deleted records that other(s) linked new records to, or vice-versa
  - this user deleted records that other(s) linked existing records to, or vice-versa
+ - Fields with unique indexes (eg container name, or combinations like field name and pef_table_id)
 
 Deleted records present more complex cases:
  
@@ -116,7 +123,7 @@ Deleted records present more complex cases:
     - Use textual trees to present user with groups of deleted records, with groups of records depending on them
     - Use colour coding to indicate where they link to.
     - Add non-deleted items (colour grey) to tree solely for purpose of giving context to deleted items (colour red)
-    - will need to think about unique name clashes when restoring items / containers etc. -> give user ability to rename easily.
+    - will need to think about UNIQUE NAME CLASHES when restoring items / containers etc. -> give user ability to rename easily.
 
     DELETED RECORDS:			   DEPENDANT RECORDS
     Group 1:				       Inserted Group A:
@@ -144,12 +151,12 @@ NOTES
 - With subsequent commits, delta's are made by comparison to the latest full snapshot that was comitted by the same user, and labeled with same revision no too.
   Thereafter another full snapshot (with revision no + 1) is made, stored and uploaded to the server. 
 - First time checkouts, checks out the latest full snapshot committed.
-- Currently a commit makes a delta, pulls forreign deltas, applies deltas, commits delta and the latest full snapshot.
+- Currently a commit makes a delta, pulls foreign deltas, applies deltas, commits delta and the latest full snapshot.
   In future we can allow user to make a delta and a full snapshot, followed by another delta and full snapshot
   and so on, and then only committing to the server. (The extra full snapshots are needed to make each delta).
   This will allow user to revert their own (interrim) delta's.
-- If two or more people changed same record but different fields, create warning
-- If three of more people changed same field in same record, then list all three ... 
+- If two or more people changed same record but different fields, (optional) create warning
+- If two of more people changed same field in same record, then list them all ... 
 
 Other: 
 - Comparison to get delta can have 3 options:
