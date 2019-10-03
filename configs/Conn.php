@@ -1,20 +1,20 @@
 <?php
 
-// NOTES: The index (below) for the main dropinbase database must match the value of DBINDEX in Dib.php
+// NOTES: The index of the main dropinbase table must match the DBINDEX value in Dib.php
 //        Using an IP address as host (eg 127.0.0.1 instead of 'localhost') can dramatically increase performance
 
 DIB::$DATABASES = array(
 1 => array(
         'database' => 'dropinbase',
         'dbType' => 'mysql',
-        'connectionString' => 'mysql:dbname=dropinbase;host=127.0.0.1;charset=utf8',
-        'charset' => 'utf8',
+        'connectionString' => 'mysql:dbname=dropinbase;host=127.0.0.1;port=3307;charset=utf8mb4',
+        'charset' => 'utf8mb4',
         'username' => 'root',
-        'password' => '123456',
+        'password' => '',
         'host' => '127.0.0.1',
-        'port' => null,               
+        'port' => 3307,               
         'emulatePrepare' => true,
         'dbDropin' => 'dibMySqlPdo',
         'systemDropin' => true
-    ),
+    )
 );
