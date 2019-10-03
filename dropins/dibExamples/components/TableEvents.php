@@ -26,15 +26,16 @@ class TableEvents {
      * @param int $databaseId id of database involved - useful for calls to Database class
      * @param object $crudClass object pointing to container's crud class
      * @param mixed $crudResult result of crud operation (note, could be array('error', $msg) in case crud operation failed)
+     * @param array $submissionData submissionData available on Dropinbase CRUD events
      * 
      * @return mixed TRUE on success, or array('error', $msg) if operation must be cancelled (message is returned to user)
      */
-    public static function trigger($containerName, $trigger, $source, &$attributes, &$primaryKeyData, $databaseId, &$crudClass, &$crudResult) {
+    public static function trigger($containerName, $trigger, $source, &$attributes, &$primaryKeyData, $databaseId, &$crudClass, &$crudResult, $submissionData=null) {
         // The following line can be used to see contents provided:
         
-        //Log::w($containerName, $trigger, $source, $attributes, $primaryKeyData, $databaseId, $crudClass, $crudResult);
+        //Log::w($containerName, $trigger, $source, $attributes, $primaryKeyData, $databaseId, $crudClass, $crudResult, $submissionData);
         
-        /* If 'after create', 'after delete' or 'after update' is involved we normally want to handle the case of an error happening with these events:
+        /* If 'after create', 'after delete' or 'after update' is involved we normally want to handle the case of an error happening before the Table Event trigger was called:
         
         // If an error occured, do nothing
         if (isset($primaryKeyData[0]) && $primaryKeyData[0] === 'error')
@@ -51,8 +52,10 @@ class TableEvents {
         	$params = array(':p1'=>$attributes['primkey1'],
         					':p2'=>$attributes['primkey2'],
         					':pkey1'=>$primaryKeyData['primkey1'],
-        					':pkey2'=>$primaryKeyData['primkey2']);
-        	$rst = Database::fetch($sql, $params);
+                            ':pkey2'=>$primaryKeyData['primkey2']);
+                            
+            $rst = Database::fetch($sql, $params);
+            
         	if(Database::count()>0) {
         		$p1 = $attributes['primkey1'];
         		$p2 = $attributes['primkey2'];
@@ -71,6 +74,16 @@ class TableEvents {
         
         // If all is well, return true so that crud operations can proceed.
         return true;
+
+        // *** Note that the following means can also be used to send messages or actions to the client:
+        // *** THE CODE BELOW DOES NOT EXECUTE DUE TO THE return true LINE ABOVE ... 
+        
+        // By setting PeffApp::clientMsg we set (and override) any other pending system message that may have been configured
+        PeffApp::setClientMsg("Container Events triggered to change values in the 'name' field", 'notice', 4000);
+        
+        // We can also send client actions by adding them to the PeffApp::$clientActions array...
+        ClientFunctions::addAction(PeffApp::$clientActions, 'OpenUrl', array('url'=>'/nav/dibDashboard')); 
+
     }
 }
 

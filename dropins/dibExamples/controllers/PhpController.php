@@ -20,7 +20,7 @@ class PhpController extends Controller {
 		
         // Classes in the Dropinbase core, eg the Database class, are also loaded automatically using the autoloader
         // The file paths are stored in the /runtime/Components.php file, which is created automatically if it is not found.
-		$rst = Database::execute("SELECT id, name FROM test_company LIMIT 20", array(), 'dibtestCompanyGrid');
+		$rst = Database::execute("SELECT id, name FROM test_company LIMIT 20", null, 'dibtestCompanyGrid');
 		
 		// Classes in other dropins can be loaded with the PeffApp::load function
 		PeffApp::load('dibExcel', 'DibExcelExport.php', 'components');
@@ -72,6 +72,7 @@ class PhpController extends Controller {
 		//   If the the error originates in core DIB classes such as the Crud class, 
 		//   Database::lastErrorUserMsg() will often contain a useful message for display to the user.
 		// If it succeeds but there are no records then $rst would be an empty array, and Database::count() would still be 0.
+		// Note that certain database engines do not reliably return the count of affected records. Use !empty($rst) or count($rst)<1 instead...
 		
 		// WARNING. In case of an error, the Database class returns FALSE but does not cause the system to stop executing PHP code. 
 		// Developers must handle potential errors.
@@ -91,7 +92,7 @@ class PhpController extends Controller {
 		if($rst === FALSE)
 			// It is a good idea to point the user to the System Administrator, as the error.log will contain further details.
 			return $this->invalidResult("System error! Please contact the System Administrator for more info.");
-        elseif(Database::count()<1)
+        elseif(count($rst)<1)
 			return $this->invalidResult("Could not find any records in the test_company table. Please populate it and try again.");
         
         // Get a value
@@ -111,7 +112,6 @@ class PhpController extends Controller {
 			if(strlen($record['name']) > 7)
 				$str .= $record['id'] . (isset($rst[$key+1]) ? ', ' : '');
 		}
-		
 		
 		// *** Another example of using parameters (still using the dropinbase database)
 		// (AGAIN - ALWAYS use parameters with user data)
@@ -133,9 +133,12 @@ class PhpController extends Controller {
 		
 		// For the sake of demonstration we are using the database containing the dibtestCompanyGrid table
 		
-        $rst = Database::fetch("SELECT min(chinese_name) as minName FROM test_company", array(), 'dibtestCompanyGrid');
+        $rst = Database::fetch("SELECT min(chinese_name) as minName FROM test_company", null, 'dibtestCompanyGrid');
         if($rst === FALSE)
-        	return $this->invalidResult(Database::lastErrorUserMsg());
+			return $this->invalidResult(Database::lastErrorUserMsg());
+		if(empty($rst['minName']))
+			return $this->invalidResult("Ooops there are no records with chinese names :(");
+
         $str .= "\r\nChinese name 1: " . $rst['minName'];
         
         // Note, the following specification of $databaseId is unneccessary - 
@@ -144,11 +147,12 @@ class PhpController extends Controller {
         //    we provide this merely as an example of what your code may look like:
        
         $databaseId = DIB::DBINDEX;
-        $rst = Database::fetch("SELECT min(chinese_name) as minName FROM test_company", array(), $databaseId);
+        $rst = Database::fetch("SELECT min(chinese_name) as minName FROM test_company", null, $databaseId);
         $str .= "\r\nChinese name 2: " . $rst['minName'];
 		
 		
-		// Using Database::create and Database::update. 		
+		// Using Database::create, Database::update and Database::delete
+
 		// *** Note that field names containing spaces or other non-alphanumeric characters (except underscore(_)) could cause bugs. 
 
 		$newName = uniqid('NewCo ', true);
@@ -161,22 +165,51 @@ class PhpController extends Controller {
 		// The 4th parameter is a SQL WHERE clause
 		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', "name = '$newName'");
 
-		// To avoid SQL injection, we could use :name, but then need to include it in $params
+		// To avoid SQL injection, it is best to use PDO parameters in criteria, ie :name, but then we must include `name` in $params too
 		$params = array('name'=>$newName, 'chinese_name'=>'123 T达拉斯', 'notes'=>'yyy');
 		$result = Database::update('test_company', $params, 'dibtestCompanyGrid', 'name = :name');
 
+		// Prefixing the key with # indicates that the value is not a constant, but a SQL expression (which can contain PDO parameters)
+		// Prefixing the key with ! indicates that no attempt must be made to update this field, ie the parameter must not be included in the update. 
+		//    The parameter will be used for criteria or expressions and is probably not a field name. The value in this case will always be treated as a constant.
+
+		$suffix = 'some user value';
+		$newName2 = uniqid('NewCo2 ', true);
+		$params = array(
+			'name'=>$newName2,
+			'#notes'=>"CONCAT(notes, ' *--', name, '--*')", // note the # prefix to indicate the value is not a constant
+			'#chinese_name'=>'CONCAT(chinese_name, :suffix)', // note the # prefix and the use of :suffix
+			'!suffix'=>$suffix, // note the ! prefix to exclude the parameter from any update operation
+			'id'=>$pkeyValue
+		);
+
+		// AUDIT TRAILS
+
+		// The (optional) last parameter is used to specify the level of AUDIT TRAILING to apply (by default no audit trailing is done)		
+		//    detail - individual records for old and new values of each field that has changed is stored in the audit_trail for the given container
+		//    summary - one record is used to store old and new values of each field that has changed
+		//    basic - only the primary key value(s) is stored 
+		 
+	    $result = Database::update('test_company', $params, DIB::DBINDEX, 'id = :id', 'summary');
+
+		// NOTE, multiple records can be affected by Database::update and Database::delete actions - values changed in all will be captured in the audit trail
+
 		// Let's delete that record (or any range of records defined by criteria)
-		$result = Database::delete('test_company', array(':name'=>$newName), 'dibtestCompanyGrid', 'name=:name');
-		// Since we have the primary key value we could also do this:
-		$result = Database::delete('test_company', array('id'=>$pkeyValue), 'dibtestCompanyGrid');		
+		// Note we opt to store a single record in the audit trail for demo purposes
+		// Also note that we can use the a database index OR a container name as 3d parameter (same as the Database::execute or Database::fetch commands)
+		$result = Database::delete('test_company', array(':name'=>$newName2), DIB::DBINDEX, 'name=:name', 'summary');
+
+		// Since we have the primary key value we can also simply do this:
+		$result = Database::delete('test_company', array('id'=>$pkeyValue), DIB::DBINDEX);		
 
         // *** Fetching records in a different PDO Style
         // See http://php.net/manual/en/pdostatement.fetch.php
-        $rst = Database::execute("SELECT id FROM test_company WHERE id < 5", array(), 'dibtestCompanyGrid', PDO::FETCH_OBJ);
+        $rst = Database::execute("SELECT id FROM test_company WHERE id < 5", null, 'dibtestCompanyGrid', PDO::FETCH_OBJ);
         $str .= "\r\nMore Id's: ";
         foreach($rst as $key=>$record)
 			$str .= $record->id . (isset($rst[$key+1]) ? ', ' : '');
-				
+		// Note, if there are no records, $rst contain an empty array and the foreach would merely be skipped.
+		
 		// *** Executing other SQL statements that do not start with the word 'SELECT'
 		
 		/* 
@@ -197,11 +230,14 @@ class PhpController extends Controller {
 		//   See http://php.net/manual/en/pdostatement.rowcount.php
 		// (DIB uses "SELECT @@Rowcount" for Sql Server SELECT statements to set Database::count() correctly).
 		
+		// It is therefore recommended to use one of the following tests when fetching records...
+		// if(empty($rst)) ... OR
+		// if(count($rst)<1) ...
 		
 		
 		
 		// *** Executing data dictionary queries 
-		// Since these type of queries do not start with the word 'select', but does return records, 
+		// Since these type of queries do not start with the word 'select', but do return records, 
 		//   we specify a $style to instruct the Database class to return the records
 		// Note, the DIB::$DATABASES array contains the array specified in Conn.php 
 		
@@ -210,9 +246,10 @@ class PhpController extends Controller {
 		
 		$str .= "\r\ntest_company meta data: ";
 		foreach($result as $key=>$value)
-			$str .= $key . '=>' . $value . (isset($result[$key+1]) ? ', ' : '');
+			$str .= $key . '=>' . $value . ', ';
 		
-		
+		$str = rtrim($str, ', ');
+
 		// *** Working with transactions 
 		// Transactions provide a convenient way to ensure that a batch of sql statements all succeed 
 		//   before any changes are committed to the database, otherwise they are all rolled back.
@@ -234,6 +271,9 @@ class PhpController extends Controller {
 		// etc...
 		// If all is well, commit the transactions
 		Database::transactionCommit();
+
+		// NOTE: especially for long running SQL scripts, or high volumes of concurrent users, using transactions could cause table/record locking issues.
+		// You may therefore need to write code to ensure only one user runs the queries at any given moment... 
 		
 		
 		// *** Using more advanced PDO features of prepared statements  
@@ -242,10 +282,10 @@ class PhpController extends Controller {
 		// In such cases the Database::stmt function can be used to return a prepared statement 
 		// Note, by default the Database class always uses prepared statements (even for a query executed only once)
 		
-		$params = array(':id'=>1);
+		$params = array(':id'=>5);
 		// The last paramenter below is set to FALSE in order to prevent the return of records (ie merely prepare a statement).
-		$rst = Database::fetch("SELECT id, name FROM test_company WHERE id < 5", $params, DIB::DBINDEX, null, TRUE, FALSE);
-		$str .= "\r\nRecords affected by the last statement: " . Database::count();
+		$rst = Database::execute("SELECT id, name FROM test_company WHERE id < :id", $params, DIB::DBINDEX, null, TRUE, FALSE);
+		$str .= "\r\nRecords affected by the last statement: " . Database::count(); // Note, for some database engines, Database::count() does not work...
 		
 		// Get the statement
 		$fetchStmt = Database::stmt(); // Note, this function accepts a database id or container name as parameter. DIB::DBINDEX is used as default.
@@ -263,8 +303,8 @@ class PhpController extends Controller {
 		$path = DIB::$RUNTIMEPATH . 'tmp' . DIRECTORY_SEPARATOR . 'Testing Database Functions.txt';
 		file_put_contents($path, $str);
 		
-		// If the event's reponse_type is 'actions' (the default)' we must always send a response to the client api 
-		// that has been waiting (note only the first parameter is required below);
+		// If the event's reponse_type is 'actions' (which is the default), we must always send a response to the client API 
+		//   that has been waiting (note only the first parameter is required below);
 		// See the function comments for validResult and invalidResult in /dropinbase/system/Controller.php for more details
 		return $this->validResult(NULL, "The result file, 'Testing Database Functions.txt', has been created in the /runtime/tmp folder.", 'dialog');
     }
@@ -279,7 +319,7 @@ class PhpController extends Controller {
 				1. container specific validation is done on Create and Update
 				2. container and item specific permissions apply on all actions
 				3. grid header filters and subcontainer/activefilters are available
-				4. audit trailing (if specified) applies
+				4. audit trailing (if specified in pef_table) applies
 				5. records can be retrieved as batches/pages
 		*
 		* NOTE, if an error occurs on any of the Crud functions, 
@@ -440,7 +480,7 @@ class PhpController extends Controller {
         $msg = ($filteredCount == 1) ?  '1 record was involved' : $filteredCount . ' records were involved';
         return $this->validResult(NULL, $msg);
     }    
-      
+
     // Post data, and returning files
     public function sendFile($containerName, $itemEventId, $submissionData=null) {
     /*	
@@ -477,11 +517,11 @@ class PhpController extends Controller {
 		$sendText
 		. '</body>
 		</html>
-		';
-		
+		';	
+
 		// First load DPdf 
 		PeffApp::load('dibPdf', 'DPdf.php', 'components');		
-
+		
 		DPdf::convertHtml($sendText, true, 'myPdf.pdf');
 		
 		/* 
@@ -500,7 +540,77 @@ class PhpController extends Controller {
 	    unlink($filePath);
 	    */
     }
-    
+	
+	 //
+	 public function buildDocxXslx($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
+        
+		list($sendText, $msg) = PeffApp::getSubmitVal($submissionData, 'sIA.s', array('sendText','msg'));
+		
+		// Note $itemAlias contains the type of template being merged : docx / xlsx
+
+		$tmplFile = DIB::$DROPINPATHDEV . 'dibExamples' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $itemAlias . 'Tmpl.' . $itemAlias;
+		$resultFile = DIB::$DROPINPATHDEV . 'dibExamples' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'test.' . $itemAlias;
+
+		$params = array('profile_id'=>2, 'name'=>'John', 'path'=>DIB::$FILESPATH . 'icons' . DIRECTORY_SEPARATOR);
+
+		$el = new Eleutheria();
+		
+		$el->mergeTmpl($itemAlias, $tmplFile, $resultFile, TRUE, FALSE, $params);
+
+		/**
+		 * mergeTmpl($InputFormat, $TemplateFile, $OutputFile='', $OutputToBrowser=false, $OutputToMemory=false, $Parameters=array(), $cacheKey='', $configs='')	
+		 *
+		 * @params $InputFormat - One of 'html','text','htmlbody','textbody','docx','xlsx'
+		 * @params $TemplateFile - If 'htmlbody' or 'textbody', then template content, else physical path to template file
+		 * @params $OutputFile = '' - (Optional) Physical path to where result must be stored
+		 * @params $OutputToBrowser = FALSE - Whether result must be sent to browser
+		 * @params $OutputToMemory = FALSE - Whether result is kept in public class variables docHeader, docBody and docFooter after function exits
+		 * @params $Parameters = array() - (Optional) Global merge parameters
+		 * @params $cacheKey = '' - (Optional) Stores result in cache using $cacheKey
+		 * @params $configs = '' - (Optional) Comma delimited string eg 'cj,bj,js'. Options: 'ca' (compress javaccript) 'cj' (compress json), 
+		 *							'ph' (purify html with HtmlPurifier), 'bh' (beautify html), 'bj' beautify js with JsBeautifier
+		*/
+		
+		// NOTE: We could set $OutputToBrowser to FALSE above, and then use the function below to specify a specific name for our download
+		//DibFunctions::exportFileToClient($resultFile, 'testFile.' . $itemAlias);
+	}
+	
+	//
+    public function buildPDF($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
+        
+		$tmplFile = DIB::$DROPINPATHDEV . 'dibExamples' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'pdfTmpl.html';
+
+		$params = array('profile_id'=>2, 'name'=>'John');
+
+		$el = new Eleutheria();
+		// Export to memory so that we can get hold of the content
+		$el->mergeTmpl('html', $tmplFile, '', FALSE, TRUE, $params);
+		
+		$content = $el->docBody[0];
+
+		// First load DPdf 
+		PeffApp::load('dibPdf', 'DPdf.php', 'components');
+		
+		$result = DPdf::convertHtml($content, true, 'myPdf.pdf');
+		/**
+		 * public static function convertHtml($html, $exportToClient, $file)
+		 * 
+		 * Converts HTML to a PDF and saves the file to the supplied filename location, or sends the file to the client.
+		 * 
+		 * Input:
+		 *    $html - The html to convert
+		 *    $exportToclient - whether resulting pdf file must be streamed to the client or not 
+		 *    $file - The physical location to save the PDF, OR (if $exportToClient=True) the name of the file to send to the client
+		 * 
+		 * Output:
+		 *    true/false - If conversion was successful or not
+		 */
+
+		 if($result === FALSE)
+		 	echo "Conversion to PDF failed, please contact the System Administrator for more info (error.log)";
+
+	}
+	
     // Asynchronous execution
     public function asyncExecution($containerName, $itemEventId, $submissionData = null, $triggerType = null, $itemId = null, $itemAlias = null) {
 	/*
@@ -511,6 +621,8 @@ class PhpController extends Controller {
 		   Execute the actual script asynchronously (and impose an acceptable timelimit) - when its done notify the client to take further action.
 		
 		Below the second method is used to run a very basic script asynchronously
+
+		NOTE: An even simpler method is available with Dropinibase: Queues...  see QueueController for more info...
 	*/
 		
 		if(!isset($submissionData['submitItemAlias.self']['msg']))
@@ -518,7 +630,7 @@ class PhpController extends Controller {
 		
 		$msg = $submissionData['submitItemAlias.self']['msg'];
 		
-		// Since $msg will be echo'd to the user, it is important to validate the contents to avoid possible xss attacks
+		// Since $msg will be echoed to the user, it is important to validate the contents to avoid possible xss attacks
 		if(!ctype_alnum(str_replace(' ', '', $msg)))
 			return $this->invalidResult("Aikona! The message may only contain alphanumeric characters and spaces. Please amend and try again.");
 		
@@ -528,7 +640,7 @@ class PhpController extends Controller {
 	        'another_var'=>'here I am'
         );
         
-        // Since we'll intiate the Queue server-side, we need to set a unique id that will be used by the client when requesting actions for this user
+        // Since we'll initiate the Queue server-side, we need to set a unique id that will be used by the client when requesting actions for this user
         // Note PeffApp::randomToken() generates a cryptographically secure random string which is important to prevent hackers predicting the value.
 		// The call to DibFunctions::async below will send this value to the asynchronous script to use in any Queue actions.
         // The call to validResult at the end of this function will package this value for return the client.
@@ -564,19 +676,18 @@ class PhpController extends Controller {
 		(Note Sql injection is avoided by always using PDO parameters as explained above)
 		
 		The following are places where user data is displayed
-		1. Grid Controls
-		2. Form Controls
-		3. Trees
-		4. dropdown lists 
-		5. (In)ValidResult messages		
-		6. msgPopup
-		7. Prompt
-		8. setValue
-		9. ItemHandler		
+		1. Container Components (eg grid/form fields)
+		2. Trees
+		3. dropdown lists 
+		4. (In)ValidResult messages		
+		5. msgPopup
+		6. Prompt
+		7. setValue
+		8. ItemHandler		
 		
-		The first 4 cases are handled by Angular's ng-bind and ng-bind-html directives that escapes data 
+		The first 3 cases are handled by Angular's ng-bind and ng-bind-html directives that escapes data 
 		
-		The remaining cases must be escaped serverside if there is any possibility that the content may be insecure.
+		The remaining cases must preferably be escaped serverside if there is any possibility that the content may be insecure.
 	*/
     }
     
@@ -587,5 +698,7 @@ class PhpController extends Controller {
 		Log::err("mmm");
 	
     }
-    
+
+   
+
 }

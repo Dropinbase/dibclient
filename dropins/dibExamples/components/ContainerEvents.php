@@ -5,28 +5,28 @@ Demonstrates Container Events
 NOTES: 
 1. Function parameters vary according to trigger (event) as follows:
 	before readone,  before readmany: 
-    	$containerName, $filterParams, $trigger
+    	$containerName, &$criteriaParams, $trigger, $gridFilter, &$criteria
     
     after readone,  after readmany: 
     	$containerName, $attributes, $trigger, $filterParams
     	
     before update: 
-		$containerName, $attributes, $trigger, $recordOld
+		$containerName, &$attraaibutes, $trigger, $recordOld, $submissionData
 	
 	after update: 
-		$containerName, $attributes, $trigger, $recordOld, $validAttributes
+		$containerName, $attributes, $trigger, $recordOld, $validAttributes, $submissionData
 		
    	get defaults, before create, after create, before delete, after delete:
-   		$containerName, $attributes, $trigger
+   		$containerName, &$attributes, $trigger, $submissionData
 
-2. Note that $attributes and $validAttributes can be received by reference (eg &$attributes); eg values can be manipulated/tested before storing them.
+2. Note that parameters such as $attributes and $validAttributes can be received by reference (eg &$attributes) which is useful on the 'before' events. Values can be manipulated before storing them.
 
 3. To cancel execution of any further code in the calling Crud class: 
-   return array('error', $message);
+   return array('cancel', $message);
    where $message will be displayed to the user.
    To change audit trail info being captured for a specific container, set $attributes on 'after create' or $validAttributes on 'after update'
 
-4. Note, delete the corresponding Crud class with any change in pef_container_event that may affect it. This will cause the
+4. Note, delete the corresponding Table Crud class with any change in pef_container_event, pef_container, pef_item etc. that may affect it. This will cause the
    Crud class code to be regenerated.
 */
 
@@ -48,10 +48,10 @@ class ContainerEvents extends Controller {
         	$attributes[0]['name'] = "Container Events classified this info, if >3 records ;-)";
         
         // We'll include a notice for the user. 
-        // By setting PeffApp::clientMsg we override any other message that may have been configured using validResult(...)
+        // By setting PeffApp::clientMsg we set (and override) any other message that may have been configured using validResult(...)
         PeffApp::setClientMsg("Container Events triggered to change values in the 'name' field", 'notice', 4000);
         
-        // We can also add any other client actions ... 
+        // We can also send client actions by adding them to the PeffApp::$clientActions array...
         ClientFunctions::addAction(PeffApp::$clientActions, 'AppendValue', array('dibexEvents.containerEvents'=>"$containerName: $trigger (fired from Container Crud Events); "));
  
     } 

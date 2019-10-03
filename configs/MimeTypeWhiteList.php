@@ -21,12 +21,13 @@
             case 'js' :
                 return 'application/x-javascript';
             case 'css' :
-                return 'text/css';
-            case 'svg' :
+                return 'text/css';           
             case 'html' :
             case 'htm' :
+               return 'text/html';            
             case 'txt' :
-                return 'text/plain'; // Note, as an example, this code will return 'text/plain' for the following extensions: svg, html, htm and txt
+            case 'svg' :
+                return 'text/plain'; // Note, as an example, this code will return 'text/plain' for the following extensions: svg and txt
             case 'json' :
                 return 'application/json';
             case 'csv' :
