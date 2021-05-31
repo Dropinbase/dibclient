@@ -220,12 +220,22 @@ class EventsController extends Controller {
         //   'action' -  or specify an single action to execute (see $actionArray below)
         // The Yes action is required. If the No action is omitted, the button will show but simply close the dialog.
         $actionArray = array('submitUrl'=>'dibGlobals.action.setValue', 
-                             'params'=>array('Textfield1'=>"You clicked No on the popup which set Textfield1 and triggered its change event"));
+                             'params'=>array('Textfield1'=>"You clicked No on the popup which set Textfield1's value'"));
         $params = ClientFunctions::addMsgPopup($actionList, 
             'A popup question', 'Do you want to say hello?', 
             'itemAlias', 'btnHelloWorld', 
             'action', $actionArray);
         return $this->validResult($actionList);
+
+        /* addMsgPopup (
+            $actionList,
+            $title,
+            $bodyText,
+            $yesBtnActionType,
+            $yesBtnActionItemAliasOrActionParams,
+            $noBtnActionType,
+            $noBtnActionItemAliasOrActionParams
+            )
         
     } 
 

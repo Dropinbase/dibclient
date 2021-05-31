@@ -174,3 +174,37 @@ Other:
   -> rather do this with dropin scripts ... must also have ability to create dashboard & menu entries, and set port values to basecontainer etc.
 - A check to ensure dibuid is unique
    
+
+CONCERNS:
+1. group of 5 developers sit in office and work off same db, and other developers work offline.
+-> while sync is happening, developers continue working. So only changes before certain timestamp set on server must be included. committed-tick won't work therefore.
+-> no idea who in the office made the change (although Designer stores who)
+
+2. Ability to "export containers" or make them available for developers of other projects.
+--> also export related dropin folders... 
+
+3. Table design changes. Both dbs must first be on same (latest) version of DIB before sync. 
+
+4. Conflicts must be aware of records higher in the tree that were deleted. Eg. developer A deletes entire database. Developer B adds item_event.
+
+5. Recursive relationships in DIB table designs
+
+6. GIT sync files stored in dropin folders... sync per dropin ? Ie devs share files
+
+7. deletes -> how handle conflicts, how store them?
+
+8. Conflicts. Worse case scenario is developer A deletes a container with child records, and developer B updates one of the child records (items).
+   In its worse form, developer A deletes eg. record in pef_databse with all its dependencies, and developer B updates hundredes of dependent records ! 
+   --> How to detect this conflict and show it only once (in case of 100 dependent records updated)
+   --> Need to present options to person resolving conflict in a clear, understandable way -> on one side he must see tree of affected records, and on the other one OR more records updated instead... 
+
+8. Triggers -> messy -> no control. 
+  Text file strategy requires no maintenance
+
+
+
+
+
+
+
+
