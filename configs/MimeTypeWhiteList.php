@@ -31,7 +31,7 @@
             case 'json' :
                 return 'application/json';
             case 'csv' :
-                return 'text/csv';
+                return array('text/csv','application/vnd.ms-excel'); // Windows reports uploaded csv files as vnd.ms-excel :( 
             case 'ico' :
                 return 'image/x-icon';
             case 'jpg' :
@@ -47,8 +47,9 @@
             case 'doc' :
             case 'docx' :
                 return 'application/msword';
+            case 'xlsx' : 
+                return array('application/zip','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/octet-stream');
             case 'xls' :
-            case 'xlsx' :
             case 'xlt' :
             case 'xlm' :
             case 'xld' :
@@ -56,7 +57,7 @@
             case 'xlc' :
             case 'xlw' :
             case 'xll' :
-                return array('application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                return array('application/vnd.ms-excel');
             case 'ppt' :
             case 'pptx' :
             case 'pps' :
