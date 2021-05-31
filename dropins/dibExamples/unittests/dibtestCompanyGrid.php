@@ -1,13 +1,13 @@
 <?php 
 
 // dibtestCompanyGrid
-/*
+
 $params = array('action'=>'xlsx', 'actionType'=>'itemAlias',  'trigger'=>'click', 'containerName'=>$containerName, 'portId'=>null); // item where container is injected
 ClientFunctions::addAction($actionList, 'run', $params);
 
 $params = array('action'=>'xlsxA', 'actionType'=>'itemAlias',  'trigger'=>'click', 'containerName'=>$containerName, 'portId'=>null);
 ClientFunctions::addAction($actionList, 'run', $params);
-*/
+
 
 
 $params = array('action'=>'btnAdd', 'actionType'=>'itemAlias', 'trigger'=>'click', 'containerName'=>$containerName, 'portId'=>null);
