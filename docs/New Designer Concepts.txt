@@ -1,0 +1,45 @@
+Dropin Script:
+--------------
+Add base container base1 like baseTmpl1
+Add grid myGrid like gridTmpl2 using table pef_item
+Add grid myGrid using query qMyGrid
+Add grid myForm like formTmpl1 to otherBase1.tab1 as port 
+... as subcontainer
+Link myForm.editButton to myGrid via port alias2
+
+Link base1.menuMyGrid to myGrid
+
+Add field last_name to person as varchar(10) null default null
+
+Define last action as af 
+---> THIS defines last action executed as template named af with parameters in same order:
+
+af first_name
+af title,,varchar(5)
+
+
+Add item event to myGrid.myButton run /dropins/myDropin/Contr/hello
+Define last action as aie
+aie otherButton, /dropins/myDropin/Contr/otherHello
+
+Workings:
+Hierarchy of elements (from Database to table to fields etc.) provide auto context for linking new elements to existing ones. Display current context to user -> has ability to select different.
+
+Have PHP functions that execute list of actions - each with all posible parameters
+
+Map language to parameters.
+Fill in defaults.
+
+Have language/grammar action templates and coding that interprets the templates.
+This way we can easily change grammar.
+
+
+
+Designer:
+---------
+Drag-and-drop Design Templates -> user just provides table/sql
+
+GUI Designer:
+- display containers in groups. User chooses active group.
+- Zoom in to change details of container / table etc.
+- Display basic settings in corner when creating new container etc.

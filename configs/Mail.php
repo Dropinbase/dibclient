@@ -5,7 +5,13 @@
 // PHPMailer is used. 
 // Basic example settings for gmail here: http://phpmailer.worxware.com/?pg=examplebgmail
 
+/* Useful links:
+   https://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/ 
+   https://www.mailgun.com/
+*/
+
 self::$account = array(
+    'use_smtp' => true,
     'mail_host' => 'smtp-relay.gmail.com', // server, eg 'imap.gmail.com' | 'localhost'
     'debug_level' => 0, // enables SMTP debug information (for testing)
     					// 0 = none
