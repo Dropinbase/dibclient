@@ -39,6 +39,12 @@ DirectoryIndex index.php
 #
 # ------------------------------------------------------------------------------
 
+#Plaas die json directive NA  "RewriteRule ^files/(.*)$ files.php"  want: As die request begin met /files/  en eindig in .json moet dit gaan na files.php toe
+#Deny access to ALL files that ends in .json ....
+<FilesMatch "\.(json|key|crt|pem)$">
+    ## Apache 2.4
+    Require all denied
+</FilesMatch>
 
 # ------------------------------------------------------------------------------
 # | Proper MIME types for all files                                            |
