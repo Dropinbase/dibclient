@@ -1,0 +1,16 @@
+version: '2.1'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_dev
+    environment: 
+      XDEBUG_CONFIG: mode=debug client_host=host.docker.internal client_port=9003 start_with_request=yes xdebug.log=/tmp/xdebug.log 
+    container_name: dibclient
+    image: dibclient:ng15
+    volumes:
+      - ./:/dropinbase
+    ports:
+    - 80:80
+    - 443:443
+

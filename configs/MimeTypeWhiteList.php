@@ -22,7 +22,7 @@
             case 'js' :
                 return 'application/x-javascript';
             case 'css' :
-                return 'text/css';           
+                return array('text/css');     
             case 'html' :
             case 'htm' :
                return 'text/html';            
