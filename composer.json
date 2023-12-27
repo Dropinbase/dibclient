@@ -1,8 +1,21 @@
+
 {
-    "name": "dibclient",
+    "name": "dropinbase/dibclient",
     "description": "Dropinbase client files",
     "require": {
         "php": ">=5.3.3",
         "dropinbase/dropinbase": "^2.0"
+        "onelogin/php-saml": "^3.4",
+        "robrichards/xmlseclibs": "^3.1",
+        "phpseclib/phpseclib": "^3.0",
+        "phpmailer/phpmailer": "^6.5",
+        "dompdf/dompdf": "^2.0",
+        "ezyang/htmlpurifier": "^4.14",
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
+

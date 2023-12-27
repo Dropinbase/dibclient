@@ -6,10 +6,17 @@ Options SymLinksIfOwnerMatch
 # Set the default file for indexes
 DirectoryIndex index.php
 
+#Limit the amount of information shared about your server in HTTP headers.
+ServerSignature Off
+
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase '/'
+    #HTTP 1.0 has security weakness related to session hijacking.
+    RewriteCond %{THE_REQUEST} !HTTP/1.1$
+    RewriteRule .* - [F]
 
+    RewriteBase '/'
     # If the file is NOT the index.php file
     RewriteCond %{REQUEST_FILENAME} !index.php
     RewriteCond %{REQUEST_FILENAME} !files.php
@@ -19,18 +26,22 @@ DirectoryIndex index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^files/(.*)$ files.php
 
-    RewriteRule ^config/(.*)$ - [F,L,NC]
+    RewriteRule ^configs/(.*)$ - [F,L,NC]
     RewriteRule ^controllers/(.*)$ - [F,L,NC]
     RewriteRule ^runtime/(.*)$ - [F,L,NC]
     RewriteRule ^uploads/(.*)$ - [F,L,NC]
-    RewriteRule ^views/(.*)$ - [F,L,NC]
-    #RewriteRule ^files/(.*)$ - [F,L,NC]
-
+  	RewriteRule ^users/(.*)$ - [F,L,NC]
     RewriteCond %{REQUEST_URI} !^files/(.*)$
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule .* index.php [L]
 
 </IfModule>
+
+# If Mod_rewrite is NOT installed go to index.php
+<IfModule !mod_rewrite.c>
+    ErrorDocument 404 index.php
+</IfModule>
+
 
 # ------------------------------------------------------------------------------
 # 
@@ -39,12 +50,6 @@ DirectoryIndex index.php
 #
 # ------------------------------------------------------------------------------
 
-#Plaas die json directive NA  "RewriteRule ^files/(.*)$ files.php"  want: As die request begin met /files/  en eindig in .json moet dit gaan na files.php toe
-#Deny access to ALL files that ends in .json ....
-<FilesMatch "\.(json|key|crt|pem)$">
-    ## Apache 2.4
-    Require all denied
-</FilesMatch>
 
 # ------------------------------------------------------------------------------
 # | Proper MIME types for all files                                            |
@@ -110,11 +115,15 @@ DirectoryIndex index.php
 
 # `FileETag None` is not enough for every server.
 <IfModule mod_headers.c>
-  # Here is the fix used in a CakePHP .htaccess file: See: https://httpoxy.org/
+  #Here is the fix used in a CakePHP .htaccess file: See: https://httpoxy.org/
   RequestHeader unset Proxy
   Header unset ETag
   
-  <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
+  # Block access to .htaccess and other configuration files like .htpasswd.
+  <filesMatch "^\.ht">
+	Require all denied
+  </filesMatch>
+  <filesMatch "\.(ico|jpe?g|png|gif|swf|svg)$">
     Header set Cache-Control "max-age=2592000, public"
   </filesMatch>
   <filesMatch "\.(css)$">
@@ -124,8 +133,12 @@ DirectoryIndex index.php
     Header set Cache-Control "max-age=216000, private"
   </filesMatch>
   <filesMatch "\.(x?html?|php)$">
-    Header set Cache-Control "max-age=0, private, must-revalidate"
+    Header set Cache-Control "no-cache, no-store, must-revalidate, private"
+    Header set Pragma "no-cache"
   </filesMatch>
+  
+
+
 </IfModule>
 
 FileETag None

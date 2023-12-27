@@ -1,5 +1,11 @@
 <?php
-    //phpinfo(); // To view installed PHP extensions, uncomment this line, and comment out all other lines below
-    
-    $DIR = __DIR__;
-    include_once("./vendor/dropinbase/dropinbase/index.php");
+
+//phpinfo(); die(); // To view installed PHP extensions, uncomment this line
+
+$DIR = __DIR__;
+
+// Run Dropinbase
+include_once("./vendor/dropinbase/dropinbase/index.php"); die();
+
+// Run Installer
+//include_once("./installer.php");
