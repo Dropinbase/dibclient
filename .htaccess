@@ -3,38 +3,27 @@ Options -Indexes
 
 Options SymLinksIfOwnerMatch
 
-# Set the default file for indexes
-DirectoryIndex index.php
-
 #Limit the amount of information shared about your server in HTTP headers.
 ServerSignature Off
 
+# Set the default file for indexes
+DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    #HTTP 1.0 has security weakness related to session hijacking.
+    
+    RewriteBase '/'	
+	
+	# HTTP 1.0 has security weakness related to session hijacking.
     RewriteCond %{THE_REQUEST} !HTTP/1.1$
-    RewriteRule .* - [F]
-
-    RewriteBase '/'
-    # If the file is NOT the index.php file
-    RewriteCond %{REQUEST_FILENAME} !index.php
-    RewriteCond %{REQUEST_FILENAME} !files.php
-    # Hide all PHP files so that none can be accessed by HTTP
-    RewriteRule (.*)\.php$ - [F,L,NC]
-
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^files/(.*)$ files.php
-
-    RewriteRule ^configs/(.*)$ - [F,L,NC]
-    RewriteRule ^controllers/(.*)$ - [F,L,NC]
-    RewriteRule ^runtime/(.*)$ - [F,L,NC]
-    RewriteRule ^uploads/(.*)$ - [F,L,NC]
-  	RewriteRule ^users/(.*)$ - [F,L,NC]
-    RewriteCond %{REQUEST_URI} !^files/(.*)$
-    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule .* - [F,L,END]   
+    
+    # Direct all URLs starting with files/ to files.php, and all the rest to index.php
+    RewriteRule ^files/(.*) files.php [L,END]
     RewriteRule .* index.php [L]
-
+    
+    # Hide all other (eg PHP) files so that none can be accessed
+    RewriteRule !index.php - [F,L,NC,END]
 </IfModule>
 
 # If Mod_rewrite is NOT installed go to index.php
@@ -120,9 +109,9 @@ ServerSignature Off
   Header unset ETag
   
   # Block access to .htaccess and other configuration files like .htpasswd.
-  <filesMatch "^\.ht">
+  <FilesMatch "^\.ht">
 	Require all denied
-  </filesMatch>
+  </FilesMatch>
   <filesMatch "\.(ico|jpe?g|png|gif|swf|svg)$">
     Header set Cache-Control "max-age=2592000, public"
   </filesMatch>
@@ -133,12 +122,8 @@ ServerSignature Off
     Header set Cache-Control "max-age=216000, private"
   </filesMatch>
   <filesMatch "\.(x?html?|php)$">
-    Header set Cache-Control "no-cache, no-store, must-revalidate, private"
-    Header set Pragma "no-cache"
+    Header set Cache-Control "max-age=0, private, must-revalidate"
   </filesMatch>
-  
-
-
 </IfModule>
 
 FileETag None
