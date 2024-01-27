@@ -19,7 +19,8 @@ class DibUserParams {
         // Normally a field like staff_id/client_id is added to the pef_login table and included in the SELECT statement above,
         //    whereby each user is linked to a staff/client record
         // To access the value use DIB::$USER['staff_id'] in PHP, and :dibUser_staff_id in queries and permission criteria.
-        // The value can also be included in Environment.php and then accessed client-side by getEnv('staff_id') etc. to hide/show buttons etc.
+        
+        // NOTE: This value has also been included in /configs/Environment.php so that the demo's can access it client-side using getEnv('staff_id') or @{env_staff_id} etc. to hide/show buttons etc.
         // See /nav/dibexPermSegmentDataByUser for more info
         $sessionArgs['staff_id'] = 1;
 

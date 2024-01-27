@@ -11,7 +11,7 @@ Example connection configurations:
 */
 
 DIB::$DATABASES = [
-      // MySql:
+      // MySql / MariaDb
       1 => [
             'database'=>'dropinbase',
             'host'=>'127.0.0.1',

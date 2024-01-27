@@ -13,22 +13,21 @@ $settings = $this->getSettings("`name` IN ('auditTrailContainerName','defaultDat
 // Values 
 
 $args = array(
-    'staff_id' => DIB::$USER['staff_id'], // Remove or adjust as needed. See /configs/DibUserParams.php for details
+    'staff_id' => (empty(DIB::$USER['staff_id']) ? null : DIB::$USER['staff_id']), // Remove or adjust as needed. See /configs/DibUserParams.php for details
 
     'site_name' => DIB::$SITENAME,
     'logo' => DIB::$SITELOGO,
     'user_fullname' => DIB::$USER['first_name'] . ' ' . DIB::$USER['last_name'],
 
     // Valid date formats: https://date-fns.org/v2.29.3/docs/format
-    'default_date_time_format' => (isset($settings['defaultDateTimeFormat']) ? $settings['defaultDateTimeFormat'] : 'YYYY/MM/DD HH:mm'),
-    'default_date_format' => (isset($settings['defaultDateFormat']) ? $settings['defaultDateFormat'] : 'YYYY/MM/DD'),
+    'default_date_time_format' => (isset($settings['defaultDateTimeFormat']) ? $settings['defaultDateTimeFormat'] : 'yyyy-MM-dd HH:mm:ss'),
+    'default_date_format' => (isset($settings['defaultDateFormat']) ? $settings['defaultDateFormat'] : 'yyyy-MM-dd'),
    
     'audit_trail_container' => (isset($settings['auditTrailContainerName']) ? $settings['auditTrailContainerName'] : 'dibAuditTrailGrid'),
     'audit_trail_port' => '',
 
     'default_url' => isset(DIB::$USER['default_url']) ? DIB::$USER['default_url'] : '',
     'base_url' => DIB::$BASEURL,
-    'remember_tabs' => (DIB::$USER['remember_tabs'] == '1') ? TRUE : FALSE,
 
     'larger_font' =>  (DIB::$USER['larger_font'] == '1') ? TRUE : FALSE, // ***TODO - accessibility option
 

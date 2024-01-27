@@ -37,8 +37,8 @@ class DIB {
     const LOGINDBINDEX=1; // Database containing the pef_login, pef_perm_group and pef_security_policy tables	
 	// NOTE: add more constants or variables here to use in your own PHP for other databases... 
 
-    public static $ERRORLOGINDEX=1; // database containing the pef_error table where errors are logged. 
-                                    // Note, also update the pef_sql.pef_database_id of the 'qdibErrorLog...' query(ies) if needed, which determine which pef_error table to look at (there can be more than one in different databases)
+    public static $ERRORLOGINDEX=1; // database containing the pef_error_log table where errors are logged. 
+                                    // Note, also update the pef_sql.pef_database_id of the two or more 'qdibErrorLog...' query(ies) if needed, which determine which pef_error_log table to look at - there can (erroneously) be more than one in different databases.
     public static $SQLLOGDBINDEX=null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.	
 	public static $AUDITDBINDEX=1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
 	
@@ -61,19 +61,27 @@ class DIB {
 	public static $RECORDUNITTEST=FALSE; // TRUE or FALSE - Whether all requests must be recorded in pef_unit_test. Greatly affects performance. Normally FALSE.
 
 	// Cache settings
-	public static $CACHEUSE=0; // 0 = Always overwrite cache files (also occurs in 'development' mode); 
-							   // 1 = Delete a container's cache file if affected by design changes, else use cache if available (speeds up loads during development). 
-							   // 2 = Use a cache file if it exists, else create it; 
-							   // 3 = Allways use cache (assume all necessary files exist)
+	public static $CODEUSE=1;  // 0 = Always overwrite dibCode files
+							   // 1 = Delete a container's dibCode file if affected by design changes, else use if available (speeds up loads during development). 
+							   // 2 = Use a dibCode file if it exists, else create it
+                               // 3 = Allways use dibCode files (assume all necessary files exist)
 	public static $USEPROXYPERMGROUP = FALSE; // (experimental) Generate less cache and crud files as for each container a representative "proxy" perm_group in pef_perm_active is set with same permissions.
 
 	// Security settings
+	public static $DESIGNER_CAN_READ_ERRORS = TRUE; // Whether the Designer can read and display errors from the database.
+	public static $DESIGNER_CAN_READ_DEBUG = TRUE; // Whether the Designer can read and display debug logs.
 	public static $VERIFY_IP = TRUE; // Whether successive requests from the same web user must originate from the same IP address, else logged out. Note, is affected by Load-ballencers and dynamic ip addresses which will cause intermittent drops.
 	public static $VERIFY_USER_AGENT = TRUE; // Whether successive requests from the same web user must have the same USER AGENT, else logged out. Note, affected by ISP's and browsers which updates info.
 	public static $VERIFY_AUTH_TOKEN = TRUE; // Whether authentication tokens are checked on server requests, else logged out. This should be TRUE. Use eg. $REQUEST_TYPE='GET,POST,ignoretoken' in controller function parameters to override, for eg. file downloads.
 	public static $USERNAME_REGEX='#^\w{4,30}$#'; // A semicolon delimited list of regular expressions that must validate successfully in order for usernames to be accepted
     public static $USERNAME_REGEXMSG='The username must contain between 4 and 30 alpha-numeric characters (no spaces, but underscore (_) is allowed).';
-
+	public static $ENABLE_REMEMBERME = true; // Whether to enable Remember Me functionality. Ensure that the /dropins/dibAuthentice/views/login.php contains the neccessary HTML.
+	public static $PUBLICFILEPERMS = array( 
+		'allow_uploads'=>TRUE, // Allow system_public user to upload files.
+		'allow_downloads'=>TRUE, // Allow system_public user to download files.
+		'allow_deletes'=>TRUE, // Allow system_public user to delete files.
+	);
+	
     // Path to the index file to bootstrap the application for a particular material dropin
 	public static $DEFAULTFRAMEWORK='setNgxMaterial'; // client framework to load at startup
 	public static $INDEXPATH=[
@@ -123,7 +131,7 @@ class DIB {
                                // If it is not a dropin request, the path will point to the /droinbase/ folder (same as the $BASEPATH).
 	public static $USER; // Array of all fields in pef_login (except password, dib_password, and notes)
 	public static $DATABASES; // Array of connection details to all databases in pef_database
-	public static $PERMGROUP; // Combination of the permission groups the user currently has rights to
+	public static $PERMGROUP; // Combination of the permission groups the user currently has rights to, eg x3x5x
 	public static $LOCALE;	// The user's language (from pef_login)
 	public static $RETURN_URL; // Dynamically set - remembers requested page when user is not logged in and returns to it after login.
 	public static $CONTROLLER; // Name of the controller referenced by the current request
