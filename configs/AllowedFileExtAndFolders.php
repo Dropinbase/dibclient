@@ -10,6 +10,8 @@ and another whitelist of allowed file extensions and their related mimetypes for
     ts        (typescript)
 */
 
+
+
 /**
  * Checks for allowed characters in the url and filename, 
  *  whether the url references a folder in the defined whitelist of folders accessible by system_public,
@@ -25,28 +27,32 @@ function checkFile($url, $fileName, $ext) {
     // This is a whitelist of folders - all other folders will be blocked.
     
     $allowedFolders = array(
-        // Dropinbase required
         'files/dropins/setNgxMaterial/angular/dist/browser',
         'files/dropins/setNgxMaterial/dibAdmin/js/template',
         'files/dropins/dibAdmin/js',
         'files/dropins/dibAdmin/css',
+        'files/dropins/dibDocs/css',
         'files/dropins/dibAuthenticate/css',
-        'files/dropins/setNgxMaterial/dibAdmin/designImages',
+        'files/dropins/dibAuthenticate/js',
         'files/dropins/dibAdmin/images',
+        'files/dropins/dibAdmin/images/docs',
+        'files/dropins/dibAdmin/images/logos',
+        'files/dropins/dibAdmin/images/icons',
         'files/dropins/setNgxMaterial/shared/img/icons',
         'files/dropins/setNgxMaterial/dibAdmin/images/dashboard',
         'files/dropins/setNgxMaterial/dibAdmin/images',
         'files/dropins/setNgMaterial/dibGlobals/images/svg',
         'files/dropins/setNgMaterial/dibAdmin/images',
+        'files/dropins/dibCustom/designImages',
+        
+        
         'files/files/icons',
         'files/files/images',
+        'files/dropins/setCharts/dibPlotly/js',
+        'files/dropins/dibDynamicUI/js',
 
-        // Application specific
-        'files/dropins/setNgxMaterial/wisl/files/images',
-        'files/files/themes/overrides/images',
-        'files/dropins/fitproper/files',
-        'files/dropins/fitproper/files/manuals',
-        'files/dropins/fitproper/files/help',
+         // DIB Examples
+        'files/dropins/dibExamples/img',
         
     );
 
@@ -73,10 +79,6 @@ function checkFile($url, $fileName, $ext) {
  */
 function getMimeType($ext) {
     
-    // List the file extensions of files that are allowed to be uploaded and downloaded, with their assoicated mimetypes
-    // This is a whitelist of file extensions - all other will be blocked.
-    // Uploaded files are checked against the related mimetype and blocked if found different.
-    
     $allowedExtensions = array(
         // Dropinbase required
         'css' => 'text/css',
@@ -85,20 +87,30 @@ function getMimeType($ext) {
         'jpg' => array('image/jpg','image/jpeg'),
         'png' => 'image/png',
         'ico' => 'image/x-icon',
-        // Application specific (enable/add as few as possible)
-        'csv' => array('text/csv','application/vnd.ms-excel'), // Windows reports uploaded csv files as vnd.ms-excel :(
+
+        'csv' => array(
+            'text/csv',
+            'text/plain',
+            'application/csv',
+            'text/comma-separated-values',
+            'application/excel',
+            'application/vnd.ms-excel', // Windows
+            'application/vnd.msexcel',
+            'text/anytext',
+            'application/octet-stream',
+            'application/txt',
+        ),
         'pdf' => 'application/pdf',
         'jpg' => array('image/jpg','image/jpeg'),
         'jpeg' => array('image/jpg','image/jpeg'),
         'png' => 'image/png',
-        'gif' => 'image/gif',
-        'bmp' => 'image/bmp',
+        //'gif' => 'image/gif',
+        //'bmp' => 'image/bmp',
         //'tiff' => 'image/tiff',
         'xlsx' => array('application/zip','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/octet-stream'),
-        'xls' => array('application/vnd.ms-excel'),
-        'map' => 'text/plain',
-        /*
         'docx' => 'application/msword',
+        
+        /*
         'xls' => array('application/vnd.ms-excel'),
         'doc' => 'application/msword',
         'xlt' => array('application/vnd.ms-excel'),
@@ -129,7 +141,7 @@ function getMimeType($ext) {
         'avi' =>'video/msvideo',
         'wmv' =>'video/x-ms-wmv',
         'mov' =>'video/quicktime',
-        
+
         'zip' =>'application/zip',
         'tar' =>'application/x-tar',
         */
@@ -139,6 +151,8 @@ function getMimeType($ext) {
 
     if(!array_key_exists($ext, $allowedExtensions))
         return FALSE;
+
+        //  echo $allowedExtensions[$ext] . '<br><br>';
     
     return $allowedExtensions[$ext];
 }

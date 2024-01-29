@@ -18,7 +18,7 @@ $args = array(
     'user_fullname' => DIB::$USER['first_name'] . ' ' . DIB::$USER['last_name'],
     'default_date_time_format' => (isset($settings['defaultDateTimeFormat']) ? $settings['defaultDateTimeFormat'] : 'YYYY/MM/DD HH:mm'),
     'default_date_format' => (isset($settings['defaultDateFormat']) ? $settings['defaultDateFormat'] : 'YYYY/MM/DD'),
-   
+    'environment' => 'production',
     'audit_trail_container' => (isset($settings['auditTrailContainerName']) ? $settings['auditTrailContainerName'] : 'dibAuditTrailGrid'),
     'audit_trail_port' => '',
     'help_edit_container' => 'dibHelpForm',

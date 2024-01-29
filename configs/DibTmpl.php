@@ -49,7 +49,7 @@ class DIB {
 	// The 'params' argument is a semicolon-delimitted list of parameter names used in 'sql' and must match field names in pef_login.
 	// NOTE: Do not override fields used by the system (eg username, email, admin_user, etc.) unless eg CrudEvents is used to maintain them in pef_login.
 	public static $SESSIONINCLUDE = NULL;
-	
+	public static $WRITE_ERRORS_TO = 'file';
 	// Values generated automatically:
 	
 	public static $FORCESSL=true; // Force all traffic to use ssl instead, applies to the BASE URL
