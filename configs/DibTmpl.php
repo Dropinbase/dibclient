@@ -1,6 +1,6 @@
 <?php
 
-// *** NOTE, the /runtime/Dib.php file is auto-generated when deleted, based on the /configs/DibTmpl.php template file
+// *** NOTE, the /configs/Dib.php file is auto-generated when deleted, based on the /configs/DibTmpl.php template file
 //     Deleting it triggers a script that ensures certain key files and permission records are in place for DIB to function properly
 
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
@@ -81,6 +81,7 @@ class DIB {
 		'allow_downloads'=>TRUE, // Allow system_public user to download files.
 		'allow_deletes'=>TRUE, // Allow system_public user to delete files.
 	);
+	public static $ALLOWEDHTML = ''; // If empty, then messages/prompts/popups sent to browser are not secured. Otherwise, specify a list of allowed HTML elements and attributes, using HtmlPurifier's syntax: http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
 	
     // Path to the index file to bootstrap the application for a particular material dropin
 	public static $DEFAULTFRAMEWORK='setNgxMaterial'; // client framework to load at startup
