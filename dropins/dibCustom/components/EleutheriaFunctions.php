@@ -3,6 +3,7 @@
 /**
 * Specify additional "add-on" functions for Eleutheria
 */
+
 Class EleutheriaFunctions { 
 	
 	// List of Eleutheria function names defined in this class

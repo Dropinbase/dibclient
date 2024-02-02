@@ -1,45 +1,41 @@
 <?php
 
-// The /peff/Template/environment.js request is made once when the application is refreshed
-// It returns values accessible via dibCommon.env.xxx in client side code and HTML attributes etc.
-// You can add values or JavaScript code to the $response below...
-// NOTE: do not remove existing values.
+// The /peff/Template/environment.js request is made once when the application is refreshed and the Angular framework is loaded
+// It returns values accessible via getEnv('xxx') and @{env_xxx} in client side code and HTML attributes etc.
+// You can add your own values to $args, and JavaScript code to the $response
+// The values are accessible in the browser console by typing DIB [Enter]
+// Use the 'reload-env' action to reload values if necessary
 
-$settings = $this->getSettings("`name` IN ('auditTrailContainerName','defaultDateTimeFormat','defaultDateFormat','backgroundPalette','warnPalette','primaryPalette','accentPalette')", 'pef_setting');
+// NOTE: do not remove existing values except 'staff_id'
+
+$settings = $this->getSettings("`name` IN ('auditTrailContainerName','defaultDateTimeFormat','defaultDateFormat')", 'pef_setting');
 
 // Values 
 
 $args = array(
-    'secure_id' => (isset(DIB::$USER['secure_id']) ? DIB::$USER['secure_id'] : null),
-    //'environment' => DIB::$ENVIRONMENT,
+    'staff_id' => (empty(DIB::$USER['staff_id']) ? null : DIB::$USER['staff_id']), // Remove or adjust as needed. See /configs/DibUserParams.php for details
 
     'site_name' => DIB::$SITENAME,
     'logo' => DIB::$SITELOGO,
     'user_fullname' => DIB::$USER['first_name'] . ' ' . DIB::$USER['last_name'],
-    'default_date_time_format' => (isset($settings['defaultDateTimeFormat']) ? $settings['defaultDateTimeFormat'] : 'YYYY/MM/DD HH:mm'),
-    'default_date_format' => (isset($settings['defaultDateFormat']) ? $settings['defaultDateFormat'] : 'YYYY/MM/DD'),
-    'environment' => 'production',
+
+    // Valid date formats: https://date-fns.org/v2.29.3/docs/format
+    'default_date_time_format' => (isset($settings['defaultDateTimeFormat']) ? $settings['defaultDateTimeFormat'] : 'yyyy-MM-dd HH:mm:ss'),
+    'default_date_format' => (isset($settings['defaultDateFormat']) ? $settings['defaultDateFormat'] : 'yyyy-MM-dd'),
+   
     'audit_trail_container' => (isset($settings['auditTrailContainerName']) ? $settings['auditTrailContainerName'] : 'dibAuditTrailGrid'),
     'audit_trail_port' => '',
-    'help_edit_container' => 'dibHelpForm',
 
     'default_url' => isset(DIB::$USER['default_url']) ? DIB::$USER['default_url'] : '',
     'base_url' => DIB::$BASEURL,
-    'remember_tabs' => (DIB::$USER['remember_tabs'] == '1') ? TRUE : FALSE,
 
-    'background_palette' => (isset($settings['backgroundPalette']) ? $settings['backgroundPalette'] : 'dibBackground'),
-    'warn_palette' => (isset($settings['warnPalette']) ? $settings['warnPalette'] : 'dibWarn'),
-    'primary_palette' => (isset($settings['primaryPalette']) ? $settings['primaryPalette'] : 'dibPrimary'),
-    'accent_palette' => (isset($settings['accentPalette']) ? $settings['accentPalette'] : 'dibAccent'),
-
-    'larger_font' =>  (DIB::$USER['larger_font'] == '1') ? TRUE : FALSE, // Accessibility option
+    'larger_font' =>  (DIB::$USER['larger_font'] == '1') ? TRUE : FALSE, // ***TODO - accessibility option
 
     'queue_retry_count' => DIB::$ASYNCRETRYCOUNT,
-    'nodejs' => (!empty(DIB::$NODEJSHOST)) ? TRUE : FALSE,  
-    'nodejs_server_host' => DIB::$NODEJSHOST,
 
     'debug' => DIB::$CLIENT_DEBUG_LEVEL,
-    'can_dib_design' => $canDibDesign 
+    'can_dib_design' => $canDibDesign,
+    'secure_id' => (isset(DIB::$USER['secure_id']) ? DIB::$USER['secure_id'] : null),
 );
 
 $response = 'var DIB = ' . json_encode($args);

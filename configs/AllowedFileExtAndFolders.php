@@ -2,7 +2,7 @@
 
 /*
 NOTE this file defines a whitelist of folders accessible by public users via /files/ requests, 
-and another whitelist of allowed file extensions and their related mimetypes for uploading and downloading 
+and another whitelist of allowed file extensions and their related mime-types
     
 *** WARNING! DO NOT add the following file extensions:
     ​php       (server-side code)
@@ -11,11 +11,11 @@ and another whitelist of allowed file extensions and their related mimetypes for
 */
 
 
-
 /**
- * Checks for allowed characters in the url and filename, 
- *  whether the url references a folder in the defined whitelist of folders accessible by system_public,
- *  and finally calls getMimeType to check the file extension and return the mimetype.
+ * Checks for:
+ * - allowed characters in the URL and filename, 
+ * - whether the URL references a folder in the defined whitelist of folders accessible by system_public,
+ * - and finally calls getMimeType to check the file extension and return the mimetype (to eg. files.php)
  * 
  * @param string $url eg 'files/dropins/dibAdmin/css'
  * @param string $fileName eg 'theme.css'
@@ -33,6 +33,7 @@ function checkFile($url, $fileName, $ext) {
         'files/dropins/dibAdmin/css',
         'files/dropins/dibDocs/css',
         'files/dropins/dibAuthenticate/css',
+        'files/dropins/dibAuthenticate/images',
         'files/dropins/dibAuthenticate/js',
         'files/dropins/dibAdmin/images',
         'files/dropins/dibAdmin/images/docs',
@@ -41,13 +42,11 @@ function checkFile($url, $fileName, $ext) {
         'files/dropins/setNgxMaterial/shared/img/icons',
         'files/dropins/setNgxMaterial/dibAdmin/images/dashboard',
         'files/dropins/setNgxMaterial/dibAdmin/images',
-        'files/dropins/setNgMaterial/dibGlobals/images/svg',
-        'files/dropins/setNgMaterial/dibAdmin/images',
         'files/dropins/dibCustom/designImages',
-        
-        
+
         'files/files/icons',
         'files/files/images',
+        'files/files/themes/overrides/css',
         'files/dropins/setCharts/dibPlotly/js',
         'files/dropins/dibDynamicUI/js',
 
@@ -73,9 +72,9 @@ function checkFile($url, $fileName, $ext) {
 
 
 /**
- * Checks if file extention is allowed and returns the corresponding mime-type if it is
+ * NOTE: Any file extention not listed here, is not allowed to be accessed
  * @param $ext string eg txt
- * @return mixed string or array (if multiple mime-types), or boolean FALSE on failure
+ * @return mixed string or array (if multiple mime-types) of mime-types, or boolean FALSE on failure
  */
 function getMimeType($ext) {
     
@@ -147,7 +146,7 @@ function getMimeType($ext) {
         */
     );
 
-    $ext = strtolower($ext);
+    $ext = strtolower((string)$ext);
 
     if(!array_key_exists($ext, $allowedExtensions))
         return FALSE;

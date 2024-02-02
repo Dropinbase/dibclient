@@ -1,30 +1,71 @@
 <?php 
-/* Example connection configurations:
+/* 
 
-MySql Pdo:
-         array('database'=>'dropinbase', 'host'=>'127.0.0.1', 'connectionString'=>'mysql:dbname=dropinbase;host=127.0.0.1;charset=utf8', 'username'=>'root',
-               'password'=>'123456', 'port'=>'', 'emulatePrepare'=>true, 'charset'=>'utf8', 'dbType'=>'mysql', 'dbDropin'=>'dibMySqlPdo', 'systemDropin'=>true),
-MsSql Pdo:
-         array('database'=>'myMsSqlDb', 'host'=>'MyMachine\\SQL2008', 'connectionString'=>'sqlsrv:Server=MyMachine\\SQL2008;Database=MyMsSqlDb', 'username'=>'testuser',
-               'password'=>'test', 'port'=>'', 'emulatePrepare'=>true, 'charset'=>'utf8', 'dbType'=>'mssql', 'dbDropin'=>'dibMsSqlPdo', 'systemDropin'=>true),
-               
-Sqllite: (see https://www.connectionstrings.com/sqlite-net-provider/)
-         array('database'=>'pef.sqlite3', 'host'=>'D:/DIB/pef.sqlite3', 'connectionString'=>'sqlite:D:/DIB/pef.sqlite3', 'username'=>'',
-               'password'=>'', 'port'=>'', 'emulatePrepare'=>true, 'charset'=>'utf8', 'dbType'=>'sqlite', 'dbDropin'=>'dibSqlLitePdo', 'systemDropin'=>true),
+NOTES: The index of the main dropinbase table must match the DBINDEX value in Dib.php  
+         Using an IP address as host (eg 127.0.0.1 instead of 'localhost') can dramatically increase performance
 
 *** TODO :
-'postgresql','oracle','access','interbase','db2','ingres','maxdb','sybase','dbase','firebird','pervasivesql','sap'
+'oracle','access','sybase','db2','ingres','maxdb','informix','dbase','firebird','amazon redshift','sap','cockroachdb'
 
+Example connection configurations:
 */
 
-// NOTES: The index of the main dropinbase table must match the DBINDEX value in Dib.php  
-//        Using an IP address as host (eg 127.0.0.1 instead of 'localhost') can dramatically increase performance
+DIB::$DATABASES = [
+      // MySql / MariaDb
+      1 => [
+            'database'=>'dropinbase',
+            'host'=>'127.0.0.1',
+            'port'=>'',
+            'username'=>'root',
+            'password'=>'123456',
+            'timeout'=>60,
+            'charset'=>'utf8', 
+            'dbType'=>'mysql', 
+            'dbDropin'=>'dibMySqlPdo', 
+            'systemDropin'=>true,
+            'emulatePrepare'=>true
+      ],
 
-DIB::$DATABASES = array(
-    1 => array('database'=>'dropinbase', 'dbType'=>'mysql', 'connectionString'=>'mysql:dbname=dropinbase;host=127.0.0.1;charset=utf8', 'username'=>'root',
-                'password'=>'123456', 'host'=>'127.0.0.1', 'port'=>'', 'emulatePrepare'=>true, 'charset'=>'utf8', 'dbDropin'=>'dibMySqlPdo', 'systemDropin'=>true), 
-    8 => array('database'=>'dib_modules', 'dbType'=>'mysql', 'connectionString'=>'mysql:dbname=dib_modules;host=127.0.0.1;charset=utf8', 'username'=>'root',
-                'password'=>'123456', 'host'=>'127.0.0.1', 'port'=>'', 'emulatePrepare'=>true, 'charset'=>'utf8', 'dbDropin'=>'dibMySqlPdo', 'systemDropin'=>true)     
-); 
+      // SQLServer:
+      3 => [
+            'database'=>'MyMsSqlDb',
+            'host'=>'MyMachine\\SQL2012',
+            'port'=>'',
+            'username'=>'root',
+            'password'=>'123456',
+            'charset'=>'utf8', 
+            'dbType'=>'mssql', 
+            'dbDropin'=>'dibMsSqlPdo', 
+            'systemDropin'=>true,
+            'emulatePrepare'=>true
+      ],
 
-?>
+      // Sqllite: (see https://www.connectionstrings.com/sqlite-net-provider/)
+      4 => [
+            'database'=>'dib.sqlite3',
+            'host'=>'C:/DIB/dib.sqlite3',
+            'port'=>'',
+            'username'=>'',
+            'password'=>'',
+            'charset'=>'utf8', 
+            'dbType'=>'sqlite', 
+            'dbDropin'=>'dibSqlLitePdo', 
+            'systemDropin'=>true,
+            'emulatePrepare'=>true
+      ],
+
+      // PostgreSQL:
+      5 => [
+            'database'=>'dropinbase',
+            'host'=>'127.0.0.1',
+            'port'=>3317,
+            'username'=>'postgres',
+            'password'=>'1A2b3C45',
+            'charset'=>'utf8', 
+            'dbType'=>'mysql', 
+            'dbDropin'=>'dibPgSqlPdo', 
+            'systemDropin'=>true,
+            'emulatePrepare'=>true
+      ],
+
+];
