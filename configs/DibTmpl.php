@@ -34,9 +34,10 @@ class DIB {
 
 	// Database indexes
 	const DBINDEX=1; // id/index value of the main Dropinbase database in Conn.php and the pef_database table
-    const LOGINDBINDEX=1; // Database containing the pef_login, pef_perm_group and pef_security_policy tables	
-	// NOTE: add more constants or variables here to use in your own PHP for other databases... 
+    const LOGINDBINDEX=1; // Database containing the pef_login, pef_perm_group and pef_security_policy tables
 
+	// ***NOTE: add more constants or variables here to use in your own PHP for other databases... 
+	
     public static $ERRORLOGINDEX=1; // database containing the pef_error_log table where errors are logged. 
                                     // Note, also update the pef_sql.pef_database_id of the two or more 'qdibErrorLog...' query(ies) if needed, which determine which pef_error_log table to look at - there can (erroneously) be more than one in different databases.
     public static $SQLLOGDBINDEX=null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.	
@@ -92,7 +93,8 @@ class DIB {
 	// Queue settings
 	public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
 	public static $OVERRIDEQUEUEWITH = 'None'; // None/NodeJs (Note, NodeJs requires expertise to maintain and run stably in some client environments)
-	public static $NODEJSHOST=null; // NodeJs server connection details (eg 'http://localhost:8080'), OR null (NodeJs will not be initialized)	
+	public static $NODEJSHOST=null; // NodeJs server connection details (eg 'http://localhost:8080'), OR null (NodeJs will not be initialized)
+	public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the NodeJs watcher automatically when compiling container's one-by-one.
 	
 	// Hooks
 	public static $SETUPSCRIPT=null; // Path to any script that is run just after user indentification and before URL request is analysed, eg '/dropins/myDropin/components/SetValues.php'

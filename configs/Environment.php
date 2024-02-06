@@ -35,7 +35,7 @@ $args = array(
 
     'debug' => DIB::$CLIENT_DEBUG_LEVEL,
     'can_dib_design' => $canDibDesign,
-    'secure_id' => (isset(DIB::$USER['secure_id']) ? DIB::$USER['secure_id'] : null),
+    'auth_id' => (isset(DIB::$USER['auth_id']) ? DIB::$USER['auth_id'] : null),
 );
 
 $response = 'var DIB = ' . json_encode($args);
