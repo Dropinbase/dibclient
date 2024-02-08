@@ -1,6 +1,9 @@
 <?php
 
  self::$fileLocations = array(
+
+	// *** NOTE: use forward-slashes (/) to delimit folders in paths since back-slashes are used to escape characters in PHP
+
  	// Path to PHP's error log file - used to display in dibDebug (leave blank on production, or if not desired)
  	'phpErrorLog' => 'c:/wamp64/logs/php_error.log',
 	

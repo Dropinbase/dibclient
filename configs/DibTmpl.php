@@ -34,7 +34,7 @@ class DIB {
 
 	// Database indexes
 	const DBINDEX=1; // id/index value of the main Dropinbase database in Conn.php and the pef_database table
-    const LOGINDBINDEX=1; // Database containing the pef_login, pef_perm_group and pef_security_policy tables
+    const LOGINDBINDEX=1; // Database containing the pef_login, pef_login_group, pef_perm_group, pef_two_factor and pef_security_policy tables
 
 	// ***NOTE: add more constants or variables here to use in your own PHP for other databases... 
 	
