@@ -43,7 +43,6 @@ class DIB {
     public static $SQLLOGDBINDEX=null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.	
 	public static $AUDITDBINDEX=1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
 	
-	
     // Basic settings
 	public static $ENVIRONMENT='development'; // 'development' = auto-deletion of files, html beautified. 'production' = No deletion, compression of Javascript.
 	public static $TIMEZONE='Africa/Johannesburg'; // See http://php.net/manual/en/timezones.php
