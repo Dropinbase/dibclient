@@ -7,7 +7,7 @@ class DibUserParams {
         // Adjust the query below as per your needs.
         // All the fields in the (original) query below are required, except staff_id which was added for demo purposes.
 
-        $sql = "SELECT l.id, l.username, l.perm_group, l.admin_user, l.email, l.test_user, l.first_name, l.last_name, l.default_url, l.supplier_code,
+        $sql = "SELECT l.id, l.username, l.perm_group, l.admin_user, l.email, l.test_user, l.first_name, l.last_name, l.default_url, l.supplier_code, l.session_version,
                     l.pef_security_policy_id, l.login_expiry, l.login_group_expiry, l.language, l.larger_font, s.name as policyName, l.dib_username
                 FROM pef_login l
                     INNER JOIN pef_security_policy s ON l.pef_security_policy_id = s.id 
