@@ -32,17 +32,18 @@ class DIB {
     );
     */
 
-	// Database indexes
-	const DBINDEX = 1; // id/index value of the main Dropinbase database in Conn.php and the pef_database table
+	// Constants/variables used to refer to Databases in PHP. The values reference the id/index value specified in Conn.php and the pef_database table.
+	const DBINDEX = 1; // The main Dropinbase database 
     const LOGINDBINDEX = 1; // Database containing the pef_login, pef_login_group, pef_perm_group, pef_two_factor and pef_security_policy tables
 
-	// ***NOTE: add more constants or variables here to use in your own PHP for other databases... 
-	
-    public static $ERRORLOGINDEX = 1; // database containing the pef_error_log table where errors are logged. 
+    public static $ERRORLOGINDEX = 1; // id value of the database containing the pef_error_log table where errors are logged. 
                                     // Note, also update the pef_sql.pef_database_id of the two or more 'qdibErrorLog...' query(ies), which determine which pef_error_log table to look at - there can (erroneously) be more than one in different databases.
     public static $SQLLOGDBINDEX = null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.	
 	public static $AUDITDBINDEX = 1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
 	
+	// ***NOTE: add more constants/variables here to use in your own PHP for other databases... 
+
+
     // Basic settings
 	public static $ENVIRONMENT = 'development'; // 'development' = auto-deletion of files, html beautified. 'production' = No deletion, compression of Javascript.
 	public static $TIMEZONE = 'Africa/Johannesburg'; // See http://php.net/manual/en/timezones.php

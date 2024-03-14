@@ -14,9 +14,9 @@ DirectoryIndex index.php
     
     RewriteBase '/'	
 	
-	# HTTP 1.0 has security weakness related to session hijacking.
-    RewriteCond %{THE_REQUEST} !HTTP/1.1$
-    RewriteRule .* - [F,L,END]   
+	# HTTP 1.0 has security weakness related to session hijacking. THIS MAY NOT WORK ON YOUR SERVER
+    #RewriteCond %{THE_REQUEST} !HTTP/1.1$
+    #RewriteRule .* - [F,L,END]   
     
     # Direct all URLs starting with files/ to files.php, and all the rest to index.php
     RewriteRule ^files/(.*) files.php [L,END]
