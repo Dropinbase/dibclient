@@ -27,7 +27,6 @@ function checkFile($url, $fileName, $ext) {
     // This is a whitelist of folders - all other folders will be blocked.
     
     $allowedFolders = array(
-        'files/dropins/setNgxMaterial/angular/dist/browser',
         'files/dropins/setNgxMaterial/dibAdmin/js/template',
         'files/dropins/dibAdmin/js',
         'files/dropins/dibAdmin/css',
@@ -62,6 +61,10 @@ function checkFile($url, $fileName, $ext) {
     // Check for invalid characters in file name
     if(!ctype_alnum(str_replace(array('.','_','-',' '), '', $fileName)))
         return FALSE;
+
+    // Handle special case for Angular files
+    if (strpos($url, 'files/dropins/setNgxMaterial/angular/dist/browser/') !== false)
+       return getMimeType($ext); 
 
     // Check if folder is whitelisted
     if(!in_array($url, $allowedFolders))
