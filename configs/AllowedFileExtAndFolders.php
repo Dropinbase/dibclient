@@ -63,7 +63,7 @@ function checkFile($url, $fileName, $ext) {
         return FALSE;
 
     // Handle special case for Angular files
-    if (strpos($url, 'files/dropins/setNgxMaterial/angular/dist/browser/') !== false)
+    if (strpos($url, 'files/dropins/setNgxMaterial/angular/dist/browser') !== false)
        return getMimeType($ext); 
 
     // Check if folder is whitelisted

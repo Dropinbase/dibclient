@@ -73,7 +73,7 @@ class DIB {
 	public static $DESIGNER_CAN_READ_DEBUG = TRUE; // Whether the Designer can read and display debug logs.
 	public static $CHECKUSERSESSIONS = TRUE; // Helps block session hijacking. Affects users where pef_login.check_user_session==1. These users can have only one active session. Note, pef_login.session_version is compared with value stored in PHP session with every request, which affects performance.
 	public static $VERIFY_IP = TRUE; // Whether successive requests from the same web user must originate from the same IP address, else logged out. Note, is affected by Load-ballencers and dynamic ip addresses which will cause intermittent drops.
-	public static $VERIFY_USER_AGENT = TRUE; // Whether successive requests from the same web user must have the same USER AGENT, else logged out. Note, affected by ISP's and browsers which updates info.
+	public static $VERIFY_USER_AGENT = FALSE; // Whether successive requests from the same web user must have the same USER AGENT, else logged out. Note, affected by webservers, ISP's and browsers which updates info.
 	public static $VERIFY_AUTH_TOKEN = TRUE; // Whether authentication tokens are checked on server requests, else logged out. This should be TRUE. Use eg. $REQUEST_TYPE='GET,POST,ignoretoken' in controller function parameters to override, for eg. file downloads.
 	public static $USERNAME_REGEX='#^\w{4,30}$#'; // A semicolon delimited list of regular expressions that must validate successfully in order for usernames to be accepted
     public static $USERNAME_REGEXMSG='The username must contain between 4 and 30 alpha-numeric characters (no spaces, but underscore (_) is allowed).';

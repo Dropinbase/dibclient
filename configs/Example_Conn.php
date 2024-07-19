@@ -1,17 +1,20 @@
 <?php 
 /* 
 
-NOTES: The index of the main dropinbase table must match the DBINDEX value in Dib.php  
-         Using an IP address as host (eg 127.0.0.1 instead of 'localhost') can dramatically increase performance
+NOTES: 
+      - The index of the main dropinbase table must match the DBINDEX value in Dib.php  
+      - Using an IP address as host (eg 127.0.0.1 instead of 'localhost') can increase performance
+      - More info about charset and collation:
+          https://www.coderedcorp.com/blog/guide-to-mysql-charsets-collations/
 
 *** TODO :
-'oracle','access','sybase','db2','ingres','maxdb','informix','dbase','firebird','amazon redshift','sap','cockroachdb'
+      'odbc','oracle','access','sybase','db2','ingres','maxdb','informix','dbase','firebird','amazon redshift','sap','cockroachdb'
 
 Example connection configurations:
 */
 
 DIB::$DATABASES = [
-      // MySql / MariaDb
+      // MySql / MariaDb / SkySQL / AuroraDb
       1 => [
             'database'=>'dropinbase',
             'host'=>'127.0.0.1',
@@ -23,7 +26,10 @@ DIB::$DATABASES = [
             'dbType'=>'mysql', 
             'dbDropin'=>'dibMySqlPdo', 
             'systemDropin'=>true,
-            'emulatePrepare'=>true
+            'emulatePrepare'=>true,
+            // 'collation' => 'utf8mb4_unicode_520_ci', // optional. See link to more info above
+            // 'timezone' => ''; // optional
+            // 'sql_mode' => ''; // optional
       ],
 
       // SQLServer:
@@ -51,7 +57,8 @@ DIB::$DATABASES = [
             'dbType'=>'sqlite', 
             'dbDropin'=>'dibSqlLitePdo', 
             'systemDropin'=>true,
-            'emulatePrepare'=>true
+            'emulatePrepare'=>true,
+            'foreign_key_constraints'=> true,
       ],
 
       // PostgreSQL:
@@ -65,7 +72,8 @@ DIB::$DATABASES = [
             'dbType'=>'mysql', 
             'dbDropin'=>'dibPgSqlPdo', 
             'systemDropin'=>true,
-            'emulatePrepare'=>true
+            'emulatePrepare'=>true,
+            // 'timezone' => ''; // optional
       ],
 
 ];

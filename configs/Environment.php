@@ -35,6 +35,7 @@ $args = array(
 
     'debug' => DIB::$CLIENT_DEBUG_LEVEL,
     'can_dib_design' => $canDibDesign,
+    'user_session_data_key' => DIB::$USER['username'], // Facilitates a user data store in the browser, and is required for eg. Remember Query String parameters
     'auth_id' => (isset(DIB::$USER['auth_id']) ? DIB::$USER['auth_id'] : null),
 );
 
