@@ -32,14 +32,15 @@ class DIB {
     );
     */
 
-	// Constants/variables used to refer to Databases in PHP. The values reference the id/index value specified in Conn.php and the pef_database table.
-	const DBINDEX = 1; // The main Dropinbase database 
-    const LOGINDBINDEX = 1; // Database containing the pef_login, pef_login_group, pef_perm_group, pef_two_factor and pef_security_policy tables
+	// Variables used to refer to Databases in PHP. The values reference the id/index value specified in Conn.php and the pef_database table.
+	public static $DIBDB = 1; // The main Dropinbase database 
+    public static $LOGINDB = 1; // Database containing the pef_login, pef_login_group, pef_perm_group, pef_two_factor and pef_security_policy tables
 
-    public static $ERRORLOGINDEX = 1; // id value of the database containing the pef_error_log table where errors are logged. 
+    public static $ERRORLOGDB = 1; // id value of the database containing the pef_error_log table where errors are logged. 
                                     // Note, also update the pef_sql.pef_database_id of the two or more 'qdibErrorLog...' query(ies), which determine which pef_error_log table to look at - there can (erroneously) be more than one in different databases.
-    public static $SQLLOGDBINDEX = null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.	
-	public static $AUDITDBINDEX = 1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
+    public static $SQLLOGDB = null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.	
+	public static $AUDITDB = 1; // Database containing the default pef_audit_trail table (overide this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
+	public static $ACTIVITYLOGDB = 1; // Database containing the pef_activity_log table. Both the $ACTIVITYLOGDB and $ACTIVITYLOG (see below) settings must not be empty for logging to be activated.
 	
 	// ***NOTE: add more constants/variables here to use in your own PHP for other databases... 
 
@@ -59,7 +60,21 @@ class DIB {
 	public static $LOGPERMISSUES = 1; // 0 = Don't log any permission issues. 1 = Log permission issues. 2 = Log permission and authentication issues.
 	public static $INFORM_ADMIN_ERRORLEVEL = 2; // Administrator will be informed of any PHP error logged with level equal to or higher than this value. Errors logged with unspecified level defaults to 3.
 	public static $ADMIN_EMAIL = null; // Administrator's email address. NOTE: Configure /config/mail.php for mail account settings, and PHPMailer must be installed via composer.
-	public static $RECORDUNITTEST = FALSE; // TRUE or FALSE - Whether all requests must be recorded in pef_unit_test. Greatly affects performance. Normally FALSE.
+	public static $ACTIVITYLOG = [ 
+		// conditions in the URI, container name, and permgroup that must all match for an entry to be made in pef_activity_log. Note, at least one of the sets of conditions specified must match.
+		// Note, to improve performance, preferably don't overlap with pef_audit_trail entries
+		[ 
+			'usePhp_fnMatch' => false, // Use the PHP fnMatch function that supports wildcards for matching strings below, instead of merely testing whether the string is contained (using strpos). Very small performance hit, though dependant on complexity.
+									   // *** Note, negation of the whole string with ! works for strpos and fnMatch, eg. '!x1x' or '!dibDesigner' -> match everything except these strings.	
+			'uriList' => [],           // array of paths to functions ('/' to match all). For possible values, see the Browser Console->Netword-tab  or  /nav/dibDocs/?area=docs&doc=Common-API-Requests. NOTE: /nav/ is not supported.
+									   //    Examples: '/peff/Crud/update'  or  '/peff/Container/getPortInfo'  or  '/my'   or   '/myDropin/'  or  '/myDropin/myFunction'  or '/mySet/myDropin/myFunction'   or  '/myDropin/myFunction/myContainer' etc.
+			'containerList' => [],     // array of container names, or partial container names (empty to match all). Use the DIB::$DEFAULTPERMSCONTAINER value for open functions. 
+									   //    Examples: 'adm'  or  'admDashboard'  or  'admDashoardChart1'.
+			'permgroupList' => [],     // array of permgroups, or partial permgroups (empty to match all).
+									   //    Examples: 'x2x', 'x3x4x11x', etc.
+		]
+	];
+	public static $RECORDUNITTEST = FALSE; // (not fully functional yet) - Whether all requests must be recorded in pef_unit_test. Greatly affects performance. Only set to TRUE when recording Unit Test requests.
 
 	// Cache settings
 	public static $CODEUSE = 1;  // 0 = Always overwrite dibCode files
@@ -84,6 +99,7 @@ class DIB {
 		'allow_deletes' => TRUE, // Allow system_public user to delete files.
 	];
 	public static $ALLOWEDHTML = ''; // If empty, then the HTML of messages/prompts/popups sent to browser are not sanitized. Otherwise, specify a list of allowed HTML elements and attributes, using HtmlPurifier's syntax: http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+	public static $DEFAULTPERMSCONTAINER = 'defaultPermsContainer'; // The container that specifies permissions for requests where $containerName is not in function parameters. If empty, all requests from system_public will fail, unless eg $REQUEST_TYPE='POST,ignorecontainerperms' is included in controller function parameters.
 	
     // Path to the index file to bootstrap the application for a particular material dropin
 	public static $DEFAULTFRAMEWORK = 'setNgxMaterial'; // client framework to load at startup
@@ -93,9 +109,7 @@ class DIB {
 
 	// Queue settings
 	public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
-	public static $OVERRIDEQUEUEWITH = 'None'; // None/NodeJs (Note, NodeJs requires expertise to maintain and run stably in some client environments)
-	public static $NODEJSHOST=null; // NodeJs server connection details (eg 'http://localhost:8080'), OR null (NodeJs will not be initialized)
-	public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the NodeJs watcher automatically when compiling container's one-by-one.
+	public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the node.js Angular watcher automatically when compiling container's one-by-one.
 	
 	// Hooks
 	public static $SETUPSCRIPT=null; // Path to any script that is run just after user indentification and before URL request is analysed, eg '/dropins/myDropin/components/SetValues.php'
