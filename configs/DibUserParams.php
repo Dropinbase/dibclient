@@ -27,7 +27,7 @@ class DibUserParams {
                     INNER JOIN pef_security_policy s ON l.pef_security_policy_id = s.id 
                 WHERE l.id = :loginId";
 
-        $sessionArgs = Database::fetch($sql, array('loginId'=>$loginId), DIB::LOGINDBINDEX);
+        $sessionArgs = Database::fetch($sql, array('loginId'=>$loginId), DIB::$LOGINDB);
 
         if($sessionArgs === false) {
             Log::err("URGENT! The DibUserParams.php query returned a SQL error.\r\n" . Database::lastErrorAdminMsg(), 10);

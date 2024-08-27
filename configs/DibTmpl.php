@@ -60,20 +60,42 @@ class DIB {
 	public static $LOGPERMISSUES = 1; // 0 = Don't log any permission issues. 1 = Log permission issues. 2 = Log permission and authentication issues.
 	public static $INFORM_ADMIN_ERRORLEVEL = 2; // Administrator will be informed of any PHP error logged with level equal to or higher than this value. Errors logged with unspecified level defaults to 3.
 	public static $ADMIN_EMAIL = null; // Administrator's email address. NOTE: Configure /config/mail.php for mail account settings, and PHPMailer must be installed via composer.
-	public static $ACTIVITYLOG = [ 
-		// conditions in the URI, container name, and permgroup that must all match for an entry to be made in pef_activity_log. Note, at least one of the sets of conditions specified must match.
-		// Note, to improve performance, preferably don't overlap with pef_audit_trail entries
-		[ 
-			'usePhp_fnMatch' => false, // Use the PHP fnMatch function that supports wildcards for matching strings below, instead of merely testing whether the string is contained (using strpos). Very small performance hit, though dependant on complexity.
-									   // *** Note, negation of the whole string with ! works for strpos and fnMatch, eg. '!x1x' or '!dibDesigner' -> match everything except these strings.	
-			'uriList' => [],           // array of paths to functions ('/' to match all). For possible values, see the Browser Console->Netword-tab  or  /nav/dibDocs/?area=docs&doc=Common-API-Requests. NOTE: /nav/ is not supported.
-									   //    Examples: '/peff/Crud/update'  or  '/peff/Container/getPortInfo'  or  '/my'   or   '/myDropin/'  or  '/myDropin/myFunction'  or '/mySet/myDropin/myFunction'   or  '/myDropin/myFunction/myContainer' etc.
-			'containerList' => [],     // array of container names, or partial container names (empty to match all). Use the DIB::$DEFAULTPERMSCONTAINER value for open functions. 
-									   //    Examples: 'adm'  or  'admDashboard'  or  'admDashoardChart1'.
-			'permgroupList' => [],     // array of permgroups, or partial permgroups (empty to match all).
-									   //    Examples: 'x2x', 'x3x4x11x', etc.
-		]
+
+	// Activity Log
+	// The array below specifies sets of conditions in the URI, container name, and permgroup that must all match to add an entry to pef_activity_log. Note, at least one of the sets of conditions specified must match.
+	// Note, to improve performance, preferably don't overlap with pef_audit_trail entries
+	// Both the $ACTIVITYLOGDB and $ACTIVITYLOG settings must not be empty for logging to be activated.
+
+	public static $ACTIVITYLOG = [
+		[
+			// Boolean -> use the PHP fnMatch function that supports wildcards for matching strings below, instead of merely testing whether the string is contained (using strpos). Very small performance hit, though dependant on complexity.
+			// If fnMatch is activated, it must either be an exact match, or wildcard characters must be present, eg. '/peff/Crud/update/*'=>'update'
+			'usePhp_fnMatch' => false,
+
+			// Array of paths to functions (array key) and action-label (array value). For possible path values, see the Browser Console->Netword-tab  or  /nav/dibDocs/?area=docs&doc=Common-API-Requests. 
+			// NOTES: Use '/' to match all, '/nav/' is not supported.
+			// Examples: '/peff/Crud/update'=>'update'  or  '/peff/Container/getPortInfo'=>'open'  or  '/my'=>'my dropins'   or   '/myDropin/'=>'myDropin'  or  '/myDropin/myFunction'=>'myFunction'  or '/mySet/myDropin/myFunction'=>'myFunction'   or  '/myDropin/myFunction/myContainer'=>'myOtherFunc' etc.
+			'uriList' => [
+				'/peff/Container/getPortInfo' => 'open',
+				'/peff/Crud/create' => 'create',
+				'/peff/Crud/update' => 'update',
+				'/peff/Crud/delete' => 'delete',
+				'/dropins/dibExcel/Export/exportDibExcel' => 'excel',
+			],
+
+			// Array of container names, or partial container names (empty array to match all). Use the DIB::$DEFAULTPERMSCONTAINER value for open functions. 
+			// Examples: 'adm'  or  'admDashboard'  or  'admDashoardChart1'.
+			'containerList' => [],
+
+			// Array of session field names obtained from DibUserParams.php (array key) and values to match or partially match (array value). Empty array to match all values of any session field.
+			// Examples: 'perm_group' => 'x3x' (will match any permgroup that contains 'x3x'), 'admin_user' => 1
+			'sessionFieldList' => [
+				'perm_group' => 'x3x',
+				'admin_user' => 4
+			],
+		],
 	];
+
 	public static $RECORDUNITTEST = FALSE; // (not fully functional yet) - Whether all requests must be recorded in pef_unit_test. Greatly affects performance. Only set to TRUE when recording Unit Test requests.
 
 	// Cache settings
