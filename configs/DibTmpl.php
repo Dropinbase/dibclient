@@ -32,7 +32,7 @@ class DIB {
     );
     */
 
-	// Variables used to refer to Databases in PHP. The values reference the id/index value specified in Conn.php and the pef_database table.
+	/// Variables used to refer to Databases in PHP. The values reference the id/index value specified in Conn.php and the pef_database table.
 	public static $DIBDB = 1; // The main Dropinbase database 
     public static $LOGINDB = 1; // Database containing the pef_login, pef_login_group, pef_perm_group, pef_two_factor and pef_security_policy tables
 
@@ -45,13 +45,13 @@ class DIB {
 	// ***NOTE: add more constants/variables here to use in your own PHP for other databases... 
 
 
-    // Basic settings
+    /// Basic settings
 	public static $ENVIRONMENT = 'development'; // 'development' = auto-deletion of files, html beautified. 'production' = No deletion, compression of Javascript.
 	public static $TIMEZONE = 'Africa/Johannesburg'; // See http://php.net/manual/en/timezones.php
     public static $SITENAME = 'Dropinbase'; // The title of the browser tab
 	public static $SITELOGO = 'files/icons/logo.png'; // Used in Environment.php settings to make available client-side via the getEnv() function
 
-	// Logs and error reporting
+	/// Logs and error reporting
 	public static $WRITE_ERRORS_TO = 'db'; // Write errors to file/db/file&db. Note if Dropinbase cannot write to the database, it will always attempt to write to the file (/runtime/logs/error.log).
     public static $DEBUG_LEVEL = 2; // 0 = no PHP errors logged. 1 = PHP errors logged with some detail. 2 = most detail logged for PHP errors.
     public static $CLIENT_DEBUG_LEVEL = 1; // 0 = no debug messages printed in browser Console and no debugger code generated. 1 = debug messages printed in browser Console and debugger code generated.
@@ -61,7 +61,7 @@ class DIB {
 	public static $INFORM_ADMIN_ERRORLEVEL = 2; // Administrator will be informed of any PHP error logged with level equal to or higher than this value. Errors logged with unspecified level defaults to 3.
 	public static $ADMIN_EMAIL = null; // Administrator's email address. NOTE: Configure /config/mail.php for mail account settings, and PHPMailer must be installed via composer.
 
-	// Activity Log
+	/// Activity Log
 	// The array below specifies sets of conditions in the URI, container name, and permgroup that must all match to add an entry to pef_activity_log. Note, at least one of the sets of conditions specified must match.
 	// Note, to improve performance, preferably don't overlap with pef_audit_trail entries
 	// Both the $ACTIVITYLOGDB and $ACTIVITYLOG settings must not be empty for logging to be activated.
@@ -98,14 +98,16 @@ class DIB {
 
 	public static $RECORDUNITTEST = FALSE; // (not fully functional yet) - Whether all requests must be recorded in pef_unit_test. Greatly affects performance. Only set to TRUE when recording Unit Test requests.
 
-	// Cache settings
+	/// Cache/Compile/Queue settings
 	public static $CODEUSE = 1;  // 0 = Always overwrite dibCode files
 							   // 1 = Delete a container's dibCode file if affected by design changes, else use if available (speeds up loads during development). 
 							   // 2 = Use a dibCode file if it exists, else create it
                                // 3 = Allways use dibCode files (assume all necessary files exist)
 	public static $USEPROXYPERMGROUP = FALSE; // (experimental) Generate less cache and crud files as for each container a representative "proxy" perm_group in pef_perm_active is set with same permissions.
-
-	// Security settings
+	public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the node.js Angular watcher automatically when compiling container's one-by-one.
+	public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
+	
+	/// Security settings
 	public static $DESIGNER_CAN_READ_ERRORS = TRUE; // Whether the Designer can read and display errors from the database.
 	public static $DESIGNER_CAN_READ_DEBUG = TRUE; // Whether the Designer can read and display debug logs.
 	public static $CHECKUSERSESSIONS = TRUE; // Helps block session hijacking. Affects users where pef_login.check_user_session==1. These users can have only one active session. Note, pef_login.session_version is compared with value stored in PHP session with every request, which affects performance.
@@ -115,25 +117,29 @@ class DIB {
 	public static $USERNAME_REGEX='#^\w{4,30}$#'; // A semicolon delimited list of regular expressions that must validate successfully in order for usernames to be accepted
     public static $USERNAME_REGEXMSG='The username must contain between 4 and 30 alpha-numeric characters (no spaces, but underscore (_) is allowed).';
 	public static $ENABLE_REMEMBERME = TRUE; // Whether to enable Remember Me functionality. Ensure that the /dropins/dibAuthentice/views/login.php contains the neccessary HTML.
+
 	public static $PUBLICFILEPERMS = [
 		'allow_uploads' => TRUE, // Allow system_public user to upload files.
 		'allow_downloads' => TRUE, // Allow system_public user to download files.
 		'allow_deletes' => TRUE, // Allow system_public user to delete files.
 	];
-	public static $ALLOWEDHTML = ''; // If empty, then the HTML of messages/prompts/popups sent to browser are not sanitized. Otherwise, specify a list of allowed HTML elements and attributes, using HtmlPurifier's syntax: http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
-	public static $DEFAULTPERMSCONTAINER = 'defaultPermsContainer'; // The container that specifies permissions for requests where $containerName is not in function parameters. If empty, all requests from system_public will fail, unless eg $REQUEST_TYPE='POST,ignorecontainerperms' is included in controller function parameters.
 	
+	public static $DEFAULTPERMSCONTAINER = 'defaultPermsContainer'; // The container that specifies permissions for requests where $containerName is not in function parameters. If empty, all requests from system_public will fail, unless eg $REQUEST_TYPE='POST,ignorecontainerperms' is included in controller function parameters.
+
+	// If empty, then the HTML of messages/prompts/popups sent to the browser are not sanitized. Otherwise, configure the use of HtmlPurifier, or allowed tags and other HTML to allow.
+	public static $ALLOWEDHTML = [
+		'htmlPurifier' => false, 'allowedHtml' => '', // specify TRUE to use the sophisticated HtmlPurifier. Use the allowedHtml string to override HTMLPurifier's default configuration (see http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed)
+		'basic_tags' => ['br', 'p', 'b', 'i', 'h1', 'h2', 'h3', 'span'], // this allows tags like <br>,<p>,</p>,<b>,</b>,<i>,</i> etc with no HTML attributes.
+		'other_html' => ['<span style="color:red">', '<a href="/nav/dibexActionEmitEvent">Investigate Further</a>'] // list complete HTML strings that must be allowed.
+	];
+
     // Path to the index file to bootstrap the application for a particular material dropin
 	public static $DEFAULTFRAMEWORK = 'setNgxMaterial'; // client framework to load at startup
 	public static $INDEXPATH = [
 		'setNgxMaterial'=>'/setNgxMaterial/angular/dist/browser/index.html',
 	];
-
-	// Queue settings
-	public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
-	public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the node.js Angular watcher automatically when compiling container's one-by-one.
 	
-	// Hooks
+	/// Hooks
 	public static $SETUPSCRIPT=null; // Path to any script that is run just after user indentification and before URL request is analysed, eg '/dropins/myDropin/components/SetValues.php'
     public static $AFTERLOGINSCRIPT = null; // Path to any script that is run just after a user has manually logged in, eg '/dropins/myDropin/components/RunOnceDaily.php'
     // Catchall event handler for any/all requests. Specifiy a DIB style URI, eg. /dropins/DROPIN/COMPONENTCLASSNAME/FUNCTIONNAME.
@@ -142,11 +148,11 @@ class DIB {
 	// Return FALSE if targetted request must not be executed.
 	public static $CATCHALLEVENT = null;
 
-	// PATHS
+	/// PATHS
 
-	// Physical path to user-file uploads folder (NOTE, keep outside webserver's reach for security reasons)
+	// Physical path to user-file uploads folder (note, better to keep it outside /var/www/html/ for security reasons)
     // IMPORTANT: See https://www.owasp.org/index.php/Unrestricted_File_Upload
-    public static $USERSPATH='C:/dibwebuploads/'; 
+    public static $USERSPATH='C:/dibwebuploads/';
 
 	// Alternate path for /configs folder. Move outside www folder for (slightly) improved security
 	public static $CONFIGSPATH = null; 
@@ -177,5 +183,5 @@ class DIB {
 	public static $CONTROLLER; // Name of the controller referenced by the current request
 	public static $ACTION; // Name of the controller action
 	public static $CONTAINERDATA; // array of the current container's info obtained from active permission record
-	public static $ITEMLISTDATA; // array of the current item list's info obtained from active permission record    
+	public static $ITEMLISTDATA; // array of the current item list's info obtained from active permission record
 }

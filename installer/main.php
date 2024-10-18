@@ -1,0 +1,1678 @@
+<?php 
+
+/* 
+ * Copyright (C) Dropinbase - All Rights Reserved
+ * This code, along with all other code under the root /dropinbase folder, is provided "As Is" and is proprietary and confidential
+ * Unauthorized copying or use, of this or any related file, is strictly prohibited
+ * Please see the License Agreement at www.dropinbase.com/license for more info
+*/
+
+ini_set('display_errors', 0); // so that a fatal error will still send a valid json response to the client
+
+register_shutdown_function('shutDownFunction');
+
+require_once "Db.php";
+
+Install::init($DIR);
+
+function shutDownFunction() {
+	$error = error_get_last();
+
+	// Handle PHP errors
+	if(isset($error['type']) && (int)$error['type'] < 16 && (int)$error['type'] > 0) {
+		$errfile = $error["file"];
+		
+		if(!empty($errfile)) {
+			$errline = $error["line"];
+			$errstr  = $error["message"];
+			
+			$msg = "$errstr\r\n in $errfile on line $errline.";
+			
+			$response = array();
+			$response[] = array(
+				"name"  => 'Fatal PHP Error',
+				"ready" => false,
+				"notes" => $msg
+			);
+			
+			// Change the 500 header status code to 200, else response will not show
+			header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK', true, 200);
+			
+			echo json_encode(array('success'=>FALSE, 'messages'=>$response, 'override'=>false));
+			die();
+		}
+	}
+	
+	// Handle errors
+	if (!empty(DIB::$ACTION)) {
+		echo json_encode(array('success'=>FALSE, 'messages'=>DIB::$ACTION, 'override' => Install::$showOverrideButton));
+
+	} else {
+		// All good, echo success	
+		echo json_encode(array('success'=>TRUE, 'messages'=>null, 'override' => Install::$showOverrideButton));
+	}
+	
+}
+
+
+
+class Install {
+	public static $basePath = '';
+	public static $dibPath = '';
+	public static $query = null;
+	public static $showOverrideButton = FALSE;
+	private static $curl = null;
+
+	private static $dibDomain = 'https://dib.cdn.co.za';
+	
+	public static function init($path) {
+		self::$basePath = $path . DIRECTORY_SEPARATOR;
+
+		if(!empty(DIB::$SYSTEMPATH))
+			self::$dibPath = DIB::$SYSTEMPATH;
+
+		elseif(file_exists($path . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR . 'DibApp.php'))
+			self::$dibPath = $path . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR;
+
+		elseif(file_exists($path . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR . 'DibApp.php'))
+			self::$dibPath = $path . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR;
+    }
+
+    private static function getResponse($name, $ready, $exceptionMsg) {
+		return array(
+			"name"  => $name,
+        	"ready" => $ready,
+        	"notes" => $exceptionMsg
+       	);
+    }
+
+	public static function signIn($params) {
+		$response = array();
+
+		self::signUserIn($response, $params);
+
+		if(!empty($response)) {
+			DIB::$ACTION = array_merge(DIB::$ACTION, $response);
+		}
+
+		return TRUE;
+	}
+
+	public static function checkDibInstall() {
+		if(!empty(self::$dibPath))
+			DIB::$ACTION[] = self::getResponse('File Exists', false, "An installation of the Dropinbase framework was found in " . self::$dibPath . "<br>You can Skip this step below, or<br>if you proceed the existing framework files will be upgraded to the latest version");
+		else
+			DIB::$ACTION[] = self::getResponse('File Exists', false, "Installation path: " . self::$basePath . 'dropinbase');
+
+		return TRUE;
+	}
+
+	public static function configureDib($params) {
+
+		$result = self::checkFiles($response);
+		if($result !== true) {
+			DIB::$ACTION = $response[0];
+			return false;
+		}
+
+		if (strtolower(substr(php_uname(), 0, 7)) === "windows")
+			self::createScriptWindows($params);
+		else
+			self::createScriptLinux($params);
+
+		return TRUE;
+	}
+	
+    public static function testPhp($params=array()) {
+    	$response = array();
+        
+    	self::checkRequiredPhpApacheModules($response);
+    	
+    	self::phpVer($response);
+    	
+    	if(!empty($response)) {
+			self::$showOverrideButton = true;
+			DIB::$ACTION = $response;
+		}
+    	
+    	// No errors
+		return TRUE;
+    }
+
+    public static function saveTestDb($params=array()) {
+    	$response = array();
+		
+    	$result = self::checkFilesAndDbConn($response, $params);
+    	
+    	if(!empty($response))
+            DIB::$ACTION = $response;
+    	
+    	// No errors
+		return TRUE;
+    }
+    
+    public static function updateIndex($params=array()) {
+    	$response = array();
+		
+    	$result = self::updateIndexFile($response);
+    	
+    	if(!empty($response))
+            DIB::$ACTION = $response;
+    	
+    	// No errors
+		return TRUE;
+    }
+
+	/**
+	* Changes permissions recusively on files and directories within $dir
+	* @param string $dir folderpath
+	* @param int $dirPermissions permissions for folders
+	* @param int $filePermissions permissions for files
+	*/
+	private static function chmod_r($dir, $dirPermissions, $filePermissions) {
+		//if(strtolower(substr(php_uname(), 0, 7)) === 'windows') return TRUE;
+
+		$dp = opendir($dir);
+	   	while($file = readdir($dp)) {
+	     	if (($file == ".") || ($file == ".."))
+	        	continue;
+
+	    	$fullPath = $dir."/".$file;
+
+		    if(is_dir($fullPath)) {
+		        // echo('DIR:' . $fullPath . "\n");
+		        if(@chmod($fullPath, $dirPermissions)===FALSE) return FALSE;
+		        if(!self::chmod_r($fullPath, $dirPermissions, $filePermissions)) return FALSE;
+		    } else {
+		        // echo('FILE:' . $fullPath . "\n");
+		        if(@chmod($fullPath, $filePermissions)===FALSE) return FALSE;
+		    }
+	    }
+		closedir($dp);
+		return TRUE;
+	}
+    
+    private static function checkConnAttributes($c) {
+    	$perfect = array('database', 'dbType', 'username', 'password', 'host', 'port', 'emulatePrepare', 'charset', 'dbDropin', 'systemDropin');
+		
+		$missing = array();
+		foreach ($perfect as $key) {
+			if(!array_key_exists($key, $c))
+				$missing[]=$key;
+		}
+		
+		if(!empty($missing))
+			return implode (', ', $missing);
+		return '';
+	}
+	
+    private static function checkFilesAndDbConn(&$response, $params) {
+		$apache = array();
+		$php = array();
+		
+		// Check for required files and folders
+        $result = self::checkFiles($response);
+		if($result !== true) return false;
+
+        list($host, $port, $database, $username, $password) = array(
+            $params['host'], $params['port'], $params['database'], $params['username'], $params['password'], 
+        );
+        
+        if(empty($params['port']) || $params['port'] != (string)(int)$params['port']) {
+			$response[] = self::getResponse('Database Connection', false, "The 'port' attribute must be an integer (for MySQL it is normally 3306, and for MariaDb, 3307). Please amend and try again.");
+			return FALSE;
+		}
+
+        if(empty($params['host']) || empty($params['database']) || empty($params['username'])) {
+			$response[] = self::getResponse('Database Connection', false, "The following values are all required: host, database, username, port. Please amend and try again.");
+			return FALSE;
+		}
+		
+	  	// Load Conn.php and try to connect to db's
+		$connPath = self::$basePath  . 'configs' . DIRECTORY_SEPARATOR . 'Conn.php';
+
+        if(!file_exists($connPath)) {
+        	if(!is_writable(dirname($connPath))) {
+				$response[] = self::getResponse('File Permissions', true, "The '$connPath' file does not exist, and the webserver does not have permissions to create the file. Either provide the necessary permissions or create the Conn.php file manually (see /config/Example_Conn.php).");
+				return FALSE;
+			}
+			// Create the file
+			self::createConn($connPath, 1, $host, $port, $database, $username, $password, $response);
+		
+		}
+		
+		require $connPath;
+
+        $dbIndex = array_keys(DIB::$DATABASES)[0];
+
+        if(count(DIB::$DATABASES) < 2) {
+			self::createConn($connPath, $dbIndex, $host, $port, $database, $username, $password, $response);
+            require $connPath;
+
+            $dbIndex = array_keys(DIB::$DATABASES)[0];
+        }
+		
+		// Test the mysql server connection
+
+		$c = DIB::$DATABASES[$dbIndex];
+		$missing = self::checkConnAttributes($c);
+		if($missing !== '') {
+			$response[] = self::getResponse('Database Connection', true, "The entry in the database connection file (/configs/Conn.php) is missing the following attributes:<br><b>$missing<b><br>Please amend, or delete the Conn.php file so that it can be created again.");
+			return FALSE;
+		}
+		
+		// dropinbase database must be mysql
+		if($c['dbType'] !== 'mysql') {
+			$response[] = self::getResponse('Database Connection', true, "The dropinbase database must (at present) be hosted in MySQL / Mariadb. If it is, change the dbType field to 'mysql' for the first entry of the database connection file (/configs/Conn.php).");
+			return FALSE;
+		}
+
+		// construct general conn string and test basic query
+		$connStr = "mysql:host=$host;port=$port;charset=utf8mb4";
+		Db::setConn($connStr, $username, $password);
+		
+		$result = Db::execute("SELECT 1 as A");
+		if($result === FALSE || Db::count()<1) {
+			$response[] = self::getResponse('Database Connection', false, 'Could not connect to the MySQL (compatible) server, using the host, port, username and password provided in entry 1 of the database connection file (/configs/Conn.php).<br>Database error: ' . Db::lastErrorAdminMsg());
+			return FALSE;
+		}
+
+		// Test connection to dropinbase db
+		$connStr = "mysql:dbname=$database;host=$host;port=$port;charset=utf8mb4";
+		Db::setConn($connStr, $username, $password);
+		$result = Db::execute("SELECT `content_type` FROM pef_content_type");
+		if(Db::count()>1)
+			return TRUE;
+		
+		// Create the database
+        $connStr = "mysql:host=$host;port=$port;charset=utf8mb4";
+		return self::createDb($connStr, $username, $password, $database, $dbIndex, $response);
+	}
+
+	private static function checkFiles(&$response) {
+		// Check folder structure
+		$configsPath = self::$basePath  . 'configs';
+
+        if(!file_exists($configsPath . DIRECTORY_SEPARATOR . 'DibTmpl.php')) {
+            $response[] = self::getResponse('Folder structure', true, "The '" . self::$basePath  . 'configs'. "' folder with its required files like 'DibTmpl.php' does not exist. Download the .zip file from Github and recreate the dropinbase client folder structure. Alternatively, copy this folder (and other missing files) from another DIB installation.");
+            return FALSE;
+        }
+
+		if(!file_exists($configsPath . DIRECTORY_SEPARATOR . 'AllowedFileExtAndFolders.php')) {
+            $response[] = self::getResponse('Folder structure', true, "The '" . self::$basePath  . 'configs'. "' folder with its required file 'AllowedFileExtAndFolders.php' does not exist. Download the .zip file from Github and recreate the dropinbase client folder structure. Alternatively, copy this folder (and other missing files) from another DIB installation.");
+            return FALSE;
+        }
+
+		if(!file_exists($configsPath . DIRECTORY_SEPARATOR . 'Environment.php')) {
+            $response[] = self::getResponse('Folder structure', true, "The '" . self::$basePath  . 'configs'. "' folder with its required file 'Environment.php' does not exist. Download the .zip file from Github and recreate the dropinbase client folder structure. Alternatively, copy this folder (and other missing files) from another DIB installation.");
+            return FALSE;
+        }
+		
+        if(!file_exists($configsPath . DIRECTORY_SEPARATOR . 'Dib.php') && !is_writable($configsPath)) {
+            $response[] = self::getResponse('File Permissions', true, "The webserver lacks permissions to create the Dib.php file in the '$configsPath' folder. Please amend using the chmod and chown commands. Once it is created, you can reset the folder permissions to read-only.");
+            return FALSE;
+        }
+        
+        $filesPath = self::$basePath  . 'files';
+        if(!file_exists($filesPath)) {
+            $response[] = self::getResponse('Folder structure', true, "The '$filesPath' folder does not exist. folder with its required files does not exist. Download the .zip file from Github and recreate the dropinbase client folder structure. Alternatively, copy this folder (and other missing files) from another DIB installation.");
+            return FALSE;
+        }
+        
+        // Check runtime path
+		$runtimePath = self::$basePath  . 'runtime' . DIRECTORY_SEPARATOR . 'tmp';
+
+		$result = self::createPath($runtimePath);
+		if($result === false) {
+			$response[] = self::getResponse('File Permissions', true, "The webserver lacks permissions to create the '$runtimePath' folder. Please amend using the chmod and chown commands, and try again.");
+			return FALSE;
+		}
+        
+
+        // Note, runtime path is configurable in Dib.php
+        
+        if(!is_writable($runtimePath)) {
+            $response[] = self::getResponse('File Permissions', true, "The webserver lacks permissions to create files in the '$runtimePath' folder. Please amend using the chmod and chown commands, and try again.");
+            return FALSE;
+        }
+
+		return TRUE;
+	}
+	
+	private static function createDb($connStr, $username, $password, $databaseName, $dbIndex, &$response) {
+		// Create the database 
+		Db::setConn($connStr, $username, $password);
+		$sql = "CREATE DATABASE IF NOT EXISTS `$databaseName` DEFAULT CHARACTER SET = 'utf8mb4' DEFAULT COLLATE 'utf8mb4_unicode_520_ci';";
+		$result = Db::execute($sql);
+		if($result === FALSE) {
+	    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ('$databaseName') using the following connection properties:<br>$connStr, $username, $password.<br>Please check the connection properties in entry $dbIndex of the database connection file (/configs/Conn.php). The following SQL failed:<br> " . $sql . '<br> Database error: ' . Db::lastErrorAdminMsg());
+			return $response;
+		}
+		
+		// Get sql file contents
+		$sql = file_get_contents(self::$dibPath . 'dropinbase.sql');
+		$sql = str_ireplace("CREATE TABLE IF NOT EXISTS `pef_activity_log`", "USE `$databaseName`;\r\n\r\n CREATE TABLE IF NOT EXISTS `pef_activity_log`", $sql);
+
+		// Temporary variable, used to store current query
+		$templine = '';
+
+		// Loop through each line
+		$lines = explode("\n", $sql);
+		$sql = "";
+		foreach ($lines as $line){
+			// Skip it if it's a comment
+			if (substr($line, 0, 2) == '--' || $line == '')
+			    continue;
+
+			// Add this line to the current segment
+			$templine .= $line;
+			// If it has a semicolon at the end, it's the end of the query
+			if (substr(trim($line), -1, 1) == ';'){
+			    // Perform the query
+			    $result = Db::execute($templine);
+
+			    if($result === FALSE) {
+			    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables. Please check the MySQL user permissions and the connection properties (/configs/Conn.php). The following SQL failed: " . $templine . '. Database error: ' . Db::lastErrorAdminMsg());
+					return $response;
+				}
+			    	
+			    // Reset temp variable to empty
+			    $templine = '';
+			}
+		}
+		
+        return TRUE;
+		
+	}
+	
+	private static function signUserIn(&$response, $params) {
+
+		if(empty($params['email']) || empty($params['password'])) {
+			$response[] = self::getResponse('SignIn', false, "First provide both your registered Dropinbase 'email' and 'password' and try again.");
+			return false;
+		}
+
+		$un = $params['email'];
+		$pw = $params['password'];
+
+	    if(strlen($un) > 180) {
+			$response[] = self::getResponse('SignIn', false, "The email address provided to sign-in is not valid. Please try again.");
+			return false;
+		}
+
+		if(strlen($pw) > 80) {
+			$response[] = self::getResponse('SignIn', false, "The password provided to sign-in is not valid. Please try again.");
+			return false;
+		}
+
+		require_once "/DCurl.php";
+
+		self::$curl = new DCurl(self::$dibDomain);
+		self::$curl->thisClassIsInDibFramework = false;
+		self::$curl->caCertPemFilePath = __DIR__ . DIRECTORY_SEPARATOR . 'cacert.pem';
+
+		DIB::$USER['unique_id'] = rand(0, 9999999);
+
+		$apiToken = 'X3T6_gynMp2^aW6qs';
+		$debug = false;
+
+		$result = self::$curl->dibLogin($un, $pw, $debug, $apiToken);
+        
+		if($result !== true) {
+			$curlMsg = (extension_loaded('curl')) ? '' : ', that your PHP CURL extension is enabled';
+
+			if(strpos($result, 'of the target site') !== false)
+				$result = "Please check the Dropinbase sign-in credentials provided.";
+
+			$response[] = self::getResponse('SignIn', false, "Authentication failed at Dropinbase online portal.<br>Please check your credentials{$curlMsg}, and that the Dropinbase server at " . self::$dibDomain . ' is not blocked by firewalls before trying again.<br>Remote response:<br>' . $result);
+			return false;
+		}
+
+		return true;
+	}
+
+    
+	/**
+	* Check if Apache and PHP have required modules & extensions
+	* 
+	* @return mixed TRUE on success, or response array on failure
+	*/
+	private static function checkRequiredPhpApacheModules(&$response) {
+
+		// Check if Apache / Nginx is running
+
+		if (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache') !== false)
+			$server = 'Apache';
+		elseif (function_exists('apache_get_modules'))
+			$server = 'Apache';
+		else
+			$server = 'Nginx';
+		
+		$apache = array();
+		$php = array();
+        $phpOpt = array();
+		$apacheOpt = array();
+		
+		if($server === 'Apache') {
+			if(function_exists('apache_get_modules')) {
+
+				$apacheMods = apache_get_modules();
+
+				if (!in_array('mod_rewrite', $apacheMods)) 
+					$apache[] = '<b>mod_rewrite</b> (required - enable URL rewriting in .htaccess)';
+
+				if (!in_array('mod_mime', $apacheMods)) 
+					$apacheOpt[] = '<b>mod_mime</b> (recommended - proper MIME types in .htaccess)';
+
+				if (!in_array('mod_headers', $apacheMods)) 
+					$apacheOpt[] = '<b>mod_headers</b> (recommended - added security layer in .htaccess)';
+
+				if (!in_array('mod_expires',$apacheMods)) 
+					$apacheOpt[] = '<b>mod_expires</b> (optional - expiry of files, set in .htaccess)';
+
+				if (!in_array('mod_deflate', $apacheMods)) 
+					$apacheOpt[] = '<b>mod_deflate</b> (optional - additional file compression for performance)';
+
+			} else {
+				$msg = "It seems that the PHP 'apache_get_modules()' function is not registered which prevents the installer from validating required Apache modules.
+							<br>If your installation does not function properly, please check that the following Apache modules are installed:
+							<br><b>mod_rewrite, mod_mime, mod_headers</b>";
+	  			$response[] = self::getResponse('PHP', false, $msg);
+			}
+		} else {
+			$msg = 'Detected Nginx as webserver. PHP cannot directly check for URL rewriting (required), MIME type definitions, and header manipulations.<br>Nginx should be configured with the equivalent of the Apache .htaccess file.';
+			$response[] = self::getResponse('PHP', false, $msg);
+		}
+        
+	  	if (!extension_loaded('pdo_mysql'))
+            $php[] = '<b>pdo_mysql</b> (required - at present the Dropinbase database needs to be in MariaDb/MySql/Aurora. Client databases can reside in other systems (MariaDb, MySql, Aurora, PostgreSQL, SQLite, SQL Server)';
+	  	if (!extension_loaded('curl'))
+            $phpOpt[] = '<b>curl</b> (required by Unit Tester which is still experimental)';
+	  	if (!extension_loaded('mbstring'))
+	   		$php[] = '<b>mbstring</b> (required to ensure UTF-8 encoding is utilized)';
+	  	if (!extension_loaded('openssl'))
+	   		$phpOpt[] = '<b>openssl</b> (required if two-factor authentication using Google Authenticator is used, and on older PHP versions)';
+	  	
+	  	if(!empty($apache)) {
+	  		$apacheStr = implode('<br>', $apache);
+	  		$response[] = self::getResponse('Apache Modules', true, $apacheStr);
+        }
+
+		if(!empty($apacheOpt)) {
+			$apacheStr = implode('<br>', $apacheOpt);
+			$response[] = self::getResponse('Apache Modules', false, $apacheStr);
+	  }
+        
+        if(!empty($php)) {
+	  		$phpStr = implode('<br>', $php);
+	  		$response[] = self::getResponse('PHP Extensions', true, $phpStr);
+        }
+
+        if(!empty($phpOpt)) {
+            $phpStr = implode('<br>', $phpOpt);
+            $response[] = self::getResponse('PHP Extensions', false, $phpStr);
+        }
+        
+        return TRUE;
+    }
+    
+    /**
+	* Check PHP Version
+	* 
+	* @return mixed TRUE on success, or response array on failure
+	*/
+	private static function phpVer(&$response) {
+   
+	  	if (phpversion() < '5.3.3') {
+	  		$response[] = self::getResponse('PHP', true, 'PHP version 5.3.3 or above is required. Your version: ' . phpversion());
+	  		return FALSE;
+	  	}
+	  	
+	  	return TRUE; 
+    }   
+    
+    private static function createConn($path, $dbIndex, $host, $port, $database, $username, $password, &$response) {
+
+        if(empty($host) || empty($port) || empty($database) || empty($username)) {
+            $response[] = self::getResponse('Database Connection', false, "The following fields are required: host, port, database, username (and password if set for the user)");
+	  		return FALSE;
+        }
+    	 
+    	$result = @file_put_contents($path,
+"<?php
+
+/* NOTES: 
+   - The index of the main dropinbase table must match the DBINDEX value in Dib.php
+   - Depending on your setup, using an IP address as host (eg 127.0.0.1 instead of 'localhost') can increase performance
+   - This file is regenerated each time connection details are updated using the /nav/dibConfigs UI in Dropinbase
+   - View the Example_Conn.php file for examples of how to connect to different database servers
+   - By default the MySQL dropinbase tables use the 'utf8mb4_unicode_520_ci' collation. 
+     Ensure your MySQL server's my.ini file is configured accordingly, or change the collation for the dropinbase tables (HeidiSQL has a useful bulk tool).
+   - More info about charset and collation:
+        https://www.coderedcorp.com/blog/guide-to-mysql-charsets-collations/
+*/
+
+DIB::\$DATABASES = array(
+    " . $dbIndex . " => array(
+        'database'=>'$database',
+        'username'=>'$username',
+        'password'=>'$password',
+        'host'=>'$host',
+        'port'=>$port,
+        'charset'=>'utf8mb4',
+		'collation' => 'utf8mb4_unicode_520_ci'
+        'connectionStringExtra'=>'',
+        'dbType'=>'mysql',
+        'emulatePrepare'=>true,
+        'dbDropin'=>'dibMySqlPdo',
+        'systemDropin'=>true
+    )
+);");
+
+		if ($result === false) {
+			$response[] = self::getResponse('Database Connection', false, "Could not create the following database connection file. Please check permissions: '$path'");
+	  		return FALSE;
+		}
+	}
+
+    private static function updateIndexFile(&$response) {
+        
+		// Read the content of the file into a string
+		$fileContents = file_get_contents(self::$basePath.'index.php');
+
+		// Check if the file was successfully read
+		if ($fileContents === false) {
+			echo "Failed to read the file.";
+			exit(1);
+		}
+		
+		// Uncomment "./installer/index.php"
+		$updatedContents = str_replace('require \'./installer/installer.php\'; die();', '// require \'./installer/installer.php\'; die();', $fileContents);
+
+        $path = self::$basePath.'index.php';
+		$result = @file_put_contents($path, $updatedContents);
+
+        if ($result === false) {
+			$response[] = self::getResponse('Index.php file', false, "Could not write to the $path file. Please check permissions, and try again, or alter the file manually by uncommenting and commenting the relevant lines to run Dropinbase instead of the Installer.");
+	  		return FALSE;
+		}
+
+        // installer.js has code to redirect the user to /login
+        return TRUE;
+    }
+
+	public static function downloadDib($params) {
+
+		$result = self::checkFiles($response);
+		if($result !== true) {
+			DIB::$ACTION = $response[0];
+			return false;
+		}
+
+		$dest = self::$basePath.'runtime' . DIRECTORY_SEPARATOR . 'tmp';
+
+		$result = self::createPath($dest);
+		if($result !== true) {
+			file_put_contents($dest . DIRECTORY_SEPARATOR . 'install_progress.dtxt', 'error');
+			DIB::$ACTION = self::getResponse('File Permissions', true, "The webserver lacks permissions to create child folders of the /runtime folder.<br>Please amend using the chmod and chown commands, and try again.");
+			return FALSE;
+		}
+
+		/*
+		// Log user in
+		$result = self::signUserIn($response, $params);
+		if($result !== true) {
+			DIB::$ACTION = $response[0];
+			return false;
+		}
+
+		// Get name of download file
+		$url = "/dropins/serve/Installer/downloadDib?containerName=appReq&itemEventId=CF637F07040B4A56A51B456536A0DCF7-dib";
+        $postData = array();
+
+		$result = self::$curl->request('POST', $url, $postData, 'json');
+
+        if($result === false || empty($result)) {
+            $msg = (extension_loaded('curl')) ? 'Could not access the Dropinbase server. Please check your PHP error logs for more info, and that you have access to the internet.' : 'The Dropinbase API request failed. Please ensure that the PHP CURL extension is enabled, and try again.';
+			DIB::$ACTION = self::getResponse('Download DIB', false, $msg);
+	  		return FALSE;
+        }
+
+        $data = json_decode($result, true);
+
+        // Will get a validResult / invalidResult style response
+
+        if(empty($data) || !is_array($data) || !array_key_exists('success', $data) || !array_key_exists('message', $data) ) {
+            $msg = "Could not JSON decode data returned from the Dropinbase API endpoint\r\nResult from remote server: $result";
+			DIB::$ACTION = self::getResponse('Download DIB', false, $msg);
+			return FALSE;
+        }
+
+        if($data['success'] !== true) {
+            $msg = "The Dropinbase API could not process the request. Error returned from remote server:<br><br>" . $data['message'];
+			DIB::$ACTION = self::getResponse('Download DIB', false, $msg);
+			return FALSE;
+        }
+
+		$url = base64_decode($data['records']['url']);
+		*/
+		$url =  'https://assets.dropinbase.com/dropinbase_20241011.zip';
+
+		$progressFile = $dest . DIRECTORY_SEPARATOR . 'install_progress.dtxt';
+
+		$dest .= DIRECTORY_SEPARATOR . 'dropinbase.zip';
+
+		if (file_exists($dest)) @unlink($dest);
+
+		// Open the file for writing
+		$fp = fopen($dest, 'w+');
+
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_FILE, $fp);  // Save the file to the opened destination
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);  // Follow any redirects if necessary
+		curl_setopt($ch, CURLOPT_NOPROGRESS, false);  // Allow progress tracking
+		curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, function ($resource, $download_size, $downloaded, $upload_size, $uploaded) use ($progressFile) {
+			if ($download_size > 0) {
+				// Calculate and save the progress percentage
+				$progress = round(($downloaded / $download_size) * 100);
+				file_put_contents($progressFile, $progress);
+			}
+		});
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification (use with caution in production)
+		curl_setopt($ch, CURLOPT_TIMEOUT, 300);  // Set a timeout in case the server takes too long to respond
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');  // Set a user agent string to avoid being blocked by certain servers
+
+		// Execute the cURL request
+		curl_exec($ch);
+
+		// Check for cURL errors
+		if(curl_errno($ch)) {
+			$error_msg = curl_error($ch);
+			file_put_contents($progressFile, 'error');  // Save any errors to the progress file
+			DIB::$ACTION = self::getResponse('download', false, 'Could not download the Dropinbase framework from ' . $url . '<br>Error reported: ' . $error_msg);
+		}
+
+		curl_close($ch);
+		fclose($fp);
+
+		// When download is complete, set progress to 100%
+		file_put_contents($progressFile, 100);
+		DIB::$ACTION = self::getResponse('download', true, "Download of '$dest' complete");
+	}
+
+	public static function downloadDibProgress() {
+		$dest = self::$basePath.'runtime' . DIRECTORY_SEPARATOR . 'tmp';
+
+		if(!file_exists($dest)) {
+			$result = self::createPath($dest);
+			if($result !== true) {
+				file_put_contents($dest . DIRECTORY_SEPARATOR . 'install_progress.dtxt', 'error');
+				DIB::$ACTION = self::getResponse('File Permissions', true, "The webserver lacks permissions to create child folders of the /runtime folder.<br>Please amend using the chmod and chown commands, and try again.");
+				return false;
+			}
+		}
+
+		$progressFile = $dest . DIRECTORY_SEPARATOR . 'install_progress.dtxt';
+		$progress = 0;
+
+		if (file_exists($progressFile)) {
+			$progress = file_get_contents($progressFile);
+
+			if($progress == (string)(int)$progress && (int)$progress < 100) {
+				$msg = 'Downloading Framework: ' . $progress . '%';
+				DIB::$ACTION = self::getResponse('download', false, $msg);
+				return false;
+			}
+
+		} else {
+			file_put_contents($progressFile, 0);
+			$msg = 'Downloading Framework: 0%';
+			DIB::$ACTION = self::getResponse('download', false, $msg);
+			return false;
+		}
+
+		if($progress == 'error') {
+			DIB::$ACTION = self::getResponse('download', true, 'stop queue');
+			return false;
+		}
+
+		$dibFile = $dest . DIRECTORY_SEPARATOR . 'dropinbase.zip';
+ 
+		if($progress == 100) {
+
+			if(empty(self::$dibPath)) {
+				self::$dibPath = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR;
+			}
+
+			if(!file_exists(self::$dibPath)) {
+				$result = @mkdir(self::$dibPath);
+				if($result !== true) {
+					file_put_contents($progressFile, 'error');
+					DIB::$ACTION = self::getResponse('File Permissions', true, "The webserver lacks permissions to create the framework folder: '" . self::$dibPath . "' folder.<br>Please amend using the chmod and chown commands.<br>Alternatively manually unzip '$dibFile' here,<br> assign the necessary permissions, and then Skip this installation step.");
+					return false;
+				}
+
+			} elseif(!is_writable(self::$dibPath)) {
+				file_put_contents($progressFile, 'error');
+				DIB::$ACTION = self::getResponse('File Permissions', true, "The webserver lacks permissions to create files in the '" . self::$dibPath . "' folder.<br>Please amend using the chmod and chown commands.<br>Alternatively manually unzip '$dibFile' here,<br> assign the necessary permissions, and then Skip this installation step.");
+				return false;
+			}
+
+			/*
+			if(file_exists(self::$dibPath)) {
+				$result = self::delDir(self::$dibPath);
+
+				if($result !== true) {
+					file_put_contents($progressFile, 'error');
+					DIB::$ACTION = self::getResponse('File Permissions', true, 'Could not remove existing Dropinbase folder: ' . self::$dibPath);
+					return false;
+				}
+			}
+			*/
+
+			file_put_contents($progressFile, 'unzip');
+
+			DIB::$ACTION = self::getResponse('unzip', false, "Installing files...");
+			return false;
+
+		} elseif($progress == 'unzip') {
+
+			if(empty(self::$dibPath)) {
+				self::$dibPath = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR;
+			}
+
+			file_put_contents($progressFile, 'unzipping');
+
+			set_time_limit(60 * 60);
+
+			$result = self::unzipDir($dibFile, self::$dibPath);
+
+			if($result !== true) {
+				file_put_contents($progressFile, 'error');
+				DIB::$ACTION = self::getResponse('unzip', true, "Could not unzip '$dibFile' to '" . self::$dibPath . "'<br>The webserver user requires permissions to write to this folder for installation purposes.");
+				return false;
+			}
+
+			file_put_contents($progressFile, 'next step');
+
+			DIB::$ACTION = self::getResponse('unzip', false, "Setting permissions...");
+			return false;
+
+		} elseif($progress == 'unzipping') {
+
+			DIB::$ACTION = self::getResponse('unzip', false, "Installing files...");
+			return false;
+
+		} elseif($progress == 'next step') {
+
+			DIB::$ACTION = self::getResponse('get perms', true, 'Framework installation successfull. Please continue with the next step.');
+			return false;
+
+		} else {
+			DIB::$ACTION = self::getResponse('none', false, $progress);
+			return false;
+		}
+
+		return true;
+	}
+
+	public static function getComposerVersion() {
+		if (strtolower(substr(php_uname(), 0, 7)) === "windows") {
+			$composerVersion = shell_exec('composer --version 2>&1');
+			$composerVersion = $composerVersion ? trim($composerVersion) : null;
+
+		} else {
+			$composerVersion = shell_exec('composer --version 2>/dev/null');
+			$composerVersion = $composerVersion ? trim($composerVersion) : null;
+		}
+
+		return $composerVersion;
+	}
+
+	private static function createScriptWindows($params) {
+
+		$dibNodeVersion = '20.9.3';
+		$dibNodeMajorVersion = '20';
+
+		$basePath = realpath(self::$basePath);
+		$dibPath = realpath(self::$dibPath);
+		$angularPath = $dibPath . '\dropins\setNgxMaterial\angular';
+
+		if(!file_exists($angularPath)) {
+			DIB::$ACTION = self::getResponse('configureDib', false, "First install the complete Dropinbase framework and try again<br>($angularPath is missing).");
+			return false;
+		}
+		
+		chdir($basePath);
+
+		// Detect installed Composer version
+		$composerVersion = self::getComposerVersion();
+		
+		if(empty($composerVersion)) {
+			$composerPath = (!empty($params['composerFolder'])) ? $params['composerFolder'] : null;
+
+			if(empty($composerPath)) {
+				DIB::$ACTION = self::getResponse('configureDib', false, "Please specify a valid installation path for Composer, and try again.");
+				return false;
+			}
+
+			$result = self::createPath($composerPath);
+			if($result === false) {
+				DIB::$ACTION = self::getResponse('configureDib', false, "Could not create path for Composer installation: $composerPath. Please amend and try again.");
+				return false;
+			}
+		}
+
+		// Detect installed Node.js version
+
+		chdir($dibPath . '/dropins/setNgxMaterial/angular');
+
+		$nodeVersion = shell_exec('node -v 2>&1');
+		if($nodeVersion) {
+			$nodeVersion = trim($nodeVersion, 'v');
+			$nodeMajorVersion = explode('.', $nodeVersion)[0];
+		} else 
+			$nodeVersion = null;
+
+		// Detect installed Angular CLI version
+
+		$angularVersion = shell_exec('ng version 2>&1');
+		preg_match('/Angular CLI\:\s*(\d+\.\d+\.\d+)/', $angularVersion, $matches);
+		$angularVersion = isset($matches[1]) ? $matches[1] : null;
+		$angularVersion = $angularVersion ? trim($angularVersion) : null;
+
+
+//$composerVersion =  null;
+//$nodeVersion = null;
+//$angularVersion = null;
+
+
+		// PowerShell script template with error handling and Invoke-WebRequest fallback
+		$psScript = <<< PS
+		# Check if script is running as administrator
+		\$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+		if (-not \$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+			Write-Host "Please run this script as an administrator." -ForegroundColor Red
+			exit 1
+		}
+
+		Write-Host "Starting dependency installation..."
+
+		function StopIfFailed {
+			param (
+				[string] \$CommandName = '',
+				[string] \$StopOnError = 'yes'
+			)
+			if (\$LASTEXITCODE -ne 0) {
+				if(\$StopOnError -eq 'yes') {
+					Write-Host "Command '\$CommandName' failed with exit code \$LASTEXITCODE. Script will stop executing." -ForegroundColor Red
+					exit \$LASTEXITCODE
+				}
+			} else {
+				Write-Host "Command '\$CommandName' succeeded." -ForegroundColor Green
+			}
+		}
+
+		# A function to download files by trying three different methods
+		function DownloadFile {
+			param (
+				[string] \$url,
+				[string] \$output
+			)
+			
+			Write-Host "Downloading \$url..." -ForegroundColor Blue
+			
+			if (Get-Command Invoke-WebRequest -ErrorAction SilentlyContinue) {
+				try {
+					Invoke-WebRequest -Uri "\$url" -OutFile "\$output"
+					StopIfFailed -CommandName "Invoke-WebRequest" -StopOnError "no"
+				} catch {
+					Write-Host "Invoke-WebRequest failed. Trying WebClient..." -ForegroundColor Yellow
+					UseWebClient "\$url" "\$output"
+				}
+			
+			} else {
+				Write-Host "Invoke-WebRequest not available. Trying WebClient..." -ForegroundColor Yellow
+				UseWebClient "\$url" "\$output"
+			}
+		}
+
+		# Use WebClient to download files
+		function UseWebClient {
+			param (
+				[string] \$url,
+				[string] \$output
+			)
+
+			try {
+				\$webClient = New-Object System.Net.WebClient
+				\$webClient.DownloadFile("\$url", "\$output")
+				StopIfFailed -CommandName "webClient.DownloadFile" -StopOnError "no"
+			} catch {
+				Write-Host "WebClient failed. Trying Start-BitsTransfer..." -ForegroundColor Yellow
+				UseStartBitsTransfer "\$url" "\$output"
+			}
+		}
+
+		# Use Start-BitsTransfer to download files
+		function UseStartBitsTransfer {
+			param (
+				[string] \$url,
+				[string] \$output
+			)
+
+			try {
+				Start-BitsTransfer -Source "\$url" -Destination "\$output"
+				StopIfFailed -CommandName "Start-BitsTransfer" -StopOnError "no"
+			} catch {
+				Write-Host "Download failed with all methods. Please download and install manually. Exiting script." -ForegroundColor Red
+				exit 1
+			}
+		}
+		PS;
+
+		// Add Node.js installation if not installed or version is incorrect (with error handling)
+		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion) {
+			$psScript .= <<< PS
+		
+		Write-Host "Installing Node.js $dibNodeVersion..."
+		try {
+			if (-not (Get-Command msiexec.exe -ErrorAction SilentlyContinue)) {
+				Write-Host "msiexec.exe not found. Please ensure it's available in your system's PATH variable." -ForegroundColor Red
+				exit 1
+			}
+
+			# Detect if the system is 32-bit or 64-bit
+			if (\$env:PROCESSOR_ARCHITECTURE -eq "x86") {
+				\$nodeUrl = "https://nodejs.org/dist/v$dibNodeVersion/node-v$dibNodeVersion-x86.msi"
+				\$installerFile = "node-v$dibNodeVersion-x86.msi"
+			} else {
+				\$nodeUrl = "https://nodejs.org/dist/v$dibNodeVersion/node-v$dibNodeVersion-x64.msi"
+				\$installerFile = "node-v$dibNodeVersion-x64.msi"
+			}
+
+			# Download Node.js installer
+			Write-Host "Downloading Node.js version $dibNodeVersion for \$env:PROCESSOR_ARCHITECTURE..."
+			DownloadFile -url \$nodeUrl -output \$installerFile
+			StopIfFailed -CommandName "Download Node.js installer"
+
+			# Install Node.js silently
+			Write-Host "Installing Node.js..."
+			& msiexec.exe /i \$installerFile /quiet /norestart
+			StopIfFailed -CommandName "Execution of \$installerFile"
+			
+			# Detect Node.js installation directory from the registry
+			try {
+				\$nodeInstallDir = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Node.js" -Name "InstallPath" -ErrorAction Stop).InstallPath
+			} catch {
+				try {
+					\$nodeInstallDir = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Node.js" -Name "InstallPath" -ErrorAction Stop).InstallPath
+				} catch {
+					Write-Host "Failed to detect Node.js installation directory from the registry." -ForegroundColor Red
+					exit 1
+				}
+			}
+
+			# Check if Node.js installation directory exists
+			if (Test-Path \$nodeInstallDir) {
+	
+				# Add Node.js to machine PATH and Session PATH
+				\$existingPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
+				if (\$existingPath -notlike "*\$nodeInstallDir*") {
+					[Environment]::SetEnvironmentVariable("Path", "\$existingPath;\$nodeInstallDir", "Machine")
+					\$env:Path = "\$env:Path;\$nodeInstallDir"
+				}
+				
+				# Verify Node.js is accessible
+				try {
+					\$nodeVersion = node -v
+				} catch {
+					Write-Host "Failed to verify Node.js installation. Please ensure the directory \$nodeInstallDir exists in the PATH." -ForegroundColor Red
+					exit 1
+				}
+			} else {
+				Write-Host "Node.js installation directory not found. Please check the installation path." -ForegroundColor Red
+				exit 1
+			}
+			
+			# Remove the installer
+			Remove-Item \$installerFile -ErrorAction Stop
+			StopIfFailed -CommandName "Remove \$installerFile"
+
+			Write-Host "Node.js $dibNodeVersion installed successfully."
+
+		} catch {
+			Write-Host "Node.js $dibNodeVersion installation failed." -ForegroundColor Red
+			exit 1
+		}
+		PS;
+
+		} else {
+			$msg = ($nodeVersion != '20.9.3') ? "\r\n\r\n***NOTE: Version 20.9.3 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.3, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version before testing.\r\n\r\n" : '';
+			$psScript .= "\$nodeMessage = @'Node.js $nodeVersion is already installed. $msg'@ -ForegroundColor Red \r\n";
+			$psScript .= "Write-Host \$nodeMessage";
+		}
+
+		// Add Composer installation if not installed (with error handling)
+		if (!$composerVersion) {
+			$psScript .= <<< PS
+
+		Write-Host "Installing Composer..."
+		try {
+			# Check if PHP is installed
+			if (Get-Command php -ErrorAction SilentlyContinue) {
+				Write-Host ""
+			} else {
+				Write-Host "PHP cannot be run from the commandline, or not in PATH. Please check your PHP installation, and ensure it's in the PATH." -ForegroundColor Red
+				exit 1
+			}
+
+			# Download Composer installer
+			DownloadFile -url "https://getcomposer.org/installer" -output composer-setup.php
+			StopIfFailed -CommandName "Download Composer installer"
+
+			# Run the installer
+			& php composer-setup.php --install-dir=$composerPath --filename=composer
+			StopIfFailed -CommandName "Execution of php composer-setup.php"
+
+			Remove-Item composer-setup.php -ErrorAction Stop
+			StopIfFailed -CommandName "Remove composer-setup.php"
+
+			# Add Composer to PATH if not already present
+			\$existingPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
+			if (\$existingPath -notlike "*$composerPath*") {
+				[Environment]::SetEnvironmentVariable("Path", "\$existingPath;$composerPath", "Machine")
+				\$env:Path = "\$env:Path;$composerPath"
+			}
+			
+			Write-Host "Composer installed successfully."
+
+		} catch {
+			Write-Host "Composer installation failed." -ForegroundColor Red
+			exit 1
+		}
+		PS;
+		} else {
+			$psScript .= "\r\nWrite-Host 'Composer is already installed.'\r\n";
+		}
+		
+		// Run composer install and npm install
+		$psScript .= <<< PS
+
+		# Navigate to the PHP project directory and run Composer install
+		cd "$basePath"
+
+		Write-Host "Running Composer install..."
+		try {
+			composer install
+			StopIfFailed -CommandName "composer install"
+
+		} catch {
+			Write-Host "Composer install failed." -ForegroundColor Red
+			exit 1
+		}
+
+		# Navigate to the Angular project directory
+		cd "$angularPath"
+		Write-Host "Running npm install..."
+
+		# Remove node_modules and package-lock.json if they exist
+		if (Test-Path "node_modules") {
+			Write-Host "Removing node_modules directory..."
+			try {
+				Remove-Item -Recurse -Force "node_modules" -ErrorAction Stop
+				StopIfFailed -CommandName "Remove node_modules directory"
+
+			} catch {
+				Write-Host "Failed to remove node_modules." -ForegroundColor Red
+				exit 1
+			}
+		}
+		
+		if (Test-Path "package-lock.json") {
+			Write-Host "Removing package-lock.json file..."
+			try {
+				Remove-Item -Force "package-lock.json" -ErrorAction Stop
+				StopIfFailed -CommandName "Remove package-lock.json"
+
+			} catch {
+				Write-Host "Failed to remove package-lock.json." -ForegroundColor Red
+				exit 1
+			}
+		}
+
+		try {
+			npm install
+			StopIfFailed -CommandName "npm install"
+
+		} catch {
+			Write-Host "npm install failed." -ForegroundColor Red
+			exit 1
+		}
+		
+		PS;
+
+		// Add Angular CLI installation if not installed or version is incorrect (with error handling)
+		if (!$angularVersion || $angularVersion !== '17.3.9') {
+			$psScript .= <<< PS
+
+		Write-Host "Installing Angular CLI 17.3.9..."
+		try {
+			npm install -g @angular/cli@17.3.9
+			StopIfFailed -CommandName "Install Angular CLI"
+			Write-Host "Angular CLI 17.3.9 installed successfully."
+
+		} catch {
+			Write-Host "Angular CLI installation failed." -ForegroundColor Red
+			exit 1
+		}
+		PS;
+		} else {
+			$psScript .= "\r\nWrite-Host 'Angular CLI 17.3.9 is already installed.'\r\n";
+		}
+
+		$psScript .= "\r\nWrite-Host 'Dependencies installed successfully.'\r\n";
+
+		// Save the PowerShell script to a file
+		$path = self::$basePath . 'runtime' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'configuredib.ps1';
+
+		file_put_contents($path, $psScript);
+
+		DIB::$ACTION = self::getResponse('configureDib', true, "A Windows PowerShell script was generated for this installation.<br>Please review the script, and execute the following in PowerShell:<br><br><b>powershell -ExecutionPolicy Bypass -File $path</b>");
+		return TRUE;
+
+		/*
+		echo "\nDetected Versions:\n";
+		echo "Node.js: " . ($nodeVersion ?: 'Not Installed') . "\n";
+		echo "Composer: " . ($composerVersion ?: 'Not Installed') . "\n";
+		echo "Angular CLI: " . ($angularVersion ?: 'Not Installed') . "\n";
+		*/
+
+	}
+
+	// Create bash script
+	private static function createScriptLinux($params) {
+		
+		$writePerms = array(
+			'configs folder (this should be read-only on production)' => 'BASE/configs', 
+			'runtime folder' => 'BASE/runtime', 
+			'dropins folders (repeat for each dropin that has containers that need to be generated - make readonly on production)' => 'BASE/dropins/main/dibCode', 
+			'Angular compile folder 1' => 'SYSTEM/dropins/setNgxMaterial/angular/projects/plugins/src', 
+			'Angular compile folder 2' => 'SYSTEM/dropins/setNgxMaterial/angular/src/assets/plugins', 
+			'user files folder' => 'USERFOLDER'
+		);
+
+		$dibNodeVersion = '20.9.3';
+		$dibNodeMajorVersion = '20';
+
+		$basePath = realpath(self::$basePath);
+		$dibPath = realpath(self::$dibPath);
+		$angularPath = $dibPath . '/dropins/setNgxMaterial/angular';
+
+		if(!file_exists($angularPath)) {
+			DIB::$ACTION = self::getResponse('configureDib', false, 'First install the Dropinbase framework and try again.');
+			return false;
+		}
+		
+		chdir($basePath);
+
+		// Detect installed Composer version
+		$composerVersion = self::getComposerVersion();
+
+		chdir($dibPath . '/dropins/setNgxMaterial/angular');
+
+		// Detect installed Node.js version
+		$nodeVersion = shell_exec('node -v 2>/dev/null');
+		if($nodeVersion) {
+			$nodeVersion = trim($nodeVersion, 'v');
+			$nodeMajorVersion = explode('.', $nodeVersion)[0];
+		} else 
+			$nodeVersion = null;
+
+		// Detect installed Angular CLI version
+
+		//$angularVersion = shell_exec('ng version 2>/dev/null | grep -oP "(?<=CLI: )[^ ]+"');
+		$angularVersion = shell_exec('ng version 2>/dev/null');
+		preg_match('/Angular CLI\:\s*(\d+\.\d+\.\d+)/', $angularVersion, $matches);
+		$angularVersion = isset($matches[1]) ? $matches[1] : null;
+		$angularVersion = $angularVersion ? trim($angularVersion) : null;
+
+		// Get $owner and $group - set rights to all new folders/files with these users.
+		// Also get $webUser (user running apache) - install npm and angular with this user (note on systems with multiple websites, the $owner/$group may differ from $webUser)
+
+		if(empty($params['owner']) || empty($params['group'])) {
+			DIB::$ACTION = self::getResponse('configureDib', false, "First specify a valid file/folder 'owner' and 'group' and try again.");
+			return false;
+		}
+
+		if(empty($params['webUser'])) {
+			DIB::$ACTION = self::getResponse('configureDib', false, "First specify the user under which the web-server runs, and try again.");
+			return false;
+		}
+
+		$regex = '/^[a-z][-a-z0-9_]{0,36}[a-z0-9]$/'; // valid Linux user name
+
+		if(preg_match($regex, $params['webUser']) !== 1) {
+			DIB::$ACTION = self::getResponse('configureDib', false, "The web-server user name does not seem valid. Please try again.");
+			return false;
+		}
+
+		if(preg_match($regex, $params['owner']) !== 1) {
+			DIB::$ACTION = self::getResponse('configureDib', false, "The 'owner' user name does not seem valid. Please try again.");
+			return false;
+		}
+
+		if(preg_match($regex, $params['group']) !== 1) {
+			DIB::$ACTION = self::getResponse('configureDib', false, "The 'group' name does not seem valid. Please try again.");
+			return false;
+		}
+
+		$owner = $params['owner'];
+		$group = $params['group'];
+		$webUser = $params['webUser'];
+
+		// Detect Linux distribution from /etc/os-release
+		$osReleaseFile = '/etc/os-release';
+		$linuxDistro = 'unknown';
+		if (file_exists($osReleaseFile)) {
+			$osReleaseContent = file_get_contents($osReleaseFile);
+			if (preg_match('/^ID=(\w+)/m', $osReleaseContent, $matches)) {
+				$linuxDistro = $matches[1];
+			}
+		}
+
+		// Generate the bash script based on the detected Linux distribution
+
+		$bashScript = <<< BASH
+		#!/bin/bash
+		# Detected Linux Distribution: $linuxDistro
+
+		# User must have sudo rights to run this script:
+		if [ "$(id -u)" -ne 0 ]; then
+			echo "This script must be run by a user with privileged permissions." >&2
+			exit 1
+		fi
+
+		# Break on any error
+		set -e
+
+		# Function to check if a command exists
+		command_exists() {
+			command -v "$1" >/dev/null 2>&1
+		}
+
+		# Define Linux owner and group names to use for folder and file permissions
+		OWNER=$owner
+		GROUP=$group
+
+		# Define user that must install node(npm) and Angular - in order to have rights
+		WEBUSER=$webUser
+
+		#  Define permissions for read-only files and folders
+		FOLDERPERMS=755
+		FILEPERMS=644
+		
+		# Define permissions for writeable files and folders
+		WRITEFOLDERPERMS=777
+		WRITEFILEPERMS=776
+
+		cd $dibPath/dropins/setNgxMaterial/angular
+
+		BASH;
+
+		// Add Node.js installation commands if the required version is not installed
+		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion) {
+			switch ($linuxDistro) {
+				case 'ubuntu':
+				case 'debian':
+					$bashScript .= <<< BASH
+		# Update system packages 
+		echo "Updating system packages..."
+		apt update -y && apt upgrade -y
+
+		if ! command_exists curl; then
+			echo "Installing curl..."
+			apt install -y curl
+		fi
+
+		# Update and install Node.js for Ubuntu/Debian
+		echo "Downloading Node.js $dibNodeVersion..."
+		curl -fsSL https://deb.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
+
+		echo "Installing Node.js $dibNodeVersion..."
+		apt install -y nodejs=$dibNodeVersion-1nodesource1
+
+		BASH;
+				break;
+
+				case 'centos':
+				case 'rhel':
+					$bashScript .= <<< BASH
+
+		if ! command_exists curl; then
+			echo "Installing curl..."
+			yum install -y curl
+		fi
+
+		# Install Node.js for CentOS/RHEL
+		echo "Downloading Node.js $dibNodeVersion..."
+		curl -fsSL https://rpm.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
+
+		echo "Installing Node.js $dibNodeVersion..."
+		yum install -y nodejs-$dibNodeVersion-1nodesource
+
+		BASH;
+				break;
+
+				case 'fedora':
+					$bashScript .= <<< BASH
+
+		if ! command_exists curl; then
+			echo "Installing curl..."
+			dnf install -y curl
+		fi
+
+		# Install Node.js for Fedora
+		echo "Downloading Node.js $dibNodeVersion..."
+		curl -fsSL https://rpm.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
+
+		echo "Installing Node.js $dibNodeVersion..."
+		dnf install -y nodejs-$dibNodeVersion-1nodesource
+
+		BASH;
+				break;
+
+				default:
+					$bashScript .= "\necho 'Unsupported Linux distribution: $linuxDistro'\nexit 1\n";
+				break;
+			}
+
+		} else {
+			$msg = ($nodeVersion != '20.9.3') ? "\r\n\r\n***NOTE: Version 20.9.3 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.3, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version, before testing.\r\n" : '';
+			$bashScript .= "\r\nWrite-Host 'Node.js $nodeVersion is already installed. $msg'\n";
+		}
+
+/*
+		// NPM configuration
+		$bashScript .= <<< BASH
+
+		echo "Set Node.js global install folder"
+
+		# Set npm global installation directory for $webUser user
+		sudo -u \$WEBUSER npm config set prefix /var/www/.npm-global
+
+		# Add npm global directory to PATH for \$WEBUSER user
+		if ! sudo -u \$WEBUSER grep -q "export PATH=/var/www/.npm-global/bin:\$PATH" /var/www/.bashrc; then
+			echo "Adding npm global bin directory to PATH for $webUser user..."
+			sudo -u \$WEBUSER bash -c 'echo "export PATH=/var/www/.npm-global/bin:\$PATH" >> /var/www/.bashrc'
+			sudo -u \$WEBUSER bash -c 'source /var/www/.bashrc'
+		fi
+
+		BASH;
+*/
+		$bashScript .= "\n\n# Install Composer\necho 'Install Composer'\n";
+
+		// Add Composer installation commands if Composer is not installed
+		if ($composerVersion === null) {
+			switch ($linuxDistro) {
+				case 'ubuntu':
+				case 'debian':
+					$bashScript .= "apt install -y composer\n";
+					break;
+
+				case 'centos':
+				case 'rhel':
+					$bashScript .= "yum install -y composer\n";
+					break;
+
+				case 'fedora':
+					$bashScript .= "dnf install -y composer\n";
+					break;
+			}
+		} else {
+			$bashScript .= "echo 'Composer is already installed.'\n";
+		}
+
+		// node_modules installation
+		$bashScript .= <<< BASH
+		# Install node_modules
+		cd $angularPath
+
+		# Remove node_modules and package-lock.json if they exist
+		if [ -d "node_modules" ]; then
+			echo "Removing existing node_modules directory..."
+			rm -rf node_modules
+		fi
+
+		if [ -f "package-lock.json" ]; then
+			echo "Removing existing package-lock.json..."
+			rm package-lock.json
+		fi
+
+		echo "Install node_modules"
+
+		npm install
+
+		echo "Install Angular CLI"
+
+		BASH;
+
+		if ($angularVersion !== '17.3.9') {
+			$bashScript .= "npm install -g @angular/cli@17.3.9\n";
+		} else {
+			$bashScript .= "echo 'Angular CLI 17.3.9 is already installed.'\n";
+		}
+
+		// Add project-specific commands for Composer installation
+		$bashScript .= <<< BASH
+		cd $basePath
+
+		echo "Install Composer Libraries"
+		composer install --no-dev --optimize-autoloader
+
+		echo "Dependencies installed"
+
+		echo "Configure permissions"
+		
+		# Configure general folder and file permissions
+
+		chown \$OWNER:\$GROUP -R $basePath
+		find $basePath -type d -exec chmod \$FOLDERPERMS {} +
+		find $basePath -type f -exec chmod \$FILEPERMS {} +
+		
+		# Ensure ngc is executable
+		chmod +x /node_modules/.bin/ngc
+
+		# Set writable folders and file permissions
+		BASH;
+
+		$bashScript .= "\n\n";
+		
+		foreach($writePerms as $key => $path) {
+			if($path === 'USERFOLDER') {
+				if(!empty(DIB::$USERSPATH))
+					$path = DIB::$USERSPATH;
+				else
+					continue;
+			}
+
+			$path = str_replace('SYSTEM', $dibPath, $path);
+			$path = str_replace('BASE', $basePath, $path);
+			$path = str_replace('//', '/', $path);
+			$path = str_replace('\/', '/', $path);
+
+			$bashScript .= "# $key\n";
+
+			if(!file_exists($path))
+				$bashScript .= "mkdir -p $path\n";
+
+			$bashScript .= "find $path -type d -exec chmod \$WRITEFOLDERPERMS {} +\n";
+			$bashScript .= "find $path -type f -exec chmod \$WRITEFILEPERMS {} +\n";
+
+			if($path !== 'configs')
+				$bashScript .= "chmod g+s $path\n";
+
+			$bashScript .= "\n";
+		}
+
+		$bashScript .= "\necho 'Installation complete'";
+
+		//$bashScript .= "\necho 'Restarting Apache' \n systemctl restart apache2\n";
+
+		//$str = '<pre>' . $bashScript . '</pre>';
+
+		// Save the PowerShell script to a file
+		$path = self::$basePath . 'runtime' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'configuredib.sh';
+
+		file_put_contents($path, $bashScript);
+
+		DIB::$ACTION = self::getResponse('configureDib', true, "A Linux bash script was generated for this installation.<br>Please review, and then execute the following in Linux as a privileged user:<br><br><b>chmod +x $path<br>sh $path</b>");
+		return TRUE;
+
+		file_put_contents('install_dependencies.sh', $bashScript);
+
+		// Make the bash script executable
+		chmod('install_dependencies.sh', 0755);
+
+		return $str;
+	}
+
+	public static function getOwnerGroupWebUser() {
+		if (strtolower(substr(php_uname(), 0, 7)) === "windows")
+			return array(null, null, null);
+
+		if(function_exists('fileowner') && function_exists('posix_getpwuid')) {
+			// Get the owner and group names
+			$ownerId = fileowner(__FILE__);
+			$groupId = filegroup(__FILE__);
+
+			// Convert to names
+			$owner = posix_getpwuid($ownerId)['name'];
+			$group = posix_getgrgid($groupId)['name'];
+
+			
+			if (isset($_SERVER['USER'])) {
+				$webUser = $_SERVER['USER'];
+			} else {
+				$uid = getmyuid();
+				$userInfo = posix_getpwuid($uid);
+				$webUser = $userInfo['name'];
+			}
+
+		} else {
+			$owner = 'www-data';
+			$group = 'www-data';
+			$webUser = 'www-data';
+		}
+
+		return array($owner, $group, $webUser);
+	}
+
+	/**
+     * Recursively creates parts of a directory path that may not yet exist in the file system
+     * @param string $path - full path to a file (not a folder)
+     * @return boolean TRUE on success. FALSE on error
+     */
+    public static function createPath($path) {
+        try {
+            if(empty($path)) 
+                return FALSE;
+
+            if(substr($path, -1) == DIRECTORY_SEPARATOR) // Avoid issue on Linux
+                $path = substr($path, 0, -1);
+            if (is_dir($path))
+                return true;
+
+            $prev_path = dirname($path);
+            $return = self::createPath($prev_path);
+
+            if ($return && is_writable($prev_path))
+                // check again if path still does not exist in case of concurrent users
+                return (!is_dir($path)) ? mkdir($path, 0770) : true;
+            else 
+                return false;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+	/**
+     * unzipDir file. Will create $saveDir if it does not exist, but won't empty it if it exists.
+     * @param $pathToZipFile full path to zip file
+	 * @param $targetPath folder where to save contents of zip file
+	 * @return mixed boolean TRUE on success, string with err msg on failure
+     */
+	private static function unzipDir($pathToZipFile, $targetPath) {
+		try {
+			if(!file_exists($targetPath)) {
+				$result = self::createPath($targetPath);
+				if($result !== true) return $result;
+			}
+			
+			$zip = new ZipArchive;
+			$res = $zip->open($pathToZipFile);
+			if ($res === TRUE) {
+				$zip->extractTo($targetPath);
+				$zip->close();
+			} else
+				return 'Could not open Zip file';
+			
+			return TRUE;
+			
+		} catch(Exception $e) {
+            return "Unzip error: ".$e->getMessage();
+		}
+	}
+
+	/**
+     * Recursively delete a folder and all contents in subfolders etc
+	 * USE WITH GREAT CAUTION!
+     *
+     * @param string $dir parent folder where files and subfolders reside
+     * @param string $ext eg php or txt or empty 
+     * @param int $fileAgeSeconds only delete files modified/created more than $fileAgeSeconds ago
+     * @return boolean false if any one file could not be deleted, else true
+     *
+     */
+	public static function delDir($dir, $ext='', $fileAgeSeconds=0) {
+        if(!is_dir($dir)) return true;
+
+	    $fp = @opendir($dir);
+
+	    if ($fp !== false) {
+
+	        while (false !== ($f = readdir($fp))) {
+
+                if ($f == '.' || $f == '..') continue;
+                
+	            $file = realpath($dir) . DIRECTORY_SEPARATOR . $f;
+                $ageDel = ($fileAgeSeconds == 0 || filemtime($file) <= time() - $fileAgeSeconds);
+
+	            if (is_dir($file) && !is_link($file)) {
+	                $r = self::delDir($file, $ext, $fileAgeSeconds);
+                    if($r === false) return false;
+
+                } elseif(!empty($ext) && $ext !== '*') {
+                    if(pathinfo($file, PATHINFO_EXTENSION) == $ext && $ageDel) {
+                        $r = @unlink($file);
+                        if($r === false) return false;
+                    }
+
+                } elseif ($ageDel) {
+                    $r = @unlink($file);
+                    clearstatcache(true);
+                    if($r === false) return false;
+                }
+	        }
+    	    closedir($fp);
+			
+            if(empty(array_diff(scandir($dir), array('.', '..')))) {
+	            $r = @rmdir($dir);
+				if($r === false) return false;
+			}
+
+            clearstatcache(true);
+	    }
+        return true;
+	}
+}

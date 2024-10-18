@@ -1,0 +1,5 @@
+/**
+Additional css styling to include. 
+Also override Angular Material styles here.
+Alternatively create your own .scss definitions and include the resulting .css files in the pef_setting table using the afterBodyJs record.
+*/

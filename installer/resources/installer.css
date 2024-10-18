@@ -1,0 +1,335 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+}​
+
+* {
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box
+}
+
+.longLabel{
+    display: inline-block;
+    width: auto;
+    text-align: left;
+}
+
+
+.logo {
+    width: 110px;
+}
+
+.bg {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgb(45 122 173)  0%, rgb(41, 135, 196) 10%, rgb(0, 52, 97) 100%)
+
+}
+
+.mainBlock {
+    z-index:10; 
+    width: 80%; 
+    height: 70%; 
+    max-width: 1600px;
+    max-height: 700px;
+    display:flex; 
+    flex-direction: row; 
+    justify-content:flex-start; 
+    align-items: stretch;
+}
+
+.leftBlock {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-around;
+    align-items: center;
+    background-color: #05a6ed;
+    width: 33%;
+}
+
+.leftInnerBlock {
+    margin: 30px 10px 0px 40px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: transparent;
+    color: #d7f0fe;
+}
+
+.logoBlock {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+.rightBlock {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: white;
+    width: 67%;
+    height: 100%;
+}
+
+p {
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+
+.rightInnerBlock {
+    margin: 35px 20px 10px 40px;
+    display: none;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: transparent;
+    color: #c5c7c8;
+    height: 90%;
+}
+
+.rightInnerBlock.active {
+    display: flex;
+}
+
+.dibSite {
+
+    color: white;
+    cursor: pointer;
+}
+
+.mainBody {
+    display:flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0px;
+    
+    max-height: calc(100% - 70px);
+}
+
+.dibBtn {
+    width: 250px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid lightblue;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #ccd2d4;
+    background-color: transparent;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+}
+
+.dibBtn:hover {
+    background-color: #f3fdff;
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+.btnNextStep {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    align-self: flex-end;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 100px;
+    height: 35px;
+    
+    border: 1px solid lightblue;
+    border-radius: 15px;
+    cursor: pointer
+}
+
+.btnNextStep:hover {
+    background-color: #f3fdff;
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    color: #05a6ed;
+}
+
+.title {
+    display: flex;
+    flex-direction: row; 
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.title.active {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+.response {
+    margin: 0px 0px;
+    padding: 0px 8px;
+}
+
+.responseErr {
+    margin: 0px 0px;
+    padding: 0px 8px;
+    color: rgb(213, 59, 59);
+}
+
+.textInput {
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 16px;
+    width: 300px;
+    color: #111111; 
+    outline: none;
+
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus effect */
+}
+  
+.textInput:focus {
+    border-color: #666666; /* Darker border on focus for visibility */
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.6); /* Glowing effect on focus */
+}
+  
+.note {
+    font-size: 14px; 
+    margin: 12px 12px 0px;
+    font-style: italic;
+}
+
+.dibTable {
+    border: solid 1px rgb(177 175 175);
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 4px;
+    overflow: scroll;
+}
+
+.dibTable tr  {
+    font-family: Roboto,Helvetica Neue,sans-serif;
+    color: #333;  
+}
+
+.dibTable th {
+    text-align: center; 
+    color: rgb(78 112 138); 
+    background: #61bae1;
+    font-weight: bold;
+    font-size: 14px;
+    padding:3px 9px;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+}
+
+.dibTable td {
+    border: solid 1px rgb(191 179 179);
+    padding: 5px 5px;
+    vertical-align: top;
+    background-color: white;
+    font-size: 12px;
+
+}
+
+.card {
+    display:flex; 
+    flex-direction:column; 
+    gap: 10px; 
+    background-color: transparent;
+    border: 1px solid rgb(177 175 175);
+    border-radius: 4px;
+    width: calc(100% - 35px);
+    margin: 10px 10px 10px 0px;
+    padding: 10px 15px;
+}
+
+.checkbox {
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #f9fafb;
+    align-self: center; 
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox input {
+     width: 17px;
+    height: 17px;
+    cursor: pointer;
+       background: #fcfff4;
+    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    border-radius: 4px;
+}
+
+/* .squaredFour */
+.squaredFour {
+    width: 17px;
+    position: relative;
+    margin: 3px auto;
+    z-index: 0;
+  }
+  .squaredFour label {
+    z-index: 0;
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fcfff4;
+    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    border-radius: 4px;
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  .squaredFour label:after {
+    z-index: 0;
+    content: '';
+    width: 8px;
+    height: 4px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border: 3px solid #333;
+    border-top: none;
+    border-right: none;
+    background: transparent;
+    opacity: 0;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  .squaredFour label:hover::after {
+    opacity: 0.2;
+  }
+  .squaredFour input[type=checkbox] {
+    visibility: hidden;
+  }
+  .squaredFour input[type=checkbox]:checked + label:after {
+    opacity: 1;
+  }
+  /* end .squaredFour */
+
+
+
