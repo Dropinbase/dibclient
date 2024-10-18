@@ -131,7 +131,7 @@ function getMimeType($ext) {
         'htm' => 'text/html',
         'txt' => 'text/plain',
         'json' => 'application/json',
-        'xml' => 'application/xml',
+        'xml' => array('application/xml', 'text/xml'),
 
         'mpeg' => 'video/mpeg',
         'mpg' => 'video/mpeg',

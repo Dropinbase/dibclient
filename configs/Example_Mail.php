@@ -7,12 +7,13 @@
 // NOTE, gmail requires various cloud settings to be in place... ask AI :)
 
 self::$account = array(
-	'mail_host' => 'smtp.gmail.com', // SMTP server, or 'imap.gmail.com', or 'localhost'
+    'use_smtp' => 1, // whether an SMTP account is used
+    'mail_host' => 'smtp.gmail.com', // SMTP server, or 'imap.gmail.com', or 'localhost'
     'debug_level' => 0, // enables SMTP debug information (for testing)
-    					// 0 = none
+                        // 0 = none
                         // 1 = errors and messages
                         // 2 = messages only
-    'smtp_auth' => TRUE,  // enable SMTP authentication
+    'smtp_auth' => true,  // enable SMTP authentication
     'encryption' => 'ssl', // connection prefix to server: '', 'ssl' or 'tls'
     'port_outgoing' => '465', // TLS port: 587, imap : 993
     'username' => 'xxx@gmail.com',
