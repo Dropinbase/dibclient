@@ -32,7 +32,7 @@ class DIB {
     );
     */
 
-    /// Variables used to refer to Databases in PHP. The values reference the id/index value specified in Conn.php and the pef_database table.
+    /// Variables used to refer to Databases in PHP. The values reference the id/index value specified in /secrets/Conn.php and the pef_database table.
     public static $DIBDB = 1; // The main Dropinbase database 
     public static $LOGINDB = 1; // Database containing the pef_login, pef_login_group, pef_perm_group, pef_two_factor and pef_security_policy tables
 
@@ -59,7 +59,7 @@ class DIB {
                                              // 2 = SECURITY RISK: Adds echo-ing of errors to (1). 3 = SECURITY RISK: Adds creation of detailed trace file to (2).
     public static $LOGPERMISSUES = 1; // 0 = Don't log any permission issues. 1 = Log permission issues. 2 = Log permission and authentication issues.
     public static $INFORM_ADMIN_ERRORLEVEL = 2; // Administrator will be informed of any PHP error logged with level equal to or higher than this value. Errors logged with unspecified level defaults to 3.
-    public static $ADMIN_EMAIL = null; // Administrator's email address. NOTE: Configure /config/mail.php for mail account settings, and PHPMailer must be installed via composer.
+    public static $ADMIN_EMAIL = null; // Administrator's email address. NOTE: Configure /secrets/mail.php for mail account settings, and PHPMailer must be installed via composer.
 
     /// Activity Log
     // The array below specifies sets of conditions in the URI, container name, and permgroup that must all match to add an entry to pef_activity_log. Note, at least one of the sets of conditions specified must match.
@@ -148,40 +148,55 @@ class DIB {
     // Return FALSE if targetted request must not be executed.
     public static $CATCHALLEVENT = null;
 
+    /// SITE URL
+    public static $BASEURL='~baseurl~';
+
     /// PATHS
 
-    // Physical path to user-file uploads folder (note, better to keep it outside /var/www/html/ for security reasons)
-    // IMPORTANT: See https://www.owasp.org/index.php/Unrestricted_File_Upload
-    public static $USERSPATH='C:/dibwebuploads/';
+    // THE FOLLOWING PATHS SHOULD BE MOVED OUTSIDE THE WEBSERVER'S DOCUMENT-ROOT FOLDER FOR IMPROVED SECURITY
 
-    // Alternate path for /configs folder. Move outside www folder for (slightly) improved security
-    public static $CONFIGSPATH = null; 
-    
-    // Full path to HtmlPurifier temp/cache folder. Ensure this folder has 775 rights. If empty, Dropinbase uses DIB::$RUNTIMEPATH . 'cache/htmlPurifier'
+    // (Read/write) Full path where user files are uploaded to (see https://www.owasp.org/index.php/Unrestricted_File_Upload)
+    public static $USERSPATH='C:/mysite_uploads/';
+
+    // (Read) Alternate full path for /dropinbase/dropins/setNgxMaterial/angular folder. 
+    // (Write)-rights are required on the /angular/ngtmp folder on development servers only.
+    public static $ANGULARPATH = null;
+
+    // (Read) Full path to /secrets folder. Eg. '/var/www/www-read-only/secrets/'
+    public static $SECRETSPATH = '~rootdir~secrets~dirsep~'; 
+
+    // (Read/Write) Full path to HtmlPurifier temp/cache folder. Ensure the webserver user has read/write rights. If empty, Dropinbase uses DIB::$RUNTIMEPATH . 'cache/htmlPurifier'
     public static $HTMLPURIFIERCACHEPATH = '';
 
+    // (Read/Write) Full path to the /runtime folder - where Dropinbase stores temporary files, and the generated site index.html (.dtxt) file.
+    public static $RUNTIMEPATH='~rootdir~runtime~dirsep~';
+
+    // (Read) Full path to the Composer /vendor folder
+    public static $VENDORPATH='~vendordir~';
+
+    /// OTHER PATHS REQUIRED BY DROPINBASE
+
     // Values generated automatically (hard-code them for custom environments)
-    public static $BASEURL='~baseurl~';
     public static $BASEPATH='~rootdir~';
     public static $DROPINPATHDEV='~rootdir~dropins~dirsep~';
-    public static $RUNTIMEPATH='~rootdir~runtime~dirsep~';
     public static $FILESPATH='~rootdir~files~dirsep~';
     public static $SYSTEMPATH='~systemdir~';
     public static $EXTPATH= '~systemdir~extensions~dirsep~';
-    public static $VENDORPATH='~vendordir~';
     
-    // Values set dynamically with every request
-    public static $CRUDFILE; // Path to container or dropdownlist crud file for the current user (set just before crud operation is performed).
-    public static $CODEPATH; // Folder where current container's generated files are stored. Is set when container permissions are checked.
-    public static $DROPINPATH; // Path to either the system or user dropin folder, depending on the current request. 
-                               // If it is not a dropin request, the path will point to the /droinbase/ folder (same as the $BASEPATH).
-    public static $USER; // Array of all fields in pef_login (except password, dib_password, and notes)
-    public static $DATABASES; // Array of connection details to all databases in pef_database
-    public static $PERMGROUP; // Combination of the permission groups the user currently has rights to, eg x3x5x
-    public static $LOCALE;    // The user's language (from pef_login)
-    public static $RETURN_URL; // Dynamically set - remembers requested page when user is not logged in and returns to it after login.
-    public static $CONTROLLER; // Name of the controller referenced by the current request
-    public static $ACTION; // Name of the controller action
-    public static $CONTAINERDATA; // array of the current container's info obtained from active permission record
-    public static $ITEMLISTDATA; // array of the current item list's info obtained from active permission record
+    /// Values set dynamically with every request
+
+    public static $CRUDFILE = ''; // Path to container or dropdownlist crud file for the current user (set just before crud operation is performed).
+    public static $CODEPATH = ''; // Folder where current container's generated files are stored. Is set when container permissions are checked.
+    public static $DROPINPATH = ''; // Path to either the system or user dropin folder, depending on the current request. 
+                                    // If it is not a dropin request, the path will point to the /droinbase/ folder (same as the $BASEPATH).
+    public static $PERMGROUP = ''; // Combination of the permission groups the user currently has rights to, eg x3x5x
+    public static $LOCALE = '';    // The user's language (from pef_login)
+    public static $RETURN_URL = ''; // Dynamically set - remembers requested page when user is not logged in and returns to it after login.
+    public static $CONTROLLER = ''; // Name of the controller referenced by the current request
+    public static $ACTION = ''; // Name of the controller action
+
+    public static $USER = []; // Array of all fields in pef_login (except password, dib_password, and notes)
+    public static $DATABASES = []; // Array of connection details to all databases in pef_database
+    public static $CONTAINERDATA = []; // array of the current container's info obtained from active permission record
+    public static $ITEMLISTDATA = []; // array of the current item list's info obtained from active permission record
 }
