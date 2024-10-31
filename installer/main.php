@@ -229,11 +229,11 @@ class Install {
 		}
 		
 	  	// Load Conn.php and try to connect to db's
-		$connPath = self::$basePath  . 'configs' . DIRECTORY_SEPARATOR . 'Conn.php';
+		$connPath = (empty(DIB::$SECRETSPATH)) ? self::$basePath  . 'secrets' . DIRECTORY_SEPARATOR . 'Conn.php' : DIB::$SECRETSPATH . 'Conn.php';
 
         if(!file_exists($connPath)) {
         	if(!is_writable(dirname($connPath))) {
-				$response[] = self::getResponse('File Permissions', true, "The '$connPath' file does not exist, and the webserver does not have permissions to create the file. Either provide the necessary permissions or create the Conn.php file manually (see /config/Example_Conn.php).");
+				$response[] = self::getResponse('File Permissions', true, "The '$connPath' file does not exist, and the webserver does not have permissions to create the file. Either provide the necessary permissions or create the Conn.php file manually (see /secrets/Example_Conn.php).");
 				return FALSE;
 			}
 			// Create the file
@@ -257,13 +257,13 @@ class Install {
 		$c = DIB::$DATABASES[$dbIndex];
 		$missing = self::checkConnAttributes($c);
 		if($missing !== '') {
-			$response[] = self::getResponse('Database Connection', true, "The entry in the database connection file (/configs/Conn.php) is missing the following attributes:<br><b>$missing<b><br>Please amend, or delete the Conn.php file so that it can be created again.");
+			$response[] = self::getResponse('Database Connection', true, "The entry in the database connection file (/secrets/Conn.php) is missing the following attributes:<br><b>$missing<b><br>Please amend, or delete the Conn.php file so that it can be created again.");
 			return FALSE;
 		}
 		
 		// dropinbase database must be mysql
 		if($c['dbType'] !== 'mysql') {
-			$response[] = self::getResponse('Database Connection', true, "The dropinbase database must (at present) be hosted in MySQL / Mariadb. If it is, change the dbType field to 'mysql' for the first entry of the database connection file (/configs/Conn.php).");
+			$response[] = self::getResponse('Database Connection', true, "The dropinbase database must (at present) be hosted in MySQL / Mariadb. If it is, change the dbType field to 'mysql' for the first entry of the database connection file (/secrets/Conn.php).");
 			return FALSE;
 		}
 
@@ -273,7 +273,7 @@ class Install {
 		
 		$result = Db::execute("SELECT 1 as A");
 		if($result === FALSE || Db::count()<1) {
-			$response[] = self::getResponse('Database Connection', false, 'Could not connect to the MySQL (compatible) server, using the host, port, username and password provided in entry 1 of the database connection file (/configs/Conn.php).<br>Database error: ' . Db::lastErrorAdminMsg());
+			$response[] = self::getResponse('Database Connection', false, 'Could not connect to the MySQL (compatible) server, using the<br>host, port, username and password provided in entry 1 of the database connection file (/secrets/Conn.php).<br>Database error: ' . Db::lastErrorAdminMsg());
 			return FALSE;
 		}
 
@@ -345,12 +345,12 @@ class Install {
 		$sql = "CREATE DATABASE IF NOT EXISTS `$databaseName` DEFAULT CHARACTER SET = 'utf8mb4' DEFAULT COLLATE 'utf8mb4_unicode_520_ci';";
 		$result = Db::execute($sql);
 		if($result === FALSE) {
-	    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ('$databaseName') using the following connection properties:<br>$connStr, $username, $password.<br>Please check the connection properties in entry $dbIndex of the database connection file (/configs/Conn.php). The following SQL failed:<br> " . $sql . '<br> Database error: ' . Db::lastErrorAdminMsg());
+	    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ('$databaseName') using the following connection properties:<br>$connStr, $username, $password.<br>Please check the connection properties in entry $dbIndex of the database connection file (/secrets/Conn.php). The following SQL failed:<br> " . $sql . '<br> Database error: ' . Db::lastErrorAdminMsg());
 			return $response;
 		}
 		
 		// Get sql file contents
-		$sql = file_get_contents(self::$dibPath . 'dropinbase.sql');
+		$sql = file_get_contents(self::$dibPath . 'installer' . DIRECTORY_SEPARATOR . 'dropinbase.sql');
 		$sql = str_ireplace("CREATE TABLE IF NOT EXISTS `pef_activity_log`", "USE `$databaseName`;\r\n\r\n CREATE TABLE IF NOT EXISTS `pef_activity_log`", $sql);
 
 		// Temporary variable, used to store current query
@@ -372,7 +372,7 @@ class Install {
 			    $result = Db::execute($templine);
 
 			    if($result === FALSE) {
-			    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables. Please check the MySQL user permissions and the connection properties (/configs/Conn.php). The following SQL failed: " . $templine . '. Database error: ' . Db::lastErrorAdminMsg());
+			    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables. Please check the MySQL user permissions and the connection properties (/secrets/Conn.php).<br>The following SQL failed: " . $templine . '. Database error: ' . Db::lastErrorAdminMsg());
 					return $response;
 				}
 			    	
@@ -547,7 +547,7 @@ class Install {
    - This file is regenerated each time connection details are updated using the /nav/dibConfigs UI in Dropinbase
    - View the Example_Conn.php file for examples of how to connect to different database servers
    - By default the MySQL dropinbase tables use the 'utf8mb4_unicode_520_ci' collation. 
-     Ensure your MySQL server's my.ini file is configured accordingly, or change the collation for the dropinbase tables (HeidiSQL has a useful bulk tool).
+     Ensure your MySQL server's my.ini file is configured accordingly, or change the collation for the dropinbase tables to match your own settings (HeidiSQL has a useful bulk tool).
    - More info about charset and collation:
         https://www.coderedcorp.com/blog/guide-to-mysql-charsets-collations/
 */
@@ -560,7 +560,7 @@ DIB::\$DATABASES = array(
         'host'=>'$host',
         'port'=>$port,
         'charset'=>'utf8mb4',
-		'collation' => 'utf8mb4_unicode_520_ci'
+		'collation' => 'utf8mb4_unicode_520_ci',
         'connectionStringExtra'=>'',
         'dbType'=>'mysql',
         'emulatePrepare'=>true,
@@ -576,24 +576,30 @@ DIB::\$DATABASES = array(
 	}
 
     private static function updateIndexFile(&$response) {
+
+		$path = self::$basePath.'index.php';
+
+		if(!is_writable($path)){
+			$response[] = self::getResponse('Index.php file', false, "The installer cannot update the $path file due to file permissions. Please alter the file manually by commenting the 'require ./installer/index.php' line out, to run Dropinbase instead of the Installer.");
+	  		return FALSE;
+		}
         
 		// Read the content of the file into a string
-		$fileContents = file_get_contents(self::$basePath.'index.php');
+		$fileContents = @file_get_contents($path);
 
 		// Check if the file was successfully read
 		if ($fileContents === false) {
-			echo "Failed to read the file.";
-			exit(1);
+			$response[] = self::getResponse('Index.php file', false, "The installer cannot read to the $path file. Please alter the file manually by commenting the 'require ./installer/index.php' line out, to run Dropinbase instead of the Installer.");
+	  		return FALSE;
 		}
 		
-		// Uncomment "./installer/index.php"
-		$updatedContents = str_replace('require \'./installer/installer.php\'; die();', '// require \'./installer/installer.php\'; die();', $fileContents);
+		// Comment require ./installer/index.php
+		$updatedContents = str_replace('require \'./installer/index.php\'; die();', '// require \'./installer/index.php\'; die();', $fileContents);
 
-        $path = self::$basePath.'index.php';
 		$result = @file_put_contents($path, $updatedContents);
 
         if ($result === false) {
-			$response[] = self::getResponse('Index.php file', false, "Could not write to the $path file. Please check permissions, and try again, or alter the file manually by uncommenting and commenting the relevant lines to run Dropinbase instead of the Installer.");
+			$response[] = self::getResponse('Index.php file', false, "The installer cannot update the $path file due to file permissions. Please alter the file manually by commenting the 'require ./installer/index.php' line out, to run Dropinbase instead of the Installer.");
 	  		return FALSE;
 		}
 
@@ -889,6 +895,10 @@ DIB::\$DATABASES = array(
 
 		// PowerShell script template with error handling and Invoke-WebRequest fallback
 		$psScript = <<< PS
+		# Application checksums (https://nodejs.org/en/blog/release/v20.9.0)
+		\$nodeJsCheckSumx86 = "808d504dfd367b72260b378a5a5ee1812751a43512ab48d70d9d945f22c71af8"
+		\$nodeJsCheckSumx64 = "B2DECDFC3DD4BB43965BE46302E1198B1A3A95DA0BE5C7DC7EB221C185A3C5FD"
+		
 		# Check if script is running as administrator
 		\$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 		if (-not \$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -905,7 +915,7 @@ DIB::\$DATABASES = array(
 			)
 			if (\$LASTEXITCODE -ne 0) {
 				if(\$StopOnError -eq 'yes') {
-					Write-Host "Command '\$CommandName' failed with exit code \$LASTEXITCODE. Script will stop executing." -ForegroundColor Red
+					Write-Host "\r\nCommand '\$CommandName' failed with exit code \$LASTEXITCODE. Script will stop executing." -ForegroundColor Red
 					exit \$LASTEXITCODE
 				}
 			} else {
@@ -965,17 +975,34 @@ DIB::\$DATABASES = array(
 				Start-BitsTransfer -Source "\$url" -Destination "\$output"
 				StopIfFailed -CommandName "Start-BitsTransfer" -StopOnError "no"
 			} catch {
-				Write-Host "Download failed with all methods. Please download and install manually. Exiting script." -ForegroundColor Red
+				Write-Host "\r\nDownload of \$url failed with all 3 methods. Please download and install manually. Exiting script." -ForegroundColor Red
 				exit 1
 			}
 		}
+		
+		
+		# Function to calculate the file checksum
+		function CheckFileHashSHA256 {
+
+			param (
+				[string] \$filePath,
+				[string] \$validHash,
+				[string] \$appName
+			)
+
+			if (\$validHash -ne (Get-FileHash -Algorithm SHA256 \$filePath).Hash) {
+				Write-Host "Checksum validation failed for downloaded \$appName! Aborting installation." -ForegroundColor Red
+				Remove-Item \$filePath -Force
+				Exit 1
+			}
+		}
+
 		PS;
 
 		// Add Node.js installation if not installed or version is incorrect (with error handling)
 		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion) {
 			$psScript .= <<< PS
 		
-		Write-Host "Installing Node.js $dibNodeVersion..."
 		try {
 			if (-not (Get-Command msiexec.exe -ErrorAction SilentlyContinue)) {
 				Write-Host "msiexec.exe not found. Please ensure it's available in your system's PATH variable." -ForegroundColor Red
@@ -986,15 +1013,20 @@ DIB::\$DATABASES = array(
 			if (\$env:PROCESSOR_ARCHITECTURE -eq "x86") {
 				\$nodeUrl = "https://nodejs.org/dist/v$dibNodeVersion/node-v$dibNodeVersion-x86.msi"
 				\$installerFile = "node-v$dibNodeVersion-x86.msi"
+				\$nodeJsCheckSum = \$nodeJsCheckSumx86
 			} else {
 				\$nodeUrl = "https://nodejs.org/dist/v$dibNodeVersion/node-v$dibNodeVersion-x64.msi"
 				\$installerFile = "node-v$dibNodeVersion-x64.msi"
+				\$nodeJsCheckSum = \$nodeJsCheckSumx64
 			}
 
 			# Download Node.js installer
 			Write-Host "Downloading Node.js version $dibNodeVersion for \$env:PROCESSOR_ARCHITECTURE..."
 			DownloadFile -url \$nodeUrl -output \$installerFile
 			StopIfFailed -CommandName "Download Node.js installer"
+
+			# Perfom checksum
+			CheckFileHashSHA256 -filePath \$installerFile -validHash \$nodeJsCheckSum -appName "Node.js installer"
 
 			# Install Node.js silently
 			Write-Host "Installing Node.js..."
@@ -1048,28 +1080,43 @@ DIB::\$DATABASES = array(
 		PS;
 
 		} else {
-			$msg = ($nodeVersion != '20.9.3') ? "\r\n\r\n***NOTE: Version 20.9.3 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.3, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version before testing.\r\n\r\n" : '';
-			$psScript .= "\$nodeMessage = @'Node.js $nodeVersion is already installed. $msg'@ -ForegroundColor Red \r\n";
-			$psScript .= "Write-Host \$nodeMessage";
+			$msg = ($nodeVersion != '20.9.3') ? "`n`n***NOTE: Version 20.9.3 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.3, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version before testing.`n`n" : '';
+			$psScript .= "\r\n\$nodeMessage = 'Node.js $nodeVersion is already installed. $msg'";
+			$psScript .= "\r\nWrite-Host \$nodeMessage -ForegroundColor Red \r\n";
 		}
 
 		// Add Composer installation if not installed (with error handling)
 		if (!$composerVersion) {
 			$psScript .= <<< PS
 
-		Write-Host "Installing Composer..."
 		try {
 			# Check if PHP is installed
 			if (Get-Command php -ErrorAction SilentlyContinue) {
 				Write-Host ""
 			} else {
-				Write-Host "PHP cannot be run from the commandline, or not in PATH. Please check your PHP installation, and ensure it's in the PATH." -ForegroundColor Red
+				Write-Host "PHP cannot be run from the commandline, or php.exe is not in PATH. Please check your PHP installation, and ensure it is globally available by adding it to the PATH environment setting." -ForegroundColor Red
 				exit 1
 			}
 
 			# Download Composer installer
+			Write-Host "Downloading Composer and signature..."
+
 			DownloadFile -url "https://getcomposer.org/installer" -output composer-setup.php
 			StopIfFailed -CommandName "Download Composer installer"
+
+			DownloadFile -url "https://composer.github.io/installer.sig" -output ComposerInstaller.sig
+			StopIfFailed -CommandName "Download Composer Signature"
+
+			# Calculate SHA384 checksum of the downloaded installer
+			\$calculatedHash = Get-FileHash -Path composer-setup.php -Algorithm SHA384 | Select-Object -ExpandProperty Hash
+			\$expectedHash = Get-Content ComposerInstaller.sig
+
+			# Validate the checksum
+			if (\$calculatedHash -ne \$expectedHash) {
+				Write-Host "Composer installer checksum validation failed! Aborting installation." -ForegroundColor Red
+				Remove-Item composer-setup.php -Force
+				Exit 1
+			}
 
 			# Run the installer
 			& php composer-setup.php --install-dir=$composerPath --filename=composer
@@ -1088,7 +1135,7 @@ DIB::\$DATABASES = array(
 			Write-Host "Composer installed successfully."
 
 		} catch {
-			Write-Host "Composer installation failed." -ForegroundColor Red
+			Write-Host "\r\nComposer installation failed." -ForegroundColor Red
 			exit 1
 		}
 		PS;
@@ -1102,17 +1149,17 @@ DIB::\$DATABASES = array(
 		# Navigate to the PHP project directory and run Composer install
 		cd "$basePath"
 
-		Write-Host "Running Composer install..."
+		Write-Host "Executing composer install..."
 		try {
 			composer install
 			StopIfFailed -CommandName "composer install"
 
 		} catch {
-			Write-Host "Composer install failed." -ForegroundColor Red
+			Write-Host "\r\nComposer install failed." -ForegroundColor Red
 			exit 1
 		}
 
-		# Navigate to the Angular project directory
+		# Navigate to the Angular project directory and run 'npn install'
 		cd "$angularPath"
 		Write-Host "Running npm install..."
 
@@ -1283,6 +1330,8 @@ DIB::\$DATABASES = array(
 
 		// Generate the bash script based on the detected Linux distribution
 
+		// Note, linux apt/cnf/yum does checksum verification of packages 
+
 		$bashScript = <<< BASH
 		#!/bin/bash
 		# Detected Linux Distribution: $linuxDistro
@@ -1338,6 +1387,7 @@ DIB::\$DATABASES = array(
 		# Update and install Node.js for Ubuntu/Debian
 		echo "Downloading Node.js $dibNodeVersion..."
 		curl -fsSL https://deb.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
+
 
 		echo "Installing Node.js $dibNodeVersion..."
 		apt install -y nodejs=$dibNodeVersion-1nodesource1

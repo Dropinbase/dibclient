@@ -67,7 +67,7 @@ function doAction(action) {
                
                 window.history.replaceState(stateObj, "Dropinbase", "/login");
 
-                msg = '<h2 style="color: #05a6ed">Ready to go!</h2> <b>Refresh your browser, and provide the credentials above.</b>';
+                msg = '<h2 style="color: #05a6ed">Ready to go!</h2> <b style="color: rgb(2, 78, 144)">Refresh your browser, and provide the credentials above.</b>';
 
             } else
                 msg += 'Please proceed to the next step';
