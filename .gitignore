@@ -5,3 +5,4 @@ configs/Mail.php
 configs/MimeTypeWhiteList.php
 composer.lock
 .htaccess
+configs/Dib.php

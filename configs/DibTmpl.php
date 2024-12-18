@@ -24,8 +24,8 @@ class DIB {
 	// See coverPage setting below for configuring the layout
     /*
     public static $SITEMAINTENANCE=array(
-        'startTime'=>'2023-07-20 15:01', // date & time at which site will become unavailable and 'coverPage' is displayed instead
-        'warningMsg'=>'The site will be down for upgrades & maintenance from xxx today for about xxx minutes.', // 10 minute warning message for users
+        'startTime' => '2024-02-20 15:01', // date & time at which site will become unavailable and 'coverPage' is displayed instead
+        'warningMsg' => 'The site will be down for upgrades & maintenance from xxx today for about xxx minutes.', // 10 minute warning message for users
         'coverPageMsg' => 'Oops!<br>Temporarily unavailable due to scheduled upgrades &amp; maintenance<br>We should be up again soon, please check in later.',
         'coverPage' => 'sitemaintenance.php', // PHP file in /dropins/dibAuthenticate/views/ that returns HTML to display after startTime
         'allowedIps' => array() // list of IP addresses that are allowed to use the site while maintenance is active
@@ -45,25 +45,28 @@ class DIB {
 	public static $AUDITDB=1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
 	
 	
+	// ***NOTE: add more constants/variables here to use in your own PHP for other databases... 
+
+
     // Basic settings
-	public static $ENVIRONMENT='development'; // 'development' = auto-deletion of files, html beautified. 'production' = No deletion, compression of Javascript.
-	public static $TIMEZONE='Africa/Johannesburg'; // See http://php.net/manual/en/timezones.php
-    public static $SITENAME='Dropinbase'; // The title of the browser tab
-	public static $SITELOGO='files/icons/logo.png'; // Used in Environment.php settings to make available client-side via the getEnv() function
+	public static $ENVIRONMENT = 'development'; // 'development' = auto-deletion of files, html beautified. 'production' = No deletion, compression of Javascript.
+	public static $TIMEZONE = 'Africa/Johannesburg'; // See http://php.net/manual/en/timezones.php
+    public static $SITENAME = 'Dropinbase'; // The title of the browser tab
+	public static $SITELOGO = 'files/icons/logo.png'; // Used in Environment.php settings to make available client-side via the getEnv() function
 
 	// Logs and error reporting
-	public static $WRITE_ERRORS_TO = 'file&db'; // Write errors to file/db/file&db. Note if Dropinbase cannot write to the database, it will always attempt to write to the file (/runtime/logs/error.log).
-    public static $DEBUG_LEVEL=2; // 0 = no PHP errors logged. 1 = PHP errors logged with some detail. 2 = most detail logged for PHP errors.
-    public static $CLIENT_DEBUG_LEVEL=1; // 0 = no debug messages printed in browser Console and no debugger code generated. 1 = debug messages printed in browser Console and debugger code generated.
-    public static $ELEUTHERIA_DEBUG_LEVEL=2; // 0 = no Eleutheria pre-emptive syntax checking or error reporting.  1 = Eleutheria pre-emptive syntax checking.
+	public static $WRITE_ERRORS_TO = 'db'; // Write errors to file/db/file&db. Note if Dropinbase cannot write to the database, it will always attempt to write to the file (/runtime/logs/error.log).
+    public static $DEBUG_LEVEL = 2; // 0 = no PHP errors logged. 1 = PHP errors logged with some detail. 2 = most detail logged for PHP errors.
+    public static $CLIENT_DEBUG_LEVEL = 1; // 0 = no debug messages printed in browser Console and no debugger code generated. 1 = debug messages printed in browser Console and debugger code generated.
+    public static $ELEUTHERIA_DEBUG_LEVEL = 2; // 0 = no Eleutheria pre-emptive syntax checking or error reporting.  1 = Eleutheria pre-emptive syntax checking.
                                              // 2 = SECURITY RISK: Adds echo-ing of errors to (1). 3 = SECURITY RISK: Adds creation of detailed trace file to (2).
-	public static $LOGPERMISSUES=1; // 0 = Don't log any permission issues. 1 = Log permission issues. 2 = Log permission and authentication issues.
-	public static $INFORM_ADMIN_ERRORLEVEL=2; // Administrator will be informed of any PHP error logged with level equal to or higher than this value. Errors logged with unspecified level defaults to 3.
-	public static $ADMIN_EMAIL=null; // Administrator's email address. NOTE: Configure /config/mail.php for mail account settings, and PHPMailer must be installed via composer.
-	public static $RECORDUNITTEST=FALSE; // TRUE or FALSE - Whether all requests must be recorded in pef_unit_test. Greatly affects performance. Normally FALSE.
+	public static $LOGPERMISSUES = 1; // 0 = Don't log any permission issues. 1 = Log permission issues. 2 = Log permission and authentication issues.
+	public static $INFORM_ADMIN_ERRORLEVEL = 2; // Administrator will be informed of any PHP error logged with level equal to or higher than this value. Errors logged with unspecified level defaults to 3.
+	public static $ADMIN_EMAIL = null; // Administrator's email address. NOTE: Configure /config/mail.php for mail account settings, and PHPMailer must be installed via composer.
+	public static $RECORDUNITTEST = FALSE; // TRUE or FALSE - Whether all requests must be recorded in pef_unit_test. Greatly affects performance. Normally FALSE.
 
 	// Cache settings
-	public static $CODEUSE=1;  // 0 = Always overwrite dibCode files
+	public static $CODEUSE = 1;  // 0 = Always overwrite dibCode files
 							   // 1 = Delete a container's dibCode file if affected by design changes, else use if available (speeds up loads during development). 
 							   // 2 = Use a dibCode file if it exists, else create it
                                // 3 = Allways use dibCode files (assume all necessary files exist)
@@ -72,29 +75,31 @@ class DIB {
 	// Security settings
 	public static $DESIGNER_CAN_READ_ERRORS = TRUE; // Whether the Designer can read and display errors from the database.
 	public static $DESIGNER_CAN_READ_DEBUG = TRUE; // Whether the Designer can read and display debug logs.
+	public static $CHECKUSERSESSIONS = TRUE; // Helps block session hijacking. Affects users where pef_login.check_user_session==1. These users can have only one active session. Note, pef_login.session_version is compared with value stored in PHP session with every request, which affects performance.
 	public static $VERIFY_IP = TRUE; // Whether successive requests from the same web user must originate from the same IP address, else logged out. Note, is affected by Load-ballencers and dynamic ip addresses which will cause intermittent drops.
 	public static $VERIFY_USER_AGENT = TRUE; // Whether successive requests from the same web user must have the same USER AGENT, else logged out. Note, affected by ISP's and browsers which updates info.
 	public static $VERIFY_AUTH_TOKEN = TRUE; // Whether authentication tokens are checked on server requests, else logged out. This should be TRUE. Use eg. $REQUEST_TYPE='GET,POST,ignoretoken' in controller function parameters to override, for eg. file downloads.
 	public static $USERNAME_REGEX='#^\w{4,30}$#'; // A semicolon delimited list of regular expressions that must validate successfully in order for usernames to be accepted
     public static $USERNAME_REGEXMSG='The username must contain between 4 and 30 alpha-numeric characters (no spaces, but underscore (_) is allowed).';
-	public static $ENABLE_REMEMBERME = true; // Whether to enable Remember Me functionality. Ensure that the /dropins/dibAuthentice/views/login.php contains the neccessary HTML.
-	public static $PUBLICFILEPERMS = array( 
-		'allow_uploads'=>TRUE, // Allow system_public user to upload files.
-		'allow_downloads'=>TRUE, // Allow system_public user to download files.
-		'allow_deletes'=>TRUE, // Allow system_public user to delete files.
-	);
-	public static $ALLOWEDHTML = ''; // If empty, then messages/prompts/popups sent to browser are not secured. Otherwise, specify a list of allowed HTML elements and attributes, using HtmlPurifier's syntax: http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+	public static $ENABLE_REMEMBERME = TRUE; // Whether to enable Remember Me functionality. Ensure that the /dropins/dibAuthentice/views/login.php contains the neccessary HTML.
+	public static $PUBLICFILEPERMS = [
+		'allow_uploads' => TRUE, // Allow system_public user to upload files.
+		'allow_downloads' => TRUE, // Allow system_public user to download files.
+		'allow_deletes' => TRUE, // Allow system_public user to delete files.
+	];
+	public static $ALLOWEDHTML = ''; // If empty, then the HTML of messages/prompts/popups sent to browser are not sanitized. Otherwise, specify a list of allowed HTML elements and attributes, using HtmlPurifier's syntax: http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
 	
     // Path to the index file to bootstrap the application for a particular material dropin
-	public static $DEFAULTFRAMEWORK='setNgxMaterial'; // client framework to load at startup
-	public static $INDEXPATH=[
+	public static $DEFAULTFRAMEWORK = 'setNgxMaterial'; // client framework to load at startup
+	public static $INDEXPATH = [
 		'setNgxMaterial'=>'/setNgxMaterial/angular/dist/browser/index.html',
 	];
 
 	// Queue settings
 	public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
 	public static $OVERRIDEQUEUEWITH = 'None'; // None/NodeJs (Note, NodeJs requires expertise to maintain and run stably in some client environments)
-	public static $NODEJSHOST=null; // NodeJs server connection details (eg 'http://localhost:8080'), OR null (NodeJs will not be initialized)	
+	public static $NODEJSHOST=null; // NodeJs server connection details (eg 'http://localhost:8080'), OR null (NodeJs will not be initialized)
+	public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the NodeJs watcher automatically when compiling container's one-by-one.
 	
 	// Hooks
 	public static $SETUPSCRIPT=null; // Path to any script that is run just after user indentification and before URL request is analysed, eg '/dropins/myDropin/components/SetValues.php'
