@@ -13,7 +13,7 @@ class DibUserParams {
                     INNER JOIN pef_security_policy s ON l.pef_security_policy_id = s.id 
                 WHERE l.id = :loginId";
 
-        $sessionArgs = Database::fetch($sql, array('loginId'=>$loginId), DIB::LOGINDBINDEX);
+        $sessionArgs = Database::fetch($sql, array('loginId'=>$loginId), DIB::$LOGINDB);
 
         // The following is for demo purposes only
         // Normally a field like staff_id/client_id is added to the pef_login table and included in the SELECT statement above,

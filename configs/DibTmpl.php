@@ -31,16 +31,18 @@ class DIB {
         'allowedIps' => array() // list of IP addresses that are allowed to use the site while maintenance is active
     );
     */
+    public static $SECRETSPATH = '~rootdir~configs~dirsep~'; 
 
 	// Database indexes
-	const DBINDEX=1; // id/index value of the main Dropinbase database in Conn.php and the pef_database table
-    const LOGINDBINDEX=1; // Database containing the pef_login, pef_perm_group and pef_security_policy tables	
+	public static $DIBDB=1; // id/index value of the main Dropinbase database in Conn.php and the pef_database table
+    public static $LOGINDB=1; // Database containing the pef_login, pef_perm_group and pef_security_policy tables	
 	// NOTE: add more constants or variables here to use in your own PHP for other databases... 
+	public static $ANGULARPATH = ''; // if empty then default folder in /dropinbase/dropins/setNgxMaterial/angular is assumed
 
-    public static $ERRORLOGINDEX=1; // database containing the pef_error_log table where errors are logged. 
+    public static $ERRORLOGDB=1; // database containing the pef_error_log table where errors are logged. 
                                     // Note, also update the pef_sql.pef_database_id of the two or more 'qdibErrorLog...' query(ies) if needed, which determine which pef_error_log table to look at - there can (erroneously) be more than one in different databases.
-    public static $SQLLOGDBINDEX=null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.	
-	public static $AUDITDBINDEX=1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
+    public static $SQLLOGDB=null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.	
+	public static $AUDITDB=1; // Database containing the default pef_audit_trail table (override this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
 	
 	
     // Basic settings
@@ -50,7 +52,7 @@ class DIB {
 	public static $SITELOGO='files/icons/logo.png'; // Used in Environment.php settings to make available client-side via the getEnv() function
 
 	// Logs and error reporting
-	public static $WRITE_ERRORS_TO = 'db'; // Write errors to file/db/file&db. Note if Dropinbase cannot write to the database, it will always attempt to write to the file (/runtime/logs/error.log).
+	public static $WRITE_ERRORS_TO = 'file&db'; // Write errors to file/db/file&db. Note if Dropinbase cannot write to the database, it will always attempt to write to the file (/runtime/logs/error.log).
     public static $DEBUG_LEVEL=2; // 0 = no PHP errors logged. 1 = PHP errors logged with some detail. 2 = most detail logged for PHP errors.
     public static $CLIENT_DEBUG_LEVEL=1; // 0 = no debug messages printed in browser Console and no debugger code generated. 1 = debug messages printed in browser Console and debugger code generated.
     public static $ELEUTHERIA_DEBUG_LEVEL=2; // 0 = no Eleutheria pre-emptive syntax checking or error reporting.  1 = Eleutheria pre-emptive syntax checking.

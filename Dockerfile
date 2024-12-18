@@ -1,5 +1,5 @@
-FROM dropinbase/angular:ng15
-RUN apt-get update --fix-missing
+FROM dropinbase/latest:ng17
+# RUN apt-get update --fix-missing
 
 # TODO /vendor/dropinbase/dropinbase should be copied from somewhere else
 # COPY test-app.php /dropinbase/index.php
@@ -26,10 +26,10 @@ COPY package.json /dropinbase/
 COPY composer.json /dropinbase/
 RUN php /usr/local/bin/composer install --prefer-dist 
 ENV Dropinbase_Vendor_Path /vendor
-COPY nginx/* /opt/docker/etc/nginx/
-COPY nginx/vhost.common.d/* /opt/docker/etc/nginx/vhost.common.d/
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY php.webdevops.ini /opt/docker/etc/php/php.webdevops.ini
+#COPY nginx/* /opt/docker/etc/nginx/
+#COPY nginx/vhost.common.d/* /opt/docker/etc/nginx/vhost.common.d/
+#COPY nginx.conf /etc/nginx/nginx.conf
+#COPY php.webdevops.ini /opt/docker/etc/php/php.webdevops.ini
 
 RUN chown application:application /vendor/dropinbase/dropinbase/dropins/setNgxMaterial/angular/projects -R
 RUN chown application:application /vendor/dropinbase/dropinbase/dropins/setNgxMaterial/angular/src/ -R

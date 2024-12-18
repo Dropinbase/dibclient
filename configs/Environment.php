@@ -8,13 +8,13 @@
 
 // NOTE: do not remove existing values except 'staff_id'
 
-$settings = $this->getSettings("`name` IN ('auditTrailContainerName','defaultDateTimeFormat','defaultDateFormat')", 'pef_setting');
+$settings = DibFunctions::getSettings("`name` IN ('auditTrailContainerName','defaultDateTimeFormat','defaultDateFormat')", 'pef_setting');
 
 // Values 
 
 $args = array(
+    'user_session_data_key' => DIB::$USER['username'], // This defines the user session data key and is required to use remember query string parameters
     'staff_id' => (empty(DIB::$USER['staff_id']) ? null : DIB::$USER['staff_id']), // Remove or adjust as needed. See /configs/DibUserParams.php for details
-
     'site_name' => DIB::$SITENAME,
     'logo' => DIB::$SITELOGO,
     'user_fullname' => DIB::$USER['first_name'] . ' ' . DIB::$USER['last_name'],
@@ -35,7 +35,7 @@ $args = array(
 
     'debug' => DIB::$CLIENT_DEBUG_LEVEL,
     'can_dib_design' => $canDibDesign,
-    'secure_id' => (isset(DIB::$USER['secure_id']) ? DIB::$USER['secure_id'] : null),
+    'auth_id' => (isset(DIB::$USER['auth_id']) ? DIB::$USER['auth_id'] : null),
 );
 
 $response = 'var DIB = ' . json_encode($args);

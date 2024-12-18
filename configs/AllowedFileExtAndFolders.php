@@ -63,6 +63,10 @@ function checkFile($url, $fileName, $ext) {
     if(!ctype_alnum(str_replace(array('.','_','-',' '), '', $fileName)))
         return FALSE;
 
+
+    if (strpos($url,"files/dropins/setNgxMaterial/angular/dist/browser/") !== false)  {
+        return getMimeType($ext);    
+    }
     // Check if folder is whitelisted
     if(!in_array($url, $allowedFolders))
         return FALSE;
