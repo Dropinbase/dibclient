@@ -1,5 +1,7 @@
 <?php
 
+require_once './configs/SecurityHeaders.php';
+
 /* NOTE: Depending on what is uncommented below, this file determines which of the following three options should run: */
 
 // 1. To view installed PHP extensions, uncomment the following line

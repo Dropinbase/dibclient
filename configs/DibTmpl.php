@@ -130,7 +130,7 @@ class DIB {
     public static $ALLOWEDHTML = [
         'htmlPurifier' => false, 'allowedHtml' => '', // specify TRUE to use the sophisticated HtmlPurifier. Use the allowedHtml string to override HTMLPurifier's default configuration (see http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed)
         'basic_tags' => ['br', 'p', 'b', 'i', 'h1', 'h2', 'h3', 'span'], // this allows tags like <br>,<p>,</p>,<b>,</b>,<i>,</i> etc with no HTML attributes.
-        'other_html' => ['<span style="color:red">', '<a href="/nav/dibexActionEmitEvent">Investigate Further</a>'] // list complete HTML strings that must be allowed.
+        'other_html' => ['<span style="color:red">', '<b style="color:red">', '<a href="/nav/dibexActionEmitEvent">Investigate Further</a>'] // list complete HTML strings that must be allowed.
     ];
 
     // Path to the index file to bootstrap the application for a particular material dropin
