@@ -5,5 +5,5 @@
 // Update tokens periodically.
 
 $this->apiTokens = array(
-    'username1' => 'Tg1Ja6yKwQQfi02iJ0vrlL',
+    'username1' => 'Tg1Ja2_yKwQIQfi02iJ0vrlL',
 );

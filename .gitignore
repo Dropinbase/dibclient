@@ -1,5 +1,4 @@
 vendor/
 dropinbase/
 runtime/
-secrets/
 composer.lock
