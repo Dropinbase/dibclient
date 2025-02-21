@@ -25,6 +25,9 @@ $args = array(
    
     'audit_trail_container' => (isset($settings['auditTrailContainerName']) ? $settings['auditTrailContainerName'] : 'auditTrailGrid'),
     'audit_trail_port' => '',
+    
+    'loaderType' => 'ball-atom', // Set the spinner type: https://labs.danielcardoso.net/load-awesome/animations.html
+    'loaderColor' => '#181F32', // Set the spinner color
 
     'default_url' => isset(DIB::$USER['default_url']) ? DIB::$USER['default_url'] : '',
     'base_url' => DIB::$BASEURL,
