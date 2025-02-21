@@ -48,6 +48,7 @@
         '/resources/installer.css',
         '/resources/installer.js',
         '/resources/favicon.ico',
+        '/resources/doneTick.png',
         '/resources/busyTick.png',
         '/resources/pendingTick.png',
         '/resources/logocircle.png',

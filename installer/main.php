@@ -63,7 +63,7 @@ class Install {
 	public static $showOverrideButton = FALSE;
 	private static $curl = null;
 
-	private static $dibDomain = 'https://dib.cdn.co.za';
+	private static $dibDomain = 'https://dibdev.cdn.co.za';
 	
 	public static function init($path) {
 		self::$basePath = $path . DIRECTORY_SEPARATOR;
@@ -348,7 +348,7 @@ class Install {
 	    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ('$databaseName') using the following connection properties:<br>$connStr, $username, $password.<br>Please check the connection properties in entry $dbIndex of the database connection file (/secrets/Conn.php). The following SQL failed:<br> " . $sql . '<br> Database error: ' . Db::lastErrorAdminMsg());
 			return $response;
 		}
-		
+
 		// Get sql file contents
 		$sql = file_get_contents(self::$dibPath . 'installer' . DIRECTORY_SEPARATOR . 'dropinbase.sql');
 		$sql = str_ireplace("CREATE TABLE IF NOT EXISTS `pef_activity_log`", "USE `$databaseName`;\r\n\r\n CREATE TABLE IF NOT EXISTS `pef_activity_log`", $sql);
@@ -361,7 +361,7 @@ class Install {
 		$sql = "";
 		foreach ($lines as $line){
 			// Skip it if it's a comment
-			if (substr($line, 0, 2) == '--' || $line == '')
+			if ($line=='' || substr($line, 0, 2) == '--')
 			    continue;
 
 			// Add this line to the current segment
@@ -405,7 +405,7 @@ class Install {
 			return false;
 		}
 
-		require_once "/DCurl.php";
+		require_once __DIR__ . DIRECTORY_SEPARATOR . "DCurl.php";
 
 		self::$curl = new DCurl(self::$dibDomain);
 		self::$curl->thisClassIsInDibFramework = false;
@@ -594,8 +594,13 @@ DIB::\$DATABASES = array(
 		}
 		
 		// Comment require ./installer/index.php
-		$updatedContents = str_replace('require \'./installer/index.php\'; die();', '// require \'./installer/index.php\'; die();', $fileContents);
-
+		$i = strpos($fileContents, '$INSTALLER=TRUE; require \'./installer/index.php\'; die();');
+		if($i !== false) {
+			$updatedContents = str_replace('$INSTALLER=TRUE; require ', '// $INSTALLER=TRUE; require', $fileContents);
+		} else {
+			$updatedContents = str_replace('require \'./installer/index.php\'; die();', '// require \'./installer/index.php\'; die();', $fileContents);
+		}
+		
 		$result = @file_put_contents($path, $updatedContents);
 
         if ($result === false) {
@@ -662,7 +667,7 @@ DIB::\$DATABASES = array(
 
 		$url = base64_decode($data['records']['url']);
 		*/
-		$url =  'https://assets.dropinbase.com/dropinbase_20241011.zip';
+		$url =  'https://assets.dropinbase.com/dropinbase20241111.zip';
 
 		$progressFile = $dest . DIRECTORY_SEPARATOR . 'install_progress.dtxt';
 
@@ -696,6 +701,7 @@ DIB::\$DATABASES = array(
 			$error_msg = curl_error($ch);
 			file_put_contents($progressFile, 'error');  // Save any errors to the progress file
 			DIB::$ACTION = self::getResponse('download', false, 'Could not download the Dropinbase framework from ' . $url . '<br>Error reported: ' . $error_msg);
+			return false;
 		}
 
 		curl_close($ch);
@@ -703,10 +709,25 @@ DIB::\$DATABASES = array(
 
 		// When download is complete, set progress to 100%
 		file_put_contents($progressFile, 100);
+
+		// check that the intended file was downloaded and not a HTML error page
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$mimeType = finfo_file($finfo, $dest);
+		finfo_close($finfo);
+
+		//file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . 'aa.txt', $mimeType . 'xxx' . $dest);
+
+		if ($mimeType !== 'application/zip') {
+			file_put_contents($progressFile, 'error');
+			DIB::$ACTION = self::getResponse('download', true, 'Could not download the Dropinbase framework from ' . $url . '.<br>Please try again, or contact Dropinbase support at support@dropinbase.com');
+			return false;
+		}
+		
 		DIB::$ACTION = self::getResponse('download', true, "Download of '$dest' complete");
 	}
 
 	public static function downloadDibProgress() {
+
 		$dest = self::$basePath.'runtime' . DIRECTORY_SEPARATOR . 'tmp';
 
 		if(!file_exists($dest)) {
@@ -782,6 +803,7 @@ DIB::\$DATABASES = array(
 			return false;
 
 		} elseif($progress == 'unzip') {
+			
 
 			if(empty(self::$dibPath)) {
 				self::$dibPath = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR;
@@ -811,7 +833,7 @@ DIB::\$DATABASES = array(
 
 		} elseif($progress == 'next step') {
 
-			DIB::$ACTION = self::getResponse('get perms', true, 'Framework installation successfull. Please continue with the next step.');
+			DIB::$ACTION = self::getResponse('get perms', true, 'Framework installation to ' . self::$dibPath . ' successfull.<br>Please continue with the next step.');
 			return false;
 
 		} else {
@@ -892,6 +914,8 @@ DIB::\$DATABASES = array(
 //$nodeVersion = null;
 //$angularVersion = null;
 
+		$installing = '';
+		$installed = '';
 
 		// PowerShell script template with error handling and Invoke-WebRequest fallback
 		$psScript = <<< PS
@@ -902,7 +926,7 @@ DIB::\$DATABASES = array(
 		# Check if script is running as administrator
 		\$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 		if (-not \$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-			Write-Host "Please run this script as an administrator." -ForegroundColor Red
+			Write-Host "Administrator rights required. Please close and then run Powershell as Administrator before executing the script." -ForegroundColor Red
 			exit 1
 		}
 
@@ -1001,6 +1025,8 @@ DIB::\$DATABASES = array(
 
 		// Add Node.js installation if not installed or version is incorrect (with error handling)
 		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion) {
+			$installing .= "Node.js $dibNodeVersion<br>";
+
 			$psScript .= <<< PS
 		
 		try {
@@ -1083,10 +1109,12 @@ DIB::\$DATABASES = array(
 			$msg = ($nodeVersion != '20.9.3') ? "`n`n***NOTE: Version 20.9.3 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.3, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version before testing.`n`n" : '';
 			$psScript .= "\r\n\$nodeMessage = 'Node.js $nodeVersion is already installed. $msg'";
 			$psScript .= "\r\nWrite-Host \$nodeMessage -ForegroundColor Red \r\n";
+			$installed .= 'Node.js ' . $nodeVersion . '<br>';
 		}
 
 		// Add Composer installation if not installed (with error handling)
 		if (!$composerVersion) {
+			$installing .= 'Composer<br>';
 			$psScript .= <<< PS
 
 		try {
@@ -1141,6 +1169,7 @@ DIB::\$DATABASES = array(
 		PS;
 		} else {
 			$psScript .= "\r\nWrite-Host 'Composer is already installed.'\r\n";
+			$installed .= 'Composer<br>';
 		}
 		
 		// Run composer install and npm install
@@ -1201,6 +1230,8 @@ DIB::\$DATABASES = array(
 
 		// Add Angular CLI installation if not installed or version is incorrect (with error handling)
 		if (!$angularVersion || $angularVersion !== '17.3.9') {
+			$installing .= 'Angular CLI 17.3.9<br>';
+
 			$psScript .= <<< PS
 
 		Write-Host "Installing Angular CLI 17.3.9..."
@@ -1215,6 +1246,7 @@ DIB::\$DATABASES = array(
 		}
 		PS;
 		} else {
+			$installed .= 'Angular CLI 17.3.9<br>';
 			$psScript .= "\r\nWrite-Host 'Angular CLI 17.3.9 is already installed.'\r\n";
 		}
 
@@ -1225,7 +1257,11 @@ DIB::\$DATABASES = array(
 
 		file_put_contents($path, $psScript);
 
-		DIB::$ACTION = self::getResponse('configureDib', true, "A Windows PowerShell script was generated for this installation.<br>Please review the script, and execute the following in PowerShell:<br><br><b>powershell -ExecutionPolicy Bypass -File $path</b>");
+		$installing .= 'Composer 3d-party dependencies<br>Angular node_modules<br>';
+
+		$installStr = '<br><br><b>Running the command above will install the following:</b><br>' . $installing . '<br><b>The following are already installed:</b><br>' . $installed;
+
+		DIB::$ACTION = self::getResponse('configureDib', true, "A Windows PowerShell script was generated for this installation.<br>Please review the script, open a Terminal Window in Powershell and run the following command:<br><br><b>powershell -ExecutionPolicy Bypass -File $path</b>$installStr");
 		return TRUE;
 
 		/*
@@ -1329,6 +1365,8 @@ DIB::\$DATABASES = array(
 		}
 
 		// Generate the bash script based on the detected Linux distribution
+		$installing = '';
+		$installed = '';
 
 		// Note, linux apt/cnf/yum does checksum verification of packages 
 
@@ -1371,6 +1409,8 @@ DIB::\$DATABASES = array(
 
 		// Add Node.js installation commands if the required version is not installed
 		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion) {
+			$installing .= "Node.js $dibNodeVersion<br>";
+
 			switch ($linuxDistro) {
 				case 'ubuntu':
 				case 'debian':
@@ -1438,6 +1478,7 @@ DIB::\$DATABASES = array(
 			}
 
 		} else {
+			$installed .= 'Node.js<br>';
 			$msg = ($nodeVersion != '20.9.3') ? "\r\n\r\n***NOTE: Version 20.9.3 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.3, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version, before testing.\r\n" : '';
 			$bashScript .= "\r\nWrite-Host 'Node.js $nodeVersion is already installed. $msg'\n";
 		}
@@ -1464,6 +1505,8 @@ DIB::\$DATABASES = array(
 
 		// Add Composer installation commands if Composer is not installed
 		if ($composerVersion === null) {
+			$installing .= 'Composer<br>';
+
 			switch ($linuxDistro) {
 				case 'ubuntu':
 				case 'debian':
@@ -1480,6 +1523,7 @@ DIB::\$DATABASES = array(
 					break;
 			}
 		} else {
+			$installed .= 'Composer<br>';
 			$bashScript .= "echo 'Composer is already installed.'\n";
 		}
 
@@ -1508,8 +1552,10 @@ DIB::\$DATABASES = array(
 		BASH;
 
 		if ($angularVersion !== '17.3.9') {
+			$installing .= 'Angular CLI 17.3.9<br>';
 			$bashScript .= "npm install -g @angular/cli@17.3.9\n";
 		} else {
+			$installed .= 'Angular CLI 17.3.9<br>';
 			$bashScript .= "echo 'Angular CLI 17.3.9 is already installed.'\n";
 		}
 
@@ -1576,7 +1622,10 @@ DIB::\$DATABASES = array(
 
 		file_put_contents($path, $bashScript);
 
-		DIB::$ACTION = self::getResponse('configureDib', true, "A Linux bash script was generated for this installation.<br>Please review, and then execute the following in Linux as a privileged user:<br><br><b>chmod +x $path<br>sh $path</b>");
+		$installing .= 'Composer 3d-party dependencies<br>Angular node_modules<br>Setting folder&file permissions<br>';
+		$installStr = '<br><br><b>Running the command above will install the following:</b><br>' . $installing . '<br><b>The following are already installed:</b><br>' . $installed;
+
+		DIB::$ACTION = self::getResponse('configureDib', true, "A Linux bash script was generated for this installation.<br>Please review, and then execute the following in Linux as a privileged user:<br><br><b>chmod +x $path<br>sh $path</b>$installStr");
 		return TRUE;
 
 		file_put_contents('install_dependencies.sh', $bashScript);

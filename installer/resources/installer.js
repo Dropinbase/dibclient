@@ -60,7 +60,7 @@ function doAction(action) {
 
         if(!!data && !!data.success) {
            
-            var msg = '<h3>All good!</h3>';
+            var msg = '<h3 style="color: #05a6ed">All good!</h3>';
 
             if(action == 'updateIndex') {
                 var stateObj = {};
@@ -70,7 +70,7 @@ function doAction(action) {
                 msg = '<h2 style="color: #05a6ed">Ready to go!</h2> <b style="color: rgb(2, 78, 144)">Refresh your browser, and provide the credentials above.</b>';
 
             } else
-                msg += 'Please proceed to the next step';
+                msg += '<span style="color: #05a6ed">Please proceed to the next step</span>';
             
             el.innerHTML = msg;
 
@@ -128,7 +128,15 @@ function openTab(pos) {
 
     var iagree = document.getElementById('iagree');
     if (!!!iagree.checked) {
-        alert('First please agree to the terms and conditions stated before continuing');
+       
+        const firstAgree = document.getElementById('firstAgree');
+      
+        firstAgree.style.display = 'block';
+
+        setTimeout(() => {
+            firstAgree.style.display = 'none';
+        }, 4000);
+
         return;
     }
         
@@ -156,14 +164,14 @@ function openTab(pos) {
         if(i + 1 == currentPage) {
             tabcontent[i].style.display = "flex";
             tablinks[i].className = 'title active'
-            tablinks[i].childNodes[1].src = "/files/dropins/dibAdmin/images/icons/busyTick.png"
+            tablinks[i].childNodes[1].src = "/resources/busyTick.png"
         } else {
             tabcontent[i].style.display = "none";
             tablinks[i].className = 'title'
             if(i < maxI)
-                tablinks[i].childNodes[1].src = "/files/dropins/dibAdmin/images/icons/doneTick.png"
+                tablinks[i].childNodes[1].src = "/resources/doneTick.png"
             else
-                tablinks[i].childNodes[1].src = "/files/dropins/dibAdmin/images/icons/pendingTick.png"
+                tablinks[i].childNodes[1].src = "/resources/pendingTick.png"
         }
     }
 

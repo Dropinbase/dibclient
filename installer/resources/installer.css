@@ -263,6 +263,18 @@ p {
     padding: 10px 15px;
 }
 
+/* Warning message styling */
+.warningMessage {
+    display: none;
+    background-color: #ffe6e6;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: left;
+  }
+
 .checkbox {
     border: 1px solid grey;
     border-radius: 4px;
