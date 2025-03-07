@@ -74,7 +74,24 @@
         '/checkDibInstall',
     );
 
-    include($path.DIRECTORY_SEPARATOR.'main.php');
+    include($path . DIRECTORY_SEPARATOR . 'main.php');
+    Install::checkRequiredPhpApacheModules($response);
+    if (!empty($response)) {
+        $msgStyle ="style=\" background-color: #f97f7f; border-left: 4px solid rgb(255,57,57); border-radius: 2px; width: 26em; padding: 0.2em; \"";
+        // print_r($response);
+        foreach ($response as $r) {
+            // print_r($r['notes']);
+            if (str_contains($r['notes'], 'mod_headers')) {
+                // echo "mod_headers and mod_rewrite needs to be enabled before continuing";
+                $missingMods = "<div style=\"margin: 2px; padding: 2px;\"><h3 " . $msgStyle . ">mod_headers needs to be enabled before continuing</h3></div>";
+                echo $missingMods;
+            }
+            if (str_contains($r['notes'], 'mod_rewrite')) {
+                $missingMods = "<div style=\"margin: 2px; padding: 2px;\"><h3 " . $msgStyle . ">mod_rewrite needs to be enabled before continuing</h3></div>";
+                echo $missingMods;
+            }
+        }
+    }
 
     if (in_array($_SERVER['REQUEST_URI'], $actions)){
 
@@ -129,7 +146,7 @@
             $composerFolder = null;
         else {
             $composerVersion = Install::getComposerVersion();
-            $composerFolder = (empty($composerVersion)) ? "C:\\composer" : null;
+            $composerFolder = (empty($composerVersion) || stripos($composerVersion, "Composer version") === false) ? "C:\\composer" : null;
         }
 
         // Get Linux users

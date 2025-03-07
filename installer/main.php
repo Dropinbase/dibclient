@@ -54,6 +54,8 @@ function shutDownFunction() {
 	
 }
 
+
+
 class Install {
 	public static $basePath = '';
 	public static $dibPath = '';
@@ -352,7 +354,7 @@ class Install {
 	    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ('$databaseName') using the following connection properties:<br>$connStr, $username, $password.<br>Please check the connection properties in entry $dbIndex of the database connection file (/secrets/Conn.php). The following SQL failed:<br> " . $sql . '<br> Database error: ' . Db::lastErrorAdminMsg());
 			return $response;
 		}
-
+		
 		// Get sql file contents
 		$sql = file_get_contents(self::$dibPath . 'installer' . DIRECTORY_SEPARATOR . 'dropinbase.sql');
 		$sql = str_ireplace("CREATE TABLE IF NOT EXISTS `pef_activity_log`", "USE `$databaseName`;\r\n\r\n CREATE TABLE IF NOT EXISTS `pef_activity_log`", $sql);
@@ -852,7 +854,11 @@ DIB::\$DATABASES = array(
 	public static function getComposerVersion() {
 		if (strtolower(substr(php_uname(), 0, 7)) === "windows") {
 			$composerVersion = shell_exec('composer --version 2>&1');
-			$composerVersion = $composerVersion ? trim($composerVersion) : null;
+			if (empty($composerVersion) || stripos($composerVersion, "Composer version") === false) {
+				$composerVersion = null;
+			} else {
+				$composerVersion = $composerVersion ? trim($composerVersion) : null;
+			}
 
 		} else {
 			$composerVersion = shell_exec('composer --version 2>/dev/null');
@@ -865,7 +871,8 @@ DIB::\$DATABASES = array(
 	private static function createScriptWindows($params) {
 
 		$dibNodeVersion = '20.9.0';
-		$dibNodeMajorVersion = '20';
+		$dibNodeMajorVersion = 20;
+		$dibNodeMinorVersion = 9;
 
 		$basePath = realpath(self::$basePath);
 		$dibPath = realpath(self::$dibPath);
@@ -901,9 +908,17 @@ DIB::\$DATABASES = array(
 		chdir($dibPath . '/dropins/setNgxMaterial/angular');
 
 		$nodeVersion = shell_exec('node -v 2>&1');
+		$nodeMajorVersion = explode('.', $nodeVersion)[0];
+		$nodeMinorVersion = explode('.', $nodeVersion)[1];
+
+		// echo "=====================================================================";
+		// echo $nodeMajorVersion;
+		// echo $nodeMinorVersion;
+
 		if($nodeVersion) {
 			$nodeVersion = trim($nodeVersion, 'v');
 			$nodeMajorVersion = explode('.', $nodeVersion)[0];
+			$nodeMinorVersion = explode('.', $nodeVersion)[1];
 		} else 
 			$nodeVersion = null;
 
@@ -1030,12 +1045,10 @@ DIB::\$DATABASES = array(
 			}
 		}
 
-		PS;
+PS;
 
 		// Add Node.js installation if not installed or version is incorrect (with error handling)
-		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion) {
-			$installing .= "Node.js $dibNodeVersion<br>";
-
+		if (!$nodeVersion || ($nodeMajorVersion != $dibNodeMajorVersion) || ($nodeMinorVersion < $dibNodeMinorVersion)) {
 			$psScript .= <<< PS
 		
 		try {
@@ -1065,43 +1078,23 @@ DIB::\$DATABASES = array(
 
 			# Install Node.js silently
 			Write-Host "Installing Node.js..."
-			& msiexec.exe /i \$installerFile /quiet /norestart
+			Start-Process -FilePath msiexec.exe -ArgumentList '/i', \$installerFile, '/quiet', '/norestart' -Wait
+			# & msiexec.exe /i \$installerFile /quiet /norestart
 			StopIfFailed -CommandName "Execution of \$installerFile"
-			
+
 			# Detect Node.js installation directory from the registry
 			try {
-				\$nodeInstallDir = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Node.js" -Name "InstallPath" -ErrorAction Stop).InstallPath
+				Write-Host "Trying to detect Node.js installation directory from the registry..."
+				\$nodeInstallDir = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Node.js" -Name "InstallPath" -ErrorAction silentlycontinue).InstallPath
 			} catch {
 				try {
-					\$nodeInstallDir = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Node.js" -Name "InstallPath" -ErrorAction Stop).InstallPath
+					\$nodeInstallDir = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Node.js" -Name "InstallPath" -ErrorAction silentlycontinue).InstallPath
 				} catch {
-					Write-Host "Failed to detect Node.js installation directory from the registry." -ForegroundColor Red
+					Write-Host "Failed to detect Node.js installation directory from the registry. Moving to next checks..." -ForegroundColor Red
 					exit 1
 				}
 			}
 
-			# Check if Node.js installation directory exists
-			if (Test-Path \$nodeInstallDir) {
-	
-				# Add Node.js to machine PATH and Session PATH
-				\$existingPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
-				if (\$existingPath -notlike "*\$nodeInstallDir*") {
-					[Environment]::SetEnvironmentVariable("Path", "\$existingPath;\$nodeInstallDir", "Machine")
-					\$env:Path = "\$env:Path;\$nodeInstallDir"
-				}
-				
-				# Verify Node.js is accessible
-				try {
-					\$nodeVersion = node -v
-				} catch {
-					Write-Host "Failed to verify Node.js installation. Please ensure the directory \$nodeInstallDir exists in the PATH." -ForegroundColor Red
-					exit 1
-				}
-			} else {
-				Write-Host "Node.js installation directory not found. Please check the installation path." -ForegroundColor Red
-				exit 1
-			}
-			
 			# Remove the installer
 			Remove-Item \$installerFile -ErrorAction Stop
 			StopIfFailed -CommandName "Remove \$installerFile"
@@ -1156,26 +1149,24 @@ DIB::\$DATABASES = array(
 			}
 
 			# Run the installer
-			& php composer-setup.php --install-dir=$composerPath --filename=composer
+			& php composer-setup.php --install-dir="$composerPath"
 			StopIfFailed -CommandName "Execution of php composer-setup.php"
 
 			Remove-Item composer-setup.php -ErrorAction Stop
 			StopIfFailed -CommandName "Remove composer-setup.php"
 
-			# Add Composer to PATH if not already present
 			\$existingPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
 			if (\$existingPath -notlike "*$composerPath*") {
 				[Environment]::SetEnvironmentVariable("Path", "\$existingPath;$composerPath", "Machine")
 				\$env:Path = "\$env:Path;$composerPath"
 			}
-			
 			Write-Host "Composer installed successfully."
 
 		} catch {
 			Write-Host "\r\nComposer installation failed." -ForegroundColor Red
 			exit 1
 		}
-		PS;
+PS;
 		} else {
 			$psScript .= "\r\nWrite-Host 'Composer is already installed.'\r\n";
 			$installed .= 'Composer<br>';
@@ -1185,11 +1176,11 @@ DIB::\$DATABASES = array(
 		$psScript .= <<< PS
 
 		# Navigate to the PHP project directory and run Composer install
-		cd "$basePath"
+		Set-Location "$basePath"
 
 		Write-Host "Executing composer install..."
 		try {
-			composer install
+			php $composerPath\\composer.phar install
 			StopIfFailed -CommandName "composer install"
 
 		} catch {
@@ -1198,7 +1189,7 @@ DIB::\$DATABASES = array(
 		}
 
 		# Navigate to the Angular project directory and run 'npn install'
-		cd "$angularPath"
+		Set-Location "$angularPath"
 		Write-Host "Running npm install..."
 
 		# Remove node_modules and package-lock.json if they exist
@@ -1227,7 +1218,13 @@ DIB::\$DATABASES = array(
 		}
 
 		try {
-			npm install
+			# Get-ChildItem -Path "C:\Program Files" -Directory
+			\$nodeDir = Get-ChildItem -Path "C:\Program Files" -Directory -Filter "nodejs"
+
+			\$nodePath = Resolve-Path -Path (\$nodeDir.FullName + "\\npm.cmd")
+
+
+			Start-Process -FilePath \$nodePath -ArgumentList "install", '/quiet' -Wait
 			StopIfFailed -CommandName "npm install"
 
 		} catch {
@@ -1235,17 +1232,16 @@ DIB::\$DATABASES = array(
 			exit 1
 		}
 		
-		PS;
+PS;
 
 		// Add Angular CLI installation if not installed or version is incorrect (with error handling)
 		if (!$angularVersion || $angularVersion !== '17.3.9') {
-			$installing .= 'Angular CLI 17.3.9<br>';
 
 			$psScript .= <<< PS
 
 		Write-Host "Installing Angular CLI 17.3.9..."
 		try {
-			npm install -g @angular/cli@17.3.9
+			Start-Process -FilePath \$nodePath -ArgumentList "install -g @angular/cli@17.3.9", '/quiet' -Wait
 			StopIfFailed -CommandName "Install Angular CLI"
 			Write-Host "Angular CLI 17.3.9 installed successfully."
 
@@ -1295,7 +1291,8 @@ DIB::\$DATABASES = array(
 		);
 
 		$dibNodeVersion = '20.9.0';
-		$dibNodeMajorVersion = '20';
+		$dibNodeMajorVersion = 20;
+		$dibNodeMinorVersion = 9;
 
 		$basePath = realpath(self::$basePath);
 		$dibPath = realpath(self::$dibPath);
@@ -1318,6 +1315,7 @@ DIB::\$DATABASES = array(
 		if($nodeVersion) {
 			$nodeVersion = trim($nodeVersion, 'v');
 			$nodeMajorVersion = explode('.', $nodeVersion)[0];
+			$nodeMinorVersion = explode('.', $nodeVersion)[1];
 		} else 
 			$nodeVersion = null;
 
@@ -1417,9 +1415,7 @@ DIB::\$DATABASES = array(
 		BASH;
 
 		// Add Node.js installation commands if the required version is not installed
-		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion) {
-			$installing .= "Node.js $dibNodeVersion<br>";
-
+		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion || $nodeMinorVersion < $dibNodeMinorVersion) {
 			switch ($linuxDistro) {
 				case 'ubuntu':
 				case 'debian':
@@ -1476,7 +1472,7 @@ DIB::\$DATABASES = array(
 		curl -fsSL https://rpm.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
 
 		echo "Installing Node.js $dibNodeVersion..."
-		dnf install -y nodejs-$dibNodeVersion-1nodesource
+		dnf install -y  nodejs-$dibNodeVersion-1nodesource
 
 		BASH;
 				break;
@@ -1586,7 +1582,7 @@ DIB::\$DATABASES = array(
 		find $basePath -type f -exec chmod \$FILEPERMS {} +
 		
 		# Ensure ngc is executable
-		chmod +x /node_modules/.bin/ngc
+		chmod +x ./dropinbase/dropins/setNgxMaterial/angular/node_modules/.bin/ngc
 
 		# Set writable folders and file permissions
 		BASH;
@@ -1628,12 +1624,12 @@ DIB::\$DATABASES = array(
 
 		// Save the PowerShell script to a file
 		$path = self::$basePath . 'runtime' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'configuredib.sh';
-
+		
+		$bashScript = str_replace("\r\n", "\n", $bashScript);
 		file_put_contents($path, $bashScript);
 
 		$installing .= 'Composer 3d-party dependencies<br>Angular node_modules<br>Setting folder&file permissions<br>';
 		$installStr = '<br><br><b>Running the command above will install the following:</b><br>' . $installing . '<br><b>The following are already installed:</b><br>' . $installed;
-
 		DIB::$ACTION = self::getResponse('configureDib', true, "A Linux bash script was generated for this installation.<br>Please review, and then execute the following in Linux as a privileged user:<br><br><b>chmod +x $path<br>sh $path</b>$installStr");
 		return TRUE;
 
