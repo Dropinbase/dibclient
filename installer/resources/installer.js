@@ -14,6 +14,10 @@ function initPage() {
         var el = document.getElementById('scriptFields');
         el.style.display = 'none';
     }
+
+    if(window.location.href !== window.location.origin && window.location.href !== window.location.origin + '/')
+        window.location.href = window.location.origin;
+
 }
 
 function doAction(action) {
@@ -224,56 +228,105 @@ function ajaxPost(url, params, callback) {
     
 }
 
-let intervalId;
+let intervalId, downloadError = false;
+let progressRequestNo = 0;
 
 function startDownload() {
     const downloadStatus = document.getElementById("downloadStatus");
     downloadStatus.innerHTML = "Starting download...";
+    downloadError = false;
 
     // Start polling for progress every 1 seconds
     intervalId = setInterval(checkProgress, 1000);
+    progressRequestNo = 0;
 
-    // Start the download via AJAX
-    fetch('downloadDib')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (!!data.messages.ready) {
-                downloadStatus.innerHTML =  data.messages.notes;
-            } else {
-                downloadStatus.innerHTML = "Download failed to start.<br><br>" + data.messages.notes;
-            }
-        })
-        .catch(error => {
-            downloadStatus.innerHTML = "Error starting download: " + error;
-        });
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    var params = JSON.stringify(
+        {
+            'email' : email,
+            'password' : password
+        }
+    );
+
+    // Start the download
+    fetch('downloadDib', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: params
+    })
+    .then(response => {
+        if (!response.ok) {
+            clearInterval(intervalId);
+            downloadError = true;
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (!!data.messages.ready) {
+            downloadStatus.innerHTML =  data.messages.notes;
+        } else {
+            clearInterval(intervalId);
+            downloadError = true;
+            downloadStatus.innerHTML = "Download failed to start.<br><br>" + data.messages.notes;
+        }
+    })
+    .catch(error => {
+        clearInterval(intervalId);
+        downloadError = true;
+        downloadStatus.innerHTML = "Error starting download: " + error;
+    });
 }
 
 function checkProgress() {
     const downloadStatus = document.getElementById("downloadStatus");
 
-    fetch('downloadDibProgress')
-        .then(response => response.json())
-        .then(data => {
+    if(downloadError) {
+        clearInterval(intervalId);
+        return;
+    }
+
+    var params = JSON.stringify(
+        {
+            'progressRequestNo' : progressRequestNo
+        }
+    );
+
+    progressRequestNo++;
+
+    fetch('downloadDibProgress', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: params
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        if(downloadError) {
+            clearInterval(intervalId);
+            return;
+        }
+        
+        if (!!data.messages.ready || (!!data.messages.notes && data.messages.notes == 'stop queue')) {
+            clearInterval(intervalId); // Stop checking progress when complete
             
-            if (!!data.messages.ready || (!!data.messages.notes && data.messages.notes == 'stop queue')) {
-                clearInterval(intervalId); // Stop checking progress when complete
-                
-            } else if (!!data.messages[0] && data.messages[0].name == 'Fatal PHP Error') {
-                clearInterval(intervalId);
-                data.messages.notes =  data.messages[0].notes;
-            }
-            
-            if(!!data.messages.notes && data.messages.notes != 'stop queue')
-                downloadStatus.innerHTML = data.messages.notes;
-            
-        })
-        .catch(error => {
-         //   clearInterval(intervalId);
-            downloadStatus.innerHTML = "Error checking progress: " + error;
-        });
+        } else if (!!data.messages[0] && data.messages[0].name == 'Fatal PHP Error') {
+            clearInterval(intervalId);
+            data.messages.notes =  data.messages[0].notes;
+        }
+        
+        if(!!data.messages.notes && data.messages.notes != 'stop queue')
+            downloadStatus.innerHTML = data.messages.notes;
+        
+    })
+    .catch(error => {
+        clearInterval(intervalId);
+        downloadStatus.innerHTML = "Error checking progress: " + error;
+    });
 }

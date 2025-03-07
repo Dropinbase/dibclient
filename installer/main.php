@@ -54,8 +54,6 @@ function shutDownFunction() {
 	
 }
 
-
-
 class Install {
 	public static $basePath = '';
 	public static $dibPath = '';
@@ -91,8 +89,14 @@ class Install {
 
 		self::signUserIn($response, $params);
 
+		$result = self::signUserIn($response, $params);
+		if($result !== true) {
+			DIB::$ACTION = $response[0];
+			return false;
+		}
+
 		if(!empty($response)) {
-			DIB::$ACTION = array_merge(DIB::$ACTION, $response);
+			DIB::$ACTION = (empty(DIB::$ACTION)) ? array() : array_merge(DIB::$ACTION, $response);
 		}
 
 		return TRUE;
@@ -413,7 +417,7 @@ class Install {
 
 		DIB::$USER['unique_id'] = rand(0, 9999999);
 
-		$apiToken = 'X3T6_gynMp2^aW6qs';
+		$apiToken = 'X3T6_gTnEM12^w$6MIL2Rd2s';
 		$debug = false;
 
 		$result = self::$curl->dibLogin($un, $pw, $debug, $apiToken);
@@ -427,6 +431,8 @@ class Install {
 			$response[] = self::getResponse('SignIn', false, "Authentication failed at Dropinbase online portal.<br>Please check your credentials{$curlMsg}, and that the Dropinbase server at " . self::$dibDomain . ' is not blocked by firewalls before trying again.<br>Remote response:<br>' . $result);
 			return false;
 		}
+
+		$response[] = self::getResponse('SignIn', true, "Authentication successfull.");
 
 		return true;
 	}
@@ -594,9 +600,9 @@ DIB::\$DATABASES = array(
 		}
 		
 		// Comment require ./installer/index.php
-		$i = strpos($fileContents, '$INSTALLER=TRUE; require \'./installer/index.php\'; die();');
+		$i = strpos($fileContents, '$INSTALLER=TRUE; require ');
 		if($i !== false) {
-			$updatedContents = str_replace('$INSTALLER=TRUE; require ', '// $INSTALLER=TRUE; require', $fileContents);
+			$updatedContents = str_replace('$INSTALLER=TRUE; require ', '// $INSTALLER=TRUE; require ', $fileContents);
 		} else {
 			$updatedContents = str_replace('require \'./installer/index.php\'; die();', '// require \'./installer/index.php\'; die();', $fileContents);
 		}
@@ -613,14 +619,14 @@ DIB::\$DATABASES = array(
     }
 
 	public static function downloadDib($params) {
+		$dest = self::$basePath.'runtime' . DIRECTORY_SEPARATOR . 'tmp';
 
 		$result = self::checkFiles($response);
+
 		if($result !== true) {
 			DIB::$ACTION = $response[0];
 			return false;
 		}
-
-		$dest = self::$basePath.'runtime' . DIRECTORY_SEPARATOR . 'tmp';
 
 		$result = self::createPath($dest);
 		if($result !== true) {
@@ -628,8 +634,7 @@ DIB::\$DATABASES = array(
 			DIB::$ACTION = self::getResponse('File Permissions', true, "The webserver lacks permissions to create child folders of the /runtime folder.<br>Please amend using the chmod and chown commands, and try again.");
 			return FALSE;
 		}
-
-		/*
+		
 		// Log user in
 		$result = self::signUserIn($response, $params);
 		if($result !== true) {
@@ -666,10 +671,12 @@ DIB::\$DATABASES = array(
         }
 
 		$url = base64_decode($data['records']['url']);
-		*/
-		$url =  'https://assets.dropinbase.com/dropinbase20241111.zip';
+		
+		// $url =  'https://assets.dropinbase.com/dropinbase20241111.zip';
 
 		$progressFile = $dest . DIRECTORY_SEPARATOR . 'install_progress.dtxt';
+		if (file_exists($progressFile)) @unlink($progressFile);
+		file_put_contents($progressFile, 0);
 
 		$dest .= DIRECTORY_SEPARATOR . 'dropinbase.zip';
 
@@ -708,27 +715,19 @@ DIB::\$DATABASES = array(
 		fclose($fp);
 
 		// When download is complete, set progress to 100%
-		file_put_contents($progressFile, 100);
-
-		// check that the intended file was downloaded and not a HTML error page
-		$finfo = finfo_open(FILEINFO_MIME_TYPE);
-		$mimeType = finfo_file($finfo, $dest);
-		finfo_close($finfo);
-
-		//file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . 'aa.txt', $mimeType . 'xxx' . $dest);
-
-		if ($mimeType !== 'application/zip') {
-			file_put_contents($progressFile, 'error');
-			DIB::$ACTION = self::getResponse('download', true, 'Could not download the Dropinbase framework from ' . $url . '.<br>Please try again, or contact Dropinbase support at support@dropinbase.com');
-			return false;
-		}
-		
+		//file_put_contents($progressFile, 100);
 		DIB::$ACTION = self::getResponse('download', true, "Download of '$dest' complete");
+		
 	}
 
-	public static function downloadDibProgress() {
+	public static function downloadDibProgress($params) {
 
 		$dest = self::$basePath.'runtime' . DIRECTORY_SEPARATOR . 'tmp';
+		$progressFile = $dest . DIRECTORY_SEPARATOR . 'install_progress.dtxt';
+
+		if($params['progressRequestNo'] == 0) {
+			if (file_exists($progressFile)) @unlink($progressFile);
+		}
 
 		if(!file_exists($dest)) {
 			$result = self::createPath($dest);
@@ -739,7 +738,6 @@ DIB::\$DATABASES = array(
 			}
 		}
 
-		$progressFile = $dest . DIRECTORY_SEPARATOR . 'install_progress.dtxt';
 		$progress = 0;
 
 		if (file_exists($progressFile)) {
@@ -748,31 +746,42 @@ DIB::\$DATABASES = array(
 			if($progress == (string)(int)$progress && (int)$progress < 100) {
 				$msg = 'Downloading Framework: ' . $progress . '%';
 				DIB::$ACTION = self::getResponse('download', false, $msg);
-				return false;
+
 			}
 
 		} else {
 			file_put_contents($progressFile, 0);
 			$msg = 'Downloading Framework: 0%';
 			DIB::$ACTION = self::getResponse('download', false, $msg);
-			return false;
 		}
 
 		if($progress == 'error') {
 			DIB::$ACTION = self::getResponse('download', true, 'stop queue');
+			
 			return false;
 		}
 
 		$dibFile = $dest . DIRECTORY_SEPARATOR . 'dropinbase.zip';
+
+		if(empty(self::$dibPath)) {
+			self::$dibPath = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR;
+		}
  
 		if($progress == 100) {
 
-			if(empty(self::$dibPath)) {
-				self::$dibPath = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR;
+			// check that the intended file was downloaded and not a HTML error page
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$mimeType = finfo_file($finfo, $dibFile);
+			finfo_close($finfo);
+	
+			if ($mimeType !== 'application/zip') {
+				file_put_contents($progressFile, 'error');
+				DIB::$ACTION = self::getResponse('download', true, 'Could not download the Dropinbase framework.<br>Please try again, or contact Dropinbase support at support@dropinbase.com');
+				return false;
 			}
 
 			if(!file_exists(self::$dibPath)) {
-				$result = @mkdir(self::$dibPath);
+				$result = self::createPath(self::$dibPath);
 				if($result !== true) {
 					file_put_contents($progressFile, 'error');
 					DIB::$ACTION = self::getResponse('File Permissions', true, "The webserver lacks permissions to create the framework folder: '" . self::$dibPath . "' folder.<br>Please amend using the chmod and chown commands.<br>Alternatively manually unzip '$dibFile' here,<br> assign the necessary permissions, and then Skip this installation step.");
@@ -804,14 +813,9 @@ DIB::\$DATABASES = array(
 
 		} elseif($progress == 'unzip') {
 			
-
-			if(empty(self::$dibPath)) {
-				self::$dibPath = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR;
-			}
-
 			file_put_contents($progressFile, 'unzipping');
 
-			set_time_limit(60 * 60);
+			set_time_limit(10 * 60);
 
 			$result = self::unzipDir($dibFile, self::$dibPath);
 
@@ -834,10 +838,11 @@ DIB::\$DATABASES = array(
 		} elseif($progress == 'next step') {
 
 			DIB::$ACTION = self::getResponse('get perms', true, 'Framework installation to ' . self::$dibPath . ' successfull.<br>Please continue with the next step.');
+			if (file_exists($progressFile)) @unlink($progressFile);
 			return false;
 
 		} else {
-			DIB::$ACTION = self::getResponse('none', false, $progress);
+			DIB::$ACTION = self::getResponse('none', false, 'Downloading... ' . $progress . '%');
 			return false;
 		}
 
@@ -859,7 +864,7 @@ DIB::\$DATABASES = array(
 
 	private static function createScriptWindows($params) {
 
-		$dibNodeVersion = '20.9.3';
+		$dibNodeVersion = '20.9.0';
 		$dibNodeMajorVersion = '20';
 
 		$basePath = realpath(self::$basePath);
@@ -937,13 +942,17 @@ DIB::\$DATABASES = array(
 				[string] \$CommandName = '',
 				[string] \$StopOnError = 'yes'
 			)
-			if (\$LASTEXITCODE -ne 0) {
-				if(\$StopOnError -eq 'yes') {
-					Write-Host "\r\nCommand '\$CommandName' failed with exit code \$LASTEXITCODE. Script will stop executing." -ForegroundColor Red
+			# `LASTEXITCODE` of 0 or null = success
+			# Non-zero = failure
+			if (-not \$LASTEXITCODE) {
+				Write-Host "Command '\$CommandName' succeeded." -ForegroundColor Green
+			}
+			else {
+				# The command failed
+				if (\$StopOnError -eq 'yes') {
+					Write-Host "`r`nCommand '\$CommandName' failed with exit code \$LASTEXITCODE. Script will stop executing." -ForegroundColor Red
 					exit \$LASTEXITCODE
 				}
-			} else {
-				Write-Host "Command '\$CommandName' succeeded." -ForegroundColor Green
 			}
 		}
 
@@ -1106,7 +1115,7 @@ DIB::\$DATABASES = array(
 		PS;
 
 		} else {
-			$msg = ($nodeVersion != '20.9.3') ? "`n`n***NOTE: Version 20.9.3 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.3, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version before testing.`n`n" : '';
+			$msg = ($nodeVersion != '20.9.0') ? "`n`n***NOTE: Version 20.9.0 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.0, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version before testing.`n`n" : '';
 			$psScript .= "\r\n\$nodeMessage = 'Node.js $nodeVersion is already installed. $msg'";
 			$psScript .= "\r\nWrite-Host \$nodeMessage -ForegroundColor Red \r\n";
 			$installed .= 'Node.js ' . $nodeVersion . '<br>';
@@ -1261,7 +1270,7 @@ DIB::\$DATABASES = array(
 
 		$installStr = '<br><br><b>Running the command above will install the following:</b><br>' . $installing . '<br><b>The following are already installed:</b><br>' . $installed;
 
-		DIB::$ACTION = self::getResponse('configureDib', true, "A Windows PowerShell script was generated for this installation.<br>Please review the script, open a Terminal Window in Powershell and run the following command:<br><br><b>powershell -ExecutionPolicy Bypass -File $path</b>$installStr");
+		DIB::$ACTION = self::getResponse('configureDib', true, "A Windows PowerShell script was generated for this installation.<br>Please review the script, open a Terminal Window in Powershell and run the following command:<br><br><b style='padding: 9px; background-color:black'>powershell -ExecutionPolicy Bypass -File $path</b>$installStr");
 		return TRUE;
 
 		/*
@@ -1285,7 +1294,7 @@ DIB::\$DATABASES = array(
 			'user files folder' => 'USERFOLDER'
 		);
 
-		$dibNodeVersion = '20.9.3';
+		$dibNodeVersion = '20.9.0';
 		$dibNodeMajorVersion = '20';
 
 		$basePath = realpath(self::$basePath);
@@ -1479,7 +1488,7 @@ DIB::\$DATABASES = array(
 
 		} else {
 			$installed .= 'Node.js<br>';
-			$msg = ($nodeVersion != '20.9.3') ? "\r\n\r\n***NOTE: Version 20.9.3 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.3, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version, before testing.\r\n" : '';
+			$msg = ($nodeVersion != '20.9.0') ? "\r\n\r\n***NOTE: Version 20.9.0 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.0, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version, before testing.\r\n" : '';
 			$bashScript .= "\r\nWrite-Host 'Node.js $nodeVersion is already installed. $msg'\n";
 		}
 

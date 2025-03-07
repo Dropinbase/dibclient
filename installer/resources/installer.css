@@ -43,6 +43,8 @@ label {
     height: 70%; 
     max-width: 1600px;
     max-height: 700px;
+    min-height: 550px;
+    min-width: 900px;
     display:flex; 
     flex-direction: row; 
     justify-content:flex-start; 
