@@ -17,6 +17,7 @@ $args = array(
 
     'site_name' => DIB::$SITENAME,
     'logo' => ltrim(DIB::$SITELOGO, '/ '),
+    'application_title' => '', // Leave blank to let containers' captions adjust the title.
     'user_fullname' => DIB::$USER['first_name'] . ' ' . DIB::$USER['last_name'],
 
     // Valid date formats: https://date-fns.org/v2.29.3/docs/format
