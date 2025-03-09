@@ -9,54 +9,6 @@
         <link rel="stylesheet" href="/resources/installer.css">
 
         <script type="text/javascript" src="/resources/installer.js"></script>
-        <script>
-            function copy_to_clipboard() {
-                    const span = document.getElementById('script');
-                    const text = span.innerText || span.textContent;
-                    // Check if navigator.clipboard is available (for HTTPS and localhost)
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(text).then(
-                            () => {
-                                console.log('Text copied to clipboard using navigator.clipboard!');
-                            },
-                            (err) => {
-                                console.error('Failed to copy text with navigator.clipboard: ', err);
-                            }
-                        );
-                    } else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
-                        // Fallback for HTTP or if clipboard API is unsupported
-                        const textarea = document.createElement('textarea');
-                        textarea.value = text;
-                        document.body.appendChild(textarea);
-                        textarea.select();
-                        try {
-                            document.execCommand('copy');
-                            console.log('Text copied to clipboard using execCommand fallback!');
-                        } catch (err) {
-                            console.error('Failed to copy text with execCommand: ', err);
-                        }
-                        // Clean up
-                        document.body.removeChild(textarea);
-                    } else {
-                        console.warn('Clipboard copy is not supported in this browser.');
-                        copySpanTextManual('script');
-                    }
-                }
-
-                function copySpanTextManual(spanId) {
-                    const span = document.getElementById(spanId);
-                    const text = span.innerText || span.textContent;
-                    // Create a temporary textarea to select text
-                    const textarea = document.createElement('textarea');
-                    textarea.value = text;
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    // Inform the user if automatic copy fails
-                    alert('Copy the highlighted text manually using Ctrl+C or Command+C');
-                    // Clean up
-                    document.body.removeChild(textarea);
-                }
-        </script>
 
         <!--  LINKS TO GOOGLE FONTS -->
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -225,7 +177,7 @@
                         
                         <div>
                             <div id="configureDibMsg" class="response" ></div>
-                            <button onclick="copy_to_clipboard()">Copy to Clipboard</button>
+                            
                         </div>
                         
                     </div>
@@ -273,7 +225,7 @@
                             </div>
                             
                         </div>
-                        
+                        <br>
 
                         <a id="btnCreateTables" class="dibBtn" onClick="doAction('saveTestDb');return false;">Create Tables</a>
                         

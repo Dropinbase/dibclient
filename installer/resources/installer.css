@@ -139,6 +139,7 @@ p {
     text-decoration: none;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
+    background-color:#ffffde;
 }
 
 .dibBtn:hover {
@@ -170,7 +171,12 @@ p {
     color: #05a6ed;
 }
 
+.btnCopy:hover {
+    box-shadow: -2px 3px 5px rgb(16 14 14 / 83%)
+}
+
 .title {
+    cursor: pointer;
     display: flex;
     flex-direction: row; 
     justify-content: flex-start;
@@ -184,6 +190,13 @@ p {
 .title.active {
     font-weight: bold;
     font-size: 16px;
+}
+
+.execScript {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    color: #696969
 }
 
 

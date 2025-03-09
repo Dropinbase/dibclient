@@ -16,7 +16,7 @@ $INSTALLER=TRUE; require './installer/index.php'; die();
 require './dropinbase/index.php';
 
 /* -- TIPS --
-- The Dropinbase framework can be moved to any folder accessible by the webserver. Just delete /configs/Dib.php and adjust the path above.
+- The Dropinbase framework can be moved to any folder accessible by the webserver. Just delete /configs/Dib.php and adjust the path above, or hardcode DIB::$SYSTEMPATH in /configs/DibTmpl.php.
 - If the folder varies between environments, use environment variables to obtain the path, eg. getenv('Dropinbase_Path').
-- A common multi-tenant setup is to reuse the same /dropinbase and /vendor folders. Use symbolic links for folders that cannnot be moved via settings Dib.php.
+- A common multi-tenant setup is to reuse the same /dropinbase and /vendor folders. Either use symbolic links, or set DIB::$SYSTEMPATH and DIB::$VENDORPATH in DibTmpl.php.
 */

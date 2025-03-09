@@ -79,7 +79,7 @@ function doAction(action) {
             el.innerHTML = msg;
 
         } else {
-
+                
             if(action == 'testPhp') {
 
                 if (!!data.messages) {
@@ -108,14 +108,22 @@ function doAction(action) {
 
                 } else
                     el.innerHTML = '<h3>Could not fetch info. Check the PHP error log and your server connection.</h3>';
+
             } else {
                 if (!!data.messages) {
                     if(!!data.messages[0])
                         var str = data.messages[0].notes;
-                    else
+                    else {
                         var str = data.messages.notes
+                    }
                     
                     el.innerHTML = str;
+
+                    if(action == 'configureDib') {
+                        str = '<a  style="cursor:pointer;" onclick="copy_to_clipboard()" title="copy to clipboard"><img class="btnCopy" style="width:32px;" src="/resources/contentCopy.png"></a><span id="copied" style="display:none;padding: 0px 20px"></span>';
+                    
+                        document.getElementById('copyBtn').innerHTML = str;
+                    }
                 }
             }
 
@@ -329,4 +337,71 @@ function checkProgress() {
         clearInterval(intervalId);
         downloadStatus.innerHTML = "Error checking progress: " + error;
     });
+}
+
+function copiedMsg(msg) {
+    var el = document.getElementById('copied');
+    el.innerHTML = msg;
+    el.style = 'display: inline-block; padding: 0px 20px; font-weight:bold; color: #05a6ed';
+
+    setTimeout(() => {
+        el.style.display = 'none';
+    }, 4000);
+}
+
+function copy_to_clipboard() {
+    const span = document.getElementById('script');
+    const text = span.innerText || span.textContent;
+    // Check if navigator.clipboard is available (for HTTPS and localhost)
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+            () => {
+                //Text copied to clipboard using navigator.clipboard
+                copiedMsg('Copied');
+            },
+            (err) => {
+                console.error('Failed to copy text with navigator.clipboard: ', err);
+                copiedMsg('Failed to copy - use Ctrl+C or Command+C');
+            }
+        );
+
+    } else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        // Fallback for HTTP or if clipboard API is unsupported
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            document.execCommand('copy');
+            //Text copied to clipboard using execCommand fallback
+            copiedMsg('Copied');
+
+        } catch (err) {
+            console.error('Failed to copy text with execCommand: ', err);
+            copiedMsg('Failed to copy - use Ctrl+C or Command+C');
+        }
+
+        // Clean up
+        document.body.removeChild(textarea);
+        
+    } else {
+        console.warn('Clipboard copy is not supported in this browser.');
+        copiedMsg('Failed to copy - use Ctrl+C or Command+C');
+        //copySpanTextManual('script');
+    }
+}
+
+function copySpanTextManual(spanId) {
+    const span = document.getElementById(spanId);
+    const text = span.innerText || span.textContent;
+    // Create a temporary textarea to select text
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    // Inform the user if automatic copy fails
+    alert('Copy the highlighted text manually using Ctrl+C or Command+C');
+    // Clean up
+    document.body.removeChild(textarea);
 }

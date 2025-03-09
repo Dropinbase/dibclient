@@ -31,6 +31,9 @@
             self::err($data);
         }
     }
+
+    mb_internal_encoding('UTF-8');
+    mb_http_output('UTF-8');
     
     error_reporting(E_ALL & ~E_STRICT);
 
@@ -53,11 +56,38 @@
         '/resources/pendingTick.png',
         '/resources/logocircle.png',
         '/resources/east.png',
-        '/resources/logo_tr.png'
+        '/resources/logo_tr.png',
+        '/resources/contentCopy.png'
     );
 
     if (in_array($_SERVER['REQUEST_URI'], $resources)){
-        include($path.$_SERVER['REQUEST_URI']);
+
+        $fileExtension = pathinfo($_SERVER['REQUEST_URI'], PATHINFO_EXTENSION);
+        
+        if($fileExtension == 'ico') $mimeType = 'image/x-icon';
+        else if($fileExtension == 'png') $mimeType = 'image/png';
+        else if($fileExtension == 'css') $mimeType = 'text/css';
+        else if($fileExtension == 'js') $mimeType = 'application/javascript';
+        else $mimeType = 'text/plain';
+
+        header('Content-Description: File Transfer');
+        header('Content-Type: ' . $mimeType);
+
+        // Handle caching
+        $path = $path.$_SERVER['REQUEST_URI'];
+    
+        if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($path)) {
+            header('HTTP/1.1 304 Not Modified');
+            return 'Not Modified';
+        }
+        
+        $fileModificationTime = gmdate('D, d M Y H:i:s', filemtime($path)) . ' GMT';
+        
+        header('Last-Modified: ' . $fileModificationTime);
+
+        //echo file_get_contents($path);
+        readfile($path);
+
         return;
     }
 
@@ -76,16 +106,19 @@
 
     include($path . DIRECTORY_SEPARATOR . 'main.php');
     Install::checkRequiredPhpApacheModules($response);
+    
     if (!empty($response)) {
         $msgStyle ="style=\" background-color: #f97f7f; border-left: 4px solid rgb(255,57,57); border-radius: 2px; width: 26em; padding: 0.2em; \"";
         // print_r($response);
         foreach ($response as $r) {
-            // print_r($r['notes']);
+            /*
             if (str_contains($r['notes'], 'mod_headers')) {
                 // echo "mod_headers and mod_rewrite needs to be enabled before continuing";
                 $missingMods = "<div style=\"margin: 2px; padding: 2px;\"><h3 " . $msgStyle . ">mod_headers needs to be enabled before continuing</h3></div>";
                 echo $missingMods;
             }
+            */
+
             if (str_contains($r['notes'], 'mod_rewrite')) {
                 $missingMods = "<div style=\"margin: 2px; padding: 2px;\"><h3 " . $msgStyle . ">mod_rewrite needs to be enabled before continuing</h3></div>";
                 echo $missingMods;

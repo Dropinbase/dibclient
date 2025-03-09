@@ -43,7 +43,6 @@ function shutDownFunction() {
 		}
 	}
 	
-	// Handle errors
 	if (!empty(DIB::$ACTION)) {
 		echo json_encode(array('success'=>FALSE, 'messages'=>DIB::$ACTION, 'override' => Install::$showOverrideButton));
 
@@ -445,7 +444,7 @@ class Install {
 	* 
 	* @return mixed TRUE on success, or response array on failure
 	*/
-	private static function checkRequiredPhpApacheModules(&$response) {
+	public static function checkRequiredPhpApacheModules(&$response) {
 
 		// Check if Apache / Nginx is running
 
@@ -476,7 +475,7 @@ class Install {
 					$apacheOpt[] = '<b>mod_headers</b> (recommended - added security layer in .htaccess)';
 
 				if (!in_array('mod_expires',$apacheMods)) 
-					$apacheOpt[] = '<b>mod_expires</b> (optional - expiry of files, set in .htaccess)';
+					$apacheOpt[] = '<b>mod_expires</b> (optional - automatic expiry of cache files, set in .htaccess)';
 
 				if (!in_array('mod_deflate', $apacheMods)) 
 					$apacheOpt[] = '<b>mod_deflate</b> (optional - additional file compression for performance)';
@@ -839,7 +838,7 @@ DIB::\$DATABASES = array(
 
 		} elseif($progress == 'next step') {
 
-			DIB::$ACTION = self::getResponse('get perms', true, 'Framework installation to ' . self::$dibPath . ' successfull.<br>Please continue with the next step.');
+			DIB::$ACTION = self::getResponse('get perms', true, 'Framework installation to ' . self::$dibPath . ' successfull.<br><br>Please continue with the next step.');
 			if (file_exists($progressFile)) @unlink($progressFile);
 			return false;
 
@@ -887,9 +886,9 @@ DIB::\$DATABASES = array(
 
 		// Detect installed Composer version
 		$composerVersion = self::getComposerVersion();
+		$composerPath = (!empty($params['composerFolder'])) ? $params['composerFolder'] : null;
 		
 		if(empty($composerVersion)) {
-			$composerPath = (!empty($params['composerFolder'])) ? $params['composerFolder'] : null;
 
 			if(empty($composerPath)) {
 				DIB::$ACTION = self::getResponse('configureDib', false, "Please specify a valid installation path for Composer, and try again.");
@@ -908,17 +907,17 @@ DIB::\$DATABASES = array(
 		chdir($dibPath . '/dropins/setNgxMaterial/angular');
 
 		$nodeVersion = shell_exec('node -v 2>&1');
-		$nodeMajorVersion = explode('.', $nodeVersion)[0];
-		$nodeMinorVersion = explode('.', $nodeVersion)[1];
+		$nodeMajorVersion = (int)explode('.', $nodeVersion)[0];
+		$nodeMinorVersion = (int)explode('.', $nodeVersion)[1];
 
 		// echo "=====================================================================";
 		// echo $nodeMajorVersion;
 		// echo $nodeMinorVersion;
 
 		if($nodeVersion) {
-			$nodeVersion = trim($nodeVersion, 'v');
-			$nodeMajorVersion = explode('.', $nodeVersion)[0];
-			$nodeMinorVersion = explode('.', $nodeVersion)[1];
+			$nodeVersion = trim(trim($nodeVersion, 'v'));
+			$nodeMajorVersion = (int)explode('.', $nodeVersion)[0];
+			$nodeMinorVersion = (int)explode('.', $nodeVersion)[1];
 		} else 
 			$nodeVersion = null;
 
@@ -1049,6 +1048,7 @@ PS;
 
 		// Add Node.js installation if not installed or version is incorrect (with error handling)
 		if (!$nodeVersion || ($nodeMajorVersion != $dibNodeMajorVersion) || ($nodeMinorVersion < $dibNodeMinorVersion)) {
+			$installing .= "Node.js $dibNodeVersion<br>";
 			$psScript .= <<< PS
 		
 		try {
@@ -1108,7 +1108,7 @@ PS;
 		PS;
 
 		} else {
-			$msg = ($nodeVersion != '20.9.0') ? "`n`n***NOTE: Version 20.9.0 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.0, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version before testing.`n`n" : '';
+			$msg = ($nodeVersion != $dibNodeVersion) ? "`n`n***NOTE: Version $dibNodeVersion is recommended by Angular, but your existing version should work fine. If it does not, please manually install $dibNodeVersion, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version before testing.`n`n" : '';
 			$psScript .= "\r\n\$nodeMessage = 'Node.js $nodeVersion is already installed. $msg'";
 			$psScript .= "\r\nWrite-Host \$nodeMessage -ForegroundColor Red \r\n";
 			$installed .= 'Node.js ' . $nodeVersion . '<br>';
@@ -1236,7 +1236,7 @@ PS;
 
 		// Add Angular CLI installation if not installed or version is incorrect (with error handling)
 		if (!$angularVersion || $angularVersion !== '17.3.9') {
-
+			$installing .= 'Angular CLI 17.3.9<br>';
 			$psScript .= <<< PS
 
 		Write-Host "Installing Angular CLI 17.3.9..."
@@ -1257,6 +1257,8 @@ PS;
 
 		$psScript .= "\r\nWrite-Host 'Dependencies installed successfully.'\r\n";
 
+		$psScript .= "\r\nWrite-Host 'Dropinbase Installation complete.' -ForegroundColor Green\r\n";
+
 		// Save the PowerShell script to a file
 		$path = self::$basePath . 'runtime' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'configuredib.ps1';
 
@@ -1264,9 +1266,9 @@ PS;
 
 		$installing .= 'Composer 3d-party dependencies<br>Angular node_modules<br>';
 
-		$installStr = '<br><br><b>Running the command above will install the following:</b><br>' . $installing . '<br><b>The following are already installed:</b><br>' . $installed;
+		$installStr = '<div id="copyBtn"></div><br><br<b>Running the command above will install the following:</b><br>' . $installing . '<br><b>The following are already installed:</b><br>' . $installed;
 
-		DIB::$ACTION = self::getResponse('configureDib', true, "A Windows PowerShell script was generated for this installation.<br>Please review the script, open a Terminal Window in Powershell and run the following command:<br><br><b style='padding: 9px; background-color:black'>powershell -ExecutionPolicy Bypass -File $path</b>$installStr");
+		DIB::$ACTION = self::getResponse('configureDib', true, "A Windows PowerShell script was generated for this installation.<br>Please review the script, open a Terminal Window in Powershell and run the following command:<br><br><pre class='execScript' id='script'>powershell -ExecutionPolicy Bypass -File $path</pre>$installStr");
 		return TRUE;
 
 		/*
@@ -1285,8 +1287,7 @@ PS;
 			'configs folder (this should be read-only on production)' => 'BASE/configs', 
 			'runtime folder' => 'BASE/runtime', 
 			'dropins folders (repeat for each dropin that has containers that need to be generated - make readonly on production)' => 'BASE/dropins/main/dibCode', 
-			'Angular compile folder 1' => 'SYSTEM/dropins/setNgxMaterial/angular/projects/plugins/src', 
-			'Angular compile folder 2' => 'SYSTEM/dropins/setNgxMaterial/angular/src/assets/plugins', 
+			'Angular compile folder 1' => 'SYSTEM/dropins/setNgxMaterial/angular/ngtmp', 
 			'user files folder' => 'USERFOLDER'
 		);
 
@@ -1313,9 +1314,9 @@ PS;
 		// Detect installed Node.js version
 		$nodeVersion = shell_exec('node -v 2>/dev/null');
 		if($nodeVersion) {
-			$nodeVersion = trim($nodeVersion, 'v');
-			$nodeMajorVersion = explode('.', $nodeVersion)[0];
-			$nodeMinorVersion = explode('.', $nodeVersion)[1];
+			$nodeVersion = trim(trim($nodeVersion, 'v'));
+			$nodeMajorVersion = (int)explode('.', $nodeVersion)[0];
+			$nodeMinorVersion = (int)explode('.', $nodeVersion)[1];
 		} else 
 			$nodeVersion = null;
 
@@ -1414,34 +1415,21 @@ PS;
 
 		BASH;
 
+		$downgradeNode = '';
+
 		// Add Node.js installation commands if the required version is not installed
 		if (!$nodeVersion || $nodeMajorVersion !== $dibNodeMajorVersion || $nodeMinorVersion < $dibNodeMinorVersion) {
+			$installing .= "Node.js $dibNodeVersion<br>";
+
 			switch ($linuxDistro) {
-				case 'ubuntu':
-				case 'debian':
-					$bashScript .= <<< BASH
-		# Update system packages 
-		echo "Updating system packages..."
-		apt update -y && apt upgrade -y
-
-		if ! command_exists curl; then
-			echo "Installing curl..."
-			apt install -y curl
-		fi
-
-		# Update and install Node.js for Ubuntu/Debian
-		echo "Downloading Node.js $dibNodeVersion..."
-		curl -fsSL https://deb.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
-
-
-		echo "Installing Node.js $dibNodeVersion..."
-		apt install -y nodejs=$dibNodeVersion-1nodesource1
-
-		BASH;
-				break;
-
+				
 				case 'centos':
 				case 'rhel':
+					if(!!$nodeVersion && ($nodeMajorVersion > $dibNodeMajorVersion || ($nodeMajorVersion == $dibNodeMajorVersion && $nodeMinorVersion > $dibNodeMinorVersion))) {
+						$installNode = "sudo yum downgrade -y nodejs-$dibNodeVersion-1nodesource";
+					} else
+						$installNode = "yum install -y nodejs-$dibNodeVersion-1nodesource";
+
 					$bashScript .= <<< BASH
 
 		if ! command_exists curl; then
@@ -1454,12 +1442,17 @@ PS;
 		curl -fsSL https://rpm.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
 
 		echo "Installing Node.js $dibNodeVersion..."
-		yum install -y nodejs-$dibNodeVersion-1nodesource
+		$installNode
 
 		BASH;
 				break;
 
 				case 'fedora':
+					if(!!$nodeVersion && ($nodeMajorVersion > $dibNodeMajorVersion || ($nodeMajorVersion == $dibNodeMajorVersion && $nodeMinorVersion > $dibNodeMinorVersion))) {
+						$installNode = "dnf downgrade -y nodejs-$dibNodeVersion-1nodesource";
+					} else
+						$installNode = "dnf install -y nodejs-$dibNodeVersion-1nodesource";
+
 					$bashScript .= <<< BASH
 
 		if ! command_exists curl; then
@@ -1472,20 +1465,45 @@ PS;
 		curl -fsSL https://rpm.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
 
 		echo "Installing Node.js $dibNodeVersion..."
-		dnf install -y  nodejs-$dibNodeVersion-1nodesource
+		$installNode
 
 		BASH;
 				break;
 
-				default:
-					$bashScript .= "\necho 'Unsupported Linux distribution: $linuxDistro'\nexit 1\n";
-				break;
+				default: // ubuntu / debian / etc.
+					if(!!$nodeVersion && ($nodeMajorVersion > $dibNodeMajorVersion || ($nodeMajorVersion == $dibNodeMajorVersion && $nodeMinorVersion > $dibNodeMinorVersion))) {
+						$downgradeNode = '--allow-downgrades';
+					}
+
+					$bashScript .= <<< BASH
+					# Update system packages 
+					echo "Updating system packages..."
+					apt update -y && apt upgrade -y
+			
+					if ! command_exists curl; then
+						echo "Installing curl..."
+						apt install -y curl
+					fi
+			
+					# Update and install Node.js for Ubuntu/Debian
+					echo "Downloading Node.js $dibNodeVersion..."
+					curl -fsSL https://deb.nodesource.com/setup_$dibNodeMajorVersion.x | bash -
+			
+			
+					echo "Installing Node.js $dibNodeVersion..."
+					echo "nodeVersion: $nodeVersion. $nodeMajorVersion > $dibNodeMajorVersion || ($nodeMajorVersion == $dibNodeMajorVersion && $nodeMinorVersion > $dibNodeMinorVersion)";
+
+					apt install -y $downgradeNode nodejs=$dibNodeVersion-1nodesource1
+			
+					BASH;
+					break;
+
 			}
 
 		} else {
-			$installed .= 'Node.js<br>';
-			$msg = ($nodeVersion != '20.9.0') ? "\r\n\r\n***NOTE: Version 20.9.0 is recommended by Angular, but your existing version should work fine. If it does not, please manually install 20.9.0, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version, before testing.\r\n" : '';
-			$bashScript .= "\r\nWrite-Host 'Node.js $nodeVersion is already installed. $msg'\n";
+			$installed .= "Node.js $nodeVersion<br>";
+			$msg = ($nodeVersion != $dibNodeVersion) ? "\r\n\r\n***NOTE: Version $dibNodeVersion is recommended by Angular, but your existing version should work fine. If it does not, please manually install $dibNodeVersion, delete the /dropins/setNgxMaterial/angular/node_modules folder and run npm install here. Restart to ensure the watcher uses the new version, before testing.\r\n" : '';
+			$bashScript .= "\r\necho 'Node.js $nodeVersion is already installed. $msg'\n";
 		}
 
 /*
@@ -1616,7 +1634,7 @@ PS;
 			$bashScript .= "\n";
 		}
 
-		$bashScript .= "\necho 'Installation complete'";
+		$bashScript .= "\necho 'Dropinbase Installation complete'";
 
 		//$bashScript .= "\necho 'Restarting Apache' \n systemctl restart apache2\n";
 
@@ -1629,8 +1647,8 @@ PS;
 		file_put_contents($path, $bashScript);
 
 		$installing .= 'Composer 3d-party dependencies<br>Angular node_modules<br>Setting folder&file permissions<br>';
-		$installStr = '<br><br><b>Running the command above will install the following:</b><br>' . $installing . '<br><b>The following are already installed:</b><br>' . $installed;
-		DIB::$ACTION = self::getResponse('configureDib', true, "A Linux bash script was generated for this installation.<br>Please review, and then execute the following in Linux as a privileged user:<br><br><b>chmod +x $path<br>sh $path</b>$installStr");
+		$installStr = '<div id="copyBtn"></div><br><br><b>Running the command above will install the following:</b><br>' . $installing . '<br><b>The following are already installed:</b><br>' . $installed;
+		DIB::$ACTION = self::getResponse('configureDib', true, "A Linux bash script was generated for this installation.<br>Please review, and then execute the following in Linux as a privileged user:<br><br><b id='script'>chmod +x $path; sh $path</b>$installStr");
 		return TRUE;
 
 		file_put_contents('install_dependencies.sh', $bashScript);
