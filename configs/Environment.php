@@ -36,6 +36,10 @@ $args = array(
     'debug' => DIB::$CLIENT_DEBUG_LEVEL,
     'can_dib_design' => $canDibDesign,
     'auth_id' => (isset(DIB::$USER['auth_id']) ? DIB::$USER['auth_id'] : null),
+    'session_timeout_enabled' => true,
+    'session_inactivity_timeout' => 10,
+    'session_warning_timeout' => 60,
+    'session_timeout_sound_enabled' => true
 );
 
 $response = 'var DIB = ' . json_encode($args);
