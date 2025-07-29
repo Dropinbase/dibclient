@@ -20,15 +20,22 @@
         public static function w() {
             $args = func_get_args();
             if(!isset($args[0])) return;
-
-            $data = date("Y-m-d H:i:s") . "]--\r\n";
-
+    
+            $filePath = __DIR__ . DIRECTORY_SEPARATOR . 'debug.log';
+            
+            $data = "[" .date("Y-m-d H:i:s") . "]--\r\n";
+    
             foreach ($args AS $key=>$arg)
                 $data .= $key . ": \t" . print_r($arg, true) . "\r\n";
             
             $data = substr($data, 0, -2);
-
-            self::err($data);
+    
+            $data = "\r\n\r\n". $data;
+            
+            if(file_exists($filePath))
+                file_put_contents($filePath, $data, FILE_APPEND | LOCK_EX);
+            else
+                file_put_contents($filePath, $data);
         }
     }
 
@@ -57,7 +64,9 @@
         '/resources/logocircle.png',
         '/resources/east.png',
         '/resources/logo_tr.png',
-        '/resources/contentCopy.png'
+        '/resources/contentCopy.png',
+        '/resources/correctTick.png',
+        '/resources/redCross.png'
     );
 
     if (in_array($_SERVER['REQUEST_URI'], $resources)){
@@ -102,6 +111,7 @@
         '/downloadDibProgress',
         '/configureDib',
         '/checkDibInstall',
+        '/verifyInstall',
     );
 
     include($path . DIRECTORY_SEPARATOR . 'main.php');

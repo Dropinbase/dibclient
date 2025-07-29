@@ -61,7 +61,7 @@ label {
 }
 
 .leftInnerBlock {
-    margin: 30px 10px 0px 40px;
+    margin: 30px 10px 0px 10px;
     display: flex;
     flex-direction: column; 
     justify-content: flex-start;

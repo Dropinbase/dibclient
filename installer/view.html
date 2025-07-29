@@ -45,6 +45,9 @@
                         <img src="/resources/pendingTick.png"><span>Connect to DIB Database</span>
                     </div>
                     <div id="title7" class="title" onclick="openTab(7)">
+                        <img src="/resources/pendingTick.png"><span>Verify Installation</span>
+                    </div>
+                    <div id="title8" class="title" onclick="openTab(8)">
                         <img src="/resources/pendingTick.png"><span>Finalize</span>
                     </div>
                 </div>
@@ -80,7 +83,7 @@
                     <div class="mainBody" style="gap:10px">
                         <p>Let's see if PHP and the webserver has the required extensions...</p>
                         
-                        <a class="dibBtn" onClick="doAction('testPhp');return false;">Run Tests</a>
+                        <a class="dibBtn" onClick="doAction('testPhp');">Run Tests</a>
 
                         <p>You can also</p>
                         <a class="dibBtn" href="/phpModules" target="_blank" >View your PHP configuration</a>
@@ -109,7 +112,7 @@
                             <input id="password" type="password" class="textInput"/>
                         </div>
                         
-                        <a class="dibBtn" onClick="doAction('signIn');return false;">Sign In</a>
+                        <a class="dibBtn" onClick="doAction('signIn');">Sign In</a>
                         
                         <div style="overflow:auto">
                             <div id="signInMsg" class="responseErr" ></div>
@@ -227,7 +230,7 @@
                         </div>
                         <br>
 
-                        <a id="btnCreateTables" class="dibBtn" onClick="doAction('saveTestDb');return false;">Create Tables</a>
+                        <a id="btnCreateTables" class="dibBtn" onClick="doAction('saveTestDb');">Create Tables</a>
                         
                         <div id="saveTestDbMsg" class="response">
                             <span id="addConnections">
@@ -239,6 +242,19 @@
                 </div>
 
                 <div id="pg7" class="rightInnerBlock" style="display: none; flex-grow:1">
+                    <div>
+                        <h2>Verify Dropinbase Requirements</h2>
+                        
+                        <div style="display:flex; flex-direction: row; gap:10px;">
+                            <a class="dibBtn" onClick="doAction('verifyInstall')">Verify Requirements</a>
+                            <a class="dibBtn" target="_blank" href="https://www.dropinbase.com/manualInstallHelp.html">Manual Installation Help</a>
+                        </div>
+
+                        <div id="verifyInstallMsg"></div>
+                    </div>
+                </div>
+
+                <div id="pg8" class="rightInnerBlock" style="display: none; flex-grow:1">
                     <div>
                         <h2>One Last Step!</h2>
                         <div>Currently the project's <b>index.php</b> file is set to open the Installer.
@@ -253,7 +269,7 @@
                             <br><br>
                         </div>
 
-                        <a class="dibBtn" onClick="doAction('updateIndex');return false;">Update index.php</a>
+                        <a class="dibBtn" onClick="doAction('updateIndex');">Update index.php</a>
 
                         <div id="updateIndexMsg" class="response"></div>
                     </div>

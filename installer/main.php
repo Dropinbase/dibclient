@@ -43,6 +43,7 @@ function shutDownFunction() {
 		}
 	}
 	
+	// Note that success=>FALSE is also used in some cases for just communicating information to the client in DIB::$ACTION
 	if (!empty(DIB::$ACTION)) {
 		echo json_encode(array('success'=>FALSE, 'messages'=>DIB::$ACTION, 'override' => Install::$showOverrideButton));
 
@@ -53,9 +54,10 @@ function shutDownFunction() {
 	
 }
 
-
-
 class Install {
+	private static $dibAngularVersion = '17.3.9';
+	private static $dibNodeVersion = '20.9.0';
+
 	public static $basePath = '';
 	public static $dibPath = '';
 	public static $query = null;
@@ -67,7 +69,7 @@ class Install {
 	public static function init($path) {
 		self::$basePath = $path . DIRECTORY_SEPARATOR;
 
-		if(!empty(DIB::$SYSTEMPATH))
+		if(!empty(DIB::$SYSTEMPATH) && file_exists(DIB::$SYSTEMPATH))
 			self::$dibPath = DIB::$SYSTEMPATH;
 
 		elseif(file_exists($path . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR . 'DibApp.php'))
@@ -75,6 +77,7 @@ class Install {
 
 		elseif(file_exists($path . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR . 'DibApp.php'))
 			self::$dibPath = $path . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR . 'dropinbase' . DIRECTORY_SEPARATOR;
+			
     }
 
     private static function getResponse($name, $ready, $exceptionMsg) {
@@ -196,9 +199,14 @@ class Install {
 		closedir($dp);
 		return TRUE;
 	}
-    
+
     private static function checkConnAttributes($c) {
-    	$perfect = array('database', 'dbType', 'username', 'password', 'host', 'port', 'emulatePrepare', 'charset', 'dbDropin', 'systemDropin');
+		$dbType = (isset($c['dbType'])) ? $c['dbType'] : 'mysql';
+
+		if($dbType === 'sqlite')
+			$perfect = array('foreignKeyConstraints', 'host', 'charset', 'dbType', 'emulatePrepare', 'dbDropin', 'systemDropin');
+		else
+    		$perfect = array('database', 'dbType', 'username', 'password', 'host', 'port', 'emulatePrepare', 'charset', 'dbDropin', 'systemDropin');
 		
 		$missing = array();
 		foreach ($perfect as $key) {
@@ -211,90 +219,148 @@ class Install {
 		return '';
 	}
 	
-    private static function checkFilesAndDbConn(&$response, $params) {
+    private static function checkFilesAndDbConn(&$response, $params, $finalVerifyInstall=FALSE) {
 		$apache = array();
 		$php = array();
 		
 		// Check for required files and folders
-        $result = self::checkFiles($response);
+        $result = self::checkFiles($response, TRUE);
 		if($result !== true) return false;
 
-        list($host, $port, $database, $username, $password) = array(
-            $params['host'], $params['port'], $params['database'], $params['username'], $params['password'], 
-        );
-        
-        if(empty($params['port']) || $params['port'] != (string)(int)$params['port']) {
-			$response[] = self::getResponse('Database Connection', false, "The 'port' attribute must be an integer (for MySQL it is normally 3306, and for MariaDb, 3307). Please amend and try again.");
-			return FALSE;
-		}
+		if($finalVerifyInstall === FALSE) {
 
-        if(empty($params['host']) || empty($params['database']) || empty($params['username'])) {
-			$response[] = self::getResponse('Database Connection', false, "The following values are all required: host, database, username, port. Please amend and try again.");
-			return FALSE;
-		}
-		
-	  	// Load Conn.php and try to connect to db's
-		$connPath = (empty(DIB::$SECRETSPATH)) ? self::$basePath  . 'secrets' . DIRECTORY_SEPARATOR . 'Conn.php' : DIB::$SECRETSPATH . 'Conn.php';
-
-        if(!file_exists($connPath)) {
-        	if(!is_writable(dirname($connPath))) {
-				$response[] = self::getResponse('File Permissions', true, "The '$connPath' file does not exist, and the webserver does not have permissions to create the file. Either provide the necessary permissions or create the Conn.php file manually (see /secrets/Example_Conn.php).");
+			list($host, $port, $database, $username, $password) = array(
+				$params['host'], $params['port'], $params['database'], $params['username'], $params['password'], 
+			);
+			
+			if(empty($params['port']) || $params['port'] != (string)(int)$params['port']) {
+				$response[] = self::getResponse('Database Connection', false, "The 'port' attribute must be an integer (for MySQL it is normally 3306, and for MariaDb, 3307). Please amend and try again.");
 				return FALSE;
 			}
-			// Create the file
-			self::createConn($connPath, 1, $host, $port, $database, $username, $password, $response);
-		
+
+			if(empty($params['host']) || empty($params['database']) || empty($params['username'])) {
+				$response[] = self::getResponse('Database Connection', false, "The following values are all required: host, database, username, port. Please amend and try again.");
+				return FALSE;
+			}
 		}
+
+	  	// Load Conn.php and try to connect to db's
+		$connPath = (empty(DIB::$SECRETSPATH)) ? self::$basePath  . 'secrets' . DIRECTORY_SEPARATOR . 'Conn.php' : DIB::$SECRETSPATH . 'Conn.php';
+		$usingExistingConn = FALSE;
+
+        if(!file_exists($connPath)) {
+
+			if($finalVerifyInstall === FALSE) {
+				if(!is_writable(dirname($connPath))) {
+					$response[] = self::getResponse('File Permissions', true, "The '$connPath' file does not exist, and the webserver does not have permissions to create the file. Either provide the necessary permissions or create the Conn.php file manually (see /secrets/Example_Conn.php).");
+					return FALSE;
+				}
+				// Create the file
+				$result = self::createConn($connPath, 1, $host, $port, $database, $username, $password, $response);
+				if($result === FALSE) return FALSE;
+
+			} else {
+				$response[] = self::getResponse('Database Connection', false, "The database connection file ($connPath) does not exist. Please create the file manually (see /secrets/Example_Conn.php).");
+				return FALSE;
+			}
+		
+		} else
+			$usingExistingConn = TRUE;
 		
 		require $connPath;
-
-        $dbIndex = array_keys(DIB::$DATABASES)[0];
-
-        if(count(DIB::$DATABASES) < 2) {
-			self::createConn($connPath, $dbIndex, $host, $port, $database, $username, $password, $response);
-            require $connPath;
-
-            $dbIndex = array_keys(DIB::$DATABASES)[0];
-        }
 		
+		if(empty(DIB::$DATABASES)) {
+			if($finalVerifyInstall === TRUE) {
+				$response[] = self::getResponse('Database Connection', false, "The database connection file ($connPath) is corrupt or empty. It must have a entry for the Dropinbase database. Please create the file manually (see /secrets/Example_Conn.php).");
+				return FALSE;
+				
+			} else {
+				$result = self::createConn($connPath, 1, $host, $port, $database, $username, $password, $response);
+				if($result === FALSE) return FALSE;
+				sleep(1); // If we don't sleep, we get the old results
+				require $connPath;
+			}
+		}
+
+		if($finalVerifyInstall === FALSE && $usingExistingConn && DIB::$DATABASES[1]['database'] !== $database) {
+			$result = self::createConn($connPath, 1, $host, $port, $database, $username, $password, $response);
+			if($result === FALSE) return FALSE;
+
+			sleep(1); // If we don't sleep, we get the old results
+			require $connPath;
+			$usingExistingConn = false;
+		}
+
+		$dbKeys = array_keys(DIB::$DATABASES);
+        $dbIndex = $dbKeys[0];
+
 		// Test the mysql server connection
 
 		$c = DIB::$DATABASES[$dbIndex];
 		$missing = self::checkConnAttributes($c);
+
 		if($missing !== '') {
-			$response[] = self::getResponse('Database Connection', true, "The entry in the database connection file (/secrets/Conn.php) is missing the following attributes:<br><b>$missing<b><br>Please amend, or delete the Conn.php file so that it can be created again.");
+			$response[] = self::getResponse('Database Connection', true, "The entry in the database connection file ($connPath) is missing the following attributes:<br><b>$missing</b><br>Please amend, or delete the Conn.php file so that it can be created again.");
 			return FALSE;
 		}
 		
 		// dropinbase database must be mysql
 		if($c['dbType'] !== 'mysql') {
-			$response[] = self::getResponse('Database Connection', true, "The dropinbase database must (at present) be hosted in MySQL / Mariadb. If it is, change the dbType field to 'mysql' for the first entry of the database connection file (/secrets/Conn.php).");
+			$response[] = self::getResponse('Database Connection', true, "The dropinbase database must (at present) be hosted in a MySQL compatible database server. If it is, change the dbType field to 'mysql' for the first entry of the database connection file (/secrets/Conn.php).");
 			return FALSE;
 		}
 
+		$host = $c['host'];
+		$port = $c['port'];
+		$database = $c['database'];
+		$username = $c['username'];
+		$password = $c['password'];
+		
+		/*
 		// construct general conn string and test basic query
 		$connStr = "mysql:host=$host;port=$port;charset=utf8mb4";
 		Db::setConn($connStr, $username, $password);
 		
 		$result = Db::execute("SELECT 1 as A");
 		if($result === FALSE || Db::count()<1) {
-			$response[] = self::getResponse('Database Connection', false, 'Could not connect to the MySQL (compatible) server, using the<br>host, port, username and password provided in entry 1 of the database connection file (/secrets/Conn.php).<br>Database error: ' . Db::lastErrorAdminMsg());
+			$response[] = self::getResponse('Database Connection', false, 'Could not connect to the MySQL (compatible) server, using the<br>host, port, username and password provided in entry 1 of the database connection file ($connPath).<br>Database error: ' . Db::lastErrorAdminMsg());
 			return FALSE;
 		}
+		*/
 
 		// Test connection to dropinbase db
 		$connStr = "mysql:dbname=$database;host=$host;port=$port;charset=utf8mb4";
+
 		Db::setConn($connStr, $username, $password);
+
 		$result = Db::execute("SELECT `content_type` FROM pef_content_type");
-		if(Db::count()>1)
+		if(Db::count()>1) {
+
+			if($usingExistingConn === TRUE && $finalVerifyInstall === FALSE) {
+				$response[] = self::getResponse('Database Connection', false, "<br>Note, the /secrets/Conn.php file already existed, referencing a dropinbase database with the same name which will be used.<br><br>You can proceed to the next step.");
+				return FALSE;
+			}
 			return TRUE;
-		
+		}
+
+		if($finalVerifyInstall === TRUE) {
+			$response[] = self::getResponse('Database Connection', false, "Could not retrieve any data from the pef_content_type table in the dropinbase database. The database connection is faulty, or the database tables/records were not created correctly.<br>Please review the first entry of the database connection file ($connPath) that should reference the dropinbase database, and check if the tables and records exist.<br>Database error: " . Db::lastErrorAdminMsg());
+			return FALSE;
+		}
+
 		// Create the database
         $connStr = "mysql:host=$host;port=$port;charset=utf8mb4";
-		return self::createDb($connStr, $username, $password, $database, $dbIndex, $response);
+		$result = self::createDb($connStr, $username, $password, $database, $dbIndex, $response);
+
+		if($result === TRUE && $usingExistingConn === TRUE) {
+			$response[] = self::getResponse('Database Connection', false, "<br>Note, the /secrets/Conn.php file already existed, which referenced a dropinbase database with the same name. The installer created missing tables in this database.<br><br>You can proceed to the next step.");
+			return FALSE;
+		}
+
+		return $result;
 	}
 
-	private static function checkFiles(&$response) {
+	private static function checkFiles(&$response, $finalVerifyInstall=FALSE) {
 		// Check folder structure
 		$configsPath = self::$basePath  . 'configs';
 
@@ -313,14 +379,14 @@ class Install {
             return FALSE;
         }
 		
-        if(!file_exists($configsPath . DIRECTORY_SEPARATOR . 'Dib.php') && !is_writable($configsPath)) {
+        if(!file_exists($configsPath . DIRECTORY_SEPARATOR . 'Dib.php') && !is_writable($configsPath) && $finalVerifyInstall === FALSE) {
             $response[] = self::getResponse('File Permissions', true, "The webserver lacks permissions to create the Dib.php file in the '$configsPath' folder. Please amend using the chmod and chown commands. Once it is created, you can reset the folder permissions to read-only.");
             return FALSE;
         }
         
         $filesPath = self::$basePath  . 'files';
         if(!file_exists($filesPath)) {
-            $response[] = self::getResponse('Folder structure', true, "The '$filesPath' folder does not exist. folder with its required files does not exist. Download the .zip file from Github and recreate the dropinbase client folder structure. Alternatively, copy this folder (and other missing files) from another DIB installation.");
+            $response[] = self::getResponse('Folder structure', true, "The '$filesPath' folder does not exist. Download the dibclient project's .zip file from Github and recreate the dropinbase client folder structure. Alternatively, get this folder (and other missing files) from another working DIB installation.");
             return FALSE;
         }
         
@@ -332,8 +398,7 @@ class Install {
 			$response[] = self::getResponse('File Permissions', true, "The webserver lacks permissions to create the '$runtimePath' folder. Please amend using the chmod and chown commands, and try again.");
 			return FALSE;
 		}
-        
-
+		
         // Note, runtime path is configurable in Dib.php
         
         if(!is_writable($runtimePath)) {
@@ -351,7 +416,12 @@ class Install {
 		$result = Db::execute($sql);
 		if($result === FALSE) {
 	    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ('$databaseName') using the following connection properties:<br>$connStr, $username, $password.<br>Please check the connection properties in entry $dbIndex of the database connection file (/secrets/Conn.php). The following SQL failed:<br> " . $sql . '<br> Database error: ' . Db::lastErrorAdminMsg());
-			return $response;
+			return FALSE;
+		}
+
+		if(empty(self::$dibPath) || !file_exists(self::$dibPath . 'DibApp.php')) {
+			$response[] = self::getResponse('File Permissions', true, "The Dropinbase framework has not been installed yet. First execute that step and try again.");
+			return FALSE;
 		}
 		
 		// Get sql file contents
@@ -378,7 +448,7 @@ class Install {
 
 			    if($result === FALSE) {
 			    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables. Please check the MySQL user permissions and the connection properties (/secrets/Conn.php).<br>The following SQL failed: " . $templine . '. Database error: ' . Db::lastErrorAdminMsg());
-					return $response;
+					return FALSE;
 				}
 			    	
 			    // Reset temp variable to empty
@@ -548,12 +618,12 @@ class Install {
     	$result = @file_put_contents($path,
 "<?php
 
-/* NOTES: 
-   - The index of the main dropinbase table must match the DBINDEX value in Dib.php
+/* NOTES: x
+   - The index of the main Dropinbase database must match the DBINDEX value in Dib.php
    - Depending on your setup, using an IP address as host (eg 127.0.0.1 instead of 'localhost') can increase performance
    - This file is regenerated each time connection details are updated using the /nav/dibConfigs UI in Dropinbase
    - View the Example_Conn.php file for examples of how to connect to different database servers
-   - By default the MySQL dropinbase tables use the 'utf8mb4_unicode_520_ci' collation. 
+   - By default the MySQL Dropinbase tables use the 'utf8mb4_unicode_520_ci' collation. 
      Ensure your MySQL server's my.ini file is configured accordingly, or change the collation for the dropinbase tables to match your own settings (HeidiSQL has a useful bulk tool).
    - More info about charset and collation:
         https://www.coderedcorp.com/blog/guide-to-mysql-charsets-collations/
@@ -580,6 +650,8 @@ DIB::\$DATABASES = array(
 			$response[] = self::getResponse('Database Connection', false, "Could not create the following database connection file. Please check permissions: '$path'");
 	  		return FALSE;
 		}
+
+		return TRUE;
 	}
 
     private static function updateIndexFile(&$response) {
@@ -809,7 +881,7 @@ DIB::\$DATABASES = array(
 
 			file_put_contents($progressFile, 'unzip');
 
-			DIB::$ACTION = self::getResponse('unzip', false, "Installing files...");
+			DIB::$ACTION = self::getResponse('unzip', false, "Installing files to " . self::$dibPath);
 			return false;
 
 		} elseif($progress == 'unzip') {
@@ -833,7 +905,7 @@ DIB::\$DATABASES = array(
 
 		} elseif($progress == 'unzipping') {
 
-			DIB::$ACTION = self::getResponse('unzip', false, "Installing files...");
+			DIB::$ACTION = self::getResponse('unzip', false, "Installing files to " . self::$dibPath);
 			return false;
 
 		} elseif($progress == 'next step') {
@@ -869,9 +941,15 @@ DIB::\$DATABASES = array(
 
 	private static function createScriptWindows($params) {
 
-		$dibNodeVersion = '20.9.0';
-		$dibNodeMajorVersion = 20;
-		$dibNodeMinorVersion = 9;
+		$dibAngularVersion = self::$dibAngularVersion;
+		$dibNodeVersion = self::$dibNodeVersion;
+		$dibNodeMajorVersion = (int)explode('.', $dibNodeVersion)[0];
+		$dibNodeMinorVersion = (int)explode('.', $dibNodeVersion)[1];
+
+		if(empty(self::$dibPath) || !file_exists(self::$dibPath . 'DibApp.php')) {
+			DIB::$ACTION = self::getResponse('configureDib', true, "The Dropinbase framework has not been installed yet. First execute that step and try again.");
+			return false;
+		}
 
 		$basePath = realpath(self::$basePath);
 		$dibPath = realpath(self::$dibPath);
@@ -886,7 +964,11 @@ DIB::\$DATABASES = array(
 
 		// Detect installed Composer version
 		$composerVersion = self::getComposerVersion();
-		$composerPath = (!empty($params['composerFolder'])) ? $params['composerFolder'] : null;
+		$composerFoundPath = self::findComposerOnWindows();
+		if(!empty($composerFoundPath)) {
+			$composerFoundPath = str_replace("\\", "\\\\", dirname(realpath($composerFoundPath)));
+		}
+		$composerPath = (!empty($params['composerFolder'])) ? $params['composerFolder'] : $composerFoundPath;
 		
 		if(empty($composerVersion)) {
 
@@ -906,7 +988,7 @@ DIB::\$DATABASES = array(
 
 		chdir($dibPath . '/dropins/setNgxMaterial/angular');
 
-		$nodeVersion = shell_exec('node -v 2>&1');
+		$nodeVersion = self::checkCommand('node -v');
 		$nodeMajorVersion = (int)explode('.', $nodeVersion)[0];
 		$nodeMinorVersion = (int)explode('.', $nodeVersion)[1];
 
@@ -923,7 +1005,12 @@ DIB::\$DATABASES = array(
 
 		// Detect installed Angular CLI version
 
-		$angularVersion = shell_exec('ng version 2>&1');
+		$angularVersion = self::checkCommand('ng version');
+
+		if($angularVersion === null) {
+			$angularVersion = self::checkCommand('npx ng version');
+		}
+
 		preg_match('/Angular CLI\:\s*(\d+\.\d+\.\d+)/', $angularVersion, $matches);
 		$angularVersion = isset($matches[1]) ? $matches[1] : null;
 		$angularVersion = $angularVersion ? trim($angularVersion) : null;
@@ -958,7 +1045,7 @@ DIB::\$DATABASES = array(
 			)
 			# `LASTEXITCODE` of 0 or null = success
 			# Non-zero = failure
-			if (-not \$LASTEXITCODE) {
+			if (\$LASTEXITCODE -eq \$null -or \$LASTEXITCODE -eq 0) {
 				Write-Host "Command '\$CommandName' succeeded." -ForegroundColor Green
 			}
 			else {
@@ -1047,6 +1134,10 @@ DIB::\$DATABASES = array(
 PS;
 
 		// Add Node.js installation if not installed or version is incorrect (with error handling)
+
+// *** TODO: detect if nvm installed - then rather do nvm install... and nvm use... 
+// ALSO the help must advise the use of nvm before running installation script.
+
 		if (!$nodeVersion || ($nodeMajorVersion != $dibNodeMajorVersion) || ($nodeMinorVersion < $dibNodeMinorVersion)) {
 			$installing .= "Node.js $dibNodeVersion<br>";
 			$psScript .= <<< PS
@@ -1075,6 +1166,7 @@ PS;
 
 			# Perfom checksum
 			CheckFileHashSHA256 -filePath \$installerFile -validHash \$nodeJsCheckSum -appName "Node.js installer"
+			StopIfFailed -CommandName "Check NodeJs Checksum of \$installerFile"
 
 			# Install Node.js silently
 			Write-Host "Installing Node.js..."
@@ -1097,7 +1189,7 @@ PS;
 
 			# Remove the installer
 			Remove-Item \$installerFile -ErrorAction Stop
-			StopIfFailed -CommandName "Remove \$installerFile"
+			
 
 			Write-Host "Node.js $dibNodeVersion installed successfully."
 
@@ -1153,7 +1245,7 @@ PS;
 			StopIfFailed -CommandName "Execution of php composer-setup.php"
 
 			Remove-Item composer-setup.php -ErrorAction Stop
-			StopIfFailed -CommandName "Remove composer-setup.php"
+			
 
 			\$existingPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
 			if (\$existingPath -notlike "*$composerPath*") {
@@ -1180,15 +1272,20 @@ PS;
 
 		Write-Host "Executing composer install..."
 		try {
-			php $composerPath\\composer.phar install
+			php "$composerPath\\composer.phar" install
+			if ((\$LASTEXITCODE -ne \$null) -and (\$LASTEXITCODE -ne 0)) {
+				Write-Host "Composer installation failed using PHP. Let's try executing 'composer install' directly..." -ForegroundColor Red
+				composer install
+			}
 			StopIfFailed -CommandName "composer install"
 
 		} catch {
-			Write-Host "\r\nComposer install failed." -ForegroundColor Red
-			exit 1
+			Write-Host "Composer installation failed using PHP. Let's try executing 'composer install' directly..." -ForegroundColor Red
+			composer install
+			StopIfFailed -CommandName "composer install"
 		}
 
-		# Navigate to the Angular project directory and run 'npn install'
+		# Navigate to the Angular project directory and run 'npm install'
 		Set-Location "$angularPath"
 		Write-Host "Running npm install..."
 
@@ -1219,12 +1316,12 @@ PS;
 
 		try {
 			# Get-ChildItem -Path "C:\Program Files" -Directory
-			\$nodeDir = Get-ChildItem -Path "C:\Program Files" -Directory -Filter "nodejs"
+			\$nodeDir = Get-ChildItem -Path "C:\\Program Files" -Directory -Filter "nodejs"
 
 			\$nodePath = Resolve-Path -Path (\$nodeDir.FullName + "\\npm.cmd")
 
+			& \$nodePath install
 
-			Start-Process -FilePath \$nodePath -ArgumentList "install", '/quiet' -Wait
 			StopIfFailed -CommandName "npm install"
 
 		} catch {
@@ -1234,25 +1331,33 @@ PS;
 		
 PS;
 
+// The following failed on some machines, so using a simpler approach above: 
+// Start-Process -FilePath \$nodePath -ArgumentList "install", '/quiet' -NoNewWindow -Wait 
+
 		// Add Angular CLI installation if not installed or version is incorrect (with error handling)
-		if (!$angularVersion || $angularVersion !== '17.3.9') {
-			$installing .= 'Angular CLI 17.3.9<br>';
+		if (!$angularVersion || $angularVersion !== $dibAngularVersion) {
+			$installing .= "Angular CLI $dibAngularVersion<br>";
 			$psScript .= <<< PS
 
-		Write-Host "Installing Angular CLI 17.3.9..."
+		Write-Host "Installing Angular CLI $dibAngularVersion..."
 		try {
-			Start-Process -FilePath \$nodePath -ArgumentList "install -g @angular/cli@17.3.9", '/quiet' -Wait
-			StopIfFailed -CommandName "Install Angular CLI"
-			Write-Host "Angular CLI 17.3.9 installed successfully."
+			& \$nodePath install -g @angular/cli@$dibAngularVersion
+			StopIfFailed -CommandName "Install Angular CLI $dibAngularVersion"
+			Write-Host "Angular CLI $dibAngularVersion installed successfully."
 
 		} catch {
-			Write-Host "Angular CLI installation failed." -ForegroundColor Red
+			Write-Host "Angular CLI CLI $dibAngularVersion installation failed." -ForegroundColor Red
 			exit 1
 		}
 		PS;
+
+// The following failed on some machines, so using a simpler approach above: 
+// Start-Process -FilePath \$nodePath -ArgumentList "install -g @angular/cli@$dibAngularVersion", '/quiet' -NoNewWindow -Wait
+
+
 		} else {
-			$installed .= 'Angular CLI 17.3.9<br>';
-			$psScript .= "\r\nWrite-Host 'Angular CLI 17.3.9 is already installed.'\r\n";
+			$installed .= "Angular CLI $dibAngularVersion<br>";
+			$psScript .= "\r\nWrite-Host 'Angular CLI $dibAngularVersion is already installed.'\r\n";
 		}
 
 		$psScript .= "\r\nWrite-Host 'Dependencies installed successfully.'\r\n";
@@ -1291,9 +1396,15 @@ PS;
 			'user files folder' => 'USERFOLDER'
 		);
 
-		$dibNodeVersion = '20.9.0';
-		$dibNodeMajorVersion = 20;
-		$dibNodeMinorVersion = 9;
+		$dibAngularVersion = self::$dibAngularVersion;
+		$dibNodeVersion = self::$dibNodeVersion;
+		$dibNodeMajorVersion = (int)explode('.', $dibNodeVersion)[0];
+		$dibNodeMinorVersion = (int)explode('.', $dibNodeVersion)[1];
+
+		if(empty(self::$dibPath) || !file_exists(self::$dibPath . 'DibApp.php')) {
+			DIB::$ACTION = self::getResponse('configureDib', true, "The Dropinbase framework has not been installed yet. First execute that step and try again.");
+			return false;
+		}
 
 		$basePath = realpath(self::$basePath);
 		$dibPath = realpath(self::$dibPath);
@@ -1312,7 +1423,7 @@ PS;
 		chdir($dibPath . '/dropins/setNgxMaterial/angular');
 
 		// Detect installed Node.js version
-		$nodeVersion = shell_exec('node -v 2>/dev/null');
+		$nodeVersion = self::checkCommand('node -v');
 		if($nodeVersion) {
 			$nodeVersion = trim(trim($nodeVersion, 'v'));
 			$nodeMajorVersion = (int)explode('.', $nodeVersion)[0];
@@ -1323,7 +1434,12 @@ PS;
 		// Detect installed Angular CLI version
 
 		//$angularVersion = shell_exec('ng version 2>/dev/null | grep -oP "(?<=CLI: )[^ ]+"');
-		$angularVersion = shell_exec('ng version 2>/dev/null');
+		$angularVersion = self::checkCommand('ng version');
+
+		if($angularVersion === null) {
+			$angularVersion = self::checkCommand('npx ng version');
+		}
+
 		preg_match('/Angular CLI\:\s*(\d+\.\d+\.\d+)/', $angularVersion, $matches);
 		$angularVersion = isset($matches[1]) ? $matches[1] : null;
 		$angularVersion = $angularVersion ? trim($angularVersion) : null;
@@ -1574,12 +1690,12 @@ PS;
 
 		BASH;
 
-		if ($angularVersion !== '17.3.9') {
-			$installing .= 'Angular CLI 17.3.9<br>';
-			$bashScript .= "npm install -g @angular/cli@17.3.9\n";
+		if ($angularVersion !== $dibAngularVersion) {
+			$installing .= "Angular CLI $dibAngularVersion<br>";
+			$bashScript .= "npm install -g @angular/cli@$dibAngularVersion\n";
 		} else {
-			$installed .= 'Angular CLI 17.3.9<br>';
-			$bashScript .= "echo 'Angular CLI 17.3.9 is already installed.'\n";
+			$installed .= "Angular CLI $dibAngularVersion<br>";
+			$bashScript .= "echo 'Angular CLI $dibAngularVersion is already installed.'\n";
 		}
 
 		// Add project-specific commands for Composer installation
@@ -1718,6 +1834,229 @@ PS;
         }
     }
 
+
+	/**
+	 * Checks if a command can be run successfully on the system.
+	 * Returns the command's output on success, or null on failure.
+	 */
+	private static function checkCommand($command) {
+		// Capture the return code in $return_var and output in $output.
+		$output = [];
+		$return_var = 1; // set default to non-zero
+
+		// On Windows, you might prefer "where node" but usually running "node -v" is enough.
+
+		if (strtolower(substr(php_uname(), 0, 7)) === "windows") {
+			$str = ' 2>&1';
+		} else {
+			$str = ' 2>/dev/null';
+		}
+
+		exec($command . $str, $output, $return_var);
+
+		// If $return_var is 0, the command executed successfully.
+		if ($return_var === 0) {
+			// Return the full output as a string.
+			$output = implode("\n", $output);
+			$output = ltrim($output, 'v');
+			return $output;
+		}
+
+		// If the command failed (return_var != 0), return null
+		return null;
+	}
+
+	private static function verifyInstallParts($params, &$response) {
+		$success = array();
+
+		$dir = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR . 'DibApp.php';
+		if(!file_exists($dir)) {
+			$success['dropinbase'] = array(false, 'The Dropinbase framework files do not exist.<br><b>Cannot conduct further checks</b>.');
+			return $success;
+		} else {
+			$success['dropinbase'] = array(true, 'The Dropinbase framework files exist.');
+		}
+
+		$result = self::checkFilesAndDbConn($response, $params, TRUE);
+		if($result === false) {
+			$success['conn'] = array(false, $response[0]['notes']);
+		} else {
+			// Last convenience check: dropins/main folder
+			$path = self::$basePath  . 'dropins' . DIRECTORY_SEPARATOR . 'main';
+			if(!file_exists($path)) {
+				$success['conn'] = array(false, 'Folder structure', true, "Database connection is successful. Note, the '$path' folder does not exist - it is not required, but helpful if you're new to Dropinbase.");
+				return FALSE;
+			}
+
+			$success['conn'] = array(true, 'Dropinbase client files exist, and database connection is successful.');
+		}
+
+		// Check composer and vendor folder
+		
+		if(empty(DIB::$VENDORPATH))
+			$dir = self::$basePath . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+		else
+			$dir = DIB::$VENDORPATH . 'autoload.php';
+
+		$vendorPathExists = file_exists($dir);
+
+		$composerOutput = self::checkCommand('composer --version'); // 2>nul
+
+		if (empty($composerOutput)) {
+			$str = ($vendorPathExists) ? 'Composer not found, but vendor folder exists.' : 'Composer not found and vendor folder missing.';
+			$success['composer'] = array(true, $str);
+		} else {
+			if ($vendorPathExists) {
+				$success['composer'] = array(true, 'Composer installed and vendor folder exists.');
+			} else {
+				$success['composer'] = array(false, "Composer installed, but required vendor folder missing. See Help for more info.");
+			}
+		}
+
+		// Check Angular CLI and node_modules
+
+		$dir = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR . 'dropins' . DIRECTORY_SEPARATOR . 'setNgxMaterial' . DIRECTORY_SEPARATOR . 'angular' . DIRECTORY_SEPARATOR . 'node_modules';
+		if(!file_exists($dir)) {
+			$success['node_modules'] = array(false, 'Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules not found.<br><b>Cannot conduct further checks</b>.');
+			return $success;
+		} else {
+			$success['node_modules'] = array(true, 'Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules exists.');
+		}
+
+		$dir = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR . 'dropins' . DIRECTORY_SEPARATOR . 'setNgxMaterial' . DIRECTORY_SEPARATOR . 'angular' . DIRECTORY_SEPARATOR . 'node_modules' . DIRECTORY_SEPARATOR . '@angular';
+		if(!file_exists($dir)) {
+			$success['angular'] = array(false, 'Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules/@angular not found.');
+
+		} else {
+			
+			$dir = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR . 'dropins' . DIRECTORY_SEPARATOR . 'setNgxMaterial' . DIRECTORY_SEPARATOR . 'angular' . DIRECTORY_SEPARATOR . 'node_modules' . DIRECTORY_SEPARATOR . '.bin' . DIRECTORY_SEPARATOR . 'ngc';
+			if(!file_exists($dir)) {
+			
+				// See if npx can find ngc
+				$npxVersion = self::checkCommand('npx ngc --version');
+				if(empty($npxVersion)) {
+					$success['node_modules'] = array(false, "Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules/@angular exists, but Angular compiler is not working using 'ngc' or 'npx ngc'.");
+				} else {
+					$success['node_modules'] = array(true, 'Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules/@angular exists, and Angular compiler (ngc) functional.');
+				}
+			} else {
+				$success['node_modules'] = array(true, 'Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules/@angular exists, and Angular compiler (ngc) functional.');
+			}
+		}
+
+		// Check Node.js
+		$dir = self::$basePath . 'dropinbase' . DIRECTORY_SEPARATOR . 'dropins' . DIRECTORY_SEPARATOR . 'setNgxMaterial' . DIRECTORY_SEPARATOR . 'angular';
+
+		if(!file_exists($dir)) {
+			$success['angular'] = array(false, 'DIB Framework folder /dropinbase/dropins/setNgxMaterial/angular not found. <br><b>Cannot conduct further checks</b>.');
+			return $success;
+		}
+
+		chdir($dir);
+		$nodeOutput = self::checkCommand('node -v');
+
+		if ($nodeOutput !== null) {
+			$nodeOutputMajorVersion = (int)explode('.', $nodeOutput)[0];
+			$nodeOutputMinorVersion = (int)explode('.', $nodeOutput)[1];
+
+			$dibNodeMajorVersion = (int)explode('.', self::$dibNodeVersion)[0];
+			$dibNodeMinorVersion = (int)explode('.', self::$dibNodeVersion)[1];
+
+			if (($nodeOutputMajorVersion != $dibNodeMajorVersion) || ($nodeOutputMinorVersion < $dibNodeMinorVersion))  {
+				$success['nodeversion'] = array(false, "Node.js version $nodeOutput installed (it may not work with Angular CLI " . self::$dibAngularVersion . "). Node.js version " . self::$dibNodeVersion . " recommended.");
+			} else {
+				$success['nodeversion'] = array(true, "Node.js version $nodeOutput installed.");
+			}
+			
+		} else {
+			$success['nodeversion'] = array(false, "Node.js not installed. Version " . self::$dibNodeVersion . " recommended.");
+		}
+		
+		// Check npm
+		$npmOutput = self::checkCommand('npm -v');
+		if ($npmOutput !== null) {
+			//$success['npm'] = array(true, "NPM installed.");
+			$a=1; // skip - can be confusing if wrong version no
+		} else {
+			$success['npm'] = array(false, "NPM (which comes with Node.js) not installed or not accessible.");
+		}
+
+		// Check Angular CLI
+		$ngVersion = self::checkCommand('ng version');
+
+		if($ngVersion === null) {
+			$ngVersion = self::checkCommand('npx ng version');
+		}
+
+// *** TODO: detect if nvm installed - then rather do nvm install... and nvm use...
+// ALSO the help must advise the use of nvm before running installation script.
+
+
+// *** TODO: check for Major and Minor version ... 
+
+		if ($ngVersion !== null) {
+
+			preg_match('/Angular CLI\:\s*(\d+\.\d+\.\d+)/', $ngVersion, $matches);
+			$ngVersion = isset($matches[1]) ? $matches[1] : null;
+			$ngVersion = $ngVersion ? trim($ngVersion) : null;
+
+			if($ngVersion === null) {
+				$success['ngversion'] = array(false, "Angular CLI not installed. Version " . self::$dibAngularVersion . " recommended.");
+			
+			} else {
+				$ngVersionMajorVersion = (int)explode('.', $ngVersion)[0];
+				$ngVersionMinorVersion = (int)explode('.', $ngVersion)[1];
+
+				$dibNgMajorVersion = (int)explode('.', self::$dibAngularVersion)[0];
+				$dibNgMinorVersion = (int)explode('.', self::$dibAngularVersion)[1];
+
+				if (($ngVersionMajorVersion == $dibNgMajorVersion) && ($ngVersionMinorVersion == $dibNgMinorVersion)) {
+					$success['ngversion'] = array(true, "Angular CLI version $ngVersion installed.");
+				} else
+					$success['ngversion'] = array(false, "Angular CLI version $ngVersion installed. Version " . self::$dibAngularVersion . " required.");
+			}
+			
+		} else {
+			$success['ngversion'] = array(false, "Angular CLI not (globally) installed. Version " . self::$dibAngularVersion . " recommended.");
+		}
+
+		return $success;
+	}
+
+	public static function verifyInstall($params) {
+
+		$result = self::verifyInstallParts($params, $response);
+
+		$msg = '<br><table class="dibTable" >';
+		$error = false;
+
+		foreach ($result as $key => $r) {
+			$msg .= '<tr><td>';
+			if(!!$r[0]) {
+				$msg .= "<img src='/resources/correctTick.png' alt='OK' style='width: 24px; height: 24px; vertical-align: middle;' />";
+			} else {
+				$error = true;
+				$msg .= "<img src='/resources/redCross.png' alt='Error' style='width: 24px; height: 24px; vertical-align: middle;' />";
+			}
+
+			$msg .= '</td><td>' . $r[1];
+			$msg .= '</td></tr>';
+		}
+
+		$msg .= '</table>';
+
+		if($error) {
+			$msg = "<br><span style='color:red'>Errors found. Please redo affected steps or see 'Manual Installation Help' above.</span><br>$msg";
+		}
+
+		$showFile = true;
+
+		DIB::$ACTION = array('msg'=>$msg, 'showFile'=>$showFile);
+
+		return TRUE;
+	}
+
+
 	/**
      * unzipDir file. Will create $saveDir if it does not exist, but won't empty it if it exists.
      * @param $pathToZipFile full path to zip file
@@ -1797,4 +2136,71 @@ PS;
 	    }
         return true;
 	}
+
+	public static function findComposerOnWindows() {
+		//
+		// 1) Check if Composer is even callable by running "composer --version"
+		//
+		$versionOutput = shell_exec('composer --version 2>nul');
+		if (empty($versionOutput)) {
+			// If this returns nothing, "composer" isn't recognized on PATH
+			// or otherwise not callable. Return null.
+			return null;
+		}
+
+		//
+		// 2) Attempt "where composer"
+		//
+		$whereOutput = shell_exec('where composer 2>nul');
+		$foundPath = self::parseOutputForFirstLine($whereOutput);
+		if ($foundPath) {
+			return $foundPath;
+		}
+
+		//
+		// 3) Attempt the cmd.exe "for" trick
+		//
+		//    cmd /c "for %I in (composer) do @echo %~$PATH:I"
+		//
+		$cmdOutput = shell_exec('cmd /c "for %I in (composer) do @echo %~$PATH:I"');
+		$foundPath = self::parseOutputForFirstLine($cmdOutput);
+		if ($foundPath) {
+			return $foundPath;
+		}
+
+		//
+		// 4) Attempt via PowerShell "Get-Command composer"
+		//
+		//    powershell.exe -NoProfile -Command "Get-Command composer | Select-Object -ExpandProperty Definition"
+		//
+		$psCommand = 'powershell.exe -NoProfile -Command "Get-Command composer | Select-Object -ExpandProperty Definition"';
+		$psOutput = shell_exec($psCommand . ' 2>nul');
+		$foundPath = self::parseOutputForFirstLine($psOutput);
+		if ($foundPath) {
+			return $foundPath;
+		}
+
+		//
+		// 5) If we still don’t have anything, return null
+		//
+		return null;
+	}
+
+	/**
+	 * Helper function: Takes the raw string from shell_exec()
+	 * and returns the first non-empty line or null if none.
+	 */
+	private static function parseOutputForFirstLine(?string $rawOutput) {
+		if (!$rawOutput) {
+			return null;
+		}
+
+		// Split into lines, trim each line, filter out empty
+		$lines = array_map('trim', explode("\n", $rawOutput));
+		$lines = array_filter($lines);
+
+		// Return the first line if it exists
+		return $lines ? reset($lines) : null;
+	}
+
 }

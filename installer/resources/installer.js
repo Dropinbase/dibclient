@@ -57,7 +57,9 @@ function doAction(action) {
 
     if(action === 'saveTestDb')
         el.innerHTML = '<h3>Please wait while the Dropinbase database is being created... </h3>';
-    else 
+    else if(action === 'verifyInstall')
+        el.innerHTML = '<h3>Please wait ... </h3>';
+    else
         el.innerHTML = '';
 
     ajaxPost(url, params, function(data) {
@@ -71,7 +73,7 @@ function doAction(action) {
                
                 window.history.replaceState(stateObj, "Dropinbase", "/login");
 
-                msg = '<h2 style="color: #05a6ed">Ready to go!</h2> <b style="color: rgb(2, 78, 144)">Refresh your browser, and provide the credentials above.</b>';
+                msg = `<h2 style="color: #05a6ed">Ready to go!</h2> <b style="color: rgb(2, 78, 144)">Refresh your browser, and provide the credentials above ('admin' &amp; 'test').</b>`;
 
             } else
                 msg += '<span style="color: #05a6ed">Please proceed to the next step</span>';
@@ -109,6 +111,15 @@ function doAction(action) {
                 } else
                     el.innerHTML = '<h3>Could not fetch info. Check the PHP error log and your server connection.</h3>';
 
+            } else if(action == 'verifyInstall') {
+
+                if (!!data.messages && !!data.messages.msg) {
+
+                    el.innerHTML = data.messages.msg;
+
+                } else
+                    el.innerHTML = '<h3>Could not fetch info. Check the PHP error log and your server connection.</h3>';
+
             } else {
                 if (!!data.messages) {
                     if(!!data.messages[0])
@@ -134,7 +145,7 @@ function doAction(action) {
 
 var maxI = 0;
 var currentPage = 1;
-var maxPage = 7;
+var maxPage = 8;
 
 function openTab(pos) {
 
