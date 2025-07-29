@@ -17,5 +17,51 @@ self::$fileLocations = array(
     'phpExecutablePathLinux' => '', 
     
     // (Windows only) full path to PHP Code editor application (adds ability to open files from Designer)
-    'phpCodeEditor' => "C:/Users/___MY___WINDOWS___USER___/AppData/Local/Programs/Microsoft VS Code/Code.exe" // OR 'C:/Program Files (x86)/Microsoft VS Code/Code.exe'
+    // (Windows only) full path to you PHP Code editor application (adds ability to open files from Designer)
+    'phpCodeEditor' => findVSCode() // OR hardcode it, eg. 'C:/Program Files (x86)/Microsoft VS Code/Code.exe'
 );
+
+// Attempt to find the PHP executable path for Visual Studio Code editor
+function findVSCode(): ?string {
+	$override = getenv('VSCODE_PATH');
+    if ($override && is_file($override))
+        return $override;
+
+    $cli = trim(shell_exec('where.exe code 2>NUL'));
+    if ($cli !== '' && is_file($cli))
+        return $cli;
+
+	$user = getActiveUsername() ?? 'Public';
+
+    $candidates = [
+		(getenv('SystemDrive') ?: 'C:') . '\Users\\' . $user . '\AppData\Local\Programs\Microsoft VS Code\Code.exe',
+        getenv('LOCALAPPDATA') . '\Programs\Microsoft VS Code\Code.exe',
+        getenv('ProgramFiles') . '\Microsoft VS Code\Code.exe',
+        getenv('ProgramFiles(x86)') . '\Microsoft VS Code\Code.exe',
+        getenv('LOCALAPPDATA') . '\Microsoft\WindowsApps\Code.exe',
+        getenv('LOCALAPPDATA') . '\Programs\Microsoft VS Code Insiders\Code - Insiders.exe',
+        getenv('ProgramFiles') . '\Microsoft VS Code Insiders\Code - Insiders.exe',
+    ];
+
+    foreach ($candidates as $path) {
+        if (is_file($path))
+            return $path;
+    }
+
+	return null;
+}
+
+// Return the username of the *active* console/RDP session
+function getActiveUsername(): ?string{
+    $out = shell_exec('quser.exe 2>NUL');
+    if (!$out)
+        return null;
+
+    foreach (preg_split('/\r?\n/', trim($out)) as $line) {
+        if (preg_match('/^\s*>\s*(\S+)/', $line, $m)                    // current session
+         || preg_match('/^\s*(\S+)\s+\S+\s+\d+\s+Active\b/', $line, $m)) {
+            return $m[1];                                               // first column = user
+        }
+    }
+    return null;
+}

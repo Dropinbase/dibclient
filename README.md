@@ -10,8 +10,16 @@
 
 These files enable, and are dependant on, the <a target="_blank" href="https://github.com/Dropinbase/framework">Dropinbase framework</a>.<br><br>
 
-Dropinbase enables rapid prototyping, development and maintenance of database/business applications, without limiting customizations. Dream big, build anything.<br> 
-Extensions are easy to add, and can be shared with other community members.<br><br>
+Dropinbase enables rapid development, maintenance and prototyping of database/business applications, without limiting customizations. Dream big, build anything in record time.<br> 
+In Summary: Rapid low-code development, flexible, structured, full-stack, fully customizable, secure (we ace our penetration tests), fast, powerful, extendable, transparent.
+<br><br>
+
+<h2>Technology</h2>
+Node.js v20.19.0<br>
+Angular 19.2.7<br>
+Angular Material Design 19.2.18<br>
+PHP 5.3.3 and above <br>
+Supported databases: MySQL(/MariaDb/SkySQL/AuroraDb), SQLite, PostgreSQL, SQL Server<br>
 
 <h3>Home: </h3>
 <a target="_blank" href="https://dropinbase.com">https://dropinbase.com</a>

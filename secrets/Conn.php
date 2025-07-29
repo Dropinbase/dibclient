@@ -13,8 +13,8 @@
 
 DIB::$DATABASES = [
     1 => [
-        'database' => 'dropinbase',
-        'username' => 'root',
+        'database' => 'dropinbase', // name of the dropinbase database, eg. shop_dib (then use shop_data for the user tables database)
+        'username' => '', // set your database user credentials
         'password' => '',
         'host' => '127.0.0.1',
         'port' => 3306,
@@ -26,6 +26,7 @@ DIB::$DATABASES = [
         'collation' => 'utf8mb4_unicode_520_ci', // See link to more info above
         // 'timezone' => ''; // optional
         // 'sql_mode' => ''; // optional
+        // 'connectionStringExtra' => ''; // optional connection string parameters, eg sslmode=require;aaa=bbb;ccc=ddd (see https://www.connectionstrings.com)
     ],
 
 ];

@@ -16,22 +16,23 @@ $args = array(
     'staff_id' => (empty(DIB::$USER['staff_id']) ? null : DIB::$USER['staff_id']), // Remove or adjust as needed. See /configs/DibUserParams.php for details
 
     'site_name' => DIB::$SITENAME,
-    'logo' => ltrim(DIB::$SITELOGO, '/ '),
-    'application_title' => '', // Leave blank to let containers' captions adjust the title.
+    'application_title' => '', // Leave blank to let containers' captions adjust the browser-tab title.
     'user_fullname' => DIB::$USER['first_name'] . ' ' . DIB::$USER['last_name'],
+    'logo' => '', // Should your app require for eg. a different logo for different users, use some logic to set this value and display using {{getEnv('logo')}} in the client.
 
     // Valid date formats: https://date-fns.org/v2.29.3/docs/format
     'default_date_time_format' => (isset($settings['defaultDateTimeFormat']) ? $settings['defaultDateTimeFormat'] : 'yyyy-MM-dd HH:mm:ss'),
     'default_date_format' => (isset($settings['defaultDateFormat']) ? $settings['defaultDateFormat'] : 'yyyy-MM-dd'),
    
     'audit_trail_container' => (isset($settings['auditTrailContainerName']) ? $settings['auditTrailContainerName'] : 'auditTrailGrid'),
-    'audit_trail_port' => '',
+    'audit_trail_port' => '', // port record alias if applicable (else 'main' is assumed)
     
     'loaderType' => 'ball-atom', // Set the spinner type: https://labs.danielcardoso.net/load-awesome/animations.html
-    'loaderColor' => '#181F32', // Set the spinner color
+    'loaderColor' => '#181F32', // Set the spinner color, or you can use for eg. 'var(--primary-color)'
 
     'default_url' => isset(DIB::$USER['default_url']) ? DIB::$USER['default_url'] : '',
     'base_url' => DIB::$BASEURL,
+    'environment' => DIB::$ENVIRONMENT,
 
     'larger_font' =>  (DIB::$USER['larger_font'] == '1') ? TRUE : FALSE, // ***TODO - accessibility option
 

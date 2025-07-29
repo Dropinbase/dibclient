@@ -3,21 +3,6 @@
 // *** NOTE, the /configs/Dib.php file is auto-generated when deleted, based on the /configs/DibTmpl.php template file
 //     Deleting it triggers a script that ensures certain key files and permission records are in place for DIB to function properly
 
-header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-
-// Respond to preflights
-// This was added to resolve issue with Angular requesting options for cross domain access
-// The isset is necessary for Asynchronous PHP threads that skip Apache
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    // Return only the headers and not the content
-    // Only allow CORS if we're doing a GET - i.e. no saving for now.
-    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']) && $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'GET')
-        header('Access-Control-Allow-Headers: X-Requested-With');
-    
-    exit;
-}
-
 class DIB {
 
     // Uncommenting the following array will put the site in Maintenance Mode
@@ -49,10 +34,9 @@ class DIB {
     public static $ENVIRONMENT = 'development'; // 'development' = auto-deletion of files, html beautified. 'production' = No deletion, compression of Javascript.
     public static $TIMEZONE = 'Africa/Johannesburg'; // See http://php.net/manual/en/timezones.php
     public static $SITENAME = 'Dropinbase'; // The title of the browser tab
-    public static $SITELOGO = 'files/icons/logo.png'; // Used in Environment.php settings to make available client-side via the getEnv() function
 
     /// Logs and error reporting
-    public static $WRITE_ERRORS_TO = 'db'; // Write errors to file/db/file&db. Note if Dropinbase cannot write to the database, it will always attempt to write to the file (/runtime/logs/error.log).
+    public static $WRITE_ERRORS_TO = 'file&db'; // Write errors to file/db/file&db. Note if Dropinbase cannot write to the database, it will always attempt to write to the file (/runtime/logs/error.log).
     public static $DEBUG_LEVEL = 2; // 0 = no PHP errors logged. 1 = PHP errors logged with some detail. 2 = most detail logged for PHP errors.
     public static $CLIENT_DEBUG_LEVEL = 1; // 0 = no debug messages printed in browser Console and no debugger code generated. 1 = debug messages printed in browser Console and debugger code generated.
     public static $ELEUTHERIA_DEBUG_LEVEL = 2; // 0 = no Eleutheria pre-emptive syntax checking or error reporting.  1 = Eleutheria pre-emptive syntax checking.
@@ -84,14 +68,14 @@ class DIB {
             ],
 
             // Array of container names, or partial container names (empty array to match all). Use the DIB::$DEFAULTPERMSCONTAINER value for open functions. 
-            // Examples: 'adm'  or  'admDashboard'  or  'admDashoardChart1'.
+            // Examples: 'adm'  or  'Dashboard'  or  'admDashoardChart1'.
             'containerList' => [],
 
             // Array of session field names obtained from DibUserParams.php (array key) and values to match or partially match (array value). Empty array to match all values of any session field.
-            // Examples: 'perm_group' => 'x3x' (will match any permgroup that contains 'x3x'), 'admin_user' => 1
+            // Examples: ['perm_group'=>'x3x', 'perm_group'=>'x4x', 'admin_user'=>1]  (will match requests where permgroup contains 'x3x' or 'x4x', or admin_user == 1)
             'sessionFieldList' => [
                 'perm_group' => 'x3x',
-                'admin_user' => 4
+                'admin_user' => 1
             ],
         ],
     ];
@@ -105,7 +89,9 @@ class DIB {
                                // 3 = Allways use dibCode files (assume all necessary files exist)
     public static $USEPROXYPERMGROUP = FALSE; // (experimental) Generate less cache and crud files as for each container a representative "proxy" perm_group in pef_perm_active is set with same permissions.
     public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the node.js Angular watcher automatically when compiling container's one-by-one.
+    public static $KILLNODEPROCESSES = TRUE; // (Windows only) Whether to kill any and all node.exe processes that are running before starting the watcher. This is useful when DIB starts multiple watchers due to a mysterious bug that makes them unresponsive. Note, on Linux we can manage it better.
     public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
+    public static $CHECK_CACHE_MODIFED_TIME = FALSE; // If TRUE and a generated UI file (.js) is requested, then the generated .js-file's modified time is compared to that of the source code (.ts) - if older then the .js file is regenerated. Note, beware of deployment systems/scripts that update the time.
     
     /// Security settings
     public static $DESIGNER_CAN_READ_ERRORS = TRUE; // Whether the Designer can read and display errors from the database.
@@ -115,15 +101,30 @@ class DIB {
     public static $VERIFY_USER_AGENT = FALSE; // Whether successive requests from the same web user must have the same USER AGENT, else logged out. Note, affected by webservers, ISP's and browsers which updates info.
     public static $VERIFY_AUTH_TOKEN = TRUE; // Whether authentication tokens are checked on server requests, else logged out. This should be TRUE. Use eg. $REQUEST_TYPE='GET,POST,ignoretoken' in controller function parameters to override, for eg. file downloads.
     public static $USERNAME_REGEX='#^\w{4,30}$#'; // A semicolon delimited list of regular expressions that must validate successfully in order for usernames to be accepted
-    public static $USERNAME_REGEXMSG='The username must contain between 4 and 30 alpha-numeric characters (no spaces, but underscore (_) is allowed).';
-    public static $ENABLE_REMEMBERME = TRUE; // Whether to enable Remember Me functionality. Ensure that the /dropins/dibAuthentice/views/login.php contains the neccessary HTML.
+    public static $ENABLE_REMEMBERME = TRUE; // Whether to enable Remember Me functionality. Ensure that the /dropins/dibAuthentice/views/login.php file contains the neccessary HTML.
 
     public static $PUBLICFILEPERMS = [
-        'allow_uploads' => TRUE, // Allow system_public user to upload files.
-        'allow_downloads' => TRUE, // Allow system_public user to download files.
-        'allow_deletes' => TRUE, // Allow system_public user to delete files.
+        'allow_uploads' => FALSE, // Allow system_public user to upload files.
+        'allow_downloads' => FALSE, // Allow system_public user to download uploaded files.
+        'allow_deletes' => FALSE, // Allow system_public user to delete uploaded files.
     ];
-    
+
+    // NOTE: It is recommended to set session cookie configurations in the PHP configuration file (php.ini) instead of here. 
+    // Also set session.gc_maxlifetime in php.ini to a value that is less than the session.cookie_lifetime value.
+    /*
+    public static $SESSIONCONFIGS = [
+        'session.use_strict_mode' => 1,
+        'session.use_only_cookies' => 1,
+        'session.cookie_secure' => 1,
+        'session.cookie_httponly' => 1,
+        'session.cookie_path' => '/',
+        'session.cookie_samesite' => 'Strict', // Strict/Lax or comment it out for none. Available in >=PHP 7.3.0
+        'session.cookie_domain' => '~domainname~', // Your domain name or pattern, eg. '.mydomain.com' - see PHP docs for more info
+        'session.cookie_lifetime' => 900, // Lifetime in seconds of the PHPSESSID browser cookie (not the server session file). A user warning appears before it expires.
+                                          // Set session.gc_maxlifetime, session.gc_probability and session.gc_divisor in php.ini (to less than this value).
+    ];
+    */
+
     public static $DEFAULTPERMSCONTAINER = 'defaultPermsContainer'; // The container that specifies permissions for requests where $containerName is not in function parameters. If empty, all requests from system_public will fail, unless eg $REQUEST_TYPE='POST,ignorecontainerperms' is included in controller function parameters.
 
     // If empty, then the HTML of messages/prompts/popups sent to the browser are not sanitized. Otherwise, configure the use of HtmlPurifier, or allowed tags and other HTML to allow.
@@ -171,6 +172,9 @@ class DIB {
     // (Read/Write) Full path to the /runtime folder - where Dropinbase stores temporary files, and the generated site index.html (.dtxt) file.
     public static $RUNTIMEPATH='~rootdir~runtime~dirsep~';
 
+    // (Read/Write) Full path to the folder where the deleteMeToInitDIB.dtxt file will be stored. If empty or not defined, Dropinbase will not be initialized when the file does not exist.
+    public static $DELETEMETOINITDIBPATH ='~rootdir~runtime~dirsep~';
+
     // (Read) Full path to the Composer /vendor folder
     public static $VENDORPATH='~vendordir~';
 
@@ -178,9 +182,9 @@ class DIB {
 
     // Values generated automatically (hard-code them for custom environments)
     public static $BASEPATH='~rootdir~';
-    public static $DROPINPATHDEV='~rootdir~dropins~dirsep~';
+    public static $DROPINPATHDEV='~rootdir~dropins~dirsep~'; // folder cannot be moved from its default location.
     public static $FILESPATH='~rootdir~files~dirsep~';
-    public static $SYSTEMPATH='~systemdir~';
+    public static $SYSTEMPATH='~systemdir~'; // must correlate with the path used in the /index.php and /files.php files.
     public static $EXTPATH= '~systemdir~extensions~dirsep~';
     
     /// Values set dynamically with every request

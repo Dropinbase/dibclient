@@ -10,7 +10,7 @@ Class EleutheriaFunctions {
     public $functionList = array('test');
 	
 	/**
-	* Demo function. $parts[0]=count. $parts[1]=string. Repeats the string, count times. Then adds all values in the current merge record as a semicolon-delimitted list. 
+    * Demo function. $parts[0]=count. $parts[1]=string. Provides the input format, then repeats the given string, count times. Then adds all values in the current merge record as a semicolon-delimitted list. 
 	* @param array $parts function parameter values
 	* @param int $partsCount the count of function parameter values (ie count($parts))
 	* @param array $mergeRecord associative array of values in the current merge record
