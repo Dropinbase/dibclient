@@ -16,12 +16,14 @@ class Db {
     private static $password = '';
     private static $lastUserMsg = null;
 	private static $lastAdminMsg = null;
-	private static $forceNewConn = false; 
+	private static $forceNewConn = false;
+    private static $dbType = 'mysql'; // default dbType
 	
-    public static function setConn($connectionString, $username, $password) {
+    public static function setConn($connectionString, $dbType, $username, $password) {
 		self::$username = $username;
 		self::$password = $password;
 		self::$connectionString = $connectionString;
+        self::$dbType = $dbType;
 		
 		self::$forceNewConn = true;
 	}
@@ -32,16 +34,19 @@ class Db {
             
             // Check if connection has already been made
             if(!self::$dbh || self::$forceNewConn) {
-            	self::$dbh = new PDO(self::$connectionString, 
-                                   self::$username, self::$password,
-                                   array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-    			
-    			self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-    			self::$forceNewConn = false;   			    			
+                if(self::$dbType == 'mysql')
+                    $extraOptions = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'");
+                else
+                    $extraOptions = array();
+
+            	self::$dbh = new PDO(self::$connectionString, self::$username, self::$password, $extraOptions);
+
+    			self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    			self::$forceNewConn = false;
     		}            
             
             
-			$stmt = self::$dbh->prepare($sql);             
+			$stmt = self::$dbh->prepare($sql);
 
             foreach ($params AS $key => $value) 
                 $stmt->bindValue($key, $value);
@@ -61,14 +66,14 @@ class Db {
                 if($firstRecordOnly) {
                     $rst = $stmt->fetch($style);
                     if($rst === false) $rst = array(); // fetch returns false if no records exist!
-                    if ($cacheKey) Cache::set($cacheKey, json_encode($rst));             
+                    if ($cacheKey) Cache::set($cacheKey, json_encode($rst));
                     return $rst;
                 
                 } else {
-					if ($cacheKey) {						
+					if ($cacheKey) {
 						$rst = $stmt->fetchAll($style);
 						Cache::set($cacheKey, json_encode($rst));
-						return $rst;				
+						return $rst;
                     }     
                  
                     return $stmt->fetchAll($style);
@@ -128,10 +133,10 @@ class Db {
             // Check if connection has already been made
             if(self::$dbh) {
     			self::$dbh = new PDO(self::$connectionString , 
-                                   self::$username, self::$password,
-                                   array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+                                   self::$username, self::$password
+                                   );
                 
-    			self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    			    			
+    			self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     		}
             self::$dbh->beginTransaction();
         

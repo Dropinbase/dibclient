@@ -191,38 +191,55 @@
                     <div>
                         <div>
                             This step will create the Dropinbase database and tables, <u>only</u> if they do not already exist.
-                            <br>Provide connection details to a MySQL-compatible database server for the database (other servers will be supported soon).
+                            <br>Provide connection details to the database server where the Dropinbase database must be created.
                             
                         </div>
 
                         <div id="dbfields" class="card">
                             
                             <div>
+                                <label>Database Type</label>
+                                <select id="dbtype" class="textInput" onchange="toggleDbFields()">
+                                    <option value="mysql">MySQL</option>
+                                    <option value="pgsql">PostgreSQL</option>
+                                    <option value="sqlite">SQLite</option>
+                                    <option value="mssql">Microsoft SQL Server</option>
+                                </select>
+                            </div>
+
+                            <div id="hostDiv">
                                 <div style="display:flex;">
                                     <div>
                                         <label>Host</label>
                                         <input id="host" type="text" class="textInput" style="flex-grow: 1;" value=<?php echo '"' . $host . '" ' . $disabled; ?>/>
                                     </div>
-                                    <div >
+                                    <div id="portDiv">
                                         <label style="width: 30px; margin-left: 10px;">Port</label>
-                                        <input id="port" type="text" class="textInput" style="width: 60px" value=<?php echo '"' . $port . '" ' . $disabled; ?>/>
+                                        <input id="port" type="text" class="textInput" style="width: 80px" value=<?php echo '"' . $port . '" ' . $disabled; ?>/>
                                     </div>
                                 </div>
                                 
-                                <i style="font-size: 12px">When using Docker, set this to <b>host.docker.internal</b> to access a database on your machine (outside Docker)</i>
+                                <div id="dockerNote">
+                                    <i style="font-size: 12px">When using Docker, set this to <b>host.docker.internal</b> to access a database on your machine (outside Docker)</i>
+                                </div>
                             </div>
 
-                            <div >
+                            <div id="databaseDiv">
                                 <label>Database</label>
                                 <input id="database" type="text" class="textInput" value=<?php echo '"' . $database . '" ' . $disabled; ?>/>
                             </div>
 
-                            <div >
+                            <div id="schemaDiv" style="display: none;">
+                                <label>Schema</label>
+                                <input id="schema" type="text" class="textInput" value="public" />
+                            </div>
+
+                            <div id="usernameDiv">
                                 <label>Username</label>
                                 <input id="un" type="text" class="textInput" value=<?php echo '"' . $username . '" ' . $disabled; ?>/>
                             </div>
 
-                            <div >
+                            <div id="passwordDiv">
                                 <label>Password</label>
                                 <input id="pw" type="password" class="textInput" value=<?php echo '"' . $password . '" ' . $disabled; ?>/>
                             </div>
@@ -234,7 +251,7 @@
                         
                         <div id="saveTestDbMsg" class="response">
                             <span id="addConnections">
-                                <br>Add connections to your &quot;user&quot; databases within Dropinbase once the installation is complete.
+                                <br>Add connections to your &quot;user&quot; database(s) within Dropinbase once the installation is complete.
                             </span>
                         </div>
                     </div>

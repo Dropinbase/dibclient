@@ -15,9 +15,57 @@ function initPage() {
         el.style.display = 'none';
     }
 
+    // Initialize database fields visibility
+    toggleDbFields();
+
     if(window.location.href !== window.location.origin && window.location.href !== window.location.origin + '/')
         window.location.href = window.location.origin;
 
+}
+
+function toggleDbFields() {
+    var dbType = document.getElementById('dbtype').value;
+    var hostDiv = document.getElementById('hostDiv');
+    var portDiv = document.getElementById('portDiv');
+    var databaseDiv = document.getElementById('databaseDiv');
+    var schemaDiv = document.getElementById('schemaDiv');
+    var usernameDiv = document.getElementById('usernameDiv');
+    var passwordDiv = document.getElementById('passwordDiv');
+    var dockerNote = document.getElementById('dockerNote');
+
+    if (dbType === 'sqlite') {
+        // For SQLite, only show host field (which will be used as the file path)
+        hostDiv.style.display = 'block';
+        portDiv.style.display = 'none';
+        databaseDiv.style.display = 'none';
+        schemaDiv.style.display = 'none';
+        usernameDiv.style.display = 'none';
+        passwordDiv.style.display = 'none';
+        dockerNote.style.display = 'none';
+        
+        // Update label for SQLite
+        var hostLabel = hostDiv.querySelector('label');
+        hostLabel.textContent = 'Database File Path';
+    } else {
+        // For other database types, show all relevant fields
+        hostDiv.style.display = 'block';
+        portDiv.style.display = 'block';
+        databaseDiv.style.display = 'block';
+        usernameDiv.style.display = 'block';
+        passwordDiv.style.display = 'block';
+        dockerNote.style.display = 'block';
+        
+        // Update label back to Host
+        var hostLabel = hostDiv.querySelector('label');
+        hostLabel.textContent = 'Host';
+        
+        // Show schema field only for PostgreSQL
+        if (dbType === 'pgsql') {
+            schemaDiv.style.display = 'block';
+        } else {
+            schemaDiv.style.display = 'none';
+        }
+    }
 }
 
 function doAction(action) {
@@ -25,15 +73,21 @@ function doAction(action) {
     var url = '/' + action;
 
     if(action == 'saveTestDb') {
-        var params = JSON.stringify(
-            {
-                'host' : document.getElementById('host').value,
-                'port' : document.getElementById('port').value,
-                'database' : document.getElementById('database').value,
-                'username' : document.getElementById('un').value,
-                'password' : document.getElementById('pw').value
-            }
-        );
+        var params = {
+            'dbType': document.getElementById('dbtype').value,
+            'host': document.getElementById('host').value,
+            'port': document.getElementById('port').value,
+            'database': document.getElementById('database').value,
+            'username': document.getElementById('un').value,
+            'password': document.getElementById('pw').value
+        };
+        
+        // Add schema for PostgreSQL
+        if (document.getElementById('dbtype').value === 'pgsql') {
+            params.schema = document.getElementById('schema').value;
+        }
+        
+        params = JSON.stringify(params);
     } else if(action == 'configureDib') {
         var params = JSON.stringify(
             {

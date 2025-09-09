@@ -55,8 +55,11 @@ function shutDownFunction() {
 }
 
 class Install {
-	private static $dibAngularVersion = '17.3.9';
-	private static $dibNodeVersion = '20.9.0';
+	
+	private static $dibAngularVersion = '19.2.7';
+	private static $dibNodeVersion = '20.19.0';
+	private static $nodeJsCheckSumx86 = "68d09bc053428bec1e1c76db1d3b73db8976af1387a0458a53c95b4f972f7427"; // get from eg https://nodejs.org/dist/v20.19.0/SHASUMS256.txt.asc
+	private static $nodeJsCheckSumx64 = "e9032adb422bf332001a5d8c799621307b8f2f2f8bcf3071b8b6998923ddc20e";
 
 	public static $basePath = '';
 	public static $dibPath = '';
@@ -207,6 +210,9 @@ class Install {
 			$perfect = array('foreignKeyConstraints', 'host', 'charset', 'dbType', 'emulatePrepare', 'dbDropin', 'systemDropin');
 		else
     		$perfect = array('database', 'dbType', 'username', 'password', 'host', 'port', 'emulatePrepare', 'charset', 'dbDropin', 'systemDropin');
+
+		if($dbType === 'pgsql')
+			$perfect[] = 'schema';
 		
 		$missing = array();
 		foreach ($perfect as $key) {
@@ -229,16 +235,31 @@ class Install {
 
 		if($finalVerifyInstall === FALSE) {
 
-			list($host, $port, $database, $username, $password) = array(
-				$params['host'], $params['port'], $params['database'], $params['username'], $params['password'], 
+			if(!array_key_exists('schema', $params))
+				$params['schema'] = '';
+
+			list($dbType, $host, $port, $database, $username, $password, $schema) = array(
+				$params['dbType'], $params['host'], $params['port'], $params['database'], $params['username'], $params['password'], $params['schema']
 			);
 			
-			if(empty($params['port']) || $params['port'] != (string)(int)$params['port']) {
-				$response[] = self::getResponse('Database Connection', false, "The 'port' attribute must be an integer (for MySQL it is normally 3306, and for MariaDb, 3307). Please amend and try again.");
+			if($dbType !== 'sqlite' && (empty($params['port']) || $params['port'] != (string)(int)$params['port'])) {
+				$mysql = ($dbType == 'mysql') ? "(for MySQL it is normally 3306, and for MariaDb, 3307)" : '';
+				$response[] = self::getResponse('Database Connection', false, "The 'port' attribute must be an integer $mysql. Please amend and try again.");
 				return FALSE;
 			}
 
-			if(empty($params['host']) || empty($params['database']) || empty($params['username'])) {
+			if($dbType === 'pgsql' && empty($params['schema'])) {
+				$response[] = self::getResponse('Database Connection', false, "The 'schema' attribute is required for PostgreSQL connections. Please amend and try again.");
+				return FALSE;
+			}
+
+			if($dbType === 'sqlite') {
+				if(empty($params['host'])) {
+					$response[] = self::getResponse('Database Connection', false, "The 'host' attribute is required for SQLite connections. Please amend and try again.");
+					return FALSE;
+				}
+
+			} elseif(empty($params['host']) || empty($params['database']) || empty($params['username'])) {
 				$response[] = self::getResponse('Database Connection', false, "The following values are all required: host, database, username, port. Please amend and try again.");
 				return FALSE;
 			}
@@ -255,8 +276,9 @@ class Install {
 					$response[] = self::getResponse('File Permissions', true, "The '$connPath' file does not exist, and the webserver does not have permissions to create the file. Either provide the necessary permissions or create the Conn.php file manually (see /secrets/Example_Conn.php).");
 					return FALSE;
 				}
+
 				// Create the file
-				$result = self::createConn($connPath, 1, $host, $port, $database, $username, $password, $response);
+				$result = self::createConn($connPath, 1, $dbType, $host, $port, $database, $schema, $username, $password, $response);
 				if($result === FALSE) return FALSE;
 
 			} else {
@@ -269,21 +291,21 @@ class Install {
 		
 		require $connPath;
 		
-		if(empty(DIB::$DATABASES)) {
+		if(empty(DIB::$DATABASES) || empty(DIB::$DATABASES[1]) || empty(DIB::$DATABASES[1]['host'])) { // The dibclient default Conn.php has an empty host
 			if($finalVerifyInstall === TRUE) {
-				$response[] = self::getResponse('Database Connection', false, "The database connection file ($connPath) is corrupt or empty. It must have a entry for the Dropinbase database. Please create the file manually (see /secrets/Example_Conn.php).");
+				$response[] = self::getResponse('Database Connection', false, "The database connection file ($connPath) is corrupt or empty. It should have a entry for the Dropinbase database in index position 1. Please create the file manually (see /secrets/Example_Conn.php).");
 				return FALSE;
 				
 			} else {
-				$result = self::createConn($connPath, 1, $host, $port, $database, $username, $password, $response);
+				$result = self::createConn($connPath, 1, $dbType, $host, $port, $database, $schema, $username, $password, $response);
 				if($result === FALSE) return FALSE;
 				sleep(1); // If we don't sleep, we get the old results
 				require $connPath;
 			}
 		}
 
-		if($finalVerifyInstall === FALSE && $usingExistingConn && DIB::$DATABASES[1]['database'] !== $database) {
-			$result = self::createConn($connPath, 1, $host, $port, $database, $username, $password, $response);
+		if($finalVerifyInstall === FALSE && $usingExistingConn && (($dbType == 'sqlite' && DIB::$DATABASES[1]['host'] !== 'host') || ($dbType != 'sqlite' && (DIB::$DATABASES[1]['database'] !== $database || DIB::$DATABASES[1]['dbType'] !== $dbType)))) {
+			$result = self::createConn($connPath, 1, $dbType, $host, $port, $database, $schema, $username, $password, $response);
 			if($result === FALSE) return FALSE;
 
 			sleep(1); // If we don't sleep, we get the old results
@@ -294,7 +316,7 @@ class Install {
 		$dbKeys = array_keys(DIB::$DATABASES);
         $dbIndex = $dbKeys[0];
 
-		// Test the mysql server connection
+		// Check the db connection details
 
 		$c = DIB::$DATABASES[$dbIndex];
 		$missing = self::checkConnAttributes($c);
@@ -303,58 +325,147 @@ class Install {
 			$response[] = self::getResponse('Database Connection', true, "The entry in the database connection file ($connPath) is missing the following attributes:<br><b>$missing</b><br>Please amend, or delete the Conn.php file so that it can be created again.");
 			return FALSE;
 		}
-		
-		// dropinbase database must be mysql
-		if($c['dbType'] !== 'mysql') {
-			$response[] = self::getResponse('Database Connection', true, "The dropinbase database must (at present) be hosted in a MySQL compatible database server. If it is, change the dbType field to 'mysql' for the first entry of the database connection file (/secrets/Conn.php).");
-			return FALSE;
-		}
 
+		// Get the connection string
+		
 		$host = $c['host'];
-		$port = $c['port'];
-		$database = $c['database'];
-		$username = $c['username'];
-		$password = $c['password'];
-		
-		/*
-		// construct general conn string and test basic query
-		$connStr = "mysql:host=$host;port=$port;charset=utf8mb4";
-		Db::setConn($connStr, $username, $password);
-		
-		$result = Db::execute("SELECT 1 as A");
-		if($result === FALSE || Db::count()<1) {
-			$response[] = self::getResponse('Database Connection', false, 'Could not connect to the MySQL (compatible) server, using the<br>host, port, username and password provided in entry 1 of the database connection file ($connPath).<br>Database error: ' . Db::lastErrorAdminMsg());
+		$port = $c['port'] ?? '';
+		$database = $c['database'] ?? '';
+		$username = $c['username'] ?? '';
+		$password = $c['password'] ?? '';
+		$schema = $c['schema'] ?? '';
+
+		if(empty(self::$dibPath) || !file_exists(self::$dibPath . 'DibApp.php')) {
+			$response[] = self::getResponse('File Permissions', true, "The Dropinbase framework has not been installed yet. First execute that step and try again.");
 			return FALSE;
 		}
-		*/
 
-		// Test connection to dropinbase db
-		$connStr = "mysql:dbname=$database;host=$host;port=$port;charset=utf8mb4";
+		$dropinArr = array (
+			'mysql' => 'dibMySqlPdo',
+			'pgsql' => 'dibPgSqlPdo',
+			'sqlite' => 'dibSqlitePdo',
+			'mssql' => 'dibMsSqlPdo'
+		);
 
-		Db::setConn($connStr, $username, $password);
+		if (!isset($dropinArr[$dbType])) {
+			$response[] = self::getResponse('Database Connection', true, "A Dropinbase framework class $port file for '$dbType' does not exist. Please check the Dropinbase installation and try again.");
+			return FALSE;
+		}
 
-		$result = Db::execute("SELECT `content_type` FROM pef_content_type");
+		$dbDropin = $dropinArr[$dbType];
+
+		$dropinFile = self::$dibPath . 'dropins' . DIRECTORY_SEPARATOR . 'setData' . DIRECTORY_SEPARATOR . $dbDropin . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $dbDropin . 'Schema.php';
+		if(!file_exists($dropinFile)) {
+			$response[] = self::getResponse('Database Connection', true, "The dropinbase database connection file ($dropinFile) does not exist. Please check the Dropinbase installation or the Dropinbase database connection file.");
+			return FALSE;
+		}
+
+		require_once $dropinFile;
+
+		$dbDropinCls = $dbDropin . 'Schema';
+
+		$conCls = New $dbDropinCls();
+
+		$connArray = $conCls->getConnDetails($host, $port, '');
+		
+		// Test connection to dropinbase db - see if pef_content_type exists
+		$connStr = str_replace('{database}', $database, $connArray['connStr']);
+
+		Db::setConn($connStr, $dbType, $username, $password);
+
+		$result = Db::execute("SELECT content_type FROM pef_content_type");
 		if(Db::count()>1) {
 
 			if($usingExistingConn === TRUE && $finalVerifyInstall === FALSE) {
-				$response[] = self::getResponse('Database Connection', false, "<br>Note, the /secrets/Conn.php file already existed, referencing a dropinbase database with the same name which will be used.<br><br>You can proceed to the next step.");
+				$response[] = self::getResponse('Database Connection', false, "<br>Note, the /secrets/Conn.php file already existed, referencing an existing Dropinbase database which will be used.<br><br>You can proceed to the next step.");
 				return FALSE;
 			}
 			return TRUE;
-		}
 
-		if($finalVerifyInstall === TRUE) {
+		} elseif($finalVerifyInstall === TRUE) {
 			$response[] = self::getResponse('Database Connection', false, "Could not retrieve any data from the pef_content_type table in the dropinbase database. The database connection is faulty, or the database tables/records were not created correctly.<br>Please review the first entry of the database connection file ($connPath) that should reference the dropinbase database, and check if the tables and records exist.<br>Database error: " . Db::lastErrorAdminMsg());
 			return FALSE;
 		}
 
-		// Create the database
-        $connStr = "mysql:host=$host;port=$port;charset=utf8mb4";
-		$result = self::createDb($connStr, $username, $password, $database, $dbIndex, $response);
+		// Check if the database exists, and if not, create it
+		$dbExists = false;
+
+		if($dbType == 'sqlite')
+			$dbExists =  file_exists($host);
+
+		elseif($dbType =='pgsql') {
+			$sql = "SELECT 1 FROM pg_database WHERE datname = '$database'";
+			$result = Db::execute($sql);
+			$dbExists = (Db::count() > 0);
+
+		} elseif($dbType == 'mssql' || $dbType == 'sqlsrv') {
+			$sql = "SELECT name FROM sys.databases WHERE name = '$database'";
+			$result = Db::execute($sql);
+			$dbExists = (Db::count() > 0);
+
+		} else {
+			// MySQL and other databases that support SHOW DATABASES
+			$sql = "SHOW DATABASES LIKE '$database'";
+			$result = Db::execute($sql);
+			$dbExists = (Db::count() > 0);
+		}
+
+		if($dbExists === false) {
+			if($dbType == 'sqlite') {
+				$username = null;
+				$password = null;
+				$database = $host;
+			}
+
+			$createStmt = str_replace('{database}', $database, $connArray['createStmt']);
+
+			if($dbType == 'pgsql' && $schema != 'public') {
+				$createSchemaStmt = str_replace('{schema}', $schema, $connArray['createSchemaStmt']);
+			} else {
+				$createSchemaStmt = '';
+			}
+
+			$fallbackDbList = $connArray['fallbackDbList'] ?? array();
+
+			foreach ($fallbackDbList as $db) {
+				$dsn = str_replace('{fallbackDb}', $db, $connArray['createDbConnStr']);
+				
+				try {
+					$pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+					if(!empty($createStmt)) // skip following for Sqlite
+						$result = $pdo->exec($createStmt);
+
+					if(!empty($createSchemaStmt)) {
+						try {
+							$pdo->exec($createSchemaStmt);
+						} catch (PDOException $e) {
+							$response[] = self::getResponse('Database Connection', false, "Created database '$database' successfully, but could not create the schema using:<br>$createSchemaStmt<br> Database error: " .  $e->getMessage());
+							return FALSE;
+						}
+					}
+
+					if($result === 0 || $result === true) break; // 0 rows affected
+
+				} catch (PDOException $e) {
+					$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ($database) using the following connection properties:<br>connection string=$connStr, username=$username, password=$password.<br>Please check entry $dbIndex of the database connection file (/secrets/Conn.php).<br> Database error: " .  $e->getMessage() . "<br>The following SQL failed:<br> " . $createStmt);
+					return FALSE;
+				}
+			}
+		}
+
+		// Add tables to dropinbase database
+		Db::setConn($connStr, $dbType, $username, $password);
+
+		$result = self::createTables($dbType, $response);
 
 		if($result === TRUE && $usingExistingConn === TRUE) {
-			$response[] = self::getResponse('Database Connection', false, "<br>Note, the /secrets/Conn.php file already existed, which referenced a dropinbase database with the same name. The installer created missing tables in this database.<br><br>You can proceed to the next step.");
+			$response[] = self::getResponse('Database Connection', false, "<br>Note, the /secrets/Conn.php file already existed, which was reused. The installer created the '$database' database successfully.<br><br>You can proceed to the next step.");
 			return FALSE;
+		}
+
+		if($result === true) {
+			$response[] = self::getResponse('Database Connection', true, "The database connection was successful and the '$database' database was created successfully.");
 		}
 
 		return $result;
@@ -409,53 +520,57 @@ class Install {
 		return TRUE;
 	}
 	
-	private static function createDb($connStr, $username, $password, $databaseName, $dbIndex, &$response) {
-		// Create the database 
-		Db::setConn($connStr, $username, $password);
-		$sql = "CREATE DATABASE IF NOT EXISTS `$databaseName` DEFAULT CHARACTER SET = 'utf8mb4' DEFAULT COLLATE 'utf8mb4_unicode_520_ci';";
-		$result = Db::execute($sql);
-		if($result === FALSE) {
-	    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ('$databaseName') using the following connection properties:<br>$connStr, $username, $password.<br>Please check the connection properties in entry $dbIndex of the database connection file (/secrets/Conn.php). The following SQL failed:<br> " . $sql . '<br> Database error: ' . Db::lastErrorAdminMsg());
+	private static function createTables($dbType, &$response) {
+
+		// use glob to get file named dropinbase_xxx_$dbType.sql where xxx is a number
+		$files = glob(self::$dibPath . 'sql' . DIRECTORY_SEPARATOR . 'dropinbase_*_' . $dbType . '.sql');
+		if(empty($files)) {
+			$response[] = self::getResponse('Database Connection', false, "Could not find the Dropinbase SQL file for the database type '$dbType'. Please check the installation files and try again.");
 			return FALSE;
 		}
 
-		if(empty(self::$dibPath) || !file_exists(self::$dibPath . 'DibApp.php')) {
-			$response[] = self::getResponse('File Permissions', true, "The Dropinbase framework has not been installed yet. First execute that step and try again.");
-			return FALSE;
-		}
+		$filePath = $files[0];
 		
 		// Get sql file contents
-		$sql = file_get_contents(self::$dibPath . 'installer' . DIRECTORY_SEPARATOR . 'dropinbase.sql');
-		$sql = str_ireplace("CREATE TABLE IF NOT EXISTS `pef_activity_log`", "USE `$databaseName`;\r\n\r\n CREATE TABLE IF NOT EXISTS `pef_activity_log`", $sql);
-
+		$sql = file_get_contents($filePath);
+		
 		// Temporary variable, used to store current query
 		$templine = '';
 
 		// Loop through each line
 		$lines = explode("\n", $sql);
-		$sql = "";
-		foreach ($lines as $line){
-			// Skip it if it's a comment
-			if ($line=='' || substr($line, 0, 2) == '--')
-			    continue;
 
+		unset($sql);
+
+		foreach ($lines as $key=>$line){
+			// Skip it if it's a comment
+			//if ($line!=='' && substr($line, 0, 2) !== '--') {
 			// Add this line to the current segment
 			$templine .= $line;
+			
+
 			// If it has a semicolon at the end, it's the end of the query
 			if (substr(trim($line), -1, 1) == ';'){
-			    // Perform the query
-			    $result = Db::execute($templine);
+				// sqlite and mssql requires new lines "as is" in values in the SQL, so we need to double-check that this is the end of the SQL statement
+				if(strpos(trim($templine), 'INSERT ') === 0 && substr(trim($line), -16) !== ' -- END OF STMT;')
+					continue;
 
-			    if($result === FALSE) {
-			    	$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables. Please check the MySQL user permissions and the connection properties (/secrets/Conn.php).<br>The following SQL failed: " . $templine . '. Database error: ' . Db::lastErrorAdminMsg());
+				// Perform the query
+				$result = Db::execute($templine);
+
+
+				if($result === FALSE) {
+					file_put_contents('C:/temp' . DIRECTORY_SEPARATOR . 'aaaaaaa.log',$templine);
+
+					$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables. Please check the database user permissions and the connection properties (/secrets/Conn.php).<br> Database error: " . Db::lastErrorAdminMsg() . "<br>The following SQL failed: " . $templine);
 					return FALSE;
 				}
-			    	
-			    // Reset temp variable to empty
-			    $templine = '';
-			}
+					
+				// Reset temp variable to empty
+				$templine = '';
+			}	
 		}
-		
+
         return TRUE;
 		
 	}
@@ -608,46 +723,57 @@ class Install {
 	  	return TRUE; 
     }   
     
-    private static function createConn($path, $dbIndex, $host, $port, $database, $username, $password, &$response) {
+    private static function createConn($connPath, $dbIndex, $dbType, $host, $port, $database, $schema, $username, $password, &$response) {
 
-        if(empty($host) || empty($port) || empty($database) || empty($username)) {
-            $response[] = self::getResponse('Database Connection', false, "The following fields are required: host, port, database, username (and password if set for the user)");
-	  		return FALSE;
+		$dropinArr = array (
+			'mysql' => 'dibMySqlPdo',
+			'pgsql' => 'dibPgSqlPdo',
+			'sqlite' => 'dibSqlitePdo',
+			'mssql' => 'dibMsSqlPdo'
+		);
+
+		$dbDropin = (isset($dropinArr[$dbType])) ? $dropinArr[$dbType] : 'dibMySqlPdo';
+
+		$foreignKeyConstraints = ($dbType === 'sqlite') ? true : false;
+
+		if($dbType === 'mysql')
+            $charset = 'utf8mb4';
+        elseif($dbType === 'pgsql')
+            $charset = 'utf8';
+        else
+            $charset = 'UTF-8'; // sqlite, mssql
+
+        $tmpArray = array(
+            'database'=>$database,
+            'dbType'=>$dbType,
+            'charset'=>$charset,
+            'username'=>$username,
+            'password'=>$password,
+            'host'=>$host,
+            'port'=>$port,
+            'emulatePrepare'=>true,
+            'dbDropin'=>$dbDropin,
+            'systemDropin'=>true,
+        );
+
+        DIB::$DATABASES[$dbIndex] = $tmpArray;
+
+        if($dbType === 'pgsql')
+            DIB::$DATABASES[$dbIndex]['schema'] = $schema;
+        elseif($dbType === 'mysql')
+            DIB::$DATABASES[$dbIndex]['collation'] = 'utf8mb4_unicode_520_ci';
+        elseif($dbType === 'sqlite') {
+            DIB::$DATABASES[$dbIndex]['foreignKeyConstraints'] = $foreignKeyConstraints;
+            unset(DIB::$DATABASES[$dbIndex]['username'], DIB::$DATABASES[$dbIndex]['password'], DIB::$DATABASES[$dbIndex]['port']);
         }
-    	 
-    	$result = @file_put_contents($path,
-"<?php
 
-/* NOTES: x
-   - The index of the main Dropinbase database must match the DBINDEX value in Dib.php
-   - Depending on your setup, using an IP address as host (eg 127.0.0.1 instead of 'localhost') can increase performance
-   - This file is regenerated each time connection details are updated using the /nav/dibConfigs UI in Dropinbase
-   - View the Example_Conn.php file for examples of how to connect to different database servers
-   - By default the MySQL Dropinbase tables use the 'utf8mb4_unicode_520_ci' collation. 
-     Ensure your MySQL server's my.ini file is configured accordingly, or change the collation for the dropinbase tables to match your own settings (HeidiSQL has a useful bulk tool).
-   - More info about charset and collation:
-        https://www.coderedcorp.com/blog/guide-to-mysql-charsets-collations/
-*/
+		require_once self::$dibPath . 'dropins' . DIRECTORY_SEPARATOR . 'dibAdmin' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'DConfigs.php';
 
-DIB::\$DATABASES = array(
-    " . $dbIndex . " => array(
-        'database'=>'$database',
-        'username'=>'$username',
-        'password'=>'$password',
-        'host'=>'$host',
-        'port'=>$port,
-        'charset'=>'utf8mb4',
-		'collation' => 'utf8mb4_unicode_520_ci',
-        'connectionStringExtra'=>'',
-        'dbType'=>'mysql',
-        'emulatePrepare'=>true,
-        'dbDropin'=>'dibMySqlPdo',
-        'systemDropin'=>true
-    )
-);");
+		$d = New DConfigs();
+		$result = $d->writeConnFile();
 
-		if ($result === false) {
-			$response[] = self::getResponse('Database Connection', false, "Could not create the following database connection file. Please check permissions: '$path'");
+		if ($result !== true) {
+			$response[] = self::getResponse('Database Connection', false, $result);
 	  		return FALSE;
 		}
 
@@ -1023,11 +1149,14 @@ DIB::\$DATABASES = array(
 		$installing = '';
 		$installed = '';
 
+		$nodeJsCheckSumx86 = self::$nodeJsCheckSumx86;
+		$nodeJsCheckSumx64 = self::$nodeJsCheckSumx64;
+
 		// PowerShell script template with error handling and Invoke-WebRequest fallback
 		$psScript = <<< PS
 		# Application checksums (https://nodejs.org/en/blog/release/v20.9.0)
-		\$nodeJsCheckSumx86 = "808d504dfd367b72260b378a5a5ee1812751a43512ab48d70d9d945f22c71af8"
-		\$nodeJsCheckSumx64 = "B2DECDFC3DD4BB43965BE46302E1198B1A3A95DA0BE5C7DC7EB221C185A3C5FD"
+		\$nodeJsCheckSumx86 = "$nodeJsCheckSumx86" 
+		\$nodeJsCheckSumx64 = "$nodeJsCheckSumx64"
 		
 		# Check if script is running as administrator
 		\$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
@@ -1285,9 +1414,9 @@ PS;
 			StopIfFailed -CommandName "composer install"
 		}
 
-		# Navigate to the Angular project directory and run 'npm install'
+		# Navigate to the Angular project directory and install angular
 		Set-Location "$angularPath"
-		Write-Host "Running npm install..."
+		Write-Host "Installing Angular ..."
 
 		# Remove node_modules and package-lock.json if they exist
 		if (Test-Path "node_modules") {
@@ -1313,35 +1442,24 @@ PS;
 				exit 1
 			}
 		}
-
-		try {
-			# Get-ChildItem -Path "C:\Program Files" -Directory
-			\$nodeDir = Get-ChildItem -Path "C:\\Program Files" -Directory -Filter "nodejs"
-
-			\$nodePath = Resolve-Path -Path (\$nodeDir.FullName + "\\npm.cmd")
-
-			& \$nodePath install
-
-			StopIfFailed -CommandName "npm install"
-
-		} catch {
-			Write-Host "npm install failed." -ForegroundColor Red
-			exit 1
-		}
-		
 PS;
 
 // The following failed on some machines, so using a simpler approach above: 
 // Start-Process -FilePath \$nodePath -ArgumentList "install", '/quiet' -NoNewWindow -Wait 
 
-		// Add Angular CLI installation if not installed or version is incorrect (with error handling)
+		// Add Angular CLI installation if not installed or version is incorrect (with error handling) npm i @angular/cli@19.2.7   OR   npm install -g @angular/cli@19.2.7
 		if (!$angularVersion || $angularVersion !== $dibAngularVersion) {
 			$installing .= "Angular CLI $dibAngularVersion<br>";
 			$psScript .= <<< PS
 
 		Write-Host "Installing Angular CLI $dibAngularVersion..."
 		try {
-			& \$nodePath install -g @angular/cli@$dibAngularVersion
+			# Get-ChildItem -Path "C:\Program Files" -Directory
+			\$nodeDir = Get-ChildItem -Path "C:\\Program Files" -Directory -Filter "nodejs"
+
+			\$nodePath = Resolve-Path -Path (\$nodeDir.FullName + "\\npm.cmd")
+
+			& \$nodePath i @angular/cli@$dibAngularVersion
 			StopIfFailed -CommandName "Install Angular CLI $dibAngularVersion"
 			Write-Host "Angular CLI $dibAngularVersion installed successfully."
 
@@ -1359,6 +1477,22 @@ PS;
 			$installed .= "Angular CLI $dibAngularVersion<br>";
 			$psScript .= "\r\nWrite-Host 'Angular CLI $dibAngularVersion is already installed.'\r\n";
 		}
+
+
+		// Run "npm install" in the Angular project directory
+		$psScript .= <<< PS
+		try {
+			
+			& \$nodePath install
+
+			StopIfFailed -CommandName "npm install"
+
+		} catch {
+			Write-Host "npm install failed." -ForegroundColor Red
+			exit 1
+		}
+		PS;
+
 
 		$psScript .= "\r\nWrite-Host 'Dependencies installed successfully.'\r\n";
 
@@ -1681,22 +1815,26 @@ PS;
 			echo "Removing existing package-lock.json..."
 			rm package-lock.json
 		fi
+		BASH;
 
+		if ($angularVersion !== $dibAngularVersion) {
+			$installing .= "Angular CLI $dibAngularVersion<br>";
+			$bashScript .= "npm i @angular/cli@$dibAngularVersion\n"; // npm install -g @angular/cli@$dibAngularVersion\n    OR   npm i @angular/cli@$dibAngularVersion
+		} else {
+			$installed .= "Angular CLI $dibAngularVersion<br>";
+			$bashScript .= "echo 'Angular CLI $dibAngularVersion is already installed.'\n";
+		}
+
+		// Run "npm install" in the Angular project directory
+		$bashScript .= <<< BASH
+		
 		echo "Install node_modules"
 
 		npm install
 
 		echo "Install Angular CLI"
-
 		BASH;
-
-		if ($angularVersion !== $dibAngularVersion) {
-			$installing .= "Angular CLI $dibAngularVersion<br>";
-			$bashScript .= "npm install -g @angular/cli@$dibAngularVersion\n";
-		} else {
-			$installed .= "Angular CLI $dibAngularVersion<br>";
-			$bashScript .= "echo 'Angular CLI $dibAngularVersion is already installed.'\n";
-		}
+		
 
 		// Add project-specific commands for Composer installation
 		$bashScript .= <<< BASH
