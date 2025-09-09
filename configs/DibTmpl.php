@@ -19,7 +19,7 @@ class DIB {
 
     /// Variables used to refer to Databases in PHP. The values reference the id/index value specified in /secrets/Conn.php and the pef_database table.
     public static $DIBDB = 1; // The main Dropinbase database 
-    public static $LOGINDB = 1; // Database containing the pef_login, pef_login_group, pef_perm_group, pef_two_factor and pef_security_policy tables
+    public static $LOGINDB = 1; // Database containing the pef_login, pef_login_group, pef_perm_group, pef_twofactor and pef_security_policy tables
 
     public static $ERRORLOGDB = 1; // id value of the database containing the pef_error_log table where errors are logged. 
                                     // Note, also update the pef_sql.pef_database_id of the two or more 'qdibErrorLog...' query(ies), which determine which pef_error_log table to look at - there can (erroneously) be more than one in different databases.
@@ -89,7 +89,8 @@ class DIB {
                                // 3 = Allways use dibCode files (assume all necessary files exist)
     public static $USEPROXYPERMGROUP = FALSE; // (experimental) Generate less cache and crud files as for each container a representative "proxy" perm_group in pef_perm_active is set with same permissions.
     public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the node.js Angular watcher automatically when compiling container's one-by-one.
-    public static $KILLNODEPROCESSES = TRUE; // (Windows only) Whether to kill any and all node.exe processes that are running before starting the watcher. This is useful when DIB starts multiple watchers due to a mysterious bug that makes them unresponsive. Note, on Linux we can manage it better.
+    public static $KILLNODEPROCESSES = TRUE; // Whether to kill any and all node.exe processes that are running before starting the watcher. This is useful when DIB starts multiple watchers due to a mysterious bug that makes them unresponsive.
+    public static $LINUX_FIND_WATCHER_PROCESSES = 'ps aux | grep -E "ngc.*ngtmp" | grep -v grep'; // (Linux only) Command to find Angular watcher processes. If empty, the default command is used. If set, it must return a list of processes that can be killed.
     public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
     public static $CHECK_CACHE_MODIFED_TIME = FALSE; // If TRUE and a generated UI file (.js) is requested, then the generated .js-file's modified time is compared to that of the source code (.ts) - if older then the .js file is regenerated. Note, beware of deployment systems/scripts that update the time.
     
@@ -153,6 +154,7 @@ class DIB {
     public static $BASEURL='~baseurl~';
 
     /// PATHS
+    // Merge fields populated by init function. Hard-code them for custom environments.
 
     // THE FOLLOWING PATHS SHOULD BE MOVED OUTSIDE THE WEBSERVER'S DOCUMENT-ROOT FOLDER FOR IMPROVED SECURITY
 
@@ -170,22 +172,21 @@ class DIB {
     public static $HTMLPURIFIERCACHEPATH = '';
 
     // (Read/Write) Full path to the /runtime folder - where Dropinbase stores temporary files, and the generated site index.html (.dtxt) file.
-    public static $RUNTIMEPATH='~rootdir~runtime~dirsep~';
+    public static $RUNTIMEPATH = '~rootdir~runtime~dirsep~';
 
     // (Read/Write) Full path to the folder where the deleteMeToInitDIB.dtxt file will be stored. If empty or not defined, Dropinbase will not be initialized when the file does not exist.
-    public static $DELETEMETOINITDIBPATH ='~rootdir~runtime~dirsep~';
+    public static $DELETEMETOINITDIBPATH = '~rootdir~runtime~dirsep~';
 
     // (Read) Full path to the Composer /vendor folder
-    public static $VENDORPATH='~vendordir~';
+    public static $VENDORPATH = '~vendordir~';
 
     /// OTHER PATHS REQUIRED BY DROPINBASE
-
-    // Values generated automatically (hard-code them for custom environments)
-    public static $BASEPATH='~rootdir~';
-    public static $DROPINPATHDEV='~rootdir~dropins~dirsep~'; // folder cannot be moved from its default location.
-    public static $FILESPATH='~rootdir~files~dirsep~';
-    public static $SYSTEMPATH='~systemdir~'; // must correlate with the path used in the /index.php and /files.php files.
-    public static $EXTPATH= '~systemdir~extensions~dirsep~';
+    
+    public static $BASEPATH =      '~rootdir~';
+    public static $DROPINPATHDEV = '~rootdir~dropins~dirsep~'; // folder cannot be moved from its default location.
+    public static $FILESPATH =     '~rootdir~files~dirsep~';
+    public static $SYSTEMPATH =    '~systemdir~'; // must correlate with the path used in the /index.php and /files.php files.
+    public static $EXTPATH =       '~systemdir~extensions~dirsep~';
     
     /// Values set dynamically with every request
 
@@ -199,7 +200,7 @@ class DIB {
     public static $CONTROLLER = ''; // Name of the controller referenced by the current request
     public static $ACTION = ''; // Name of the controller action
 
-    public static $USER = []; // Array of all fields in pef_login (except password, dib_password, and notes)
+    public static $USER = []; // Array of user's PHP session fields - customize in /configs/DibUserParams.php
     public static $DATABASES = []; // Array of connection details to all databases in pef_database
     public static $CONTAINERDATA = []; // array of the current container's info obtained from active permission record
     public static $ITEMLISTDATA = []; // array of the current item list's info obtained from active permission record
