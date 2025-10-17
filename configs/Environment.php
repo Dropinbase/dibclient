@@ -2,11 +2,11 @@
 
 // The /peff/Template/environment.js request is made once when the application is refreshed and the Angular framework is loaded
 // It returns values accessible via getEnv('xxx') and @{env_xxx} in client side code and HTML attributes etc.
-// You can add your own values to $args, and any additional JavaScript code to the $response
+// You can add your own values to $args, and JavaScript code to the $response
 // The values are accessible in the browser console by typing DIB [Enter]
 // Use the 'reload-env' action to reload values if necessary
 
-// NOTE: do not remove existing values, except 'staff_id' which was added for demo purposes.
+// NOTE: do not remove existing values except 'staff_id'
 
 $settings = DibFunctions::getSettings("`name` IN ('auditTrailContainerName','defaultDateTimeFormat','defaultDateFormat')", 'pef_setting');
 
@@ -36,10 +36,6 @@ $args = array(
     'debug' => DIB::$CLIENT_DEBUG_LEVEL,
     'can_dib_design' => $canDibDesign,
     'auth_id' => (isset(DIB::$USER['auth_id']) ? DIB::$USER['auth_id'] : null),
-    'session_timeout_enabled' => true,
-    'session_inactivity_timeout' => 10,
-    'session_warning_timeout' => 60,
-    'session_timeout_sound_enabled' => true
 );
 
 $response = 'var DIB = ' . json_encode($args);

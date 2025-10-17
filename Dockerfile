@@ -1,4 +1,4 @@
-FROM dropinbase/angular:ng17
+FROM dropinbase/angular:ng19
 # RUN apt-get update --fix-missing
 
 # TODO /vendor/dropinbase/dropinbase should be copied from somewhere else
