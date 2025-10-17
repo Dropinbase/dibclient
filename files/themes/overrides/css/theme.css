@@ -1,0 +1,18 @@
+/**
+Additional css styling to include. 
+Also override Angular Material styles here.
+Alternatively create your own .scss definitions and include the resulting .css files in the pef_setting table using the afterBodyJs record.
+*/
+
+.redClass {
+    color: red;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.blueStatus {
+    text-decoration: underline;
+    background-color: #548bd2;
+    padding: 7px 5px;
+    border-radius: 4px;
+}

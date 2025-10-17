@@ -1,0 +1,278 @@
+<html lang="en"  ng-app="InstallerApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <title>Dropinbase Installer</title>
+
+        <link rel="stylesheet" href="/resources/installer.css">
+
+        <script type="text/javascript" src="/resources/installer.js"></script>
+
+        <!--  LINKS TO GOOGLE FONTS -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- FAVICON -->
+        <link rel="icon" type="image/x-icon" href="/resources/favicon.ico" />
+    </head>
+
+    <body onload="initPage()">
+        <div class="bg">
+
+        <div class="mainBlock">
+
+            <div class="leftBlock">
+
+                <div class="leftInnerBlock">
+                    <div id="title1" class="title active" onclick="openTab(1)">
+                        <img src="/resources/busyTick.png"><span>Welcome</span>
+                    </div>
+                    <div id="title2" class="title" onclick="openTab(2)">
+                        <img src="/resources/pendingTick.png"><span>Pre-Installation Tests</span>
+                    </div>
+                    <div id="title3" class="title" onclick="openTab(3)">
+                        <img src="/resources/pendingTick.png"><span>Login / Register</span>
+                    </div>
+                    <div id="title4" class="title" onclick="openTab(4)">
+                        <img src="/resources/pendingTick.png"><span>Install DIB Framework</span>
+                    </div>
+                    <div id="title5" class="title" onclick="openTab(5)">
+                        <img src="/resources/pendingTick.png"><span>Configure Installation</span>
+                    </div>
+                    <div id="title6" class="title" onclick="openTab(6)">
+                        <img src="/resources/pendingTick.png"><span>Connect to DIB Database</span>
+                    </div>
+                    <div id="title7" class="title" onclick="openTab(7)">
+                        <img src="/resources/pendingTick.png"><span>Finalize</span>
+                    </div>
+                </div>
+
+                <div class="logoBlock">
+                    <img src="/resources/logo_tr.png" style="height:75px">
+                    <a href="https://www.dropinbase.com" class="dibSite" target="_blank">https://www.dropinbase.com</a>
+                </div>
+                
+            </div>
+
+            <div class="rightBlock">
+
+                <div id="pg1" class="rightInnerBlock active" style="align-items: center;">
+                    <div class="mainBody" style="align-items:center;">
+                        <img src="/resources/logocircle.png" style="width: 200px">
+                    
+                        <h2>Welcome!</h2>
+                        <p style="text-align: center; ">This wizard will guide you step-by-step through the installation of Dropinbase.</p>
+
+                        <p style="text-align: center; ">By proceeding with this installation, you acknowledge and agree that Dropinbase shall not be held liable for any consequences, issues, or damages arising from the use of this wizard.</p>
+
+                        <div class="warningMessage" id="firstAgree">
+                            First please agree to the terms and conditions stated before continuing
+                        </div>
+
+                        <div class="checkbox"><input type="checkbox" id="iagree"><label style="width:auto" for="iagree">I&nbsp;Agree</label></div>
+
+                    </div>
+                </div>
+
+                <div id="pg2" class="rightInnerBlock">
+                    <div class="mainBody" style="gap:10px">
+                        <p>Let's see if PHP and the webserver has the required extensions...</p>
+                        
+                        <a class="dibBtn" onClick="doAction('testPhp');return false;">Run Tests</a>
+
+                        <p>You can also</p>
+                        <a class="dibBtn" href="/phpModules" target="_blank" >View your PHP configuration</a>
+                        
+                        <div style="overflow:auto">
+                            <div id="testPhpMsg" class="response" ></div>
+                            <div id="phpModules" class="response" ></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+                <div id="pg3" class="rightInnerBlock">
+                    <div class="mainBody" style="gap:10px">
+                        <p>Please provide your Dropinbase credentials, </p>
+                        <p>or first register online below.</p>
+
+                        <div >
+                            <label>Email</label>
+                            <input id="email" type="text" class="textInput"/>
+                        </div>
+
+                        <div >
+                            <label>Password</label>
+                            <input id="password" type="password" class="textInput"/>
+                        </div>
+                        
+                        <a class="dibBtn" onClick="doAction('signIn');return false;">Sign In</a>
+                        
+                        <div style="overflow:auto">
+                            <div id="signInMsg" class="responseErr" ></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div id="pg4" class="rightInnerBlock" name="installDib">
+                    <div class="mainBody" style="gap:10px">
+                        
+                        <p>Executing this step will download a .zip file containing the Dropinbase framework files. It will be unzipped into the <b>/dropinbase</b> folder, overwriting any existing files there.</p>
+                        <p>If you intend to use a symbolic link (virtual folder) to an existing copy you can skip this step.</p>
+
+                        <div id="checkDibInstallMsg" class="response" ></div>
+                        
+                        <div style="display:flex; flex-direction: row; gap:10px;">
+                            <a class="dibBtn" onClick="startDownload()">Install Dropinbase Framework</a>
+                        
+                            <a class="dibBtn" onclick="openTab(5)" title="Skip installation if already installed, or if you will install manually">Skip Installation</a>
+                        </div>
+                        
+                        <div style="overflow:auto">
+                            <div id="downloadStatus" class="response" ></div>
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+
+                <div id="pg5" class="rightInnerBlock" name="configureDib">
+                    <div class="mainBody" style="gap:10px">
+                        <p>Generate a Script to Configure the Installation</p>
+
+                        <div id="scriptFields" class="card">
+                            
+                            <div id="composerFolderDiv">
+                                <label for="composerFolder" class="longLabel">Composer Install Folder</label>
+                                <input id="composerFolder" type="text" class="textInput" value="<?php echo $composerFolder; ?>"/>
+                            </div>
+
+                            <div id="ownerDiv">
+                                <label for="owner" class="longLabel">Linux/macOS File and Folder permissions 'owner'</label>
+                                <input id="owner" type="text" class="textInput" value="<?php echo $owner; ?>"/>
+                            </div>
+
+                            <div id="groupDiv">
+                                <label for="group" class="longLabel">Linux/macOS File and Folder permissions 'group'</label>
+                                <input id="group" type="text" class="textInput" value="<?php echo $group; ?>"/>
+                            </div>
+
+                            <div id="webUserDiv">
+                                <label for="webUser" class="longLabel">Linux/macOS User that Runs the Web Server</label>
+                                <input id="webUser" type="text" class="textInput" value="<?php echo $webUser; ?>"/>
+                            </div>
+                            
+                        </div>
+
+
+                        <div style="display:flex; flex-direction: row; gap:10px;">
+                            <button class="dibBtn" onClick="doAction('configureDib')">Generate Script</button>
+                        </div>
+                        
+                        <div>
+                            <div id="configureDibMsg" class="response" ></div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+                <div id="pg6" class="rightInnerBlock">
+                    <div>
+                        <div>
+                            This step will create the Dropinbase database and tables, <u>only</u> if they do not already exist.
+                            <br>Provide connection details to a MySQL-compatible database server for the database (other servers will be supported soon).
+                            
+                        </div>
+
+                        <div id="dbfields" class="card">
+                            
+                            <div>
+                                <div style="display:flex;">
+                                    <div>
+                                        <label>Host</label>
+                                        <input id="host" type="text" class="textInput" style="flex-grow: 1;" value=<?php echo '"' . $host . '" ' . $disabled; ?>/>
+                                    </div>
+                                    <div >
+                                        <label style="width: 30px; margin-left: 10px;">Port</label>
+                                        <input id="port" type="text" class="textInput" style="width: 60px" value=<?php echo '"' . $port . '" ' . $disabled; ?>/>
+                                    </div>
+                                </div>
+                                
+                                <i style="font-size: 12px">When using Docker, set this to <b>host.docker.internal</b> to access a database on your machine (outside Docker)</i>
+                            </div>
+
+                            <div >
+                                <label>Database</label>
+                                <input id="database" type="text" class="textInput" value=<?php echo '"' . $database . '" ' . $disabled; ?>/>
+                            </div>
+
+                            <div >
+                                <label>Username</label>
+                                <input id="un" type="text" class="textInput" value=<?php echo '"' . $username . '" ' . $disabled; ?>/>
+                            </div>
+
+                            <div >
+                                <label>Password</label>
+                                <input id="pw" type="password" class="textInput" value=<?php echo '"' . $password . '" ' . $disabled; ?>/>
+                            </div>
+                            
+                        </div>
+                        <br>
+
+                        <a id="btnCreateTables" class="dibBtn" onClick="doAction('saveTestDb');return false;">Create Tables</a>
+                        
+                        <div id="saveTestDbMsg" class="response">
+                            <span id="addConnections">
+                                <br>Add connections to your &quot;user&quot; databases within Dropinbase once the installation is complete.
+                            </span>
+                        </div>
+                    </div>
+                
+                </div>
+
+                <div id="pg7" class="rightInnerBlock" style="display: none; flex-grow:1">
+                    <div>
+                        <h2>One Last Step!</h2>
+                        <div>Currently the project's <b>index.php</b> file is set to open the Installer.
+                            <br><br>The button below adjusts it to direct requests to the main Dropinbase API.
+                        </div>
+                        <div>
+                            <br>Note, when prompted for a username and password, the default credentials are:<br><br>
+                        </div>
+                        <div style="color: rgb(2, 78, 144)">
+                            Username: <b>admin</b><br>
+                            Password: <b>test</b>
+                            <br><br>
+                        </div>
+
+                        <a class="dibBtn" onClick="doAction('updateIndex');return false;">Update index.php</a>
+
+                        <div id="updateIndexMsg" class="response"></div>
+                    </div>
+                </div>
+                
+                <div id="divNext" class="btnNextStep" onclick="openTab('next')">
+                    <span>Next</span>
+                    <img src="/resources/east.png">
+                </div>
+                    
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+      
+    </body>
+  
+  </html>

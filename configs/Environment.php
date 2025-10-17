@@ -16,15 +16,19 @@ $args = array(
     'user_session_data_key' => DIB::$USER['username'], // This defines the user session data key and is required to use remember query string parameters
     'staff_id' => (empty(DIB::$USER['staff_id']) ? null : DIB::$USER['staff_id']), // Remove or adjust as needed. See /configs/DibUserParams.php for details
     'site_name' => DIB::$SITENAME,
-    'logo' => DIB::$SITELOGO,
+    'logo' => ltrim(DIB::$SITELOGO, '/ '),
+    'application_title' => '', // Leave blank to let containers' captions adjust the title.
     'user_fullname' => DIB::$USER['first_name'] . ' ' . DIB::$USER['last_name'],
 
     // Valid date formats: https://date-fns.org/v2.29.3/docs/format
     'default_date_time_format' => (isset($settings['defaultDateTimeFormat']) ? $settings['defaultDateTimeFormat'] : 'yyyy-MM-dd HH:mm:ss'),
     'default_date_format' => (isset($settings['defaultDateFormat']) ? $settings['defaultDateFormat'] : 'yyyy-MM-dd'),
    
-    'audit_trail_container' => (isset($settings['auditTrailContainerName']) ? $settings['auditTrailContainerName'] : 'dibAuditTrailGrid'),
+    'audit_trail_container' => (isset($settings['auditTrailContainerName']) ? $settings['auditTrailContainerName'] : 'auditTrailGrid'),
     'audit_trail_port' => '',
+    
+    'loaderType' => 'ball-atom', // Set the spinner type: https://labs.danielcardoso.net/load-awesome/animations.html
+    'loaderColor' => '#181F32', // Set the spinner color
 
     'default_url' => isset(DIB::$USER['default_url']) ? DIB::$USER['default_url'] : '',
     'base_url' => DIB::$BASEURL,
@@ -35,10 +39,11 @@ $args = array(
 
     'debug' => DIB::$CLIENT_DEBUG_LEVEL,
     'can_dib_design' => $canDibDesign,
+    'user_session_data_key' => DIB::$USER['username'], // Facilitates a user data store in the browser, and is required for eg. Remember Query String parameters
     'auth_id' => (isset(DIB::$USER['auth_id']) ? DIB::$USER['auth_id'] : null),
 );
 
-$response = 'var DIB = ' . json_encode($args);
+$response = 'var DIB = ' . json_encode($args) . ';';
 
 // Add line breaks for debugging
 // $response = str_replace('","', "\",\r\n\"", $response);

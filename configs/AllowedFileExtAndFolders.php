@@ -63,6 +63,9 @@ function checkFile($url, $fileName, $ext) {
     if(!ctype_alnum(str_replace(array('.','_','-',' '), '', $fileName)))
         return FALSE;
 
+    // Handle special case for Angular files
+    if (strpos($url, 'files/dropins/setNgxMaterial/angular/dist/browser') !== false)
+       return getMimeType($ext); 
 
     if (strpos($url,"files/dropins/setNgxMaterial/angular/dist/browser/") !== false)  {
         return getMimeType($ext);    
@@ -132,7 +135,7 @@ function getMimeType($ext) {
         'htm' => 'text/html',
         'txt' => 'text/plain',
         'json' => 'application/json',
-        'xml' => 'application/xml',
+        'xml' => array('application/xml', 'text/xml'),
 
         'mpeg' => 'video/mpeg',
         'mpg' => 'video/mpeg',
