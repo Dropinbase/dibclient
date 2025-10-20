@@ -31,7 +31,6 @@ class DIB {
         'allowedIps' => array() // list of IP addresses that are allowed to use the site while maintenance is active
     );
     */
-    public static $SECRETSPATH = '~rootdir~configs~dirsep~'; 
 
     /// Variables used to refer to Databases in PHP. The values reference the id/index value specified in /secrets/Conn.php and the pef_database table.
     public static $DIBDB = 1; // The main Dropinbase database 

@@ -354,9 +354,33 @@ class Install {
 			return $response;
 		}
 		
-		// Get sql file contents
-		$sql = file_get_contents(self::$dibPath . 'installer' . DIRECTORY_SEPARATOR . 'dropinbase.sql');
-		$sql = str_ireplace("CREATE TABLE IF NOT EXISTS `pef_activity_log`", "USE `$databaseName`;\r\n\r\n CREATE TABLE IF NOT EXISTS `pef_activity_log`", $sql);
+		// Get sql file contents - look for the latest MySQL SQL file in the sql folder
+		$sqlPath = self::$dibPath . 'sql' . DIRECTORY_SEPARATOR;
+		$sqlFiles = glob($sqlPath . 'dropinbase_*_mysql.sql');
+
+		if (empty($sqlFiles)) {
+			// Fallback to old location if no SQL files found
+			$sqlFile = self::$dibPath . 'installer' . DIRECTORY_SEPARATOR . 'dropinbase.sql';
+		} else {
+			// Sort to get the latest version (files are named with version numbers)
+			sort($sqlFiles);
+			$sqlFile = end($sqlFiles);
+		}
+
+		if (!file_exists($sqlFile)) {
+			$response[] = self::getResponse('Database Setup', false, "Could not find SQL file. Expected at: " . $sqlFile);
+			return $response;
+		}
+
+		$sql = file_get_contents($sqlFile);
+
+		// First, ensure we're using the correct database
+		$useDb = "USE `$databaseName`;";
+		$result = Db::execute($useDb);
+		if($result === FALSE) {
+			$response[] = self::getResponse('Database Selection', false, "Could not select database '$databaseName'. Database error: " . Db::lastErrorAdminMsg());
+			return $response;
+		}
 
 		// Temporary variable, used to store current query
 		$templine = '';
