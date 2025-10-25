@@ -1393,7 +1393,7 @@ PS;
 			$installed .= 'Composer<br>';
 		}
 		
-		// Run composer install and npm install
+		// Run composer install and npm ci
 		$psScript .= <<< PS
 
 		# Navigate to the PHP project directory and run Composer install
@@ -1414,84 +1414,32 @@ PS;
 			StopIfFailed -CommandName "composer install"
 		}
 
-		# Navigate to the Angular project directory and install angular
-		Set-Location "$angularPath"
-		Write-Host "Installing Angular ..."
-
-		# Remove node_modules and package-lock.json if they exist
-		if (Test-Path "node_modules") {
-			Write-Host "Removing node_modules directory..."
-			try {
-				Remove-Item -Recurse -Force "node_modules" -ErrorAction Stop
-				StopIfFailed -CommandName "Remove node_modules directory"
-
-			} catch {
-				Write-Host "Failed to remove node_modules." -ForegroundColor Red
-				exit 1
-			}
-		}
-		
-		if (Test-Path "package-lock.json") {
-			Write-Host "Removing package-lock.json file..."
-			try {
-				Remove-Item -Force "package-lock.json" -ErrorAction Stop
-				StopIfFailed -CommandName "Remove package-lock.json"
-
-			} catch {
-				Write-Host "Failed to remove package-lock.json." -ForegroundColor Red
-				exit 1
-			}
-		}
 PS;
 
 // The following failed on some machines, so using a simpler approach above: 
 // Start-Process -FilePath \$nodePath -ArgumentList "install", '/quiet' -NoNewWindow -Wait 
 
 		// Add Angular CLI installation if not installed or version is incorrect (with error handling) npm i @angular/cli@19.2.7   OR   npm install -g @angular/cli@19.2.7
-		if (!$angularVersion || $angularVersion !== $dibAngularVersion) {
-			$installing .= "Angular CLI $dibAngularVersion<br>";
-			$psScript .= <<< PS
-
-		Write-Host "Installing Angular CLI $dibAngularVersion..."
-		try {
-			# Get-ChildItem -Path "C:\Program Files" -Directory
-			\$nodeDir = Get-ChildItem -Path "C:\\Program Files" -Directory -Filter "nodejs"
-
-			\$nodePath = Resolve-Path -Path (\$nodeDir.FullName + "\\npm.cmd")
-
-			& \$nodePath i @angular/cli@$dibAngularVersion
-			StopIfFailed -CommandName "Install Angular CLI $dibAngularVersion"
-			Write-Host "Angular CLI $dibAngularVersion installed successfully."
-
-		} catch {
-			Write-Host "Angular CLI CLI $dibAngularVersion installation failed." -ForegroundColor Red
-			exit 1
-		}
-		PS;
-
-// The following failed on some machines, so using a simpler approach above: 
-// Start-Process -FilePath \$nodePath -ArgumentList "install -g @angular/cli@$dibAngularVersion", '/quiet' -NoNewWindow -Wait
-
-
-		} else {
-			$installed .= "Angular CLI $dibAngularVersion<br>";
-			$psScript .= "\r\nWrite-Host 'Angular CLI $dibAngularVersion is already installed.'\r\n";
-		}
-
-
-		// Run "npm install" in the Angular project directory
 		$psScript .= <<< PS
-		try {
-			
-			& \$nodePath install
+        Set-Location "$angularPath"
 
-			StopIfFailed -CommandName "npm install"
+        try {
+            \$nodeDir = Get-ChildItem -Path "C:\\Program Files" -Directory -Filter "nodejs"
+            \$nodePath = Resolve-Path -Path (\$nodeDir.FullName + "\\npm.cmd")
+            Write-Host "Found npm at \$nodePath"
+        } catch {
+            Write-Host "Could not locate npm.cmd under C:\\Program Files\\nodejs" -ForegroundColor Red
+            exit 1
+        }
 
-		} catch {
-			Write-Host "npm install failed." -ForegroundColor Red
-			exit 1
-		}
-		PS;
+        try {
+            & \$nodePath ci
+            StopIfFailed -CommandName "npm ci"
+        } catch {
+            Write-Host "Installation of Angular, using npm ci failed." -ForegroundColor Red
+            exit 1
+        }
+PS;
 
 
 		$psScript .= "\r\nWrite-Host 'Dependencies installed successfully.'\r\n";
@@ -1802,38 +1750,18 @@ PS;
 
 		// node_modules installation
 		$bashScript .= <<< BASH
-		# Install node_modules
-		cd $angularPath
+        # Install project dependencies using npm ci (clean, reproducible)
+        cd $angularPath
 
-		# Remove node_modules and package-lock.json if they exist
-		if [ -d "node_modules" ]; then
-			echo "Removing existing node_modules directory..."
-			rm -rf node_modules
-		fi
+        echo "Running npm ci (using existing package-lock.json)..."
+        npm ci
+        if [ \$? -ne 0 ]; then
+            echo "npm ci failed." >&2
+            exit 1
+        fi
 
-		if [ -f "package-lock.json" ]; then
-			echo "Removing existing package-lock.json..."
-			rm package-lock.json
-		fi
-		BASH;
-
-		if ($angularVersion !== $dibAngularVersion) {
-			$installing .= "Angular CLI $dibAngularVersion<br>";
-			$bashScript .= "npm i @angular/cli@$dibAngularVersion\n"; // npm install -g @angular/cli@$dibAngularVersion\n    OR   npm i @angular/cli@$dibAngularVersion
-		} else {
-			$installed .= "Angular CLI $dibAngularVersion<br>";
-			$bashScript .= "echo 'Angular CLI $dibAngularVersion is already installed.'\n";
-		}
-
-		// Run "npm install" in the Angular project directory
-		$bashScript .= <<< BASH
-		
-		echo "Install node_modules"
-
-		npm install
-
-		echo "Install Angular CLI"
-		BASH;
+        echo "npm ci completed."
+        BASH;
 		
 
 		// Add project-specific commands for Composer installation
