@@ -26,9 +26,8 @@ class DIB {
     public static $SQLLOGDB = null; // id value of the database containing the pef_sql_log table. If not null, then ALL SQL statements except SELECT ... are logged with their paramater values.    
     public static $AUDITDB = 1; // Database containing the default pef_audit_trail table (overide this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
     public static $ACTIVITYLOGDB = 1; // Database containing the pef_activity_log table. Both the $ACTIVITYLOGDB and $ACTIVITYLOG (see below) settings must not be empty for logging to be activated.
-    
+    public static $LOCKDB = 1; // Database containing the pef_semaphore table that is used for locking resources during concurrent operations. If null or not set, then a SQLite file is used in the /runtime/tmp folder.
     // ***NOTE: add more constants/variables here to use in your own PHP for other databases... 
-
 
     /// Basic settings
     public static $ENVIRONMENT = 'development'; // 'development' = auto-deletion of files, html beautified. 'production' = No deletion, compression of Javascript.
@@ -88,7 +87,7 @@ class DIB {
                                // 2 = Use a dibCode file if it exists, else create it
                                // 3 = Allways use dibCode files (assume all necessary files exist)
     public static $USEPROXYPERMGROUP = FALSE; // (experimental) Generate less cache and crud files as for each container a representative "proxy" perm_group in pef_perm_active is set with same permissions.
-    public static $AUTO_START_WATCHER = TRUE; // Whether an attempt is made to start the node.js Angular watcher automatically when compiling container's one-by-one.
+    public static $USE_OF_WATCHER = 'auto'; // 'auto' = attempt to start Angular watcher automaticaly to compile single files. 'manual' = assume watcher is started manually (compiles without watcher on failure). 'none' = compile files one-by-one without watcher.
     public static $KILLNODEPROCESSES = TRUE; // Whether to kill any and all node.exe processes that are running before starting the watcher. This is useful when DIB starts multiple watchers due to a mysterious bug that makes them unresponsive.
     public static $LINUX_FIND_WATCHER_PROCESSES = 'ps aux | grep -E "ngc.*ngtmp" | grep -v grep'; // (Linux only) Command to find Angular watcher processes. If empty, the default command is used. If set, it must return a list of processes that can be killed.
     public static $ASYNCRETRYCOUNT=10; // Default count of tries the client will poll for actions in the Queue, before giving up. Can be set dynamically using Queue::updateIntervals().
@@ -100,7 +99,9 @@ class DIB {
     public static $CHECKUSERSESSIONS = TRUE; // Helps block session hijacking. Affects users where pef_login.check_user_session==1. These users can have only one active session. Note, pef_login.session_version is compared with value stored in PHP session with every request, which affects performance.
     public static $VERIFY_IP = TRUE; // Whether successive requests from the same web user must originate from the same IP address, else logged out. Note, is affected by Load-ballencers and dynamic ip addresses which will cause intermittent drops.
     public static $VERIFY_USER_AGENT = FALSE; // Whether successive requests from the same web user must have the same USER AGENT, else logged out. Note, affected by webservers, ISP's and browsers which updates info.
-    public static $VERIFY_AUTH_TOKEN = TRUE; // Whether authentication tokens are checked on server requests, else logged out. This should be TRUE. Use eg. $REQUEST_TYPE='GET,POST,ignoretoken' in controller function parameters to override, for eg. file downloads.
+    public static $VERIFY_AUTH_TOKEN = TRUE; // Whether authentication tokens are checked on server requests, else logged out. This should be TRUE. 
+                                             // Use eg. $REQUEST_TYPE='GET,POST,ignoretoken' in controller function parameters to override, for eg. file downloads.
+                                             // Note, if $ENVIRONMENT == 'development' we allow x1x permgroup (developers) to bypass token check
     public static $USERNAME_REGEX='#^\w{4,30}$#'; // A semicolon delimited list of regular expressions that must validate successfully in order for usernames to be accepted
     public static $ENABLE_REMEMBERME = TRUE; // Whether to enable Remember Me functionality. Ensure that the /dropins/dibAuthentice/views/login.php file contains the neccessary HTML.
 
@@ -109,23 +110,7 @@ class DIB {
         'allow_downloads' => FALSE, // Allow system_public user to download uploaded files.
         'allow_deletes' => FALSE, // Allow system_public user to delete uploaded files.
     ];
-
-    // NOTE: It is recommended to set session cookie configurations in the PHP configuration file (php.ini) instead of here. 
-    // Also set session.gc_maxlifetime in php.ini to a value that is less than the session.cookie_lifetime value.
-    /*
-    public static $SESSIONCONFIGS = [
-        'session.use_strict_mode' => 1,
-        'session.use_only_cookies' => 1,
-        'session.cookie_secure' => 1,
-        'session.cookie_httponly' => 1,
-        'session.cookie_path' => '/',
-        'session.cookie_samesite' => 'Strict', // Strict/Lax or comment it out for none. Available in >=PHP 7.3.0
-        'session.cookie_domain' => '~domainname~', // Your domain name or pattern, eg. '.mydomain.com' - see PHP docs for more info
-        'session.cookie_lifetime' => 900, // Lifetime in seconds of the PHPSESSID browser cookie (not the server session file). A user warning appears before it expires.
-                                          // Set session.gc_maxlifetime, session.gc_probability and session.gc_divisor in php.ini (to less than this value).
-    ];
-    */
-
+    
     public static $DEFAULTPERMSCONTAINER = 'defaultPermsContainer'; // The container that specifies permissions for requests where $containerName is not in function parameters. If empty, all requests from system_public will fail, unless eg $REQUEST_TYPE='POST,ignorecontainerperms' is included in controller function parameters.
 
     // If empty, then the HTML of messages/prompts/popups sent to the browser are not sanitized. Otherwise, configure the use of HtmlPurifier, or allowed tags and other HTML to allow.
@@ -140,6 +125,29 @@ class DIB {
     public static $INDEXPATH = [
         'setNgxMaterial'=>'/setNgxMaterial/angular/dist/browser/index.html',
     ];
+
+    /// Session settings
+    // Note, it is recommended to set these in php.ini or webserver settings instead (ie. comment them out here).
+
+    /*
+    public static $SESSION_COOKIE_OPTIONS = [
+        'lifetime' => 1440,          // The lifetime of the cookie in seconds which is sent to the browser. 0 = until the browser is closed.
+                                     // set session.gc_maxlifetime (in php.ini preferably) to a value that is greater than this.
+        'path'     => '/',           // The path on the server in which the cookie will be available on. If set to '/', the cookie will be available within the entire domain.
+      //  'domain'   => '~domainname~', // Your domain name or pattern - see PHP docs for more info
+        'secure'   => true,          // If true the cookie will only be sent over secure connections (HTTPS).
+        'httponly' => true,          // When true the cookie will be made accessible only through the HTTP protocol. This means that the cookie won't be accessible by scripting languages, such as JavaScript. This setting can effectively help to reduce identity theft through XSS attacks (although it is not supported by all browsers).
+        'samesite' => 'Lax',      // Strict/Lax or comment it out for NONE. Available in >=PHP 7.3.0. Consider 'Lax' if you do cross-site redirects for shopping carts etc. Note, samesite=None requires secure=true
+    ];
+
+    public static $SESSION_OPTIONS = [
+        'session.use_strict_mode' => 1, // never accept an unknown session ID (prevents fixation)
+        'session.use_only_cookies' => 1, // don't send session id in URL
+       // 'session.gc_maxlifetime' => 1440, // time in seconds after which data will be seen as 'garbage' and cleaned up. This is the maximum lifetime of the session cookie when the browser is closed.
+       // 'session.gc_probability' => 1,
+       // 'session.gc_divisor'    => 1000
+    ];
+    */
     
     /// Hooks
     public static $SETUPSCRIPT=null; // Path to any script that is run just after user indentification and before URL request is analysed, eg '/dropins/myDropin/components/SetValues.php'

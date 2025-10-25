@@ -52,7 +52,15 @@ class DibUserParams {
            Remove the line from configs/Environment.php if needed...
            See /nav/dibexPermSegmentDataByUser for more info.
         */
-        
+
+        /*
+            You can furthermore add logic that alters a user's perm_group based on for eg. their role at the company that they are linked to ... 
+            ...
+            if($sessionArgs['role'] == 'sales') {
+                $sessionArgs['perm_group'] = 'x4x';
+            } ... 
+
+        */
 
         // Further error handling is done in Authenticator::logUserIn();
         // Return a message to display to the user on failure, otherwise an array with session values that will be available as User Parameters throughout the system (in queries and Client Data etc.)
