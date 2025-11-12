@@ -327,6 +327,7 @@ class Install {
 		}
 
 		// Get the connection string
+		if(empty($dbType)) $dbType = $c['dbType'];
 		
 		$host = $c['host'];
 		$port = $c['port'] ?? '';
@@ -560,9 +561,9 @@ class Install {
 
 
 				if($result === FALSE) {
-					file_put_contents('C:/temp' . DIRECTORY_SEPARATOR . 'aaaaaaa.log',$templine);
+					//file_put_contents('C:/temp' . DIRECTORY_SEPARATOR . 'aaaaaaa.log',$templine);
 
-					$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables. Please check the database user permissions and the connection properties (/secrets/Conn.php).<br> Database error: " . Db::lastErrorAdminMsg() . "<br>The following SQL failed: " . $templine);
+					$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables.<br>If you make any changes, drop the created Dropinbase database before trying again.<br>Please check the database user permissions and the connection properties (/secrets/Conn.php).<br>Database error:<span style='color:red'> " . Db::lastErrorAdminMsg() . "</span><br>The following SQL failed: " . $templine);
 					return FALSE;
 				}
 					
@@ -679,7 +680,9 @@ class Install {
 	  	if (!extension_loaded('pdo_mysql'))
             $php[] = '<b>pdo_mysql</b> (required - at present the Dropinbase database needs to be in MariaDb/MySql/Aurora. Client databases can reside in other systems (MariaDb, MySql, Aurora, PostgreSQL, SQLite, SQL Server)';
 	  	if (!extension_loaded('curl'))
-            $phpOpt[] = '<b>curl</b> (required by Unit Tester which is still experimental)';
+            $php[] = '<b>curl</b> (required by Dropinbase Admin and Design functions)';
+		if (!extension_loaded('zip'))
+            $php[] = '<b>zip</b> (required by this installer and .xlsx/.docx file handling)';
 	  	if (!extension_loaded('mbstring'))
 	   		$php[] = '<b>mbstring</b> (required to ensure UTF-8 encoding is utilized)';
 	  	if (!extension_loaded('openssl'))
@@ -770,7 +773,7 @@ class Install {
 		require_once self::$dibPath . 'dropins' . DIRECTORY_SEPARATOR . 'dibAdmin' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'DConfigs.php';
 
 		$d = New DConfigs();
-		$result = $d->writeConnFile();
+		$result = $d->writeConnFile($connPath);
 
 		if ($result !== true) {
 			$response[] = self::getResponse('Database Connection', false, $result);
@@ -1105,7 +1108,7 @@ class Install {
 
 			$result = self::createPath($composerPath);
 			if($result === false) {
-				DIB::$ACTION = self::getResponse('configureDib', false, "Could not create path for Composer installation: $composerPath. Please amend and try again.");
+				DIB::$ACTION = self::getResponse('configureDib', false, "Could not create the following path for Composer installation:<br>$composerPath<br>Please amend the path, or create it manually.");
 				return false;
 			}
 		}
@@ -1345,7 +1348,7 @@ PS;
 			if (Get-Command php -ErrorAction SilentlyContinue) {
 				Write-Host ""
 			} else {
-				Write-Host "PHP cannot be run from the commandline, or php.exe is not in PATH. Please check your PHP installation, and ensure it is globally available by adding it to the PATH environment setting." -ForegroundColor Red
+				Write-Host "PHP cannot be run from the commandline, or php.exe is not in PATH. Please check your PHP installation, and ensure it is globally available by adding it to the PATH environment setting. Restart your terminal after making changes." -ForegroundColor Red
 				exit 1
 			}
 
@@ -2001,7 +2004,7 @@ PS;
 				// See if npx can find ngc
 				$npxVersion = self::checkCommand('npx ngc --version');
 				if(empty($npxVersion)) {
-					$success['node_modules'] = array(false, "Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules/@angular exists, but Angular compiler is not working using 'ngc' or 'npx ngc'.");
+					$success['node_modules'] = array(false, "Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules/@angular exists, but Angular compiler is not working using 'ngc' or 'npx ngc'.<br>*** NOTE: it may simply require a restart");
 				} else {
 					$success['node_modules'] = array(true, 'Folder /dropinbase/dropins/setNgxMaterial/angular/node_modules/@angular exists, and Angular compiler (ngc) functional.');
 				}
@@ -2035,7 +2038,7 @@ PS;
 			}
 			
 		} else {
-			$success['nodeversion'] = array(false, "Node.js not installed. Version " . self::$dibNodeVersion . " recommended.");
+			$success['nodeversion'] = array(false, "Node.js not installed. Version " . self::$dibNodeVersion . " recommended.<br>*** NOTE: it may simply require a restart");
 		}
 		
 		// Check npm
@@ -2044,7 +2047,7 @@ PS;
 			//$success['npm'] = array(true, "NPM installed.");
 			$a=1; // skip - can be confusing if wrong version no
 		} else {
-			$success['npm'] = array(false, "NPM (which comes with Node.js) not installed or not accessible.");
+			$success['npm'] = array(false, "NPM (which comes with Node.js) not installed or not accessible.<br>*** NOTE: it may simply require a restart");
 		}
 
 		// Check Angular CLI
@@ -2067,7 +2070,7 @@ PS;
 			$ngVersion = $ngVersion ? trim($ngVersion) : null;
 
 			if($ngVersion === null) {
-				$success['ngversion'] = array(false, "Angular CLI not installed. Version " . self::$dibAngularVersion . " recommended.");
+				$success['ngversion'] = array(false, "Angular CLI not installed. Version " . self::$dibAngularVersion . " recommended. <br>*** NOTE: it may simply require a restart");
 			
 			} else {
 				$ngVersionMajorVersion = (int)explode('.', $ngVersion)[0];
@@ -2083,7 +2086,7 @@ PS;
 			}
 			
 		} else {
-			$success['ngversion'] = array(false, "Angular CLI not (globally) installed. Version " . self::$dibAngularVersion . " recommended.");
+			$success['ngversion'] = array(false, "Angular CLI not (globally) installed. Version " . self::$dibAngularVersion . " recommended. <br>*** NOTE: it may simply require a restart");
 		}
 
 		return $success;

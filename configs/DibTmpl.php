@@ -143,7 +143,7 @@ class DIB {
     public static $SESSION_OPTIONS = [
         'session.use_strict_mode' => 1, // never accept an unknown session ID (prevents fixation)
         'session.use_only_cookies' => 1, // don't send session id in URL
-       // 'session.gc_maxlifetime' => 1440, // time in seconds after which data will be seen as 'garbage' and cleaned up. This is the maximum lifetime of the session cookie when the browser is closed.
+       // 'session.gc_maxlifetime' => 1500, // time in seconds after which data will be seen as 'garbage' and cleaned up. This is the maximum lifetime of the session cookie when the browser is closed.
        // 'session.gc_probability' => 1,
        // 'session.gc_divisor'    => 1000
     ];

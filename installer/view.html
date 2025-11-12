@@ -82,17 +82,17 @@
                 <div id="pg2" class="rightInnerBlock">
                     <div class="mainBody" style="gap:10px">
                         <p>Let's see if PHP and the webserver has the required extensions...</p>
-                        
-                        <a class="dibBtn" onClick="doAction('testPhp');">Run Tests</a>
+                        <div style = "display:flex;direction:row;align-items:center;">
+                            <a class="dibBtn" onClick="doAction('testPhp');">Run Tests</a> &nbsp;&nbsp;or&nbsp;&nbsp; 
 
-                        <p>You can also</p>
-                        <a class="dibBtn" href="/phpModules" target="_blank" >View your PHP configuration</a>
-                        
+                            <a class="dibBtn" href="/phpModules" target="_blank" >View Your PHP Configs</a>
+                        </div>
+
                         <div style="overflow:auto">
                             <div id="testPhpMsg" class="response" ></div>
                             <div id="phpModules" class="response" ></div>
                         </div>
-                        
+                        <p><br>Note, for MySQL, ensure that max_allowed_packet >= 8M in my.ini (restart MySQL after changes)</p>
                     </div>
                     
                 </div>
