@@ -1,7 +1,7 @@
 
 {
-    "name": "dropinbase/dibclient",
-    "description": "Dropinbase client files",
+    "name": "dibclient",
+    "description": "Any libraries that your project might require",
     "require": {
         "php": ">=5.3.3",
         "onelogin/php-saml": "^3.4",

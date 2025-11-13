@@ -1,0 +1,24 @@
+{
+  "name": "dibclient",
+  "version": "2.0.0",
+  "description": "DibClient for Dropinbase",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start" : "docker-compose up --build",
+    "gulp": "gulp",
+    "build:scss": "gulp sass",
+    "watch:scss": "gulp sass && gulp sass:watch",
+    "docker:rebuild": "docker pull dropinbase/angular:ng14 & docker-compose up --build",
+    "docker:restart": "docker-compose up -d"
+  },
+  "author": "Matogen Corporate Web Development PTY Ltd",
+  "license": "GDP",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.13.0"
+  }
+}

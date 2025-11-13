@@ -2,3 +2,4 @@ vendor/
 dropinbase/
 runtime/
 composer.lock
+configs/Dib.php

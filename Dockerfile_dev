@@ -1,0 +1,36 @@
+FROM dropinbase/angular:ng19
+RUN apt-get update --fix-missing
+RUN apt-get install -y git 
+
+
+WORKDIR /dropinbase
+# Downgrade the minimum TLS protocol level to TLS v1.0
+# This should be removed as soon as the APIs support higher versions of TLS
+RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1.0/g' /etc/ssl/openssl.cnf
+
+# Include the XDEBUG for PHP in the image
+#RUN pecl install -f xdebug && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)\nxdebug.mode=debug\nxdebug.start_with_request=yes" > /usr/local/etc/php/conf.d/xdebug.ini
+#RUN pecl install redis && docker-php-ext-enable redis
+
+# COPY any pre-generated cache
+RUN chown application:application /dropinbase -R
+WORKDIR /dropinbase
+COPY package.json /dropinbase/
+# COPY composer.json /dropinbase/
+# RUN php /usr/local/bin/composer install --prefer-dist 
+ENV Dropinbase_Vendor_Path /vendor
+#COPY nginx/* /opt/docker/etc/nginx/
+#COPY nginx/vhost.common.d/* /opt/docker/etc/nginx/vhost.common.d/
+#COPY nginx.conf /etc/nginx/nginx.conf
+#COPY php.webdevops.ini /opt/docker/etc/php/php.webdevops.ini
+#COPY php.ini /etc/php/8.1/fpm/php.ini
+
+RUN chown application:application /vendor/dropinbase/dropinbase/dropins/setNgxMaterial/angular/projects/plugins/src -R
+RUN chown application:application /vendor/dropinbase/dropinbase/dropins/setNgxMaterial/angular/src/assets/ -R
+RUN chown application:application /vendor/dropinbase/dropinbase/dropins/setNgxMaterial/dibAdmin/dibCode/ -R
+
+RUN chown application:application /dropinbase/runtime -R
+RUN chmod 755 /dropinbase/runtime -R
+
+EXPOSE 80
+EXPOSE 443

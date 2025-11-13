@@ -9,8 +9,8 @@ class DIB {
     // See coverPage setting below for configuring the layout
     /*
     public static $SITEMAINTENANCE=array(
-        'startTime' => '2024-02-20 15:01', // date & time at which site will become unavailable and 'coverPage' is displayed instead
-        'warningMsg' => 'The site will be down for upgrades & maintenance from xxx today for about xxx minutes.', // 10 minute warning message for users
+        'startTime'=>'2023-07-20 15:01', // date & time at which site will become unavailable and 'coverPage' is displayed instead
+        'warningMsg'=>'The site will be down for upgrades & maintenance from xxx today for about xxx minutes.', // 10 minute warning message for users
         'coverPageMsg' => 'Oops!<br>Temporarily unavailable due to scheduled upgrades &amp; maintenance<br>We should be up again soon, please check in later.',
         'coverPage' => 'sitemaintenance.php', // PHP file in /dropins/dibAuthenticate/views/ that returns HTML to display after startTime
         'allowedIps' => array() // list of IP addresses that are allowed to use the site while maintenance is active
