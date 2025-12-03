@@ -8,10 +8,12 @@
 <body>
 <h2>Dropinbase Client</h2>
 
-These files enable, and are dependant on, the <a target="_blank" href="https://github.com/Dropinbase/framework">Dropinbase framework</a>.<br><br>
+NOT FUNCTIONAL YET - FIRST OFFICIAL RELEASE TO BE JAN 2026. Watch this space - its awesome!
 
-Dropinbase enables rapid prototyping, development and maintenance of database/business applications, without limiting customizations. Dream big, build anything.<br> 
-Extensions are easy to add, and can be shared with other community members.<br><br>
+These files enable, and are dependant on, the <a target="_blank" href="https://github.com/Dropinbase/framework">Dropinbase framework (which is still locked away... but coming soon)</a>.<br><br>
+
+Dropinbase enables very rapid prototyping, development and maintenance of database/business applications, without limiting customizations.<br> 
+Extensions are easy to add, and can be shared.<br><br>
 
 <h3>Home: </h3>
 <a target="_blank" href="https://dropinbase.com">https://dropinbase.com</a>
