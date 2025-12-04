@@ -18,13 +18,13 @@ In Summary: Rapid low-code development, flexible, structured, full-stack, fully 
 Node.js v20.19.0<br>
 Angular 19.2.7<br>
 Angular Material Design 19.2.18<br>
-PHP 5.3.3 and above <br>
+PHP 5.4 and above <br>
 Supported databases: MySQL(/MariaDb/SkySQL/AuroraDb), SQLite, PostgreSQL, SQL Server<br>
 
-<h3>Home: </h3>
+<h3>Home</h3>
 <a target="_blank" href="https://dropinbase.com">https://dropinbase.com</a>
 
-<h3>Licensing: </h3>
+<h3>Licensing</h3>
 While this Dropinbase client is open-source, the Dropinbase Framework is not, yet VERY affordable and free for many tiers.
 <a target="_blank" href="https://dropinbase.com">https://dropinbase.com/license/</a>
 
