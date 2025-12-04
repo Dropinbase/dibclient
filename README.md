@@ -15,8 +15,12 @@ These files enable, and are dependant on, the <a target="_blank" href="https://g
 Dropinbase enables very rapid prototyping, development and maintenance of database/business applications, without limiting customizations.<br> 
 Extensions are easy to add, and can be shared.<br><br>
 
-<h3>Home: </h3>
+<h3>Home</h3>
 <a target="_blank" href="https://dropinbase.com">https://dropinbase.com</a>
+
+<h3>Licensing</h3>
+While this Dropinbase client is open-source, the Dropinbase Framework is not, yet VERY affordable and free for many tiers.
+<a target="_blank" href="https://dropinbase.com">https://dropinbase.com/license/</a>
 
 <h3>Docker and Native Install</h3>
 <a target="_blank" href="https://dropinbase.com/get-started/">https://dropinbase.com/get-started/</a>
