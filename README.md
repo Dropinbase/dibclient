@@ -24,6 +24,10 @@ Supported databases: MySQL(/MariaDb/SkySQL/AuroraDb), SQLite, PostgreSQL, SQL Se
 <h3>Home: </h3>
 <a target="_blank" href="https://dropinbase.com">https://dropinbase.com</a>
 
+<h3>Licensing: </h3>
+While this Dropinbase client is open-source, the Dropinbase Framework is not, yet VERY affordable and free for many tiers.
+<a target="_blank" href="https://dropinbase.com">https://dropinbase.com/license/</a>
+
 <h3>Docker and Native Install</h3>
 <a target="_blank" href="https://dropinbase.com/get-started/">https://dropinbase.com/get-started/</a>
 
