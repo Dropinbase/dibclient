@@ -31,6 +31,8 @@ function checkFile($url, $fileName, $ext) {
         'files/dropins/setNgxMaterial/dibAdmin/js/template',
         'files/dropins/dibAdmin/js',
         'files/dropins/dibAdmin/css',
+        'files/dropins/dibAi/css',
+        'files/dropins/dibAi/js',
         'files/dropins/dibDocs/css',
         'files/dropins/dibAuthenticate/css',
         'files/dropins/dibAuthenticate/images',
@@ -42,6 +44,7 @@ function checkFile($url, $fileName, $ext) {
         'files/dropins/setNgxMaterial/shared/img/icons',
         'files/dropins/setNgxMaterial/dibAdmin/images/dashboard',
         'files/dropins/setNgxMaterial/dibAdmin/images',
+        'files/dropins/setNgxMaterial/tree/img/icons',
         'files/dropins/dibCustom/designImages',
 
         'files/files/icons',
@@ -49,6 +52,7 @@ function checkFile($url, $fileName, $ext) {
         'files/files/themes/overrides/css',
         'files/dropins/setCharts/dibPlotly/js',
         'files/dropins/dibDynamicUI/js',
+    
 
          // DIB Examples
         'files/dropins/dibExamples/img',

@@ -369,12 +369,12 @@ class Install {
 
 		$connArray = $conCls->getConnDetails($host, $port, '');
 		
-		// Test connection to dropinbase db - see if pef_content_type exists
+		// Test connection to dropinbase db - see if pef_validation_type exists
 		$connStr = str_replace('{database}', $database, $connArray['connStr']);
 
 		Db::setConn($connStr, $dbType, $username, $password);
 
-		$result = Db::execute("SELECT content_type FROM pef_content_type");
+		$result = Db::execute("SELECT id FROM pef_validation_type");
 		if(Db::count()>1) {
 
 			if($usingExistingConn === TRUE && $finalVerifyInstall === FALSE) {
@@ -384,8 +384,18 @@ class Install {
 			return TRUE;
 
 		} elseif($finalVerifyInstall === TRUE) {
-			$response[] = self::getResponse('Database Connection', false, "Could not retrieve any data from the pef_content_type table in the dropinbase database. The database connection is faulty, or the database tables/records were not created correctly.<br>Please review the first entry of the database connection file ($connPath) that should reference the dropinbase database, and check if the tables and records exist.<br>Database error: " . Db::lastErrorAdminMsg());
+			$response[] = self::getResponse('Database Connection', false, "Could not retrieve any data from the pef_validation_type table in the dropinbase database. The database connection is faulty, or the database tables/records were not created correctly.<br>Please review the first entry of the database connection file ($connPath) that should reference the dropinbase database, and check if the tables and records exist.<br>You could simply drop the database and try again.<br>Database error: " . Db::lastErrorAdminMsg());
 			return FALSE;
+		}
+
+		// Check that mysql has max_allowed_packet of at least 4MB
+		if($dbType == 'mysql' || $dbType == 'mariadb') {
+			$rst = Db::execute("SHOW VARIABLES LIKE 'max_allowed_packet'", array(), true);
+
+			if(!empty($rst['Value']) && (int)$rst['Value'] < 4194304) {
+				$response[] = self::getResponse('Database Connection', false, "The MySQL/MariaDB server variable 'max_allowed_packet' is less than the required minimum of 4MB (4M). Please increase it in your my.cnf/my.ini file and restart the database server.");
+				return FALSE;
+			}
 		}
 
 		// Check if the database exists, and if not, create it
@@ -449,6 +459,8 @@ class Install {
 					if($result === 0 || $result === true) break; // 0 rows affected
 
 				} catch (PDOException $e) {
+					if(strlen($createStmt) > 400)
+						$createStmt = substr($createStmt, 0, 400) . ' ...'; // truncate long statements
 					$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase database ($database) using the following connection properties:<br>connection string=$connStr, username=$username, password=$password.<br>Please check entry $dbIndex of the database connection file (/secrets/Conn.php).<br> Database error: " .  $e->getMessage() . "<br>The following SQL failed:<br> " . $createStmt);
 					return FALSE;
 				}
@@ -559,9 +571,10 @@ class Install {
 				// Perform the query
 				$result = Db::execute($templine);
 
-
 				if($result === FALSE) {
 					//file_put_contents('C:/temp' . DIRECTORY_SEPARATOR . 'aaaaaaa.log',$templine);
+					if(strlen($templine) > 400)
+						$templine = substr($templine, 0, 400) . ' ...'; // truncate long statements
 
 					$response[] = self::getResponse('Database Connection', false, "Could not create the Dropinbase tables.<br>If you make any changes, drop the created Dropinbase database before trying again.<br>Please check the database user permissions and the connection properties (/secrets/Conn.php).<br>Database error:<span style='color:red'> " . Db::lastErrorAdminMsg() . "</span><br>The following SQL failed: " . $templine);
 					return FALSE;

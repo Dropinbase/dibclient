@@ -2,9 +2,9 @@
 
 require_once './configs/SecurityHeaders.php';
 
-/* NOTE: Depending on what is uncommented below, this file determines which of the following three options should run: */
+/* NOTE: Depending on what is commented below, this file determines which of the following three options should run: */
 
-// 1. To view installed PHP extensions, uncomment the following line
+// 1. To test if the virtual host and hosts file is configured correctly, and view installed PHP extensions, uncomment the following line
 // phpinfo(); die();
 
 $DIR = __DIR__;
@@ -13,16 +13,7 @@ $DIR = __DIR__;
 $INSTALLER=TRUE; require './installer/index.php'; die();
 
 // 3. Run Dropinbase
-// Get vendor path from environment variable, default to './vendor/' if not set
-$vendorPath = getenv('VENDOR_PATH') ?: './vendor/';
-// Ensure trailing slash
-$vendorPath = rtrim($vendorPath, '/') . '/';
-
-$dibIndexPath = $vendorPath . 'dropinbase/dropinbase/index.php';
-if (!file_exists($dibIndexPath)) {
-    die("Dropinbase not found at: " . $dibIndexPath);
-}
-require $dibIndexPath;
+require './dropinbase/index.php';
 
 /* -- TIPS --
 - The Dropinbase framework can be moved to any folder accessible by the webserver. Just delete /configs/Dib.php and adjust the path above, or hardcode DIB::$SYSTEMPATH in /configs/DibTmpl.php.

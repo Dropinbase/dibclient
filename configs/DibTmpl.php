@@ -27,7 +27,12 @@ class DIB {
     public static $AUDITDB = 1; // Database containing the default pef_audit_trail table (overide this value using pef_container.pef_audit_trail_table_id). NOTE: Must also change pef_database_id in pef_table for 'pef_audit_trail'. Don't remove pef_audit_trail from the DIB database - it is still needed here to store eg Designer changes.
     public static $ACTIVITYLOGDB = 1; // Database containing the pef_activity_log table. Both the $ACTIVITYLOGDB and $ACTIVITYLOG (see below) settings must not be empty for logging to be activated.
     public static $LOCKDB = 1; // Database containing the pef_semaphore table that is used for locking resources during concurrent operations. If null or not set, then a SQLite file is used in the /runtime/tmp folder.
-    // ***NOTE: add more constants/variables here to use in your own PHP for other databases... 
+    // ***NOTE: add more constants/variables here to use in your own PHP for other databases...
+
+    // Aliases for databases - used to refer to databases in the Designer -> db_alias field in pef_table and pef_sql. Useful for distributing dropins.
+    public static $DBALIASES = [ 
+        'test' => 3
+    ];
 
     /// Basic settings
     public static $ENVIRONMENT = 'development'; // 'development' = auto-deletion of files, html beautified. 'production' = No deletion, compression of Javascript.
@@ -79,7 +84,29 @@ class DIB {
         ],
     ];
 
-    public static $RECORDUNITTEST = FALSE; // (not fully functional yet) - Whether all requests must be recorded in pef_unit_test. Greatly affects performance. Only set to TRUE when recording Unit Test requests.
+        /*
+    public static $RECORDUNITTEST = [
+        'batch_name' => 'sqltests',
+        'test_types' => 'C,R,U,D,V,J,L,T,P,M,d,O', // Include in recording. C-Create, R-Read, U-update, D-Delete, V-view one record in form, J-JavaScript (UI code), L-Dropdownlists, P-port request, M-menus, d-defaults, O-other, T-toolbar, r-first grid record only, l-first dropdownlist record only
+        
+        // Array of URL regex patters identifying requests to exclude from recording. Overrides test_types.
+        'exclude_urls' => [
+            '#/dropins\/main\/Private.*#'
+        ], 
+
+        'ignore_result_match' => 'V,R,L', // Comma delimited list of test types where result matching is ignored 
+
+        // Array of URL regex patterns where result matching is ignored
+        'ignore_result_match_urls' => ['#\/peff\/Crud\/toolbarinfo.*#', '#\/peff\/Template\/.*#'], 
+
+        // Array of URL regex patterns, and result regex patterns. Where the URL matches, and the result matches, the test is marked successful. Used mainly for non-JSON results.
+        'mark_success' => [ 
+            '#\/peff\/Template.*#' => '/^(?!.*Please contact the System Administrator).*$/s', // Note, this marks /peff/Template request results that do not contain the error message as success
+            '#\/dropins\/setNgxMaterial\/iframe\/Template\/open.*#' => '/^(?!.*Please contact the System Administrator).*$/s',
+            '#\/dropins\/setNgxMaterial\/\w*\/Template\/controller.*#' => '/^(?!.*Please contact the System Administrator).*$/s'
+        ]
+    ];
+    */
 
     /// Cache/Compile/Queue settings
     public static $CODEUSE = 1;  // 0 = Always overwrite dibCode files
@@ -135,7 +162,7 @@ class DIB {
                                      // set session.gc_maxlifetime (in php.ini preferably) to a value that is greater than this.
         'path'     => '/',           // The path on the server in which the cookie will be available on. If set to '/', the cookie will be available within the entire domain.
       //  'domain'   => '~domainname~', // Your domain name or pattern - see PHP docs for more info
-        'secure'   => true,          // If true the cookie will only be sent over secure connections (HTTPS).
+        'secure'   => true,          // Use only if https implemented. If true the cookie will only be sent over secure connections (HTTPS).
         'httponly' => true,          // When true the cookie will be made accessible only through the HTTP protocol. This means that the cookie won't be accessible by scripting languages, such as JavaScript. This setting can effectively help to reduce identity theft through XSS attacks (although it is not supported by all browsers).
         'samesite' => 'Lax',      // Strict/Lax or comment it out for NONE. Available in >=PHP 7.3.0. Consider 'Lax' if you do cross-site redirects for shopping carts etc. Note, samesite=None requires secure=true
     ];

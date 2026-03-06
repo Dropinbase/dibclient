@@ -1,6 +1,6 @@
 
 {
-    "name": "dibclient",
+    "name": "dropinbase/dibclient",
     "description": "Any libraries that your project might require",
     "require": {
         "php": ">=5.3.3",
